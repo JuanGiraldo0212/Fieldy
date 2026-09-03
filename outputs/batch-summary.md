@@ -28,7 +28,7 @@ The rest fail on what venues publish, not on extraction — overwhelmingly a mis
 
 **Notable findings**
 
-- **Emily Carr House is a tooling failure, not a thin venue.** The site is fully client-rendered and returned only `<head>` metadata on nine URLs. Nothing was extractable. This needs a re-run with a browser-capable fetch — it is the single highest-value follow-up in this batch.
+- **Emily Carr House — re-run and recovered.** The first pass returned only `<head>` metadata because the site is Square Online, renders client-side, and keeps its content in shadow DOM. Re-extracted 2026-09-03 with a rendering browser: address, phone, email, seasonal hours, wheelchair access, parking, pet policy, one hero image and 3 programs (school groups, 40-minute guided tour, self-guided drop-in). Still not publishable — the site genuinely publishes no ages and no admission amount ("by donation"). See `emily-carr-house.verification.md` for the retrieval method; **a fetch-only re-run will wrongly conclude this site is empty.**
 - **Gonzales Hill was rescued from `no_website`.** The tracker pointed at tourismvictoria.com (third-party). The operator page is `crd.ca`; the tracker's website column was corrected. CRD's interpretive school programs run at four other parks, not this one, so no program was invented.
 - **Heritage Acres' site is frozen around 2018** — WordPress 4.9.8, 2018 events, 2018 admission figures on an expired event page. Those figures were quoted in `gaps`, not recorded as prices.
 - **Helmcken House is not routinely open** — "typically open during July and August, the weekends in December and other special events." Recorded factually rather than as a closure.
@@ -39,6 +39,16 @@ The rest fail on what venues publish, not on extraction — overwhelmingly a mis
 **Prompt changes applied cleanly.** All 33 new programs carry `mood_tags` (play 16, learn 19, explore 14, active 11, creative 3). All image URLs are https. Generated alt was used where site alt was a filename or absent, with the reasoning stated in gaps.
 
 **Stale-cache check** (added after the Crag X incident) ran on every price-bearing page. No drift this batch. One retrieval quirk found: the fetcher de-duplicates by path, so query-string cache-busters return empty — trailing-slash variants force a genuine second fetch.
+
+## Browser re-runs, 2026-09-03
+
+`STEP 1b` was added to the prompt after three venues turned out to be rendering failures rather than thin venues. Two have been re-run with a rendering browser:
+
+- **Emily Carr House** — recovered from an empty record. See above.
+- **Beacon Hill Children's Farm** — recovered. Programs 1 → 3, images 0 → 5, and the admission figures corrected from $6/$5 to **$7 adult / $6 child**, which the fetch run had guessed low. The new **Farm Friends Storytime** (Thursdays 10:45–11:15, ages 2–5, daycares of 10 or fewer) is the venue's first program with a real age range and is aimed directly at the daycare audience. Now blocked *only* on a street address, which the site never publishes.
+- **Beacon Hill Park** — checked, no fix needed. The City page carries exactly one photograph and it was already recorded with the site's own alt text. Its hero URL was switched from the Drupal cropped derivative with an `itok` token to the untokened full-size original. It remains unpublishable because victoria.ca states no ages and no admission for the park.
+
+Every photograph on both Beacon Hill Farm and Carr House is a CSS `background-image`, invisible to a DOM image query — the reason both records had no images. Each recorded image was opened and viewed before its alt was written.
 
 ## Two inconsistencies to settle
 

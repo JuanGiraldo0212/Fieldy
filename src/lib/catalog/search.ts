@@ -502,3 +502,33 @@ export function resultLine(results: SearchResult[]): string {
   const outings = `${n} outing${n === 1 ? '' : 's'}`
   return green ? `${outings}, ${green} fit your group` : outings
 }
+
+/* ─── Reconciling a room with the URL ────────────────────────────────────── */
+
+/*
+  A room's age range as band indices. The bands overlap deliberately (3 to 5
+  and 5 to 8 both contain a five-year-old), so a room spanning a boundary
+  selects both rather than losing half its children.
+*/
+export function bandsFor(ageMin: number, ageMax: number): number[] {
+  const hits = AGE_BANDS.map(([lo, hi], i) =>
+    lo < ageMax && hi > ageMin ? i : -1,
+  ).filter((i) => i >= 0)
+  return hits.length ? hits : [1]
+}
+
+/*
+  A room lists every way it can travel. The catalog needs one, so prefer the
+  URL's choice when the room can do it, and otherwise take the room's most
+  capable option: driving reaches furthest, walking least.
+*/
+export function preferredTransport(
+  roomModes: string[],
+  fromUrl: SearchState['transport'],
+): SearchState['transport'] {
+  if (roomModes.includes(fromUrl)) return fromUrl
+  for (const mode of ['bus', 'parent_drivers', 'walking'] as const) {
+    if (roomModes.includes(mode)) return mode
+  }
+  return fromUrl
+}

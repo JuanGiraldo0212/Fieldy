@@ -1,10 +1,13 @@
 import Link from 'next/link'
+import { getActiveRoom, getViewer } from '@/lib/auth'
 import {
   emptyHint,
   fetchCatalog,
   fetchHeroImages,
   resultLine,
   search,
+  bandsFor,
+  preferredTransport,
 } from '@/lib/catalog/search'
 import { parseSearchParams, toSearchParams } from '@/lib/catalog/url'
 import { CatalogMap, type MapPin } from '@/components/catalog/catalog-map'
@@ -23,9 +26,9 @@ import { EmptyState } from '@/components/ui'
 */
 
 /*
-  Until a session exists (slice 3), distance is measured from the centre of
-  Victoria. Slice 3 replaces this with the active room's home base, which is
-  what the design's "Leaving from" control actually shows.
+  Where a logged-out visitor is measured from. Once someone has a room, we
+  measure from that room's own home base instead, which is what the design's
+  "Leaving from" control shows.
 */
 const VICTORIA = { lat: 48.4284, lng: -123.3656 }
 
@@ -35,11 +38,41 @@ export default async function CatalogPage({
   searchParams: Promise<Record<string, string | string[] | undefined>>
 }) {
   const params = await searchParams
-  const state = parseSearchParams(params)
   const mapOpen = params.map === '1'
 
+  const viewer = await getViewer()
+  const activeRoom = await getActiveRoom(viewer?.centreId ?? null)
+
+  /*
+    A room replaces the anonymous defaults, but only where the URL is silent.
+    Someone who has explicitly narrowed the search has said what they want, and
+    having their own room quietly overwrite it on the next navigation would be
+    maddening.
+  */
+  const urlState = parseSearchParams(params)
+  const state = activeRoom
+    ? {
+        ...urlState,
+        age_bands: params.ages
+          ? urlState.age_bands
+          : bandsFor(activeRoom.ageMin, activeRoom.ageMax),
+        children: params.kids ? urlState.children : activeRoom.size,
+        budget_max: params.max
+          ? urlState.budget_max
+          : Number(activeRoom.budgetPerChild ?? urlState.budget_max),
+        transport: params.to
+          ? urlState.transport
+          : preferredTransport(activeRoom.transport, urlState.transport),
+      }
+    : urlState
+
+  const origin =
+    activeRoom?.lat != null && activeRoom.lng != null
+      ? { lat: activeRoom.lat, lng: activeRoom.lng }
+      : VICTORIA
+
   const [rows, heroes] = await Promise.all([fetchCatalog(), fetchHeroImages()])
-  const results = search(rows, state, VICTORIA, heroes)
+  const results = search(rows, state, origin, heroes)
 
   /*
     One pin per distinct venue coordinate — several programs at the same venue
@@ -80,7 +113,10 @@ export default async function CatalogPage({
         </p>
       </header>
 
-      <SearchControls state={state} />
+      <SearchControls
+        state={state}
+        originLabel={activeRoom ? activeRoom.name : 'Victoria'}
+      />
 
       <div className="mt-6 mb-4 flex flex-wrap items-center justify-between gap-3">
         <p className="text-body-sm text-text-muted font-semibold">
@@ -100,10 +136,15 @@ export default async function CatalogPage({
 
       {mapOpen ? (
         <div className="mb-5">
-          <CatalogMap home={VICTORIA} homeLabel="Victoria" pins={pins} />
+          <CatalogMap
+            home={origin}
+            homeLabel={activeRoom?.address ?? 'Victoria'}
+            pins={pins}
+          />
           <p className="text-meta-sm text-text-faint mt-2">
-            One pin per venue in this list. The dark pin is Victoria. Programs
-            that come to you have no pin.
+            One pin per venue in this list. The dark pin is{' '}
+            {activeRoom ? activeRoom.name : 'Victoria'}. Programs that come to
+            you have no pin.
           </p>
         </div>
       ) : null}

@@ -90,7 +90,13 @@ const FORMATS: [string, string, LucideIcon][] = [
 
 const BUDGET_QUICK = [5, 10, 15, 20, 30]
 
-export function SearchControls({ state }: { state: SearchState }) {
+export function SearchControls({
+  state,
+  originLabel,
+}: {
+  state: SearchState
+  originLabel: string
+}) {
   const router = useRouter()
   const [pending, startTransition] = useTransition()
   const [filtersOpen, setFiltersOpen] = useState(false)
@@ -232,7 +238,7 @@ export function SearchControls({ state }: { state: SearchState }) {
               <span className="text-brand flex">
                 <MapPin size={18} />
               </span>
-              <span className="truncate">Your centre</span>
+              <span className="truncate">{originLabel}</span>
             </div>
             <div className="border-border-strong bg-surface flex h-control items-center gap-2.5 rounded-r-control border border-l-0 px-3">
               <span className="text-brand flex">

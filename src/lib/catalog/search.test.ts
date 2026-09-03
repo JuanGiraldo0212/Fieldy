@@ -9,6 +9,8 @@ import {
   initialsOf,
   resultLine,
   search,
+  bandsFor,
+  preferredTransport,
   type CatalogRow,
 } from './search'
 
@@ -355,5 +357,47 @@ describe('resultLine', () => {
 
   it('has an honest empty case', () => {
     expect(resultLine([])).toBe('No outings match')
+  })
+})
+
+describe('bandsFor', () => {
+  it('picks the band a room sits inside', () => {
+    expect(bandsFor(3, 5)).toEqual([1])
+    expect(bandsFor(1, 3)).toEqual([0])
+  })
+
+  it('picks both bands when a room straddles a boundary', () => {
+    // A room of 4 to 6 year olds has children in "3 to 5" and in "5 to 8".
+    // Choosing one would hide outings half the room could go on.
+    expect(bandsFor(4, 6)).toEqual([1, 2])
+  })
+
+  it('spans everything for a wide range', () => {
+    expect(bandsFor(1, 12)).toEqual([0, 1, 2, 3])
+  })
+
+  it('never returns nothing', () => {
+    expect(bandsFor(30, 40)).toEqual([1])
+  })
+})
+
+describe('preferredTransport', () => {
+  it('keeps the URL choice when the room can travel that way', () => {
+    expect(preferredTransport(['walking', 'bus'], 'walking')).toBe('walking')
+  })
+
+  it('falls back to the room when the URL asks for something it cannot do', () => {
+    // A walking-only room cannot take a bus, so showing bus results would
+    // offer outings they have no way of reaching.
+    expect(preferredTransport(['walking'], 'bus')).toBe('walking')
+  })
+
+  it('prefers the mode that reaches furthest', () => {
+    expect(preferredTransport(['walking', 'bus'], 'parent_drivers')).toBe('bus')
+    expect(preferredTransport(['walking', 'parent_drivers'], 'bus')).toBe('parent_drivers')
+  })
+
+  it('leaves the URL alone for a room that lists no usable mode', () => {
+    expect(preferredTransport(['none'], 'bus')).toBe('bus')
   })
 })

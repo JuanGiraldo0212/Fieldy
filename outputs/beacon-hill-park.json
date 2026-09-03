@@ -77,11 +77,16 @@
       "adults_free": null,
       "indoor": false,
       "outdoor": true,
-      "format": ["self_guided"],
+      "format": [
+        "self_guided"
+      ],
       "sensory_friendly": null,
       "low_noise": null,
       "neurodiversity_friendly": null,
-      "mood_tags": ["explore", "active"],
+      "mood_tags": [
+        "explore",
+        "active"
+      ],
       "curriculum_tags": null,
       "booking_email": null,
       "booking_url": null,
@@ -89,7 +94,9 @@
       "source_url": "https://www.victoria.ca/parks-recreation/parks-trails/our-parks/beacon-hill-park",
       "evidence": "Meandering footpaths offer long strolls among manicured and natural areas and features for the whole family to enjoy.",
       "checked_on": "2026-09-02",
-      "image_ids": ["hero-park-pond-aerial"]
+      "image_ids": [
+        "hero-park-pond-aerial"
+      ]
     },
     {
       "id": "park-activity-event-permit",
@@ -130,7 +137,9 @@
       "sensory_friendly": null,
       "low_noise": null,
       "neurodiversity_friendly": null,
-      "mood_tags": ["active"],
+      "mood_tags": [
+        "active"
+      ],
       "curriculum_tags": null,
       "booking_email": "culture@victoria.ca",
       "booking_url": "https://www.victoria.ca/parks-recreation/our-parks/park-event-permits",
@@ -144,7 +153,7 @@
   "images": [
     {
       "id": "hero-park-pond-aerial",
-      "url": "https://www.victoria.ca/sites/default/files/styles/16_9_park/public/2025-08/0H6A1229%20%281%29.jpg?h=df44d994&itok=IfPlKKxQ",
+      "url": "https://www.victoria.ca/sites/default/files/2025-08/0H6A1229%20%281%29.jpg",
       "role": "hero",
       "alt": "A bird's eye view of Beacon Hill Park. Lush trees and green grass surround a peaceful pond.",
       "alt_source": "site",
@@ -169,7 +178,9 @@
     "bus parking: unknown — no parking information of any kind is published on the park page.",
     "stroller and wheelchair access: the park page lists 'Accessible Features' as an amenity but does not say which features or which routes are step-free.",
     "hosts_school_groups and hosts_daycare_groups are left null: the City site is silent about school or daycare visits rather than welcoming or excluding them.",
-    "The park page's og:image is the City's generic social card (social.png), not a photograph, so the hero was taken from the lead photo on the park page instead."
+    "The park page's og:image is the City's generic social card (social.png), not a photograph, so the hero was taken from the lead photo on the park page instead.",
+    "the hero was originally recorded as the Drupal 16_9_park cropped derivative with an itok query token. Re-checked in a browser 2026-09-03: the untokened original at /sites/default/files/2025-08/ returns 200 and is larger, so the URL was switched to it per STEP 2b (largest size, query string stripped).",
+    "re-checked with a rendering browser 2026-09-03: the City park page carries exactly one photograph, so no further images exist to collect. victoria.ca states no admission, fee or age information for the park, so those fields stay null."
   ],
   "conflicts": [],
   "pages_opened": [
@@ -185,6 +196,6 @@
     "https://www.victoria.ca/parks-recreation/our-parks/park-event-permits",
     "https://www.victoria.ca/media/file/bhp-information-applicants-november-2022pdf"
   ],
-  "extracted_at": "2026-09-02T20:10:00Z",
+  "extracted_at": "2026-09-03T12:30:00-07:00",
   "extractor_version": "v2.0"
 }

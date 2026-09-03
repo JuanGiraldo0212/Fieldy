@@ -1,42 +1,32 @@
-# VERIFICATION — Emily Carr House (Carr House)
+# VERIFICATION — emily-carr-house
 
-Checked on 2026-09-03 against https://www.carrhouse.org. Extractor v2.0.
+Re-run 2026-09-03 with a rendering browser, replacing the fetch-only record that returned nothing.
 
-- **Fields checked: 32 venue fields + 1 program + images + location.** Almost all resolved to null, for one reason described below.
+- **Fields checked:** 41 (23 venue, 3 programs × ~6 non-null each, 1 image)
+- **Fields corrected:** 0 from the previous record — the previous record had almost no non-null values to correct. Against it, this run **added**: `address`, `booking_email`, `booking_phone`, `booking_method`, `wheelchair_accessible`, `facility_notes`, `nearby_park`, `restrictions`, `hours_notes`, `seasonal_notes`, `price_year_or_season`, two further programs, and one image.
+- **Fields set to null after review:** 1 — `venue.booking_url` was previously `plan-your-visit`; it is now the School Groups form, which is the page that actually takes a school booking. `image.width`/`height` left null: the browser reports 1500×2000, but the page markup does not state them and STEP 2b allows only markup-stated dimensions.
+- **Conflicts between pages:** none. The FAQ's "No, you don't need to book" and the homepage's "sign up in advance on Eventbrite" describe two different offerings (self-guided drop-in vs the 40-minute guided tour), not a disagreement.
+- **Meets minimum viable record:** no — missing `lat`/`lng` (geocode_pending, address captured) and no program has `age_basis` + range or a cost/`is_free`. The site publishes no ages and no admission amount for anything.
+- **Confidence:** high for what is recorded. Every value was read from a rendered page on the venue's own domain, and the two thin areas (no ages, no prices) are genuine absences on the site rather than retrieval failures.
 
-- **Blocking finding: the site is JavaScript-rendered and served no body content to the fetcher.** Nine URLs were opened (homepage, sitemap, `/school-groups`, `/plan-your-visit`, `/plan-your-visit-`, `/frequently-asked-questions`, `/about-carr-house`, `/contact-us`, `/educational-resources`). Every HTML page returned only its `<head>` metadata — no headings, no paragraphs, no image tags, no JSON-LD, no map embed. The `www` and apex hosts behave identically, and a cache-busting query changed nothing. `sitemap.xml` returned normally, which is how the page inventory was obtained, so this is a rendering limitation and not a block or an outage. No browser-capable fetch was available in this run environment.
+## Method note — this is why the first run failed
 
-  Everything recorded therefore comes from page metadata, which is the venue's own published text on its own domain:
-  - `/school-groups` → "Carr House offers a range of educational programs for school groups, from guided tours to scavenger hunts."
-  - `/` → "Book a tour at Carr House and learn about Emily Carr and her legacy and upcoming events at this national historic site."
-  - `/plan-your-visit-` → "Book a guided tour or art class, see our upcoming events or book a rental!"
-  - `/educational-resources` → "Educational videos, activities and tours about Emily Carr and Carr House!"
+`carrhouse.org` is a **Square Online** site that renders entirely client-side. A plain fetch returns `<head>` metadata and nothing else; `/qr-codes-quotes`, never fetched before, came back empty on a cold request, confirming rendering rather than caching was the problem. `?format=json` returns metadata only.
 
-- **Fields corrected: 0** (nothing survived long enough to need correcting).
+Even in the browser, `get_page_text` found nothing and `document.body.innerText` returned 753 characters of navigation, because the page content sits inside **shadow DOM**. The content was reached with a TreeWalker that descends into `shadowRoot` at each element, polling until the body text settled — the render completes after `navigate` returns, so an immediate read gets an empty page.
 
-- **Fields set to null after review: 5 categories**
-  - `address`, and therefore `lat`, `lng`, `geo_source`. The street address is well known but it was not readable on the site in this run, and the rules forbid filling it from outside the venue's own pages or hand-placing a pin. `geo_source` is null rather than `geocode_pending`, because there is no address for the backfill script to work from.
-  - `booking_email`, `booking_phone`, `booking_method` — no contact details were readable.
-  - `general_admission_child_cad` / `general_admission_adult_cad`, `hours_notes` — not readable.
-  - All facility booleans — not readable.
-  - `programs[0].what_children_do` — the site names "guided tours" and "scavenger hunts" but never describes what a visit consists of, so this was left null rather than imagined.
+Photographs are CSS `background-image`, not `<img>`, so they need `getComputedStyle` rather than a DOM image query. Both candidate images were opened directly in the tab and viewed before alt text was written, so the hero's `alt_source: "generated"` rests on having actually seen the frame.
 
-- **Images: 0 recorded, deliberately.** Each page carries an og:image on the venue's own domain (e.g. `https://www.carrhouse.org/uploads/b/769b2f10-164b-11ec-87f7-2f2c96c7cfb2/Carr%20House%20August%202022.jpg`). Because page bodies did not render, no image had a readable alt attribute, and `alt` cannot honestly be generated for a photograph whose frame has not been seen — the rule is to describe only what is visibly in the frame. Rather than write a guess, the candidate hero URL is listed in `gaps` so a human can view it and caption it in one pass. This is why the record has no hero.
+**Anything re-running this venue with fetch tools alone will conclude the site is empty. It is not.**
 
-- **Conflicts recorded: 0.**
+## Recommended follow up, in priority order for a daycare director
 
-- **Authored fields written:** `our_note` and `practical_summary` on the one program. `our_note` rests on the single readable sentence about school programmes plus the honest statement of what is missing; `practical_summary` states plainly that nothing practical is published in readable form. `what_children_do` was left null on purpose. `mood_tags` `["explore","learn"]` rests on the two named activities — a guided tour is `learn`, a scavenger hunt is children finding things at their own pace, which is `explore`.
+1. **Price** — school programs and admission are both unpriced; admission is "by donation" with no suggested amount.
+2. **Youngest age** — nothing published. The 40-minute guided tour is the only duration given, and it may be long for under-fives.
+3. **Capacity** — no group size limit published.
+4. **Lead time** — no minimum notice published; the enquiry form is the only channel.
+5. **Lunch space** — not mentioned. Beacon Hill Park is the obvious fallback and is named on the site for parking.
+6. **Washrooms** — not mentioned anywhere.
+7. **Rain backup** — the house is indoors, but the gardens are part of the visit and wet-weather arrangements are not addressed.
 
-- **Meets minimum viable record: no.** Missing: `venue.address`, `venue.lat`, `venue.lng`, a hero image, and a program with `age_basis` plus a published age or grade range. Nothing was padded to clear the bar.
-
-- **Confidence: low** — not because the site is thin, but because our fetch could not read it. Carr House very likely publishes prices, hours and school-programme detail that a browser would show; this record should be re-run with a JavaScript-capable fetch before anyone concludes the venue publishes nothing.
-
-- **Recommended follow up by phone or email**, in priority order for a daycare director:
-  1. **Re-run this venue with a browser-based fetch** — this single action probably resolves most of the list below.
-  2. **Price** for a school or daycare group.
-  3. **Youngest age** welcomed, and whether the guided tour or the scavenger hunt suits under-fives.
-  4. **Capacity** — the house is small; ask the maximum group size and whether a class is split.
-  5. **Lead time** for booking.
-  6. **Lunch space**, indoors or otherwise.
-  7. **Washrooms** and **step-free access** in a heritage house.
-  8. Confirm the street address and booking contact.
+Also worth asking: whether a coach can set down, given on-site parking is three vehicles and the roundabout must stay clear.

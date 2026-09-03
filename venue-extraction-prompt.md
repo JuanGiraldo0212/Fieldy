@@ -69,6 +69,53 @@ Everything else is verbatim-supported or null.
 
 Start at the homepage. Look for menu items and links containing: schools, education, learn, groups, field trips, programs, tours, book, visit, rates, admission, teachers, kids, youth, camps, birthday, accessibility, contact, directions. Open every plausible one, including PDFs (program guides are often PDFs). Also check the footer and any "Plan your visit" or "Visit" section for washrooms, accessibility, parking, lunch and address information. Stop when you have opened all plausible pages or ten pages, whichever comes first. Record every URL you opened in `pages_opened` and the ones that yielded data in `pages_useful`.
 
+If a site returns nothing useful to a plain fetch, do not record it as a thin venue. Go to STEP 1b.
+
+---
+
+## STEP 1b. When fetching returns an empty page
+
+Plain fetching retrieves HTML without running JavaScript. A site built on Squarespace, Wix, Weebly, Square Online, Webflow or any React/Vue framework may render its entire body client-side, so a fetch returns a shell and the venue looks empty when it is not. **This has already produced one wrong record in this pipeline** — Emily Carr House was first written up as having no address, no hours and no contact details, all of which are published and plainly visible in a browser.
+
+**Symptoms.** Treat any of these as a rendering problem, not an absent venue:
+- The fetch returns only `<head>` metadata — title, description, og: tags — and no body text.
+- The body text is navigation and footer links only, with no page content between them.
+- A page you have never fetched before returns empty on a first request. That rules out the fetch cache and points at rendering.
+- `sitemap.xml` works and lists real pages while every page itself comes back blank. A working sitemap means the site is up.
+
+**Confirm it, then escalate.** Pick a page you have not fetched this session and fetch it cold. If it is empty too, stop fetching and switch to the browser tools. Do not keep retrying with cache-busters — the problem is not the cache, and query-string busters are often deduplicated by path anyway (a trailing-slash variant forces a genuine second fetch when you do need one).
+
+**In the browser.** Four things reliably go wrong, in this order:
+
+1. **Read after the render, not before.** Navigation returns as soon as the document loads, which is before the client-side framework has painted anything. Poll until the text stops being empty rather than reading immediately — try for about ten seconds before concluding a page is genuinely blank.
+
+2. **Descend into shadow DOM.** Several of these platforms put page content inside web components, where `document.body.innerText` and the generic page-text tool both return the navigation only. Walk the tree and recurse into every element's `shadowRoot`:
+
+   ```js
+   function deepText(root, out){
+     const w = document.createTreeWalker(root, NodeFilter.SHOW_ELEMENT|NodeFilter.SHOW_TEXT);
+     let n;
+     while (n = w.nextNode()){
+       if (n.nodeType === 3){ const t = n.textContent.trim(); if (t) out.push(t); }
+       else if (n.shadowRoot) deepText(n.shadowRoot, out);
+       else if (n.tagName === 'IFRAME'){ try { deepText(n.contentDocument, out); } catch(e){} }
+     }
+     return out;
+   }
+   ```
+
+   The site's navigation repeats on every page, so slice from the last occurrence of the final nav item to get the page's own content.
+
+3. **Photographs are often CSS, not `<img>`.** A DOM image query can return nothing but the logo while the page is full of pictures, because they are `background-image` on a div. Read `getComputedStyle(el).backgroundImage` as well as `<img>`, take `currentSrc` for `<img>` so you get the resolved `srcset` size, and strip the query string from what you record.
+
+4. **Scroll before collecting images.** Lazy-loaded galleries do not populate `src` until they enter the viewport. Scroll the page and wait before reading, or you will collect placeholders.
+
+**On alt text.** The browser lets you open an image URL directly and look at it. Do that before writing a `generated` alt, and then describe only what is in the frame. This is the one situation where a written alt rests on having actually seen the image rather than on the file name — say which it was in `gaps`.
+
+**Record what happened.** When a venue needed the browser, put a line in `gaps` saying so, in these words or close to them: *"RETRIEVAL NOTE: this site renders in JavaScript and returns only `<head>` metadata to a plain fetch. A fetch-only re-run will appear to find an empty site."* Without it, the next person to re-run the venue will quietly overwrite a good record with an empty one.
+
+**If no browser is available**, do not guess and do not fill the record from a third-party listing. Extract only what the page metadata legitimately supports, set the venue's status to `error`, and put the reason in `gaps` so it can be re-run rather than mistaken for a venue with nothing to offer.
+
 ---
 
 ## STEP 2. Extract

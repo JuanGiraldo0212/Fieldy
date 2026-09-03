@@ -73,6 +73,25 @@ value judgement.
 Same six programs, same pink chip and tint, new label and a Blocks icon in place
 of Sparkles. The design's frame needs its label updated.
 
+### Gap — login and first-run setup
+
+*Slice 3. `src/app/login/`, `src/app/welcome/`.*
+
+Neither screen exists in the design. Both built in its language.
+
+Login is one field, because spec §5.10 is "email plus magic link, no
+passwords". The "check your email" state is given as much care as the form:
+sending a link and showing nothing is how people end up requesting four of
+them, and only the newest works, so it says so.
+
+Setup is one screen rather than a wizard, for the same reason spec §5.3 gives
+for the plan screen. This is the first thing a director ever does, and a
+three-step flow with a progress bar is a worse first impression than eight
+fields she can see all of. It arrives pre-filled with the design's own
+anonymous defaults, so she corrects rather than composes.
+
+Both need frames.
+
 ### Gap — photo viewer
 
 *Slice 2. `src/components/program/photo-strip.tsx`.*
