@@ -432,6 +432,40 @@ export function search(
   return applySort(filtered, state, opts.rankFeasibleFirst ?? true)
 }
 
+/*
+  What to suggest loosening when nothing matched.
+
+  Naming the actual culprit matters: an empty catalog that says "try the bus"
+  when the real cause is two ANDed accessibility filters sends the user to
+  change the wrong control, and they conclude the app is broken.
+
+  Ordered by how sharply each filter cuts, so the first plausible cause wins.
+*/
+export function emptyHint(state: SearchState): string {
+  if (state.query.trim()) {
+    return `Nothing matches “${state.query.trim()}”. Try a shorter word, or clear the search.`
+  }
+  if (state.accessibility.length > 1) {
+    return 'Every accessibility filter has to match at once. Try just the one that matters most.'
+  }
+  if (state.accessibility.length === 1) {
+    return 'Few venues publish their accessibility details, so this filter cuts deep. Try clearing it and asking the venue instead.'
+  }
+  if (state.transport === 'walking') {
+    return 'Walking only reaches about 2.5 km. Try the bus, or widen the distance.'
+  }
+  if (state.radius_km > 0 && state.radius_km <= 5) {
+    return `Nothing within ${state.radius_km} km. Try widening the distance.`
+  }
+  if (state.formats.length || state.environment.length) {
+    return 'Try clearing a filter or two — several are on at once.'
+  }
+  if (state.categories.length || state.moods.length) {
+    return 'Nothing in that category for this group. Try another, or clear it.'
+  }
+  return 'Try a wider distance, a higher budget, or fewer filters.'
+}
+
 /* The line above the results: "12 outings, 5 fit your group". */
 export function resultLine(results: SearchResult[]): string {
   const n = results.length

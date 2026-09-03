@@ -4,6 +4,7 @@ import {
   applyFilters,
   applySort,
   decorate,
+  emptyHint,
   effectiveAgeRange,
   initialsOf,
   resultLine,
@@ -287,6 +288,36 @@ describe('search — surprise me', () => {
     const a = search(rows, s, ORIGIN, noHeroes, { surpriseSeed: 1 }).map((r) => r.id)
     const b = search(rows, s, ORIGIN, noHeroes, { surpriseSeed: 99 }).map((r) => r.id)
     expect(a).not.toEqual(b)
+  })
+})
+
+describe('emptyHint', () => {
+  it('blames the search text first, because that is usually it', () => {
+    expect(emptyHint(state({ query: 'salmon', transport: 'walking' }))).toMatch(/“salmon”/)
+  })
+
+  it('explains that accessibility filters AND together', () => {
+    const h = emptyHint(state({ accessibility: ['wheelchair', 'sensory'], transport: 'walking' }))
+    expect(h).toMatch(/at once/)
+  })
+
+  it('does not blame walking when accessibility is the real cause', () => {
+    // The bug this exists to prevent: sending the user to change the wrong
+    // control, after which they conclude the app is broken.
+    const h = emptyHint(state({ accessibility: ['wheelchair'], transport: 'walking' }))
+    expect(h).not.toMatch(/2\.5 km/)
+  })
+
+  it('blames walking when walking really is the constraint', () => {
+    expect(emptyHint(state({ transport: 'walking', radius_km: 0 }))).toMatch(/2\.5 km/)
+  })
+
+  it('names the radius when a tight one is set', () => {
+    expect(emptyHint(state({ transport: 'bus', radius_km: 3 }))).toMatch(/within 3 km/)
+  })
+
+  it('falls back to generic advice with no filters on', () => {
+    expect(emptyHint(state({ transport: 'bus', radius_km: 0 }))).toMatch(/wider distance/)
   })
 })
 

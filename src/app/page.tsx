@@ -1,5 +1,11 @@
 import Link from 'next/link'
-import { fetchCatalog, fetchHeroImages, resultLine, search } from '@/lib/catalog/search'
+import {
+  emptyHint,
+  fetchCatalog,
+  fetchHeroImages,
+  resultLine,
+  search,
+} from '@/lib/catalog/search'
 import { parseSearchParams, toSearchParams } from '@/lib/catalog/url'
 import { CatalogMap, type MapPin } from '@/components/catalog/catalog-map'
 import { OutingCard } from '@/components/catalog/outing-card'
@@ -111,14 +117,7 @@ export default async function CatalogPage({
       ) : (
         /* Not in the design — logged in docs/design-gaps.md. Built plainly,
            and it says which filter to loosen rather than just apologising. */
-        <EmptyState
-          title="Nothing matches yet"
-          body={
-            state.transport === 'walking'
-              ? 'Walking only reaches about 2.5 km. Try the bus, or widen the distance.'
-              : 'Try a wider distance, a higher budget, or fewer filters.'
-          }
-        />
+        <EmptyState title="Nothing matches yet" body={emptyHint(state)} />
       )}
     </main>
   )
