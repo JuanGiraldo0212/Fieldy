@@ -1,0 +1,192 @@
+json_file,name,region,city,website,already_in_seed,status
+abkhazi-gardens.json,Abkhazi Gardens,Greater Victoria,Victoria,www.conservancy.bc.ca,,done
+art-gallery-of-greater-victoria.json,Art Gallery of Greater Victoria,Greater Victoria,Victoria,www.aggv.ca,yes,done
+b-c-archives.json,B.C. Archives,Greater Victoria,Victoria,www.royalbcmuseum.bc.ca,,done
+b-c-aviation-museum.json,B.C. Aviation Museum,Greater Victoria,North Saanich,www.bcam.net,yes,done
+bateman-foundation-gallery-of-nature.json,Bateman Foundation Gallery of Nature,Greater Victoria,Victoria,www.batemanfoundation.org,,not_for_groups
+beacon-hill-childrens-farm.json,Beacon Hill Children’s Farm,Greater Victoria,Victoria,www.beaconhillchildrensfarm.ca,yes,done
+beacon-hill-park.json,Beacon Hill Park,Greater Victoria,Victoria,www.beaconhillpark.com,yes,done
+butchart-gardens-national-historic-site.json,Butchart Gardens – National Historic Site,Greater Victoria,Brentwood Bay,www.butchartgardens.com,yes,done
+cfb-esquimalt-naval-and-military-museum.json,CFB Esquimalt Naval and Military Museum,Greater Victoria,Esquimalt,www.navalandmilitarymuseum.org,,done
+chinese-consolidated-benevolent-association-building-and-chinese-public-school.json,Chinese Consolidated Benevolent Association Building and Chinese Public School,Greater Victoria,Victoria,www.heritagebc.ca,,no_website
+christ-church-cathedral.json,Christ Church Cathedral,Greater Victoria,Victoria,www.christchurchcathedral.bc.ca,,done
+crag-x-climbing-gym.json,Crag X Climbing Gym,Greater Victoria,Victoria,www.cragx.ca,,done
+craigdarroch-castle-national-historic-site.json,Craigdarroch Castle – National Historic Site,Greater Victoria,Victoria,www.thecastle.ca,yes,done
+craigflower-manor-and-school-house-national-historic-sites-of-canada.json,Craigflower Manor and School House – National Historic Sites of Canada,Greater Victoria,Victoria,www.pc.gc.ca/apps/dfhd/page_nhs_,,done
+discover-the-past-walking-tours.json,Discover the Past Walking Tours,Greater Victoria,Victoria,www.discoverthepast.com,,done
+dominion-astrophysical-observatory-centre-of-the-universe-visitor-centre-nrc.json,Dominion Astrophysical Observatory – Centre of the Universe Visitor Centre – NRC,Greater Victoria,Victoria,www.centreoftheuniverse.org,,pending
+emily-carr-house.json,Emily Carr House,Greater Victoria,Victoria,www.carrhouse.org,yes,pending
+fairmont-empress-hotel.json,Fairmont Empress Hotel,Greater Victoria,Victoria,www.fairmont.com,,pending
+fairway-gorge-paddling-club.json,Fairway Gorge Paddling Club,Greater Victoria,Victoria,www.fgpaddle.com,,pending
+flying-squirrel-trampoline-park.json,Flying Squirrel Trampoline Park,Greater Victoria,Victoria,www.flyingsquirrelsports.ca/victoriabritish-columbia,,pending
+fort-rodd-hill-and-fisgard-lighthouse-national-historic-site.json,Fort Rodd Hill and Fisgard Lighthouse National Historic Site,Greater Victoria,Victoria,www.parks.canada.ca/lhn-nhs/bc/,yes,pending
+freshwater-fisheries-society-of-b-c.json,Freshwater Fisheries Society of B.C.,Greater Victoria,Victoria,www.gofishbc.com,,pending
+gonzales-hill-observatory-walbran-park.json,Gonzales Hill Observatory (Walbran Park),Greater Victoria,Victoria,www.tourismvictoria.com,,pending
+government-house-lieutenant-governor-of-bc.json,Government House (Lieutenant Governor of BC),Greater Victoria,Victoria,www.ltgov.bc.ca,,pending
+greater-victoria-public-library.json,Greater Victoria Public Library,Greater Victoria,Victoria,www.gvpl.ca,yes,pending
+greater-victoria-sports-hall-of-fame.json,Greater Victoria Sports Hall of Fame,Greater Victoria,Victoria,www.gvshof.ca,,pending
+gulf-islands-cruising-school-ltd.json,Gulf Islands Cruising School Ltd.,Greater Victoria,Sidney,www.cruising.bc.ca,,pending
+hatley-park-formal-gardens-national-historic-site.json,Hatley Park Formal Gardens – National Historic Site,Greater Victoria,Victoria,www.hatleypark.ca,yes,pending
+helmcken-house.json,Helmcken House,Greater Victoria,Victoria,www.royalbcmuseum.bc.ca,,pending
+heritage-acres.json,Heritage Acres,Greater Victoria,Saanichton,www.heritageacresbc.ca,yes,pending
+horticulture-centre-of-the-pacific.json,Horticulture Centre of the Pacific,Greater Victoria,Victoria,www.hcp.ca,,pending
+imax-victoria.json,IMAX Victoria,Greater Victoria,Victoria,www.imaxvictoria.com,,pending
+kelp-reef-adventures.json,Kelp Reef Adventures,Greater Victoria,Victoria,www.kelpreef.com,,pending
+legacy-downtown-art-gallery-uvic.json,Legacy Downtown Art Gallery (UVic),Greater Victoria,Victoria,www.uvic.ca/legacygalleries,,pending
+legacy-maltwood-art-museum-gallery-uvic.json,Legacy Maltwood Art Museum & Gallery (UVic),Greater Victoria,Victoria,www.uvic.ca,,pending
+legislative-assembly-of-bc-parliamentary-education-office.json,Legislative Assembly of BC – Parliamentary Education Office,Greater Victoria,Victoria,www.leg.bc.ca,,pending
+log-cabin-museum-saanich-pioneer-society.json,Log Cabin Museum – Saanich Pioneer Society,Greater Victoria,Saanichton,www.saanichpioneersociety.com,,pending
+madrona-gallery.json,Madrona Gallery,Greater Victoria,Victoria,www.madronagallery.com,,pending
+maritime-museum-of-british-columbia.json,Maritime Museum of British Columbia,Greater Victoria,Victoria,www.mmbc.bc.ca,yes,pending
+mark-loria-gallery-contemporary-indigenous-art.json,Mark Loria Gallery – Contemporary Indigenous Art,Greater Victoria,Victoria,www.markloriagallery.com,,pending
+metchosin-international-summer-school-of-the-arts.json,Metchosin International Summer School of the Arts,Greater Victoria,Victoria,www.missa.ca,,pending
+metchosin-pioneer-museum.json,Metchosin Pioneer Museum,Greater Victoria,Victoria,www.metchosinmuseum.ca,,pending
+metchosin-schoolhouse-museum.json,Metchosin Schoolhouse Museum,Greater Victoria,Victoria,www.metchosinmuseum.ca,,pending
+miniature-world-located-in-the-fairmont-empress-hotel.json,Miniature World – Located in the Fairmont Empress Hotel,Greater Victoria,Victoria,www.miniatureworld.com,yes,pending
+national-toy-museum-of-canada.json,National Toy Museum of Canada,Greater Victoria,Victoria,www.nationaltoymuseumcanada.ca,,pending
+nature-house-at-goldstream-provincial-park.json,Nature House at Goldstream Provincial Park,Greater Victoria,Victoria,,yes,no_website
+ocean-networks-canada-marine-technology-centre.json,Ocean Networks Canada – Marine Technology Centre,Greater Victoria,North Saanich,www.oceannetworks.ca,yes,pending
+ocean-networks-canada-ocean-climate-building-university-of-victoria.json,"Ocean Networks Canada, Ocean Climate Building – University of Victoria",Greater Victoria,Victoria,www.oceannetworks.ca,yes,pending
+ocean-river-sports-victoria-harbour-paddle-shack.json,Ocean River Sports – Victoria Harbour Paddle Shack,Greater Victoria,Victoria,www.oceanriver.com,,pending
+old-cemeteries-society-of-victoria.json,Old Cemeteries Society of Victoria,Greater Victoria,Victoria,www.oldcem.bc.ca,,pending
+one-moon-gallery.json,One Moon Gallery,Greater Victoria,Esquimalt,www.onemoon.ca,,pending
+orca-spirit-adventures.json,Orca Spirit Adventures,Greater Victoria,Victoria,www.orcaspirit.com,,pending
+point-ellice-house-museum-and-gardens.json,Point Ellice House Museum and Gardens,Greater Victoria,Victoria,www.PointElliceHouse.com,yes,pending
+royal-british-columbia-museum.json,Royal British Columbia Museum,Greater Victoria,Victoria,www.royalbcmuseum.bc.ca,yes,done
+royal-roads-university.json,Royal Roads University,Greater Victoria,Victoria,www.royalroads.ca,yes,pending
+salts-sail-and-life-training-society.json,SALTS – Sail and Life Training Society,Greater Victoria,Victoria,www.salts.ca,,pending
+saanichton-christmas-tree-farm.json,Saanichton Christmas Tree Farm,Greater Victoria,Saanichton,www.saanichtonchristmastreefarm.com,,pending
+shaw-centre-for-the-salish-sea.json,Shaw Centre for the Salish Sea,Greater Victoria,Sidney,www.salishseacentre.org,yes,pending
+side-street-studio.json,Side Street Studio,Greater Victoria,Victoria,www.sidestreetstudio.com,,pending
+sidney-museum-and-archives.json,Sidney Museum and Archives,Greater Victoria,Sidney,www.sidneymuseum.ca,,pending
+sooke-region-museum.json,Sooke Region Museum,Greater Victoria,Sooke,www.sookeregionmuseum.ca,yes,pending
+st-anns-academy-national-historic-site.json,St. Ann’s Academy National Historic Site,Greater Victoria,Victoria,www.stannsacademy.com,,pending
+susan-isaac-design-and-shards-glass-studio.json,Susan Isaac Design and Shards Glass Studio,Greater Victoria,Sooke,www.susanisaacdesign.com,,pending
+tlc-the-land-conservancy-of-b-c.json,TLC – The Land Conservancy of B.C.,Greater Victoria,Victoria,www.conservancy.bc.ca,,pending
+tnt-paintball.json,TNT Paintball,Greater Victoria,Victoria,www.tntpaintball.com,,pending
+the-avenue-gallery-contempory-fine-art-gallery.json,The Avenue Gallery – Contempory Fine Art Gallery,Greater Victoria,Victoria,www.theavenuegallery.com,,pending
+victoria-bug-zoo-inc.json,Victoria Bug Zoo Inc.,Greater Victoria,Victoria,www.victoriabugzoo.ca,yes,pending
+victoria-butterfly-gardens.json,Victoria Butterfly Gardens,Greater Victoria,Brentwood Bay,,yes,no_website
+wildplay-element-parks.json,Wildplay Element Parks,Greater Victoria,Victoria,www.wildplay.com,,pending
+ymca-ywca-of-vancouver-island-camp-thunderbird.json,YMCA / YWCA of Vancouver Island – Camp Thunderbird,Greater Victoria,Sooke,www.vancouverislandy.com,,pending
+ymca-ywca-of-victoria-downtown.json,YMCA / YWCA of Victoria Downtown,Greater Victoria,Victoria,www.vancouverislandy.com,,pending
+ymca-ywca-westhills.json,YMCA / YWCA – Westhills,Greater Victoria,Langford,www.vancouverislandy.com,,pending
+art-council-of-ladysmith-and-district.json,Art Council of Ladysmith and District,Cowichan Valley,Ladysmith,www.ladysmitharts.ca,,pending
+b-c-artifacts-mobile-museum.json,B.C. Artifacts Mobile Museum,Cowichan Valley,Cobble Hill,www.mobilemuseum.ca,,pending
+b-c-forest-discovery-centre.json,B.C. Forest Discovery Centre,Cowichan Valley,Duncan,www.bcforestdiscoverycentre.com,,pending
+bernadette-mccormack-hummingbird-studio.json,Bernadette McCormack – Hummingbird Studio,Cowichan Valley,Duncan,www.bernadettemccormack.com,,pending
+chemainus-theatre-festival.json,Chemainus Theatre Festival,Cowichan Valley,Chemainus,www.chemainustheatrefestival.ca,,pending
+chemainus-valley-museum.json,Chemainus Valley Museum,Cowichan Valley,Chemainus,www.chemainusvalleymuseum.ca,,pending
+city-of-totems-totem-tour-walk.json,City of Totems – Totem Tour Walk,Cowichan Valley,Duncan,www.duncan.ca/visitors/totems-tour/,,pending
+coast-salish-journey.json,Coast Salish Journey,Cowichan Valley,Cowichan Bay,www.coastsalishjourney.com,,pending
+cowichan-bay-maritime-centre-cowichan-wooden-boat-society.json,Cowichan Bay Maritime Centre & Cowichan Wooden Boat Society,Cowichan Valley,Cowichan Bay,www.classicboats.org,,pending
+cowichan-estuary-nature-centre.json,Cowichan Estuary Nature Centre,Cowichan Valley,Cowichan,www.cowichanestuary.ca,,pending
+cowichan-river-provincial-park.json,Cowichan River Provincial Park,Cowichan Valley,Duncan,www.bcparks.ca/explore/parkpgs/,,pending
+cowichan-valley-museum-and-archives.json,Cowichan Valley Museum and Archives,Cowichan Valley,Duncan,www.cvmuseum.ca,,pending
+excellent-frameworks-home-of-the-ej-hughes-gallery.json,Excellent Frameworks – Home of the EJ Hughes Gallery,Cowichan Valley,Duncan,www.excellentframeworks.ca,,pending
+kaatza-station-museum-archives.json,Kaatza Station Museum & Archives,Cowichan Valley,Lake Cowichan,www.kaatzastationmuseum.ca,,pending
+kinsol-trestle.json,Kinsol Trestle,Cowichan Valley,Shawnigan Lake,www.cvrd.bc.ca/1379/Kinsol-Trestle,,pending
+ladysmith-archives.json,Ladysmith Archives,Cowichan Valley,Ladysmith,www.ladysmithhistoricalsociety.ca/,,pending
+ladysmith-gallery.json,Ladysmith Gallery,Cowichan Valley,Ladysmith,www.ladysmitharts.ca,,pending
+ladysmith-industrial-heritage-museum.json,Ladysmith Industrial Heritage Museum,Cowichan Valley,Ladysmith,www.ladysmithhistoricalsociety.ca,,pending
+ladysmith-museum.json,Ladysmith Museum,Cowichan Valley,Ladysmith,,,no_website
+mary-fox-pottery.json,Mary Fox Pottery,Cowichan Valley,Ladysmith,www.maryfoxpottery.ca,,pending
+pacific-northwest-raptors.json,Pacific Northwest Raptors,Cowichan Valley,Duncan,www.pnwraptors.com,,pending
+quwutsun-cultural-and-education-centre.json,Quw’utsun Cultural and Education Centre,Cowichan Valley,Duncan,www.cowichantribes.com,,pending
+shawnigan-lake-museum.json,Shawnigan Lake Museum,Cowichan Valley,Shawnigan Lake,,,no_website
+somenos-marsh-wildlife-society.json,Somenos Marsh Wildlife Society,Cowichan Valley,Duncan,www.somenosmarsh.com,,pending
+the-raptors.json,The Raptors,Cowichan Valley,Duncan,www.pnwraptors.com,,pending
+vancouver-island-trout-hatchery.json,Vancouver Island Trout Hatchery,Cowichan Valley,Duncan,www.gofishbc.com,,pending
+bailey-studio-nanaimo-theatre-group.json,Bailey Studio – Nanaimo Theatre Group,Nanaimo,Nanaimo,www.nanaimotheatregroup.ca,,pending
+canadian-indigenous-art-inc.json,Canadian Indigenous Art Inc.,Nanaimo,Nanaimo,www.canadianindigenousart.com,,pending
+clayworks-studio-gallery.json,Clayworks Studio/Gallery,Nanaimo,Lantzville,www.heathergoldminc.store,,pending
+creative-escape-art-programs.json,Creative Escape Art Programs,Nanaimo,Nanaimo,www.creativeescapeart.com,,pending
+glaskrafter-art-glass.json,Glaskrafter Art Glass,Nanaimo,Lantzville,www.glaskrafter.com,,pending
+lyndia-terre-gallery.json,Lyndia Terre Gallery,Nanaimo,Nanoose Bay,www.lyndiaterregallery.com,,pending
+morrell-nature-sanctuary.json,Morrell Nature Sanctuary,Nanaimo,Nanaimo,www.morrellnaturesanctuary.ca,,pending
+nanaimo-art-gallery.json,Nanaimo Art Gallery,Nanaimo,Nanaimo,www.nanaimogallery.ca,,pending
+nanaimo-arts-council.json,Nanaimo Arts Council,Nanaimo,Nanaimo,www.nanaimoartscouncil.ca,,pending
+nanaimo-museum.json,Nanaimo Museum,Nanaimo,Nanaimo,www.nanaimomuseum.ca,,pending
+pacific-northwest-expeditions.json,Pacific Northwest Expeditions,Nanaimo,Nanaimo,www.seakayakbc.com,,pending
+splitsville-entertainment-bowling-and-much-more.json,Splitsville Entertainment – Bowling and Much More,Nanaimo,Nanaimo,www.splitsville.ca,,pending
+the-port-theatre.json,The Port Theatre,Nanaimo,Naniamo,www.porttheatre.com,yes,pending
+vancouver-island-military-museum.json,Vancouver Island Military Museum,Nanaimo,Nanaimo,www.militarymuseum.ca,,pending
+aboriginal-journeys-wildlife-adventure-tours.json,Aboriginal Journeys – Wildlife & Adventure Tours,Central Island,Campbell River,www.aboriginaljourneys.com,,pending
+arrowsmith-potters-guild.json,Arrowsmith Potters Guild,Central Island,Parksville,www.arrowsmithpottersguild.com,,pending
+big-qualicum-hatchery.json,Big Qualicum Hatchery,Central Island,Qualicum Beach,www.pac.dfo-mpo.gc.ca/sep-pmvs/projects-projets/bqr/qualicum-eng.html,,pending
+black-creek-studio-gallery.json,Black Creek Studio Gallery,Central Island,Black Creek,www.bscottfinearts.ca,,pending
+campbell-river-art-gallery.json,Campbell River Art Gallery,Central Island,Campbell River,www.crartgallery.ca,,pending
+comox-air-force-museum.json,Comox Air Force Museum,Central Island,Lazo,www.comoxairforcemuseum.ca,,pending
+comox-archives-museum.json,Comox Archives & Museum,Central Island,Comox,www.comoxmuseum.ca,,pending
+comox-valley-art-gallery.json,Comox Valley Art Gallery,Central Island,Courtenay,www.comoxvalleyartgallery.com,,pending
+courtenay-and-district-museum-and-paleontology-centre.json,Courtenay and District Museum and Paleontology Centre,Central Island,Courtenay,www.courtenaymuseum.ca,,pending
+cumberland-museum-and-archives.json,Cumberland Museum and Archives,Central Island,Cumberland,www.cumberlandmuseum.ca,,pending
+douglas-walker-sculpture-studio.json,Douglas Walker Sculpture Studio,Central Island,Black Creek,www.douglaswalkersculpture.ca,,pending
+echo-players-village-theatre.json,Echo Players Village Theatre,Central Island,Qualicum Beach,www.echoplayers.ca,,pending
+filberg-heritage-lodge-and-park.json,Filberg Heritage Lodge and Park,Central Island,Comox,www.filberg.com,,pending
+gildas-box-of-treasures-theatre.json,Gildas Box of Treasures Theatre,Central Island,Campbell River,www.native-dance.ca/en/showcase/gildas-box-of-treasures-theatre/,,pending
+grey-wolf-expeditions.json,Grey Wolf Expeditions,Central Island,Black Creek,www.greywolfexpeditions.com,,pending
+horne-lake-cave-tours-and-outdoor-centre.json,Horne Lake Cave Tours and Outdoor Centre,Central Island,Qualicum Beach,www.hornelake.com,,pending
+i-hos-gallery.json,I-Hos Gallery,Central Island,Courtenay,www.ihosgallery.com,,pending
+island-cycle.json,Island Cycle,Central Island,Parksville,www.island-cycle.myshopify.com,,pending
+kitty-coleman-woodland-gardens.json,Kitty Coleman Woodland Gardens,Central Island,Courtenay,www.woodlandgardens.ca,,pending
+larry-aguilar-pottery-studio.json,Larry Aguilar Pottery Studio,Central Island,Qualicum Beach,www.facebook.com/Larry.Aguilar.,,pending
+maritime-heritage-centre.json,Maritime Heritage Centre,Central Island,Campbell River,www.maritimeheritagecentre.ca,yes,pending
+mcmillan-arts-centre-the-mac.json,McMillan Arts Centre – The MAC,Central Island,Parksville,www.mcmillanartscentre.com,,pending
+milner-gardens-and-woodlands.json,Milner Gardens and Woodlands,Central Island,Qualicum Beach,www.milnergardens.viu.ca,,pending
+miracle-beach-nature-house.json,Miracle Beach Nature House,Central Island,Black Creek,www.discoverparks.ca/parks/miraclebeach-park,,pending
+monk-art-gallery-studio.json,Monk Art Gallery & Studio,Central Island,Parksville,www.artbymonk.com,,pending
+monks-rathtrevor-beach-studio.json,Monk’s Rathtrevor Beach Studio,Central Island,Parksville,www.artbymonk.com,,pending
+mount-arrowsmith-biosphere-region.json,Mount Arrowsmith Biosphere Region,Central Island,Qualicum Beach,www.mabr.ca,,pending
+mount-washington-alpine-resort.json,Mount Washington Alpine Resort,Central Island,Courtenay,www.mountwashington.ca,,pending
+museum-at-campbell-river.json,Museum at Campbell River,Central Island,Campbell River,www.crmuseum.ca,,pending
+needle-arts-centre.json,Needle & Arts Centre,Central Island,Campbell River,www.needlenart.com,,pending
+north-island-wildlife-recovery-centre.json,North Island Wildlife Recovery Centre,Central Island,Errington,www.niwra.org,,pending
+nuyumbalees-cultural-centre.json,Nuyumbalees Cultural Centre,Central Island,Quathiaski Cove,,,no_website
+oceanside-community-arts-council.json,Oceanside Community Arts Council,Central Island,Parksville,www.oceansideartscouncil.com,,pending
+parksville-museum-archive.json,Parksville Museum & Archive,Central Island,Parksville,www.parksvillemuseum.com,,pending
+qualicum-beach-historical-and-museum-society.json,Qualicum Beach Historical and Museum Society,Central Island,Qualicum Beach,www.qbmuseum.ca,,pending
+rathtrevor-beach-nature-house.json,Rathtrevor Beach Nature House,Central Island,Parksville,www.naturehouse.ca,,pending
+seaview-game-farm.json,Seaview Game Farm,Central Island,Black Creek,www.seaviewgamefarm.com,,pending
+sid-williams-theatre-society.json,Sid Williams Theatre Society,Central Island,Courtenay,www.sidwilliamstheatre.com,,pending
+strathcona-park-lodge-and-outdoor-education-centre.json,Strathcona Park Lodge and Outdoor Education Centre,Central Island,Campbell River,www.strathconaparklodge.com,,pending
+sweet-pea-quilting.json,Sweet Pea Quilting,Central Island,Parksville,www.sweetpeaquilting.ca,,pending
+the-old-school-house-arts-centre.json,The Old School House Arts Centre,Central Island,Qualicum Beach,www.theoldschoolhouse.org,yes,pending
+wei-wai-kum-house-of-treasures.json,Wei Wai Kum House of Treasures,Central Island,Campbell River,www.weiwaikumhouseoftreasures.com,,pending
+ahtsik-native-art-gallery-gordon-dick-studio.json,Ahtsik Native Art Gallery + Gordon Dick Studio,West Coast / Alberni,Port Alberni,www.ahtsik.com,,pending
+alberni-valley-museum.json,Alberni Valley Museum,West Coast / Alberni,Port Alberni,www.playinpa.ca/museum,,pending
+bamfield-marine-sciences-centre.json,Bamfield Marine Sciences Centre,West Coast / Alberni,Bamfield,www.bamfieldmsc.com,,pending
+cedar-coast-art-and-ecology-centre.json,Cedar Coast Art and Ecology Centre,West Coast / Alberni,Tofino,www.thecedarcoast.ca,,pending
+cedar-coast-field-station.json,Cedar Coast Field Station,West Coast / Alberni,Tofino,www.cedarcoastfieldstation.org,,pending
+hot-springs-cove-maquinna-provincial-park.json,Hot Springs Cove Maquinna Provincial Park,West Coast / Alberni,35 km NW from Tofino,www.tourismtofino.com,,pending
+house-of-himwitsa-art-gallery.json,House of Himwitsa Art Gallery,West Coast / Alberni,Tofino,www.himwitsa.com,,pending
+jamies-whaling-station-adventure-centres-tofino.json,Jamie’s Whaling Station & Adventure Centres – Tofino,West Coast / Alberni,Tofino,www.jamies.com,,pending
+jamies-whaling-station-adventure-centres-ucluelet.json,Jamie’s Whaling Station & Adventure Centres – Ucluelet,West Coast / Alberni,Ucluelet,www.jamies.com,,pending
+mclean-mill-national-historic-park.json,McLean Mill National Historic Park,West Coast / Alberni,Port Alberni,www.mcleanmill.ca,,pending
+naawayasum-gardens-formerly-tofino-botanical-gardens.json,Naa’Waya’Sum Gardens (Formerly Tofino Botanical Gardens),West Coast / Alberni,Tofino,www.clayoquotcampus.ca/,,pending
+pacific-rim-national-park-reserve.json,Pacific Rim National Park Reserve,West Coast / Alberni,Ucluelet,www.pc.gc.ca/en/pn-np/bc/pacificrim,,pending
+pacific-rim-national-park-kwisitis-visitor-centre.json,Pacific Rim National Park – Kwisitis Visitor Centre,West Coast / Alberni,Ucluelet,www.pc.gc.ca/en/pn-np/bc/pacificrim,,pending
+port-alberni-echo-aquatic-centre-and-fitness-studio.json,Port Alberni Echo Aquatic Centre and Fitness Studio,West Coast / Alberni,Port Alberni,www.playinpa.ca,,pending
+port-alberni-maritime-discovery-centre.json,Port Alberni Maritime Discovery Centre,West Coast / Alberni,Port Alberni,www.portalbernimaritimeheritage.ca,,pending
+raincoast-education-society.json,Raincoast Education Society,West Coast / Alberni,Ucluelet,www.raincoasteducation.org,,pending
+remote-passages-marine-excursions.json,Remote Passages Marine Excursions,West Coast / Alberni,Tofino,www.remotepassages.com,,pending
+roy-henry-vickers-gallery.json,Roy Henry Vickers Gallery,West Coast / Alberni,Tofino,www.royhenryvickers.com,,pending
+the-whale-centre.json,The Whale Centre,West Coast / Alberni,Tofino,www.tofinowhalecentre.com,,pending
+tofino-sea-kayaking-co.json,Tofino Sea Kayaking Co.,West Coast / Alberni,Tofino,www.tofinoseakayaking.com,,pending
+tofino-tourism.json,Tofino Tourism,West Coast / Alberni,Tofino,www.tourismtofino.com,,pending
+west-coast-aquatic-safaris.json,West Coast Aquatic Safaris,West Coast / Alberni,Tofino,www.whalesafaris.com,,pending
+west-coast-nest.json,West Coast Nest,West Coast / Alberni,Tofino,www.westcoastnest.org,,pending
+alert-bay-public-library-museum.json,Alert Bay Public Library & Museum,North Island,Alert Bay,www.alertbay.bc.libraries.coop,,pending
+ecosummer-expeditions.json,Ecosummer Expeditions,North Island,Telegraph Cove,www.ecosummer.com,,pending
+henschel-fine-arts.json,Henschel Fine Arts,North Island,Port McNeill,,,no_website
+kwakiutl-art-of-the-copper-maker-gallery.json,Kwakiutl Art of The Copper Maker Gallery,North Island,Port Hardy,www.calvinhunt.com,,pending
+mount-cain-alpine-park.json,Mount Cain Alpine Park,North Island,Port McNeill,www.mountcain.com,,pending
+port-hardy-museum-archives.json,Port Hardy Museum & Archives,North Island,Port Hardy,www.porthardymuseum.com,,pending
+port-mcneill-district-museum.json,Port McNeill & District Museum,North Island,Port McNeill,www.town.portmcneill.bc.ca,,pending
+sea-wolf-adventures.json,Sea Wolf Adventures,North Island,Port McNeil,www.seawolfadventures.ca,,pending
+sointula-museum.json,Sointula Museum,North Island,Sointula,www.sointulamuseum.ca,,pending
+the-whale-interpretive-centre.json,The Whale Interpretive Centre,North Island,Telegraph Cove,www.killerwhalecentre.org,,pending
+umista-cultural-centre.json,U’Mista Cultural Centre,North Island,Alert Bay,www.umista.ca,,pending
+zeballos-expeditions.json,Zeballos Expeditions,North Island,Zeballos,www.zeballosexpeditions.com,,pending
+zeballos-heritage-museum.json,Zeballos Heritage Museum,North Island,Zeballos,www.zeballos.com,,pending
+cineplex-education-cinema-more.json,Cineplex – Education Cinema & More,Island wide,Vancouver Island,www.cineplex.com/groupsales,,pending

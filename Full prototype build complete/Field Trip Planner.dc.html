@@ -1,0 +1,1860 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Nunito+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #F6F0E6; font-family: 'Nunito Sans', system-ui, sans-serif; color: #2B2620; -webkit-font-smoothing: antialiased; }
+  a { color: #B14A22; text-decoration: underline; text-underline-offset: 2px; }
+  a:hover { color: #8C3714; }
+  button { font: inherit; color: inherit; cursor: pointer; }
+  input, textarea, select { font: inherit; color: inherit; }
+  ::placeholder { color: #776854; }
+  @keyframes riseIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+</style>
+<script src="./image-slot.js"></script>
+</helmet>
+
+<div style="min-height: 100vh; background: #F6F0E6;">
+
+  <div style="position: sticky; top: 0; z-index: 40; background: rgba(246,240,230,0.94); backdrop-filter: blur(8px); border-bottom: 1px solid #E3D8C4;">
+    <div style="max-width: 1080px; margin: 0 auto; padding: 14px 20px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap;">
+      <button onClick="{{ goCatalog }}" style="display: flex; align-items: baseline; gap: 8px; background: none; border: 0; padding: 0;">
+        <span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 21px; letter-spacing: -0.02em;">Fieldy</span>
+        <span style="font-size: 12px; color: #665B4C; letter-spacing: 0.04em; text-transform: uppercase;">Greater Victoria</span>
+      </button>
+      <div style="flex: 1;"></div>
+      <div style="display: flex; align-items: center; gap: 6px;">
+        <button onClick="{{ goCatalog }}" style="background: none; border: 0; padding: 10px 14px; border-radius: 999px; font-weight: 600; font-size: 15px; color: #4A4239;" style-hover="background: #EDE4D5;">Find outings</button>
+        <button onClick="{{ goTrips }}" style="background: none; border: 0; padding: 10px 14px; border-radius: 999px; font-weight: 600; font-size: 15px; color: #4A4239; display: flex; align-items: center; gap: 7px;" style-hover="background: #EDE4D5;">My trips
+          <sc-if value="{{ hasUnread }}" hint-placeholder-val="{{ true }}">
+            <span style="min-width: 21px; padding: 1px 6px; border-radius: 999px; background: #B14A22; color: #FFF8EE; font-size: 12px; font-weight: 700;">{{ unreadCount }}</span>
+          </sc-if>
+          <sc-if value="{{ noUnread }}" hint-placeholder-val="{{ false }}">
+            <span style="min-width: 21px; padding: 1px 6px; border-radius: 999px; background: #EDE4D5; color: #6B6053; font-size: 12px; font-weight: 700;">{{ tripCount }}</span>
+          </sc-if>
+        </button>
+        <button onClick="{{ goProfiles }}" style="background: none; border: 0; padding: 10px 14px; border-radius: 999px; font-weight: 600; font-size: 15px; color: #4A4239;" style-hover="background: #EDE4D5;">Groups</button>
+        <button onClick="{{ goAccount }}" style="margin-left: 4px; width: 38px; height: 38px; border-radius: 999px; border: 1px solid #DCCFB8; background: #FFFCF6; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 600; font-size: 14px;" style-hover="border-color: #B14A22;">DM</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ CATALOG ============ -->
+  <sc-if value="{{ isCatalog }}" hint-placeholder-val="{{ true }}">
+    <div style="background: #FFFCF6; border-bottom: 1px solid #E3D8C4;">
+      <div style="max-width: 1080px; margin: 0 auto; padding: 30px 20px 22px;">
+        <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 34px; line-height: 1.12; letter-spacing: -0.025em; margin: 0 0 8px; max-width: 640px;">Every outing in Victoria that actually works for your group.</h1>
+        <p style="margin: 0 0 22px; font-size: 17px; line-height: 1.5; color: #6B6053; max-width: 560px;">Tell us about the room once. We keep the details checked and get you booked on time.</p>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: flex-end; padding: 16px; border: 1px solid #E3D8C4; border-radius: 16px; background: #F9F4EA;">
+          <div>
+            <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: #6E6252; margin-bottom: 7px;">Ages</div>
+            <div style="display: flex; gap: 6px;">
+              <sc-for list="{{ ageOptions }}" as="a" hint-placeholder-count="4">
+                <button onClick="{{ a.pick }}" style="position: relative; padding: 9px 13px; border-radius: 999px; border: 1px solid #DCCFB8; background: #FFFCF6; font-weight: 600; font-size: 14px;" style-hover="border-color: #B14A22;">
+                  <sc-if value="{{ a.active }}" hint-placeholder-val="{{ false }}"><span style="position: absolute; inset: 0; border-radius: 999px; background: #F0DED0; border: 1.5px solid #B14A22; z-index: 0;"></span></sc-if>
+                  <span style="position: relative; z-index: 1;">{{ a.label }}</span>
+                </button>
+              </sc-for>
+            </div>
+          </div>
+          <div>
+            <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: #6E6252; margin-bottom: 7px;">Children</div>
+            <div style="display: flex; align-items: center; gap: 2px; border: 1px solid #DCCFB8; background: #FFFCF6; border-radius: 999px; padding: 3px;">
+              <button onClick="{{ sizeDown }}" style="width: 34px; height: 34px; border-radius: 999px; border: 0; background: none; font-size: 19px; font-weight: 600;" style-hover="background: #EDE4D5;">–</button>
+              <span style="min-width: 30px; text-align: center; font-weight: 700; font-size: 16px;">{{ size }}</span>
+              <button onClick="{{ sizeUp }}" style="width: 34px; height: 34px; border-radius: 999px; border: 0; background: none; font-size: 19px; font-weight: 600;" style-hover="background: #EDE4D5;">+</button>
+            </div>
+          </div>
+          <div>
+            <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: #6E6252; margin-bottom: 7px;">Getting there</div>
+            <div style="display: flex; gap: 6px;">
+              <sc-for list="{{ transportOptions }}" as="t" hint-placeholder-count="3">
+                <button onClick="{{ t.pick }}" style="position: relative; padding: 9px 13px; border-radius: 999px; border: 1px solid #DCCFB8; background: #FFFCF6; font-weight: 600; font-size: 14px;" style-hover="border-color: #B14A22;">
+                  <sc-if value="{{ t.active }}" hint-placeholder-val="{{ false }}"><span style="position: absolute; inset: 0; border-radius: 999px; background: #F0DED0; border: 1.5px solid #B14A22; z-index: 0;"></span></sc-if>
+                  <span style="position: relative; z-index: 1;">{{ t.label }}</span>
+                </button>
+              </sc-for>
+            </div>
+          </div>
+          <div>
+            <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: #6E6252; margin-bottom: 7px;">Budget per child</div>
+            <div style="display: flex; align-items: center; gap: 10px; border: 1px solid #DCCFB8; background: #FFFCF6; border-radius: 999px; padding: 6px 14px; height: 42px;">
+              <span style="font-weight: 700; font-size: 16px; min-width: 34px;">{{ budgetLabel }}</span>
+              <input type="range" min="0" max="30" step="1" value="{{ budget }}" onChange="{{ setBudget }}" style="width: 108px; accent-color: #B14A22;">
+            </div>
+          </div>
+          <div style="flex: 1; min-width: 190px;">
+            <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: #6E6252; margin-bottom: 7px;">Leaving from</div>
+            <div style="display: flex; align-items: center; gap: 8px; border: 1px solid #DCCFB8; background: #FFFCF6; border-radius: 999px; padding: 0 14px; height: 42px; font-size: 15px; color: #4A4239;">
+              <span style="color: #B14A22; font-weight: 700;">◎</span>
+              <span style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ homeAddress }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="max-width: 1080px; margin: 0 auto; padding: 20px 20px 70px;">
+      <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 14px;">
+        <div style="display: flex; align-items: center; gap: 8px; background: #FFFCF6; border: 1px solid #DCCFB8; border-radius: 999px; padding: 0 14px; height: 40px; min-width: 210px;">
+          <span style="color: #776854;">⌕</span>
+          <input value="{{ query }}" onChange="{{ setQuery }}" placeholder="Search a place or keyword" style="border: 0; outline: none; background: none; height: 38px; width: 100%; font-size: 15px;">
+        </div>
+        <sc-for list="{{ chips }}" as="c" hint-placeholder-count="8">
+          <button onClick="{{ c.toggle }}" style="position: relative; padding: 9px 14px; border-radius: 999px; border: 1px solid #DCCFB8; background: #FFFCF6; font-size: 14px; font-weight: 600; color: #4A4239;" style-hover="border-color: #B14A22;">
+            <sc-if value="{{ c.active }}" hint-placeholder-val="{{ false }}"><span style="position: absolute; inset: 0; border-radius: 999px; background: #F0DED0; border: 1px solid #B14A22; z-index: 0;"></span></sc-if>
+            <span style="position: relative; z-index: 1;">{{ c.label }}</span>
+          </button>
+        </sc-for>
+      </div>
+
+      <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 18px 2px 12px;">
+        <div style="font-size: 15px; color: #6B6053;">{{ resultLine }}</div>
+        <button onClick="{{ toggleMap }}" style="background: none; border: 0; padding: 6px 0; font-size: 14px; font-weight: 600; color: #B14A22; text-decoration: underline; text-underline-offset: 3px;">{{ mapToggleLabel }}</button>
+      </div>
+
+      <sc-if value="{{ showMap }}" hint-placeholder-val="{{ false }}">
+        <div style="position: relative; height: 340px; border-radius: 16px; overflow: hidden; border: 1px solid #E3D8C4; margin-bottom: 16px; background: #EFE7D8;">
+          <iframe src="{{ catalogMapUrl }}" title="Map of outings near you" style="width: 100%; height: 100%; border: 0; display: block;"></iframe>
+        </div>
+        <div style="font-size: 14px; color: #6E6252; margin: -6px 2px 16px;">One pin per venue in this list. The dark pin is {{ homeAddress }}. Programs that come to you have no pin.</div>
+      </sc-if>
+
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <sc-for list="{{ results }}" as="p" hint-placeholder-count="5">
+          <div style="display: flex; gap: 16px; padding: 16px; background: #FFFCF6; border: 1px solid #E3D8C4; border-radius: 18px; animation: riseIn 240ms ease both;" style-hover="border-color: #C9B99C;">
+            <div style="flex: 0 0 96px; height: 96px; border-radius: 14px; background: #EFE3D2; overflow: hidden; border: 1px solid #E3D8C4; position: relative;">
+              <sc-if value="{{ p.hasPhotos }}" hint-placeholder-val="{{ false }}">
+                <img src="{{ p.thumbUrl }}" alt="{{ p.venue }}" loading="eager" decoding="async" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </sc-if>
+              <sc-if value="{{ p.noPhotos }}" hint-placeholder-val="{{ true }}">
+                <span style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;">
+                  <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 25px; font-weight: 600; color: #B14A22;">{{ p.initials }}</span>
+                  <span style="font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: #6E6252;">{{ p.categoryShort }}</span>
+                </span>
+              </sc-if>
+            </div>
+            <div style="flex: 1; min-width: 0;">
+              <div style="display: flex; gap: 10px; align-items: flex-start; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 200px;">
+                  <button onClick="{{ p.open }}" style="background: none; border: 0; padding: 0; text-align: left; font-family: 'Bricolage Grotesque', sans-serif; font-size: 19px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.25;" style-hover="color: #B14A22;">{{ p.name }}</button>
+                  <div style="font-size: 15px; color: #6B6053; margin-top: 2px;">{{ p.venue }} · {{ p.travelLine }}</div>
+                </div>
+                <sc-if value="{{ p.green }}" hint-placeholder-val="{{ true }}">
+                  <span style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 11px; border-radius: 999px; background: #E4EEE3; border: 1px solid #A9C4AB; font-size: 13px; font-weight: 700; color: #33603F; white-space: nowrap;">✓ Fits your group</span>
+                </sc-if>
+                <sc-if value="{{ p.amber }}" hint-placeholder-val="{{ false }}">
+                  <span style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 11px; border-radius: 999px; background: #F6EAD2; border: 1px solid #D8B575; font-size: 13px; font-weight: 700; color: #7A5710; white-space: nowrap;">! One thing to check</span>
+                </sc-if>
+              </div>
+              <div style="display: flex; gap: 8px 18px; flex-wrap: wrap; margin: 10px 0 8px; font-size: 14px; color: #4A4239;">
+                <span><strong style="font-weight: 700;">{{ p.costLabel }}</strong> · {{ p.totalLabel }}</span>
+                <span>{{ p.duration }}</span>
+                <span>{{ p.ageLabel }}</span>
+                <span>{{ p.capacityLabel }}</span>
+              </div>
+              <sc-if value="{{ p.amber }}" hint-placeholder-val="{{ false }}">
+                <div style="font-size: 14px; color: #7A5710; background: #FBF3E3; border-radius: 10px; padding: 8px 11px; margin-bottom: 8px;">{{ p.issueText }}</div>
+              </sc-if>
+              <sc-if value="{{ p.schoolRateOnly }}" hint-placeholder-val="{{ false }}">
+                <div style="display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 700; color: #4A4239; background: #EFE3D2; border: 1px dashed #C9B99C; border-radius: 999px; padding: 5px 11px; margin-bottom: 9px;">◔ {{ p.rateFlag }}</div>
+              </sc-if>
+              <div style="font-size: 15px; line-height: 1.5; color: #4A4239; font-style: italic;">“{{ p.note }}”</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ============ PROGRAM DETAIL ============ -->
+  <sc-if value="{{ isProgram }}" hint-placeholder-val="{{ false }}">
+    <div style="max-width: 820px; margin: 0 auto; padding: 20px 20px 80px;">
+      <button onClick="{{ goCatalog }}" style="background: none; border: 0; padding: 8px 0; font-size: 15px; font-weight: 600; color: #B14A22;">← All outings</button>
+
+      <div style="margin-top: 10px; padding: 24px; background: #FFFCF6; border: 1px solid #E3D8C4; border-radius: 20px;">
+        <div style="font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: #6E6252; font-weight: 700;">{{ prog.category }}</div>
+        <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 31px; line-height: 1.15; letter-spacing: -0.02em; margin: 6px 0 6px;">{{ prog.name }}</h1>
+        <div style="font-size: 17px; color: #6B6053;">{{ prog.venue }} · {{ prog.travelLine }}</div>
+
+        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px;">
+          <sc-if value="{{ prog.green }}" hint-placeholder-val="{{ true }}">
+            <span style="padding: 7px 12px; border-radius: 999px; background: #E4EEE3; border: 1px solid #A9C4AB; font-size: 14px; font-weight: 700; color: #33603F;">✓ Fits {{ profileName }}</span>
+          </sc-if>
+          <sc-if value="{{ prog.amber }}" hint-placeholder-val="{{ false }}">
+            <span style="padding: 7px 12px; border-radius: 999px; background: #F6EAD2; border: 1px solid #D8B575; font-size: 14px; font-weight: 700; color: #7A5710;">! {{ prog.issueText }}</span>
+          </sc-if>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 14px; margin: 20px 0 4px; padding: 16px; background: #F9F4EA; border-radius: 14px;">
+          <div>
+            <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #6E6252; font-weight: 700;">Cost</div>
+            <div style="font-size: 17px; font-weight: 700; margin-top: 3px;">{{ prog.costLabel }}</div>
+            <div style="font-size: 14px; color: #6B6053;">{{ prog.totalLabel }}</div>
+            <sc-if value="{{ prog.schoolRateOnly }}" hint-placeholder-val="{{ false }}">
+              <div style="font-size: 13px; font-weight: 700; color: #7A5710; margin-top: 6px; line-height: 1.4;">This is the school rate. Daycares and preschools are quoted through group visits — phone before you budget.</div>
+            </sc-if>
+          </div>
+          <div>
+            <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #6E6252; font-weight: 700;">Ages &amp; size</div>
+            <div style="font-size: 17px; font-weight: 700; margin-top: 3px;">{{ prog.ageLabel }}</div>
+            <div style="font-size: 14px; color: #6B6053;">{{ prog.capacityLabel }}</div>
+          </div>
+          <div>
+            <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #6E6252; font-weight: 700;">When</div>
+            <div style="font-size: 17px; font-weight: 700; margin-top: 3px;">{{ prog.duration }}</div>
+            <div style="font-size: 14px; color: #6B6053;">{{ prog.monthsLabel }} · {{ prog.daysLabel }}</div>
+          </div>
+          <div>
+            <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #6E6252; font-weight: 700;">Book by</div>
+            <div style="font-size: 17px; font-weight: 700; margin-top: 3px;">{{ prog.leadLabel }}</div>
+            <div style="font-size: 14px; color: #6B6053; overflow-wrap: anywhere;">{{ prog.bookingLabel }}</div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px;">
+          <button onClick="{{ startPlan }}" style="padding: 14px 22px; border-radius: 999px; border: 0; background: #B14A22; color: #FFF8EE; font-weight: 700; font-size: 16px; min-height: 48px;" style-hover="background: #8C3714;">Plan this trip</button>
+          <button onClick="{{ toggleSave }}" style="padding: 14px 22px; border-radius: 999px; border: 1px solid #DCCFB8; background: #FFFCF6; font-weight: 700; font-size: 16px; min-height: 48px;" style-hover="border-color: #B14A22;">{{ saveLabel }}</button>
+        </div>
+      </div>
+
+      <div style="margin-top: 16px; padding: 22px; background: #FFFCF6; border: 1px solid #E3D8C4; border-radius: 20px;">
+        <div style="display: flex; gap: 12px; align-items: baseline; justify-content: space-between; flex-wrap: wrap; margin-bottom: 4px;">
+          <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 21px; margin: 0; letter-spacing: -0.01em;">What it actually looks like</h2>
+          <span style="font-size: 13px; color: #6E6252;">{{ prog.photoCredit }}</span>
+        </div>
+        <p style="margin: 0 0 14px; font-size: 14px; color: #6E6252; line-height: 1.5;">Taken from the venue's own website, checked with the rest of the details.</p>
+        <sc-if value="{{ prog.hasPhotos }}" hint-placeholder-val="{{ true }}">
+          <div style="display: grid; grid-template-columns: 2fr 1fr; grid-auto-rows: 118px; gap: 8px;">
+            <div style="grid-row: span 2; overflow: hidden; border-radius: 14px; background: #EFE3D2;">
+              <img src="{{ prog.leadPhoto }}" alt="{{ prog.leadAlt }}" loading="eager" decoding="async" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            </div>
+            <sc-for list="{{ prog.sidePhotos }}" as="ph" hint-placeholder-count="2">
+              <div style="overflow: hidden; border-radius: 14px; background: #EFE3D2;">
+                <img src="{{ ph.url }}" alt="{{ ph.alt }}" loading="eager" decoding="async" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+        <sc-if value="{{ prog.noPhotos }}" hint-placeholder-val="{{ false }}">
+          <div style="display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: 118px 118px; gap: 8px;">
+            <div style="grid-row: span 2; position: relative;">
+              <image-slot id="{{ prog.slotA }}" shape="rounded" radius="14" placeholder="Wide shot of the space"></image-slot>
+            </div>
+            <div style="position: relative;">
+              <image-slot id="{{ prog.slotB }}" shape="rounded" radius="14" placeholder="The bit children remember"></image-slot>
+            </div>
+            <div style="position: relative;">
+              <image-slot id="{{ prog.slotC }}" shape="rounded" radius="14" placeholder="Lunch spot or washrooms"></image-slot>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+
+      <div style="margin-top: 16px; padding: 22px; background: #FFF6E9; border: 1px solid #E6D2AE; border-radius: 20px;">
+        <div style="font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: #8A6A34; font-weight: 700; margin-bottom: 8px;">Our note</div>
+        <div style="font-size: 18px; line-height: 1.55; text-wrap: pretty;">{{ prog.note }}</div>
+      </div>
+
+      <sc-if value="{{ prog.hasMap }}" hint-placeholder-val="{{ true }}">
+        <div style="margin-top: 16px; padding: 22px; background: #FFFCF6; border: 1px solid #E3D8C4; border-radius: 20px;">
+          <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 21px; margin: 0 0 4px; letter-spacing: -0.01em;">Getting there</h2>
+          <p style="margin: 0 0 14px; font-size: 15px; color: #6B6053;">{{ prog.distanceLabel }}</p>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px;">
+            <sc-for list="{{ prog.travelModes }}" as="m" hint-placeholder-count="3">
+              <div style="position: relative; flex: 1; min-width: 150px; padding: 13px 15px; border-radius: 14px; background: #F9F4EA; border: 1px solid #E3D8C4;">
+                <sc-if value="{{ m.primary }}" hint-placeholder-val="{{ true }}">
+                  <div style="position: absolute; inset: 0; border-radius: 14px; background: #F0DED0; border: 1.5px solid #B14A22;"></div>
+                </sc-if>
+                <div style="position: relative;">
+                  <div style="font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: #6E6252;">{{ m.label }}</div>
+                  <div style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 22px; font-weight: 700; margin-top: 3px;">{{ m.time }}</div>
+                  <div style="font-size: 13px; color: #665B4C; min-height: 18px;">{{ m.caveat }}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="height: 300px; border-radius: 14px; overflow: hidden; border: 1px solid #E3D8C4; background: #EFE7D8;">
+            <iframe src="{{ prog.mapUrl }}" title="Map from your centre to the venue" style="width: 100%; height: 100%; border: 0; display: block;"></iframe>
+          </div>
+          <p style="margin: 10px 0 0; font-size: 13px; color: #6E6252;">The dashed line is straight-line distance, not the route. Times are estimates from your home address — bus times include one transfer wait.</p>
+        </div>
+      </sc-if>
+      <sc-if value="{{ prog.comesToYouNote }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top: 16px; padding: 18px 22px; background: #FFFCF6; border: 1px solid #E3D8C4; border-radius: 20px; font-size: 16px; line-height: 1.5;">
+          <strong style="font-weight: 700;">No travel.</strong> They come to you at {{ homeAddress }} — nothing to book, no ratio change on the road.
+        </div>
+      </sc-if>
+
+      <div style="margin-top: 16px; padding: 22px; background: #FFFCF6; border: 1px solid #E3D8C4; border-radius: 20px;">
+        <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 21px; margin: 0 0 10px; letter-spacing: -0.01em;">The practical stuff</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 2px 22px;">
+          <sc-for list="{{ prog.practical }}" as="f" hint-placeholder-count="6">
+            <div style="display: flex; gap: 10px; padding: 9px 0; border-bottom: 1px solid #EFE7D8; font-size: 15px; line-height: 1.4;">
+              <span style="flex: 0 0 108px; color: #6E6252;">{{ f.label }}</span>
+              <sc-if value="{{ f.known }}" hint-placeholder-val="{{ true }}">
+                <span style="flex: 1; font-weight: 600;">{{ f.value }}</span>
+              </sc-if>
+              <sc-if value="{{ f.unknown }}" hint-placeholder-val="{{ false }}">
+                <span style="flex: 1; font-weight: 600; color: #7A5710; background: #FBF3E3; border-radius: 7px; padding: 2px 7px;">{{ f.value }}</span>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="margin-top: 16px; padding: 22px; background: #FFFCF6; border: 1px solid #E3D8C4; border-radius: 20px;">
+        <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 21px; margin: 0 0 8px; letter-spacing: -0.01em;">What the children do</h2>
+        <p style="margin: 0 0 12px; font-size: 16px; line-height: 1.6; color: #3D362E; text-wrap: pretty;">{{ prog.desc }}</p>
+        <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #3D362E; text-wrap: pretty;">{{ prog.doing }}</p>
+      </div>
+
+      <sc-if value="{{ memoryOn }}" hint-placeholder-val="{{ true }}">
+        <div style="margin-top: 16px; padding: 22px; background: #FFFCF6; border: 1px solid #E3D8C4; border-radius: 20px;">
+          <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 21px; margin: 0 0 4px; letter-spacing: -0.01em;">Notes from your centre</h2>
+          <p style="margin: 0 0 14px; font-size: 14px; color: #6E6252;">Private to everyone at {{ homeAddress }}.</p>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <sc-for list="{{ memories }}" as="m" hint-placeholder-count="1">
+              <div style="padding: 13px 15px; background: #F3EFE3; border-radius: 13px;">
+                <div style="font-size: 16px; line-height: 1.5;">{{ m.text }}</div>
+                <div style="font-size: 13px; color: #6E6252; margin-top: 5px;">{{ m.author }} · {{ m.when }}</div>
+              </div>
+            </sc-for>
+            <sc-if value="{{ noMemories }}" hint-placeholder-val="{{ false }}">
+              <div style="padding: 14px 15px; border: 1px dashed #C9B99C; border-radius: 13px; font-size: 15px; color: #6B6053;">Nobody at your centre has been here yet. Leave the first note — the name to ask for, the best time slot, what to pack.</div>
+            </sc-if>
+          </div>
+          <div style="display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap;">
+            <input value="{{ memoryDraft }}" onChange="{{ setMemoryDraft }}" placeholder="Ask for Maria, book the 9:30 slot, bring wipes" style="flex: 1; min-width: 220px; height: 48px; border-radius: 999px; border: 1px solid #DCCFB8; background: #FFFCF6; padding: 0 16px; font-size: 15px; outline: none;">
+            <button onClick="{{ addMemory }}" style="padding: 0 20px; height: 48px; border-radius: 999px; border: 0; background: #2B2620; color: #F6F0E6; font-weight: 700; font-size: 15px;" style-hover="background: #443C31;">Add note</button>
+          </div>
+        </div>
+      </sc-if>
+
+      <div style="margin-top: 14px; padding: 0 4px; font-size: 14px; color: #6E6252; line-height: 1.6; overflow-wrap: anywhere;">Details checked on {{ prog.checked }} against the venue's own pages. Something wrong? <a href="#report" onClick="{{ report }}">Tell us</a> — takes one tap.
+        <sc-if value="{{ prog.hasSource }}" hint-placeholder-val="{{ true }}">
+          <span> · <a href="{{ prog.sourceUrl }}" target="_blank" rel="noreferrer">Venue page</a></span>
+        </sc-if>
+        <sc-if value="{{ prog.hasPhone }}" hint-placeholder-val="{{ false }}">
+          <span> · {{ prog.phoneLabel }}</span>
+        </sc-if>
+      </div>
+      <sc-if value="{{ reported }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top: 8px; padding: 10px 14px; background: #E4EEE3; border-radius: 12px; font-size: 15px; color: #33603F;">Thanks — we will re-check this venue this week.</div>
+      </sc-if>
+    </div>
+  </sc-if>
+
+  <!-- ============ PLAN FLOW ============ -->
+  <sc-if value="{{ isPlan }}" hint-placeholder-val="{{ false }}">
+    <div style="max-width: 620px; margin: 0 auto; padding: 24px 20px 80px;">
+      <button onClick="{{ backToProgram }}" style="background: none; border: 0; padding: 8px 0; font-size: 15px; font-weight: 600; color: #B14A22;">← Back</button>
+      <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; letter-spacing: -0.02em; margin: 8px 0 4px;">Plan {{ prog.name }}</h1>
+      <p style="margin: 0 0 22px; color: #6B6053; font-size: 16px;">Two answers and we build the timeline.</p>
+
+      <div style="padding: 20px; background: #FFFCF6; border: 1px solid #E3D8C4; border-radius: 18px;">
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: #6E6252; margin-bottom: 4px;">1. Which groups are going?</div>
+        <p style="margin: 0 0 12px; font-size: 14px; color: #6E6252;">Pick more than one if the rooms go together.</p>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <sc-for list="{{ profileChoices }}" as="p" hint-placeholder-count="2">
+            <button onClick="{{ p.pick }}" style="text-align: left; padding: 14px 16px; border-radius: 14px; border: 1px solid #DCCFB8; background: #F9F4EA; display: flex; justify-content: space-between; gap: 12px; align-items: center;" style-hover="border-color: #B14A22;">
+              <span style="display: flex; gap: 13px; align-items: center;">
+                <sc-if value="{{ p.active }}" hint-placeholder-val="{{ true }}">
+                  <span style="flex: 0 0 24px; width: 24px; height: 24px; border-radius: 7px; background: #B14A22; color: #FFF8EE; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700;">✓</span>
+                </sc-if>
+                <sc-if value="{{ p.inactive }}" hint-placeholder-val="{{ false }}">
+                  <span style="flex: 0 0 24px; width: 24px; height: 24px; border-radius: 7px; border: 1.5px solid #C9B99C; background: #FFFCF6;"></span>
+                </sc-if>
+                <span>
+                  <span style="display: block; font-weight: 700; font-size: 16px;">{{ p.name }}</span>
+                  <span style="display: block; font-size: 14px; color: #6B6053;">{{ p.summary }}</span>
+                </span>
+              </span>
+            </button>
+          </sc-for>
+          <button onClick="{{ goProfiles }}" style="text-align: left; padding: 13px 16px; border-radius: 14px; border: 1px dashed #C9B99C; background: none; font-weight: 600; font-size: 15px; color: #6B6053;" style-hover="border-color: #B14A22;">+ New group profile (asks you to sign in)</button>
+        </div>
+        <div style="margin-top: 12px; font-size: 15px; font-weight: 600; color: #4A4239;">{{ planGroupSummary }}</div>
+        <sc-if value="{{ planCapacityWarn }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top: 10px; padding: 11px 14px; border-radius: 12px; background: #F6EAD2; border: 1px solid #D8B575; font-size: 14px; line-height: 1.5; color: #7A5710;">{{ planCapacityText }}</div>
+        </sc-if>
+      </div>
+
+      <div style="margin-top: 14px; padding: 20px; background: #FFFCF6; border: 1px solid #E3D8C4; border-radius: 18px;">
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: #6E6252; margin-bottom: 4px;">2. Which dates would work?</div>
+        <p style="margin: 0 0 12px; font-size: 14px; color: #6E6252;">Pick as many as you can live with. We ask for the earliest and offer the rest.</p>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px;">
+          <sc-for list="{{ dateChoices }}" as="d" hint-placeholder-count="3">
+            <button onClick="{{ d.pick }}" style="position: relative; padding: 11px 15px; border-radius: 999px; border: 1px solid #DCCFB8; background: #F9F4EA; font-weight: 600; font-size: 15px;" style-hover="border-color: #B14A22;">
+              <sc-if value="{{ d.active }}" hint-placeholder-val="{{ false }}"><span style="position: absolute; inset: 0; border-radius: 999px; background: #F0DED0; border: 1.5px solid #B14A22; z-index: 0;"></span></sc-if>
+              <span style="position: relative; z-index: 1;">{{ d.label }}</span>
+            </button>
+          </sc-for>
+        </div>
+        <label style="display: block; font-size: 14px; color: #6B6053; margin-bottom: 6px;">Add another date</label>
+        <input type="date" value="{{ planDateDraft }}" onChange="{{ setPlanDateDraft }}" style="height: 48px; border-radius: 12px; border: 1px solid #DCCFB8; background: #F9F4EA; padding: 0 14px; font-size: 16px;">
+
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px;">
+          <sc-for list="{{ planDatePills }}" as="d" hint-placeholder-count="2">
+            <span style="display: inline-flex; align-items: center; gap: 9px; padding: 8px 8px 8px 14px; border-radius: 999px; background: #F0DED0; border: 1px solid #B14A22; font-size: 14px; font-weight: 700; color: #8C3714;">{{ d.label }}
+              <button onClick="{{ d.remove }}" style="width: 26px; height: 26px; border-radius: 999px; border: 0; background: none; color: #8C3714; font-size: 16px;" style-hover="background: #E4C8B6;">×</button>
+            </span>
+          </sc-for>
+        </div>
+        <sc-if value="{{ noPlanDates }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top: 12px; font-size: 15px; color: #7A5710;">Pick at least one date.</div>
+        </sc-if>
+        <div style="font-size: 14px; color: #6E6252; margin-top: 12px; line-height: 1.5;">{{ planDateHint }}</div>
+        <div style="font-size: 14px; color: #7A5710; margin-top: 6px; line-height: 1.5;">{{ leadWarning }}</div>
+      </div>
+
+      <sc-if value="{{ canCreate }}" hint-placeholder-val="{{ true }}">
+        <button onClick="{{ createTrip }}" style="margin-top: 18px; width: 100%; padding: 16px; border-radius: 999px; border: 0; background: #B14A22; color: #FFF8EE; font-weight: 700; font-size: 17px; min-height: 54px;" style-hover="background: #8C3714;">Build the trip page</button>
+      </sc-if>
+      <sc-if value="{{ cannotCreate }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top: 18px; padding: 16px; border-radius: 999px; background: #EFE7D8; border: 1px solid #E3D8C4; color: #776854; font-weight: 700; font-size: 17px; text-align: center;">Pick a group and a date</div>
+      </sc-if>
+    </div>
+  </sc-if>
+
+  <!-- ============ TRIP PAGE ============ -->
+  <sc-if value="{{ isTrip }}" hint-placeholder-val="{{ false }}">
+    <div style="max-width: 880px; margin: 0 auto; padding: 20px 20px 90px;">
+      <button onClick="{{ goTrips }}" style="background: none; border: 0; padding: 8px 0; font-size: 15px; font-weight: 600; color: #B14A22;">← My trips</button>
+
+      <div style="margin-top: 10px; padding: 22px; background: #FFFCF6; border: 1px solid #E3D8C4; border-radius: 20px;">
+        <div style="display: flex; gap: 18px; flex-wrap: wrap; align-items: flex-start;">
+          <div style="flex: 1; min-width: 240px;">
+            <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 4px;">{{ trip.name }}</h1>
+            <div style="font-size: 16px; color: #6B6053;">{{ trip.venue }} · {{ dateSummary }}</div>
+            <div style="font-size: 15px; color: #6B6053; margin-top: 2px;">{{ trip.profileName }} · {{ trip.profileSummary }}</div>
+          </div>
+          <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+            <sc-if value="{{ trip.waitOnMe }}" hint-placeholder-val="{{ true }}">
+              <span style="font-size: 13px; font-weight: 700; padding: 6px 12px; border-radius: 999px; background: #F0DED0; border: 1px solid #B14A22; color: #8C3714;">{{ trip.waitLabel }}</span>
+            </sc-if>
+            <sc-if value="{{ trip.waitOnVenue }}" hint-placeholder-val="{{ false }}">
+              <span style="font-size: 13px; font-weight: 700; padding: 6px 12px; border-radius: 999px; background: #F0E7D7; color: #4A4239;">{{ trip.waitLabel }}</span>
+            </sc-if>
+            <sc-if value="{{ trip.notSent }}" hint-placeholder-val="{{ false }}">
+              <span style="font-size: 13px; font-weight: 700; padding: 6px 12px; border-radius: 999px; background: #F0E7D7; color: #665B4C;">{{ trip.waitLabel }}</span>
+            </sc-if>
+
+          </div>
+        </div>
+
+        <sc-if value="{{ statusOnTrack }}" hint-placeholder-val="{{ true }}">
+          <div style="margin-top: 20px; padding-top: 18px; border-top: 1px solid #EFE7D8;">
+            <sc-if value="{{ railNarrow }}" hint-placeholder-val="{{ false }}">
+              <div style="display: flex; flex-direction: column;">
+                <sc-for list="{{ statusSteps }}" as="st" hint-placeholder-count="5">
+                  <div style="display: flex; gap: 14px; align-items: stretch;">
+                    <div style="flex: 0 0 22px; display: flex; flex-direction: column; align-items: center;">
+                      <sc-if value="{{ st.connector }}" hint-placeholder-val="{{ true }}">
+                        <span style="width: 3px; flex: 0 0 14px; border-radius: 999px; background: #EAE0CE;">
+                          <sc-if value="{{ st.connectorFilled }}" hint-placeholder-val="{{ false }}">
+                            <span style="display: block; width: 3px; height: 14px; border-radius: 999px; background: #B14A22;"></span>
+                          </sc-if>
+                        </span>
+                      </sc-if>
+                      <sc-if value="{{ st.past }}" hint-placeholder-val="{{ false }}">
+                        <span style="width: 20px; height: 20px; border-radius: 999px; background: #B14A22; color: #FFF8EE; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700;">✓</span>
+                      </sc-if>
+                      <sc-if value="{{ st.current }}" hint-placeholder-val="{{ true }}">
+                        <span style="width: 22px; height: 22px; border-radius: 999px; background: #FFFCF6; border: 4px solid #B14A22;"></span>
+                      </sc-if>
+                      <sc-if value="{{ st.future }}" hint-placeholder-val="{{ false }}">
+                        <span style="width: 14px; height: 14px; margin: 3px 0; border-radius: 999px; background: #FFFCF6; border: 2px solid #DCCFB8;"></span>
+                      </sc-if>
+                    </div>
+                    <div style="flex: 1; min-width: 0; padding-bottom: 4px;">
+                      <sc-if value="{{ st.reached }}" hint-placeholder-val="{{ true }}">
+                        <div>
+                          <div style="font-size: 15px; font-weight: 700; line-height: 1.3;">{{ st.label }}</div>
+                          <div style="font-size: 13px; color: #6E6252; line-height: 1.4;">{{ st.detail }}</div>
+                        </div>
+                      </sc-if>
+                      <sc-if value="{{ st.future }}" hint-placeholder-val="{{ false }}">
+                        <div>
+                          <div style="font-size: 15px; font-weight: 600; line-height: 1.3; color: #776854;">{{ st.label }}</div>
+                          <div style="font-size: 13px; color: #8A7B66; line-height: 1.4;">{{ st.detail }}</div>
+                        </div>
+                      </sc-if>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+            <sc-if value="{{ railWide }}" hint-placeholder-val="{{ true }}">
+            <div style="display: flex; gap: 4px;">
+              <sc-for list="{{ statusSteps }}" as="st" hint-placeholder-count="5">
+                <div style="flex: 1; min-width: 0;">
+                  <div style="display: flex; align-items: center; gap: 0; height: 22px;">
+                    <sc-if value="{{ st.connector }}" hint-placeholder-val="{{ true }}">
+                      <span style="flex: 1; height: 3px; border-radius: 999px; background: #EAE0CE;">
+                        <sc-if value="{{ st.connectorFilled }}" hint-placeholder-val="{{ false }}">
+                          <span style="display: block; height: 3px; border-radius: 999px; background: #B14A22;"></span>
+                        </sc-if>
+                      </span>
+                    </sc-if>
+                    <sc-if value="{{ st.past }}" hint-placeholder-val="{{ false }}">
+                      <span style="flex: 0 0 20px; width: 20px; height: 20px; border-radius: 999px; background: #B14A22; color: #FFF8EE; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700;">✓</span>
+                    </sc-if>
+                    <sc-if value="{{ st.current }}" hint-placeholder-val="{{ true }}">
+                      <span style="flex: 0 0 22px; width: 22px; height: 22px; border-radius: 999px; background: #FFFCF6; border: 4px solid #B14A22;"></span>
+                    </sc-if>
+                    <sc-if value="{{ st.future }}" hint-placeholder-val="{{ false }}">
+                      <span style="flex: 0 0 14px; width: 14px; height: 14px; border-radius: 999px; background: #FFFCF6; border: 2px solid #DCCFB8;"></span>
+                    </sc-if>
+                    <span style="flex: 1; height: 3px;"></span>
+                  </div>
+                  <sc-if value="{{ st.reached }}" hint-placeholder-val="{{ true }}">
+                    <div style="padding-right: 8px; margin-top: 7px;">
+                      <div style="font-size: 14px; font-weight: 700; line-height: 1.3;">{{ st.label }}</div>
+                      <div style="font-size: 12px; color: #6E6252; line-height: 1.35; margin-top: 2px;">{{ st.detail }}</div>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{ st.future }}" hint-placeholder-val="{{ false }}">
+                    <div style="padding-right: 8px; margin-top: 7px;">
+                      <div style="font-size: 14px; font-weight: 600; line-height: 1.3; color: #776854;">{{ st.label }}</div>
+                      <div style="font-size: 12px; color: #8A7B66; line-height: 1.35; margin-top: 2px;">{{ st.detail }}</div>
+                    </div>
+                  </sc-if>
+                </div>
+              </sc-for>
+            </div>
+            </sc-if>
+            <div style="display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; margin-top: 16px;">
+              <span style="font-size: 14px; color: #6E6252; flex: 1; min-width: 200px;">{{ statusWhy }}</span>
+              <button onClick="{{ toggleStatusManual }}" style="background: none; border: 0; padding: 4px 0; font-size: 14px; font-weight: 600; color: #6E6252; text-decoration: underline; text-underline-offset: 3px;">Set status by hand</button>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ statusCancelled }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top: 18px; padding: 15px 17px; border-radius: 15px; background: #F3EFE3; display: flex; gap: 14px; align-items: center; flex-wrap: wrap;">
+            <span style="flex: 1; min-width: 200px; font-size: 15px; color: #4A4239;">{{ statusWhy }}</span>
+            <button onClick="{{ reopenTrip }}" style="padding: 10px 16px; border-radius: 999px; border: 1px solid #DCCFB8; background: #FFFCF6; font-weight: 700; font-size: 14px;" style-hover="border-color: #B14A22;">Put it back on track</button>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ statusManualOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top: 14px; padding: 15px 17px; border-radius: 15px; background: #F9F4EA; border: 1px dashed #C9B99C;">
+            <div style="font-size: 14px; color: #6B6053; margin-bottom: 10px; line-height: 1.5;">Override it if the venue called you instead. This does not message anyone.</div>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+              <sc-for list="{{ statusChoices }}" as="s" hint-placeholder-count="6">
+                <button onClick="{{ s.pick }}" style="position: relative; padding: 9px 13px; border-radius: 999px; border: 1px solid #DCCFB8; background: #FFFCF6; font-size: 14px; font-weight: 600;" style-hover="border-color: #B14A22;">
+                  <sc-if value="{{ s.active }}" hint-placeholder-val="{{ false }}"><span style="position: absolute; inset: 0; border-radius: 999px; background: #F0DED0; border: 1.5px solid #B14A22; z-index: 0;"></span></sc-if>
+                  <span style="position: relative; z-index: 1;">{{ s.label }}</span>
+                </button>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+
+      <div style="margin-top: 14px; padding: 20px 22px; background: #FFFCF6; border: 1px solid #E3D8C4; border-radius: 20px;">
+        <div style="display: flex; gap: 12px; align-items: baseline; justify-content: space-between; flex-wrap: wrap;">
+          <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; margin: 0;">Dates on the table</h2>
+          <label style="display: flex; align-items: center; gap: 9px; font-size: 14px; color: #6B6053;">Add one
+            <input type="date" value="{{ newAltDraft }}" onChange="{{ addAltDate }}" style="height: 40px; border-radius: 10px; border: 1px solid #DCCFB8; background: #F9F4EA; padding: 0 10px; font-size: 14px;">
+          </label>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 14px;">
+          <sc-for list="{{ tripDates }}" as="d" hint-placeholder-count="2">
+            <div style="display: flex; gap: 12px; align-items: center; padding: 11px 14px; border-radius: 13px; background: #F9F4EA;">
+              <span style="flex: 1; font-size: 16px; font-weight: 600;">{{ d.label }}</span>
+              <sc-if value="{{ d.first }}" hint-placeholder-val="{{ true }}">
+                <span style="font-size: 13px; font-weight: 700; padding: 5px 11px; border-radius: 999px; background: #F0DED0; border: 1px solid #B14A22; color: #8C3714;">{{ d.badge }}</span>
+              </sc-if>
+              <sc-if value="{{ d.alternate }}" hint-placeholder-val="{{ false }}">
+                <button onClick="{{ d.makeFirst }}" style="font-size: 13px; font-weight: 700; padding: 7px 12px; border-radius: 999px; border: 1px solid #DCCFB8; background: #FFFCF6; color: #4A4239;" style-hover="border-color: #B14A22;">Make first choice</button>
+              </sc-if>
+              <sc-if value="{{ hasAlternates }}" hint-placeholder-val="{{ true }}">
+                <button onClick="{{ d.remove }}" style="width: 32px; height: 32px; border-radius: 8px; border: 0; background: none; color: #776854; font-size: 16px;" style-hover="background: #EFE3D2; color: #A5401A;">×</button>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+        <p style="margin: 12px 0 0; font-size: 14px; color: #6E6252; line-height: 1.5;">The timeline counts back from the first choice. Accepting a date from the venue drops the alternates.</p>
+      </div>
+
+      <sc-if value="{{ hasSuggestion }}" hint-placeholder-val="{{ true }}">
+        <div style="margin-top: 14px; padding: 18px 20px; background: #FFF6E9; border: 1px solid #E6D2AE; border-radius: 20px;">
+          <div style="font-size: 17px; line-height: 1.5; margin-bottom: 4px;">{{ suggestion.text }}</div>
+          <div style="font-size: 14px; color: #8A6A34; line-height: 1.5; margin-bottom: 14px;">{{ suggestion.evidence }}</div>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+            <sc-for list="{{ suggestion.buttons }}" as="b" hint-placeholder-count="1">
+              <button onClick="{{ b.run }}" style="padding: 11px 17px; border-radius: 999px; border: 0; background: #B14A22; color: #FFF8EE; font-weight: 700; font-size: 15px; min-height: 44px;" style-hover="background: #8C3714;">{{ b.label }}</button>
+            </sc-for>
+            <button onClick="{{ suggestion.dismiss }}" style="padding: 11px 17px; border-radius: 999px; border: 1px solid #DCCFB8; background: #FFFCF6; font-weight: 700; font-size: 15px; min-height: 44px;" style-hover="border-color: #B14A22;">{{ suggestion.dismissLabel }}</button>
+            <sc-if value="{{ suggestion.hasLink }}" hint-placeholder-val="{{ false }}">
+              <button onClick="{{ suggestion.link }}" style="background: none; border: 0; padding: 11px 4px; font-size: 15px; font-weight: 600; color: #B14A22; text-decoration: underline; text-underline-offset: 3px;">{{ suggestion.linkLabel }}</button>
+            </sc-if>
+          </div>
+        </div>
+      </sc-if>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-top: 14px;">
+        <div style="padding: 20px; background: #FFFCF6; border: 1px solid #E3D8C4; border-radius: 20px;">
+          <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; margin: 0 0 4px;">What it costs</h2>
+          <p style="margin: 0 0 12px; font-size: 14px; color: #6E6252;">Edit any number. Reality differs.</p>
+          <div style="display: flex; flex-direction: column; gap: 9px;">
+            <sc-for list="{{ costRows }}" as="c" hint-placeholder-count="3">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="flex: 1; font-size: 15px;">{{ c.label }}</span>
+                <span style="font-size: 15px; color: #6E6252;">$</span>
+                <input value="{{ c.value }}" onChange="{{ c.set }}" style="width: 78px; height: 40px; border-radius: 10px; border: 1px solid #DCCFB8; background: #F9F4EA; padding: 0 10px; font-size: 15px; text-align: right; outline: none;">
+              </div>
+            </sc-for>
+          </div>
+          <div style="margin-top: 14px; padding-top: 13px; border-top: 1px solid #EFE7D8; display: flex; justify-content: space-between; align-items: baseline;">
+            <span style="font-weight: 700; font-size: 17px;">Total</span>
+            <span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 23px;">{{ trip.totalLabel }}</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 15px; color: #6B6053; margin-top: 3px;">
+            <span>Per child</span><span>{{ trip.perChildLabel }}</span>
+          </div>
+        </div>
+
+        <div style="padding: 20px; background: #FFFCF6; border: 1px solid #E3D8C4; border-radius: 20px;">
+          <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; margin: 0 0 4px;">Adults and ratio</h2>
+          <p style="margin: 0 0 12px; font-size: 14px; color: #6E6252;">{{ trip.ratioRequirement }}</p>
+          <sc-if value="{{ trip.multiGroup }}" hint-placeholder-val="{{ false }}">
+            <div style="display: flex; flex-direction: column; gap: 7px; margin-bottom: 14px;">
+              <sc-for list="{{ groupRows }}" as="g" hint-placeholder-count="2">
+                <div style="padding: 10px 13px; border-radius: 12px; background: #F3EFE3;">
+                  <div style="font-size: 15px; font-weight: 700;">{{ g.name }}</div>
+                  <div style="font-size: 14px; color: #6B6053; margin-top: 1px;">{{ g.detail }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+          <div style="display: flex; gap: 12px;">
+            <div style="flex: 1;">
+              <label style="display: block; font-size: 14px; color: #6B6053; margin-bottom: 5px;">Children</label>
+              <input value="{{ trip.children }}" onChange="{{ setChildren }}" style="width: 100%; height: 44px; border-radius: 10px; border: 1px solid #DCCFB8; background: #F9F4EA; padding: 0 12px; font-size: 16px; outline: none;">
+            </div>
+            <div style="flex: 1;">
+              <label style="display: block; font-size: 14px; color: #6B6053; margin-bottom: 5px;">Adults</label>
+              <input value="{{ trip.adults }}" onChange="{{ setAdults }}" style="width: 100%; height: 44px; border-radius: 10px; border: 1px solid #DCCFB8; background: #F9F4EA; padding: 0 12px; font-size: 16px; outline: none;">
+            </div>
+          </div>
+          <sc-if value="{{ trip.ratioOk }}" hint-placeholder-val="{{ true }}">
+            <div style="margin-top: 13px; padding: 12px 14px; border-radius: 13px; background: #E4EEE3; border: 1px solid #A9C4AB; font-size: 15px; color: #33603F; font-weight: 600;">✓ {{ trip.ratioLine }}</div>
+          </sc-if>
+          <sc-if value="{{ trip.ratioBad }}" hint-placeholder-val="{{ false }}">
+            <div style="margin-top: 13px; padding: 12px 14px; border-radius: 13px; background: #F6EAD2; border: 1px solid #D8B575; font-size: 15px; color: #7A5710; font-weight: 600;">! {{ trip.ratioLine }}</div>
+          </sc-if>
+        </div>
+      </div>
+
+      <div style="margin-top: 14px; padding: 22px; background: #FFFCF6; border: 1px solid #E3D8C4; border-radius: 20px;">
+        <div style="display: flex; gap: 12px; align-items: baseline; justify-content: space-between; flex-wrap: wrap;">
+          <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 21px; margin: 0;">Timeline</h2>
+          <span style="font-size: 14px; color: #6B6053;">{{ trip.taskSummary }}</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px; margin-top: 14px;">
+          <sc-for list="{{ tasks }}" as="t" hint-placeholder-count="8">
+            <div style="display: flex; gap: 12px; align-items: center; padding: 11px 13px; border-radius: 14px; background: #F9F4EA;">
+              <button onClick="{{ t.toggle }}" style="flex: 0 0 26px; width: 26px; height: 26px; border-radius: 8px; border: 1.5px solid #C9B99C; background: #FFFCF6; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; color: #33603F;" style-hover="border-color: #B14A22;">{{ t.mark }}</button>
+              <div style="flex: 1; min-width: 0;">
+                <div style="font-size: 16px; line-height: 1.35;">{{ t.title }}</div>
+                <sc-if value="{{ t.overdue }}" hint-placeholder-val="{{ false }}">
+                  <div style="font-size: 13px; font-weight: 700; color: #A5401A; margin-top: 2px;">{{ t.lateLine }}</div>
+                </sc-if>
+                <sc-if value="{{ t.soon }}" hint-placeholder-val="{{ false }}">
+                  <div style="font-size: 13px; color: #665B4C; margin-top: 2px;">{{ t.lateLine }}</div>
+                </sc-if>
+              </div>
+              <input type="date" value="{{ t.date }}" onChange="{{ t.setDate }}" style="height: 38px; border-radius: 9px; border: 1px solid #DCCFB8; background: #FFFCF6; padding: 0 8px; font-size: 14px;">
+              <button onClick="{{ t.remove }}" style="width: 32px; height: 32px; border-radius: 8px; border: 0; background: none; color: #776854; font-size: 16px;" style-hover="background: #EFE3D2; color: #A5401A;">×</button>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap;">
+          <input value="{{ taskDraft }}" onChange="{{ setTaskDraft }}" placeholder="Add your own step" style="flex: 1; min-width: 200px; height: 44px; border-radius: 999px; border: 1px solid #DCCFB8; background: #F9F4EA; padding: 0 16px; font-size: 15px; outline: none;">
+          <button onClick="{{ addTask }}" style="padding: 0 18px; height: 44px; border-radius: 999px; border: 1px solid #DCCFB8; background: #FFFCF6; font-weight: 700; font-size: 15px;" style-hover="border-color: #B14A22;">Add step</button>
+        </div>
+      </div>
+
+      <div style="margin-top: 14px; padding: 22px; background: #FFFCF6; border: 1px solid #E3D8C4; border-radius: 20px;">
+        <div style="display: flex; gap: 12px; align-items: baseline; justify-content: space-between; flex-wrap: wrap;">
+          <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 21px; margin: 0;">Thread with {{ trip.venue }}</h2>
+          <span style="font-size: 14px; color: #6E6252; overflow-wrap: anywhere; min-width: 0;">{{ trip.bookingLabel }}</span>
+        </div>
+
+        <sc-if value="{{ threadEmpty }}" hint-placeholder-val="{{ false }}">
+          <p style="margin: 12px 0 0; font-size: 16px; line-height: 1.5; color: #4A4239;">Send this to the venue and their reply will show up here.</p>
+        </sc-if>
+
+        <div style="display: flex; flex-direction: column; gap: 4px; margin-top: 16px;">
+          <sc-for list="{{ thread }}" as="m" hint-placeholder-count="3">
+            <div>
+              <sc-if value="{{ m.isSystem }}" hint-placeholder-val="{{ false }}">
+                <div style="display: flex; align-items: center; gap: 10px; padding: 7px 0;">
+                  <span style="flex: 1; height: 1px; background: #EFE7D8;"></span>
+                  <span style="font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; color: #776854;">{{ m.body }}</span>
+                  <span style="flex: 1; height: 1px; background: #EFE7D8;"></span>
+                </div>
+              </sc-if>
+              <sc-if value="{{ m.isMessage }}" hint-placeholder-val="{{ true }}">
+                <div data-msg-id="{{ m.id }}" style="display: flex; gap: 13px; padding: 14px 0; border-top: 1px solid #F1EADC;">
+                  <sc-if value="{{ m.isVenue }}" hint-placeholder-val="{{ true }}">
+                    <span style="flex: 0 0 38px; width: 38px; height: 38px; border-radius: 999px; background: #EFE3D2; color: #8C3714; display: flex; align-items: center; justify-content: center; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 14px;">{{ m.initials }}</span>
+                  </sc-if>
+                  <sc-if value="{{ m.isEducator }}" hint-placeholder-val="{{ false }}">
+                    <span style="flex: 0 0 38px; width: 38px; height: 38px; border-radius: 999px; background: #E7E2D6; color: #4A4239; display: flex; align-items: center; justify-content: center; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 14px;">{{ m.initials }}</span>
+                  </sc-if>
+                  <div style="flex: 1; min-width: 0;">
+                    <div style="display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap;">
+                      <span style="font-weight: 700; font-size: 16px;">{{ m.name }}</span>
+                      <span style="font-size: 13px; color: #776854;">{{ m.at }}</span>
+                      <sc-if value="{{ m.highlight }}" hint-placeholder-val="{{ false }}">
+                        <span style="font-size: 12px; font-weight: 700; padding: 3px 9px; border-radius: 999px; background: #F0DED0; color: #8C3714;">Newest reply</span>
+                      </sc-if>
+                    </div>
+                    <div style="font-size: 16px; line-height: 1.6; white-space: pre-wrap; margin-top: 5px; color: #33302A;">{{ m.body }}</div>
+                    <sc-if value="{{ m.showingFull }}" hint-placeholder-val="{{ false }}">
+                      <div style="font-size: 15px; line-height: 1.6; white-space: pre-wrap; margin-top: 10px; padding: 12px 14px; border-radius: 12px; background: #F5F0E4; color: #665B4C;">{{ m.fullBody }}</div>
+                    </sc-if>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 9px; align-items: center;">
+                      <sc-for list="{{ m.attachments }}" as="a" hint-placeholder-count="1">
+                        <a href="{{ a.href }}" target="_blank" rel="noreferrer" style="display: inline-flex; align-items: center; gap: 7px; padding: 7px 12px; border-radius: 999px; background: #F3EFE3; border: 1px solid #E3D8C4; font-size: 14px; font-weight: 600; color: #4A4239; text-decoration: none;">◫ {{ a.name }}</a>
+                      </sc-for>
+                      <sc-if value="{{ m.hasFull }}" hint-placeholder-val="{{ false }}">
+                        <button onClick="{{ m.expand }}" style="background: none; border: 0; padding: 4px 0; font-size: 14px; font-weight: 600; color: #6E6252; text-decoration: underline; text-underline-offset: 3px;">Show full message</button>
+                      </sc-if>
+                      <sc-if value="{{ m.showingFull }}" hint-placeholder-val="{{ false }}">
+                        <button onClick="{{ m.collapse }}" style="background: none; border: 0; padding: 4px 0; font-size: 14px; font-weight: 600; color: #6E6252; text-decoration: underline; text-underline-offset: 3px;">Hide quoted history</button>
+                      </sc-if>
+                    </div>
+                  </div>
+                </div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="margin-top: 14px; padding-top: 16px; border-top: 1px solid #EFE7D8;">
+          <textarea value="{{ composeValue }}" onChange="{{ setCompose }}" placeholder="Write to the venue" style="width: 100%; min-height: 420px; border-radius: 14px; border: 1px solid #DCCFB8; background: #F9F4EA; padding: 13px 15px; font-size: 15px; line-height: 1.6; resize: vertical; outline: none;"></textarea>
+          <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-top: 10px;">
+            <button onClick="{{ send }}" style="padding: 13px 22px; border-radius: 999px; border: 0; background: #B14A22; color: #FFF8EE; font-weight: 700; font-size: 16px; min-height: 48px;" style-hover="background: #8C3714;">{{ sendLabel }}</button>
+            <span style="font-size: 14px; color: #6E6252; flex: 1; min-width: 220px;">Sent from your name through Fieldy. Replies land here and in your email.</span>
+          </div>
+          <sc-if value="{{ showSendNotice }}" hint-placeholder-val="{{ false }}">
+            <div style="margin-top: 12px; padding: 14px 16px; border-radius: 14px; background: #FFF6E9; border: 1px solid #E6D2AE; font-size: 15px; line-height: 1.55; color: #4A4239;">Requests are sent from your name through a Fieldy address. The venue sees your name and centre, and can always reach you directly. Copies of every message are forwarded to your email.
+              <button onClick="{{ dismissSendNotice }}" style="display: block; margin-top: 9px; background: none; border: 0; padding: 0; font-size: 14px; font-weight: 700; color: #B14A22; text-decoration: underline; text-underline-offset: 3px;">Got it</button>
+            </div>
+          </sc-if>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 14px; padding-top: 12px; border-top: 1px dashed #E3D8C4;">
+            <span style="font-size: 13px; color: #776854;">Prototype only — simulate a venue reply that</span>
+            <sc-for list="{{ simulateKinds }}" as="k" hint-placeholder-count="4">
+              <button onClick="{{ k.run }}" style="background: none; border: 0; padding: 4px 0; font-size: 13px; font-weight: 600; color: #6E6252; text-decoration: underline; text-underline-offset: 3px;">{{ k.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 14px; padding: 20px; background: #FFFCF6; border: 1px solid #E3D8C4; border-radius: 20px;">
+        <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; margin: 0 0 10px;">Trip notes</h2>
+        <textarea value="{{ trip.notes }}" onChange="{{ setTripNotes }}" placeholder="Two children need a nap by 12:30. Ask about the covered picnic area." style="width: 100%; min-height: 100px; border-radius: 13px; border: 1px solid #DCCFB8; background: #F9F4EA; padding: 12px 14px; font-size: 15px; line-height: 1.5; resize: vertical; outline: none;"></textarea>
+      </div>
+    </div>
+
+  </sc-if>
+
+  <!-- ============ MY TRIPS ============ -->
+  <sc-if value="{{ isTrips }}" hint-placeholder-val="{{ false }}">
+    <div style="max-width: 880px; margin: 0 auto; padding: 28px 20px 80px;">
+      <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; letter-spacing: -0.02em; margin: 0 0 14px;">My trips</h1>
+      <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px;">
+        <button onClick="{{ toggleNeedsReply }}" style="position: relative; padding: 10px 15px; border-radius: 999px; border: 1px solid #DCCFB8; background: #FFFCF6; font-size: 14px; font-weight: 600; color: #4A4239;" style-hover="border-color: #B14A22;">
+          <sc-if value="{{ needsReplyOnly }}" hint-placeholder-val="{{ false }}"><span style="position: absolute; inset: 0; border-radius: 999px; background: #F0DED0; border: 1.5px solid #B14A22;"></span></sc-if>
+          <span style="position: relative;">Needs my reply · {{ needsReplyCount }}</span>
+        </button>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 22px;">
+        <sc-for list="{{ tripGroups }}" as="g" hint-placeholder-count="2">
+          <div>
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 9px;">
+              <span style="font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #6E6252;">{{ g.label }}</span>
+              <span style="flex: 1; height: 1px; background: #E3D8C4;"></span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <sc-for list="{{ g.rows }}" as="r" hint-placeholder-count="2">
+                <button onClick="{{ r.open }}" style="text-align: left; display: flex; gap: 16px; align-items: center; padding: 15px 17px; background: #FFFCF6; border: 1px solid #E3D8C4; border-radius: 16px;" style-hover="border-color: #B14A22;">
+                  <span style="flex: 0 0 62px; text-align: center;">
+                    <span style="display: block; font-family: 'Bricolage Grotesque', sans-serif; font-size: 22px; font-weight: 700; line-height: 1;">{{ r.day }}</span>
+                    <span style="display: block; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: #6E6252;">{{ r.month }}</span>
+                  </span>
+                  <span style="flex: 1; min-width: 0;">
+                    <span style="display: block; font-weight: 700; font-size: 17px;">{{ r.name }}</span>
+                    <span style="display: block; font-size: 15px; color: #6B6053;">{{ r.venue }} · {{ r.profileName }}</span>
+                    <sc-if value="{{ r.hasLast }}" hint-placeholder-val="{{ true }}">
+                      <span style="display: flex; gap: 8px; align-items: center; margin-top: 3px;">
+                        <sc-if value="{{ r.unread }}" hint-placeholder-val="{{ true }}">
+                          <span style="flex: 0 0 8px; width: 8px; height: 8px; border-radius: 999px; background: #B14A22;"></span>
+                        </sc-if>
+                        <span style="flex: 1; min-width: 0; font-size: 14px; color: #665B4C; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ r.lastLine }}</span>
+                      </span>
+                    </sc-if>
+                    <sc-if value="{{ r.hasNextTask }}" hint-placeholder-val="{{ true }}">
+                      <span style="display: block; font-size: 14px; color: #A5401A; margin-top: 3px; font-weight: 600;">{{ r.nextTask }}</span>
+                    </sc-if>
+                  </span>
+                  <span style="display: flex; flex-direction: column; gap: 6px; align-items: flex-end;">
+                    <sc-if value="{{ r.waitOnMe }}" hint-placeholder-val="{{ true }}">
+                      <span style="font-size: 13px; font-weight: 700; padding: 5px 11px; border-radius: 999px; background: #F0DED0; border: 1px solid #B14A22; color: #8C3714; white-space: nowrap;">{{ r.waitLabel }}</span>
+                    </sc-if>
+                    <sc-if value="{{ r.waitOnVenue }}" hint-placeholder-val="{{ false }}">
+                      <span style="font-size: 13px; font-weight: 600; padding: 5px 11px; border-radius: 999px; background: #F3EFE3; color: #6B6053; white-space: nowrap;">{{ r.waitLabel }}</span>
+                    </sc-if>
+                    <sc-if value="{{ r.notSent }}" hint-placeholder-val="{{ false }}">
+                      <span style="font-size: 13px; font-weight: 600; padding: 5px 11px; border-radius: 999px; background: #F3EFE3; color: #6E6252; white-space: nowrap;">{{ r.waitLabel }}</span>
+                    </sc-if>
+
+                    <span style="font-size: 13px; font-weight: 700; padding: 5px 11px; border-radius: 999px; background: #F0E7D7; color: #4A4239; white-space: nowrap;">{{ r.status }}</span>
+                  </span>
+                </button>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+
+      <sc-if value="{{ noTrips }}" hint-placeholder-val="{{ false }}">
+        <div style="padding: 26px; background: #FFFCF6; border: 1px solid #E3D8C4; border-radius: 20px;">
+          <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 22px; margin: 0 0 6px;">Nothing waiting on you</h2>
+          <p style="margin: 0 0 16px; font-size: 16px; color: #6B6053;">Three outings that fit {{ profileName }} right now:</p>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <sc-for list="{{ suggestions }}" as="s" hint-placeholder-count="3">
+              <button onClick="{{ s.open }}" style="text-align: left; padding: 14px 16px; border-radius: 14px; border: 1px solid #DCCFB8; background: #F9F4EA;" style-hover="border-color: #B14A22;">
+                <span style="display: block; font-weight: 700; font-size: 16px;">{{ s.name }}</span>
+                <span style="display: block; font-size: 14px; color: #6B6053;">{{ s.venue }} · {{ s.costLabel }} · {{ s.travelLine }}</span>
+              </button>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+    </div>
+  </sc-if>
+
+  <!-- ============ GROUP PROFILES ============ -->
+  <sc-if value="{{ isProfiles }}" hint-placeholder-val="{{ false }}">
+    <div style="max-width: 720px; margin: 0 auto; padding: 28px 20px 80px;">
+      <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; letter-spacing: -0.02em; margin: 0 0 6px;">Group profiles</h1>
+      <p style="margin: 0 0 20px; font-size: 16px; color: #6B6053;">One per room. Everything else in the app filters from these.</p>
+
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <sc-for list="{{ profileCards }}" as="p" hint-placeholder-count="2">
+          <div style="padding: 20px; background: #FFFCF6; border: 1px solid #E3D8C4; border-radius: 18px;">
+            <div style="display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap;">
+              <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 21px; margin: 0; flex: 1;">{{ p.name }}</h2>
+              <sc-if value="{{ p.active }}" hint-placeholder-val="{{ true }}">
+                <span style="font-size: 13px; font-weight: 700; padding: 5px 11px; border-radius: 999px; background: #E4EEE3; color: #33603F;">In use</span>
+              </sc-if>
+              <sc-if value="{{ p.inactive }}" hint-placeholder-val="{{ false }}">
+                <button onClick="{{ p.use }}" style="font-size: 14px; font-weight: 700; padding: 8px 14px; border-radius: 999px; border: 1px solid #DCCFB8; background: #F9F4EA;" style-hover="border-color: #B14A22;">Use this group</button>
+              </sc-if>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-top: 14px;">
+              <sc-for list="{{ p.fields }}" as="f" hint-placeholder-count="6">
+                <div>
+                  <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: #6E6252; margin-bottom: 4px;">{{ f.label }}</div>
+                  <div style="font-size: 16px; font-weight: 600;">{{ f.value }}</div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="margin-top: 14px; font-size: 15px; color: #4A4239; line-height: 1.5;">{{ p.notes }}</div>
+          </div>
+        </sc-for>
+        <button onClick="{{ goAccount }}" style="padding: 16px; border-radius: 18px; border: 1px dashed #C9B99C; background: none; font-weight: 700; font-size: 16px; color: #6B6053;" style-hover="border-color: #B14A22;">+ Add a room</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ============ ACCOUNT ============ -->
+  <sc-if value="{{ isAccount }}" hint-placeholder-val="{{ false }}">
+    <div style="max-width: 520px; margin: 0 auto; padding: 34px 20px 80px;">
+      <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; letter-spacing: -0.02em; margin: 0 0 6px;">Your account</h1>
+      <p style="margin: 0 0 22px; font-size: 16px; color: #6B6053;">Email and a link. No password to forget at 7:40 am.</p>
+      <div style="padding: 22px; background: #FFFCF6; border: 1px solid #E3D8C4; border-radius: 18px; display: flex; flex-direction: column; gap: 14px;">
+        <div>
+          <label style="display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: #6E6252; margin-bottom: 6px;">Name</label>
+          <input value="Dana Mireau" style="width: 100%; height: 48px; border-radius: 12px; border: 1px solid #DCCFB8; background: #F9F4EA; padding: 0 14px; font-size: 16px; outline: none;">
+        </div>
+        <div>
+          <label style="display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: #6E6252; margin-bottom: 6px;">Email</label>
+          <input value="dana@garryoakchildcare.ca" style="width: 100%; height: 48px; border-radius: 12px; border: 1px solid #DCCFB8; background: #F9F4EA; padding: 0 14px; font-size: 16px; outline: none;">
+        </div>
+        <div>
+          <label style="display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: #6E6252; margin-bottom: 6px;">Role</label>
+          <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+            <sc-for list="{{ roleChoices }}" as="r" hint-placeholder-count="4">
+              <button onClick="{{ r.pick }}" style="position: relative; padding: 10px 14px; border-radius: 999px; border: 1px solid #DCCFB8; background: #F9F4EA; font-weight: 600; font-size: 15px;" style-hover="border-color: #B14A22;">
+                <sc-if value="{{ r.active }}" hint-placeholder-val="{{ false }}"><span style="position: absolute; inset: 0; border-radius: 999px; background: #F0DED0; border: 1.5px solid #B14A22; z-index: 0;"></span></sc-if>
+                <span style="position: relative; z-index: 1;">{{ r.label }}</span>
+              </button>
+            </sc-for>
+          </div>
+        </div>
+        <div>
+          <label style="display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: #6E6252; margin-bottom: 6px;">Centre or school</label>
+          <input value="Garry Oak Childcare, Fairfield" style="width: 100%; height: 48px; border-radius: 12px; border: 1px solid #DCCFB8; background: #F9F4EA; padding: 0 14px; font-size: 16px; outline: none;">
+        </div>
+      </div>
+      <div style="margin-top: 14px; padding: 20px 22px; background: #FFF6E9; border: 1px solid #E6D2AE; border-radius: 18px;">
+        <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 19px; margin: 0 0 8px;">How your requests are sent</h2>
+        <p style="margin: 0 0 16px; font-size: 15px; line-height: 1.6; color: #4A4239; text-wrap: pretty;">Requests are sent from your name through a Fieldy address. The venue sees your name and centre, and can always reach you directly. Copies of every message are forwarded to your email.</p>
+        <button onClick="{{ toggleForward }}" style="display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; background: none; border: 0; padding: 0;">
+          <span style="flex: 1; font-size: 15px; font-weight: 600;">Also forward venue replies to my email</span>
+          <sc-if value="{{ forwardEmail }}" hint-placeholder-val="{{ true }}">
+            <span style="display: flex; align-items: center; justify-content: flex-end; width: 52px; height: 30px; border-radius: 999px; background: #B14A22; padding: 3px;">
+              <span style="width: 24px; height: 24px; border-radius: 999px; background: #FFF8EE;"></span>
+            </span>
+          </sc-if>
+          <sc-if value="{{ forwardOff }}" hint-placeholder-val="{{ false }}">
+            <span style="display: flex; align-items: center; justify-content: flex-start; width: 52px; height: 30px; border-radius: 999px; background: #DCCFB8; padding: 3px;">
+              <span style="width: 24px; height: 24px; border-radius: 999px; background: #FFFCF6;"></span>
+            </span>
+          </sc-if>
+        </button>
+      </div>
+      <button onClick="{{ goCatalog }}" style="margin-top: 16px; width: 100%; padding: 15px; border-radius: 999px; border: 0; background: #B14A22; color: #FFF8EE; font-weight: 700; font-size: 16px; min-height: 52px;" style-hover="background: #8C3714;">Save and keep planning</button>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;rankFeasibleFirst&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Catalog&quot;},&quot;taskBufferDays&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:3,&quot;min&quot;:0,&quot;max&quot;:14,&quot;unit&quot;:&quot;days&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Timeline&quot;},&quot;showVenueMemory&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Program page&quot;}}">
+const TODAY = new Date('2026-09-01T12:00:00');
+
+const PROGRAMS = [
+  { id: 'farm', name: 'Morning at the Children\u2019s Farm', venue: 'Beacon Hill Children\u2019s Farm', category: 'Animals and farms', cat: 'animals', ageMin: 1, ageMax: 8, cost: 5, adultCost: 5, duration: '1.5 hours', capacity: 40, leadDays: 7, indoor: false, comesToYou: false, months: 'March to October', days: 'Daily, 10am to 4pm', distanceKm: 1.4, mode: 'walk', booking: 'Phone', contact: 'farm@beaconhillfarm.ca', checked: '14 August 2026',
+    note: 'The goat stampede at 10:10 is the whole trip for under-threes. Go on a weekday before 11 and you will have the barnyard nearly to yourselves.',
+    desc: 'A small working farm inside Beacon Hill Park: goats, alpacas, peacocks, rabbits and a pair of very patient pigs.',
+    doing: 'Children walk a loop at their own pace, feed the goats from the hand-wash station, then run out the rest of the morning on the grass beside the pond.',
+    practical: [['Washrooms', 'Yes, 40m away, one accessible stall'], ['Lunch space', 'Picnic tables and open grass, no shelter'], ['Rain backup', 'None. The barn is outdoors — bring rain gear'], ['Strollers', 'Fully flat, double strollers fine'], ['Bus parking', 'Circle Drive drop-off, no bus stall'], ['Nearby park', 'You are in it. Playground 200m north']] },
+  { id: 'rbcm-self', schoolRateOnly: true, name: 'Self-guided field trip, core galleries', venue: 'Royal BC Museum', category: 'Museums and history', cat: 'museums', ageBasis: 'grades', gradeLabel: 'Grades K to 12', ageMin: 4, ageMax: 12, cost: 8, adultCost: 0, duration: 'As long as you like', capacity: 35, leadDays: 14, indoor: true, comesToYou: false, months: 'Year round', days: 'Tuesday to Friday', distanceKm: 2.6, mode: 'bus', booking: 'Web form', contact: 'rbcm.ca/field-trip-booking-information', phone: '1-250-356-7226', checked: '1 September 2026', source: 'https://rbcm.ca/learning-department/in-person-field-trips/',
+    note: 'The $2 school rate is $8 right now because Ancient Egypt is on, and it is included whether you want it or not. The rate is written for grade schools — daycares get quoted through group visits, so phone before you plan the day.',
+    desc: 'Your own route through the Natural History and Becoming BC galleries, with downloadable inquiry guides by grade.',
+    doing: 'The mammoth, then Old Town at your own pace. First Peoples gallery and part of Becoming BC are closed for modernization, so the loop is shorter than it used to be.',
+    practical: [['Washrooms', 'Yes, several sets, change tables'], ['Lunch space', 'Community room, Clifford Carl Hall or the outdoor picnic tables — confirm when you book'], ['Rain backup', 'Entirely indoors'], ['Strollers', 'Elevators throughout, wheelchair accessible'], ['Bus parking', 'Not stated — the museum runs no lot. Group entrance is Douglas at Belleville, arrive 15 min early'], ['Bags', 'Nothing over 30 x 30 cm in the galleries, and no guaranteed storage'], ['Adults needed', '1 adult per 5 children for K to 8'], ['Nearby park', 'Legislature lawns across the street']] },
+  { id: 'rbcm-lab', schoolRateOnly: true, name: 'Guided Learning Lab', venue: 'Royal BC Museum', category: 'Museums and history', cat: 'museums', ageBasis: 'grades', gradeLabel: 'Grades K to 3 for the youngest lab', ageMin: 4, ageMax: 12, cost: 0, groupCost: 150, adultCost: 0, duration: '60 minutes', capacity: null, leadDays: 14, indoor: true, comesToYou: false, months: 'September to May', days: 'Weekdays, by calendar slot', distanceKm: 2.6, mode: 'bus', booking: 'Web form', contact: 'rbcm.ca/field-trip-booking-information', phone: '1-250-356-7226', checked: '1 September 2026', source: 'https://rbcm.ca/learning-department/in-person-field-trips/',
+    note: 'Amazing Adaptations is the K to 3 lab and it is the one worth the flat fee — a museum educator, an hour, real handling objects. Ask for the discounted rate in the booking notes; they do grant it.',
+    desc: 'An hour with a museum educator in the galleries, priced per class rather than per child.',
+    doing: 'Depends on the lab you pick. Amazing Adaptations is pelts, skulls and beaks in the natural history gallery.',
+    practical: [['Washrooms', 'Yes, several sets, change tables'], ['Lunch space', 'Community room or Clifford Carl Hall — confirm when you book'], ['Rain backup', 'Entirely indoors'], ['Strollers', 'Elevators throughout, wheelchair accessible'], ['Bus parking', 'Not stated — the museum runs no lot'], ['Capacity', 'Not stated for labs. 35 is the self-guided limit'], ['Adults needed', '1 adult per 5 children for K to 8'], ['Nearby park', 'Legislature lawns across the street']] },
+  { id: 'rbcm-digital', schoolRateOnly: true, name: 'Digital field trip, live on Zoom', venue: 'Royal BC Museum', category: 'Comes to you', cat: 'comesto', ageBasis: 'grades', gradeLabel: 'Grades K to 3 topics available', ageMin: 4, ageMax: 12, cost: 0, groupCost: 75, adultCost: 0, duration: '30 minutes', capacity: 30, leadDays: 14, indoor: true, comesToYou: true, months: 'September to June', days: 'Tuesday and Thursday, 9:30am, 10:30am or 1pm', distanceKm: 0, mode: 'none', booking: 'Web form', contact: 'rbcm.ca/learning-department/digital-field-trips', phone: '1-250-356-7226', checked: '1 September 2026', source: 'https://rbcm.ca/learning-department/digital-field-trips/',
+    note: 'Thirty minutes on a screen is the whole thing, so treat it as a rainy-Tuesday filler, not an outing. Meet the Mammoth holds four-year-olds. Take the free tech test — the wired-internet requirement is real.',
+    desc: 'A museum educator runs a live two-way session over Zoom for your room.',
+    doing: 'Objects held up to the camera, questions both ways. Topics for the youngest: Amazing Adaptations, Dinosaurs, Investigating Insects, Meet the Mammoth.',
+    practical: [['Washrooms', 'Yours'], ['Lunch space', 'Yours'], ['Rain backup', 'Not needed'], ['Strollers', 'Not needed'], ['Bus parking', 'Not needed'], ['You need', 'Computer with camera, wired internet, big screen with sound'], ['Group size', 'Up to 30. Over 50 in one room, email for the webinar format'], ['Nearby park', 'Not needed']] },
+  { id: 'rbcm-kit', schoolRateOnly: true, name: 'Outreach kit, two-week loan', venue: 'Royal BC Museum', category: 'Comes to you', cat: 'comesto', ageBasis: 'grades', gradeLabel: 'Grades K to 12', ageMin: 3, ageMax: 12, cost: 0, groupCost: 50, adultCost: 0, duration: 'Two weeks', capacity: null, leadDays: 14, indoor: true, comesToYou: true, months: 'September to June', days: 'Any', distanceKm: 0, mode: 'none', booking: 'Web form', contact: 'rbcm.ca/learning-department/outreach-kits', phone: '1-250-356-7226', checked: '1 September 2026', source: 'https://rbcm.ca/learning-department/outreach-kits/',
+    note: 'Real handling objects in your own room for two weeks, shipping included. Bats of British Columbia is the one for the under-fives. No extensions and the late fee is another $50, so put the return date in the timeline.',
+    desc: 'A shipped box of museum handling-collection objects with stories and activity plans.',
+    doing: 'Whatever you build around it. Kits include Bats of BC, Great Bear Rainforest and the Ocean, Freshwater and Us floor map.',
+    practical: [['Washrooms', 'Yours'], ['Lunch space', 'Yours'], ['Rain backup', 'Not needed'], ['Strollers', 'Not needed'], ['Bus parking', 'Not needed'], ['Loan terms', 'One kit, two weeks, no extension. Late fee $50 a week, replacement $500'], ['Discount', '25 per cent off if you ask in the notes'], ['Rural note', 'Some addresses need a depot pickup']] },
+  { id: 'cathedral-tour', name: 'Discover the Cathedral guided tour', venue: 'Christ Church Cathedral', category: 'Community and civic', cat: 'civic', ageMin: null, ageMax: null, cost: null, adultCost: null, duration: null, capacity: null, leadDays: null, indoor: true, comesToYou: false, months: 'August and September', days: 'Not published', distanceKm: 1.9, mode: 'walk', booking: 'Email', contact: 'admin@christchurchcathedral.bc.ca', phone: '250.383.2714', checked: '2 September 2026', source: 'https://www.christchurchcathedral.bc.ca/news/cathedral-tours',
+    note: 'The nave and the stained glass are genuinely awe-making for small children, and it is two minutes from the library. But the tour was last advertised in 2023 and nothing since — email before you build a day around it.',
+    desc: 'A guided walk through the Gothic cathedral: nave, chapels, architecture, war history and the stained glass.',
+    doing: 'Mostly looking up. Best paired with a run at Pioneer Square next door.',
+    images: [
+      { url: 'https://dq5pwpg1q8ru0.cloudfront.net/2023/08/24/19/36/16/24691522-4c4a-4211-910a-0d3ef4411614/Tours%20form%20banner%201200x300%20(1920%20%C3%97%201080%20px).jpg', alt: 'Cathedral tours banner' },
+      { url: 'https://dq5pwpg1q8ru0.cloudfront.net/2020/10/30/19/56/07/0a5ba8b9-bf5d-43bb-98ef-5efeb55d3d51/web%20reel%20photo.png', alt: 'Christ Church Cathedral exterior' },
+      { url: 'https://dq5pwpg1q8ru0.cloudfront.net/2020/10/29/15/56/11/506738fb-0d4a-4861-a952-d4d123f6e404/ccc.jpg', alt: 'Inside the cathedral' }
+    ],
+    rights: '© 2026 Christ Church Cathedral. All rights reserved.',
+    practical: [['Washrooms', 'Not stated on the site'], ['Lunch space', 'Not stated on the site'], ['Rain backup', 'Entirely indoors'], ['Strollers', 'Not stated on the site'], ['Bus parking', 'Not stated. Street parking on Quadra, Burdett and Rockland'], ['Youngest age', 'Not published — ask when you email'], ['Price', 'Not published. Tickets went through Eventbrite in 2023'], ['Nearby park', 'Pioneer Square, next door']] },
+  { id: 'swanlake', name: 'Pond dipping and nature walk', venue: 'Swan Lake Christmas Hill Nature Sanctuary', category: 'Nature and outdoors', cat: 'nature', ageMin: 3, ageMax: 12, cost: 6, adultCost: 0, duration: '1.5 hours', capacity: 24, leadDays: 14, indoor: false, comesToYou: false, months: 'April to October', days: 'Weekday mornings', distanceKm: 5.8, mode: 'bus', booking: 'Email', contact: 'programs@swanlake.bc.ca', checked: '9 August 2026',
+    note: 'The nature house is small but warm, and the floating boardwalk is the safest water access in the city. Naturalists here are unfazed by two-year-olds.',
+    desc: 'A naturalist meets you at the nature house and walks the boardwalk loop, stopping to dip nets in the lake.',
+    doing: 'Net dipping from the boardwalk, sorting the catch in white trays, then a slow loop looking for herons and turtles.',
+    practical: [['Washrooms', 'In the nature house, one accessible'], ['Lunch space', 'Covered deck, seats about 25'], ['Rain backup', 'Nature house holds one group'], ['Strollers', 'Boardwalk yes, upper trail no'], ['Bus parking', 'Small lot, fits one school bus'], ['Nearby park', 'Grass field at the trailhead']] },
+  { id: 'bugzoo', name: 'Bug handling session', venue: 'Victoria Bug Zoo', category: 'Science', cat: 'science', ageMin: 3, ageMax: 12, cost: 12, adultCost: 12, duration: '1 hour', capacity: 12, leadDays: 14, indoor: true, comesToYou: false, months: 'Year round', days: 'Daily, first slot 10am', distanceKm: 2.1, mode: 'walk', booking: 'Phone', contact: '250-384-2847', checked: '18 August 2026',
+    note: 'One room, twelve children at a stretch. Split a big group in half and send the other half to the harbour for half an hour — the guides will hold your spot.',
+    desc: 'A single warm room of tropical insects with guides who put a stick insect on any hand that wants one.',
+    doing: 'Guided tour of the tanks, then hands-on time with stick insects and millipedes at the front bench.',
+    practical: [['Washrooms', 'One, shared with the cafe next door'], ['Lunch space', 'None inside'], ['Rain backup', 'Entirely indoors'], ['Strollers', 'Tight. Park them in the entry'], ['Bus parking', 'None. Courtney St is walk-in only'], ['Nearby park', 'Bastion Square, 3 min walk']] },
+  { id: 'goldstream', name: 'Salmon run and nature house', venue: 'Goldstream Provincial Park', category: 'Nature and outdoors', cat: 'nature', ageMin: 3, ageMax: 12, cost: 4, adultCost: 0, duration: '2 hours', capacity: 30, leadDays: 21, indoor: false, comesToYou: false, months: 'September to December', days: 'Weekdays, 10am or 1pm', distanceKm: 17.5, mode: 'bus', booking: 'Email', contact: 'nature.house@goldstreampark.ca', checked: '27 August 2026',
+    note: 'Peak chum run is late November and it smells like it. Children love that. The riverside trail is flat and short; the nature house has a real eagle mount.',
+    desc: 'A guided walk along the Goldstream River during the salmon run, with time in the nature house afterwards.',
+    doing: 'Watch spawning salmon from the gravel bar, handle the pelts and skulls in the nature house, find eagles overhead.',
+    practical: [['Washrooms', 'Flush toilets at the day-use lot'], ['Lunch space', 'Covered picnic shelter, 40 seats'], ['Rain backup', 'Nature house and the shelter'], ['Strollers', 'River trail is flat gravel'], ['Bus parking', 'Two bus stalls in the day-use lot'], ['Nearby park', 'Day-use meadow beside the river']] },
+  { id: 'artgallery', name: 'Touch, look, make', venue: 'Art Gallery of Greater Victoria', category: 'Arts and performance', cat: 'arts', ageMin: 3, ageMax: 12, cost: 7, adultCost: 0, duration: '1.5 hours', capacity: 20, leadDays: 21, indoor: true, comesToYou: false, months: 'Year round', days: 'Tuesday to Thursday mornings', distanceKm: 3.2, mode: 'bus', booking: 'Email', contact: 'learn@aggv.ca', checked: '11 August 2026',
+    note: 'The studio half is the reason to come — smocks, real brushes, no craft templates. Educators here let children make a mess and clean it up themselves.',
+    desc: 'A short look at two or three works, then a studio session in the education room.',
+    doing: 'Sitting on the floor to look and talk, then painting or collage in the studio with materials borrowed from the current show.',
+    practical: [['Washrooms', 'Beside the studio, change table'], ['Lunch space', 'Studio tables if you finish by noon'], ['Rain backup', 'Entirely indoors'], ['Strollers', 'Elevator, wheelchair accessible'], ['Bus parking', 'Moss St, curbside only'], ['Nearby park', 'Moss St playground, 2 min']] },
+  { id: 'scienceventure', name: 'Science Venture comes to you', venue: 'University of Victoria', category: 'Comes to you', cat: 'comesto', ageMin: 3, ageMax: 12, cost: 9, adultCost: 0, duration: '1 hour', capacity: 25, leadDays: 30, indoor: true, comesToYou: true, months: 'September to June', days: 'Weekday mornings', distanceKm: 0, mode: 'none', booking: 'Web form', contact: 'outreach@scienceventure.ca', checked: '20 August 2026',
+    note: 'The whole workshop fits on two tables and they bring everything, including the mess. Best option on a week when you cannot get adults for a bus.',
+    desc: 'Two instructors arrive with a hands-on workshop and set up in your own space.',
+    doing: 'Bubbles, ramps or simple circuits depending on the theme you pick, run in small rotating stations.',
+    practical: [['Washrooms', 'Yours'], ['Lunch space', 'Yours'], ['Rain backup', 'Not needed'], ['Strollers', 'Not needed'], ['Bus parking', 'Not needed'], ['Nearby park', 'Not needed']] },
+  { id: 'firehall', name: 'Fire hall visit', venue: 'Victoria Fire Department Hall No. 1', category: 'Community and civic', cat: 'civic', ageMin: 2, ageMax: 8, cost: 0, adultCost: 0, duration: '45 minutes', capacity: 20, leadDays: 30, indoor: true, comesToYou: false, months: 'Year round', days: 'Tuesday and Thursday, 10am', distanceKm: 2.9, mode: 'bus', booking: 'Email', contact: 'communityed@victoria.ca', checked: '5 August 2026',
+    note: 'Free, short, and the crew is genuinely good with toddlers. They will turn the siren off if you ask — do ask.',
+    desc: 'A crew walks your group around a working hall, the trucks and the gear.',
+    doing: 'Sit in the cab, watch a firefighter get dressed in full gear, hold the hose nozzle.',
+    practical: [['Washrooms', 'Public washroom in the lobby'], ['Lunch space', 'None'], ['Rain backup', 'Apparatus bay is covered'], ['Strollers', 'Flat concrete throughout'], ['Bus parking', 'Yates St, ask for the side lot'], ['Nearby park', 'Harris Green park, 4 min walk']] },
+  { id: 'salishsea', name: 'Touch pool discovery', venue: 'Shaw Centre for the Salish Sea, Sidney', category: 'Science', cat: 'science', ageMin: 2, ageMax: 12, cost: 11, adultCost: 0, duration: '1.5 hours', capacity: 30, leadDays: 21, indoor: true, comesToYou: false, months: 'Year round', days: 'Weekdays, 10am or 11:30am', distanceKm: 26, mode: 'bus', booking: 'Web form', contact: 'education@salishseacentre.org', checked: '25 August 2026',
+    note: 'Worth the drive only if you already have a bus. Two touch pools, warm water, and staff who will keep a shy child at the sea star tank for twenty minutes.',
+    desc: 'A small aquarium of local sea life with two supervised touch pools.',
+    doing: 'Handle sea stars and anemones, look through the jelly tanks, then a story on the mat.',
+    practical: [['Washrooms', 'Two sets, change tables'], ['Lunch space', 'Indoor classroom, book ahead'], ['Rain backup', 'Entirely indoors'], ['Strollers', 'One level, fully accessible'], ['Bus parking', 'Beacon Ave lot, bus stalls'], ['Nearby park', 'Sidney waterfront walkway']] },
+  { id: 'library', name: 'Group storytime and library cards', venue: 'Greater Victoria Public Library, Central', category: 'Community and civic', cat: 'civic', ageMin: 1, ageMax: 6, cost: 0, adultCost: 0, duration: '45 minutes', capacity: 30, leadDays: 14, indoor: true, comesToYou: false, months: 'Year round', days: 'Wednesday and Friday, 10:15am', distanceKm: 2.4, mode: 'walk', booking: 'Phone', contact: '250-382-7241', checked: '29 August 2026',
+    note: 'Free and reliable, and the children\u2019s librarian will pull a box of books on any theme if you email a week ahead. A good first outing for a new room.',
+    desc: 'A librarian runs a storytime for your group in the children\u2019s area, with songs between books.',
+    doing: 'Three books, two songs, then borrowing time. Library cards can be set up for the centre.',
+    practical: [['Washrooms', 'Family washroom on level one'], ['Lunch space', 'None indoors'], ['Rain backup', 'Entirely indoors'], ['Strollers', 'Elevator, stroller parking'], ['Bus parking', 'Broughton St, curbside'], ['Nearby park', 'Centennial Square, 1 min']] }
+];
+
+const HOME = { lat: 48.4155, lng: -123.3410 };
+
+const COORDS = {
+  farm: [48.4085, -123.3628], 'rbcm-self': [48.4197, -123.3676], 'rbcm-lab': [48.4197, -123.3676],
+  'rbcm-digital': null, 'rbcm-kit': null, swanlake: [48.4560, -123.3600], bugzoo: [48.4255, -123.3670],
+  goldstream: [48.4790, -123.5470], artgallery: [48.4232, -123.3495], scienceventure: null,
+  firehall: [48.4270, -123.3510], salishsea: [48.6497, -123.3970], library: [48.4230, -123.3610],
+  'cathedral-tour': [48.4222, -123.3560]
+};
+
+const SPEED = { walk: 4.6, bus: 15, drivers: 32 };
+const MODE_WORD = { walk: 'on foot', bus: 'by bus', drivers: 'driving' };
+
+function travelTime(km, mode) {
+  if (!km) return null;
+  const mins = Math.round(km / SPEED[mode] * 60) + (mode === 'bus' ? 9 : mode === 'drivers' ? 4 : 0);
+  if (mins < 60) return mins + ' min';
+  const h = Math.floor(mins / 60);
+  return h + ' hr' + (mins % 60 ? ' ' + (mins % 60) + ' min' : '');
+}
+
+const PROFILES = [
+  { id: 'toddler', name: 'Toddler room', ageMin: 1, ageMax: 3, size: 10, ratio: 4, budget: 8, transport: 'walk', address: '1148 Fairfield Rd, Victoria', notes: 'Two children nap at 12:30 sharp. One family needs 48 hours notice for any outing.' },
+  { id: 'preschool', name: 'Preschool room', ageMin: 3, ageMax: 5, size: 16, ratio: 8, budget: 10, transport: 'bus', address: '1148 Fairfield Rd, Victoria', notes: 'Three parent drivers available most Thursdays. Rain gear lives in the blue bin.' }
+];
+
+const CATS = [
+  ['animals', 'Animals and farms'], ['nature', 'Nature'], ['museums', 'Museums'],
+  ['arts', 'Arts'], ['science', 'Science'], ['civic', 'Community'], ['comesto', 'Comes to you']
+];
+
+const STATUSES = ['idea', 'contacted', 'replied', 'confirmed', 'done', 'cancelled'];
+const STATUS_NAME = { idea: 'Idea', contacted: 'Asked', replied: 'They answered', confirmed: 'Confirmed', done: 'Done', cancelled: 'Cancelled' };
+const FLOW = [
+  ['idea', 'Idea', 'Saved as a maybe'],
+  ['contacted', 'Asked', 'Request sent to the venue'],
+  ['replied', 'They answered', 'Waiting on your call'],
+  ['confirmed', 'Confirmed', 'Date is locked in'],
+  ['done', 'Done', 'You went']
+];
+
+function fmtTime(at) {
+  const d = new Date(at);
+  let h = d.getHours(); const ap = h < 12 ? 'am' : 'pm';
+  h = h % 12 === 0 ? 12 : h % 12;
+  const mm = String(d.getMinutes()).padStart(2, '0');
+  return d.getDate() + ' ' + ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getMonth()] + ', ' + h + ':' + mm + ' ' + ap;
+}
+function fmtDay(at) {
+  const d = new Date(at);
+  const diff = Math.round((new Date(TODAY.toDateString()) - new Date(d.toDateString())) / 86400000);
+  if (diff === 0) return 'Today';
+  if (diff === 1) return 'Yesterday';
+  return d.getDate() + ' ' + ['January','February','March','April','May','June','July','August','September','October','November','December'][d.getMonth()];
+}
+function fmtDate(isoStr) {
+  const d = new Date(isoStr + 'T12:00:00');
+  return ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][d.getDay()] + ' ' + d.getDate() + ' ' + ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getMonth()];
+}
+function initialsOf(name) {
+  return name.split(/\s+/).filter(w => /^[A-Z0-9]/.test(w)).slice(0, 2).map(w => w[0]).join('');
+}
+function truncate(s, n) { return s.length > n ? s.slice(0, n).replace(/\s+\S*$/, '') + '…' : s; }
+
+const REPLY_KINDS = {
+  confirmed: { label: 'confirms', body: 'Hi Dana,\n\nThat works — we have you down for the date you asked for at 10 am. Please arrive ten minutes early so we can get everyone signed in.\n\nBest,\nThe education team',
+    suggestion: { intent: 'confirmed', evidence: 'We have you down for the date you asked for at 10 am.' } },
+  proposed: { label: 'proposes another date', body: 'Hi Dana,\n\nThat morning is already taken by a school group, sorry. We could do the following week instead — either of the two dates below would work for us.\n\nLet me know and I will hold it.',
+    suggestion: { intent: 'proposed', evidence: 'That morning is already taken by a school group.' } },
+  declined: { label: 'declines', body: 'Hi Dana,\n\nUnfortunately we are not taking group bookings for that month while the space is being renovated. We hope to be back in the spring.\n\nThank you for thinking of us.',
+    suggestion: { intent: 'declined', evidence: 'We are not taking group bookings for that month.' } },
+  needsinfo: { label: 'asks a question', body: 'Hi Dana,\n\nHappy to host you. Before I book it in — how many adults will be coming with the group, and are there any allergies we should know about?\n\nThanks,\nThe education team',
+    suggestion: { intent: 'needsinfo', evidence: 'How many adults will be coming, and are there any allergies?' } }
+};
+const MONTH_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const MONTH_LONG = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+function iso(d) { return d.toISOString().slice(0, 10); }
+function shift(isoStr, days) { const d = new Date(isoStr + 'T12:00:00'); d.setDate(d.getDate() + days); return iso(d); }
+function money(n) { const v = Math.round(n * 100) / 100; return '$' + (v % 1 === 0 ? v.toFixed(0) : v.toFixed(2)); }
+
+class Component extends DCLogic {
+  state = {
+    view: 'catalog',
+    ageMin: 3, ageMax: 5, size: 16, transport: 'bus', budget: 10,
+    activeProfile: 'preschool',
+    query: '', cats: [], onlyFree: false, indoorOnly: false, outdoorOnly: false, showMap: false,
+    progId: null, saved: [], reported: false,
+    memories: { farm: [{ text: 'Ask for Nadine at the gate — she opens the goat pen early for small groups. Bring wipes, the hand-wash line is long.', author: 'Priya, Garry Oak Childcare', when: 'May 2026' }] },
+    memoryDraft: '',
+    planProfiles: ['preschool'], planDates: ['2026-09-24'], planDateDraft: '',
+    trips: [],
+    tripId: null, narrow: false,
+    compose: {}, expanded: {}, scrollTarget: null, scrollToken: 0, statusManual: false, forwardEmail: true, sendNoticeSeen: false,
+    needsReplyOnly: false,
+    taskDraft: '',
+    role: 'Director'
+  };
+
+  componentDidMount() {
+    this.onResize = () => {
+      const narrow = window.innerWidth < 620;
+      if (narrow !== this.state.narrow) this.setState({ narrow });
+    };
+    window.addEventListener('resize', this.onResize);
+    document.addEventListener('error', e => {
+      const im = e.target;
+      if (im && im.tagName === 'IMG') im.style.display = 'none';
+    }, true);
+    this.onResize();
+    if (this.state.trips.length > 0) return;
+    const mk = (progId, profileIds, dates, status, msgs) => {
+      const t = this.buildTrip(progId, profileIds, dates, status);
+      t.messages = msgs;
+      if (msgs.length) t.tasks = t.tasks.map(x => x.title.indexOf('Send request') === 0 ? { ...x, done: true } : x);
+      return t;
+    };
+    const req = (at, body) => ({ id: 'e' + at, party: 'educator', name: 'Dana Mireau', at, body });
+    const sys = (at, body) => ({ id: 's' + at, party: 'system', at, body });
+
+    const t1 = mk('goldstream', ['preschool', 'toddler'], ['2026-11-19', '2026-11-26'], 'replied', [
+      req('2026-08-24T09:12', 'Hello,\n\nI would like to bring our preschool room to the salmon run in November. 16 children aged 3 to 5, with 2 adults. First choice Thu 19 Nov, alternates Thu 26 Nov or Thu 3 Dec.\n\nIs the picnic shelter available for lunch?\n\nThank you,\nDana'),
+      sys('2026-08-24T09:13', 'Request sent 24 Aug'),
+      { id: 'v1', party: 'venue', name: 'Goldstream Nature House', at: '2026-08-27T14:05',
+        body: 'Hi Dana,\n\nThat works — we have you down for Thu 19 Nov at 10 am. The shelter is yours from 11:30. Please arrive ten minutes early so we can sign everyone in.\n\nBest,\nKaren',
+        full: 'Hi Dana,\n\nThat works — we have you down for Thu 19 Nov at 10 am. The shelter is yours from 11:30. Please arrive ten minutes early so we can sign everyone in.\n\nBest,\nKaren\n\n> Hello,\n> I would like to bring our preschool room to the salmon run in November. 16 children aged 3 to 5, with 2 adults.\n> First choice Thu 19 Nov, alternates Thu 26 Nov or Thu 3 Dec.',
+        attachments: [{ name: 'Goldstream-group-guide.pdf' }], unread: true,
+        suggestion: { intent: 'confirmed', dates: ['2026-11-19'], time: '10:00', evidence: 'We have you down for Thu 19 Nov at 10 am.' } }
+    ]);
+    const t2 = mk('rbcm-lab', ['preschool'], ['2026-10-14', '2026-10-21'], 'replied', [
+      req('2026-08-26T08:40', 'Hello,\n\nWe would like to book Amazing Adaptations for our preschool room on Wed 14 Oct, 16 children with 3 adults. Could you confirm the flat rate and whether the discounted rate applies to a licensed daycare?\n\nThank you,\nDana'),
+      sys('2026-08-26T08:41', 'Request sent 26 Aug'),
+      { id: 'v2', party: 'venue', name: 'Royal BC Museum Education', at: '2026-08-29T11:20',
+        body: 'Hi Dana,\n\nThat morning is already taken by a school group, sorry. We could do Fri 16 Oct or Wed 21 Oct instead — either works for us and I can hold one for a few days.\n\nThe $150 rate stands for your group.',
+        full: 'Hi Dana,\n\nThat morning is already taken by a school group, sorry. We could do Fri 16 Oct or Wed 21 Oct instead — either works for us and I can hold one for a few days.\n\nThe $150 rate stands for your group.\n\n> We would like to book Amazing Adaptations for our preschool room on Wed 14 Oct, 16 children with 3 adults.',
+        unread: true,
+        suggestion: { intent: 'proposed', dates: ['2026-10-16', '2026-10-21'], evidence: 'We could do Fri 16 Oct or Wed 21 Oct instead.' } }
+    ]);
+    const t3 = mk('library', 'toddler', '2026-09-30', 'replied', [
+      req('2026-08-28T15:02', 'Hello,\n\nCould we book a group storytime for our toddler room on Wed 30 Sep? 10 children aged 1 to 3 with 3 adults.\n\nThank you,\nDana'),
+      sys('2026-08-28T15:03', 'Request sent 28 Aug'),
+      { id: 'v3', party: 'venue', name: 'GVPL Central Children\u2019s Desk', at: '2026-08-31T09:55',
+        body: 'Hi Dana,\n\nHappy to host you. Before I book it in — how many adults will be coming with the group, and are there any allergies we should know about?\n\nThanks,\nSam',
+        unread: true,
+        suggestion: { intent: 'needsinfo', evidence: 'How many adults will be coming, and are there any allergies?' } }
+    ]);
+    const t4 = mk('farm', 'toddler', '2026-09-24', 'contacted', [
+      req('2026-08-28T07:50', 'Hello,\n\nWe would like to bring our toddler room on Thu 24 Sep, 10 children aged 1 to 3. Is the 10:10 goat feeding still running that week?\n\nThank you,\nDana'),
+      sys('2026-08-28T07:51', 'Request sent 28 Aug')
+    ]);
+    this.setState({ trips: [t1, t2, t3, t4] });
+  }
+
+  msgRefs = {};
+
+  scrollToMessage(msgId) {
+    let last = null, tries = 0;
+    const step = () => {
+      tries++;
+      const el = document.querySelector('[data-msg-id="' + msgId + '"]');
+      if (el) {
+        const y = Math.max(0, el.getBoundingClientRect().top + window.scrollY - 100);
+        const settled = last !== null && y > 5 && Math.abs(y - last) < 3;
+        last = y;
+        if (y > 5) window.scrollTo({ top: y, behavior: 'auto' });
+        if (settled) return;
+      }
+      if (tries < 8) setTimeout(step, 220);
+    };
+    requestAnimationFrame(step);
+  }
+
+  openTrip(tripId, msgId) {
+    this.setState(p => ({
+      view: 'trip', tripId, scrollTarget: msgId || null,
+      trips: p.trips.map(t => t.id === tripId ? { ...t, messages: (t.messages || []).map(m => ({ ...m, unread: false })) } : t)
+    }));
+    if (msgId) this.scrollToMessage(msgId);
+    else window.scrollTo({ top: 0, behavior: 'auto' });
+  }
+
+  profile(id) { return PROFILES.find(p => p.id === id) || PROFILES[1]; }
+
+  buildTrip(progId, profileIds, dates, status) {
+    const prog = PROGRAMS.find(p => p.id === progId);
+    const ids = (Array.isArray(profileIds) ? profileIds : [profileIds]).filter(Boolean);
+    const dateList = (Array.isArray(dates) ? dates : [dates]).filter(Boolean).sort();
+    const date = dateList[0];
+    const profs = ids.map(i => this.profile(i));
+    const prof = profs[0];
+    const totalKids = profs.reduce((n, p) => n + p.size, 0);
+    const adultsNeeded = profs.reduce((n, p) => n + Math.ceil(p.size / p.ratio), 0);
+    const buffer = this.props.taskBufferDays ?? 3;
+    const lead = prog.leadDays == null ? 14 : prog.leadDays;
+    const tasks = [
+      { title: 'Send request to ' + prog.venue, date: shift(date, -(lead + buffer)) },
+      { title: 'Director approval signed off', date: shift(date, -10) },
+      { title: 'Parent consent forms out', date: shift(date, -10) },
+      { title: 'Consent forms back in', date: shift(date, -3) },
+      { title: 'Confirm headcount with the venue', date: shift(date, -2) },
+      { title: 'Pack list, weather check, emergency contacts', date: shift(date, -1) }
+    ];
+    if (prof.transport === 'bus' && !prog.comesToYou) tasks.splice(1, 0, { title: 'Book the bus', date: shift(date, -14) });
+    tasks.forEach((t, i) => { t.id = progId + '-' + i; t.done = false; });
+    tasks.sort((a, b) => a.date < b.date ? -1 : 1);
+    const busNeeded = profs.some(p => p.transport === 'bus') && !prog.comesToYou && prog.distanceKm > 3;
+    return {
+      id: progId + '-' + date + '-' + ids.join('+'), progId, profileIds: ids, profileId: ids[0],
+      date, dates: dateList, status: status || 'idea',
+      childCost: String(prog.cost == null ? 0 : prog.cost), adultCost: String(prog.adultCost == null ? 0 : prog.adultCost), transportCost: busNeeded ? '180' : '0',
+      groupFee: prog.groupCost != null ? String(prog.groupCost) : '0',
+      children: String(totalKids), adults: String(adultsNeeded),
+      notes: '', tasks, messages: [], time: '10:00', dismissed: []
+    };
+  }
+
+  tripProfiles(trip) {
+    const ids = trip.profileIds || [trip.profileId];
+    return ids.map(i => this.profile(i));
+  }
+
+  tripDates(trip) {
+    const list = (trip.dates && trip.dates.length ? trip.dates : [trip.date]).slice().sort();
+    return [trip.date].concat(list.filter(d => d !== trip.date));
+  }
+
+  requestText(trip) {
+    const tp = PROGRAMS.find(p => p.id === trip.progId);
+    const profs = this.tripProfiles(trip);
+    const dates = this.tripDates(trip);
+    const alts = dates.slice(1).length ? dates.slice(1) : [shift(trip.date, 7), shift(trip.date, 14)];
+    const ageMin = Math.min.apply(null, profs.map(p => p.ageMin));
+    const ageMax = Math.max.apply(null, profs.map(p => p.ageMax));
+    const who = profs.length > 1
+      ? 'our ' + profs.map(p => p.name.toLowerCase()).join(' and ') + ' together'
+      : 'our ' + profs[0].name.toLowerCase();
+    const breakdown = profs.length > 1
+      ? '\n' + profs.map(p => '  · ' + p.name + ': ' + p.size + ' children aged ' + p.ageMin + ' to ' + p.ageMax).join('\n')
+      : '';
+    return 'Hello,\n\nI am Dana Mireau, ' + this.state.role.toLowerCase() + ' at Garry Oak Childcare in Fairfield. I would like to bring ' + who + ' to ' + tp.name + '.\n\nGroup: ' + trip.children + ' children aged ' + ageMin + ' to ' + ageMax + ', with ' + trip.adults + ' adults.' + breakdown + '\nFirst choice: ' + fmtDate(trip.date) + '\n' + (alts.length > 1 ? 'Alternates: ' : 'Alternate: ') + alts.map(d => fmtDate(d)).join(' or ') + '\n\nAny of those dates works for us — whichever suits you best.\n\nTwo questions: is there indoor space we can use for lunch, and where are the closest washrooms to the program space?\n\nYou can reach me at dana@garryoakchildcare.ca or 250-555-0184.\n\nThank you,\nDana';
+  }
+
+  lastMessage(trip) {
+    const real = (trip.messages || []).filter(m => m.party !== 'system');
+    return real[real.length - 1] || null;
+  }
+
+  waitingOn(trip) {
+    if (trip.status === 'cancelled') return { who: 'closed', label: 'Cancelled', days: 0 };
+    if (trip.status === 'done') return { who: 'closed', label: 'Went', days: 0 };
+    const last = this.lastMessage(trip);
+    if (!last) return { who: 'nobody', label: 'Not sent yet', days: 0 };
+    const days = Math.max(0, Math.round((TODAY - new Date(last.at)) / 86400000));
+    if (last.party === 'educator') return { who: 'venue', label: days ? 'Waiting on venue, ' + days + ' days' : 'Waiting on venue', days };
+    return { who: 'educator', label: 'Your turn', days };
+  }
+
+  openSuggestion(trip) {
+    const msgs = (trip.messages || []).filter(m => m.party === 'venue' && m.suggestion);
+    const last = msgs[msgs.length - 1];
+    if (!last) return null;
+    if ((trip.dismissed || []).indexOf(last.id) > -1) return null;
+    if (last.suggestion.intent === 'unclear') return null;
+    return { msg: last, s: last.suggestion };
+  }
+
+  regenerateTasks(trip, newDate) {
+    const tp = PROGRAMS.find(p => p.id === trip.progId);
+    const buffer = this.props.taskBufferDays ?? 3;
+    const offsets = {
+      'Send request': -(tp.leadDays + buffer), 'Book the bus': -14, 'Director approval': -10,
+      'Parent consent forms out': -10, 'Consent forms back in': -3, 'Confirm headcount': -2, 'Pack list': -1
+    };
+    return trip.tasks.map(t => {
+      if (t.done) return t;
+      const key = Object.keys(offsets).find(k => t.title.indexOf(k) === 0);
+      return key ? { ...t, date: shift(newDate, offsets[key]) } : t;
+    });
+  }
+
+  perChild(prog) {
+    if (prog.groupCost != null) return prog.groupCost / Math.max(1, this.state.size);
+    return prog.cost;
+  }
+
+  fit(prog) {
+    const s = this.state;
+    const issues = [];
+    if (prog.ageBasis === 'grades' && s.ageMax <= 5) issues.push('ages are set by grade here, not years — phone to confirm they take under-fives');
+    else if (prog.ageMin == null) issues.push('no youngest age published — email to ask before you plan');
+    else if (prog.ageMin > s.ageMin) issues.push('built for ' + prog.ageMin + '+, your youngest are ' + s.ageMin);
+    if (prog.capacity == null) issues.push('capacity is not published — ask when you book');
+    else if (prog.capacity < s.size) issues.push('capacity is ' + prog.capacity + ', your group is ' + s.size + ' — ask about splitting');
+    const pc = this.perChild(prog);
+    if (pc == null) issues.push('no price published');
+    else if (pc > s.budget) issues.push(money(pc) + ' a child is over your ' + money(s.budget) + ' budget');
+    return issues;
+  }
+
+  decorate(prog) {
+    const s = this.state;
+    const issues = this.fit(prog);
+    const pc = this.perChild(prog);
+    const total = prog.groupCost != null ? prog.groupCost : prog.cost * s.size;
+    const coords = COORDS[prog.id];
+    const primaryMode = s.transport;
+    const primaryTime = travelTime(prog.distanceKm, primaryMode);
+    let travel;
+    if (prog.comesToYou) travel = 'they come to you';
+    else travel = primaryTime + ' ' + MODE_WORD[primaryMode] + ' · ' + prog.distanceKm + ' km';
+    const mapUrl = coords
+      ? 'venue-map.html?h=' + HOME.lat + ',' + HOME.lng + '&hl=' + encodeURIComponent(this.profile(s.activeProfile).address) +
+        '&p=' + coords[0] + ',' + coords[1] + '|' + encodeURIComponent(prog.venue) + '|' + encodeURIComponent(primaryTime + ' ' + MODE_WORD[primaryMode])
+      : null;
+    return {
+      ...prog,
+      initials: prog.venue.split(/\s+/).filter(w => /^[A-Z]/.test(w)).slice(0, 2).map(w => w[0]).join('') || prog.venue.slice(0, 2),
+      categoryShort: prog.category.split(' ')[0],
+      green: issues.length === 0, amber: issues.length > 0,
+      issueText: issues.join(' · '),
+      costLabel: prog.groupCost != null ? money(prog.groupCost) + ' per class'
+        : (prog.cost == null ? 'Price not published' : (prog.cost === 0 ? 'Free' : money(prog.cost) + ' a child')),
+      totalLabel: prog.groupCost != null ? money(pc) + ' a child for ' + s.size
+        : (prog.cost == null ? 'ask the venue' : (prog.cost === 0 ? 'no cost at all' : money(total) + ' for ' + s.size + ' children')),
+      capacityLabel: prog.capacity == null ? 'Capacity not published' : 'Up to ' + prog.capacity + ' children',
+      ageLabel: prog.ageBasis === 'grades' ? prog.gradeLabel
+        : (prog.ageMin == null ? 'Ages not published' : 'Ages ' + prog.ageMin + ' to ' + prog.ageMax),
+      duration: prog.duration || 'Length not published',
+      travelLine: travel,
+      mapUrl, hasMap: !!mapUrl, comesToYouNote: prog.comesToYou,
+      travelModes: prog.comesToYou ? [] : ['walk', 'bus', 'drivers'].map(m => ({
+        label: MODE_WORD[m].charAt(0).toUpperCase() + MODE_WORD[m].slice(1),
+        time: travelTime(prog.distanceKm, m),
+        primary: m === primaryMode, secondary: m !== primaryMode,
+        caveat: m === 'walk' && prog.distanceKm > 2.5 ? 'too far with this group' : (m === 'bus' ? 'includes a 9 min wait' : '')
+      })),
+      distanceLabel: prog.distanceKm + ' km from ' + this.profile(s.activeProfile).address,
+      monthsLabel: prog.months, daysLabel: prog.days,
+      leadLabel: prog.leadDays == null ? 'Not published' : prog.leadDays + ' days ahead',
+
+      bookingLabel: prog.booking === 'Web form' ? 'Web form · ' + prog.contact : prog.booking + ': ' + prog.contact,
+      phoneLabel: prog.phone ? 'Phone ' + prog.phone : '',
+      hasPhone: !!prog.phone,
+      slotA: 'ph-' + prog.id + '-a', slotB: 'ph-' + prog.id + '-b', slotC: 'ph-' + prog.id + '-c',
+      leadPhoto: (prog.images || []).length ? prog.images[0].url : '',
+      leadAlt: (prog.images || []).length ? (prog.images[0].alt || prog.venue) : '',
+      sidePhotos: (prog.images || []).slice(1, 3).map(im => ({ url: im.url, alt: im.alt || prog.venue })),
+      hasPhotos: (prog.images || []).length > 0,
+      thumbUrl: (prog.images || []).length ? prog.images[0].url : '',
+      noPhotos: (prog.images || []).length === 0,
+      photoCredit: prog.rights || ('From ' + prog.venue + '\u2019s website'),
+      sourceUrl: prog.source || '#',
+      schoolRateOnly: !!prog.schoolRateOnly,
+      rateFlag: 'School rate — daycares are quoted separately',
+      hasSource: !!prog.source,
+      practical: prog.practical.map(p => ({
+        label: p[0], value: p[1],
+        unknown: /not stated|not published|confirm when you book/i.test(p[1]),
+        known: !/not stated|not published|confirm when you book/i.test(p[1])
+      })),
+      open: () => this.setState({ view: 'program', progId: prog.id, reported: false, memoryDraft: '' })
+    };
+  }
+
+  filtered() {
+    const s = this.state;
+    const q = s.query.trim().toLowerCase();
+    let list = PROGRAMS.filter(p => {
+      if (s.cats.length && s.cats.indexOf(p.cat) === -1) return false;
+      if (s.onlyFree && p.cost !== 0) return false;
+      if (s.indoorOnly && !p.indoor) return false;
+      if (s.outdoorOnly && p.indoor) return false;
+      if (s.transport === 'walk' && !p.comesToYou && p.distanceKm > 2.5) return false;
+      if (q && !(p.name + ' ' + p.venue + ' ' + p.category + ' ' + p.desc).toLowerCase().includes(q)) return false;
+      return true;
+    }).map(p => this.decorate(p));
+    const rank = this.props.rankFeasibleFirst ?? true;
+    list.sort((a, b) => {
+      if (rank && a.green !== b.green) return a.green ? -1 : 1;
+      return a.distanceKm - b.distanceKm;
+    });
+    return list;
+  }
+
+  tripOf(id) { return this.state.trips.find(t => t.id === id); }
+
+  setTrip(patch) {
+    this.setState(s => ({ trips: s.trips.map(t => t.id === s.tripId ? { ...t, ...patch } : t) }));
+  }
+
+  renderVals() {
+    const s = this.state;
+    const prof = this.profile(s.activeProfile);
+    const v = {
+      isCatalog: s.view === 'catalog', isProgram: s.view === 'program', isPlan: s.view === 'plan',
+      isTrip: s.view === 'trip', isTrips: s.view === 'trips', isProfiles: s.view === 'profiles', isAccount: s.view === 'account',
+      goCatalog: () => this.setState({ view: 'catalog' }),
+      goTrips: () => this.setState({ view: 'trips' }),
+      goProfiles: () => this.setState({ view: 'profiles' }),
+      goAccount: () => this.setState({ view: 'account' }),
+      size: s.size, budget: s.budget, budgetLabel: money(s.budget), query: s.query,
+      homeAddress: prof.address, profileName: prof.name,
+      tripCount: s.trips.length,
+      showMap: s.showMap, mapToggleLabel: s.showMap ? 'Hide map' : 'Show map',
+      toggleMap: () => this.setState(p => ({ showMap: !p.showMap })),
+      setQuery: e => this.setState({ query: e.target.value }),
+      setBudget: e => this.setState({ budget: Number(e.target.value) }),
+      sizeUp: () => this.setState(p => ({ size: Math.min(40, p.size + 1) })),
+      sizeDown: () => this.setState(p => ({ size: Math.max(4, p.size - 1) })),
+      ageOptions: [[1, 3, '1 to 3'], [3, 5, '3 to 5'], [5, 8, '5 to 8'], [8, 12, '8 to 12']].map(a => ({
+        label: a[2], active: s.ageMin === a[0] && s.ageMax === a[1],
+        pick: () => this.setState({ ageMin: a[0], ageMax: a[1] })
+      })),
+      transportOptions: [['walk', 'Walking'], ['bus', 'Bus'], ['drivers', 'Parent drivers']].map(t => ({
+        label: t[1], active: s.transport === t[0], pick: () => this.setState({ transport: t[0] })
+      })),
+      roleChoices: ['ECE', 'Director', 'Teacher', 'Other'].map(r => ({
+        label: r, active: s.role === r, pick: () => this.setState({ role: r })
+      }))
+    };
+
+    const chips = CATS.map(c => ({
+      label: c[1], active: s.cats.indexOf(c[0]) > -1,
+      toggle: () => this.setState(p => ({ cats: p.cats.indexOf(c[0]) > -1 ? p.cats.filter(x => x !== c[0]) : p.cats.concat([c[0]]) }))
+    }));
+    chips.push({ label: 'Free', active: s.onlyFree, toggle: () => this.setState(p => ({ onlyFree: !p.onlyFree })) });
+    chips.push({ label: 'Indoors', active: s.indoorOnly, toggle: () => this.setState(p => ({ indoorOnly: !p.indoorOnly, outdoorOnly: false })) });
+    chips.push({ label: 'Outdoors', active: s.outdoorOnly, toggle: () => this.setState(p => ({ outdoorOnly: !p.outdoorOnly, indoorOnly: false })) });
+    v.chips = chips;
+
+    const results = this.filtered();
+    v.results = results;
+    const seenCoord = {};
+    v.catalogMapUrl = 'venue-map.html?h=' + HOME.lat + ',' + HOME.lng + '&hl=' + encodeURIComponent(prof.address) +
+      results.filter(r => {
+        const c = COORDS[r.id];
+        if (!c) return false;
+        const key = c.join(',');
+        if (seenCoord[key]) return false;
+        seenCoord[key] = true;
+        return true;
+      }).map(r => '&p=' + COORDS[r.id][0] + ',' + COORDS[r.id][1] + '|' +
+        encodeURIComponent(r.venue) + '|' + encodeURIComponent(r.travelLine)).join('');
+    const greens = results.filter(r => r.green).length;
+    v.resultLine = results.length + ' outings for ' + s.size + ' children aged ' + s.ageMin + ' to ' + s.ageMax + ' · ' + greens + ' fit outright';
+
+    const prog = PROGRAMS.find(p => p.id === s.progId) || PROGRAMS[0];
+    v.prog = this.decorate(prog);
+    v.saveLabel = s.saved.indexOf(prog.id) > -1 ? 'Saved ✓' : 'Save for later';
+    v.toggleSave = () => this.setState(p => ({ saved: p.saved.indexOf(prog.id) > -1 ? p.saved.filter(x => x !== prog.id) : p.saved.concat([prog.id]) }));
+    v.report = e => { if (e && e.preventDefault) e.preventDefault(); this.setState({ reported: true }); };
+    v.reported = s.reported;
+    v.memoryOn = this.props.showVenueMemory ?? true;
+    const mems = s.memories[prog.id] || [];
+    v.memories = mems;
+    v.noMemories = mems.length === 0;
+    v.memoryDraft = s.memoryDraft;
+    v.setMemoryDraft = e => this.setState({ memoryDraft: e.target.value });
+    v.addMemory = () => {
+      const text = s.memoryDraft.trim();
+      if (!text) return;
+      this.setState(p => ({
+        memoryDraft: '',
+        memories: { ...p.memories, [prog.id]: (p.memories[prog.id] || []).concat([{ text, author: 'Dana, Garry Oak Childcare', when: 'Just now' }]) }
+      }));
+    };
+
+    v.startPlan = () => this.setState({ view: 'plan', planProfiles: [s.activeProfile] });
+    v.backToProgram = () => this.setState({ view: 'program' });
+    const picked = s.planProfiles;
+    v.profileChoices = PROFILES.map(p => ({
+      name: p.name, active: picked.indexOf(p.id) > -1, inactive: picked.indexOf(p.id) === -1,
+      summary: 'Ages ' + p.ageMin + ' to ' + p.ageMax + ' · ' + p.size + ' children · 1:' + p.ratio + ' · ' + money(p.budget) + ' a child',
+      pick: () => this.setState(prev => {
+        const on = prev.planProfiles.indexOf(p.id) > -1;
+        const next = on ? prev.planProfiles.filter(x => x !== p.id) : prev.planProfiles.concat([p.id]);
+        if (!next.length) return { planProfiles: [] };
+        const first = this.profile(next[0]);
+        return { planProfiles: next, activeProfile: next[0], ageMin: Math.min.apply(null, next.map(i => this.profile(i).ageMin)), ageMax: Math.max.apply(null, next.map(i => this.profile(i).ageMax)), size: next.reduce((n, i) => n + this.profile(i).size, 0), budget: first.budget, transport: first.transport };
+      })
+    }));
+    const pickedProfs = picked.map(i => this.profile(i));
+    const planKids = pickedProfs.reduce((n, p) => n + p.size, 0);
+    v.planGroupSummary = picked.length === 0
+      ? 'Pick at least one group.'
+      : (picked.length === 1
+        ? pickedProfs[0].name + ', ' + planKids + ' children'
+        : picked.length + ' rooms together — ' + planKids + ' children, ages ' + Math.min.apply(null, pickedProfs.map(p => p.ageMin)) + ' to ' + Math.max.apply(null, pickedProfs.map(p => p.ageMax)));
+    v.planCapacityWarn = prog.capacity != null && planKids > prog.capacity;
+    v.planCapacityText = prog.capacity != null ? 'Capacity here is ' + prog.capacity + ' and you would be ' + planKids + '. Ask about two sittings, or plan the rooms separately.' : '';
+
+    const quickDates = [['2026-09-24', 'Thu 24 Sep'], ['2026-10-15', 'Thu 15 Oct'], ['2026-11-19', 'Thu 19 Nov']];
+    const dset = s.planDates;
+    v.dateChoices = quickDates.map(d => ({
+      label: d[1], active: dset.indexOf(d[0]) > -1,
+      pick: () => this.setState(prev => ({ planDates: prev.planDates.indexOf(d[0]) > -1 ? prev.planDates.filter(x => x !== d[0]) : prev.planDates.concat([d[0]]) }))
+    }));
+    v.planDateDraft = s.planDateDraft;
+    v.setPlanDateDraft = e => {
+      const val = e.target.value;
+      if (!val) return this.setState({ planDateDraft: '' });
+      this.setState(prev => ({ planDateDraft: '', planDates: prev.planDates.indexOf(val) > -1 ? prev.planDates : prev.planDates.concat([val]) }));
+    };
+    const sortedPlanDates = dset.slice().sort();
+    v.planDatePills = sortedPlanDates.map((d, i) => ({
+      label: fmtDate(d) + (i === 0 ? ' · first choice' : ''),
+      first: i === 0,
+      remove: () => this.setState(prev => ({ planDates: prev.planDates.filter(x => x !== d) }))
+    }));
+    v.noPlanDates = sortedPlanDates.length === 0;
+    v.planDateHint = sortedPlanDates.length > 1
+      ? 'We will ask for the earliest and offer the rest as alternates. The venue picks.'
+      : 'Add a second or third option and the venue can pick what suits them.';
+    const firstPlanDate = sortedPlanDates[0];
+    const daysOut = firstPlanDate ? Math.round((new Date(firstPlanDate + 'T12:00:00') - TODAY) / 86400000) : null;
+    v.leadWarning = firstPlanDate == null ? ''
+      : (daysOut < prog.leadDays + 3
+        ? 'Tight: ' + prog.venue + ' asks for ' + prog.leadDays + ' days and ' + fmtDate(firstPlanDate) + ' is ' + daysOut + ' days away. Worth asking anyway.'
+        : prog.venue + ' asks for ' + prog.leadDays + ' days notice. You have ' + daysOut + '.');
+    v.canCreate = picked.length > 0 && sortedPlanDates.length > 0;
+    v.cannotCreate = !(picked.length > 0 && sortedPlanDates.length > 0);
+    v.createTrip = () => {
+      if (!picked.length || !sortedPlanDates.length) return;
+      const t = this.buildTrip(prog.id, picked, sortedPlanDates, 'idea');
+      this.setState(p => ({ trips: p.trips.filter(x => x.id !== t.id).concat([t]), tripId: t.id, view: 'trip' }));
+      window.scrollTo({ top: 0, behavior: 'auto' });
+    };
+
+    const trip = this.tripOf(s.tripId) || s.trips[0];
+    if (trip) {
+      const tp = PROGRAMS.find(p => p.id === trip.progId);
+      const tprofs = this.tripProfiles(trip);
+      const tprof = tprofs[0];
+      const kids = Number(trip.children) || 0;
+      const adults = Number(trip.adults) || 0;
+      const plannedKids = tprofs.reduce((n, p) => n + p.size, 0) || 1;
+      const roomKids = tprofs.map((p, i) => i === tprofs.length - 1
+        ? kids - tprofs.slice(0, -1).reduce((n, q) => n + Math.round(kids * q.size / plannedKids), 0)
+        : Math.round(kids * p.size / plannedKids));
+      const roomNeeds = tprofs.map((p, i) => Math.ceil(Math.max(0, roomKids[i]) / p.ratio));
+      const adultsNeeded = roomNeeds.reduce((n, x) => n + x, 0);
+      const ratioText = tprofs.map(p => '1:' + p.ratio + ' ' + p.name.replace(/ room$/i, '').toLowerCase()).join(', ');
+      const total = (Number(trip.childCost) || 0) * kids + (Number(trip.adultCost) || 0) * adults + (Number(trip.transportCost) || 0) + (Number(trip.groupFee) || 0);
+      const d = new Date(trip.date + 'T12:00:00');
+      const ratioOk = adults >= adultsNeeded && adultsNeeded > 0;
+      const doneCount = trip.tasks.filter(t => t.done).length;
+      const overdue = trip.tasks.filter(t => !t.done && new Date(t.date + 'T12:00:00') < TODAY).length;
+      v.trip = {
+        name: tp.name, venue: tp.venue,
+        profileName: tprofs.map(p => p.name).join(' + '),
+        profileSummary: kids + ' children · ages ' + Math.min.apply(null, tprofs.map(p => p.ageMin)) + ' to ' + Math.max.apply(null, tprofs.map(p => p.ageMax)),
+        multiGroup: tprofs.length > 1,
+        dateLabel: d.getDate() + ' ' + MONTH_LONG[d.getMonth()] + ' ' + d.getFullYear(),
+        totalLabel: money(total), perChildLabel: kids ? money(total / kids) + ' a child' : '—',
+        children: trip.children, adults: trip.adults,
+        ratioRequirement: tprofs.length > 1
+          ? 'Each room keeps its own ratio — ' + ratioText + ' — so ' + adultsNeeded + ' adults in total.'
+          : 'This room requires 1 adult for every ' + tprof.ratio + ' children, so ' + adultsNeeded + ' adults.',
+        ratioOk, ratioBad: !ratioOk,
+        ratioLine: ratioOk
+          ? adults + ' adults for ' + kids + ' children — ratio met' + (adults > adultsNeeded ? ', ' + (adults - adultsNeeded) + ' spare' : '')
+          : 'You need ' + adultsNeeded + ' adults for ' + kids + ' children. You have ' + adults + '.',
+        taskSummary: doneCount + ' of ' + trip.tasks.length + ' done' + (overdue ? ' · ' + overdue + ' overdue' : ''),
+        bookingLabel: tp.booking + ' · ' + tp.contact,
+        contact: tp.contact, notes: trip.notes
+      };
+      v.costRows = [];
+      if (tp.groupCost != null) v.costRows.push({ label: 'Flat fee for the class', value: trip.groupFee, set: e => this.setTrip({ groupFee: e.target.value }) });
+      else v.costRows.push({ label: 'Admission per child', value: trip.childCost, set: e => this.setTrip({ childCost: e.target.value }) });
+      v.costRows.push({ label: 'Admission per adult', value: trip.adultCost, set: e => this.setTrip({ adultCost: e.target.value }) });
+      v.costRows.push({ label: 'Bus or transport', value: trip.transportCost, set: e => this.setTrip({ transportCost: e.target.value }) });
+      v.setChildren = e => this.setTrip({ children: e.target.value });
+      v.setAdults = e => this.setTrip({ adults: e.target.value });
+      v.setTripNotes = e => this.setTrip({ notes: e.target.value });
+      v.statusChoices = STATUSES.map(st => ({
+        label: STATUS_NAME[st], active: trip.status === st,
+        pick: () => this.setTrip({ status: st })
+      }));
+      const msgList = trip.messages || [];
+      const firstOut = msgList.filter(m => m.party === 'educator')[0];
+      const lastIn = msgList.filter(m => m.party === 'venue').slice(-1)[0];
+      const stamps = {
+        idea: 'When you saved it',
+        contacted: firstOut ? fmtTime(firstOut.at) : null,
+        replied: lastIn ? fmtTime(lastIn.at) : null,
+        confirmed: trip.status === 'confirmed' || trip.status === 'done' ? fmtDate(trip.date) + (trip.time ? ', ' + trip.time : '') : null,
+        done: trip.status === 'done' ? fmtDate(trip.date) : null
+      };
+      const cancelled = trip.status === 'cancelled';
+      const atIdx = cancelled ? -1 : FLOW.map(f => f[0]).indexOf(trip.status);
+      v.statusCancelled = cancelled;
+      v.statusOnTrack = !cancelled;
+      v.statusSteps = FLOW.map((f, i) => ({
+        key: f[0], label: f[1],
+        detail: stamps[f[0]] || f[2],
+        past: i < atIdx, current: i === atIdx, future: i > atIdx,
+        reached: i <= atIdx,
+        connector: i > 0, connectorFilled: i <= atIdx
+      }));
+      v.statusNow = cancelled ? 'Cancelled' : FLOW[atIdx][1];
+      v.statusWhy = cancelled
+        ? 'You marked this cancelled. Nothing here is sent to the venue.'
+        : (lastIn && trip.status === 'replied' ? 'Moved here when ' + tp.venue + ' replied.' : 'Moves on its own as messages come and go.');
+      v.railWide = !s.narrow;
+      v.railNarrow = !!s.narrow;
+      v.statusManualOpen = !!s.statusManual;
+      v.toggleStatusManual = () => this.setState(p => ({ statusManual: !p.statusManual }));
+      v.reopenTrip = () => this.setTrip({ status: lastIn ? 'replied' : (firstOut ? 'contacted' : 'idea') });
+      v.tasks = trip.tasks.map(t => {
+        const td = new Date(t.date + 'T12:00:00');
+        const days = Math.round((td - TODAY) / 86400000);
+        const late = !t.done && days < 0;
+        return {
+          title: t.title, date: t.date, mark: t.done ? '✓' : '', overdue: late, soon: !late && !t.done,
+          lateLine: late ? Math.abs(days) + ' days overdue — do this today' : (days === 0 ? 'Today' : 'in ' + days + ' days'),
+          toggle: () => this.setTrip({ tasks: trip.tasks.map(x => x.id === t.id ? { ...x, done: !x.done } : x) }),
+          setDate: e => this.setTrip({ tasks: trip.tasks.map(x => x.id === t.id ? { ...x, date: e.target.value } : x) }),
+          remove: () => this.setTrip({ tasks: trip.tasks.filter(x => x.id !== t.id) })
+        };
+      });
+      v.taskDraft = s.taskDraft;
+      v.setTaskDraft = e => this.setState({ taskDraft: e.target.value });
+      v.addTask = () => {
+        const title = s.taskDraft.trim();
+        if (!title) return;
+        this.setTrip({ tasks: trip.tasks.concat([{ id: 'x' + Date.now(), title, date: shift(trip.date, -7), done: false }]) });
+        this.setState({ taskDraft: '' });
+      };
+      v.groupRows = tprofs.map((p, i) => ({
+        name: p.name,
+        detail: Math.max(0, roomKids[i]) + ' children, ages ' + p.ageMin + ' to ' + p.ageMax + ' · 1:' + p.ratio + ', needs ' + roomNeeds[i] + ' adults'
+      }));
+      const allDates = this.tripDates(trip);
+      v.tripDates = allDates.map((dd, i) => ({
+        label: fmtDate(dd), first: i === 0, alternate: i > 0,
+        badge: i === 0 ? 'First choice' : 'Alternate',
+        makeFirst: () => this.setTrip({ date: dd, tasks: this.regenerateTasks(trip, dd) }),
+        remove: () => {
+          const left = allDates.filter(x => x !== dd);
+          this.setTrip({ dates: left, date: left[0], tasks: this.regenerateTasks(trip, left[0]) });
+        }
+      }));
+      v.hasAlternates = allDates.length > 1;
+      v.altCount = allDates.length - 1;
+      v.dateSummary = allDates.length > 1
+        ? fmtDate(allDates[0]) + ' · ' + (allDates.length - 1) + (allDates.length === 2 ? ' alternate offered' : ' alternates offered')
+        : fmtDate(allDates[0]);
+      v.newAltDraft = '';
+      v.addAltDate = e => {
+        const val = e.target.value;
+        if (!val || allDates.indexOf(val) > -1) return;
+        this.setTrip({ dates: allDates.concat([val]).sort() });
+      };
+      const wait = this.waitingOn(trip);
+      v.trip.waitLabel = wait.label;
+      v.trip.waitOnMe = wait.who === 'educator';
+      v.trip.waitOnVenue = wait.who === 'venue';
+      v.trip.notSent = wait.who === 'nobody';
+      v.trip.closed = wait.who === 'closed';
+      v.trip.time = trip.time;
+
+      const msgs = trip.messages || [];
+      v.threadEmpty = msgs.length === 0;
+      v.thread = msgs.map(m => {
+        const isSys = m.party === 'system';
+        return {
+          id: m.id, isSystem: isSys, isMessage: !isSys,
+          name: m.party === 'venue' ? m.name : (m.party === 'educator' ? m.name + ' (you)' : ''),
+          initials: isSys ? '' : initialsOf(m.name),
+          isVenue: m.party === 'venue', isEducator: m.party === 'educator',
+          at: isSys ? '' : fmtTime(m.at), body: m.body,
+          highlight: s.scrollTarget === m.id,
+          hasFull: !!m.full && !s.expanded[m.id],
+          showingFull: !!m.full && !!s.expanded[m.id],
+          fullBody: m.full || '',
+          expand: () => this.setState(p => ({ expanded: { ...p.expanded, [m.id]: true } })),
+          collapse: () => this.setState(p => ({ expanded: { ...p.expanded, [m.id]: false } })),
+          attachments: (m.attachments || []).map(a => ({ name: a.name, href: a.href || '#' })),
+          hasAttachments: (m.attachments || []).length > 0
+        };
+      });
+
+      const composeKey = trip.id;
+      const composeVal = s.compose[composeKey] != null ? s.compose[composeKey] : (msgs.length === 0 ? this.requestText(trip) : '');
+      v.composeValue = composeVal;
+      v.setCompose = e => this.setState(p => ({ compose: { ...p.compose, [composeKey]: e.target.value } }));
+      v.sendLabel = msgs.length === 0 ? 'Send request' : 'Send';
+      v.send = () => {
+        const body = composeVal.trim();
+        if (!body) return;
+        const now = new Date(TODAY);
+        const at = now.toISOString().slice(0, 16);
+        const first = msgs.length === 0;
+        const nextMsgs = msgs.concat([
+          { id: 'e' + Date.now(), party: 'educator', name: 'Dana Mireau', at, body },
+          { id: 'sy' + Date.now(), party: 'system', at, body: (first ? 'Request sent ' : 'Message sent ') + now.getDate() + ' ' + MONTH_SHORT[now.getMonth()] }
+        ]);
+        this.setTrip({
+          messages: nextMsgs,
+          status: trip.status === 'idea' ? 'contacted' : trip.status,
+          tasks: first ? trip.tasks.map(x => x.title.indexOf('Send request') === 0 ? { ...x, done: true } : x) : trip.tasks
+        });
+        this.setState(p => ({ compose: { ...p.compose, [composeKey]: '' }, sendNoticeSeen: first ? true : p.sendNoticeSeen, showSendNotice: first && !p.sendNoticeSeen }));
+      };
+      v.showSendNotice = !!s.showSendNotice;
+      v.dismissSendNotice = () => this.setState({ showSendNotice: false });
+
+      v.simulateKinds = Object.keys(REPLY_KINDS).map(k => ({
+        label: REPLY_KINDS[k].label,
+        run: () => {
+          const kind = REPLY_KINDS[k];
+          const at = new Date(TODAY).toISOString().slice(0, 16);
+          const sug = { ...kind.suggestion, evidence: kind.suggestion.evidence };
+          if (k === 'confirmed') { sug.dates = [trip.date]; sug.time = '09:30'; }
+          if (k === 'proposed') { sug.dates = [shift(trip.date, 2), shift(trip.date, 7)]; }
+          const id = 'v' + Date.now();
+          this.setTrip({
+            status: 'replied',
+            messages: (trip.messages || []).concat([{ id, party: 'venue', name: tp.venue + ' Education', at, body: kind.body, unread: true, suggestion: sug }])
+          });
+        }
+      }));
+
+      const open = this.openSuggestion(trip);
+      v.hasSuggestion = !!open;
+      if (open) {
+        const sg = open.s;
+        const dismiss = () => this.setTrip({ dismissed: (trip.dismissed || []).concat([open.msg.id]) });
+        const applyDate = d => {
+          this.setTrip({ date: d, dates: [d], tasks: this.regenerateTasks(trip, d), dismissed: (trip.dismissed || []).concat([open.msg.id]) });
+          this.setState(p => ({ compose: { ...p.compose, [composeKey]: 'Hi,\n\n' + fmtDate(d) + ' works for us — please go ahead and hold it. Same group: ' + trip.children + ' children with ' + trip.adults + ' adults.\n\nThank you,\nDana' } }));
+        };
+        const base = { evidence: '“' + sg.evidence + '”', dismissLabel: 'Not quite', dismiss };
+        if (sg.intent === 'confirmed') {
+          v.suggestion = { ...base,
+            text: 'Looks like the venue confirmed ' + fmtDate(sg.dates[0]) + (sg.time ? ' at ' + sg.time : '') + '.',
+            buttons: [{ label: 'Mark confirmed', primary: true, run: () => this.setTrip({ status: 'confirmed', date: sg.dates[0], dates: [sg.dates[0]], time: sg.time || trip.time, tasks: this.regenerateTasks(trip, sg.dates[0]), dismissed: (trip.dismissed || []).concat([open.msg.id]) }) }],
+            hasLink: false };
+        } else if (sg.intent === 'proposed') {
+          v.suggestion = { ...base,
+            text: 'The venue suggested ' + sg.dates.map(d => fmtDate(d)).join(' or ') + ' instead.',
+            dismissLabel: 'Neither',
+            buttons: sg.dates.map(d => ({ label: 'Move to ' + fmtDate(d), primary: true, run: () => applyDate(d) })),
+            hasLink: false };
+        } else if (sg.intent === 'declined') {
+          v.suggestion = { ...base,
+            text: 'It sounds like the venue cannot take this booking.',
+            buttons: [{ label: 'Mark cancelled', primary: true, run: () => this.setTrip({ status: 'cancelled', dismissed: (trip.dismissed || []).concat([open.msg.id]) }) }],
+            hasLink: true, linkLabel: 'Find a similar program',
+            link: () => this.setState({ view: 'catalog', cats: [tp.cat], query: '' }) };
+        } else {
+          v.suggestion = { ...base,
+            text: 'The venue asked a question: ' + sg.evidence,
+            buttons: [{ label: 'Reply', primary: true, run: () => {
+              this.setState(p => ({ compose: { ...p.compose, [composeKey]: '> ' + sg.evidence + '\n\nHi,\n\n' } }));
+            } }],
+            hasLink: false };
+        }
+      }
+    }
+
+    const order = ['replied', 'confirmed', 'contacted', 'idea', 'done', 'cancelled'];
+    const labels = { replied: 'They answered', confirmed: 'Confirmed', contacted: 'Asked, waiting', idea: 'Ideas', done: 'History', cancelled: 'Cancelled' };
+    const rowFor = t => {
+      const tp = PROGRAMS.find(p => p.id === t.progId);
+      const d = new Date(t.date + 'T12:00:00');
+      const next = t.tasks.filter(x => !x.done).sort((a, b) => a.date < b.date ? -1 : 1)[0];
+      const nd = next ? Math.round((new Date(next.date + 'T12:00:00') - TODAY) / 86400000) : 0;
+      const wait = this.waitingOn(t);
+      const last = this.lastMessage(t);
+      return {
+        day: String(d.getDate()), month: MONTH_SHORT[d.getMonth()],
+        name: tp.name, venue: tp.venue, profileName: this.tripProfiles(t).map(p => p.name).join(' + '),
+        status: STATUS_NAME[t.status],
+        waitLabel: wait.label, waitOnMe: wait.who === 'educator', waitOnVenue: wait.who === 'venue',
+        notSent: wait.who === 'nobody', closed: wait.who === 'closed',
+        hasLast: !!last,
+        lastLine: last ? (last.party === 'venue' ? tp.venue + ': ' : 'You: ') + truncate(last.body.replace(/\s+/g, ' '), 70) : '',
+        nextTask: t.status === 'cancelled' ? '' : (next ? (nd < 0 ? 'Overdue: ' + next.title : 'Next: ' + next.title + ', in ' + nd + ' days') : 'Nothing left to do'),
+        hasNextTask: t.status !== 'cancelled',
+        unread: !!(last && last.party === 'venue' && last.unread),
+        open: () => this.openTrip(t.id, last && last.party === 'venue' && last.unread ? last.id : null)
+      };
+    };
+    const urgency = (a, b) => {
+      const wa = this.waitingOn(a), wb = this.waitingOn(b);
+      const rank = w => w.who === 'educator' ? 0 : (w.who === 'venue' ? 1 : 2);
+      if (rank(wa) !== rank(wb)) return rank(wa) - rank(wb);
+      if (rank(wa) === 1) return wb.days - wa.days;
+      return a.date < b.date ? -1 : 1;
+    };
+    const visibleTrips = s.needsReplyOnly ? s.trips.filter(t => this.waitingOn(t).who === 'educator') : s.trips;
+    v.tripGroups = order.filter(st => visibleTrips.some(t => t.status === st)).map(st => ({
+      label: labels[st],
+      rows: visibleTrips.filter(t => t.status === st).sort(urgency).map(rowFor)
+    }));
+    v.needsReplyOnly = s.needsReplyOnly;
+    v.needsReplyCount = s.trips.filter(t => this.waitingOn(t).who === 'educator').length;
+    v.toggleNeedsReply = () => this.setState(p => ({ needsReplyOnly: !p.needsReplyOnly }));
+    v.noTrips = visibleTrips.length === 0;
+    v.noTripsAtAll = s.trips.length === 0;
+
+    const allMsgs = [];
+    s.trips.forEach(t => {
+      const tp = PROGRAMS.find(p => p.id === t.progId);
+      (t.messages || []).filter(m => m.party !== 'system').forEach(m => allMsgs.push({ m, t, tp }));
+    });
+    allMsgs.sort((a, b) => a.m.at < b.m.at ? 1 : -1);
+
+    v.unreadCount = allMsgs.filter(x => x.m.unread).length;
+    v.hasUnread = v.unreadCount > 0;
+    v.noUnread = v.unreadCount === 0;
+    v.forwardEmail = s.forwardEmail;
+    v.forwardOff = !s.forwardEmail;
+    v.toggleForward = () => this.setState(p => ({ forwardEmail: !p.forwardEmail }));
+    v.suggestions = results.filter(r => r.green).slice(0, 3);
+
+    v.profileCards = PROFILES.map(p => ({
+      name: p.name, active: s.activeProfile === p.id, inactive: s.activeProfile !== p.id,
+      notes: p.notes,
+      fields: [
+        { label: 'Ages', value: p.ageMin + ' to ' + p.ageMax },
+        { label: 'Group size', value: String(p.size) },
+        { label: 'Required ratio', value: '1 adult : ' + p.ratio },
+        { label: 'Budget', value: money(p.budget) + ' a child' },
+        { label: 'Transport', value: p.transport === 'bus' ? 'Bus or parent drivers' : 'Walking' },
+        { label: 'Home address', value: p.address }
+      ],
+      use: () => this.setState({ activeProfile: p.id, ageMin: p.ageMin, ageMax: p.ageMax, size: p.size, budget: p.budget, transport: p.transport, planProfiles: [p.id] })
+    }));
+
+    return v;
+  }
+}
+</script>
+</body>
+</html>

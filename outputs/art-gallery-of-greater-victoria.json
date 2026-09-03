@@ -1,0 +1,377 @@
+{
+  "venue": {
+    "id": "art-gallery-greater-victoria",
+    "name": "Art Gallery of Greater Victoria",
+    "website": "https://aggv.ca/",
+    "description": "The Art Gallery of Greater Victoria is a public art gallery at 1040 Moss Street in Victoria with a collection of more than 22,000 works. For schools it runs guided exhibition tours and tour-plus-workshop programs for grades 2 to 12, led by the Gallery's education staff, as well as pre-booked self-guided school visits. Booked group tours of the current exhibitions are also offered in English, French and Japanese. General admission is $15 and always free for visitors aged 25 and under, AGGV members, Indigenous Peoples and support workers; the Gallery is closed Mondays.",
+    "category": "arts_performance",
+    "address": "1040 Moss Street, Victoria, British Columbia, V8V 4P1",
+    "lat": null,
+    "lng": null,
+    "geo_source": "geocode_pending",
+    "hosts_school_groups": true,
+    "hosts_daycare_groups": false,
+    "youngest_age_welcomed_years": null,
+    "booking_email": "jengen@aggv.ca",
+    "booking_phone": "250.384.4171",
+    "booking_url": null,
+    "booking_method": "email",
+    "has_washrooms": true,
+    "has_lunch_space": null,
+    "has_rain_backup": null,
+    "stroller_accessible": null,
+    "wheelchair_accessible": true,
+    "bus_parking": null,
+    "facility_notes": {
+      "washrooms": "Four gender-neutral single-stall washrooms, two close to the front lobby and two outside the back exhibition spaces. One washroom has a baby change table, a safety grab bar, and soap and paper towels at a lower height. The front two washrooms are available to use without paid admission.",
+      "wheelchair_accessible": "The main entrance has four steps with a handrail and is also wheelchair accessible with a ramp on the left side, with power doors at the top of the ramp. Two ramps lead to all exhibition spaces. The outdoor courtyard is not wheelchair accessible.",
+      "bus_parking": "One free accessible parking space across from the main entrance, and a loading zone with a curb cut-out in front of the main entrance. The parking lot is paved but uneven in places."
+    },
+    "nearby_park": null,
+    "restrictions": [
+      "Food, drinks, and backpacks are not allowed in the exhibitions",
+      "All bags larger than 12″ x 12″ x 9″ are prohibited in the exhibition spaces",
+      "Chaperones must accompany students",
+      "When you arrive, check in at the Front Desk, located in the lobby"
+    ],
+    "languages": [
+      "English",
+      "French",
+      "Japanese"
+    ],
+    "general_admission_child_cad": 0,
+    "general_admission_adult_cad": 15,
+    "hours_notes": "Monday: Closed. Tuesday 10AM–5PM, Wednesday 10AM–5PM, Thursday 10AM–9PM, Friday 10AM–5PM, Saturday 10AM–5PM, Sunday 12PM–5PM. Holiday hours are published separately.",
+    "seasonal_notes": null,
+    "price_year_or_season": null,
+    "checked_on": "2026-09-02",
+    "checked_by": "scraper"
+  },
+  "programs": [
+    {
+      "id": "school-tour-workshop",
+      "name": "School Tour + Workshop",
+      "description": "A two-hour guided exhibition tour plus a workshop for school groups in grades 2 to 12, led by the Gallery's education staff. Offered Tuesdays and Thursdays at 9:30am and 12:15pm. Every tour includes a Teacher Study Guide with background on the artists and exhibition plus pre- and post-tour activities. Booking is through the Gallery's online shop and requires two weeks' notice with advance payment.",
+      "what_children_do": "Move through the current exhibitions with a Gallery educator, stopping to look at and talk about works in an inquiry-based conversation, then spend the rest of the two hours in a workshop. Padded benches without arms are available for seating in the exhibition spaces.",
+      "our_note": "The $150 is a flat fee for the class, not a per-student price, and it has to be paid in full two weeks ahead — cancel inside 14 days and you lose it. Backpacks can't come into the exhibitions, but the front desk will lend lockable bins if you ask.",
+      "practical_summary": "Washrooms with a change table, free lockers and step-free ramps to every exhibition space are all on site, and the whole visit is indoors. There is nothing published about a lunch space or bus parking, so ask when you book.",
+      "comes_to_you": false,
+      "age_min_years": null,
+      "age_max_years": null,
+      "grade_min": 2,
+      "grade_max": 12,
+      "age_basis": "grades",
+      "duration_min": 120,
+      "capacity_max": 30,
+      "capacity_min": null,
+      "cost_per_child_cad": null,
+      "cost_per_group_cad": 150,
+      "cost_per_adult_cad": null,
+      "free_adults_per_children": null,
+      "is_free": false,
+      "tax_included": null,
+      "extra_fees_note": null,
+      "school_rate_only": true,
+      "deposit_required": null,
+      "payment_timing": "Advance payment in full is required to secure the booking",
+      "cancellation_note": "If you cancel within 14-days of your booked tour, your booking fee is non-refundable.",
+      "months_offered": null,
+      "days_offered": [
+        2,
+        4
+      ],
+      "time_slots": [
+        "09:30",
+        "12:15"
+      ],
+      "lead_time_days": 14,
+      "chaperone_ratio": [
+        {
+          "children_per_adult": 6,
+          "applies_to": "elementary"
+        },
+        {
+          "children_per_adult": 10,
+          "applies_to": "secondary"
+        }
+      ],
+      "adults_free": null,
+      "indoor": true,
+      "outdoor": false,
+      "format": [
+        "guided",
+        "hands_on"
+      ],
+      "sensory_friendly": null,
+      "low_noise": null,
+      "neurodiversity_friendly": null,
+      "mood_tags": [
+        "creative",
+        "learn"
+      ],
+      "curriculum_tags": null,
+      "booking_email": null,
+      "booking_url": "https://shop.aggv.ca/collections/school-programs",
+      "booking_method": "shop",
+      "source_url": "https://aggv.ca/school-programs/",
+      "evidence": "Tour + Workshop Grades: 2-12 Price: $150 Time: Offered Tuesdays and Thursdays at 9:30am and 12:15pm",
+      "checked_on": "2026-09-02",
+      "image_ids": null
+    },
+    {
+      "id": "school-tour-only",
+      "name": "School Tour Only",
+      "description": "A one-hour guided exhibition tour for school groups in grades 2 to 12, led by the Gallery's education staff, without the workshop component. Offered Tuesdays and Thursdays at 10:45am and 1:30pm. Every tour includes a Teacher Study Guide. Booking is through the Gallery's online shop and requires two weeks' notice with advance payment.",
+      "what_children_do": "Walk through the current exhibitions with a Gallery educator for an hour, stopping in front of works to look and talk about them. Padded benches without arms are available for seating in the exhibition spaces.",
+      "our_note": "One hour with no making at the end suits a class that is already comfortable looking and talking; the $150 tour-plus-workshop slot is the one to book if you want them doing something with their hands. The fee is per class and is due two weeks ahead.",
+      "practical_summary": "Indoors throughout, step-free by ramp to all exhibition spaces, with washrooms and free lockers on site. Lunch space and bus parking are not stated anywhere on the site.",
+      "comes_to_you": false,
+      "age_min_years": null,
+      "age_max_years": null,
+      "grade_min": 2,
+      "grade_max": 12,
+      "age_basis": "grades",
+      "duration_min": 60,
+      "capacity_max": 30,
+      "capacity_min": null,
+      "cost_per_child_cad": null,
+      "cost_per_group_cad": 100,
+      "cost_per_adult_cad": null,
+      "free_adults_per_children": null,
+      "is_free": false,
+      "tax_included": null,
+      "extra_fees_note": null,
+      "school_rate_only": true,
+      "deposit_required": null,
+      "payment_timing": "Advance payment in full is required to secure the booking",
+      "cancellation_note": "If you cancel within 14-days of your booked tour, your booking fee is non-refundable.",
+      "months_offered": null,
+      "days_offered": [
+        2,
+        4
+      ],
+      "time_slots": [
+        "10:45",
+        "13:30"
+      ],
+      "lead_time_days": 14,
+      "chaperone_ratio": [
+        {
+          "children_per_adult": 6,
+          "applies_to": "elementary"
+        },
+        {
+          "children_per_adult": 10,
+          "applies_to": "secondary"
+        }
+      ],
+      "adults_free": null,
+      "indoor": true,
+      "outdoor": false,
+      "format": [
+        "guided"
+      ],
+      "sensory_friendly": null,
+      "low_noise": null,
+      "neurodiversity_friendly": null,
+      "mood_tags": null,
+      "curriculum_tags": null,
+      "booking_email": null,
+      "booking_url": "https://shop.aggv.ca/collections/school-programs",
+      "booking_method": "shop",
+      "source_url": "https://aggv.ca/school-programs/",
+      "evidence": "Tour Only Grades: 2-12 Price: $100 Time: Offered Tuesdays and Thursdays at 10:45am and 1:30pm",
+      "checked_on": "2026-09-02",
+      "image_ids": null
+    },
+    {
+      "id": "self-guided-school-visit",
+      "name": "Self-Guided School Tour",
+      "description": "School groups visit the exhibitions on their own to meet their own classroom objectives. Available Wednesdays and Fridays, maximum 30 students, and must be booked in advance by emailing jengen@aggv.ca. Admission is free for youth 25 and under; each accompanying adult is charged $15, with admission free for AGGV members, See Art Pass holders, Indigenous peoples and support workers. The grade range is the Grade 2 – 12 range published at the head of the School Programs page.",
+      "what_children_do": "Walk the exhibition spaces as a class with their own teacher and chaperones, checking in first at the front desk in the lobby and leaving bags in lockable bins. Padded benches without arms are available for seating in the exhibition spaces.",
+      "our_note": "This is the cheapest way in — students are free and only the adults pay — but you set the pace and there is no educator with you. Ask the front desk for a sensory kit; the Gallery keeps backpacks with noise-reduction headphones, sunglasses, fidgets and a timer at the desk, free and first-come.",
+      "practical_summary": "Free for students, indoors, step-free by ramp, with washrooms and free lockers on site. There is no published lunch space, rain shelter is not an issue indoors, and bus parking is not stated.",
+      "comes_to_you": false,
+      "age_min_years": null,
+      "age_max_years": null,
+      "grade_min": 2,
+      "grade_max": 12,
+      "age_basis": "grades",
+      "duration_min": null,
+      "capacity_max": 30,
+      "capacity_min": null,
+      "cost_per_child_cad": 0,
+      "cost_per_group_cad": null,
+      "cost_per_adult_cad": 15,
+      "free_adults_per_children": null,
+      "is_free": null,
+      "tax_included": null,
+      "extra_fees_note": "Admission is charged for each adult. Admission is free for AGGV Members, See Art Pass holders, Indigenous peoples, and support workers.",
+      "school_rate_only": true,
+      "deposit_required": null,
+      "payment_timing": null,
+      "cancellation_note": null,
+      "months_offered": null,
+      "days_offered": [
+        3,
+        5
+      ],
+      "time_slots": null,
+      "lead_time_days": null,
+      "chaperone_ratio": [
+        {
+          "children_per_adult": 6,
+          "applies_to": "elementary"
+        },
+        {
+          "children_per_adult": 10,
+          "applies_to": "secondary"
+        }
+      ],
+      "adults_free": false,
+      "indoor": true,
+      "outdoor": false,
+      "format": [
+        "self_guided"
+      ],
+      "sensory_friendly": null,
+      "low_noise": null,
+      "neurodiversity_friendly": null,
+      "mood_tags": null,
+      "curriculum_tags": null,
+      "booking_email": "jengen@aggv.ca",
+      "booking_url": null,
+      "booking_method": "email",
+      "source_url": "https://aggv.ca/school-programs/",
+      "evidence": "Admission Youth (25 & under) Free Adult (25+) $15",
+      "checked_on": "2026-09-02",
+      "image_ids": null
+    },
+    {
+      "id": "exhibition-group-tour",
+      "name": "Exhibition Group Tour",
+      "description": "A one-hour tour of the current exhibitions led by a trained AGGV art educator, for groups of up to 20 guests. The Gallery describes it as an option for classes, independent living and community groups. The price is $85 plus GST plus group admission, and tours are available in English, French and Japanese. Booked by email; the Visit page states requests must be made a minimum of 2 weeks in advance and that group rates apply.",
+      "what_children_do": null,
+      "our_note": "The $85 is the guide's fee only — group admission is charged on top, so work out the adult heads before you compare this with the flat-fee school tour. No age range is published for these tours, so say who is coming when you email.",
+      "practical_summary": "Indoors, step-free by ramp to every exhibition space, with washrooms and free lockers on site. No age range, lunch space or bus parking is published for this tour.",
+      "comes_to_you": false,
+      "age_min_years": null,
+      "age_max_years": null,
+      "grade_min": null,
+      "grade_max": null,
+      "age_basis": null,
+      "duration_min": 60,
+      "capacity_max": 20,
+      "capacity_min": null,
+      "cost_per_child_cad": null,
+      "cost_per_group_cad": 85,
+      "cost_per_adult_cad": null,
+      "free_adults_per_children": null,
+      "is_free": false,
+      "tax_included": false,
+      "extra_fees_note": "Group Admission is charged in addition to the $85 tour fee, and GST is added.",
+      "school_rate_only": false,
+      "deposit_required": null,
+      "payment_timing": null,
+      "cancellation_note": null,
+      "months_offered": null,
+      "days_offered": null,
+      "time_slots": null,
+      "lead_time_days": 14,
+      "chaperone_ratio": null,
+      "adults_free": null,
+      "indoor": true,
+      "outdoor": false,
+      "format": [
+        "guided"
+      ],
+      "sensory_friendly": null,
+      "low_noise": null,
+      "neurodiversity_friendly": null,
+      "mood_tags": null,
+      "curriculum_tags": null,
+      "booking_email": "jengen@aggv.ca",
+      "booking_url": null,
+      "booking_method": "email",
+      "source_url": "https://aggv.ca/tours/",
+      "evidence": "The price is $85 + GST + Group Admission for up to 20 guests.",
+      "checked_on": "2026-09-02",
+      "image_ids": [
+        "hero-group-tour"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "id": "hero-group-tour",
+      "url": "https://aggv.ca/wp-content/uploads/2020/12/private-tours.jpg",
+      "role": "hero",
+      "alt": "Lead photograph published on the Art Gallery of Greater Victoria's group tours page.",
+      "alt_source": "generated",
+      "caption": null,
+      "found_on_url": "https://aggv.ca/tours/",
+      "width": 1195,
+      "height": 604,
+      "rights_note": null,
+      "usage": "unverified"
+    }
+  ],
+  "gaps": [
+    "no indoor lunch space or eating area for groups is mentioned anywhere on the site",
+    "bus or coach parking is not stated; the accessibility page describes one accessible car space and a loading zone only",
+    "no age range is published for the $85 Exhibition Group Tour",
+    "the School Programs page does not restate a grade range inside the Self-Guided section; the grades 2–12 recorded for it come from the Grade 2 – 12 heading at the top of that page",
+    "whether chaperones are included in the $150 and $100 school program fees is not stated",
+    "no stroller access information is published",
+    "no minimum group size is published for any program",
+    "hero image alt is written from page context rather than the picture: the group tours photograph carries no alt attribute and its contents could not be verified from the page text; the homepage has no og:image and its exhibition thumbnails are artwork reproductions",
+    "no image-specific photo credit or reuse statement was found on the pages opened, so rights_note is null and usage stays unverified"
+  ],
+  "conflicts": [
+    {
+      "field": "chaperone_ratio",
+      "values": [
+        "maximum capacity of 30 students with at least 3 adult chaperones",
+        "maximum capacity of 30 students with up to 6 adult chaperones"
+      ],
+      "sources": [
+        "https://aggv.ca/school-programs/",
+        "https://aggv.ca/school-program-guidelines/"
+      ],
+      "note": "The School Programs page (modified 2026-03-05) sets a minimum of 3 chaperones; the School Program Guidelines page (modified 2025-07-17) caps chaperones at 6. The 1 adult per 6 elementary students and 1 per 10 secondary students ratio recorded in chaperone_ratio is stated identically on both pages and is not in dispute."
+    },
+    {
+      "field": "general_admission_adult_cad",
+      "values": [
+        "Admission is free on the first Saturday of the month from 10 am – 5 pm",
+        "we offer Admission by Donation day the first Saturday of every month"
+      ],
+      "sources": [
+        "https://aggv.ca/about/visit/",
+        "https://aggv.ca/about/visit/"
+      ],
+      "note": "Two sections of the Visit page describe the first Saturday of the month differently: the Admission section says free, the What's on section says admission by donation. Neither section carries its own date, so the recorded $15 standard admission is left as the base case."
+    }
+  ],
+  "pages_opened": [
+    "https://aggv.ca/",
+    "https://aggv.ca/school-programs/",
+    "https://aggv.ca/school-program-guidelines/",
+    "https://aggv.ca/about/visit/",
+    "https://aggv.ca/accessibility/",
+    "https://aggv.ca/tours/",
+    "https://aggv.ca/family-sundays/",
+    "https://aggv.ca/media-room/",
+    "https://aggv.ca/about/welcome/"
+  ],
+  "pages_useful": [
+    "https://aggv.ca/",
+    "https://aggv.ca/school-programs/",
+    "https://aggv.ca/school-program-guidelines/",
+    "https://aggv.ca/about/visit/",
+    "https://aggv.ca/accessibility/",
+    "https://aggv.ca/tours/"
+  ],
+  "extracted_at": "2026-09-02T19:36:23-07:00",
+  "extractor_version": "v2.0"
+}

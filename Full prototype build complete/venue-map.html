@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="referrer" content="unsafe-url">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Map</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha384-sHL9NAb7lN7rfvG5lfHpm643Xkcjzp4jFvuavGOndn6pjVqS6ny56CAt3nsEVT4H" crossorigin="anonymous">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha384-cxOPjt7s7Iz04uaHJceBmS+qpjv2JkIHNVcuOrM+YHwZOmJGBXI00mdUXEq65HTH" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; height: 100%; background: #F6F0E6; font-family: 'Nunito Sans', system-ui, sans-serif; }
+  #map { position: absolute; inset: 0; }
+  .leaflet-container { background: #EFE7D8; font-family: 'Nunito Sans', system-ui, sans-serif; }
+  .pin { display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 999px; font-weight: 700; font-size: 13px; color: #FFF8EE; border: 2px solid #FFFCF6; box-shadow: 0 2px 6px rgba(43,38,32,0.3); }
+  .pin-home { background: #2B2620; }
+  .pin-venue { background: #B14A22; }
+  .leaflet-popup-content { font-size: 14px; line-height: 1.4; margin: 10px 12px; }
+  .leaflet-popup-content b { font-size: 15px; }
+  .leaflet-popup-content-wrapper { border-radius: 12px; }
+</style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+  const q = new URLSearchParams(location.search);
+  const map = L.map('map', { scrollWheelZoom: false, zoomControl: true });
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors', maxZoom: 19
+  }).addTo(map);
+
+  const icon = (cls, glyph) => L.divIcon({
+    html: '<div class="pin ' + cls + '">' + glyph + '</div>',
+    className: '', iconSize: [30, 30], iconAnchor: [15, 15], popupAnchor: [0, -16]
+  });
+
+  const pts = [];
+  const home = (q.get('h') || '').split(',').map(Number);
+  if (home.length === 2 && !isNaN(home[0])) {
+    L.marker(home, { icon: icon('pin-home', '◉') }).addTo(map)
+      .bindPopup('<b>You start here</b><br>' + (q.get('hl') || ''));
+    pts.push(home);
+  }
+
+  const pins = (q.getAll('p') || []);
+  pins.forEach((raw, i) => {
+    const parts = raw.split('|');
+    const ll = parts[0].split(',').map(Number);
+    if (isNaN(ll[0])) return;
+    L.marker(ll, { icon: icon('pin-venue', '★') }).addTo(map)
+      .bindPopup('<b>' + (parts[1] || '') + '</b>' + (parts[2] ? '<br>' + parts[2] : ''));
+    pts.push(ll);
+    if (pins.length === 1 && pts.length === 2) {
+      L.polyline([home, ll], { color: '#B14A22', weight: 2, dashArray: '6 6', opacity: 0.8 }).addTo(map);
+    }
+  });
+
+  if (pts.length > 1) map.fitBounds(pts, { padding: [46, 46], maxZoom: 15 });
+  else if (pts.length === 1) map.setView(pts[0], 14);
+  else map.setView([48.4284, -123.3656], 12);
+</script>
+</body>
+</html>

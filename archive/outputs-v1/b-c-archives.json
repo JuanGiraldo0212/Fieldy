@@ -1,0 +1,61 @@
+{
+  "venue": {
+    "name": "BC Archives",
+    "website": "https://bcarchives.ca/",
+    "description": "The BC Archives at 675 Belleville Street in Victoria is the provincial archives operated with the Royal BC Museum, preserving government records, private records, court records, photographs, paintings and a library collection for public research. Access is through a reference room where all researchers must register, must be at least 16 years old and must present photo identification, so it is not set up as a destination for daycare or elementary school groups.",
+    "category": "museums_history",
+    "hosts_school_groups": false,
+    "youngest_age_welcomed_years": 16,
+    "booking_email": null,
+    "booking_phone": "250-387-1952",
+    "booking_url": null,
+    "booking_method": null,
+    "has_washrooms": null,
+    "has_lunch_space": null,
+    "has_rain_backup": null,
+    "stroller_accessible": null,
+    "wheelchair_accessible": null,
+    "bus_parking": null,
+    "general_admission_child_cad": null,
+    "general_admission_adult_cad": null,
+    "hours_notes": "Reference room hours are Mon-Fri, 10:00 am-6:00 pm and Saturday 10:00 am-4:00 pm. Requests for retrieval of books, manuscripts, government records, sound recordings and moving images are accepted from 10:00 am to 3:30 pm.",
+    "seasonal_notes": null,
+    "price_year_or_season": null
+  },
+  "programs": [],
+  "images": [
+    {
+      "url": "https://bcarchives.ca/wp-content/uploads/sites/2/2025/07/2025sl0527005-e1766000774769.jpeg",
+      "role": "hero",
+      "alt": "Front of the BC Archives building.",
+      "caption": null,
+      "found_on_url": "https://bcarchives.ca/plan-your-visit/",
+      "program_name": null,
+      "width": null,
+      "height": null,
+      "rights_note": null
+    }
+  ],
+  "pages_opened": [
+    "https://royalbcmuseum.bc.ca/visit/bc-archives",
+    "https://www.royalbcmuseum.bc.ca/bcarchives/visit/plan-visit",
+    "https://bcarchives.ca/plan-your-visit/",
+    "https://bcarchives.ca/access-and-outreach/",
+    "https://bcarchives.ca/contact/"
+  ],
+  "pages_useful": [
+    "https://bcarchives.ca/plan-your-visit/",
+    "https://bcarchives.ca/access-and-outreach/",
+    "https://bcarchives.ca/contact/"
+  ],
+  "gaps": [
+    "hosts_school_groups is set to false because the Plan Your Visit page states 'To register, persons must be at least 16 years old and must present photo identification at the time of registration' and 'Children under the age of 16 must be accompanied by a registered parent or guardian who will be responsible for the child during the entire visit.' No school, class or youth group offering is described anywhere on the site.",
+    "The Access & Outreach page does say 'Staff provide tours of our facility and develop workshops to teach people about our collections, how to use the BC Archives, and a variety of research topics,' but no age range, price, duration, capacity, booking process or schedule is published for those tours or workshops, so no program record could be created. A group leader would have to phone 250-387-1952 to ask whether a facility tour can be booked and for what ages.",
+    "The BC Archives email address is hidden behind Cloudflare email protection and could not be read, so booking_email is left null. The contact page states 'All requests must be submitted by email or by mail'.",
+    "The listed directory website www.royalbcmuseum.bc.ca now redirects BC Archives pages to a separate domain, bcarchives.ca. The URL https://royalbcmuseum.bc.ca/visit/bc-archives returned an empty page on fetch.",
+    "No admission price is stated for the BC Archives reference room.",
+    "Washrooms, lunch space, stroller access, wheelchair access and bus parking are not addressed anywhere on bcarchives.ca. The site does state that eating, chewing gum and drinking are prohibited in the Reference Room, and that coats, briefcases and bags must be left in the lobby, where free lockers and a coat rack are provided.",
+    "No lead time is stated for a visit itself, though the site advises contacting the Archives well in advance because offsite records take two to five days to retrieve and access to restricted records can take several weeks.",
+    "Images: the hero is the banner photo at the top of the Plan Your Visit page, which is the same photo the page declares as its Open Graph image in .webp form. No photo credit, copyright line or image terms of use statement is shown on the page; the footer links to a Terms of Use page, which was not opened for this extraction, so rights_note is null."
+  ]
+}

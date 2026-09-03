@@ -1,0 +1,91 @@
+{
+  "venue": {
+    "name": "Craigflower Manor and School House - National Historic Sites of Canada",
+    "website": "https://victoriahighlandgames.com/craigflower-manor-museum/",
+    "description": "Craigflower Manor is a pre-confederation farmhouse built for the McKenzie family in 1853-56 by the Puget's Sound Agricultural Company, a subsidiary of the Hudson's Bay Company, and is now a historic house museum at 110 Island Highway, View Royal, run by the Victoria Highland Games Association. The separate Craigflower Schoolhouse at 2765 Admirals Road, built 1854-1855, is the oldest surviving school building in Western Canada and has served as a museum since 1931.",
+    "category": "museums_history",
+    "hosts_school_groups": null,
+    "youngest_age_welcomed_years": null,
+    "booking_email": null,
+    "booking_phone": null,
+    "booking_url": null,
+    "booking_method": "email",
+    "has_washrooms": null,
+    "has_lunch_space": null,
+    "has_rain_backup": null,
+    "stroller_accessible": null,
+    "wheelchair_accessible": null,
+    "bus_parking": null,
+    "general_admission_child_cad": null,
+    "general_admission_adult_cad": null,
+    "hours_notes": "Manor tours are by reservation only. The published schedule lists tours at 12 pm, 1 pm and 2 pm on Saturday May 31, Saturday June 7, Saturday June 14 and Saturday June 21.",
+    "seasonal_notes": "The tour schedule page is headed 'Tour Dates and Times May/June 2025' and only lists May and June Saturdays; no later season has been posted.",
+    "price_year_or_season": "May/June 2025 (the only dated schedule published)"
+  },
+  "programs": [
+    {
+      "name": "Craigflower Manor guided tour",
+      "description": "Guided 45-minute tour of the restored 1850s-60s McKenzie family farmhouse, furnished as Mrs. McKenzie might have liked it in the 1860s and still containing a number of original McKenzie items. Admission is by donation. Booking is by email reservation stating your name, desired time and how many will be attending. The published dates are Saturdays in May and June 2025 at 12 pm, 1 pm and 2 pm.",
+      "comes_to_you": false,
+      "age_min_years": null,
+      "age_max_years": null,
+      "grade_min": null,
+      "grade_max": null,
+      "duration_min": 45,
+      "capacity_max": null,
+      "cost_per_child_cad": null,
+      "cost_per_group_cad": null,
+      "cost_per_adult_cad": null,
+      "free_adults_per_children": null,
+      "is_free": null,
+      "months_offered": [5, 6],
+      "days_offered": [6],
+      "lead_time_days": null,
+      "indoor": true,
+      "outdoor": false,
+      "curriculum_tags": null,
+      "source_url": "https://victoriahighlandgames.com/craigflower-manor-museum/",
+      "evidence": "Tours are 45 mins",
+      "image_url": null
+    }
+  ],
+  "images": [
+    {
+      "url": "https://victoriahighlandgames.com/wp-content/uploads/Craigflower_Manor_House_Web.jpg",
+      "role": "hero",
+      "alt": null,
+      "caption": null,
+      "found_on_url": "https://victoriahighlandgames.com/craigflower-manor-museum/",
+      "program_name": null,
+      "width": 800,
+      "height": 525,
+      "rights_note": null
+    }
+  ],
+  "pages_opened": [
+    "https://www.pc.gc.ca/apps/dfhd/page_nhs_eng.aspx",
+    "https://www.pc.gc.ca/apps/dfhd/page_nhs_eng.aspx?id=95",
+    "https://hallmarkheritagesociety.ca/",
+    "https://hallmarkheritagesociety.ca/about/craigflower-schoolhouse/",
+    "https://hallmarksociety.ca/",
+    "https://victoriahighlandgames.com/",
+    "https://victoriahighlandgames.com/craigflower-manor-museum/",
+    "https://victoriahighlandgames.com/craigflower-manor/"
+  ],
+  "pages_useful": [
+    "https://victoriahighlandgames.com/craigflower-manor-museum/",
+    "https://www.pc.gc.ca/apps/dfhd/page_nhs_eng.aspx?id=95"
+  ],
+  "gaps": [
+    "The website listed in the directory (www.pc.gc.ca/apps/dfhd/page_nhs_) is Parks Canada's Directory of Federal Heritage Designations, not a venue site; it carries only heritage designation text and no visitor, tour, price or booking information.",
+    "There is no single site covering both the Manor and the Schoolhouse. The Manor is presented on the Victoria Highland Games Association site; the Schoolhouse is listed under the Hallmark Heritage Society, whose Craigflower Schoolhouse page contains only historical articles and several literal 'CONTENT' placeholders, with no hours, tours, prices or booking information at all.",
+    "hallmarksociety.ca (a similar domain) is now an unrelated commercial blog, not the heritage society.",
+    "Nothing on any of these pages mentions school groups, student programs, youngest age welcomed, group rates or capacity, so it is unknown whether the sites host children's groups.",
+    "The reservation email address is hidden by Cloudflare email protection and could not be read; no booking phone number is given for the Manor.",
+    "The only published Manor tour schedule is dated May/June 2025 and lists four Saturdays; no current or upcoming season is posted, so availability in the 2026-27 school year is unknown.",
+    "'Admission by donation' is stated, but no suggested amount and no group or per-student rate.",
+    "No washroom, lunch space, rain backup, wheelchair or stroller accessibility, or bus parking information for either site.",
+    "https://victoriahighlandgames.com/craigflower-manor/ returned an empty page.",
+    "The operator page carries only one photograph of the Manor (the exterior shot used as the hero), and in the fetched HTML the in-page copy of it is served through a third-party ShortPixel optimisation proxy (sp-ao.shortpixel.ai), so the on-domain original from the page's Open Graph tag was recorded instead. There is no interior, tour or group photo, so the guided tour program has no image of its own, and there is no photo of the Schoolhouse on any page run by the site's operator."
+  ]
+}

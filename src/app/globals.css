@@ -1,0 +1,199 @@
+@import 'tailwindcss';
+
+/*
+  Fieldy design tokens.
+
+  Extracted from the design — `Full prototype build complete/Field Trip Planner
+  Bright.dc.html` — and catalogued in docs/design-map.md section 3. The prototype
+  styles everything with inline hardcoded hex; these are those values, deduped.
+
+  No component may use a raw colour, radius or type size. If a value is not a
+  token here, add the token first.
+
+  Tailwind v4 is CSS-first: this @theme block IS the config. There is no
+  tailwind.config.ts. Every token below is usable as a utility, e.g.
+  --color-brand becomes bg-brand / text-brand / border-brand.
+*/
+
+@theme {
+  /* ── Surfaces ─────────────────────────────────────────────────────────── */
+  --color-bg: #f2f6fb;
+  --color-surface: #ffffff;
+  --color-surface-2: #f7fafe;
+  --color-surface-3: #f5f9ff;
+
+  /* ── Borders ──────────────────────────────────────────────────────────── */
+  --color-border: #dbe3ec;
+  --color-border-strong: #c9d5e2;
+  --color-border-soft: #e6edf5;
+
+  /* ── Text ─────────────────────────────────────────────────────────────── */
+  --color-text: #16202b;
+  --color-text-strong: #33414f;
+  --color-text-muted: #546475;
+  --color-text-faint: #5f7085;
+
+  /* ── Brand ────────────────────────────────────────────────────────────── */
+  --color-brand: #1668d6;
+  --color-brand-hover: #0f4e9e;
+  --color-brand-solid: #1d4e9b;
+  --color-brand-solid-hover: #16407f;
+  --color-brand-tint: #e7f0fd;
+  --color-brand-tint-2: #e2edfc;
+
+  /* ── Status ───────────────────────────────────────────────────────────── */
+  /* Green is "Fits your group" and confirmed. Amber is "One thing to check"
+     and the school-rate flag. There is no red level — see plan section 5.1. */
+  --color-success: #146c47;
+  --color-success-bright: #1e8a4e;
+  --color-success-tint: #e3f5ea;
+  --color-warn: #85610f;
+  --color-warn-tint: #fff3d6;
+  --color-warn-border: #f0dfa6;
+  --color-danger: #d0342b;
+  --color-danger-strong: #ae271f;
+
+  /* ── Mood chip accents (catalog) ──────────────────────────────────────── */
+  --color-mood-fun: #fdedf3;
+  --color-mood-fun-ink: #d4478b;
+  --color-mood-explore: #fdeee1;
+  --color-mood-explore-ink: #dd7326;
+  --color-mood-active: #e7f6ec;
+  --color-mood-active-ink: #1e8a4e;
+  --color-mood-creative: #f3edfd;
+  --color-mood-creative-ink: #7a4fd1;
+  --color-mood-learn: #e7f0fd;
+  --color-mood-learn-ink: #1668d6;
+  --color-mood-surprise: #fdf2e0;
+  --color-mood-surprise-ink: #d0951b;
+
+  /* ── Room avatar tints ────────────────────────────────────────────────── */
+  --color-room-baby: #eef0fe;
+  --color-room-baby-ink: #4a55c7;
+  --color-room-backpack: #e7f5ec;
+  --color-room-backpack-ink: #22794f;
+  --color-room-cap: #fff3d6;
+  --color-room-cap-ink: #8a6410;
+  --color-room-users: #e7f0fd;
+  --color-room-users-ink: #1668d6;
+
+  /* ── Map ──────────────────────────────────────────────────────────────── */
+  --color-map-pin-home: #16202b;
+  --color-map-pin-venue: #1668d6;
+  --color-map-canvas: #e6edf5;
+
+  /* ── Type ─────────────────────────────────────────────────────────────── */
+  --font-display: var(--font-bricolage), sans-serif;
+  --font-sans: var(--font-nunito), system-ui, sans-serif;
+
+  --text-display-lg: 2.125rem; /* 34px */
+  --text-display-lg--line-height: 1.12;
+  --text-display-lg--letter-spacing: -0.025em;
+  --text-display-md: 1.75rem; /* 28px */
+  --text-display-md--line-height: 1.15;
+  --text-display-md--letter-spacing: -0.02em;
+  --text-display-sm: 1.375rem; /* 22px */
+  --text-display-sm--line-height: 1.3;
+  --text-display-sm--letter-spacing: -0.015em;
+  --text-brand: 1.3125rem; /* 21px */
+  --text-brand--letter-spacing: -0.02em;
+  --text-body-lg: 1.0625rem; /* 17px */
+  --text-body-lg--line-height: 1.5;
+  --text-body: 1rem; /* 16px */
+  --text-body--line-height: 1.5;
+  --text-body-sm: 0.9375rem; /* 15px */
+  --text-body-sm--line-height: 1.45;
+  --text-meta: 0.875rem; /* 14px */
+  --text-meta--line-height: 1.4;
+  --text-meta-sm: 0.8125rem; /* 13px */
+  --text-label: 0.75rem; /* 12px */
+  --text-label--letter-spacing: 0.05em;
+
+  /* ── Radius ───────────────────────────────────────────────────────────── */
+  --radius-check: 6px;
+  --radius-menu: 10px;
+  --radius-control: 12px;
+  --radius-card: 14px;
+  --radius-mood: 16px;
+  --radius-panel: 20px;
+  --radius-pill: 999px;
+
+  /* ── Shadow ───────────────────────────────────────────────────────────── */
+  --shadow-card: 0 1px 2px rgb(22 32 43 / 0.04);
+  --shadow-popover: 0 12px 28px rgb(22 32 43 / 0.14);
+  --shadow-modal: 0 24px 60px rgb(22 32 43 / 0.22);
+  --shadow-float: 0 2px 6px rgb(22 32 43 / 0.18);
+
+  /* ── Layout ───────────────────────────────────────────────────────────── */
+  --container-page: 1080px;
+  --container-content: 900px;
+  --container-measure: 640px;
+
+  /* ── Control heights ──────────────────────────────────────────────────── */
+  --spacing-control-lg: 52px; /* search field, Search button */
+  --spacing-control: 46px; /* filter controls */
+  --spacing-select: 44px;
+  --spacing-avatar: 38px;
+
+  /* ── Motion ───────────────────────────────────────────────────────────── */
+  /* The design has exactly one keyframe. Keep it that way. */
+  --animate-rise-in: rise-in 180ms ease-out;
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Selection is a ring, not a fill — see docs/design-map.md section 3.3. */
+@utility ring-selected {
+  box-shadow: inset 0 0 0 1.5px var(--color-brand);
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    color: var(--color-brand);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  a:hover {
+    color: var(--color-brand-hover);
+  }
+
+  button {
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  input,
+  textarea,
+  select {
+    font: inherit;
+    color: inherit;
+  }
+
+  ::placeholder {
+    color: var(--color-text-faint);
+  }
+}

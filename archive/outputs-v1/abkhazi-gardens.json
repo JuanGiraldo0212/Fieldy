@@ -1,0 +1,65 @@
+{
+  "venue": {
+    "name": "Abkhazi Garden",
+    "website": "https://conservancy.bc.ca/featured-projects/abkhazi-garden/",
+    "description": "Abkhazi Garden is a one-acre heritage home and garden at 1964 Fairfield Road in Victoria, created by Prince and Princess Abkhazi beginning in 1946 and purchased by The Land Conservancy of B.C. in 2000. It is open to the public year-round with admission by suggested donation, and a separately operated Teahouse business serves afternoon tea in the heritage house.",
+    "category": "nature_outdoors",
+    "hosts_school_groups": null,
+    "youngest_age_welcomed_years": null,
+    "booking_email": null,
+    "booking_phone": null,
+    "booking_url": null,
+    "booking_method": null,
+    "has_washrooms": null,
+    "has_lunch_space": null,
+    "has_rain_backup": null,
+    "stroller_accessible": null,
+    "wheelchair_accessible": null,
+    "bus_parking": null,
+    "general_admission_child_cad": null,
+    "general_admission_adult_cad": 10.0,
+    "hours_notes": "Summer Hours (April 1 - September 30): open 7 days a week from 11am to 5pm with the last entrance at 4pm. Winter Hours (October 1 - March 31): open Wednesday through Sunday from 11am to 5pm, last entrance 4pm. Closed Christmas Day (December 25) and New Years Day (January 1).",
+    "seasonal_notes": "Plant sales open 7 days a week from 11am to 4pm in summer. Open on Good Friday, Easter Monday, Victoria Day, Canada Day, B.C. Day, Labour Day, National Truth & Reconciliation Day, Thanksgiving Monday, Remembrance Day, Christmas Eve and Boxing Day. Dogs allowed on leash.",
+    "price_year_or_season": null
+  },
+  "programs": [],
+  "images": [
+    {
+      "url": "https://i0.wp.com/conservancy.bc.ca/wp-content/uploads/revslider/abkhazi-garden/Dennis-Robinson-Abkhazi-Garden-summerhouse-1240x868.jpg?resize=1160%2C812",
+      "role": "hero",
+      "alt": "Dennis-Robinson-Abkhazi-Garden-summerhouse-1240x868.jpg",
+      "caption": null,
+      "found_on_url": "https://conservancy.bc.ca/featured-projects/abkhazi-garden/",
+      "program_name": null,
+      "width": null,
+      "height": null,
+      "rights_note": "Copyright © 2016 TLC The Land Conservancy of British Columbia | All Rights Reserved"
+    }
+  ],
+  "pages_opened": [
+    "https://www.conservancy.bc.ca/",
+    "https://conservancy.bc.ca/featured-projects/abkhazi-garden/",
+    "https://conservancy.bc.ca/featured-projects/abkhazi-garden/hours-directions/",
+    "https://conservancy.bc.ca/featured-projects/abkhazi-garden/a-tour-of-the-garden/",
+    "https://conservancy.bc.ca/get-involved/education-hub/",
+    "https://conservancy.bc.ca/contact/"
+  ],
+  "pages_useful": [
+    "https://conservancy.bc.ca/featured-projects/abkhazi-garden/",
+    "https://conservancy.bc.ca/featured-projects/abkhazi-garden/hours-directions/",
+    "https://conservancy.bc.ca/contact/"
+  ],
+  "gaps": [
+    "The site does not state anywhere that school, daycare or children's groups are hosted, so hosts_school_groups is left null; no school program, guided group tour or group booking process is described on conservancy.bc.ca.",
+    "No group rate, per-child price or child admission price is stated. The only price found is 'Admission is by a suggested donation of $10 per person' on the Hours & Directions page, with no child or group exception and no year or season attached.",
+    "No booking email, booking phone or booking form for a group visit is given. The Abkhazi Garden Site Manager is listed only with volunteer@conservancy.bc.ca (a volunteer-coordination address), and the Teahouse phone 778-265-6466 belongs to a separate business.",
+    "Washrooms are never mentioned on the site.",
+    "No lunch space, picnic area or eating-your-own-lunch policy is mentioned; the only food option described is the independently run Teahouse.",
+    "No rain backup or indoor space for a group is mentioned.",
+    "Stroller access is not mentioned. Wheelchair access is only partly addressed: the site says the Teahouse is wheelchair accessible but that many garden pathways are gravel or have steps that may be physically challenging, so the garden's own accessibility is left null.",
+    "Bus or coach parking is not mentioned; only street parking on Fairfield Road is described, with a request not to use spaces marked 'Residential Parking Only'.",
+    "No youngest age, capacity maximum or lead time for a group visit is stated.",
+    "TLC's Education Hub offers a free printable Abkhazi Garden Activity Book for teachers and caregivers, but it is a download, not a bookable on-site program, so it is not recorded as a program.",
+    "Images: the Abkhazi Garden page's Open Graph image is the Teahouse logo (declared 324 x 120), not a photo of the garden, so it was skipped and the hero was taken from the first slide of the page's banner slider instead. The remaining slider slides repeat with empty src placeholders in the fetched HTML, so only the first slide's URL could be captured, and no photo credit or image terms of use statement appears on the page beyond the site-wide footer copyright line."
+  ]
+}

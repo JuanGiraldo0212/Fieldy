@@ -1,0 +1,43 @@
+{
+  "venue": {
+    "name": "Bateman Foundation Gallery of Nature",
+    "website": "https://batemanfoundation.org/",
+    "description": "The listed website batemanfoundation.org no longer serves a gallery site: every URL tried, including the root and /visit, redirects to robertbateman.ca, described there as 'Robert Bateman's Official Art Legacy Website and Archive'. That site presents Robert Bateman's artwork, past exhibitions, writings, legacy projects, news and an online shop, and carries no gallery address, hours, admission prices, visitor information, school programs or booking contact of any kind.",
+    "category": "arts_performance",
+    "hosts_school_groups": false,
+    "youngest_age_welcomed_years": null,
+    "booking_email": null,
+    "booking_phone": null,
+    "booking_url": null,
+    "booking_method": null,
+    "has_washrooms": null,
+    "has_lunch_space": null,
+    "has_rain_backup": null,
+    "stroller_accessible": null,
+    "wheelchair_accessible": null,
+    "bus_parking": null,
+    "general_admission_child_cad": null,
+    "general_admission_adult_cad": null,
+    "hours_notes": null,
+    "seasonal_notes": null,
+    "price_year_or_season": null
+  },
+  "programs": [],
+  "images": [],
+  "pages_opened": [
+    "https://batemanfoundation.org/",
+    "https://batemanfoundation.org/visit",
+    "https://robertbateman.ca/"
+  ],
+  "pages_useful": [
+    "https://robertbateman.ca/"
+  ],
+  "gaps": [
+    "hosts_school_groups is set to false because the venue's own listed domain no longer publishes any visitable gallery. batemanfoundation.org appears to redirect every path to the root of robertbateman.ca, an artist legacy and art-sales site with no address, hours, admission, accessibility, tour or education content. A daycare director cannot plan a visit from anything on this domain.",
+    "The site does not itself state whether the Victoria gallery at 470 Belleville Street is closed, relocated or temporarily shut. Third-party news and listing sites report a closure, but those are not the venue's own domain and were not used as sources. This should be confirmed by phone before the row is finalised.",
+    "No booking email, phone number or form for any in-person visit is published; the only contact routes on robertbateman.ca are a newsletter signup and Shopify store policy pages.",
+    "No price, age range, capacity, lead time, washroom, lunch space or rain backup information exists anywhere on the site.",
+    "If the Foundation reopens a gallery under a new name or domain, this row will need to be re-extracted; robertbateman.ca states that more content, including exhibition details and legacy projects, is still being uploaded.",
+    "Images: the images array is empty. There is no suitable photo on any page opened. batemanfoundation.org serves no images of its own because it redirects to robertbateman.ca, whose photographs are all of Robert Bateman himself, his artwork, past exhibition venues in other provinces, and his signature wordmark - none of them shows a gallery, entrance or visitor space a group would arrive at, and the page's Open Graph image is an artwork reproduction. No hero image could be chosen and no program images exist because there are no programs."
+  ]
+}

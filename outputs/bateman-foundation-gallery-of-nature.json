@@ -1,0 +1,60 @@
+{
+  "venue": {
+    "id": "bateman-foundation-gallery-of-nature",
+    "name": "Bateman Foundation Gallery of Nature",
+    "website": "https://robertbateman.ca/",
+    "description": "The Bateman Foundation opened the Bateman Gallery of Nature in Victoria's historic Steamship Terminal building in May 2013, where it ran exhibitions, public programs and outdoor education initiatives for nearly a decade. The site states that the Bateman Gallery closed its doors on February 18, 2023 and that the Bateman Foundation suspended operations. The former www.batemanfoundation.org address now redirects to robertbateman.ca, an art legacy and archive site with no visitor information, hours, admission or group booking route. The venue no longer hosts school or daycare groups.",
+    "category": "arts_performance",
+    "address": null,
+    "lat": null,
+    "lng": null,
+    "geo_source": null,
+    "hosts_school_groups": false,
+    "hosts_daycare_groups": false,
+    "youngest_age_welcomed_years": null,
+    "booking_email": null,
+    "booking_phone": null,
+    "booking_url": null,
+    "booking_method": null,
+    "has_washrooms": null,
+    "has_lunch_space": null,
+    "has_rain_backup": null,
+    "stroller_accessible": null,
+    "wheelchair_accessible": null,
+    "bus_parking": null,
+    "facility_notes": null,
+    "nearby_park": null,
+    "restrictions": null,
+    "languages": null,
+    "general_admission_child_cad": null,
+    "general_admission_adult_cad": null,
+    "hours_notes": null,
+    "seasonal_notes": null,
+    "price_year_or_season": null,
+    "checked_on": "2026-09-02",
+    "checked_by": "scraper"
+  },
+  "programs": [],
+  "images": [],
+  "gaps": [
+    "The gallery is permanently closed. The successor site states: 'the Bateman Gallery closed its doors on February 18, 2023, and the Bateman Foundation suspended operations.' No programs are recorded.",
+    "No address is published anywhere on the successor site - the closed gallery's location is described only as 'Victoria's historic Steamship Terminal building overlooking the Inner Harbour', which is not a street address. No address published - cannot geocode, so lat, lng and geo_source are all null.",
+    "No hours, admission prices, phone number or booking route are published; robertbateman.ca is an art legacy and archive site with a shop, not a visitor site.",
+    "No image was recorded. The only og:image on the site (Index2014_02_aa7dbaca-ee0a-4aed-b99a-0e61e65960e8.jpg) is the same site-wide social card on every page rather than a photograph of the venue, and the one picture on the Bateman Foundation legacy page carried no alt text and no caption, so its contents could not be confirmed. There is therefore no hero image.",
+    "The Nature Sketch education program is described on the successor site as a past Bateman Foundation initiative with no dates, prices or booking route, so it has not been recorded as a bookable program."
+  ],
+  "conflicts": [],
+  "pages_opened": [
+    "https://www.batemanfoundation.org/",
+    "https://robertbateman.ca/",
+    "https://robertbateman.ca/pages/legacy",
+    "https://robertbateman.ca/pages/initiative/the-bateman-foundation",
+    "https://robertbateman.ca/policies/contact-information"
+  ],
+  "pages_useful": [
+    "https://robertbateman.ca/",
+    "https://robertbateman.ca/pages/initiative/the-bateman-foundation"
+  ],
+  "extracted_at": "2026-09-02T20:40:00Z",
+  "extractor_version": "v2.0"
+}

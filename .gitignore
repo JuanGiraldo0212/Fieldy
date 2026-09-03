@@ -1,0 +1,26 @@
+# dependencies
+node_modules/
+.pnpm-store/
+
+# next
+.next/
+out/
+next-env.d.ts
+
+# env — never commit
+.env
+.env.local
+.env*.local
+
+# build / test output
+coverage/
+playwright-report/
+test-results/
+*.tsbuildinfo
+
+# python catalog pipeline
+__pycache__/
+*.pyc
+
+# os
+.DS_Store

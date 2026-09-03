@@ -1,0 +1,43 @@
+{
+  "venue": {
+    "name": "Chinese Consolidated Benevolent Association Building and Chinese Public School",
+    "website": null,
+    "description": "No website owned or operated by this venue could be found, so no facts about it are recorded here. The directory entry points to www.heritagebc.ca, which is the website of Heritage BC, a province-wide non-profit heritage advocacy organization, and not a site belonging to the Chinese Consolidated Benevolent Association or the Chinese Public School.",
+    "category": "museums_history",
+    "hosts_school_groups": null,
+    "youngest_age_welcomed_years": null,
+    "booking_email": null,
+    "booking_phone": null,
+    "booking_url": null,
+    "booking_method": null,
+    "has_washrooms": null,
+    "has_lunch_space": null,
+    "has_rain_backup": null,
+    "stroller_accessible": null,
+    "wheelchair_accessible": null,
+    "bus_parking": null,
+    "general_admission_child_cad": null,
+    "general_admission_adult_cad": null,
+    "hours_notes": null,
+    "seasonal_notes": null,
+    "price_year_or_season": null
+  },
+  "programs": [],
+  "images": [],
+  "pages_opened": [
+    "https://www.heritagebc.ca/",
+    "https://heritagebc.ca/chinese-canadian-location/chinese-consolidated-benevolent-association-building/",
+    "https://heritagebc.ca/chinese-canadian-location/chinese-public-school/",
+    "http://www.victoriabbs.com/sponsors/vcps.html"
+  ],
+  "pages_useful": [],
+  "gaps": [
+    "NO VENUE-OWNED WEBSITE FOUND. The website listed in the directory, www.heritagebc.ca, is the site of Heritage BC, a provincial non-profit heritage advocacy organization. It is a third-party directory, not the venue's own domain, so per the extraction rules nothing was extracted from it.",
+    "The only Heritage BC pages about these two buildings (heritagebc.ca/chinese-canadian-location/chinese-consolidated-benevolent-association-building/ and .../chinese-public-school/) are stub entries on the Chinese Canadian Historic Places Map. They give only a street address (554-562 Fisgard Street and 636 Fisgard Street, Victoria) and a link out to the federal historicplaces.ca register. They contain no hours, admission, accessibility, contact or programming information of any kind, and they are not the venue's own domain.",
+    "Web searches for an official CCBA Victoria or Victoria Chinese Public School site returned only third-party pages: Wikipedia, historicplaces.ca, UVic's chinatown.library.uvic.ca and MemoryBC. The one page that reads as authored by the school (www.victoriabbs.com/sponsors/vcps.html) is hosted on victoriabbs.com, a third-party community portal, and its content is dated - it refers to the 2011 graduation ceremony. Nothing from it was recorded.",
+    "Because there is no venue-owned source, it could not be established whether the CCBA or the Chinese Public School hosts visiting children's groups at all. hosts_school_groups is null rather than true or false.",
+    "The Chinese Public School appears from third-party sources to be an operating after-hours Chinese-language school rather than a public visitor attraction, and the CCBA building's upper floors are association meeting rooms with retail at street level. A daycare or school wanting to visit would most likely need to phone the association directly; no phone number could be confirmed from a venue-owned source.",
+    "No images could be collected, so images is an empty array. There is no venue-owned website or CDN to take photographs from. The only pages opened belong to third parties (heritagebc.ca and victoriabbs.com), and images on those sites are not the venue's own property, so nothing from them was recorded. pages_useful is empty, so there was no venue page on which to look for a hero or program image.",
+    "Everything a daycare director needs is missing: whether visits are possible, price, hours, youngest age, capacity, lead time, washrooms, lunch space, rain backup and accessibility. Recommend a phone call to the Chinese Consolidated Benevolent Association before this venue is listed in the planner."
+  ]
+}
