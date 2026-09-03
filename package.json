@@ -2,6 +2,7 @@
   "name": "fieldy",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "packageManager": "pnpm@11.25.0",
   "scripts": {
     "dev": "next dev",
@@ -13,10 +14,11 @@
     "test:watch": "vitest",
     "e2e": "playwright test",
     "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate",
-    "db:studio": "drizzle-kit studio",
-    "import:catalog": "tsx scripts/import-catalog.ts",
-    "geocode:catalog": "tsx scripts/geocode-catalog.ts"
+    "db:migrate": "node --env-file-if-exists=.env.local node_modules/drizzle-kit/bin.cjs migrate",
+    "db:studio": "node --env-file-if-exists=.env.local node_modules/drizzle-kit/bin.cjs studio",
+    "import:catalog": "tsx --env-file-if-exists=.env.local scripts/import-catalog.ts",
+    "geocode:catalog": "tsx --env-file-if-exists=.env.local scripts/geocode-catalog.ts",
+    "db:push": "node --env-file-if-exists=.env.local node_modules/drizzle-kit/bin.cjs push"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.5",
