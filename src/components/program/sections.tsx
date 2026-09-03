@@ -135,12 +135,50 @@ export function ConflictBanner({ note }: { note: string }) {
   us a paragraph ("Four gender-neutral single-stall washrooms, two close to the
   front lobby...") while others give us two words, and forcing both into one
   narrow column either truncates the useful one or leaves the terse one mostly
-  empty. A long value takes two columns, a very long one takes the full width.
+  empty. A long value wants two columns, a very long one the full width.
+
+  But a ragged row reads as a mistake. Widths are therefore PACKED rather than
+  taken at face value: walk the cards keeping a running total, and when one
+  will not fit the space left in a row, the row's last card grows to close the
+  gap. The final row is filled the same way. Every row is flush on both edges.
 */
-function spanFor(value: string): string {
-  if (value.length > 240) return 'sm:col-span-3'
-  if (value.length > 90) return 'sm:col-span-2'
-  return ''
+const COLUMNS = 3
+
+function wantedSpan(value: string): number {
+  if (value.length > 240) return 3
+  if (value.length > 90) return 2
+  return 1
+}
+
+export function packSpans(values: string[]): number[] {
+  const spans = values.map(wantedSpan)
+  let used = 0
+
+  for (let i = 0; i < spans.length; i++) {
+    const want = Math.min(spans[i]!, COLUMNS)
+    if (used + want > COLUMNS) {
+      /* Does not fit. Close the current row by growing its last card, then
+         start a new row with this one. */
+      spans[i - 1] = spans[i - 1]! + (COLUMNS - used)
+      used = want
+    } else {
+      used += want
+    }
+    spans[i] = want
+  }
+
+  /* The last row is short unless it happens to land exactly. Give the
+     remainder to its final card so the block ends on a straight edge. */
+  if (used < COLUMNS && spans.length > 0) {
+    spans[spans.length - 1] = spans[spans.length - 1]! + (COLUMNS - used)
+  }
+  return spans
+}
+
+const SPAN_CLASS: Record<number, string> = {
+  1: '',
+  2: 'sm:col-span-2',
+  3: 'sm:col-span-3',
 }
 
 export function PracticalList({
@@ -150,14 +188,16 @@ export function PracticalList({
   facts: Fact[]
   icons: Record<string, ReactNode>
 }) {
+  const spans = packSpans(facts.map((f) => f.value))
+
   return (
     <div className="grid gap-3 sm:grid-cols-3">
-      {facts.map((f) => (
+      {facts.map((f, i) => (
         <div
           key={f.key}
           className={cx(
             'bg-surface-2 border-border-soft flex gap-3.5 rounded-card border px-4 py-3.5',
-            spanFor(f.value),
+            SPAN_CLASS[spans[i]!] ?? '',
           )}
         >
           <span className="text-brand flex-none">{icons[f.key]}</span>

@@ -49,6 +49,7 @@ import {
 import { VenueThumb } from '@/components/catalog/venue-thumb'
 import { CatalogMap } from '@/components/catalog/catalog-map'
 import { ReportForm } from '@/components/program/report-form'
+import { PhotoStrip } from '@/components/program/photo-strip'
 
 /* Until a session exists (slice 3), distance is from the centre of Victoria. */
 const VICTORIA = { lat: 48.4284, lng: -123.3656 }
@@ -284,17 +285,16 @@ export default async function OutingPage({
         title="What it actually looks like"
         aside={`Photos from ${v.name}'s website`}
       >
-        {gallery.length > 0 || hero ? (
-          <div className="grid grid-cols-3 gap-3">
-            {[hero, ...gallery].filter(Boolean).slice(0, 3).map((img) => (
-              <div
-                key={img!.id}
-                className="bg-thumb relative h-[200px] min-w-0 overflow-hidden rounded-card"
-              >
-                <VenueThumb src={img!.url} alt={img!.alt} initials={initialsOf(v.name)} />
-              </div>
-            ))}
-          </div>
+        {images.length > 0 ? (
+          <PhotoStrip
+            venueName={v.name}
+            photos={images.map((img) => ({
+              id: img.id,
+              url: img.url,
+              alt: img.alt,
+              caption: img.caption,
+            }))}
+          />
         ) : (
           <p className="text-body-sm text-text-muted">
             No photographs published on {v.name}&rsquo;s site.

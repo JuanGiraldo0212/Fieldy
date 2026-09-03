@@ -73,6 +73,24 @@ value judgement.
 Same six programs, same pink chip and tint, new label and a Blocks icon in place
 of Sparkles. The design's frame needs its label updated.
 
+### Gap — photo viewer
+
+*Slice 2. `src/components/program/photo-strip.tsx`.*
+
+The design shows three 200px thumbnails and nothing happens when you tap one.
+Three thumbnails that size do not tell a director whether a space suits her
+group, which is the whole reason the section exists, so tapping opens the
+photograph properly.
+
+Built on a native `<dialog>` with `showModal()`, which gives the focus trap,
+Escape, page inertness and the top layer for free. Arrow keys move between
+photographs and wrap. Eight of the thirty venues publish more than three
+photographs, so the strip shows three and the last tile carries a "+N more"
+badge rather than silently dropping the rest.
+
+Needs a frame. The credit line inside the viewer ("From {venue}'s website") is
+the same attribution promised in docs/decisions.md.
+
 ### Gap — the report form
 
 *Slice 2. `src/components/program/report-form.tsx`, `src/app/api/reports/route.ts`.*
