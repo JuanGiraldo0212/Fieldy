@@ -127,6 +127,16 @@ export const searchStateSchema = z.object({
   transport: z.enum(['walking', 'bus', 'parent_drivers']).default('bus'),
   budget_max: z.number().min(0).default(10),
   radius_km: z.number().min(0).default(5),
+  /*
+    Where to measure from, when it is not the active room's home base. A
+    director planning around a different starting point — the school she is
+    borrowing a bus from, a park the group is already at — should be able to
+    say so without editing her room. Carried in the URL with its coordinates so
+    a shared link measures from the same place.
+  */
+  from: z.string().default(''),
+  from_lat: z.number().nullable().default(null),
+  from_lng: z.number().nullable().default(null),
   categories: z.array(z.string()).default([]),
   moods: z.array(z.string()).default([]),
   environment: z.array(z.string()).default([]),

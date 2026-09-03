@@ -66,10 +66,24 @@ export default async function CatalogPage({
       }
     : urlState
 
+  /*
+    Where distances are measured from, most specific first: an address the
+    director picked for this search, then her active room's home base, then
+    the centre of Victoria for someone signed out.
+
+    The map reads the same value, so the dark pin is always the place the
+    numbers on the cards were measured from. Those two disagreeing would be
+    worse than either being wrong on its own.
+  */
   const origin =
-    activeRoom?.lat != null && activeRoom.lng != null
-      ? { lat: activeRoom.lat, lng: activeRoom.lng }
-      : VICTORIA
+    state.from_lat != null && state.from_lng != null
+      ? { lat: state.from_lat, lng: state.from_lng }
+      : activeRoom?.lat != null && activeRoom.lng != null
+        ? { lat: activeRoom.lat, lng: activeRoom.lng }
+        : VICTORIA
+
+  const originLabel = state.from || activeRoom?.name || 'Victoria'
+  const originAddress = state.from || activeRoom?.address || 'Victoria'
 
   const [rows, heroes] = await Promise.all([fetchCatalog(), fetchHeroImages()])
   const results = search(rows, state, origin, heroes)
@@ -153,15 +167,10 @@ export default async function CatalogPage({
 
       {mapOpen ? (
         <div className="mb-5">
-          <CatalogMap
-            home={origin}
-            homeLabel={activeRoom?.address ?? 'Victoria'}
-            pins={pins}
-          />
+          <CatalogMap home={origin} homeLabel={originAddress} pins={pins} />
           <p className="text-meta-sm text-text-faint mt-2">
-            One pin per venue in this list. The dark pin is{' '}
-            {activeRoom ? activeRoom.name : 'Victoria'}. Programs that come to
-            you have no pin.
+            One pin per venue in this list. The dark pin is {originLabel}.
+            Programs that come to you have no pin.
           </p>
         </div>
       ) : null}

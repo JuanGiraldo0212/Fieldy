@@ -35,6 +35,9 @@ export function parseSearchParams(
     transport: one('to') ?? undefined,
     budget_max: one('max') ? Number(one('max')) : undefined,
     radius_km: one('within') ? Number(one('within')) : undefined,
+    from: one('from') ?? undefined,
+    from_lat: one('flat') ? Number(one('flat')) : undefined,
+    from_lng: one('flng') ? Number(one('flng')) : undefined,
     categories: list(one('cat')),
     moods: list(one('mood')),
     environment: list(one('env')),
@@ -59,6 +62,13 @@ export function toSearchParams(state: SearchState): URLSearchParams {
   if (state.transport !== DEFAULTS.transport) put('to', state.transport)
   if (state.budget_max !== DEFAULTS.budget_max) put('max', String(state.budget_max))
   if (state.radius_km !== DEFAULTS.radius_km) put('within', String(state.radius_km))
+  /* All three or none: a label without coordinates would silently fall back to
+     the room and show the wrong place in the "Leaving from" control. */
+  if (state.from && state.from_lat != null && state.from_lng != null) {
+    put('from', state.from)
+    put('flat', String(state.from_lat))
+    put('flng', String(state.from_lng))
+  }
   if (state.categories.length) put('cat', state.categories.join(','))
   if (state.moods.length) put('mood', state.moods.join(','))
   if (state.environment.length) put('env', state.environment.join(','))

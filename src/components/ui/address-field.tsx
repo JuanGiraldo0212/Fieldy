@@ -25,12 +25,24 @@ export function AddressField({
   defaultValue = '',
   hint,
   required,
+  /* The catalog's filter bar has its own label above a joined control, and it
+     acts on a pick immediately rather than waiting for a submit. */
+  hideLabel,
+  placeholder = 'Start typing, then pick your address',
+  onPick,
+  onClear,
+  rounded = 'rounded-control',
 }: {
   name?: string
   label?: string
   defaultValue?: string
   hint?: string
   required?: boolean
+  hideLabel?: boolean
+  placeholder?: string
+  onPick?: (s: Suggestion) => void
+  onClear?: () => void
+  rounded?: string
 }) {
   const [value, setValue] = useState(defaultValue)
   const [suggestions, setSuggestions] = useState<Suggestion[]>([])
@@ -87,13 +99,16 @@ export function AddressField({
     setValue(s.label)
     setOpen(false)
     setSuggestions([])
+    onPick?.(s)
   }
 
   return (
     <div ref={boxRef} className="relative">
-      <div className="text-label text-text-muted mb-1.5 font-bold uppercase">
-        {label}
-      </div>
+      {hideLabel ? null : (
+        <div className="text-label text-text-muted mb-1.5 font-bold uppercase">
+          {label}
+        </div>
+      )}
 
       {/* Only sent when a suggestion was chosen. The server treats their
           absence as "geocode the text". */}
@@ -104,7 +119,12 @@ export function AddressField({
         </>
       ) : null}
 
-      <div className="border-border-strong bg-surface text-body-sm text-text flex h-control items-center gap-2.5 rounded-control border px-3 font-semibold">
+      <div
+        className={cx(
+          'border-border-strong bg-surface text-body-sm text-text flex h-control items-center gap-2.5 border px-3 font-semibold',
+          rounded,
+        )}
+      >
         <span className="text-brand flex">
           <MapPin size={18} />
         </span>
@@ -115,6 +135,7 @@ export function AddressField({
           onChange={(e) => {
             setValue(e.target.value)
             setPicked(null)
+            if (e.target.value.trim() === '') onClear?.()
           }}
           onFocus={() => suggestions.length > 0 && setOpen(true)}
           onKeyDown={(e) => {
@@ -139,7 +160,7 @@ export function AddressField({
           aria-controls={listId}
           aria-autocomplete="list"
           autoComplete="off"
-          placeholder="Start typing, then pick your address"
+          placeholder={placeholder}
           className="text-body-sm w-full border-0 bg-transparent font-semibold outline-none"
         />
         {picked && picked.label === value ? (

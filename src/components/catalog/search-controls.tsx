@@ -38,6 +38,7 @@ import {
 import { AGE_BANDS, RADIUS_OPTIONS, type SearchState } from '@/lib/schemas'
 import { searchHref, toggleIn } from '@/lib/catalog/url'
 import { CheckRow, Chip, Field, FieldBox, cx } from '@/components/ui'
+import { AddressField } from '@/components/ui/address-field'
 
 /*
   Every control writes to the URL and lets the server re-render. That keeps one
@@ -101,6 +102,16 @@ export function SearchControls({
   const [pending, startTransition] = useTransition()
   const [filtersOpen, setFiltersOpen] = useState(false)
   const [query, setQuery] = useState(state.query)
+  const [budget, setBudget] = useState(String(state.budget_max))
+
+  /* Typed budgets commit on blur or Enter, not on every keystroke: navigating
+     mid-number would refetch for "1" on the way to "15". */
+  const commitBudget = () => {
+    const n = Number(budget)
+    if (Number.isFinite(n) && n >= 0 && n !== state.budget_max) {
+      go({ ...state, budget_max: n })
+    }
+  }
 
   const go = (next: SearchState) => {
     startTransition(() => router.push(searchHref(next), { scroll: false }))
@@ -207,40 +218,78 @@ export function SearchControls({
           </FieldBox>
         </Field>
 
+        {/* Quick amounts, and a box for anything else. The design's dropdown
+            has "Or type a max" for the same reason: $10 and $15 cover most
+            rooms, and the one on $7.50 should not have to round. */}
         <Field label="Budget per child">
           <FieldBox>
             <span className="text-brand flex">
               <CircleDollarSign size={18} />
             </span>
-            <select
-              value={state.budget_max}
-              onChange={(e) => go({ ...state, budget_max: Number(e.target.value) })}
+            <span className="text-text-faint">$</span>
+            <input
+              type="number"
+              min={0}
+              step="0.5"
+              inputMode="decimal"
+              value={budget}
+              onChange={(e) => setBudget(e.target.value)}
+              onBlur={() => commitBudget()}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault()
+                  commitBudget()
+                }
+              }}
               aria-label="Budget per child"
-              className="text-body-sm h-select w-full cursor-pointer appearance-none border-0 bg-transparent font-semibold outline-none"
-            >
-              {BUDGET_QUICK.map((b) => (
-                <option key={b} value={b}>
-                  {b === 30 ? '30 or more' : `Up to $${b}`}
-                </option>
-              ))}
-            </select>
-            <span className="text-text-faint flex">
-              <ChevronDown size={15} />
-            </span>
+              className="text-body-sm w-full border-0 bg-transparent font-bold outline-none"
+            />
           </FieldBox>
+          <div className="mt-1.5 flex flex-wrap gap-1.5">
+            {BUDGET_QUICK.map((b) => (
+              <button
+                key={b}
+                type="button"
+                aria-pressed={state.budget_max === b}
+                onClick={() => {
+                  setBudget(String(b))
+                  go({ ...state, budget_max: b })
+                }}
+                className={cx(
+                  'text-meta-sm rounded-pill border px-2.5 py-1 font-semibold',
+                  state.budget_max === b
+                    ? 'bg-brand-tint-2 border-brand text-brand'
+                    : 'border-border-soft bg-surface text-text-muted hover:border-brand',
+                )}
+              >
+                ${b}
+              </button>
+            ))}
+          </div>
         </Field>
       </div>
 
       <div className="mt-3.5">
         <Field label="Leaving from">
-          <div className="flex">
-            <div className="border-border-strong bg-surface text-body-sm text-text-muted flex h-control min-w-0 flex-1 items-center gap-2.5 rounded-l-control border px-3 font-semibold">
-              <span className="text-brand flex">
-                <MapPin size={18} />
-              </span>
-              <span className="truncate">{originLabel}</span>
+          <div className="flex flex-col gap-2 sm:flex-row sm:gap-0">
+            <div className="min-w-0 flex-1">
+              <AddressField
+                name="from"
+                hideLabel
+                rounded="rounded-control sm:rounded-l-control sm:rounded-r-none"
+                defaultValue={state.from}
+                placeholder={originLabel}
+                onPick={(s) =>
+                  go({ ...state, from: s.label, from_lat: s.lat, from_lng: s.lng })
+                }
+                /* Emptying the box goes back to the room's own home base
+                   rather than leaving the search measured from nowhere. */
+                onClear={() =>
+                  go({ ...state, from: '', from_lat: null, from_lng: null })
+                }
+              />
             </div>
-            <div className="border-border-strong bg-surface flex h-control items-center gap-2.5 rounded-r-control border border-l-0 px-3">
+            <div className="border-border-strong bg-surface flex h-control items-center gap-2.5 rounded-control border px-3 sm:rounded-l-none sm:border-l-0">
               <span className="text-brand flex">
                 <Radar size={18} />
               </span>
@@ -258,6 +307,18 @@ export function SearchControls({
               </select>
             </div>
           </div>
+          {state.from ? (
+            <p className="text-meta text-text-faint mt-1.5">
+              Measuring from {state.from}.{' '}
+              <button
+                type="button"
+                onClick={() => go({ ...state, from: '', from_lat: null, from_lng: null })}
+                className="text-brand font-semibold underline"
+              >
+                Use {originLabel} instead
+              </button>
+            </p>
+          ) : null}
         </Field>
       </div>
 
