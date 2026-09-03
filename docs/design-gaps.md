@@ -73,6 +73,23 @@ value judgement.
 Same six programs, same pink chip and tint, new label and a Blocks icon in place
 of Sparkles. The design's frame needs its label updated.
 
+### Deviation — archived rooms are shown, and can come back
+
+*Slice 3. `src/components/rooms/rooms-screen.tsx`.*
+
+The design's room dialog has a delete flow with an armed confirm and a blocked
+state for the last room. Ours archives instead, per data-model.md's second
+defended rule, and then keeps the archived rooms visible in a section of their
+own with a way to restore them.
+
+The design hides archived rooms entirely. That leaves an old trip naming a room
+the director cannot find anywhere, which reads as data loss even though nothing
+was lost. Showing them, greyed and clearly labelled, is more honest and costs
+one small section.
+
+The last-room rule is enforced in the server action, not the dialog, so it
+holds whichever way the request arrives.
+
 ### Gap — login and first-run setup
 
 *Slice 3. `src/app/login/`, `src/app/welcome/`.*

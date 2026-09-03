@@ -23,6 +23,7 @@
   --color-surface-3: #f5f9ff;
   --color-surface-hover: #fdfeff; /* card hover */
   --color-thumb: #e7eefa; /* card thumbnail backing */
+  --color-input: #f4f7fb; /* filled form fields on the account screen */
 
   /* ── Borders ──────────────────────────────────────────────────────────── */
   --color-border: #dbe3ec;
@@ -63,6 +64,10 @@
   --color-note-border: #f0dfa6;
   --color-note-ink: #7d5f12;
   --color-note-icon: #e0a62a;
+
+  /* The relay explainer on the account screen: a standing arrangement worth
+     reading once, not a warning. */
+  --color-relay-tint: #fff9e9;
 
   --color-danger: #d0342b;
   --color-danger-strong: #ae271f;
@@ -106,6 +111,9 @@
   --text-display-md: 1.75rem; /* 28px */
   --text-display-md--line-height: 1.15;
   --text-display-md--letter-spacing: -0.02em;
+  --text-room: 1.5625rem; /* 25px, a room's name on its card */
+  --text-room--letter-spacing: -0.02em;
+  --text-stat: 1.25rem; /* 20px, a room's stat value */
   --text-display-sm: 1.375rem; /* 22px */
   --text-display-sm--line-height: 1.3;
   --text-display-sm--letter-spacing: -0.015em;
@@ -119,6 +127,7 @@
   --text-brand: 1.3125rem; /* 21px */
   --text-brand--letter-spacing: -0.02em;
   --text-fact: 1.125rem; /* 18px, the fact quad's value line */
+  --text-address: 1.0625rem; /* 17px, home base and room notes */
   --text-body-lg: 1.0625rem; /* 17px */
   --text-body-lg--line-height: 1.5;
   --text-body: 1rem; /* 16px */
@@ -160,6 +169,8 @@
   --spacing-control: 46px; /* filter controls */
   --spacing-select: 44px;
   --spacing-avatar: 38px;
+  --spacing-room-avatar: 56px;
+  --spacing-field: 48px; /* account screen inputs */
 
   /* ── Motion ───────────────────────────────────────────────────────────── */
   /* The design has exactly one keyframe. Keep it that way. */
