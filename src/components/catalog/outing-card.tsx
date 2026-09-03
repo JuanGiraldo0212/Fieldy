@@ -126,7 +126,7 @@ export function OutingCard({ result: r }: { result: SearchResult }) {
         ) : (
           <span className="bg-warn-tint-2 text-warn text-meta-sm inline-flex items-center gap-[7px] rounded-pill px-3 py-[7px] font-bold whitespace-nowrap">
             <TriangleAlert size={14} />
-            One thing to check
+            Needs confirmation
           </span>
         )}
 

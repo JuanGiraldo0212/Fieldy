@@ -148,7 +148,7 @@ export function feasibility(
      Only a published capacity that is genuinely too small. */
   if (program.capacityMax != null && program.capacityMax < group.size) {
     reasons.push(
-      `capacity is ${program.capacityMax}, your group is ${group.size} — ask about splitting`,
+      `capacity is ${program.capacityMax}, your group is ${group.size}`,
     )
   }
 
@@ -170,7 +170,7 @@ export function feasibility(
 
 /* The badge label on a catalog card. */
 export function badgeLabel(level: FeasibilityLevel): string {
-  return level === 'green' ? 'Fits your group' : 'One thing to check'
+  return level === 'green' ? 'Fits your group' : 'Needs confirmation'
 }
 
 /* The badge on the outing page, which names the room. */

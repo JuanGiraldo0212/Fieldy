@@ -145,7 +145,7 @@ export default async function OutingPage({
 
   const totalLabel =
     perChild == null
-      ? 'ask the venue'
+      ? 'Needs confirmation'
       : perChild === 0
         ? 'no cost at all'
         : costGroup != null

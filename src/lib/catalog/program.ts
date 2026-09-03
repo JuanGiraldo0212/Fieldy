@@ -2,10 +2,10 @@
   One outing, for the program detail page. Spec §5.2.
 
   The practical block is the point of this screen. outing-schema.md: "Nulls are
-  data. Never guess a value to fill a hole. `null` renders as an amber 'not
-  stated on the site' row, which is a feature — it tells the director what to
-  ask." Those amber rows become the pre-selected asks on the request (plan 5.2),
-  so an unknown here is not a dead end, it is the next step.
+  data. Never guess a value to fill a hole." An unpublished fact renders amber
+  as "Needs confirmation", which is a feature rather than an absence: those are
+  exactly the rows that become pre-selected asks on the request (plan 5.2), so
+  an unknown here is the next step rather than a dead end.
 */
 
 import { and, eq } from 'drizzle-orm'
@@ -56,7 +56,7 @@ function factOf(
   if (note) return { key, label, value: note, known: true }
   if (flag === true) return { key, label, value: yes, known: true }
   if (flag === false) return { key, label, value: no, known: true }
-  return { key, label, value: 'Not stated on the site', known: false }
+  return { key, label, value: 'Needs confirmation', known: false }
 }
 
 export function practicalFacts(v: {
@@ -83,7 +83,7 @@ export function practicalFacts(v: {
   facts.push(
     v.nearbyPark
       ? { key: 'park', label: 'Nearby park', value: v.nearbyPark, known: true }
-      : { key: 'park', label: 'Nearby park', value: 'Not stated on the site', known: false },
+      : { key: 'park', label: 'Nearby park', value: 'Needs confirmation', known: false },
   )
 
   if (v.restrictions?.length) {

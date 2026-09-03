@@ -237,7 +237,7 @@ function bigTotalCaptionFor(row: CatalogRow): string {
 
 function perChildLineFor(row: CatalogRow, size: number): string {
   const pc = costPerChild(row, size)
-  if (pc == null) return 'Ask the venue'
+  if (pc == null) return 'Needs confirmation'
   if (pc === 0) return `For ${size} children`
   return `${money(pc)} per child`
 }

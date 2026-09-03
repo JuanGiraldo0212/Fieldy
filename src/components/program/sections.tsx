@@ -128,8 +128,9 @@ export function ConflictBanner({ note }: { note: string }) {
 }
 
 /*
-  The practical block. An unknown is amber and says so plainly: it is what the
-  director will ask the venue, and it becomes a pre-selected ask on the request.
+  The practical block. An unknown reads "Needs confirmation" in amber, which is
+  the truth and also the next step: those rows become pre-selected asks on the
+  request.
 
   Cards size themselves to their content. Venues that write a proper note give
   us a paragraph ("Four gender-neutral single-stall washrooms, two close to the

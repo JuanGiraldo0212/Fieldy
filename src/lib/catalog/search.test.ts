@@ -63,14 +63,13 @@ const dec = (r: CatalogRow, s = state()) => decorate(r, s, ORIGIN, noHeroes)
 describe('effectiveAgeRange', () => {
   it('spans the union of selected bands', () => {
     expect(effectiveAgeRange([0])).toEqual({ min: 1, max: 3 })
-    // Band 0 is "1 to 3 years", band 13 is Grade 12 (17 to 18).
-    expect(effectiveAgeRange([0, 13])).toEqual({ min: 1, max: 18 })
+    // Band 0 is "1 to 3 years", band 14 is Grade 12 (17 to 18).
+    expect(effectiveAgeRange([0, 14])).toEqual({ min: 1, max: 18 })
   })
 
   it('falls back to the default band rather than an empty range', () => {
-    // The default band is "3 to 5 years", which runs to 6 so it meets Grade 1.
-    expect(effectiveAgeRange([])).toEqual({ min: 3, max: 6 })
-    expect(effectiveAgeRange([99])).toEqual({ min: 3, max: 6 })
+    expect(effectiveAgeRange([])).toEqual({ min: 3, max: 5 })
+    expect(effectiveAgeRange([99])).toEqual({ min: 3, max: 5 })
   })
 })
 
@@ -106,7 +105,7 @@ describe('decorate — labels', () => {
     const r = dec(row({ costPerChildCad: null }))
     expect(r.bigTotal).toBe('—')
     expect(r.bigTotalCaption).toBe('price not published')
-    expect(r.perChildLine).toBe('Ask the venue')
+    expect(r.perChildLine).toBe('Needs confirmation')
   })
 
   it('says Free rather than $0', () => {
@@ -370,9 +369,9 @@ describe('bandsFor', () => {
   })
 
   it('picks every band a room straddles', () => {
-    // A room of 5 to 7 year olds has children in "3 to 5" and in Grade 1.
+    // A room of 5 to 7 year olds has children in Kindergarten and Grade 1.
     // Choosing one would hide outings half the room could go on.
-    expect(bandsFor(5, 7)).toEqual([1, 2])
+    expect(bandsFor(5, 7)).toEqual([2, 3])
   })
 
   it('leaves no age between the bands', () => {
@@ -384,8 +383,8 @@ describe('bandsFor', () => {
   })
 
   it('spans everything for a wide range', () => {
-    // 1 to 12 reaches the pre-school bands and Grades 1 through 6.
-    expect(bandsFor(1, 12)).toEqual([0, 1, 2, 3, 4, 5, 6, 7])
+    // 1 to 12 reaches both pre-school bands, Kindergarten and Grades 1 to 6.
+    expect(bandsFor(1, 12)).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8])
   })
 
   it('never returns nothing', () => {
@@ -416,8 +415,9 @@ describe('preferredTransport', () => {
 
 describe('effectiveGrade', () => {
   it('is the grade when one grade is picked', () => {
-    expect(effectiveGrade([2])).toBe(1)   // band 2 is Grade 1
-    expect(effectiveGrade([13])).toBe(12) // band 13 is Grade 12
+    expect(effectiveGrade([2])).toBe(0)   // band 2 is Kindergarten, grade 0
+    expect(effectiveGrade([3])).toBe(1)   // band 3 is Grade 1
+    expect(effectiveGrade([14])).toBe(12) // band 14 is Grade 12
   })
 
   it('is null for the pre-school bands, which have no grade', () => {
@@ -428,7 +428,7 @@ describe('effectiveGrade', () => {
   it('is null when several grades are picked', () => {
     // A group spanning Grades 2 to 4 has no single grade, and testing against
     // one of them would answer a question nobody asked.
-    expect(effectiveGrade([3, 4, 5])).toBeNull()
+    expect(effectiveGrade([4, 5, 6])).toBeNull()
   })
 
   it('falls back to the default band rather than throwing', () => {
@@ -445,6 +445,6 @@ describe('bandsFor with grades in the list', () => {
 
   it('maps a school-age room onto its grade bands', () => {
     // A room of 6 to 8 year olds spans Grade 1 and Grade 2.
-    expect(bandsFor(6, 8)).toEqual([2, 3])
+    expect(bandsFor(6, 8)).toEqual([3, 4])
   })
 })

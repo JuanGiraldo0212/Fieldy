@@ -122,7 +122,7 @@ export const SUGGESTION_CONFIDENCE_FLOOR = 0.6
    server makes shared links behave unpredictably. Lives in the URL. */
 export const searchStateSchema = z.object({
   query: z.string().default(''),
-  age_bands: z.array(z.number().int().min(0).max(13)).default([1]),
+  age_bands: z.array(z.number().int().min(0).max(14)).default([1]),
   children: z.number().int().min(1).default(16),
   transport: z.enum(['walking', 'bus', 'parent_drivers']).default('bus'),
   budget_max: z.number().min(0).default(10),
@@ -161,18 +161,17 @@ export const searchStateSchema = z.object({
   They are used ONLY to filter age-published programs. Nothing here converts a
   venue's grades into ages, which stays forbidden: see feasibility.ts.
 
-  Kindergarten is not its own entry. A five-year-old sits inside "3 to 5",
-  which is where a K class looking for outings will find themselves.
+  Kindergarten is grade 0, which is what `grade_min: 0` means in the catalog.
+  It also closes what would otherwise be a gap: with the bands half-open, "3 to
+  5" ending at 5 and Grade 1 starting at 6 would leave five-year-olds belonging
+  to neither.
 */
 export const AGE_BANDS: readonly (readonly [number, number, string, number | null])[] = [
   [1, 3, '1 to 3 years', null],
-  /*
-    Runs to 6, not 5, so it meets Grade 1 rather than leaving a gap. With the
-    bands half-open, "3 to 5" ending at 5 and Grade 1 starting at 6 left
-    five-year-olds belonging to neither, and a kindergarten room would have
-    matched nothing. The label stays as a director would say it.
-  */
-  [3, 6, '3 to 5 years', null],
+  [3, 5, '3 to 5 years', null],
+  /* Grade 0 in the catalog, and the band that closes the gap between the
+     pre-school years and Grade 1. */
+  [5, 6, 'Kindergarten', 0],
   ...Array.from({ length: 12 }, (_, i) => {
     const grade = i + 1
     return [grade + 5, grade + 6, `Grade ${grade}`, grade] as const

@@ -45,7 +45,7 @@
   --color-brand-tint-2: #e2edfc;
 
   /* ── Status ───────────────────────────────────────────────────────────── */
-  /* Green is "Fits your group" and confirmed. Amber is "One thing to check"
+  /* Green is "Fits your group" and confirmed. Amber is "Needs confirmation"
      and the school-rate flag. There is no red level — see plan section 5.1. */
   --color-success: #146c47;
   --color-success-bright: #1e8a4e;

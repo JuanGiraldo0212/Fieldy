@@ -191,10 +191,10 @@ The reason strings are copy and ship verbatim:
   - `age_basis = 'grades'` and the room is under five, so there is no grade to compare → `ages are set by grade here, not years — phone to confirm they take under-fives`. A **known** mismatch, not a missing fact: the venue published a range, in units that cannot answer the question this room is asking.
   - `age_min_years` is not null and `> room.age_min` → `built for {n}+, your youngest are {n}`
   - Never convert grades to years anywhere, for this check or any other. Flag the mismatch instead of guessing.
-- capacity: `capacity_max` is not null and `< room.size` → `capacity is {n}, your group is {n} — ask about splitting`
+- capacity: `capacity_max` is not null and `< room.size` → `capacity is {n}, your group is {n}`
 - budget, on effective cost per child (`cost_per_child_cad`, or `cost_per_group_cad / size`): not null and over `budget_per_child` → `{$} a child is over your {$} budget`
 
-Badges: green renders `Fits your group` on the card and `✓ Fits {room name}` on the outing page; amber renders `One thing to check` on the card and `! {reasons}` on the outing page.
+Badges: green renders `Fits your group` on the card and `✓ Fits {room name}` on the outing page; amber renders `Needs confirmation` on the card and `! {reasons}` on the outing page.
 
 Sorting: `rankFeasibleFirst` (default true) puts green above amber for **Best match**, **Duration** and **Price**, then applies the sort key, then distance as the tiebreak. **Distance: nearest** ignores the green ranking entirely and sorts purely by distance.
 
@@ -231,7 +231,7 @@ Plan screen details the design fixes:
 
 - **Rooms** are multi-select. Picking more than one sets the age range to the union, the size to the sum, and takes budget and transport from the first room. Zero rooms selected disables Send with "Pick a group and a date".
 - **Date options** default to three, are ranked `1st choice`…`5th choice`, and carry a slot. Use the program's `time_slots` as the slot options when the venue publishes them; otherwise Morning / Afternoon / Either. Read mode shows ordinal + short date; edit mode exposes the date input, the slot select and Remove. Empty shows "Pick at least one date." and a lead-time warning derived from `lead_time_days`.
-- **Asks are pre-selected from the catalog's gaps**: take the program's practical facts whose value matches `/not stated|not published|confirm when you book|ask when you/i`, map each through the label → question table (design map §7, "Ask questions"), keep the first four, and mark them `source = gap`. Then append the five generic topics — Lunch space, Washrooms, Bus parking, Accessibility, Indoor space available? — skipping any already covered. Plus one free-text "Add your own", `source = custom`.
+- **Asks are pre-selected from the catalog's gaps**: take the program's practical facts whose value matches `/needs confirmation|not stated|not published|confirm when you book/i`, map each through the label → question table (design map §7, "Ask questions"), keep the first four, and mark them `source = gap`. Then append the five generic topics — Lunch space, Washrooms, Bus parking, Accessibility, Indoor space available? — skipping any already covered. Plus one free-text "Add your own", `source = custom`.
 - **The message preview is an editable auto-growing textarea**, pre-filled from the request template, and what the user leaves in it is what gets sent.
 - Default task titles, matching the design: `Send request to {venue}`, `Book the bus`, `Director approval signed off`, `Parent consent forms out`, `Consent forms back in`, `Confirm headcount with the venue`, `Pack list, weather check, emergency contacts`. Offsets are in data model 4b; `Book the bus` is only generated when a selected room's transport is bus and the program is not comes-to-you.
 

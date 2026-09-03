@@ -163,7 +163,7 @@ describe('feasibility — capacity', () => {
 
   it('flags a group too big, verbatim', () => {
     const r = feasibility(withProgram({ capacityMax: 12 }), PRESCHOOL)
-    expect(r.reasons).toContain('capacity is 12, your group is 16 — ask about splitting')
+    expect(r.reasons).toContain('capacity is 12, your group is 16')
   })
 })
 
@@ -223,7 +223,7 @@ describe('feasibility — several failures', () => {
       PRESCHOOL,
     )
     expect(r.issueText).toBe(
-      'capacity is 12, your group is 16 — ask about splitting · $20 a child is over your $10 budget',
+      'capacity is 12, your group is 16 · $20 a child is over your $10 budget',
     )
   })
 })
@@ -231,7 +231,7 @@ describe('feasibility — several failures', () => {
 describe('badge labels', () => {
   it('reads as the design writes it on a card', () => {
     expect(badgeLabel('green')).toBe('Fits your group')
-    expect(badgeLabel('amber')).toBe('One thing to check')
+    expect(badgeLabel('amber')).toBe('Needs confirmation')
   })
 
   it('names the room on the outing page', () => {

@@ -82,7 +82,7 @@ No token files exist — these were extracted from inline styles by frequency. E
 | `--brand-tint` | `#E7F0FD` `#E2EDFC` | selected chip fill, badges |
 | `--success` | `#146C47` `#1E8A4E` | "Fits your group", confirmed |
 | `--success-tint` | `#E3F5EA` `#E7F6EC` | feasible badge fill |
-| `--warn` | `#85610F` `#7D5F12` `#8A6410` | "One thing to check", rate flag |
+| `--warn` | `#85610F` `#7D5F12` `#8A6410` | "Needs confirmation", rate flag |
 | `--warn-tint` | `#FFF3D6` `#FFF2D4` `#FFF9E9` | amber badge fill |
 | `--warn-border` | `#F0DFA6` `#E7C36A` `#E0A62A` | amber banner border |
 | `--danger` | `#D0342B` | delete confirm, over-budget |
@@ -176,7 +176,7 @@ Design name → proposed path under `src/components/` → states the prototype a
 | Filter drawer | `catalog/FilterDrawer` | Environment / Accessibility / Program type checkbox groups; footer Clear all / Cancel / Apply. Edits a **draft** — Cancel discards |
 | Results header | `catalog/ResultsHeader` | result line, sort select (Best match / Distance / Duration / Price), map toggle |
 | Map panel | `catalog/CatalogMap` | hidden, shown (iframe to `venue-map*.html`), caption |
-| Outing card | `catalog/OutingCard` | photo vs no-photo (initials + category label), green "Fits your group", amber "One thing to check" + issue line, rate flag row, big total + per-child line, quoted note |
+| Outing card | `catalog/OutingCard` | photo vs no-photo (initials + category label), green "Fits your group", amber "Needs confirmation" + issue line, rate flag row, big total + per-child line, quoted note |
 | Feasibility badge | `catalog/FeasibilityBadge` | green, amber. There is no red level — plan §5.1 now matches |
 | Empty results | `catalog/CatalogEmpty` | **(gap)** — the prototype never renders a no-results state |
 
@@ -193,7 +193,7 @@ Design name → proposed path under `src/components/` → states the prototype a
 | Photo strip | `program/PhotoStrip` | real photos, or 3 `image-slot` placeholders with captions |
 | Our note | `program/OurNote` | single state |
 | Conflict banner | `program/ConflictBanner` | "Sources disagree." + note |
-| Practical list | `program/PracticalList` | fact known vs unknown (unknown detected by `/not stated|not published|confirm when you book|ask when you/i`) |
+| Practical list | `program/PracticalList` | fact known vs unknown (unknown detected by `/needs confirmation|not stated|not published|confirm when you book/i`) |
 | Getting there | `program/TravelBlock` | 3 modes, primary highlighted, caveats ("too far with this group", "includes a 9 min wait"); map frame + "View larger map →" |
 | Comes-to-you note | `program/ComesToYouNote` | replaces the travel block entirely |
 | Freshness + report | `program/FreshnessLine` | default, reported ("Thanks — we will re-check this venue this week."); optional venue-page link, optional phone |
@@ -288,17 +288,17 @@ Four strings are marked **↻ ships as** — those are the ones the send-only re
 
 **Catalog** — h1 `Every outing in Victoria that actually works for your group.` · lede `Tell us about the room once. We keep the details checked and get you booked on time.` · `Search a place or activity` · `Search` · labels `Age / Grade` `Children` `Travel` `Budget per child` `Leaving from` · `Pick more than one if the rooms go together.` · `Or type a max` · `What are you in the mood for?` (`Fun` `Explore` `Active` `Creative` `Learn` `Surprise me`) · `Browse by type` (`Animals & Farms` `Nature` `Museums` `Arts` `Science`) · `Hide filters` · `Environment` (`Indoor` `Outdoor` `Comes to you` `Free or low cost`) · `Accessibility` (`Wheelchair accessible` `Sensory friendly` `Neurodiversity friendly` `Low noise`) · `Program type` (`Guided programs` `Hands-on` `Interactive` `Self-guided`) · `Clear all filters` `Cancel` `Apply filters` · `Sort by` (`Best match` `Distance: nearest` `Duration: shortest` `Price: lowest`) · `Show map` · map caption `One pin per venue in this list. The dark pin is {home}. Programs that come to you have no pin.`
 
-**Feasibility** — badges `Fits your group` / `One thing to check` / `✓ Fits {room}` / `! {issue}`. Issue strings, joined with ` · `:
+**Feasibility** — badges `Fits your group` / `Needs confirmation` / `✓ Fits {room}` / `! {issue}`. Issue strings, joined with ` · `:
 - `ages are set by grade here, not years — phone to confirm they take under-fives`
 - `written for {Grade n} and up, yours are {Grade n}` *(new: both sides speak grades)*
 - `written for up to {Grade n}, yours are {Grade n}` *(new)*
 - `built for {n}+, your youngest are {n}`
-- `capacity is {n}, your group is {n} — ask about splitting`
+- `capacity is {n}, your group is {n}`
 - `{$} a child is over your {$} budget`
 
 The design's `fit()` raised three more, for facts the venue simply had not published — `no youngest age published — email to ask before you plan`, `capacity is not published — ask when you book`, `no price published`. **These no longer fire.** On the real catalog they made every one of 39 programs amber, because 33 publish no capacity. Unknowns now surface as the "not published" derived labels below, and as pre-selected asks on the request. See plan §5.1.
 
-**Derived labels** — `{$} per class` / `Free` / `Price not published` · `{$} a child for {n}` / `{$} for {n} children` / `no cost at all` / `ask the venue` · `Up to {n} children` / `Capacity not published` · `Ages {a} to {b}` / `Ages not published` · `Length not published` · `{n} days ahead` / `Not published` · `they come to you` / `{time} {on foot|by bus|driving} · {km} km` · travel caveats `too far with this group`, `includes a 9 min wait`
+**Derived labels** — `{$} per class` / `Free` / `Price not published` · `{$} a child for {n}` / `{$} for {n} children` / `no cost at all` / `Needs confirmation` · `Up to {n} children` / `Capacity not published` · `Ages {a} to {b}` / `Ages not published` · `Length not published` · `{n} days ahead` / `Not published` · `they come to you` / `{time} {on foot|by bus|driving} · {km} km` · travel caveats `too far with this group`, `includes a 9 min wait`
 
 **Program detail** — `Plan this trip` · `Save` / `Saved` · `Fieldy handles all communication and booking for you.` · `Learn how it works →` · ↻ ships as `You pick dates, we write and send the request in your name, chase the reply, and put their answer on your trip page. We email you the moment they answer, and you reply right here.` · `What it actually looks like` · `Photos from {venue}'s website` · placeholders `Wide shot of the space` `The bit children remember` `Lunch spot or washrooms` `Category illustration` · `Our note` · `What the children do` · `Good to know` · `Sources disagree. {note}` · `Getting there` · `On foot` `By bus` `Driving` · `View larger map →` · `No travel. They come to you at {home} — nothing to book, no ratio change on the road.` · `School rate. Daycares are quoted through group visits — phone before you budget.` · `Details checked on {date} against the venue's own pages. Something wrong? Tell us — takes one tap.` · `Venue page` · `Thanks — we will re-check this venue this week.`
 
@@ -360,7 +360,7 @@ Extracted from the prototype logic. The plan (§5.1, §5.1a, §5.2, §5.6, §10)
 - **Rooms are called "Groups" / "Group profiles" in the UI.** Keep the data-model name `room` in code, use the design's word in copy.
 - **Buckets are derived, not stored**: `past` if done/cancelled, otherwise `needs` if the last message is from the venue, `waiting` if awaiting a reply, `upcoming` if confirmed. `saved` is a separate list, not a trip status.
 - **Task defaults** (`buildTrip`, buffer prop default 3 days, lead default 14 when unpublished): `Send request to {venue}` at `−(lead + buffer)` · `Book the bus` at `−14` (only when a room's transport is bus and the program does not come to you) · `Director approval signed off` `−10` · `Parent consent forms out` `−10` · `Consent forms back in` `−3` · `Confirm headcount with the venue` `−2` · `Pack list, weather check, emergency contacts` `−1`. Sorted by date. Regeneration keeps done tasks untouched.
-- **Ask pre-selection**: the plan screen pre-picks up to 4 asks from the program's facts whose value matches `/not stated|not published|confirm when you book|ask when you/i`, then appends the standard five topics if not duplicated. This is the mechanism behind plan M3's "asks pre selected from program gaps".
+- **Ask pre-selection**: the plan screen pre-picks up to 4 asks from the program's facts whose value matches `/needs confirmation|not stated|not published|confirm when you book/i`, then appends the standard five topics if not duplicated. This is the mechanism behind plan M3's "asks pre selected from program gaps".
 - **Travel estimates**: walk 4.6 km/h, bus 15 km/h + 9 min wait, parent drivers 32 km/h + 4 min. Walking is filtered out beyond 2.5 km. **Settled** — these replaced the plan's 4.5 / 30.
 - **Radius options**: 3, 5, 10, 30 km, and 0 for "any". Default 5 km. **Settled** — replaced the plan's proposed 2 km.
 - **Age bands**: `1–3`, `3–5, Grade 1`, `5–8, Grades 1–3`, `8–12, Grades 4–7`. Multi-select, summary joined with `+`.
