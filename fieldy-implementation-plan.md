@@ -175,19 +175,22 @@ Input: a program with its venue, and a room (or the anonymous search state when 
 
 **Two levels, not three.** The design has no red state: a card is green when nothing failed and amber otherwise, with every failed reason joined by ` · ` on one line. Do not add red.
 
-**Three checks only** — age, capacity, budget. Distance and season are *filters*, not feasibility reasons: a program outside the radius or out of season is excluded from the results, not badged. The reason strings are copy and ship verbatim:
+**Three checks only** — age, capacity, budget. Distance and season are *filters*, not feasibility reasons: a program outside the radius or out of season is excluded from the results, not badged.
+
+**A missing fact is not a failure.** Only a known mismatch goes amber. "The venue did not publish its capacity" is not evidence that the group will not fit; it is evidence that nobody has asked yet.
+
+This was measured against the real catalog, not assumed. Counting unknowns as failures returned **zero green programs out of thirty-nine**: 33 publish no capacity, 18 no youngest age, 13 no price, and only 9 of the 94 reasons raised were an actual mismatch. A badge that is always amber carries no signal and trains people to ignore it, which costs them the real failures it exists to surface. With unknowns excluded the badge discriminates properly — 17 of 39 green for a preschool room, 35 of 39 for a school-age one.
+
+The unknowns are not swallowed. They still render as "Capacity not published" / "Price not published" / "Ages not published" on the card and the outing page, and they still become pre-selected asks on the request (5.2), which is where a director can act on them. Surfaced twice is enough; they do not also need to consume the badge.
+
+The reason strings are copy and ship verbatim:
 
 - age, first match wins:
-  - `age_basis = 'grades'` and the room's `age_max <= 5` → `ages are set by grade here, not years — phone to confirm they take under-fives`
-  - `age_min_years` is null → `no youngest age published — email to ask before you plan`
-  - `age_min_years > room.age_min` → `built for {n}+, your youngest are {n}`
-  - Never convert grades to years anywhere, for this check or any other. The design flags the mismatch instead of guessing.
-- capacity:
-  - `capacity_max` is null → `capacity is not published — ask when you book`
-  - `capacity_max < room.size` → `capacity is {n}, your group is {n} — ask about splitting`
-- budget, on effective cost per child (`cost_per_child_cad`, or `cost_per_group_cad / size`):
-  - null → `no price published`
-  - over `budget_per_child` → `{$} a child is over your {$} budget`
+  - `age_basis = 'grades'` and the room's `age_max <= 5` → `ages are set by grade here, not years — phone to confirm they take under-fives`. This is a **known** mismatch, not a missing fact: the venue published a range, in units that cannot answer the question this room is asking.
+  - `age_min_years` is not null and `> room.age_min` → `built for {n}+, your youngest are {n}`
+  - Never convert grades to years anywhere, for this check or any other. Flag the mismatch instead of guessing.
+- capacity: `capacity_max` is not null and `< room.size` → `capacity is {n}, your group is {n} — ask about splitting`
+- budget, on effective cost per child (`cost_per_child_cad`, or `cost_per_group_cad / size`): not null and over `budget_per_child` → `{$} a child is over your {$} budget`
 
 Badges: green renders `Fits your group` on the card and `✓ Fits {room name}` on the outing page; amber renders `One thing to check` on the card and `! {reasons}` on the outing page.
 

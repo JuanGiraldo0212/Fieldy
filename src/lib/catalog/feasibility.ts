@@ -9,6 +9,26 @@
   not feasibility reasons: a program outside the radius or out of season is
   excluded from results, not badged. See search.ts.
 
+  A MISSING FACT IS NOT A FAILURE.
+
+  Only a known mismatch goes amber. "The venue did not publish its capacity" is
+  not evidence that the group will not fit; it is evidence that nobody has
+  asked yet.
+
+  This was measured, not assumed. Scoring the real catalog with unknowns
+  counted as failures returned zero green programs out of thirty-nine, because
+  33 do not publish capacity, 18 do not publish a youngest age and 13 do not
+  publish a price. Only 9 of the 94 reasons raised were an actual mismatch
+  between program and group. A badge that is always amber carries no signal and
+  trains people to ignore it — which costs them the real failures it exists to
+  surface.
+
+  The unknowns are not swallowed. They still appear on the card and the outing
+  page as "Capacity not published" / "Price not published" / "Ages not
+  published", and they still become pre-selected asks on the request, which is
+  where a director can actually do something about them. They are surfaced
+  twice; they do not also need to consume the badge.
+
   The reason strings below are copy. They ship verbatim, are quoted in
   docs/design-map.md section 7, and are asserted character for character in the
   tests. Do not reword them here.
@@ -77,38 +97,42 @@ export function feasibility(
   const reasons: string[] = []
 
   /* ── Age ──────────────────────────────────────────────────────────────
-     First match wins: one age reason at most, because three overlapping
-     complaints about the same fact reads as noise.
+     First match wins: one age reason at most, because two overlapping
+     complaints about the same fact read as noise.
 
-     Grades are never converted to years, here or anywhere. The design flags
-     the mismatch and tells the director to phone, rather than guessing that
-     "K to 3" means "5 to 9" and quietly filtering on the guess. */
+     The grade case IS a known mismatch, not a missing fact. The venue did
+     publish its range — in units that cannot answer the question this room is
+     asking. A grades 2 to 12 program may well not take three-year-olds, and
+     that is worth checking before anyone plans a day around it.
+
+     Grades are never converted to years, here or anywhere. Flag the mismatch
+     and tell the director to phone, rather than guessing that "K to 3" means
+     "5 to 9" and then quietly filtering on the guess.
+
+     An unpublished youngest age raises nothing: the card already says "Ages
+     not published", and it becomes an ask on the request. */
   if (program.ageBasis === 'grades' && group.ageMax <= 5) {
     reasons.push(
       'ages are set by grade here, not years — phone to confirm they take under-fives',
     )
-  } else if (program.ageMinYears == null) {
-    reasons.push('no youngest age published — email to ask before you plan')
-  } else if (program.ageMinYears > group.ageMin) {
+  } else if (program.ageMinYears != null && program.ageMinYears > group.ageMin) {
     reasons.push(
       `built for ${program.ageMinYears}+, your youngest are ${group.ageMin}`,
     )
   }
 
-  /* ── Capacity ─────────────────────────────────────────────────────────── */
-  if (program.capacityMax == null) {
-    reasons.push('capacity is not published — ask when you book')
-  } else if (program.capacityMax < group.size) {
+  /* ── Capacity ─────────────────────────────────────────────────────────
+     Only a published capacity that is genuinely too small. */
+  if (program.capacityMax != null && program.capacityMax < group.size) {
     reasons.push(
       `capacity is ${program.capacityMax}, your group is ${group.size} — ask about splitting`,
     )
   }
 
-  /* ── Budget ───────────────────────────────────────────────────────────── */
+  /* ── Budget ───────────────────────────────────────────────────────────
+     Only a published price that is genuinely over budget. */
   const perChild = costPerChild(program, group.size)
-  if (perChild == null) {
-    reasons.push('no price published')
-  } else if (perChild > group.budgetPerChild) {
+  if (perChild != null && perChild > group.budgetPerChild) {
     reasons.push(
       `${money(perChild)} a child is over your ${money(group.budgetPerChild)} budget`,
     )

@@ -108,9 +108,12 @@ describe('feasibility — age', () => {
     expect(r.level).toBe('green')
   })
 
-  it('flags an unpublished youngest age, verbatim', () => {
+  it('does NOT flag an unpublished youngest age', () => {
+    // A missing fact is not a failure. The card says "Ages not published" and
+    // it becomes an ask on the request; it does not also consume the badge.
     const r = feasibility(withProgram({ ageMinYears: null }), PRESCHOOL)
-    expect(r.reasons).toContain('no youngest age published — email to ask before you plan')
+    expect(r.level).toBe('green')
+    expect(r.reasons).toEqual([])
   })
 
   it('flags a program built for older children, verbatim', () => {
@@ -119,34 +122,43 @@ describe('feasibility — age', () => {
   })
 
   it('gives at most one age reason — first match wins', () => {
-    // Grade-based AND no published minimum: only the grade reason appears.
     const r = feasibility(
-      withProgram({ ageBasis: 'grades', ageMinYears: null }),
+      withProgram({ ageBasis: 'grades', ageMinYears: 7 }),
       PRESCHOOL,
     )
     const ageReasons = r.reasons.filter(
-      (x) => x.includes('grade') || x.includes('youngest') || x.includes('built for'),
+      (x) => x.includes('grade') || x.includes('built for'),
     )
     expect(ageReasons).toHaveLength(1)
+    expect(ageReasons[0]).toMatch(/^ages are set by grade/)
+  })
+
+  it('treats the grade mismatch as known, not missing', () => {
+    // The venue DID publish a range, in units that cannot answer this room's
+    // question. That is a real thing to check, so it stays amber.
+    const r = feasibility(withProgram({ ageBasis: 'grades' }), PRESCHOOL)
+    expect(r.level).toBe('amber')
   })
 
   it('never converts grades to years', () => {
     // A grade 2-12 program has no published age range. For a school-age room
-    // the honest answer is "no youngest age published", not an invented 7.
+    // we must not invent "built for 7+" out of "Grade 2".
     const grade2: GroupCriteria = { ageMin: 6, ageMax: 8, size: 22, budgetPerChild: 12 }
     const r = feasibility(
       withProgram({ ageBasis: 'grades', ageMinYears: null }),
       grade2,
     )
-    expect(r.reasons).toContain('no youngest age published — email to ask before you plan')
     expect(r.issueText).not.toMatch(/built for/)
+    expect(r.level).toBe('green')
   })
 })
 
 describe('feasibility — capacity', () => {
-  it('flags an unpublished capacity, verbatim', () => {
+  it('does NOT flag an unpublished capacity', () => {
+    // 33 of the 39 real programs publish no capacity. Counting that as a
+    // failure made every card in the catalog amber.
     const r = feasibility(withProgram({ capacityMax: null }), PRESCHOOL)
-    expect(r.reasons).toContain('capacity is not published — ask when you book')
+    expect(r.level).toBe('green')
   })
 
   it('flags a group too big, verbatim', () => {
@@ -156,12 +168,12 @@ describe('feasibility — capacity', () => {
 })
 
 describe('feasibility — budget', () => {
-  it('flags an unpublished price, verbatim', () => {
+  it('does NOT flag an unpublished price', () => {
     const r = feasibility(
       withProgram({ costPerChildCad: null, costPerGroupCad: null }),
       PRESCHOOL,
     )
-    expect(r.reasons).toContain('no price published')
+    expect(r.level).toBe('green')
   })
 
   it('flags going over budget, verbatim', () => {
@@ -195,6 +207,14 @@ describe('feasibility — several failures', () => {
     )
     expect(r.level).toBe('amber')
     expect(r.reasons).toHaveLength(3)
+  })
+
+  it('is green when everything that failed was merely unpublished', () => {
+    const r = feasibility(
+      withProgram({ ageMinYears: null, capacityMax: null, costPerChildCad: null }),
+      PRESCHOOL,
+    )
+    expect(r.level).toBe('green')
   })
 
   it('joins reasons with a middle dot, in age then capacity then budget order', () => {

@@ -290,12 +290,11 @@ Four strings are marked **↻ ships as** — those are the ones the send-only re
 
 **Feasibility** — badges `Fits your group` / `One thing to check` / `✓ Fits {room}` / `! {issue}`. Issue strings, joined with ` · `:
 - `ages are set by grade here, not years — phone to confirm they take under-fives`
-- `no youngest age published — email to ask before you plan`
 - `built for {n}+, your youngest are {n}`
-- `capacity is not published — ask when you book`
 - `capacity is {n}, your group is {n} — ask about splitting`
-- `no price published`
 - `{$} a child is over your {$} budget`
+
+The design's `fit()` raised three more, for facts the venue simply had not published — `no youngest age published — email to ask before you plan`, `capacity is not published — ask when you book`, `no price published`. **These no longer fire.** On the real catalog they made every one of 39 programs amber, because 33 publish no capacity. Unknowns now surface as the "not published" derived labels below, and as pre-selected asks on the request. See plan §5.1.
 
 **Derived labels** — `{$} per class` / `Free` / `Price not published` · `{$} a child for {n}` / `{$} for {n} children` / `no cost at all` / `ask the venue` · `Up to {n} children` / `Capacity not published` · `Ages {a} to {b}` / `Ages not published` · `Length not published` · `{n} days ahead` / `Not published` · `they come to you` / `{time} {on foot|by bus|driving} · {km} km` · travel caveats `too far with this group`, `includes a 9 min wait`
 
