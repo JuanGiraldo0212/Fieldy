@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import { useState } from 'react'
+import { isRenderableImage } from '@/lib/catalog/image-hosts'
 
 /*
   A venue photograph, with the initials tile as its fallback.
@@ -12,6 +13,12 @@ import { useState } from 'react'
   error swaps back to it silently.
 
   next/image, not a raw <img>: see next.config.ts for why.
+
+  The host is checked BEFORE rendering, not caught after. next/image throws on
+  a host that is not in remotePatterns, and it throws during render, where the
+  onError below can never see it — so a single venue whose photos sit on a new
+  domain would crash the entire catalog page rather than losing one thumbnail.
+  An unknown host falls back to the tile, exactly like a broken image.
 */
 export function VenueThumb({
   src,
@@ -26,7 +33,7 @@ export function VenueThumb({
 }) {
   const [failed, setFailed] = useState(false)
 
-  if (src && !failed) {
+  if (src && !failed && isRenderableImage(src)) {
     return (
       <Image
         src={src}

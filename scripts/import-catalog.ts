@@ -27,6 +27,7 @@ import { drizzle } from 'drizzle-orm/postgres-js'
 import postgres from 'postgres'
 import { image, program, venue } from '@/db/schema'
 import { catalogFileSchema, type CatalogFile } from '@/lib/catalog/schema'
+import { IMAGE_HOSTS, hostOf } from '@/lib/catalog/image-hosts'
 
 const CATALOG_DIR = 'outputs'
 const dryRun = process.argv.includes('--dry-run')
@@ -64,6 +65,36 @@ for (const file of files) {
     process.exit(1)
   }
   parsed.push({ file, data: result.data })
+}
+
+/* ─── Image hosts ────────────────────────────────────────────────────────────
+   next/image throws on a host that is not in the allowlist, so an unknown host
+   is caught HERE, where a person is watching, rather than in production. This
+   is fatal on purpose: the alternative is a venue whose photos silently never
+   render, and nobody finding out. */
+
+const known = new Set<string>(IMAGE_HOSTS)
+const unknownHosts = new Map<string, string>()
+for (const { data } of parsed) {
+  for (const img of data.images ?? []) {
+    const h = hostOf(img.url)
+    if (h && !known.has(h)) unknownHosts.set(h, data.venue.id)
+  }
+}
+
+if (unknownHosts.size > 0) {
+  console.error(`\n${unknownHosts.size} image host(s) are not in the allowlist:\n`)
+  for (const [h, venueId] of unknownHosts) {
+    console.error(`  ${h.padEnd(38)} first seen on ${venueId}`)
+  }
+  console.error(`\nAdd them to src/lib/catalog/image-hosts.ts:\n`)
+  for (const h of [...unknownHosts.keys()].sort()) console.error(`  '${h}',`)
+  console.error(
+    `\nWithout this next/image refuses the URL, so those photographs would\n` +
+      `never render. Aborted rather than loading a catalog that looks fine and\n` +
+      `quietly shows initials tiles.\n`,
+  )
+  process.exit(1)
 }
 
 /* ─── Warnings: honest gaps that do not fail the import ──────────────────── */
