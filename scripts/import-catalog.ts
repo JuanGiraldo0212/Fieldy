@@ -141,6 +141,15 @@ const money = (n: number | null | undefined) => (n == null ? null : String(n))
 const int = (n: number | null | undefined) =>
   n == null ? null : Math.round(n)
 
+/* Postgres hands a numeric column back as '25.00' where the JSON carries 25, so
+   comparing the two as strings reports a price change on every priced program
+   in the catalog and buries the handful that really moved. Compare the values,
+   and print both sides in the same spelling so the report reads as money. */
+const samePrice = (a: string | null, b: string | null) =>
+  a === b || (a != null && b != null && Number(a) === Number(b))
+const priceLabel = (v: string | null | undefined) =>
+  v == null ? '—' : Number(v).toFixed(2)
+
 type Diff = {
   newVenues: string[]
   newPrograms: string[]
@@ -265,11 +274,11 @@ if (!dryRun) {
       if (!prior) {
         diff.newPrograms.push(id)
       } else if (
-        prior.costChild !== money(p.cost_per_child_cad) ||
-        prior.costGroup !== money(p.cost_per_group_cad)
+        !samePrice(prior.costChild, money(p.cost_per_child_cad)) ||
+        !samePrice(prior.costGroup, money(p.cost_per_group_cad))
       ) {
         diff.priceChanges.push(
-          `${id}: child ${prior.costChild ?? '—'} → ${money(p.cost_per_child_cad) ?? '—'}, group ${prior.costGroup ?? '—'} → ${money(p.cost_per_group_cad) ?? '—'}`,
+          `${id}: child ${priceLabel(prior.costChild)} → ${priceLabel(money(p.cost_per_child_cad))}, group ${priceLabel(prior.costGroup)} → ${priceLabel(money(p.cost_per_group_cad))}`,
         )
       }
 
