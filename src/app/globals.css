@@ -96,6 +96,17 @@
   --color-room-users: #e7f0fd;
   --color-room-users-ink: #1668d6;
 
+  /* ── Logo ─────────────────────────────────────────────────────────────────
+     The sun mark. Four ray colours cycling twice around a warm core, drawn in
+     src/components/ui/logo.tsx. src/app/icon.svg is the same mark as a static
+     file for the favicon, and cannot read these variables — the two are kept
+     in step by hand. */
+  --color-sun-core: #f6c445;
+  --color-sun-ray-amber: #f4c04a;
+  --color-sun-ray-lavender: #a89ae0;
+  --color-sun-ray-teal: #79bfa6;
+  --color-sun-ray-coral: #f2938a;
+
   /* ── Map ──────────────────────────────────────────────────────────────── */
   --color-map-pin-home: #16202b;
   --color-map-pin-venue: #1668d6;

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <!-- The Fieldy sun. Same geometry as SunMark in src/components/ui/logo.tsx,
+       with the colour tokens written out because a static file cannot read
+       globals.css. Change one and change the other.
+
+       Round caps reach half the stroke width past each endpoint, so these
+       lines are drawn from radius 10.8 to 19 and stay clear of the core. -->
+  <circle cx="24" cy="24" r="7.2" fill="#f6c445"/>
+  <g stroke-width="3.4" stroke-linecap="round">
+    <line x1="24" y1="11.5" x2="24" y2="6.7" stroke="#f4c04a"/>
+    <line x1="24" y1="11.5" x2="24" y2="6.7" stroke="#a89ae0" transform="rotate(45 24 24)"/>
+    <line x1="24" y1="11.5" x2="24" y2="6.7" stroke="#79bfa6" transform="rotate(90 24 24)"/>
+    <line x1="24" y1="11.5" x2="24" y2="6.7" stroke="#f2938a" transform="rotate(135 24 24)"/>
+    <line x1="24" y1="11.5" x2="24" y2="6.7" stroke="#f4c04a" transform="rotate(180 24 24)"/>
+    <line x1="24" y1="11.5" x2="24" y2="6.7" stroke="#a89ae0" transform="rotate(225 24 24)"/>
+    <line x1="24" y1="11.5" x2="24" y2="6.7" stroke="#79bfa6" transform="rotate(270 24 24)"/>
+    <line x1="24" y1="11.5" x2="24" y2="6.7" stroke="#f2938a" transform="rotate(315 24 24)"/>
+  </g>
+</svg>

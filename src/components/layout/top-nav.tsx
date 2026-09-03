@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { getViewer } from '@/lib/auth'
 import { NavLinks } from './nav-links'
+import { Logo } from '@/components/ui/logo'
 
 /*
   The top bar. Sticky, translucent, and the only way to reach anything that is
@@ -32,10 +33,8 @@ export async function TopNav() {
   return (
     <header className="border-border sticky top-0 z-40 border-b bg-[rgb(255_255_255_/_0.96)] backdrop-blur-[8px]">
       <div className="mx-auto flex max-w-page flex-wrap items-center gap-4 px-5 py-3.5">
-        <Link href="/" className="flex items-baseline gap-2 no-underline">
-          <span className="font-display text-brand-size text-text font-bold">
-            Fieldy
-          </span>
+        <Link href="/" className="flex items-center gap-2 no-underline">
+          <Logo />
           <span className="text-label text-text-muted tracking-[0.04em] uppercase">
             Greater Victoria
           </span>

@@ -119,11 +119,10 @@ export default async function CatalogPage({
     <main className="mx-auto max-w-page px-5 pb-16">
       <header className="py-8">
         <h1 className="font-display text-display-lg max-w-measure">
-          Every outing in Victoria that actually works for your group.
+          Find your next field trip. We&rsquo;ll help with the rest.
         </h1>
         <p className="text-body-lg text-text-muted mt-2 max-w-[560px]">
-          Tell us about the room once. We keep the details checked and get you
-          booked on time.
+          Search, contact venues, and keep everything in one place.
         </p>
       </header>
 

@@ -23,7 +23,7 @@ const nunito = Nunito_Sans({
 export const metadata: Metadata = {
   title: 'Fieldy',
   description:
-    'Every outing in Victoria that actually works for your group. Tell us about the room once. We keep the details checked and get you booked on time.',
+    'Find your next field trip. Search, contact venues, and keep everything in one place.',
 }
 
 // Mobile first: the design is built at 390px.
