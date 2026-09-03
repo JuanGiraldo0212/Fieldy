@@ -212,6 +212,17 @@ def validate_program(r, p, i, image_ids):
     check_enum_list(r, f"{path}.format", p.get("format"), FORMAT)
     check_enum_list(r, f"{path}.mood_tags", p.get("mood_tags"), MOOD)
 
+    # mood_tags is required from v2.0 on. The app can fall back to guessing from
+    # the venue category, but that guess reads `fun` as "animals or science" and
+    # misses an indoor climbing gym as `active`. A warning, not an error, so an
+    # otherwise good record still loads.
+    mt = p.get("mood_tags")
+    if not mt:
+        r.warn(f"{path}.mood_tags: missing - the mood chips will fall back to "
+               f"guessing from the venue category")
+    elif len(mt) > 3:
+        r.warn(f"{path}.mood_tags: {len(mt)} tags; 1 to 3 keeps the chips meaningful")
+
     for f in ("comes_to_you", "is_free", "tax_included", "school_rate_only", "deposit_required",
               "adults_free", "indoor", "outdoor", "sensory_friendly", "low_noise",
               "neurodiversity_friendly"):
