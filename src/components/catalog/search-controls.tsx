@@ -2,6 +2,39 @@
 
 import { useRouter } from 'next/navigation'
 import { useState, useTransition } from 'react'
+import {
+  Accessibility,
+  Activity,
+  Brain,
+  Bus,
+  ChevronDown,
+  CircleDollarSign,
+  FlaskConical,
+  GraduationCap,
+  Hand,
+  House,
+  Landmark,
+  Leaf,
+  Luggage,
+  MapPin,
+  Palette,
+  PawPrint,
+  Radar,
+  RefreshCw,
+  Search,
+  SlidersHorizontal,
+  Smile,
+  Sparkle,
+  Sparkles,
+  Sun,
+  Tag,
+  Truck,
+  User,
+  Users,
+  Volume1,
+  WandSparkles,
+  type LucideIcon,
+} from 'lucide-react'
 import { AGE_BANDS, RADIUS_OPTIONS, type SearchState } from '@/lib/schemas'
 import { searchHref, toggleIn } from '@/lib/catalog/url'
 import { CheckRow, Chip, Field, FieldBox, cx } from '@/components/ui'
@@ -13,44 +46,46 @@ import { CheckRow, Chip, Field, FieldBox, cx } from '@/components/ui'
   (plan section 8 — links get opened inside messaging apps' browsers).
 */
 
-const MOOD_STYLE: Record<string, { label: string; tint: string; ink: string }> = {
-  fun: { label: 'Fun', tint: 'var(--color-mood-fun)', ink: 'var(--color-mood-fun-ink)' },
-  explore: { label: 'Explore', tint: 'var(--color-mood-explore)', ink: 'var(--color-mood-explore-ink)' },
-  active: { label: 'Active', tint: 'var(--color-mood-active)', ink: 'var(--color-mood-active-ink)' },
-  creative: { label: 'Creative', tint: 'var(--color-mood-creative)', ink: 'var(--color-mood-creative-ink)' },
-  learn: { label: 'Learn', tint: 'var(--color-mood-learn)', ink: 'var(--color-mood-learn-ink)' },
-  surprise: { label: 'Surprise me', tint: 'var(--color-mood-surprise)', ink: 'var(--color-mood-surprise-ink)' },
+/* Icons and sizes are the design's own — 20px on mood chips, 18px on
+   category chips and the field controls, 17px in the filter drawer. */
+const MOOD_STYLE: Record<string, { label: string; tint: string; ink: string; Icon: LucideIcon }> = {
+  fun: { label: 'Fun', tint: 'var(--color-mood-fun)', ink: 'var(--color-mood-fun-ink)', Icon: Sparkles },
+  explore: { label: 'Explore', tint: 'var(--color-mood-explore)', ink: 'var(--color-mood-explore-ink)', Icon: Luggage },
+  active: { label: 'Active', tint: 'var(--color-mood-active)', ink: 'var(--color-mood-active-ink)', Icon: Activity },
+  creative: { label: 'Creative', tint: 'var(--color-mood-creative)', ink: 'var(--color-mood-creative-ink)', Icon: WandSparkles },
+  learn: { label: 'Learn', tint: 'var(--color-mood-learn)', ink: 'var(--color-mood-learn-ink)', Icon: GraduationCap },
+  surprise: { label: 'Surprise me', tint: 'var(--color-mood-surprise)', ink: 'var(--color-mood-surprise-ink)', Icon: Sparkle },
 }
 
-const CATEGORIES: [string, string][] = [
-  ['animals_farms', 'Animals & Farms'],
-  ['nature_outdoors', 'Nature'],
-  ['museums_history', 'Museums'],
-  ['arts_performance', 'Arts'],
-  ['science', 'Science'],
-  ['community_civic', 'Community'],
-  ['comes_to_you', 'Comes to you'],
+const CATEGORIES: [string, string, LucideIcon][] = [
+  ['animals_farms', 'Animals & Farms', PawPrint],
+  ['nature_outdoors', 'Nature', Leaf],
+  ['museums_history', 'Museums', Landmark],
+  ['arts_performance', 'Arts', Palette],
+  ['science', 'Science', FlaskConical],
+  ['community_civic', 'Community', Landmark],
+  ['comes_to_you', 'Comes to you', Truck],
 ]
 
-const ENVIRONMENT: [string, string][] = [
-  ['indoor', 'Indoor'],
-  ['outdoor', 'Outdoor'],
-  ['comes_to_you', 'Comes to you'],
-  ['free', 'Free or low cost'],
+const ENVIRONMENT: [string, string, LucideIcon][] = [
+  ['indoor', 'Indoor', House],
+  ['outdoor', 'Outdoor', Sun],
+  ['comes_to_you', 'Comes to you', Truck],
+  ['free', 'Free or low cost', Tag],
 ]
 
-const ACCESSIBILITY: [string, string][] = [
-  ['wheelchair', 'Wheelchair accessible'],
-  ['sensory', 'Sensory friendly'],
-  ['neuro', 'Neurodiversity friendly'],
-  ['low_noise', 'Low noise'],
+const ACCESSIBILITY: [string, string, LucideIcon][] = [
+  ['wheelchair', 'Wheelchair accessible', Accessibility],
+  ['sensory', 'Sensory friendly', Smile],
+  ['neuro', 'Neurodiversity friendly', Brain],
+  ['low_noise', 'Low noise', Volume1],
 ]
 
-const FORMATS: [string, string][] = [
-  ['guided', 'Guided programs'],
-  ['hands_on', 'Hands-on'],
-  ['interactive', 'Interactive'],
-  ['self_guided', 'Self-guided'],
+const FORMATS: [string, string, LucideIcon][] = [
+  ['guided', 'Guided programs', GraduationCap],
+  ['hands_on', 'Hands-on', Hand],
+  ['interactive', 'Interactive', RefreshCw],
+  ['self_guided', 'Self-guided', User],
 ]
 
 const BUDGET_QUICK = [5, 10, 15, 20, 30]
@@ -83,7 +118,10 @@ export function SearchControls({ state }: { state: SearchState }) {
           go({ ...state, query })
         }}
       >
-        <div className="border-border-strong bg-surface flex h-control-lg flex-1 items-center rounded-control border px-4">
+        <div className="border-border-strong bg-surface flex h-control-lg flex-1 items-center gap-2.5 rounded-control border px-4">
+          <span className="text-text-faint flex">
+            <Search size={19} />
+          </span>
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
@@ -104,6 +142,9 @@ export function SearchControls({ state }: { state: SearchState }) {
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <Field label="Age / Grade">
           <FieldBox>
+            <span className="text-brand flex">
+              <GraduationCap size={18} />
+            </span>
             <select
               value={state.age_bands[0] ?? 1}
               onChange={(e) => go({ ...state, age_bands: [Number(e.target.value)] })}
@@ -116,6 +157,9 @@ export function SearchControls({ state }: { state: SearchState }) {
                 </option>
               ))}
             </select>
+            <span className="text-text-faint flex">
+              <ChevronDown size={15} />
+            </span>
           </FieldBox>
         </Field>
 
@@ -131,11 +175,17 @@ export function SearchControls({ state }: { state: SearchState }) {
               aria-label="Number of children"
               className="text-body-sm w-full border-0 bg-transparent font-bold outline-none"
             />
+            <span className="text-brand flex">
+              <Users size={18} />
+            </span>
           </FieldBox>
         </Field>
 
         <Field label="Travel">
           <FieldBox>
+            <span className="text-brand flex">
+              <Bus size={18} />
+            </span>
             <select
               value={state.transport}
               onChange={(e) =>
@@ -153,8 +203,8 @@ export function SearchControls({ state }: { state: SearchState }) {
 
         <Field label="Budget per child">
           <FieldBox>
-            <span aria-hidden className="text-text-faint">
-              $
+            <span className="text-brand flex">
+              <CircleDollarSign size={18} />
             </span>
             <select
               value={state.budget_max}
@@ -168,6 +218,9 @@ export function SearchControls({ state }: { state: SearchState }) {
                 </option>
               ))}
             </select>
+            <span className="text-text-faint flex">
+              <ChevronDown size={15} />
+            </span>
           </FieldBox>
         </Field>
       </div>
@@ -175,10 +228,16 @@ export function SearchControls({ state }: { state: SearchState }) {
       <div className="mt-3.5">
         <Field label="Leaving from">
           <div className="flex">
-            <div className="border-border-strong bg-surface text-body-sm text-text-muted flex h-control min-w-0 flex-1 items-center rounded-l-control border px-3 font-semibold">
+            <div className="border-border-strong bg-surface text-body-sm text-text-muted flex h-control min-w-0 flex-1 items-center gap-2.5 rounded-l-control border px-3 font-semibold">
+              <span className="text-brand flex">
+                <MapPin size={18} />
+              </span>
               <span className="truncate">Your centre</span>
             </div>
-            <div className="border-border-strong bg-surface flex h-control items-center rounded-r-control border border-l-0 px-3">
+            <div className="border-border-strong bg-surface flex h-control items-center gap-2.5 rounded-r-control border border-l-0 px-3">
+              <span className="text-brand flex">
+                <Radar size={18} />
+              </span>
               <select
                 value={state.radius_km}
                 onChange={(e) => go({ ...state, radius_km: Number(e.target.value) })}
@@ -222,6 +281,7 @@ export function SearchControls({ state }: { state: SearchState }) {
                 go(toggleIn(without, 'moods', key))
               }}
             >
+              <m.Icon size={20} />
               {m.label}
             </Chip>
           ))}
@@ -234,12 +294,15 @@ export function SearchControls({ state }: { state: SearchState }) {
           Browse by type
         </div>
         <div className="flex flex-wrap items-center gap-2.5">
-          {CATEGORIES.map(([value, label]) => (
+          {CATEGORIES.map(([value, label, Icon]) => (
             <Chip
               key={value}
               active={state.categories.includes(value)}
               onClick={() => go(toggleIn(state, 'categories', value))}
             >
+              <span className="text-brand flex">
+                <Icon size={18} />
+              </span>
               {label}
             </Chip>
           ))}
@@ -248,11 +311,16 @@ export function SearchControls({ state }: { state: SearchState }) {
             onClick={() => setFiltersOpen((v) => !v)}
             className="border-border-soft bg-surface text-body-sm text-text-strong hover:border-brand flex items-center gap-2 rounded-card border px-3.5 py-3 font-semibold"
           >
+            <SlidersHorizontal size={18} />
             {filtersOpen
               ? 'Hide filters'
               : extras
                 ? `More filters (${extras})`
                 : 'More filters'}
+            <ChevronDown
+              size={16}
+              className={cx('text-text-faint', filtersOpen && 'rotate-180')}
+            />
           </button>
         </div>
       </div>
@@ -268,11 +336,12 @@ export function SearchControls({ state }: { state: SearchState }) {
             <div className="text-label text-text-muted mb-1 font-bold uppercase">
               Environment
             </div>
-            {ENVIRONMENT.map(([v, label]) => (
+            {ENVIRONMENT.map(([v, label, Icon]) => (
               <CheckRow
                 key={v}
                 checked={state.environment.includes(v)}
                 onChange={() => go(toggleIn(state, 'environment', v))}
+                icon={<Icon size={17} />}
               >
                 {label}
               </CheckRow>
@@ -282,11 +351,12 @@ export function SearchControls({ state }: { state: SearchState }) {
             <div className="text-label text-text-muted mb-1 font-bold uppercase">
               Accessibility
             </div>
-            {ACCESSIBILITY.map(([v, label]) => (
+            {ACCESSIBILITY.map(([v, label, Icon]) => (
               <CheckRow
                 key={v}
                 checked={state.accessibility.includes(v)}
                 onChange={() => go(toggleIn(state, 'accessibility', v))}
+                icon={<Icon size={17} />}
               >
                 {label}
               </CheckRow>
@@ -296,11 +366,12 @@ export function SearchControls({ state }: { state: SearchState }) {
             <div className="text-label text-text-muted mb-1 font-bold uppercase">
               Program type
             </div>
-            {FORMATS.map(([v, label]) => (
+            {FORMATS.map(([v, label, Icon]) => (
               <CheckRow
                 key={v}
                 checked={state.formats.includes(v)}
                 onChange={() => go(toggleIn(state, 'formats', v))}
+                icon={<Icon size={17} />}
               >
                 {label}
               </CheckRow>

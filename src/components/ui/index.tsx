@@ -6,6 +6,7 @@
   add the token first — see docs/design-map.md section 3.
 */
 
+import { Check } from 'lucide-react'
 import type { ReactNode } from 'react'
 
 const cx = (...parts: (string | false | null | undefined)[]) =>
@@ -189,10 +190,12 @@ export function CheckRow({
   checked,
   onChange,
   children,
+  icon,
 }: {
   checked: boolean
   onChange: () => void
   children: ReactNode
+  icon?: ReactNode
 }) {
   return (
     <button
@@ -211,8 +214,9 @@ export function CheckRow({
             : 'border-border-strong border-[1.5px]',
         )}
       >
-        {checked ? '✓' : null}
+        {checked ? <Check size={13} strokeWidth={2.5} /> : null}
       </span>
+      {icon ? <span className="text-brand flex">{icon}</span> : null}
       <span>{children}</span>
     </button>
   )
