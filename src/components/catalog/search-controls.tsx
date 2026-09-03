@@ -4,8 +4,9 @@ import { useRouter } from 'next/navigation'
 import { useState, useTransition } from 'react'
 import {
   Accessibility,
-  Activity,
+  Binoculars,
   Blocks,
+  Brush,
   Brain,
   Bus,
   ChevronDown,
@@ -16,7 +17,6 @@ import {
   House,
   Landmark,
   Leaf,
-  Luggage,
   MapPin,
   Palette,
   PawPrint,
@@ -26,13 +26,13 @@ import {
   SlidersHorizontal,
   Smile,
   Sparkle,
+  SportShoe,
   Sun,
   Tag,
   Truck,
   User,
   Users,
   Volume1,
-  WandSparkles,
   type LucideIcon,
 } from 'lucide-react'
 import { AGE_BANDS, RADIUS_OPTIONS, type SearchState } from '@/lib/schemas'
@@ -50,9 +50,9 @@ import { CheckRow, Chip, Field, FieldBox, cx } from '@/components/ui'
    category chips and the field controls, 17px in the filter drawer. */
 const MOOD_STYLE: Record<string, { label: string; tint: string; ink: string; Icon: LucideIcon }> = {
   play: { label: 'Play', tint: 'var(--color-mood-play)', ink: 'var(--color-mood-play-ink)', Icon: Blocks },
-  explore: { label: 'Explore', tint: 'var(--color-mood-explore)', ink: 'var(--color-mood-explore-ink)', Icon: Luggage },
-  active: { label: 'Active', tint: 'var(--color-mood-active)', ink: 'var(--color-mood-active-ink)', Icon: Activity },
-  creative: { label: 'Creative', tint: 'var(--color-mood-creative)', ink: 'var(--color-mood-creative-ink)', Icon: WandSparkles },
+  explore: { label: 'Explore', tint: 'var(--color-mood-explore)', ink: 'var(--color-mood-explore-ink)', Icon: Binoculars },
+  active: { label: 'Active', tint: 'var(--color-mood-active)', ink: 'var(--color-mood-active-ink)', Icon: SportShoe },
+  creative: { label: 'Creative', tint: 'var(--color-mood-creative)', ink: 'var(--color-mood-creative-ink)', Icon: Brush },
   learn: { label: 'Learn', tint: 'var(--color-mood-learn)', ink: 'var(--color-mood-learn-ink)', Icon: GraduationCap },
   surprise: { label: 'Surprise me', tint: 'var(--color-mood-surprise)', ink: 'var(--color-mood-surprise-ink)', Icon: Sparkle },
 }
