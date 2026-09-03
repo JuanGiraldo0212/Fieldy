@@ -83,19 +83,20 @@ than only apologising.
 
 Needs a frame.
 
-### Gap — every photo is withheld
+### Deviation — `unverified` images render anyway
 
-*Slice 1.*
+*Slice 1. Resolved; see `docs/decisions.md` for the full reasoning.*
 
-Not a design gap so much as a data one, but it changes what every screen looks
-like: all 23 catalog images are `usage: "unverified"`, which `outing-schema.md`
-says holds an image back from rendering. So **every card and every outing page
-falls back to the initials tile**.
+`outing-schema.md` withholds `usage: "unverified"` images from rendering, and all
+23 catalog images carry that value, so the catalog had no photography at all.
 
-The design shows real photography. Until someone reviews the rights and flips
-those flags, the app does not look like the frames. The fallback itself is
-designed for, so nothing is broken — but do not judge the visual design against
-the current build.
+They now render, credited and proxied. The `usage` value was deliberately NOT
+rewritten to `licensed` — nobody licensed these, and a false provenance claim in
+the data would be worse than a missing picture. The render rule changed instead,
+which is one condition and reversible.
+
+Three venues still have no hero image at all, so 12 of 15 have photography and
+the rest keep the initials tile.
 
 ---
 

@@ -28,7 +28,7 @@ OUTPUT (per venue)
 
 **Three carve-outs from "facts only"** — and only these three. Each is marked in the output so it can be audited:
 1. `lat` / `lng` may be derived from the extracted address (STEP 2c).
-2. `alt` may be written by you when the image has none (STEP 2b).
+2. `alt` may be written by you when the image has none, **or when the site's own alt is a filename** — `_SEP5655-edit.jpg` is not alt text, it is an accessibility failure a screen reader will read out loud. Set `alt_source` to `generated` when you write one (STEP 2b).
 3. `what_children_do`, `our_note` and `practical_summary` are authored by you, grounded in what you read (STEP 2d).
 Everything else is verbatim-supported or null.
 
@@ -249,7 +249,7 @@ If there is genuinely no suitable image, `images` is an empty array — say so i
 
 **Rules**
 - Venue's own domain or its own site's CDN only. A photo hotlinked from a tourism board or review site is not eligible.
-- Absolute URLs only. Resolve relative `src` values against the page they were found on. If a `srcset` offers several sizes, take the largest.
+- Absolute URLs only, and **https**. Resolve relative `src` values against the page they were found on; if the page serves an image over plain http, try the https form of the same URL and record that. An http image on an https page is mixed content and browsers refuse to load it. If a `srcset` offers several sizes, take the largest.
 - Skip logos, wordmarks, icons, sponsor and partner badges, social media buttons, staff headshots, spacer and tracking pixels, and anything under roughly 400px on its longest side where a dimension is stated.
 - `id` — slug, unique within the venue: `hero-exterior`, `program-school-tour`, `space-studio`.
 - `alt` is **required**. Use the image's alt attribute verbatim when it exists and is non-empty, and set `alt_source` to `site`. When there is no alt, write one plain factual sentence describing only what is visibly in the frame, and set `alt_source` to `generated`. Do not infer the season, the occasion, the program, or who the people are. "A stone castle with a turret, seen from the lawn" — not "Children arriving for a school tour".

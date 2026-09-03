@@ -12,6 +12,7 @@ import {
   Users,
 } from 'lucide-react'
 import type { SearchResult } from '@/lib/catalog/search'
+import { VenueThumb } from './venue-thumb'
 
 /*
   A catalog card. Programs, not venues — the design lists what a group can
@@ -48,22 +49,15 @@ export function OutingCard({ result: r }: { result: SearchResult }) {
       href={`/outing/${encodeURIComponent(r.id)}`}
       className="bg-surface border-border hover:border-brand hover:bg-surface-hover animate-rise-in flex w-full flex-wrap gap-5 rounded-card-lg border p-5 text-left no-underline"
     >
-      {/* Thumbnail. Every image in the catalog is currently withheld as
-          unverified, so in practice this is always the initials tile. */}
+      {/* Thumbnail, falling back to an initials tile when the venue has no
+          usable photo or the remote one fails to load. */}
       <span className="bg-thumb relative block h-[104px] w-[104px] flex-none overflow-hidden rounded-thumb">
-        {r.heroUrl ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={r.heroUrl} alt={r.venueName} className="h-full w-full object-cover" />
-        ) : (
-          <span className="absolute inset-0 flex flex-col items-center justify-center gap-0.5">
-            <span className="font-display text-price text-brand font-semibold">
-              {r.initials}
-            </span>
-            <span className="text-eyebrow text-text-muted uppercase">
-              {CATEGORY_SHORT[r.venueCategory]}
-            </span>
-          </span>
-        )}
+        <VenueThumb
+          src={r.heroUrl}
+          alt={r.heroAlt ?? r.venueName}
+          initials={r.initials}
+          caption={CATEGORY_SHORT[r.venueCategory]}
+        />
       </span>
 
       {/* Body */}

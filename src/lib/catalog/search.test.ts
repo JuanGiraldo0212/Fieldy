@@ -54,7 +54,7 @@ const row = (over: Partial<CatalogRow> = {}): CatalogRow =>
     ...over,
   }) as CatalogRow
 
-const noHeroes = new Map<string, string>()
+const noHeroes = new Map<string, { url: string; alt: string }>()
 const dec = (r: CatalogRow, s = state()) => decorate(r, s, ORIGIN, noHeroes)
 
 describe('effectiveAgeRange', () => {
@@ -144,11 +144,18 @@ describe('decorate — labels', () => {
     expect(r.travelLine).toBe('distance not known')
   })
 
-  it('withholds an unverified hero image', () => {
-    // Every image in the catalog is currently unverified, so every card falls
-    // back to its initials tile.
+  it('falls back to initials when a venue has no hero image', () => {
     expect(dec(row()).heroUrl).toBeNull()
     expect(dec(row()).initials).toBe('SL')
+  })
+
+  it('carries the hero image and its alt text through', () => {
+    const heroes = new Map([['v', { url: 'https://x/y.jpg', alt: 'The boardwalk' }]])
+    const r = decorate(row(), state(), ORIGIN, heroes)
+    expect(r.heroUrl).toBe('https://x/y.jpg')
+    // alt is required by the schema precisely so it never falls back to a
+    // filename or the venue name.
+    expect(r.heroAlt).toBe('The boardwalk')
   })
 })
 

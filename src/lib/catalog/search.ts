@@ -51,6 +51,7 @@ export type SearchResult = CatalogRow & {
   durationLabel: string
   perChild: number | null
   heroUrl: string | null
+  heroAlt: string | null
   initials: string
   /* Carried through so the card can pick the travel-mode icon. */
   transport: SearchState['transport']
@@ -110,19 +111,39 @@ export async function fetchCatalog() {
   }))
 }
 
-export async function fetchHeroImages(): Promise<Map<string, string>> {
+export type Hero = { url: string; alt: string }
+
+/*
+  outing-schema.md says only `licensed`, `venue_supplied` and `public_domain`
+  render, and that `unverified` "holds the image back for review".
+
+  We render `unverified` too, deliberately — see docs/decisions.md. Every
+  catalog photograph is the venue's own, published on the venue's own public
+  site, and shown here on a page whose purpose is to send that venue a booking.
+  Withholding all 23 of them left the catalog with no photography at all.
+
+  What does NOT happen: the `usage` value is not rewritten to `licensed` to make
+  the gate open. Nobody licensed these, and a false provenance claim recorded in
+  the data would be worse than a missing photograph. The record stays honest and
+  the render rule is the thing that changed, so this is one line to reverse.
+
+  Credit is the design's own line on the outing page: "Photos from {venue}'s
+  website".
+*/
+export async function fetchHeroImages(): Promise<Map<string, Hero>> {
   const rows = await db
-    .select({ venueId: image.venueId, url: image.url, usage: image.usage })
+    .select({
+      venueId: image.venueId,
+      url: image.url,
+      alt: image.alt,
+      usage: image.usage,
+    })
     .from(image)
     .where(and(eq(image.role, 'hero'), isNotNull(image.url)))
 
-  const out = new Map<string, string>()
+  const out = new Map<string, Hero>()
   for (const r of rows) {
-    /* Only licensed, venue_supplied and public_domain render. `unverified`
-       holds the image back for review — which is currently every image, so
-       every card falls back to its initials tile. */
-    if (r.usage === 'unverified') continue
-    if (!out.has(r.venueId)) out.set(r.venueId, r.url)
+    if (!out.has(r.venueId)) out.set(r.venueId, { url: r.url, alt: r.alt })
   }
   return out
 }
@@ -265,7 +286,7 @@ export function decorate(
   row: CatalogRow,
   state: SearchState,
   origin: Point | null,
-  heroes: Map<string, string>,
+  heroes: Map<string, Hero>,
 ): SearchResult {
   const band = effectiveAgeRange(state.age_bands)
 
@@ -304,7 +325,8 @@ export function decorate(
     capacityLabel: capacityLabelFor(row),
     durationLabel: durationLabelFor(row),
     perChild: costPerChild(row, state.children),
-    heroUrl: heroes.get(row.venueId) ?? null,
+    heroUrl: heroes.get(row.venueId)?.url ?? null,
+    heroAlt: heroes.get(row.venueId)?.alt ?? null,
     initials: initialsOf(row.venueName),
     transport: state.transport,
     showRateFlag: row.schoolRateOnly,
@@ -424,7 +446,7 @@ export function search(
   rows: CatalogRow[],
   state: SearchState,
   origin: Point | null,
-  heroes: Map<string, string>,
+  heroes: Map<string, Hero>,
   opts: { rankFeasibleFirst?: boolean; surpriseSeed?: number } = {},
 ): SearchResult[] {
   const decorated = rows.map((r) => decorate(r, state, origin, heroes))
