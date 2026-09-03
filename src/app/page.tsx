@@ -1,5 +1,7 @@
+import Link from 'next/link'
 import { fetchCatalog, fetchHeroImages, resultLine, search } from '@/lib/catalog/search'
-import { parseSearchParams } from '@/lib/catalog/url'
+import { parseSearchParams, toSearchParams } from '@/lib/catalog/url'
+import { CatalogMap, type MapPin } from '@/components/catalog/catalog-map'
 import { OutingCard } from '@/components/catalog/outing-card'
 import { SearchControls, SortControl } from '@/components/catalog/search-controls'
 import { EmptyState } from '@/components/ui'
@@ -26,10 +28,39 @@ export default async function CatalogPage({
 }: {
   searchParams: Promise<Record<string, string | string[] | undefined>>
 }) {
-  const state = parseSearchParams(await searchParams)
+  const params = await searchParams
+  const state = parseSearchParams(params)
+  const mapOpen = params.map === '1'
 
   const [rows, heroes] = await Promise.all([fetchCatalog(), fetchHeroImages()])
   const results = search(rows, state, VICTORIA, heroes)
+
+  /*
+    One pin per distinct venue coordinate — several programs at the same venue
+    would otherwise stack invisibly on one point. Programs that come to you
+    have no pin, and neither do the four venues still missing coordinates.
+  */
+  const seen = new Set<string>()
+  const pins: MapPin[] = []
+  for (const r of results) {
+    if (r.comesToYou || r.venueLat == null || r.venueLng == null) continue
+    const key = `${r.venueLat},${r.venueLng}`
+    if (seen.has(key)) continue
+    seen.add(key)
+    pins.push({
+      lat: r.venueLat,
+      lng: r.venueLng,
+      name: r.venueName,
+      caption: r.travelLine,
+    })
+  }
+
+  const mapHref = () => {
+    const p = toSearchParams(state)
+    if (!mapOpen) p.set('map', '1')
+    const qs = p.toString()
+    return qs ? `/?${qs}` : '/'
+  }
 
   return (
     <main className="mx-auto max-w-page px-5 pb-16">
@@ -49,8 +80,27 @@ export default async function CatalogPage({
         <p className="text-body-sm text-text-muted font-semibold">
           {resultLine(results)}
         </p>
-        <SortControl state={state} />
+        <div className="flex items-center gap-4">
+          <SortControl state={state} />
+          <Link
+            href={mapHref()}
+            scroll={false}
+            className="text-meta text-brand font-semibold"
+          >
+            {mapOpen ? 'Hide map' : 'Show map'}
+          </Link>
+        </div>
       </div>
+
+      {mapOpen ? (
+        <div className="mb-5">
+          <CatalogMap home={VICTORIA} homeLabel="Victoria" pins={pins} />
+          <p className="text-meta-sm text-text-faint mt-2">
+            One pin per venue in this list. The dark pin is Victoria. Programs
+            that come to you have no pin.
+          </p>
+        </div>
+      ) : null}
 
       {results.length > 0 ? (
         <div className="grid gap-3">
