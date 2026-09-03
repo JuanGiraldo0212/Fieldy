@@ -126,7 +126,9 @@ export const searchStateSchema = z.object({
   children: z.number().int().min(1).default(16),
   transport: z.enum(['walking', 'bus', 'parent_drivers']).default('bus'),
   budget_max: z.number().min(0).default(10),
-  radius_km: z.number().min(0).default(5),
+  /* 0 is "any distance": start wide and let the director narrow it, rather
+     than hiding programs behind a radius she never chose. */
+  radius_km: z.number().min(0).default(0),
   /*
     Where to measure from, when it is not the active room's home base. A
     director planning around a different starting point — the school she is
