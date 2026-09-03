@@ -113,6 +113,23 @@ export default async function CatalogPage({
         </p>
       </header>
 
+      {/* Signed in but never finished setup: they closed the tab on /welcome,
+          or clicked an old link. Without this they browse the anonymous
+          defaults forever with nothing explaining why the catalog is not
+          theirs. */}
+      {viewer && !viewer.centreId ? (
+        <Link
+          href="/welcome"
+          className="bg-brand-tint border-info-border text-info-ink mb-4 flex flex-wrap items-center gap-3 rounded-card border px-4 py-3.5 no-underline"
+        >
+          <span className="text-body-sm flex-1 font-semibold">
+            Finish setting up and the catalog will only show outings that work
+            for your group.
+          </span>
+          <span className="text-body-sm font-bold">Pick up where you left off →</span>
+        </Link>
+      ) : null}
+
       <SearchControls
         state={state}
         originLabel={activeRoom ? activeRoom.name : 'Victoria'}
