@@ -55,6 +55,24 @@ Reason: every other control on the screen applies immediately, and with twelve
 checkboxes the draft/commit distinction costs more than it buys. Revisit if the
 filter set grows, or if testing shows people expect Cancel to undo.
 
+### Deviation — the "Fun" mood chip is "Play"
+
+*Slice 1. `src/components/catalog/search-controls.tsx`, and the `mood_tag` enum.*
+
+The design's six mood chips are Fun, Explore, Active, Creative, Learn, Surprise
+me. Five of those name what the children do. "Fun" names how it is supposed to
+feel — and it implies the other four are not, which is both untrue and unhelpful
+when a director is choosing between them.
+
+The programs tagged `fun` had a common thread that was not a feeling: petting
+the goats, the dress-up box, sitting in a fighter jet's cockpit, playing fan tan
+and trying on the costume. In every case **the children do the thing themselves
+rather than being shown it**. That is `play`, and it is observable rather than a
+value judgement.
+
+Same six programs, same pink chip and tint, new label and a Blocks icon in place
+of Sparkles. The design's frame needs its label updated.
+
 ### Gap — catalog empty state
 
 *Slice 1. `src/app/page.tsx`.*

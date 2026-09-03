@@ -74,7 +74,7 @@ What the scraper/curation pipeline should emit so a venue drops into the app wit
 | `indoor` / `outdoor` | bool | |
 | `+ format` | enum[] | `guided` · `self_guided` · `hands_on` · `interactive` — the Program type filter |
 | `+ sensory_friendly`, `+ low_noise`, `+ neurodiversity_friendly` | bool·null | the Accessibility filter. `null` ≠ `false`; unknown stays out of results only when the filter is on |
-| `+ mood_tags` | enum[] | **required, 1–3 values** — `fun` · `explore` · `active` · `creative` · `learn`. Judged from what the children actually do, not from the venue category. The app can fall back to guessing from category, but that guess reads `fun` as "animals or science" and misses an indoor climbing gym as `active`, so a real reading always wins |
+| `+ mood_tags` | enum[] | **required, 1–3 values** — `play` · `explore` · `active` · `creative` · `learn`. Judged from what the children actually do, not from the venue category. The app can fall back to guessing from category, but that guess reads `play` as "animals or science" and misses an indoor climbing gym as `active`, so a real reading always wins |
 | `curriculum_tags` | string[]·null | |
 | `+ booking_email` / `+ booking_url` / `+ booking_method` | string·null | program-level override — a venue's free self-guided visit and its paid workshop rarely book the same way |
 | `source_url`, `evidence` | string | keep: `evidence` is what makes a claim auditable |

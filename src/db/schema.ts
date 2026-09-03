@@ -135,7 +135,7 @@ export const programFormat = pgEnum('program_format', [
 ])
 
 export const moodTag = pgEnum('mood_tag', [
-  'fun',
+  'play',
   'explore',
   'active',
   'creative',

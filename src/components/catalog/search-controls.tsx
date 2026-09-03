@@ -5,6 +5,7 @@ import { useState, useTransition } from 'react'
 import {
   Accessibility,
   Activity,
+  Blocks,
   Brain,
   Bus,
   ChevronDown,
@@ -25,7 +26,6 @@ import {
   SlidersHorizontal,
   Smile,
   Sparkle,
-  Sparkles,
   Sun,
   Tag,
   Truck,
@@ -49,7 +49,7 @@ import { CheckRow, Chip, Field, FieldBox, cx } from '@/components/ui'
 /* Icons and sizes are the design's own — 20px on mood chips, 18px on
    category chips and the field controls, 17px in the filter drawer. */
 const MOOD_STYLE: Record<string, { label: string; tint: string; ink: string; Icon: LucideIcon }> = {
-  fun: { label: 'Fun', tint: 'var(--color-mood-fun)', ink: 'var(--color-mood-fun-ink)', Icon: Sparkles },
+  play: { label: 'Play', tint: 'var(--color-mood-play)', ink: 'var(--color-mood-play-ink)', Icon: Blocks },
   explore: { label: 'Explore', tint: 'var(--color-mood-explore)', ink: 'var(--color-mood-explore-ink)', Icon: Luggage },
   active: { label: 'Active', tint: 'var(--color-mood-active)', ink: 'var(--color-mood-active-ink)', Icon: Activity },
   creative: { label: 'Creative', tint: 'var(--color-mood-creative)', ink: 'var(--color-mood-creative-ink)', Icon: WandSparkles },

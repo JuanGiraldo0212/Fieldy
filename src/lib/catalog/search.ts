@@ -129,7 +129,7 @@ export async function fetchHeroImages(): Promise<Map<string, string>> {
 
 /* ─── Moods ──────────────────────────────────────────────────────────────── */
 
-export const MOODS = ['fun', 'explore', 'active', 'creative', 'learn', 'surprise'] as const
+export const MOODS = ['play', 'explore', 'active', 'creative', 'learn', 'surprise'] as const
 export type Mood = (typeof MOODS)[number]
 
 /*
@@ -152,10 +152,9 @@ function matchesMood(row: CatalogRow, mood: Mood): boolean {
   const fmt = row.format ?? []
 
   switch (mood) {
-    case 'fun':
+    case 'play':
       return (
         cat === 'animals_farms' ||
-        cat === 'science' ||
         fmt.includes('hands_on') ||
         fmt.includes('interactive')
       )

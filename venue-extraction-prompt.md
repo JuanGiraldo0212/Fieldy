@@ -211,19 +211,19 @@ Produce this JSON. Use null for anything not stated.
 - `adults_free` — whether chaperones get in free. Distinct from `free_adults_per_children`, which is the count.
 - `format` — array from `guided` · `self_guided` · `hands_on` · `interactive`. Multiple allowed; a workshop is usually `["guided", "hands_on"]`.
 - `sensory_friendly`, `low_noise`, `neurodiversity_friendly` — only true or false when the site addresses it. `null` is not `false`, and unknown records are correctly excluded when the filter is on, so do not guess these to be helpful.
-- `mood_tags` — **required on every program.** One to three of `fun` · `explore` · `active` · `creative` · `learn`. Never null, never empty.
+- `mood_tags` — **required on every program.** One to three of `play` · `explore` · `active` · `creative` · `learn`. Never null, never empty.
 
-  These drive the "What are you in the mood for?" chips, which is how a director browses when she does not yet know what she wants. The app can fall back to guessing from the venue category, but that guess is crude — it reads `fun` as "animals or science", and files an indoor climbing gym under `community_civic` as not `active`. A real reading of what the children do beats it every time.
+  These drive the "What are you in the mood for?" chips, which is how a director browses when she does not yet know what she wants. The app can fall back to guessing from the venue category, but that guess is crude — it reads `play` as "animals or science", and files an indoor climbing gym under `community_civic` as not `active`. A real reading of what the children do beats it every time.
 
   Judge by **what the children actually do for most of the visit**, not by the venue's category or its own marketing:
 
-  - `fun` — they will laugh, be delighted, tell someone about it after. Animals, silliness, spectacle.
+  - `play` — they do the thing themselves rather than being shown it. Petting the goats, the dress-up box, climbing into the cockpit, playing the game. The test is whether a child's hands are on it.
   - `explore` — open-ended looking and finding, at their own pace. Trails, collections to wander, things to discover rather than be shown.
   - `active` — bodies moving for a meaningful part of the visit. Climbing, walking a real distance, running. **Indoors counts**: a climbing gym is `active`.
   - `creative` — they make something, or perform. Hands in materials. Not "they see art" — that is `explore` or `learn`.
   - `learn` — they come away knowing something specific. A guided lesson, a demonstration, a topic.
 
-  Most programs are two. A guided salmon-run walk is `explore` and `learn`. A studio workshop is `creative` and `fun`. A self-guided garden visit is `explore`. If you can only justify one, one is right.
+  Most programs are two. A guided salmon-run walk is `explore` and `learn`. A studio workshop is `creative` and `play`. A self-guided garden visit is `explore`. If you can only justify one, one is right.
 
   Do not tag `learn` on everything because it is educational; almost anything is. Ask what the child would say they did.
 - Program-level `booking_email` / `booking_url` / `booking_method` — only when this program books differently from the venue default. A free self-guided visit and a paid workshop rarely book the same way. Leave null to inherit the venue's.

@@ -162,7 +162,7 @@ export const catalogProgramSchema = z.object({
   neurodiversity_friendly: nullableBool,
 
   mood_tags: z
-    .array(z.enum(['fun', 'explore', 'active', 'creative', 'learn']))
+    .array(z.enum(['play', 'explore', 'active', 'creative', 'learn']))
     .nullable()
     .optional()
     .default(null),
