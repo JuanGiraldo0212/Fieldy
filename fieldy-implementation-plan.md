@@ -331,8 +331,8 @@ Build in this order. The Design column is the line range of that screen's sectio
 | Route | Screen | Spec | Design |
 |---|---|---|---|
 | `/` | Catalog: search state in the URL, mood and category chips, filter drawer, sort, map toggle, feasibility badges | 5.1, 5.1a | lines 63–426 |
-| `/outing/[programSlug]` | Program detail, fact quad, photo strip, our note, practical list, getting there, report link, Plan and Save | 5.2 | lines 427–631 |
-| `/plan/[programSlug]` | Rooms, date options, asks, editable message preview, Send | 5.3 | lines 632–764 |
+| `/outing/[venue]/[program]` | Program detail, fact quad, photo strip, our note, practical list, getting there, report link, Plan and Save | 5.2 | lines 427–631 |
+| `/plan/[venue]/[program]` | Rooms, date options, asks, editable message preview, Send | 5.3 | lines 632–764 |
 | `/trips` | My trips: Saved / Needs action / Waiting / Upcoming / Past tabs, grouped sections, New reply dot | 5.5, A4 | lines 999–1117 |
 | `/trips/[tripId]` | Trip page: header, status rail, suggestion banner, dates, costs, checklist, thread, compose, notes | 5.4, A2, A3 | lines 765–998 |
 | `/rooms` and `/rooms/[roomId]` | "Group profiles" list; the editor is a **modal**, not a route — keep `/rooms/[roomId]` as a deep link that opens it | 5.6 | lines 1118–1170, 1166–1251 |
@@ -343,6 +343,8 @@ Build in this order. The Design column is the line range of that screen's sectio
 | `/api/email/inbound` | Resend inbound webhook | 5.4 | |
 | `/api/jobs/retry` | Retries failed sends and notifications, called by pg_cron | 5.4 | |
 | `/api/reports` | Data correction POST, anonymous allowed | 8 | design has a one-tap link only; the form is a gap |
+
+**Program slugs are unique within a venue, not globally** — `self-guided-visit` exists at two of the fifteen catalog venues — so an outing needs both segments. `/outing/craigdarroch-castle/self-guided-visit` also reads better in a text message, which is how these links travel.
 
 The UI word for a room is **"Group"** / **"Group profiles"**, and the nav item is **Groups**. Keep `room` as the name in code, the database and this plan.
 

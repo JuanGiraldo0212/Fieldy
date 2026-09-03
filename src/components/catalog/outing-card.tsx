@@ -46,7 +46,7 @@ export function OutingCard({ result: r }: { result: SearchResult }) {
 
   return (
     <Link
-      href={`/outing/${encodeURIComponent(r.id)}`}
+      href={`/outing/${r.venueId}/${r.slug}`}
       className="bg-surface border-border hover:border-brand hover:bg-surface-hover animate-rise-in flex w-full flex-wrap gap-5 rounded-card-lg border p-5 text-left no-underline"
     >
       {/* Thumbnail, falling back to an initials tile when the venue has no

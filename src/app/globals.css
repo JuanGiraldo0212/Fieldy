@@ -58,6 +58,12 @@
   --color-info-border: #cbdef9;
   --color-info-ink: #16407f;
 
+  /* "Our note" — our own advice, warmer than a warning. */
+  --color-note-tint: #fffdf4;
+  --color-note-border: #f0dfa6;
+  --color-note-ink: #7d5f12;
+  --color-note-icon: #e0a62a;
+
   --color-danger: #d0342b;
   --color-danger-strong: #ae271f;
 
@@ -107,8 +113,12 @@
   --text-price: 1.875rem; /* 30px */
   --text-price--line-height: 1;
   --text-price--letter-spacing: -0.02em;
+  /* Travel time on the outing page: a number to compare at a glance. */
+  --text-travel: 1.625rem; /* 26px */
+  --text-travel--letter-spacing: -0.02em;
   --text-brand: 1.3125rem; /* 21px */
   --text-brand--letter-spacing: -0.02em;
+  --text-fact: 1.125rem; /* 18px, the fact quad's value line */
   --text-body-lg: 1.0625rem; /* 17px */
   --text-body-lg--line-height: 1.5;
   --text-body: 1rem; /* 16px */
