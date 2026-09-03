@@ -18,6 +18,7 @@ import {
   check,
   date,
   index,
+  doublePrecision,
   integer,
   jsonb,
   numeric,
@@ -171,9 +172,13 @@ export const venue = pgTable(
     address: text('address'),
 
     /* Required by the schema, and everything spatial depends on them: distance,
-       travel time, the radius filter, sort-by-distance and both maps. */
-    lat: real('lat'),
-    lng: real('lng'),
+       travel time, the radius filter, sort-by-distance and both maps.
+
+       doublePrecision, not real: float4 carries about 7 significant digits,
+       which rounds 48.41616 to 48.4162 and -123.32642 to -123.326 — 50 to 100
+       metres of error on the very numbers every distance decision reads. */
+    lat: doublePrecision('lat'),
+    lng: doublePrecision('lng'),
     geoSource: text('geo_source'),
 
     hostsSchoolGroups: boolean('hosts_school_groups'),
@@ -391,8 +396,8 @@ export const centre = pgTable('centre', {
      are stable, not immutable, so the expression is rejected. Derive it with
      rateClassOf() in src/lib/rate-class.ts. */
   address: text('address').notNull(),
-  lat: real('lat'),
-  lng: real('lng'),
+  lat: doublePrecision('lat'),
+  lng: doublePrecision('lng'),
   createdAt: timestamp('created_at', { withTimezone: true })
     .notNull()
     .defaultNow(),
@@ -416,8 +421,8 @@ export const room = pgTable(
     budgetPerChild: numeric('budget_per_child', { precision: 10, scale: 2 }),
     transport: transportMode('transport').array().notNull(),
     address: text('address').notNull(),
-    lat: real('lat'),
-    lng: real('lng'),
+    lat: doublePrecision('lat'),
+    lng: doublePrecision('lng'),
     notes: text('notes'),
     /* Soft delete only. A hard delete would silently relabel historical trips
        with another room's name and numbers. "At least one non-archived room per
