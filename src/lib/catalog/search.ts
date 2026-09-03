@@ -43,14 +43,22 @@ export type SearchResult = CatalogRow & {
   travelLine: string
   feasibility: Feasibility
   badge: string
-  costLabel: string
-  totalLabel: string
+  bigTotal: string
+  bigTotalCaption: string
+  perChildLine: string
   ageLabel: string
   capacityLabel: string
   durationLabel: string
   perChild: number | null
   heroUrl: string | null
   initials: string
+  /* Carried through so the card can pick the travel-mode icon. */
+  transport: SearchState['transport']
+  /* The design only shows the school-rate flag to daycare accounts: a school
+     rate quoted to a daycare is a number they cannot actually pay. There is no
+     session until slice 3, and the anonymous default centre type is a daycare,
+     so it shows. */
+  showRateFlag: boolean
 }
 
 /* ─── Fetch ──────────────────────────────────────────────────────────────── */
@@ -174,20 +182,37 @@ function seededPick<T>(items: T[], count: number, seed: number): T[] {
 
 /* ─── Labels ─────────────────────────────────────────────────────────────── */
 
-function costLabelFor(row: CatalogRow): string {
+/*
+  The card's price block is three parts, and they are not the same thing as the
+  outing page's cost tile. The design shows one large number with a caption
+  beside it, then a per-child line underneath:
+
+      $150   per class
+      $9.38 per child
+
+  A group fee shows the group fee big, because that is what the venue charges.
+  A per-child price shows the GROUP TOTAL big, because that is what the trip
+  costs. An unpublished price shows an em dash rather than a zero.
+*/
+function bigTotalFor(row: CatalogRow, size: number): string {
+  if (row.costPerGroupCad != null) return money(row.costPerGroupCad)
   if (row.isFree || row.costPerChildCad === 0) return 'Free'
-  if (row.costPerGroupCad != null) return `${money(row.costPerGroupCad)} per class`
-  if (row.costPerChildCad == null) return 'Price not published'
-  return `${money(row.costPerChildCad)} a child`
+  if (row.costPerChildCad == null) return '—'
+  return money(row.costPerChildCad * size)
 }
 
-function totalLabelFor(row: CatalogRow, size: number): string {
-  if (row.isFree || row.costPerChildCad === 0) return 'no cost at all'
-  if (row.costPerGroupCad != null) {
-    return `${money(row.costPerGroupCad / Math.max(1, size))} a child for ${size}`
-  }
-  if (row.costPerChildCad == null) return 'ask the venue'
-  return `${money(row.costPerChildCad * size)} for ${size} children`
+function bigTotalCaptionFor(row: CatalogRow): string {
+  if (row.costPerGroupCad != null) return 'per class'
+  if (row.isFree || row.costPerChildCad === 0) return 'no cost'
+  if (row.costPerChildCad == null) return 'price not published'
+  return 'total'
+}
+
+function perChildLineFor(row: CatalogRow, size: number): string {
+  const pc = costPerChild(row, size)
+  if (pc == null) return 'Ask the venue'
+  if (pc === 0) return `For ${size} children`
+  return `${money(pc)} per child`
 }
 
 function ageLabelFor(row: CatalogRow): string {
@@ -266,14 +291,17 @@ export function decorate(
     travelLine: travelLine(distanceKm, state.transport as TransportMode, row.comesToYou),
     feasibility: fit,
     badge: badgeLabel(fit.level),
-    costLabel: costLabelFor(row),
-    totalLabel: totalLabelFor(row, state.children),
+    bigTotal: bigTotalFor(row, state.children),
+    bigTotalCaption: bigTotalCaptionFor(row),
+    perChildLine: perChildLineFor(row, state.children),
     ageLabel: ageLabelFor(row),
     capacityLabel: capacityLabelFor(row),
     durationLabel: durationLabelFor(row),
     perChild: costPerChild(row, state.children),
     heroUrl: heroes.get(row.venueId) ?? null,
     initials: initialsOf(row.venueName),
+    transport: state.transport,
+    showRateFlag: row.schoolRateOnly,
   }
 }
 

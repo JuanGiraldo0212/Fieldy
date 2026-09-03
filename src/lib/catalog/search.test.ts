@@ -80,17 +80,40 @@ describe('initialsOf', () => {
 })
 
 describe('decorate — labels', () => {
-  it('writes cost the way the design writes it', () => {
-    expect(dec(row()).costLabel).toBe('$6 a child')
-    expect(dec(row({ costPerChildCad: null, costPerGroupCad: 150 })).costLabel).toBe('$150 per class')
-    expect(dec(row({ costPerChildCad: null })).costLabel).toBe('Price not published')
-    expect(dec(row({ isFree: true })).costLabel).toBe('Free')
+  it('shows the group TOTAL big for a per-child price', () => {
+    // $6 a child for 16 children. The big number is what the trip costs.
+    const r = dec(row())
+    expect(r.bigTotal).toBe('$96')
+    expect(r.bigTotalCaption).toBe('total')
+    expect(r.perChildLine).toBe('$6 per child')
   })
 
-  it('writes the group total against the group size', () => {
-    expect(dec(row()).totalLabel).toBe('$96 for 16 children')
-    expect(dec(row({ costPerChildCad: null, costPerGroupCad: 150 })).totalLabel).toBe('$9.38 a child for 16')
-    expect(dec(row({ costPerChildCad: null })).totalLabel).toBe('ask the venue')
+  it('shows the group FEE big for a per-class price', () => {
+    // The venue charges $150 regardless of headcount, so that is the number.
+    const r = dec(row({ costPerChildCad: null, costPerGroupCad: 150 }))
+    expect(r.bigTotal).toBe('$150')
+    expect(r.bigTotalCaption).toBe('per class')
+    expect(r.perChildLine).toBe('$9.38 per child')
+  })
+
+  it('shows an em dash, not a zero, when no price is published', () => {
+    const r = dec(row({ costPerChildCad: null }))
+    expect(r.bigTotal).toBe('—')
+    expect(r.bigTotalCaption).toBe('price not published')
+    expect(r.perChildLine).toBe('Ask the venue')
+  })
+
+  it('says Free rather than $0', () => {
+    const r = dec(row({ isFree: true, costPerChildCad: null }))
+    expect(r.bigTotal).toBe('Free')
+    expect(r.bigTotalCaption).toBe('no cost')
+    expect(r.perChildLine).toBe('For 16 children')
+  })
+
+  it('recomputes the big total when the group size changes', () => {
+    // The whole point of the big number: it answers "what will this cost us".
+    expect(dec(row(), state({ children: 10 })).bigTotal).toBe('$60')
+    expect(dec(row(), state({ children: 30 })).bigTotal).toBe('$180')
   })
 
   it('writes ages, and grades with K rather than 0', () => {
