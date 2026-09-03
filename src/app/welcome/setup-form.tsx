@@ -3,6 +3,7 @@
 import { useActionState, useState } from 'react'
 import { createCentreAndRoom, type SetupState } from './actions'
 import { CheckRow, Field, FieldBox } from '@/components/ui'
+import { AddressField } from '@/components/ui/address-field'
 
 /*
   One screen, not a wizard. Spec §5.3 says the plan screen is one screen and
@@ -116,20 +117,10 @@ export function SetupForm({
           </Field>
         </div>
         <div className="mt-4">
-          <Field label="Address">
-            <FieldBox>
-              <input
-                name="address"
-                required
-                placeholder="1148 Fairfield Rd, Victoria"
-                className="text-body-sm w-full border-0 bg-transparent font-semibold outline-none"
-              />
-            </FieldBox>
-          </Field>
-          <p className="text-meta text-text-faint mt-2">
-            Every distance and travel time is measured from here, so a street
-            number helps.
-          </p>
+          <AddressField
+            required
+            hint="Every distance and travel time is measured from here. Pick your address from the list so the pin lands on the right building."
+          />
         </div>
       </section>
 

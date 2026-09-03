@@ -90,6 +90,24 @@ one small section.
 The last-room rule is enforced in the server action, not the dialog, so it
 holds whichever way the request arrives.
 
+### Gap — address autocomplete
+
+*Slice 3. `src/components/ui/address-field.tsx`, `/api/geocode/suggest`.*
+
+spec §5.8 asks for it — "Address entry uses autocomplete or a map pin; distance
+calculations depend on it" — but the design draws a plain text field, so the
+list, its keyboard behaviour and the confirmed tick are invented.
+
+Picking a suggestion carries its coordinates through, so the server stores the
+point the director actually saw rather than geocoding her text again and
+possibly landing somewhere else.
+
+Typing free text still works. The geocoder is a convenience, not a gate: if it
+is slow, down, or does not know a rural address, the form still submits and the
+server geocodes the string as before.
+
+Needs a frame.
+
 ### Gap — login and first-run setup
 
 *Slice 3. `src/app/login/`, `src/app/welcome/`.*

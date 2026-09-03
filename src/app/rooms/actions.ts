@@ -6,7 +6,7 @@ import { z } from 'zod'
 import { db, room } from '@/db'
 import { getViewer } from '@/lib/auth'
 import { newId } from '@/lib/ids'
-import { geocodeAddress } from '@/lib/catalog/geocode'
+import { geocodeAddress, pickedPoint } from '@/lib/catalog/geocode'
 
 /*
   Rooms. spec §5.8.
@@ -64,10 +64,11 @@ export async function saveRoom(
     return { error: 'The oldest age cannot be younger than the youngest.' }
   }
 
-  /* Only geocode when the address is new or changed. Renaming a room should
+  /* A point chosen from the picker wins: it is the one she saw. Otherwise
+     only geocode when the address is new or changed, so renaming a room does
      not depend on a third-party service being up. */
-  let point: { lat: number; lng: number } | null = null
-  if (d.id) {
+  let point = pickedPoint(formData.get('addressLat'), formData.get('addressLng'))
+  if (!point && d.id) {
     const existing = await db
       .select()
       .from(room)
@@ -79,7 +80,7 @@ export async function saveRoom(
       prior.address === d.address && prior.lat != null && prior.lng != null
         ? { lat: prior.lat, lng: prior.lng }
         : await geocodeAddress(d.address)
-  } else {
+  } else if (!point) {
     point = await geocodeAddress(d.address)
   }
 

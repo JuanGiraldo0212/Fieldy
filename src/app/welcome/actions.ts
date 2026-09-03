@@ -7,7 +7,7 @@ import { z } from 'zod'
 import { account, centre, db, room } from '@/db'
 import { getViewer } from '@/lib/auth'
 import { newId } from '@/lib/ids'
-import { geocodeAddress } from '@/lib/catalog/geocode'
+import { geocodeAddress, pickedPoint } from '@/lib/catalog/geocode'
 
 /*
   Centre and first room, created together. spec §5.3: "a first time user
@@ -69,7 +69,9 @@ export async function createCentreAndRoom(
   /* Geocode before writing. A centre with no coordinates cannot measure a
      single distance, which is most of what the catalog does — better to say so
      now than to create it and have every card read "distance not known". */
-  const point = await geocodeAddress(d.address)
+  const point =
+    pickedPoint(formData.get('addressLat'), formData.get('addressLng')) ??
+    (await geocodeAddress(d.address))
   if (!point) {
     return {
       error:

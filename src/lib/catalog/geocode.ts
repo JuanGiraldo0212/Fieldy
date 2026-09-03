@@ -145,3 +145,26 @@ export async function geocodeAddress(address: string): Promise<Point | null> {
     return null
   }
 }
+
+/*
+  Coordinates that came from the address picker.
+
+  The browser sends the point the director actually chose from the list, which
+  is better than re-geocoding her text: a second lookup can return a different
+  result, and she would have no way of knowing the pin moved.
+
+  They are still checked. Not because a forged pair is much of an attack — it
+  would only misplace that person's own home base — but because a malformed or
+  out-of-region pair would quietly break every distance on her catalog, and
+  falling back to geocoding the text is strictly better than storing nonsense.
+*/
+export function pickedPoint(
+  lat: FormDataEntryValue | null,
+  lng: FormDataEntryValue | null,
+): Point | null {
+  if (lat == null || lng == null) return null
+  const p = { lat: Number(lat), lng: Number(lng) }
+  if (!Number.isFinite(p.lat) || !Number.isFinite(p.lng)) return null
+  if (!inRegion(p)) return null
+  return p
+}

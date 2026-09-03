@@ -5,7 +5,7 @@ import { eq } from 'drizzle-orm'
 import { z } from 'zod'
 import { account, centre, db } from '@/db'
 import { getViewer } from '@/lib/auth'
-import { geocodeAddress } from '@/lib/catalog/geocode'
+import { geocodeAddress, pickedPoint } from '@/lib/catalog/geocode'
 
 const schema = z.object({
   name: z.string().trim().min(1, 'We need your name for the request signature.').max(120),
@@ -50,8 +50,14 @@ export async function saveAccount(
 
   /* Only geocode a changed address. Editing your phone number should not
      depend on a geocoder being up. */
-  let point = { lat: prior.lat, lng: prior.lng }
-  if (prior.address !== d.address || prior.lat == null) {
+  let point: { lat: number | null; lng: number | null } = {
+    lat: prior.lat,
+    lng: prior.lng,
+  }
+  const chosen = pickedPoint(formData.get('addressLat'), formData.get('addressLng'))
+  if (chosen) {
+    point = chosen
+  } else if (prior.address !== d.address || prior.lat == null) {
     const hit = await geocodeAddress(d.address)
     if (!hit) {
       return {

@@ -4,6 +4,7 @@ import { useActionState, useState } from 'react'
 import { CircleCheck } from 'lucide-react'
 import { saveAccount, type AccountState } from './actions'
 import { cx } from '@/components/ui'
+import { AddressField } from '@/components/ui/address-field'
 
 /*
   The account screen. spec §5.10.
@@ -125,14 +126,11 @@ export function AccountForm({
           <input id="centreName" name="centreName" required defaultValue={centreName} className={field} />
         </div>
 
-        <div>
-          <label className={label} htmlFor="address">Address</label>
-          <input id="address" name="address" required defaultValue={address} className={field} />
-          <p className="text-meta text-text-faint mt-1.5">
-            Every distance is measured from here. Rooms can have their own if
-            they leave from somewhere else.
-          </p>
-        </div>
+        <AddressField
+          required
+          defaultValue={address}
+          hint="Every distance is measured from here. Rooms can have their own if they leave from somewhere else."
+        />
       </div>
 
       {/* Copy per docs/design-map.md §7.1: the design promises forwarded

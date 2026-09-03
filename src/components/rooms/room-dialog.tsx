@@ -4,6 +4,7 @@ import { useActionState, useEffect, useRef, useState } from 'react'
 import { Baby, Backpack, GraduationCap, Users, X } from 'lucide-react'
 import { saveRoom, type RoomState } from '@/app/rooms/actions'
 import { CheckRow, Field, FieldBox, cx } from '@/components/ui'
+import { AddressField } from '@/components/ui/address-field'
 
 /*
   The room editor. The design has it as a modal over the Group profiles screen
@@ -195,17 +196,14 @@ export function RoomDialog({
                 className="text-body-sm w-full border-0 bg-transparent font-bold outline-none" />
             </FieldBox>
           </Field>
-          <Field label="Home base" className="sm:col-span-2">
-            <FieldBox>
-              <input
-                name="address"
-                required
-                defaultValue={room?.address ?? centreAddress}
-                placeholder="Street, city"
-                className="text-body-sm w-full border-0 bg-transparent font-semibold outline-none"
-              />
-            </FieldBox>
-          </Field>
+          <div className="sm:col-span-2">
+            <AddressField
+              label="Home base"
+              required
+              defaultValue={room?.address ?? centreAddress}
+              hint="Where this room leaves from, if it differs from the centre."
+            />
+          </div>
         </div>
 
         <div className="mt-4">
