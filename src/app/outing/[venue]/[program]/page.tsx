@@ -258,13 +258,13 @@ export default async function OutingPage({
         </FactQuad>
 
         <div className="mt-5 flex flex-wrap gap-3">
-          <button
-            type="button"
-            className="bg-brand hover:bg-brand-hover text-body flex min-h-[52px] items-center gap-2.5 rounded-pill px-6 font-bold text-white"
+          <Link
+            href={`/plan/${v.id}/${p.slug}`}
+            className="bg-brand hover:bg-brand-hover text-body flex min-h-[52px] items-center gap-2.5 rounded-pill px-6 font-bold text-white no-underline"
           >
             <MessageCircle size={18} />
             Plan this trip
-          </button>
+          </Link>
           <button
             type="button"
             className="border-border-strong bg-surface hover:border-brand text-body flex min-h-[52px] items-center gap-2.5 rounded-pill border px-6 font-bold"

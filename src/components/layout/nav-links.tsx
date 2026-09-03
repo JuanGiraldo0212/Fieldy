@@ -20,8 +20,12 @@ export function NavLinks({ signedIn }: { signedIn: boolean }) {
 
   const items: Item[] = [
     { href: '/', label: 'Find outings' },
-    /* "My trips" belongs here, between these two, once /trips exists. */
-    ...(signedIn ? [{ href: '/rooms', label: 'Groups' }] : []),
+    ...(signedIn
+      ? [
+          { href: '/trips', label: 'My trips' },
+          { href: '/rooms', label: 'Groups' },
+        ]
+      : []),
   ]
 
   return (

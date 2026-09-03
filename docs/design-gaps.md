@@ -229,3 +229,46 @@ Carried forward, not yet reached:
 12. Account and trip-page relay copy overridden — the design promises forwarded
     email copies, the relay is send-only. See design-map §7.1.
 13. Reply notification email — no template designed.
+
+---
+
+## Slice 4 — the plan screen and the trip page
+
+**Built to the design**, with these differences, all logged rather than quietly
+absorbed:
+
+1. **The send does not send.** There is no sending domain and no Resend account
+   yet, so a request is written, stored and shown, not delivered. One constant,
+   `SENDING_ENABLED` in `src/lib/email/status.ts`, holds this fact, and every
+   line of copy that would otherwise promise mail reads it: the button says
+   "Save request" rather than "Send request", the preview helper says why, and
+   the trip page carries an amber banner naming the address the request will go
+   to once sending is switched on. The message row's `send_error` records it,
+   which is the field the design already reserves for a failed send. Slice 5
+   deletes the constant.
+
+   The one failure this product cannot afford is a screen that looks like it
+   sent when it did not: a director who believes the venue has been asked stops
+   chasing them.
+
+2. **The waiting pill and "Waiting for venue reply" are suppressed** while a
+   request is undelivered. Nobody is waiting on a venue that was never written
+   to.
+
+3. **Date slots are shown in the trip's date cards**, which the design does not
+   draw. A morning booking and an afternoon one are different trips to a
+   toddler room, and the request asked for one of them.
+
+4. **The checklist has an Edit toggle** — inline date, Remove, and one row for
+   adding a step. Spec §5.4.4 requires all three; the design draws the read-only
+   state only.
+
+5. **`/trips` is a plain list**, newest first. The grouping, urgency sort,
+   "Needs my reply" chip and suggested-programs empty state of spec §5.6 are
+   later work. It exists because a trip you can only see once is not a trip you
+   have.
+
+**Not built here, by design:** the reply bubbles, the compose box, the
+suggestion banner and the manual status selector. They arrive with slices 5 and
+6, along with the mail that produces them.
+
