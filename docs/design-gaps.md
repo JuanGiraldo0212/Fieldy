@@ -90,6 +90,21 @@ one small section.
 The last-room rule is enforced in the server action, not the dialog, so it
 holds whichever way the request arrives.
 
+### Deviation — the top bar is missing "My trips", and gains "Sign in"
+
+*Slice 3. `src/components/layout/top-nav.tsx`.*
+
+The design's bar is wordmark, Find outings, My trips with a count pill, Groups,
+and an avatar. Ours has no My trips, because /trips does not exist until slice
+7 and a nav item that 404s is worse than one that is not there yet. NavLinks
+already carries the shape, including the count pill, so it goes back in with
+the route.
+
+The design only ever draws the signed-in state. The catalog is public and most
+first visitors arrive from a link in a text message, so a signed-out person
+sees this bar before they have an account: they get "Sign in" where the avatar
+would be, and no Groups item, since it would only bounce them to login.
+
 ### Gap — address autocomplete
 
 *Slice 3. `src/components/ui/address-field.tsx`, `/api/geocode/suggest`.*

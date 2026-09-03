@@ -124,8 +124,9 @@
   /* Travel time on the outing page: a number to compare at a glance. */
   --text-travel: 1.625rem; /* 26px */
   --text-travel--letter-spacing: -0.02em;
-  --text-brand: 1.3125rem; /* 21px */
-  --text-brand--letter-spacing: -0.02em;
+  /* The wordmark. Named -size because `text-brand` is already the colour. */
+  --text-brand-size: 1.3125rem; /* 21px */
+  --text-brand-size--letter-spacing: -0.02em;
   --text-fact: 1.125rem; /* 18px, the fact quad's value line */
   --text-address: 1.0625rem; /* 17px, home base and room notes */
   --text-body-lg: 1.0625rem; /* 17px */
