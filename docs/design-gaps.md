@@ -73,6 +73,23 @@ value judgement.
 Same six programs, same pink chip and tint, new label and a Blocks icon in place
 of Sparkles. The design's frame needs its label updated.
 
+### Gap — the report form
+
+*Slice 2. `src/components/program/report-form.tsx`, `src/app/api/reports/route.ts`.*
+
+The design has the link and the thanks state, but no form between them. Built
+plainly: the labels already on the page are offered as chips so "which detail is
+wrong" is a tap rather than a sentence, the note is optional, and no account is
+needed. Requiring a login to tell us we are wrong would mean we mostly do not
+get told.
+
+Two copy changes from the design, both to drop an em dash:
+"Tell us — takes one tap" is "Tell us, it takes one tap", and
+"Thanks — we will re-check this venue this week." is "Thanks. We will re-check
+this venue this week."
+
+Needs a frame.
+
 ### Gap — catalog empty state
 
 *Slice 1. `src/app/page.tsx`.*

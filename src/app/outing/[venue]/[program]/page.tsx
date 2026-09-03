@@ -47,6 +47,8 @@ import {
   TravelModes,
 } from '@/components/program/sections'
 import { VenueThumb } from '@/components/catalog/venue-thumb'
+import { CatalogMap } from '@/components/catalog/catalog-map'
+import { ReportForm } from '@/components/program/report-form'
 
 /* Until a session exists (slice 3), distance is from the centre of Victoria. */
 const VICTORIA = { lat: 48.4284, lng: -123.3656 }
@@ -360,23 +362,54 @@ export default async function OutingPage({
           <p className="text-body-sm text-text-muted -mt-1.5 mb-4">
             {v.address ?? v.name}
           </p>
-          <TravelModes options={modes} icons={MODE_ICONS} />
+          <div className="flex flex-wrap items-start gap-5">
+            <TravelModes options={modes} icons={MODE_ICONS} />
+            {v.lat != null && v.lng != null ? (
+              <div className="w-full max-w-full sm:w-[340px] sm:flex-none">
+                <CatalogMap
+                  home={VICTORIA}
+                  homeLabel="Victoria"
+                  pins={[
+                    {
+                      lat: v.lat,
+                      lng: v.lng,
+                      name: v.name,
+                      caption: travelLine(km, state.transport as TransportMode, false),
+                    },
+                  ]}
+                />
+                <div className="mt-2 text-right">
+                  <a
+                    href={`https://www.openstreetmap.org/?mlat=${v.lat}&mlon=${v.lng}#map=16/${v.lat}/${v.lng}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-body-sm font-semibold no-underline"
+                  >
+                    View larger map →
+                  </a>
+                </div>
+              </div>
+            ) : null}
+          </div>
         </Section>
       ) : null}
 
-      {/* Freshness */}
-      <p className="text-meta text-text-muted mt-3.5 px-1 leading-relaxed [overflow-wrap:anywhere]">
-        Details checked on {p.checkedOn ?? v.checkedOn} against the venue&rsquo;s
-        own pages.{' '}
-        {v.website ? (
-          <>
-            <a href={v.website} target="_blank" rel="noreferrer">
-              Venue page
-            </a>
-            {v.bookingPhone ? <> · {v.bookingPhone}</> : null}
-          </>
-        ) : null}
-      </p>
+      {/* Freshness, and the one-tap correction. The catalog is only
+          trustworthy if telling us we are wrong is easy. */}
+      <ReportForm
+        programId={p.id}
+        venueId={v.id}
+        checkedOn={p.checkedOn ?? v.checkedOn}
+        fields={[
+          'Cost',
+          'Ages or group size',
+          'Duration or dates',
+          'How to book',
+          ...facts.map((f) => f.label),
+        ]}
+        venueUrl={v.website}
+        phone={v.bookingPhone}
+      />
     </main>
   )
 }

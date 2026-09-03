@@ -1,81 +1,50 @@
-# Batch summary — Greater Victoria, first 15 venues
+# Batch summary — Greater Victoria
 
-Run date: 2026-09-02 · `extractor_version` v2.0 · 15 of 185 tracker rows processed
+Last run 2026-09-03 · `extractor_version` v2.0 · **30 of 185** tracker rows processed
 
-All 15 files pass `validate_v2.py` with zero schema errors.
+All 30 files pass `validate_v2.py` with zero schema errors.
 
-## Outcomes
+## Tracker
 
-| Status | Count | Venues |
-|---|---|---|
-| `done` | 13 | Abkhazi, AGGV, B.C. Archives, B.C. Aviation, Beacon Hill Farm, Beacon Hill Park, Butchart, CFB Esquimalt, Christ Church Cathedral, Crag X, Craigdarroch, Craigflower, Discover the Past |
-| `not_for_groups` | 1 | Bateman Foundation — site states the gallery closed 2023-02-18 and the Foundation suspended operations |
-| `no_website` | 1 | CCBA Building & Chinese Public School — no venue-owned domain exists |
-| `error` | 0 | — |
+| Status | Count |
+|---|---|
+| `done` | 27 |
+| `no_website` | 7 |
+| `not_for_groups` | 3 |
+| `pending` | 154 |
+| `error` | 0 |
+
+`not_for_groups`: Bateman Foundation (permanently closed), Fairmont Empress (hotel, nothing bookable by a children's group), Gulf Islands Cruising School (adults-only certification).
 
 ## Publishable against the minimum viable record
 
-**2 of 15 today:** B.C. Aviation Museum, Craigdarroch Castle. Both cleared because their sites publish coordinates in a Google Maps link (`geo_source: site_embed`).
+**9 of 30 today.** **11 of 30** once `scripts/geocode-catalog.ts` runs — AGGV, Craigdarroch, B.C. Aviation, Crag X, Discover the Past, Observatory, Fairway Gorge, Flying Squirrel, Fort Rodd Hill, Freshwater Fisheries, GVPL.
 
-**5 of 15 once geocoding runs:** the two above plus Art Gallery of Greater Victoria, Crag X, Discover the Past. These three are complete except for `lat`/`lng`.
+The rest fail on what venues publish, not on extraction — overwhelmingly a missing age range, or "admission by donation", which is neither a price nor free.
 
-The remaining 10 fail on published data, not on extraction:
+## Batch 2 (venues 16–30) — what came back
 
-| Venue | Blocked by |
-|---|---|
-| Abkhazi Garden | no ages and no group/child rate published — admission is "suggested donation" |
-| B.C. Archives | tours mentioned, but no audience, cost or booking route published |
-| Beacon Hill Children's Farm | no street address ("in Beacon Hill Park"), no hero image, no age range |
-| Beacon Hill Park | no address, no hero, no ages, no admission statement on victoria.ca |
-| Butchart Gardens | 5–12 / 13–17 are ticket bands, not program eligibility — not promoted to age fields |
-| CFB Esquimalt | no single program has both an age range and a price |
-| Christ Church Cathedral | no ages, no costs published |
-| Craigflower Manor | no ages; "admission by donation" is neither a price nor free |
-| Bateman Foundation | permanently closed |
-| CCBA / Chinese Public School | no venue-owned website |
+**Strong records:** Centre of the Universe ($80 per class, grades K–12, ratios published), Fort Rodd Hill (4 programs incl. three curriculum-linked), Fairway Gorge Paddling Club, Flying Squirrel, Freshwater Fisheries (5 programs), Government House (4).
+
+**Notable findings**
+
+- **Emily Carr House is a tooling failure, not a thin venue.** The site is fully client-rendered and returned only `<head>` metadata on nine URLs. Nothing was extractable. This needs a re-run with a browser-capable fetch — it is the single highest-value follow-up in this batch.
+- **Gonzales Hill was rescued from `no_website`.** The tracker pointed at tourismvictoria.com (third-party). The operator page is `crd.ca`; the tracker's website column was corrected. CRD's interpretive school programs run at four other parks, not this one, so no program was invented.
+- **Heritage Acres' site is frozen around 2018** — WordPress 4.9.8, 2018 events, 2018 admission figures on an expired event page. Those figures were quoted in `gaps`, not recorded as prices.
+- **Helmcken House is not routinely open** — "typically open during July and August, the weekends in December and other special events." Recorded factually rather than as a closure.
+- **Flying Squirrel's tracker URL is broken** (`/victoriabritish-columbia`); live path is `/victoria-british-columbia/`. Corrected in the record.
+- **Freshwater Fisheries is mostly off-island** — every program except Rod Loan runs at Abbotsford, Summerland, Clearwater or Fort Steele. Recorded without borrowing from the separate Duncan hatchery row.
+- **GVPL publishes no outreach offering** — nothing about librarians visiting schools or daycares — so both programs are `comes_to_you: false` and the absence is in gaps.
+
+**Prompt changes applied cleanly.** All 33 new programs carry `mood_tags` (play 16, learn 19, explore 14, active 11, creative 3). All image URLs are https. Generated alt was used where site alt was a filename or absent, with the reasoning stated in gaps.
+
+**Stale-cache check** (added after the Crag X incident) ran on every price-bearing page. No drift this batch. One retrieval quirk found: the fetcher de-duplicates by path, so query-string cache-busters return empty — trailing-slash variants force a genuine second fetch.
+
+## Two inconsistencies to settle
+
+1. **`category` null vs required.** The prompt says "Enums are closed. If nothing fits, leave null and note it in gaps", but `validate_v2.py:152` treats `venue.category` as required and errors on null. The Fairmont Empress hit this and was filed `community_civic` with the override in gaps. Either add a category for venues that fit none, or relax the validator.
+2. **`rights_note` is still null on every image, all 30 venues.** These sites carry only site-wide footer copyright lines, which STEP 2b correctly excludes. If the app prints photo credits, that text will have to come from somewhere else.
 
 ## Geocoding
 
-No geocoding service is reachable from the run environment. Handling per STEP 2c:
-
-- `site_embed` — 2 (B.C. Aviation, Craigdarroch), coordinates read from the sites' own Google Maps links
-- `geocode_pending` — 10, full street address captured, ready for a single backfill pass with no re-reading of sites
-- `null` — 3, no address published to geocode from (Beacon Hill Farm, Beacon Hill Park, CCBA, Bateman)
-
-No pin was hand-placed from general knowledge.
-
-## Images
-
-11 of 15 venues have a hero. Missing: Beacon Hill Farm and Beacon Hill Park (photos lazy-load with empty `src`; alt strings present but no URLs), Bateman and CCBA (no venue photos exist).
-
-All 22 images are `usage: unverified` — correct for photos simply found on a venue site. No `rights_note` was recorded anywhere: the only credit-like text on any of these sites is a site-wide footer copyright line, which STEP 2b explicitly excludes.
-
-Several sites carry unusable alt text — generic ("Slideshow image") or filenames (Squarespace). These were recorded verbatim with `alt_source: "site"` and flagged in gaps for a human rewrite rather than replaced with invented descriptions.
-
-## Conflicts recorded
-
-13 across 8 venues, now structured data rather than gaps prose:
-
-- **Butchart** (2) — booking email `groups@` (2026 web page) vs `groupres@` (2024 PDF); outside food permitted (FAQ, 2026-06-28) vs no outside meals (school policy PDF, 2024)
-- **CFB Esquimalt** (3) — opening hours page body vs sidebar; a stale COVID closure notice against current hours; the street address disagrees three ways across pages
-- **AGGV** (2) — "at least 3 adult chaperones" vs "up to 6"; first-Saturday free admission vs by-donation
-- **Discover the Past** (2) — Chinatown meeting point and walking distance both differ between pages
-- **B.C. Aviation, Beacon Hill Farm, Christ Church, Crag X** (1 each)
-
-## Lowest confidence
-
-1. **Craigflower Manor** — only published schedule is four Saturdays in **May/June 2025**, page last modified 2025-06-02. Recorded verbatim and flagged stale rather than projected forward. Likely needs a call before listing.
-2. **Christ Church Cathedral** — the only current first-party evidence that tours run is §11.4 of a Facility Use Policy PDF. The tour booking page redirects to a login.
-3. **Crag X** — a cached copy of `/group-lesson` served a price ($45), a minimum (10 climbers) and an offer that the live page does not carry. Caught in STEP 3, fields nulled, discrepancy recorded. Worth knowing this site serves stale cache.
-4. **Beacon Hill Children's Farm** — no address, no rendering photos, no age range, admission by suggested donation.
-5. **Beacon Hill Park** — venue domain had to be reassigned to victoria.ca; the tracker's `beaconhillpark.com` is an unofficial 2001 promo site.
-6. **B.C. Archives** — tracker website is stale; all facts came from `bcarchives.ca`. `hosts_daycare_groups: false` on a published reason (registration is 16+).
-7. **CCBA / Chinese Public School** — nothing extractable.
-8. **Abkhazi Garden** — the conservancy site says nothing about group visits at all.
-
-## Follow-ups for the pipeline
-
-- **Geocoding backfill** — 10 records are one pass away from having coordinates. Needs a reachable geocoder.
-- **`rights_note` is null everywhere.** If the app is going to print photo credits, that text does not exist on these sites and will need to come from another route.
-- **Two venues need a human alt-text pass** (Cathedral, Crag X) where the site's own alt is a filename or placeholder.
-- **`checked_by` is `scraper` on all 15**, which is the flag that `our_note`, `what_children_do` and `practical_summary` are machine-drafted and need a human read before publish.
+Across all 30: `site_embed` 6, `geocode_pending` 20, `null` 4 (no address published). No pin was hand-placed from general knowledge.
