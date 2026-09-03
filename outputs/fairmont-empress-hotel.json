@@ -1,0 +1,60 @@
+{
+  "venue": {
+    "id": "fairmont-empress",
+    "name": "Fairmont Empress",
+    "website": "https://www.fairmont.com/en/hotels/victoria/fairmont-empress.html",
+    "description": "Fairmont Empress is a luxury hotel at 721 Government Street on Victoria's Inner Harbour, part of the Fairmont brand and Accor. The site sells guest rooms and suites, restaurants and bars including its long-running Afternoon Tea, a spa and pool, and function space for meetings, conferences, weddings and social celebrations. Nothing on the hotel's site is offered to visiting school or daycare groups: there are no tours, education programs, youth workshops or group rates for children, and the only children's item published is \"Kids Rule the Castle\", a family accommodation package for guests staying at the hotel. hosts_school_groups and hosts_daycare_groups are therefore both false and no programs are recorded.",
+    "category": "community_civic",
+    "address": "721 Government Street V8W 1W5 VICTORIA Canada",
+    "lat": null,
+    "lng": null,
+    "geo_source": "geocode_pending",
+    "hosts_school_groups": false,
+    "hosts_daycare_groups": false,
+    "youngest_age_welcomed_years": null,
+    "booking_email": "theempress@fairmont.com",
+    "booking_phone": "+1 2503848111",
+    "booking_url": null,
+    "booking_method": null,
+    "has_washrooms": null,
+    "has_lunch_space": null,
+    "has_rain_backup": null,
+    "stroller_accessible": null,
+    "wheelchair_accessible": null,
+    "bus_parking": null,
+    "facility_notes": null,
+    "nearby_park": null,
+    "restrictions": null,
+    "languages": null,
+    "general_admission_child_cad": null,
+    "general_admission_adult_cad": null,
+    "hours_notes": null,
+    "seasonal_notes": null,
+    "price_year_or_season": null,
+    "checked_on": "2026-09-03",
+    "checked_by": "scraper"
+  },
+  "programs": [],
+  "images": [],
+  "gaps": [
+    "does not serve children's groups: the site publishes no tour, education program or group offering bookable by a school or daycare group. Afternoon Tea, meetings, weddings and social events are commercial hospitality bookings, not a children's group program, so no \"Group visit\" program was created",
+    "no venue category fits a hotel; community_civic was used as the closest catch-all because the schema requires a category",
+    "parking is described as an indoor lot of 305 spaces available for an additional fee; nothing is published about bus parking or drop-off",
+    "no coordinates published in an unambiguous form. The address link on the Location & Contact page carries a Google Maps directions viewport (@48.421596,-123.367422,17z) rather than a place pin, and it sits west of the street address, so it was not used. Address captured for the geocoder instead",
+    "no image recorded: the hotel's photographs are served from Accor's shared m.ahstatic.com image server with empty alt attributes, and their contents could not be described. The record is not publishable, which is the correct outcome for a venue that does not serve children's groups"
+  ],
+  "conflicts": [],
+  "pages_opened": [
+    "https://www.fairmont.com/empress-victoria/",
+    "https://www.fairmont.com/en/hotels/victoria/fairmont-empress.html",
+    "https://www.fairmont.com/en/hotels/victoria/fairmont-empress/location-contact.html",
+    "https://www.fairmont.com/en/hotels/victoria/fairmont-empress/special-events-.html"
+  ],
+  "pages_useful": [
+    "https://www.fairmont.com/en/hotels/victoria/fairmont-empress.html",
+    "https://www.fairmont.com/en/hotels/victoria/fairmont-empress/location-contact.html",
+    "https://www.fairmont.com/en/hotels/victoria/fairmont-empress/special-events-.html"
+  ],
+  "extracted_at": "2026-09-03T18:50:00Z",
+  "extractor_version": "v2.0"
+}

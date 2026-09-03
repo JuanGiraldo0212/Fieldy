@@ -44,7 +44,7 @@
       "name": "Guided group tour",
       "description": "The museum coordinates guided and self-guided tours of its exhibits and displays and takes tour requests from visiting groups; staff will work with the group to tailor a tour. There is a $75 standard fee for guided tours and a discounted fee of $50 for seniors' tours. The museum states it can negotiate reduced fees for tours, or waive fees entirely, for groups and organizations with limited funds. Tours are also provided to Fleet School students and other personnel taking courses at CFB Esquimalt.",
       "what_children_do": "Walk through the exhibit rooms with a guide, looking at ship models, uniforms, a submarine control display and cases of naval instruments such as a sextant and an optical range finder.",
-      "our_note": "The $75 is a flat fee for the tour rather than a charge per child, so it lands very differently on a group of eight than on a class of thirty. The museum says outright that it will negotiate or waive the fee for groups with limited funds, which is worth raising in your first email. Getting onto the base takes time — allow about ten minutes on foot from the Naden main gate, and expect adults to be asked for photo ID.",
+      "our_note": "The $75 is a flat fee for the tour rather than a charge per child, so it lands very differently on a group of eight than on a class of thirty. The museum says outright that it will negotiate or waive the fee for groups with limited funds, which is worth raising in your first email. Getting onto the base takes time. Allow about ten minutes on foot from the Naden main gate, and expect adults to be asked for photo ID.",
       "practical_summary": "A flat tour fee, indoors, on a military base that requires photo ID at the gate. Nothing is published about washrooms, a lunch room, stroller or wheelchair access, or bus parking, so all of that needs a phone call.",
       "comes_to_you": false,
       "age_min_years": null,
@@ -91,9 +91,9 @@
     {
       "id": "school-visit-tour",
       "name": "School visit and guided tour",
-      "description": "The museum will work with a class's curriculum to provide students with a learning experience, and directs teachers to its listing on the BC Field Trips site. Guided tours for school groups are offered free of charge in November as part of the museum's Remembrance Day programming; no fee is published for school tours in other months. Two downloadable quizzes are offered as teacher resources — a tri-fold quiz with text and images for elementary and middle school classes, and a more advanced general knowledge quiz for older students, both in English only.",
+      "description": "The museum will work with a class's curriculum to provide students with a learning experience, and directs teachers to its listing on the BC Field Trips site. Guided tours for school groups are offered free of charge in November as part of the museum's Remembrance Day programming; no fee is published for school tours in other months. Two downloadable quizzes are offered as teacher resources: a tri-fold quiz with text and images for elementary and middle school classes, and a more advanced general knowledge quiz for older students, both in English only.",
       "what_children_do": "Move through the galleries with a guide and work through the museum's printed quiz, matching images and text to the displays.",
-      "our_note": "November is the month this becomes free, and it is also the month every other school in the region is thinking about Remembrance Day, so book early. Print the kids' quiz before you go — it is the only structured activity the museum publishes, and it turns a case-by-case walk into something a class can do. Nothing about group size, tour length or a booking deadline is published, so the first email should ask all three.",
+      "our_note": "November is the month this becomes free, and it is also the month every other school in the region is thinking about Remembrance Day, so book early. Print the kids' quiz before you go. It is the only structured activity the museum publishes, and it turns a case-by-case walk into something a class can do. Nothing about group size, tour length or a booking deadline is published, so the first email should ask all three.",
       "practical_summary": "Free guided tours in November only; the rest of the year the standard tour fee is the published figure. No lunch space, washroom, accessibility or capacity information is published at all.",
       "comes_to_you": false,
       "age_min_years": null,
@@ -142,7 +142,7 @@
       "name": "Oriole Children's Gallery (self-guided)",
       "description": "The museum's Oriole Gallery was designed specifically with children in mind and offers imaginative activities for youngsters between 4 and 8 years. Published gallery features are dress-up play 'uniforms', an introduction to naval terms, diver gear (flippers, masks) and life jackets, games and a magnet board, signal flags and activities, and nautical-themed books for children. Admission to the museum is by suggested cash donation: Adults $10, Seniors/Students $5, Families $25.",
       "what_children_do": "Put on the dress-up 'uniforms', try on flippers, masks and life jackets, play the games and the magnet board, handle the signal flags, and sit with the nautical picture books.",
-      "our_note": "This one room is the reason to bring under-sixes; the rest of the museum is cases, text panels and models at adult height. Admission is a suggested donation rather than a set price, so ask what a group of that size is expected to give when you call — and remember the gate ID check applies to the adults, not the children.",
+      "our_note": "This one room is the reason to bring under-sixes; the rest of the museum is cases, text panels and models at adult height. Admission is a suggested donation rather than a set price, so ask what a group of that size is expected to give when you call. Remember too that the gate ID check applies to the adults, not the children.",
       "practical_summary": "Indoors, hands-on, and pitched at exactly the daycare age band. No washroom, lunch space, stroller or capacity information is published, and the donation is suggested rather than fixed.",
       "comes_to_you": false,
       "age_min_years": 4,
@@ -204,7 +204,7 @@
   ],
   "gaps": [
     "price: no per-child or per-group school rate is published outside November, and museum admission is a suggested donation rather than a set fee, so the cost of bringing a group is not knowable from the site.",
-    "youngest age: the Oriole Gallery is described for ages 4–8 but the museum publishes no minimum age for a visit or a tour.",
+    "youngest age: the Oriole Gallery is described for ages 4 to 8 but the museum publishes no minimum age for a visit or a tour.",
     "capacity: no maximum or minimum group size is published for any tour.",
     "lead time: no minimum notice period is published for booking a group tour.",
     "duration: no tour length is published.",
@@ -228,7 +228,7 @@
         "https://navalandmilitarymuseum.org/museum/visitors/",
         "https://navalandmilitarymuseum.org/"
       ],
-      "note": "The Visitors page body (last modified 2026-08-11) says seven days a week with no seasonal split; the site-wide hours block that appears in the sidebar of every page splits the year into a seven-day summer season (May 1 – Sep 2) and a Monday-to-Friday winter season (Sep 3 – Apr 30). Value taken from the more recently dated page body, but a weekend visit after Labour Day should be confirmed by phone."
+      "note": "Their pages give different opening hours. One says seven days a week year round, another says weekdays only from September to April. If you are going at a weekend after Labour Day, phone first."
     },
     {
       "field": "closure_notice",
@@ -240,7 +240,7 @@
         "https://navalandmilitarymuseum.org/contact/",
         "https://navalandmilitarymuseum.org/museum/visitors/"
       ],
-      "note": "The Contact page still carries a COVID-19 temporary closure notice; that page was last modified 2024-03-28, while the Visitors page (2026-08-11) and the site-wide hours block both show the museum open. Treated as a stale notice, not a current closure."
+      "note": "Their contact page still carries an old temporary closure notice, while the rest of the site shows them open. Phone before you go."
     },
     {
       "field": "address",
@@ -254,7 +254,7 @@
         "https://navalandmilitarymuseum.org/wp-content/uploads/Come-Find-Us.pdf",
         "https://navalandmilitarymuseum.org/museum/visitors/"
       ],
-      "note": "Three different building numbers on the base: the Contact page says Naden 20, the undated Come-Find-Us directions PDF says Buildings Naden 37, 39, and the map link in the site-wide sidebar queries 'Naden 5'. Value taken from the only dated source (Contact page, 2024-03-28), which is also the page carrying the stale COVID notice. The mailing address is a PO Box and cannot be used for directions."
+      "note": "Their pages give three different building numbers on the base. Ask which building to come to when you book, and leave time to find it."
     }
   ],
   "pages_opened": [

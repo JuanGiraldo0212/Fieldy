@@ -335,14 +335,12 @@ export default async function OutingPage({
             {p.practicalSummary}
           </p>
         ) : null}
-        {v.conflicts?.length ? (
-          <ConflictBanner
-            note={
-              v.conflicts[0]!.note ??
-              `${v.conflicts[0]!.field}: ${v.conflicts[0]!.values.join(' / ')}`
-            }
-          />
-        ) : null}
+        {/* Only the note is ever shown. `field` and `values` are our plumbing
+            and would put schema names in front of a director. A conflict with
+            no written note is not renderable, so it is skipped. */}
+        {v.conflicts?.filter((c) => c.note?.trim()).map((c, i) => (
+          <ConflictBanner key={i} note={c.note!} />
+        ))}
         <PracticalList facts={facts} icons={FACT_ICONS} />
       </Section>
 

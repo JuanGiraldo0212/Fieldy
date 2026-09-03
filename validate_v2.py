@@ -114,6 +114,29 @@ def check_str_list(r, path, val):
             r.err(f"{path}: array must contain strings, found {type(v).__name__}")
 
 
+DASHES = "\u2014\u2013"
+JARGON = re.compile(r"\b(chaperone_ratio|hours_notes|capacity_m\w+|time_slots|booking_\w+|"
+                    r"facility_notes[.\w]*|cost_per_\w+|has_\w+|geo_source|age_basis|"
+                    r"mood_tags|extra_fees_note|left null|last modified|\(modified)")
+
+
+def check_voice(r, path, text):
+    """Everything a director reads has to sound like a person talking.
+
+    Dashes and field names both leak our plumbing into her reading. The prompt
+    forbids them; this catches an extraction that forgot.
+    """
+    if not text:
+        return
+    if any(d in text for d in DASHES):
+        r.warn(f"{path}: contains an em or en dash. Use a comma, a full stop, "
+               f"or two sentences")
+    m = JARGON.search(text)
+    if m:
+        r.err(f"{path}: contains {m.group(0)!r}, which is our plumbing, not "
+              f"words a director would use")
+
+
 def validate_venue(r, v):
     for f in VENUE_FIELDS:
         if f not in v:
@@ -129,6 +152,7 @@ def validate_venue(r, v):
     check_enum(r, "venue.category", v.get("category"), VENUE_CATEGORY, required=True)
     check_enum(r, "venue.booking_method", v.get("booking_method"), BOOKING_METHOD)
     check_enum(r, "venue.geo_source", v.get("geo_source"), GEO_SOURCE)
+    check_voice(r, "venue.description", v.get("description"))
 
     if v.get("checked_on") and not DATE_RE.match(str(v["checked_on"])):
         r.err(f"venue.checked_on: {v['checked_on']!r} is not ISO YYYY-MM-DD")
@@ -211,6 +235,9 @@ def validate_program(r, p, i, image_ids):
     check_enum(r, f"{path}.booking_method", p.get("booking_method"), BOOKING_METHOD)
     check_enum_list(r, f"{path}.format", p.get("format"), FORMAT)
     check_enum_list(r, f"{path}.mood_tags", p.get("mood_tags"), MOOD)
+
+    for field in ("our_note", "practical_summary", "what_children_do", "description"):
+        check_voice(r, f"{path}.{field}", p.get(field))
 
     # mood_tags is required from v2.0 on. The app can fall back to guessing from
     # the venue category, but that guess reads `fun` as "animals or science" and
@@ -357,6 +384,9 @@ def validate_images(r, images):
 
 
 def validate_provenance(r, d):
+    for i, c in enumerate(d.get("conflicts") or []):
+        # `note` is the only part of a conflict a director ever reads.
+        check_voice(r, f"conflicts[{i}].note", c.get("note"))
     check_str_list(r, "gaps", d.get("gaps"))
     if "gaps" not in d:
         r.err("gaps: missing key")

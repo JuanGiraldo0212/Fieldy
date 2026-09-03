@@ -49,7 +49,7 @@
       "name": "Formal cathedral tour",
       "description": "The cathedral's Facility Use Policy (revised April 2024, posted March 2025) states that formal tours of the cathedral are offered regularly and may be booked through the Parish Administrator or online, and that private tours must be arranged through the Parish Administrator. No price, duration, group size, age range or schedule for the tours is published on the public site. The 'Discover the Cathedral' programme page (/programs/discover-the-cathedral) redirects to a login screen, so any tour times or fees held there could not be read.",
       "what_children_do": null,
-      "our_note": "The only current, on-site evidence that tours still run is a line in the facility rental policy — the programme page behind it is now members-only, so phone the office and confirm the tour is still offered before you plan a trip around it. Ask on the same call whether a tour can be shortened for young children; nothing on the site suggests one written for them.",
+      "our_note": "The only current, on-site evidence that tours still run is a line in the facility rental policy. The programme page behind it is now members only, so phone the office and confirm the tour is still offered before you plan a trip around it. Ask on the same call whether a tour can be shortened for young children; nothing on the site suggests one written for them.",
       "practical_summary": "Tours are booked through the Parish Administrator by phone or email. Price, length, group size, age suitability, washrooms and lunch space are all unpublished, so this needs a call before it is bookable.",
       "comes_to_you": false,
       "age_min_years": null,
@@ -97,8 +97,8 @@
       "id": "self-guided-visit",
       "name": "Self-guided visit",
       "description": "The cathedral is open to visitors outside service times and its doors are open daily for worship, prayer, meditation, or just to visit. Published visiting hours differ between pages (see conflicts). No admission charge, donation expectation, group rate or group booking process for a self-guided visit is stated anywhere on the site.",
-      "what_children_do": "Walk into a very large stone church — the nave is 93 by 140 feet with towers 122 feet above the street — and look at the windows, the organ, the baptistry and the bells from the floor, quietly, since the nave and chapels are kept for personal prayer and meditation.",
-      "our_note": "It is a working church rather than a museum, so the visit is looking and keeping quiet — short and calm suits it, and a noisy group will land badly. Nothing on the site tells you whether a group of children needs to give notice, so ring the office at 250.383.2714 first rather than arriving with twenty of them.",
+      "what_children_do": "Walk into a very large stone church. The nave is 93 by 140 feet, with towers 122 feet above the street. They look at the windows, the organ, the baptistry and the bells from the floor, quietly, since the nave and chapels are kept for personal prayer and meditation.",
+      "our_note": "It is a working church rather than a museum, so the visit is looking and keeping quiet. Short and calm suits it, and a noisy group will land badly. Nothing on the site tells you whether a group of children needs to give notice, so ring the office at 250.383.2714 first rather than arriving with twenty of them.",
       "practical_summary": "Free entry is not stated either way, and washrooms, an indoor lunch space and step-free access are not mentioned anywhere on the site. The two published versions of the visiting hours disagree, so confirm the day you plan to come.",
       "comes_to_you": false,
       "age_min_years": null,
@@ -258,7 +258,7 @@
         "https://www.christchurchcathedral.bc.ca/",
         "https://www.christchurchcathedral.bc.ca/collections/visit"
       ],
-      "note": "pages disagree on Saturday and Sunday visiting hours; neither page is dated, so hours_notes is left null"
+      "note": "Their pages give different opening hours. Some list one time year round, others list shorter winter hours. Check the day you are going before you set off."
     }
   ],
   "pages_opened": [

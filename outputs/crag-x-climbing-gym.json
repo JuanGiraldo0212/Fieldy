@@ -49,8 +49,8 @@
       "name": "School group one-time lesson",
       "description": "A 2 hour beginner lesson booked for a school group: putting on a harness, tying knots and managing the rope belay systems, after which the group climbs. Rental equipment for the lesson and two weeks of free entry to the gym are included, though gear is not included in the two-week entry. $69 per person for groups of 6-12 and $59 per person for 13 or more; rates are per person and taxes are extra. Advance booking required through the group booking form. A separate, unpriced 2.5 hour 'Group Beginner Lesson' for general groups is described on the Group Lesson page.",
       "what_children_do": "Each student puts on a harness, ties a figure-eight knot and learns to belay a partner from the floor, then takes turns climbing the gym's 15m walls under staff supervision.",
-      "our_note": "The rate is per student and drops at 13 or more, so a full class costs less per head than a half-group — pin down which tier you are in before you commit. Every child needs a waiver signed by their own parent or guardian, so send those home a week ahead rather than handing them out at the door.",
-      "practical_summary": "Indoors on Pandora Avenue with all lesson gear included and a two-week free entry pass afterwards. Washrooms, a lunch space, bus parking and the session start times are not published — ask when you book.",
+      "our_note": "The rate is per student and drops at 13 or more, so a full class costs less per head than a half group. Pin down which tier you are in before you commit. Every child needs a waiver signed by their own parent or guardian, so send those home a week ahead rather than handing them out at the door.",
+      "practical_summary": "Indoors on Pandora Avenue with all lesson gear included and a two-week free entry pass afterwards. Washrooms, a lunch space, bus parking and the session start times are not published, so ask when you book.",
       "comes_to_you": false,
       "age_min_years": 12,
       "age_max_years": null,
@@ -98,7 +98,7 @@
       "name": "School club session series",
       "description": "A series for school groups: a beginner lesson in the first session, then 3 or more climbing sessions at a preset time. $49 per student for the lesson and $20 per student for each climbing session. Skills are reviewed the following week by staff before students climb independently, and shoe and harness rentals are included in the cost of the series. Minimum 6 students, maximum 15. Ages 12+. Rates are per person and taxes are extra; advance booking required.",
       "what_children_do": "Students learn to put on a harness, tie the knots and manage a top-rope belay in the first session, have those skills checked the following week, then come back on a set schedule to climb and boulder with staff on the floor.",
-      "our_note": "Price the whole series, not the lesson — the $49 start plus four climbing sessions lands near $130 a student before tax. The upside is that students who pass the belay test can then use the gym outside the booked times, which is worth flagging to families.",
+      "our_note": "Price the whole series, not the lesson. The $49 start plus four climbing sessions lands near $130 a student before tax. The upside is that students who pass the belay test can then use the gym outside the booked times, which is worth flagging to families.",
       "practical_summary": "All gear is included for the whole series and the group size is capped at 15, so one class group fits and a grade does not. Washrooms, lunch space, session lengths and which months the series runs are not published.",
       "comes_to_you": false,
       "age_min_years": 12,
@@ -145,9 +145,9 @@
     {
       "id": "group-beginner-lesson",
       "name": "Group beginner lesson",
-      "description": "A 2.5 hour complete beginner lesson for a group: how to properly put on a harness, tie the figure eight knot and belay another climber, after which the group has the skills to pass the Crag X belay test. Two weeks of free entry to the gym are included. Taxes extra; advance booking required. The live page publishes no price, no group size and no age range — an earlier fetch of the same URL returned a cached version carrying '$45 per climber' and '10 climbers minimum', which is recorded in conflicts. The school-specific version of this lesson is priced on the School Groups page.",
+      "description": "A 2.5 hour complete beginner lesson for a group: how to properly put on a harness, tie the figure eight knot and belay another climber, after which the group has the skills to pass the Crag X belay test. Two weeks of free entry to the gym are included. Taxes extra; advance booking required. The live page publishes no price, no group size and no age range. An earlier fetch of the same URL returned a cached version carrying '$45 per climber' and '10 climbers minimum', which is recorded in conflicts. The school-specific version of this lesson is priced on the School Groups page.",
       "what_children_do": null,
-      "our_note": "This is the general group lesson rather than the school one, and the page currently prices nothing — get the per-person rate and the minimum group size in writing before you plan a budget. It also sets no age floor, so check the child policy first: under-12s cannot belay at all and need one belay-tested adult each.",
+      "our_note": "This is the general group lesson rather than the school one, and the page currently prices nothing. Get the per person rate and the minimum group size in writing before you plan a budget. It also sets no age floor, so check the child policy first: under-12s cannot belay at all and need one belay-tested adult each.",
       "practical_summary": "Two and a half hours indoors with two weeks of free entry afterwards. Price, minimum group size, ages, start times, washrooms and lunch space are all unpublished on this page.",
       "comes_to_you": false,
       "age_min_years": null,
@@ -233,7 +233,7 @@
         "https://www.cragx.ca/group-lesson",
         "https://www.cragx.ca/group-lesson?v=1"
       ],
-      "note": "two fetches of the Group Lesson page returned different content; the first served a cached copy with a price and a 10-climber minimum, the live page carries neither. Neither version is dated, so cost_per_child_cad and capacity_min on programs[2] are left null."
+      "note": "Their group page has shown two different prices, one with a ten climber minimum and one with no price at all. Ask for the price in writing."
     }
   ],
   "pages_opened": [

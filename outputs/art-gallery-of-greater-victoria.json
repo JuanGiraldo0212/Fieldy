@@ -53,7 +53,7 @@
       "name": "School Tour + Workshop",
       "description": "A two-hour guided exhibition tour plus a workshop for school groups in grades 2 to 12, led by the Gallery's education staff. Offered Tuesdays and Thursdays at 9:30am and 12:15pm. Every tour includes a Teacher Study Guide with background on the artists and exhibition plus pre- and post-tour activities. Booking is through the Gallery's online shop and requires two weeks' notice with advance payment.",
       "what_children_do": "Move through the current exhibitions with a Gallery educator, stopping to look at and talk about works in an inquiry-based conversation, then spend the rest of the two hours in a workshop. Padded benches without arms are available for seating in the exhibition spaces.",
-      "our_note": "The $150 is a flat fee for the class, not a per-student price, and it has to be paid in full two weeks ahead — cancel inside 14 days and you lose it. Backpacks can't come into the exhibitions, but the front desk will lend lockable bins if you ask.",
+      "our_note": "The $150 is a flat fee for the class, not a per-student price, and it has to be paid in full two weeks ahead. Cancel inside 14 days and you lose it. Backpacks can't come into the exhibitions, but the front desk will lend lockable bins if you ask.",
       "practical_summary": "Washrooms with a change table, free lockers and step-free ramps to every exhibition space are all on site, and the whole visit is indoors. There is nothing published about a lunch space or bus parking, so ask when you book.",
       "comes_to_you": false,
       "age_min_years": null,
@@ -187,9 +187,9 @@
     {
       "id": "self-guided-school-visit",
       "name": "Self-Guided School Tour",
-      "description": "School groups visit the exhibitions on their own to meet their own classroom objectives. Available Wednesdays and Fridays, maximum 30 students, and must be booked in advance by emailing jengen@aggv.ca. Admission is free for youth 25 and under; each accompanying adult is charged $15, with admission free for AGGV members, See Art Pass holders, Indigenous peoples and support workers. The grade range is the Grade 2 – 12 range published at the head of the School Programs page.",
+      "description": "School groups visit the exhibitions on their own to meet their own classroom objectives. Available Wednesdays and Fridays, maximum 30 students, and must be booked in advance by emailing jengen@aggv.ca. Admission is free for youth 25 and under; each accompanying adult is charged $15, with admission free for AGGV members, See Art Pass holders, Indigenous peoples and support workers. The grade range is the Grade 2 to 12 range published at the head of the School Programs page.",
       "what_children_do": "Walk the exhibition spaces as a class with their own teacher and chaperones, checking in first at the front desk in the lobby and leaving bags in lockable bins. Padded benches without arms are available for seating in the exhibition spaces.",
-      "our_note": "This is the cheapest way in — students are free and only the adults pay — but you set the pace and there is no educator with you. Ask the front desk for a sensory kit; the Gallery keeps backpacks with noise-reduction headphones, sunglasses, fidgets and a timer at the desk, free and first-come.",
+      "our_note": "This is the cheapest way in, because students are free and only the adults pay. You set the pace though and there is no educator with you. Ask the front desk for a sensory kit; the Gallery keeps backpacks with noise-reduction headphones, sunglasses, fidgets and a timer at the desk, free and first-come.",
       "practical_summary": "Free for students, indoors, step-free by ramp, with washrooms and free lockers on site. There is no published lunch space, rain shelter is not an issue indoors, and bus parking is not stated.",
       "comes_to_you": false,
       "age_min_years": null,
@@ -252,7 +252,7 @@
       "name": "Exhibition Group Tour",
       "description": "A one-hour tour of the current exhibitions led by a trained AGGV art educator, for groups of up to 20 guests. The Gallery describes it as an option for classes, independent living and community groups. The price is $85 plus GST plus group admission, and tours are available in English, French and Japanese. Booked by email; the Visit page states requests must be made a minimum of 2 weeks in advance and that group rates apply.",
       "what_children_do": null,
-      "our_note": "The $85 is the guide's fee only — group admission is charged on top, so work out the adult heads before you compare this with the flat-fee school tour. No age range is published for these tours, so say who is coming when you email.",
+      "our_note": "The $85 is the guide's fee only. Group admission is charged on top, so work out the adult heads before you compare this with the flat-fee school tour. No age range is published for these tours, so say who is coming when you email.",
       "practical_summary": "Indoors, step-free by ramp to every exhibition space, with washrooms and free lockers on site. No age range, lunch space or bus parking is published for this tour.",
       "comes_to_you": false,
       "age_min_years": null,
@@ -320,7 +320,7 @@
     "no indoor lunch space or eating area for groups is mentioned anywhere on the site",
     "bus or coach parking is not stated; the accessibility page describes one accessible car space and a loading zone only",
     "no age range is published for the $85 Exhibition Group Tour",
-    "the School Programs page does not restate a grade range inside the Self-Guided section; the grades 2–12 recorded for it come from the Grade 2 – 12 heading at the top of that page",
+    "the School Programs page does not restate a grade range inside the Self-Guided section; the grades 2 to 12 recorded for it come from the Grade 2 to 12 heading at the top of that page",
     "whether chaperones are included in the $150 and $100 school program fees is not stated",
     "no stroller access information is published",
     "no minimum group size is published for any program",
@@ -338,7 +338,7 @@
         "https://aggv.ca/school-programs/",
         "https://aggv.ca/school-program-guidelines/"
       ],
-      "note": "The School Programs page (modified 2026-03-05) sets a minimum of 3 chaperones; the School Program Guidelines page (modified 2025-07-17) caps chaperones at 6. The 1 adult per 6 elementary students and 1 per 10 secondary students ratio recorded in chaperone_ratio is stated identically on both pages and is not in dispute."
+      "note": "Their own pages give two different answers for how many adults have to come. One asks for at least 3, another allows up to 6. The 1 adult per 6 children ratio is the same on both, so settle the total when you book."
     },
     {
       "field": "general_admission_adult_cad",
@@ -350,7 +350,7 @@
         "https://aggv.ca/about/visit/",
         "https://aggv.ca/about/visit/"
       ],
-      "note": "Two sections of the Visit page describe the first Saturday of the month differently: the Admission section says free, the What's on section says admission by donation. Neither section carries its own date, so the recorded $15 standard admission is left as the base case."
+      "note": "Two parts of their Visit page describe the first Saturday of the month differently. One says free, the other says pay what you can. Either way it is cheaper that day."
     }
   ],
   "pages_opened": [

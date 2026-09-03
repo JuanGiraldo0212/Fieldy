@@ -329,7 +329,7 @@
         "https://bcam.net/",
         "https://bcam.net/visit/"
       ],
-      "note": "The homepage and the site footer give a single year-round 10 AM to 4 PM opening, while the Visit page publishes seasonal hours with a 9:30 AM to 4:30 PM summer schedule for July and August. Neither page is dated, so hours_notes is left null."
+      "note": "Their pages give different opening hours. Some list one time year round, others list shorter winter hours. Check the day you are going before you set off."
     }
   ],
   "pages_opened": [

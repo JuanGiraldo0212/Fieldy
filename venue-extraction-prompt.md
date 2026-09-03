@@ -32,6 +32,14 @@ OUTPUT (per venue)
 3. `what_children_do`, `our_note` and `practical_summary` are authored by you, grounded in what you read (STEP 2d).
 Everything else is verbatim-supported or null.
 
+**Everything a director reads is written like a person talking.** `our_note`, `practical_summary`, `what_children_do`, `description` and every `conflicts[].note` are read by a daycare director at 7:40 am, not by us.
+
+- **No em dashes or en dashes.** Not one. Use a comma, a full stop, or rewrite the sentence. Two short sentences almost always beat one long one held together by a dash.
+- **No field names, ever.** `chaperone_ratio`, `hours_notes`, `capacity_max` and `facility_notes.washrooms` are our plumbing. Write "how many adults you need" or "opening hours".
+- **No page-modified dates, no process.** "(last modified 2026-03-05)", "recorded the home page version", "left null", "two fetches returned different content" and "neither page is dated" are notes to ourselves. They belong in `gaps`, not in front of a director.
+- **No marketing.** No exclamation marks, no "wonderful", "magical", "unforgettable", "perfect".
+- Plain words. "How many adults have to come" beats "chaperone requirements". "You need to pay when you book" beats "advance payment required".
+
 **Prices** in CAD, tax excluded unless `tax_included` is true. Numbers, not strings. Record the standard school or group price. If a price depends on season, exhibition or membership, record the base case and put the condition in the program description. If a page shows a year or season for its prices, capture it in `price_year_or_season`.
 
 **Do not contact the venue.** Do not fill any forms. Do not download anything except PDFs linked from the site. Never download image files — record image URLs only.
@@ -280,8 +288,8 @@ If no geocoding service is available in the run environment, still extract the a
 Three fields are your own writing rather than extraction. They are what makes a record feel like advice instead of a database row, and they are the reason a record needs a human read before publish. Write them only after STEP 2 is complete, so they rest on the facts you gathered.
 
 - **`what_children_do`** — the concrete, physical account of the visit, in one to three sentences. What a child's body actually does: "Sit on the floor in the gallery to look and talk about two or three works, then move to the studio to paint at low tables." Ground every clause in something the site said. If the site never describes the activity, leave this null — do not imagine a plausible visit. `description` is not a substitute and does not replace this field.
-- **`our_note`** — one to three sentences of our own practical advice, written like a friend who has been there. Never marketing. Useful shapes: the catch that isn't obvious ("The tour is 90 minutes with no seating — long for under-fives."), who it suits ("Best for groups already comfortable indoors and quiet."), or the thing to ask about ("Ask about the lunch room when you book; it isn't on the site and the park across the street is the fallback."). Do not repeat a fact already shown elsewhere on the card. Do not use exclamation marks or words like "wonderful", "magical" or "perfect".
-- **`practical_summary`** — one to two sentences summarising the practical facts *and their gaps*, generated from the facility fields plus `gaps`. It sits above the Good-to-know tiles: "Washrooms and indoor lunch space on site, and the whole route is step-free. Bus parking and rain backup aren't stated — worth a call."
+- **`our_note`** — one to three sentences of our own practical advice, written like a friend who has been there. Never marketing. Useful shapes: the catch that isn't obvious ("The tour is 90 minutes with no seating — long for under-fives."), who it suits ("Best for groups already comfortable indoors and quiet."), or the thing to ask about ("Ask about the lunch room when you book; it isn't on the site and the park across the street is the fallback."). Do not repeat a fact already shown elsewhere on the card. Do not use exclamation marks or words like "wonderful", "magical" or "perfect". No dashes: write two sentences instead.
+- **`practical_summary`** — one to two sentences summarising the practical facts *and their gaps*, generated from the facility fields plus `gaps`. It sits above the Good-to-know tiles: "Washrooms and indoor lunch space on site, and the whole route is step-free. Bus parking and rain backup aren't stated, so it is worth a call."
 
 Write all three in plain language at the level of a busy director skimming on a phone. Because these are authored, every record carrying them needs a human pass before publish; the `checked_by: scraper` value is what flags that.
 
@@ -313,11 +321,22 @@ For the location, confirm `geo_source` matches how you actually obtained the coo
   "field": "chaperone_ratio",
   "values": ["3 adults", "up to 6 adults"],
   "sources": ["https://example.org/school-programs/", "https://example.org/school-program-guidelines/"],
-  "note": "pages disagree"
+  "note": "Their own pages give two different answers for how many adults have to come. One says at least 3, another says up to 6. Worth settling when you book."
 }
 ```
 
-Then set the field itself to the more recently dated page's value, or to null if neither is dated. The app shows "sources disagree — confirm when booking" from this array, which is more useful than a confident wrong number. Conflicts belong here as structured data, not buried in `gaps` prose.
+`field`, `values` and `sources` are ours: they make the claim auditable and never reach a director. **`note` is the only part a director reads, and it is shown to her word for word**, so write it for her:
+
+- Say what the disagreement is about **in her words**, not the field name. "how many adults have to come", not `chaperone_ratio`. "opening hours", not `hours_notes`. "where to meet", not `chinatown_walk_meeting_point`.
+- Give her both answers, briefly, so she can recognise whichever she is told.
+- End with what to do about it. Usually "worth checking when you book".
+- Two or three short sentences. No dashes, no dates, no mention of which page was modified when, and never any word about what we recorded or left null.
+
+Bad: `The Groups & Tours web page (last modified 2026-08-04) gives groups@ for reservations; both policy PDFs give groupres@. Value taken from the more recently dated web page.`
+
+Good: `Two of their pages give different booking addresses. If one bounces, try the other. We use the one from their main groups page.`
+
+Then set the field itself to the more recently dated page's value, or to null if neither is dated. Put the audit trail, including which page said what and when, in `gaps`. Conflicts belong here as structured data, not buried in `gaps` prose.
 
 Finally set `extracted_at` to the current datetime and `extractor_version` to `v2.0`.
 

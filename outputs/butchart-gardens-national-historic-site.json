@@ -44,9 +44,9 @@
     "languages": null,
     "general_admission_child_cad": 5.0,
     "general_admission_adult_cad": 44.25,
-    "hours_notes": "The hours listed reflect admission gate times; The Gardens are open for viewing one hour after the gates close. Summer 2026 (June 1 – September 15): Monday–Tuesday 9:00am–5:00pm, Wednesday–Sunday 9:00am–10:00pm. September 16–30: 9:00am–5:00pm daily.",
-    "seasonal_notes": "Open year round with seasonal hours and rates. Autumn (October) 9:00am–4:00pm, November 9:00am–3:30pm, Christmas (December 1 – January 6) 3:00pm–9:00pm and closed December 25, Winter (January 7 – March 31) 9:00am–3:30pm or 4:00pm, closed January 18–31 for staff holiday, Spring (April–May) 9:00am–5:00pm.",
-    "price_year_or_season": "2026–2027 seasonal rates from the Hours & Rates page (last modified 2026-06-24); the general admission figures recorded here are the Summer 2026 rates for June 1 – September 15.",
+    "hours_notes": "The hours listed reflect admission gate times; The Gardens are open for viewing one hour after the gates close. Summer 2026 (June 1 to September 15): Monday–Tuesday 9:00am–5:00pm, Wednesday–Sunday 9:00am–10:00pm. September 16 to 30: 9:00am–5:00pm daily.",
+    "seasonal_notes": "Open year round with seasonal hours and rates. Autumn (October) 9:00am–4:00pm, November 9:00am–3:30pm, Christmas (December 1 to January 6) 3:00pm–9:00pm and closed December 25, Winter (January 7 to March 31) 9:00am–3:30pm or 4:00pm, closed January 18 to 31 for staff holiday, Spring (April–May) 9:00am–5:00pm.",
+    "price_year_or_season": "2026 to 2027 seasonal rates from the Hours & Rates page (last modified 2026-06-24); the general admission figures recorded here are the Summer 2026 rates for June 1 to September 15.",
     "checked_on": "2026-09-02",
     "checked_by": "scraper"
   },
@@ -54,9 +54,9 @@
     {
       "id": "school-field-trip",
       "name": "School group field trip (self-guided)",
-      "description": "Organized school groups and field trips are welcomed October 15 – April 15 only; no school field trips are accepted after April 16. Advance reservations are required and based on availability. Visits are restricted to a maximum of two hours and a maximum of 60 students. Child and youth seasonal rates apply: the child (5–12) rate is $3.00 including tax for October, November, January to March and April, and $5.00 during the Christmas season (December 1 – January 6); youth aged 13–17 pay the higher youth rate, which ranges from $12.60 to $21.13 across the same months. The Gardens are closed December 25 and January 18–31. All chaperones must read and sign the School Group & Field Trip Policy form before arrival.",
+      "description": "Organized school groups and field trips are welcomed October 15 to April 15 only; no school field trips are accepted after April 16. Advance reservations are required and based on availability. Visits are restricted to a maximum of two hours and a maximum of 60 students. Child and youth seasonal rates apply: the child (5 to 12) rate is $3.00 including tax for October, November, January to March and April, and $5.00 during the Christmas season (December 1 to January 6); youth aged 13 to 17 pay the higher youth rate, which ranges from $12.60 to $21.13 across the same months. The Gardens are closed December 25 and January 18 to 31. All chaperones must read and sign the School Group & Field Trip Policy form before arrival.",
       "what_children_do": "Walk the main pathways in units of ten or fewer with an adult, staying on the paths and talking quietly, past the Sunken, Rose, Japanese, Italian and Mediterranean gardens. A leisurely full circuit is about 1.5 kilometres and takes most visitors 1.5 to 2 hours.",
-      "our_note": "The two-hour cap and the walking distance are the same number, so there is no slack in the visit — plan one loop and skip the gift shop. The Gardens describe themselves as a private display garden and not a playground, and they explicitly rule out running, throwing games and scavenger hunts, so this suits a group that is already comfortable walking quietly. The window closes hard on April 15, which is a fortnight before the tulips peak.",
+      "our_note": "The two-hour cap and the walking distance are the same number, so there is no slack in the visit. Plan one loop and skip the gift shop. The Gardens describe themselves as a private display garden and not a playground, and they explicitly rule out running, throwing games and scavenger hunts, so this suits a group that is already comfortable walking quietly. The window closes hard on April 15, which is a fortnight before the tulips peak.",
       "practical_summary": "Free parking, washrooms with change tables throughout, and picnic tables by the Information Centre; the whole visit is outdoors and the rain plan is borrowed umbrellas. The public FAQ and the school group policy disagree about whether packed lunches can be eaten on site, so confirm when you book.",
       "comes_to_you": false,
       "age_min_years": null,
@@ -73,7 +73,7 @@
       "free_adults_per_children": 10,
       "is_free": false,
       "tax_included": true,
-      "extra_fees_note": "Rates are seasonal. The $3.00 child rate applies in October, November, January–March and April; the child rate is $5.00 during the Christmas season, December 1 – January 6. Youth aged 13–17 pay the youth rate for the season.",
+      "extra_fees_note": "Rates are seasonal. The $3.00 child rate applies in October, November, January–March and April; the child rate is $5.00 during the Christmas season, December 1 to January 6. Youth aged 13 to 17 pay the youth rate for the season.",
       "school_rate_only": false,
       "deposit_required": null,
       "payment_timing": null,
@@ -103,10 +103,10 @@
     {
       "id": "child-youth-group-visit",
       "name": "Child and youth group visit (self-guided)",
-      "description": "Child and youth groups other than school field trips are taken year round. Advance reservations are required and based on availability. Child and youth seasonal rates apply; the child (5–12) rate recorded here is the Summer 2026 rate of $5.00 including tax, and falls to $3.00 in October, November and January to April. Chaperones are required at 1 adult per 10 students and receive complimentary admission on that ratio. All chaperones must read and sign the Youth Group Policies before arrival. No maximum group size or visit length is published for this category.",
+      "description": "Child and youth groups other than school field trips are taken year round. Advance reservations are required and based on availability. Child and youth seasonal rates apply; the child (5 to 12) rate recorded here is the Summer 2026 rate of $5.00 including tax, and falls to $3.00 in October, November and January to April. Chaperones are required at 1 adult per 10 students and receive complimentary admission on that ratio. All chaperones must read and sign the Youth Group Policies before arrival. No maximum group size or visit length is published for this category.",
       "what_children_do": "Walk the garden paths in units of ten or fewer with an adult, staying on the paths, past the Sunken, Rose, Japanese, Italian and Mediterranean gardens; a leisurely circuit is about 1.5 kilometres.",
-      "our_note": "This is the route to ask about if your dates fall outside the October-to-April school window, and unlike the school category it carries no published two-hour limit or 60-child cap — but that also means nothing is guaranteed until Group Services confirms it. Summer rates are the highest of the year, so an autumn or winter date costs a child $3 rather than $5.",
-      "practical_summary": "Free parking, washrooms with baby change tables and a parent room, complimentary strollers from the Visitor Centre, and picnic tables near the Information Centre. There is no indoor space to retreat to and no published limit on group size — both worth asking about.",
+      "our_note": "This is the route to ask about if your dates fall outside the October-to-April school window, and unlike the school category it carries no published two-hour limit or 60 child cap. That also means nothing is guaranteed until Group Services confirms it. Summer rates are the highest of the year, so an autumn or winter date costs a child $3 rather than $5.",
+      "practical_summary": "Free parking, washrooms with baby change tables and a parent room, complimentary strollers from the Visitor Centre, and picnic tables near the Information Centre. There is no indoor space to retreat to and no published limit on group size. Both are worth asking about.",
       "comes_to_you": false,
       "age_min_years": null,
       "age_max_years": null,
@@ -122,7 +122,7 @@
       "free_adults_per_children": 10,
       "is_free": false,
       "tax_included": true,
-      "extra_fees_note": "Rates are seasonal and change through the year: the child (5–12) rate is $5.00 in summer and at Christmas and $3.00 in autumn, winter and spring. Youth aged 13–17 pay the youth rate for the season.",
+      "extra_fees_note": "Rates are seasonal and change through the year: the child (5 to 12) rate is $5.00 in summer and at Christmas and $3.00 in autumn, winter and spring. Youth aged 13 to 17 pay the youth rate for the season.",
       "school_rate_only": false,
       "deposit_required": null,
       "payment_timing": null,
@@ -179,7 +179,7 @@
     }
   ],
   "gaps": [
-    "age range: the Gardens publish no minimum or maximum age for school or youth groups, only the 5–12 child and 13–17 youth admission bands, so age_basis is left null rather than inferred from ticket categories.",
+    "age range: the Gardens publish no minimum or maximum age for school or youth groups, only the 5 to 12 child and 13 to 17 youth admission bands, so age_basis is left null rather than inferred from ticket categories.",
     "lead time: 'Advanced reservations are required and based on availability' — no minimum notice period in days is published.",
     "capacity: no maximum group size is published for the child and youth group category (the 60-student cap is stated only for school field trips), and no minimum group size is published for either.",
     "deposit and payment timing: not published for group visits.",
@@ -200,7 +200,7 @@
         "https://butchartgardens.com/wp-content/uploads/2024/04/School-Group-Field-Trip-Policies.pdf",
         "https://butchartgardens.com/wp-content/uploads/2026/06/Youth-Group-Policies.pdf"
       ],
-      "note": "The Groups & Tours web page (last modified 2026-08-04) gives groups@butchartgardens.com for reservations; both policy PDFs give groupres@butchartgardens.com. Value taken from the more recently dated web page."
+      "note": "Two of their pages give different booking addresses. If one bounces, try the other. We use the one from their main groups page."
     },
     {
       "field": "has_lunch_space",
@@ -212,7 +212,7 @@
         "https://butchartgardens.com/faq/",
         "https://butchartgardens.com/wp-content/uploads/2024/04/School-Group-Field-Trip-Policies.pdf"
       ],
-      "note": "The public FAQ (last modified 2026-06-28) permits outside food and points to picnic tables; the 2024 School Group & Field Trip Policies PDF, which every chaperone must sign, forbids outside meals and allows only pre-arranged snacks in designated areas. Field set from the more recently dated FAQ, but a booked group should assume the stricter group policy applies until Group Services confirms otherwise."
+      "note": "Their public page says you can bring your own food, but the policy every chaperone signs says no outside meals. Ask before you plan lunch there."
     }
   ],
   "pages_opened": [

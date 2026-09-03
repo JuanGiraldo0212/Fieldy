@@ -128,9 +128,21 @@ export function ConflictBanner({ note }: { note: string }) {
 }
 
 /*
-  The practical block. An unknown is amber and says so plainly — it is what the
+  The practical block. An unknown is amber and says so plainly: it is what the
   director will ask the venue, and it becomes a pre-selected ask on the request.
+
+  Cards size themselves to their content. Venues that write a proper note give
+  us a paragraph ("Four gender-neutral single-stall washrooms, two close to the
+  front lobby...") while others give us two words, and forcing both into one
+  narrow column either truncates the useful one or leaves the terse one mostly
+  empty. A long value takes two columns, a very long one takes the full width.
 */
+function spanFor(value: string): string {
+  if (value.length > 240) return 'sm:col-span-3'
+  if (value.length > 90) return 'sm:col-span-2'
+  return ''
+}
+
 export function PracticalList({
   facts,
   icons,
@@ -139,11 +151,14 @@ export function PracticalList({
   icons: Record<string, ReactNode>
 }) {
   return (
-    <div className="grid grid-cols-[repeat(auto-fit,minmax(230px,1fr))] gap-3">
+    <div className="grid gap-3 sm:grid-cols-3">
       {facts.map((f) => (
         <div
           key={f.key}
-          className="bg-surface-2 border-border-soft flex gap-3.5 rounded-card border px-4 py-3.5"
+          className={cx(
+            'bg-surface-2 border-border-soft flex gap-3.5 rounded-card border px-4 py-3.5',
+            spanFor(f.value),
+          )}
         >
           <span className="text-brand flex-none">{icons[f.key]}</span>
           <div className="min-w-0">
