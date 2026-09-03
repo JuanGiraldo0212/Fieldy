@@ -299,6 +299,8 @@ export function decorate(
     {
       ageBasis: row.ageBasis,
       ageMinYears: row.ageMinYears,
+      gradeMin: row.gradeMin,
+      gradeMax: row.gradeMax,
       capacityMax: row.capacityMax,
       costPerChildCad: row.costPerChildCad,
       costPerGroupCad: row.costPerGroupCad,
@@ -307,6 +309,7 @@ export function decorate(
     {
       ageMin: band.min,
       ageMax: band.max,
+      grade: effectiveGrade(state.age_bands),
       size: state.children,
       budgetPerChild: state.budget_max,
     },
@@ -334,13 +337,30 @@ export function decorate(
 }
 
 export function effectiveAgeRange(bands: number[]): { min: number; max: number } {
-  const picked = bands.length ? bands : [1]
-  const valid = picked.filter((i) => i >= 0 && i < AGE_BANDS.length)
-  const use = valid.length ? valid : [1]
+  const use = usableBands(bands)
   return {
     min: Math.min(...use.map((i) => AGE_BANDS[i]![0])),
     max: Math.max(...use.map((i) => AGE_BANDS[i]![1])),
   }
+}
+
+function usableBands(bands: number[]): number[] {
+  const valid = bands.filter((i) => i >= 0 && i < AGE_BANDS.length)
+  return valid.length ? valid : [1]
+}
+
+/*
+  The grade to compare a grade-published program against, or null.
+
+  Null when the selection is one of the two pre-school bands, and null when
+  several grades are selected at once: a group spanning Grades 2 to 4 has no
+  single grade, and picking one of them to test against would quietly answer a
+  question nobody asked.
+*/
+export function effectiveGrade(bands: number[]): number | null {
+  const use = usableBands(bands)
+  const grades = use.map((i) => AGE_BANDS[i]![3]).filter((g): g is number => g != null)
+  return grades.length === 1 ? grades[0]! : null
 }
 
 /* ─── Filter and sort ────────────────────────────────────────────────────── */

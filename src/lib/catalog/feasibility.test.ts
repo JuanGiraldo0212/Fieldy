@@ -265,3 +265,74 @@ describe('feasibility — against the real catalog', () => {
     expect(r.issueText).not.toMatch(/budget/)
   })
 })
+
+describe('feasibility — grade against grade', () => {
+  /* The Art Gallery workshop: Grades 2 to 12, no published ages at all. */
+  const gradesOnly = withProgram({
+    ageBasis: 'grades' as const,
+    ageMinYears: null,
+    gradeMin: 2,
+    gradeMax: 12,
+  })
+  const classOf = (grade: number, over: Partial<GroupCriteria> = {}): GroupCriteria => ({
+    ageMin: grade + 5,
+    ageMax: grade + 6,
+    grade,
+    size: 22,
+    budgetPerChild: 12,
+    ...over,
+  })
+
+  it('catches a class below the published range', () => {
+    // The bug this exists to fix: with no ages to compare, a Grade 1 class was
+    // told a Grades 2 to 12 program fitted them.
+    const r = feasibility(gradesOnly, classOf(1))
+    expect(r.level).toBe('amber')
+    expect(r.reasons).toContain('written for Grade 2 and up, yours are Grade 1')
+  })
+
+  it('catches a class above the published range', () => {
+    const r = feasibility(
+      withProgram({ ageBasis: 'grades', ageMinYears: null, gradeMin: 1, gradeMax: 3 }),
+      classOf(7),
+    )
+    expect(r.reasons).toContain('written for up to Grade 3, yours are Grade 7')
+  })
+
+  it('passes a class inside the range', () => {
+    expect(feasibility(gradesOnly, classOf(4)).level).toBe('green')
+  })
+
+  it('passes at both ends of the range', () => {
+    expect(feasibility(gradesOnly, classOf(2)).level).toBe('green')
+    expect(feasibility(gradesOnly, classOf(12)).level).toBe('green')
+  })
+
+  it('names Kindergarten rather than Grade 0', () => {
+    const r = feasibility(
+      withProgram({ ageBasis: 'grades', ageMinYears: null, gradeMin: 0, gradeMax: 3 }),
+      classOf(5),
+    )
+    expect(r.reasons).toContain('written for up to Grade 3, yours are Grade 5')
+    const below = feasibility(
+      withProgram({ ageBasis: 'grades', ageMinYears: null, gradeMin: 2, gradeMax: 5 }),
+      { ...classOf(1), grade: 0 },
+    )
+    expect(below.reasons[0]).toMatch(/yours are Kindergarten/)
+  })
+
+  it('still warns an under-five room, which has no grade to compare', () => {
+    const r = feasibility(gradesOnly, PRESCHOOL)
+    expect(r.reasons).toContain(
+      'ages are set by grade here, not years — phone to confirm they take under-fives',
+    )
+  })
+
+  it('says nothing when the venue published no grades either', () => {
+    const r = feasibility(
+      withProgram({ ageBasis: 'grades', ageMinYears: null, gradeMin: null, gradeMax: null }),
+      classOf(3),
+    )
+    expect(r.level).toBe('green')
+  })
+})

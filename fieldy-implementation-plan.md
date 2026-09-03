@@ -187,7 +187,8 @@ The unknowns are not swallowed. They still render as "Capacity not published" / 
 The reason strings are copy and ship verbatim:
 
 - age, first match wins:
-  - `age_basis = 'grades'` and the room's `age_max <= 5` → `ages are set by grade here, not years — phone to confirm they take under-fives`. This is a **known** mismatch, not a missing fact: the venue published a range, in units that cannot answer the question this room is asking.
+  - `age_basis = 'grades'` **and the director picked a grade** → compare grades directly: `written for {Grade n} and up, yours are {Grade n}`, or `written for up to {Grade n}, yours are {Grade n}`. This is the case the age-only check could never see. A grade-published program carries no ages, so with nothing to compare, a Grade 1 class was told a Grades 2 to 12 program fitted it.
+  - `age_basis = 'grades'` and the room is under five, so there is no grade to compare → `ages are set by grade here, not years — phone to confirm they take under-fives`. A **known** mismatch, not a missing fact: the venue published a range, in units that cannot answer the question this room is asking.
   - `age_min_years` is not null and `> room.age_min` → `built for {n}+, your youngest are {n}`
   - Never convert grades to years anywhere, for this check or any other. Flag the mismatch instead of guessing.
 - capacity: `capacity_max` is not null and `< room.size` → `capacity is {n}, your group is {n} — ask about splitting`
@@ -201,7 +202,7 @@ Sorting: `rankFeasibleFirst` (default true) puts green above amber for **Best ma
 
 The design's catalog is richer than the original route description. All of this is in scope.
 
-Always-visible controls, each applying immediately: **Age / Grade** (multi-select over the four bands `1–3`, `3–5, Grade 1`, `5–8, Grades 1–3`, `8–12, Grades 4–7`; the summary joins selected labels with `+`, and the effective range is min-of-mins to max-of-maxes), **Children** (numeric), **Travel** (walking / bus / parent drivers), **Budget per child** (quick options plus a typed max), and **Leaving from** (the active room's address, joined to a radius select: 3, 5, 10, 30 km, or any; default 5 km).
+Always-visible controls, each applying immediately: **Age / Grade** (fourteen bands: `1 to 3 years`, `3 to 5 years`, then `Grade 1` through `Grade 12`. Each carries an age range *and*, for the grades, a grade number, so a grade-published program is checked against a grade rather than falling through. The pre-school band runs to 6 rather than 5 so it meets Grade 1 and leaves no age between the two. Grades are still never converted to years in the other direction: a venue's published grades are compared as grades or not at all.), **Children** (numeric), **Travel** (walking / bus / parent drivers), **Budget per child** (quick options plus a typed max), and **Leaving from** (the active room's address, joined to a radius select: 3, 5, 10, 30 km, or any; default 5 km).
 
 **Mood chips** — `Fun`, `Explore`, `Active`, `Creative`, `Learn`, `Surprise me`. Match by `mood_tags` when the record carries them, else derive: fun = animals or science or a hands-on/interactive format; explore = nature or animals; active = outdoor and not comes-to-you; creative = arts; learn = museums, science or civic. `Surprise me` is exclusive of the other moods and returns three seeded-random results, ignoring the other mood filters.
 

@@ -49,6 +49,9 @@ export type Feasibility = {
 export type GroupCriteria = {
   ageMin: number
   ageMax: number
+  /* The grade the director picked, when she picked one. Null for the two
+     pre-school bands and for a selection spanning several grades. */
+  grade?: number | null
   size: number
   budgetPerChild: number
 }
@@ -58,6 +61,8 @@ export type GroupCriteria = {
 export type FeasibilityProgram = {
   ageBasis: 'years' | 'grades' | null
   ageMinYears: number | null
+  gradeMin?: number | null
+  gradeMax?: number | null
   capacityMax: number | null
   costPerChildCad: number | null
   costPerGroupCad: number | null
@@ -111,7 +116,25 @@ export function feasibility(
 
      An unpublished youngest age raises nothing: the card already says "Ages
      not published", and it becomes an ask on the request. */
-  if (program.ageBasis === 'grades' && group.ageMax <= 5) {
+  const grade = group.grade ?? null
+  const gradeName = (g: number) => (g === 0 ? 'Kindergarten' : `Grade ${g}`)
+
+  if (program.ageBasis === 'grades' && grade != null) {
+    /*
+      Both sides speak grades, so compare them. This is the case that used to
+      fall through entirely: a "Grades 2 to 12" program publishes no ages, so
+      with nothing to compare, a Grade 1 class was told it fitted.
+    */
+    if (program.gradeMin != null && grade < program.gradeMin) {
+      reasons.push(
+        `written for ${gradeName(program.gradeMin)} and up, yours are ${gradeName(grade)}`,
+      )
+    } else if (program.gradeMax != null && grade > program.gradeMax) {
+      reasons.push(
+        `written for up to ${gradeName(program.gradeMax)}, yours are ${gradeName(grade)}`,
+      )
+    }
+  } else if (program.ageBasis === 'grades' && group.ageMax <= 5) {
     reasons.push(
       'ages are set by grade here, not years — phone to confirm they take under-fives',
     )

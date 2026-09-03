@@ -10,6 +10,7 @@ import {
   resultLine,
   search,
   bandsFor,
+  effectiveGrade,
   preferredTransport,
   type CatalogRow,
 } from './search'
@@ -62,12 +63,14 @@ const dec = (r: CatalogRow, s = state()) => decorate(r, s, ORIGIN, noHeroes)
 describe('effectiveAgeRange', () => {
   it('spans the union of selected bands', () => {
     expect(effectiveAgeRange([0])).toEqual({ min: 1, max: 3 })
-    expect(effectiveAgeRange([0, 3])).toEqual({ min: 1, max: 12 })
+    // Band 0 is "1 to 3 years", band 13 is Grade 12 (17 to 18).
+    expect(effectiveAgeRange([0, 13])).toEqual({ min: 1, max: 18 })
   })
 
   it('falls back to the default band rather than an empty range', () => {
-    expect(effectiveAgeRange([])).toEqual({ min: 3, max: 5 })
-    expect(effectiveAgeRange([99])).toEqual({ min: 3, max: 5 })
+    // The default band is "3 to 5 years", which runs to 6 so it meets Grade 1.
+    expect(effectiveAgeRange([])).toEqual({ min: 3, max: 6 })
+    expect(effectiveAgeRange([99])).toEqual({ min: 3, max: 6 })
   })
 })
 
@@ -366,14 +369,23 @@ describe('bandsFor', () => {
     expect(bandsFor(1, 3)).toEqual([0])
   })
 
-  it('picks both bands when a room straddles a boundary', () => {
-    // A room of 4 to 6 year olds has children in "3 to 5" and in "5 to 8".
+  it('picks every band a room straddles', () => {
+    // A room of 5 to 7 year olds has children in "3 to 5" and in Grade 1.
     // Choosing one would hide outings half the room could go on.
-    expect(bandsFor(4, 6)).toEqual([1, 2])
+    expect(bandsFor(5, 7)).toEqual([1, 2])
+  })
+
+  it('leaves no age between the bands', () => {
+    // Every age from 1 to 17 has to belong somewhere. Five-year-olds used to
+    // fall between "3 to 5" and Grade 1 and match nothing at all.
+    for (let age = 1; age < 18; age++) {
+      expect(bandsFor(age, age + 1).length).toBeGreaterThan(0)
+    }
   })
 
   it('spans everything for a wide range', () => {
-    expect(bandsFor(1, 12)).toEqual([0, 1, 2, 3])
+    // 1 to 12 reaches the pre-school bands and Grades 1 through 6.
+    expect(bandsFor(1, 12)).toEqual([0, 1, 2, 3, 4, 5, 6, 7])
   })
 
   it('never returns nothing', () => {
@@ -399,5 +411,40 @@ describe('preferredTransport', () => {
 
   it('leaves the URL alone for a room that lists no usable mode', () => {
     expect(preferredTransport(['none'], 'bus')).toBe('bus')
+  })
+})
+
+describe('effectiveGrade', () => {
+  it('is the grade when one grade is picked', () => {
+    expect(effectiveGrade([2])).toBe(1)   // band 2 is Grade 1
+    expect(effectiveGrade([13])).toBe(12) // band 13 is Grade 12
+  })
+
+  it('is null for the pre-school bands, which have no grade', () => {
+    expect(effectiveGrade([0])).toBeNull()
+    expect(effectiveGrade([1])).toBeNull()
+  })
+
+  it('is null when several grades are picked', () => {
+    // A group spanning Grades 2 to 4 has no single grade, and testing against
+    // one of them would answer a question nobody asked.
+    expect(effectiveGrade([3, 4, 5])).toBeNull()
+  })
+
+  it('falls back to the default band rather than throwing', () => {
+    expect(effectiveGrade([])).toBeNull()
+    expect(effectiveGrade([99])).toBeNull()
+  })
+})
+
+describe('bandsFor with grades in the list', () => {
+  it('still finds the pre-school bands for a young room', () => {
+    expect(bandsFor(1, 3)).toEqual([0])
+    expect(bandsFor(3, 5)).toEqual([1])
+  })
+
+  it('maps a school-age room onto its grade bands', () => {
+    // A room of 6 to 8 year olds spans Grade 1 and Grade 2.
+    expect(bandsFor(6, 8)).toEqual([2, 3])
   })
 })

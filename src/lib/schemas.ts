@@ -122,7 +122,7 @@ export const SUGGESTION_CONFIDENCE_FLOOR = 0.6
    server makes shared links behave unpredictably. Lives in the URL. */
 export const searchStateSchema = z.object({
   query: z.string().default(''),
-  age_bands: z.array(z.number().int().min(0).max(3)).default([1]),
+  age_bands: z.array(z.number().int().min(0).max(13)).default([1]),
   children: z.number().int().min(1).default(16),
   transport: z.enum(['walking', 'bus', 'parent_drivers']).default('bus'),
   budget_max: z.number().min(0).default(10),
@@ -145,12 +145,38 @@ export const searchStateSchema = z.object({
   sort: z.enum(['best_match', 'distance', 'duration', 'price']).default('best_match'),
 })
 
-/* The four bands the catalog filters by, as [min, max, label]. */
-export const AGE_BANDS = [
-  [1, 3, '1–3'],
-  [3, 5, '3–5, Grade 1'],
-  [5, 8, '5–8, Grades 1–3'],
-  [8, 12, '8–12, Grades 4–7'],
+/*
+  What a director picks in "Age / Grade".
+
+  Two bands for the years before school, then one entry per grade, because
+  that is how a teacher describes her class and how venues publish their
+  programs. A band carries BOTH an age range and, where there is one, a grade.
+
+  The grade is the point. A venue that publishes "Grades 2 to 12" gives no
+  ages at all, so without a grade to compare we could only ever say "no
+  youngest age published" — and a Grade 1 class would be told a Grades 2 to 12
+  program fits them. With a grade on the band, that is a real check.
+
+  Ages for a grade are the ordinary BC pairing, grade n covering n+5 to n+6.
+  They are used ONLY to filter age-published programs. Nothing here converts a
+  venue's grades into ages, which stays forbidden: see feasibility.ts.
+
+  Kindergarten is not its own entry. A five-year-old sits inside "3 to 5",
+  which is where a K class looking for outings will find themselves.
+*/
+export const AGE_BANDS: readonly (readonly [number, number, string, number | null])[] = [
+  [1, 3, '1 to 3 years', null],
+  /*
+    Runs to 6, not 5, so it meets Grade 1 rather than leaving a gap. With the
+    bands half-open, "3 to 5" ending at 5 and Grade 1 starting at 6 left
+    five-year-olds belonging to neither, and a kindergarten room would have
+    matched nothing. The label stays as a director would say it.
+  */
+  [3, 6, '3 to 5 years', null],
+  ...Array.from({ length: 12 }, (_, i) => {
+    const grade = i + 1
+    return [grade + 5, grade + 6, `Grade ${grade}`, grade] as const
+  }),
 ] as const
 
 export const RADIUS_OPTIONS = [3, 5, 10, 30, 0] as const // 0 = any

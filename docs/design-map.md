@@ -290,6 +290,8 @@ Four strings are marked **↻ ships as** — those are the ones the send-only re
 
 **Feasibility** — badges `Fits your group` / `One thing to check` / `✓ Fits {room}` / `! {issue}`. Issue strings, joined with ` · `:
 - `ages are set by grade here, not years — phone to confirm they take under-fives`
+- `written for {Grade n} and up, yours are {Grade n}` *(new: both sides speak grades)*
+- `written for up to {Grade n}, yours are {Grade n}` *(new)*
 - `built for {n}+, your youngest are {n}`
 - `capacity is {n}, your group is {n} — ask about splitting`
 - `{$} a child is over your {$} budget`

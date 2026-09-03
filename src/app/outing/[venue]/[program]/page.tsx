@@ -35,7 +35,7 @@ import {
 } from '@/lib/catalog/program'
 import { haversineKm, travelLine, type TransportMode } from '@/lib/catalog/distance'
 import { costPerChild, feasibility, money } from '@/lib/catalog/feasibility'
-import { initialsOf } from '@/lib/catalog/search'
+import { effectiveAgeRange, effectiveGrade, initialsOf } from '@/lib/catalog/search'
 import { parseSearchParams } from '@/lib/catalog/url'
 import {
   ConflictBanner,
@@ -94,6 +94,7 @@ export default async function OutingPage({
 
   const { program: p, venue: v, images } = found
   const state = parseSearchParams(await searchParams)
+  const bandRange = effectiveAgeRange(state.age_bands)
 
   const km =
     p.comesToYou || v.lat == null || v.lng == null
@@ -107,12 +108,20 @@ export default async function OutingPage({
     {
       ageBasis: p.ageBasis,
       ageMinYears: p.ageMinYears,
+      gradeMin: p.gradeMin,
+      gradeMax: p.gradeMax,
       capacityMax: p.capacityMax,
       costPerChildCad: costChild,
       costPerGroupCad: costGroup,
       isFree: p.isFree,
     },
-    { ageMin: 3, ageMax: 5, size: state.children, budgetPerChild: state.budget_max },
+    {
+      ageMin: bandRange.min,
+      ageMax: bandRange.max,
+      grade: effectiveGrade(state.age_bands),
+      size: state.children,
+      budgetPerChild: state.budget_max,
+    },
   )
 
   const perChild = costPerChild(
