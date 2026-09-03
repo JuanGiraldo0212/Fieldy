@@ -230,6 +230,19 @@ describe('applyFilters — moods', () => {
     expect(all([r], state({ moods: ['creative'], radius_km: 0 }))).toHaveLength(1)
   })
 
+  it('treats explicit tags as the whole answer, not an addition', () => {
+    // A nature venue would derive as `explore`. Tagged `creative` only, it is
+    // NOT explore — a curator read it and decided. Adding derived matches on
+    // top would make every chip return nearly everything.
+    const r = row({ moodTags: ['creative'] })
+    expect(all([r], state({ moods: ['explore'], radius_km: 0 }))).toHaveLength(0)
+  })
+
+  it('still derives for an untagged program', () => {
+    const r = row({ moodTags: null })
+    expect(all([r], state({ moods: ['explore'], radius_km: 0 }))).toHaveLength(1)
+  })
+
   it('ORs several moods', () => {
     expect(all([row()], state({ moods: ['creative', 'explore'], radius_km: 0 }))).toHaveLength(1)
   })

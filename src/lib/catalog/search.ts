@@ -133,13 +133,20 @@ export const MOODS = ['fun', 'explore', 'active', 'creative', 'learn', 'surprise
 export type Mood = (typeof MOODS)[number]
 
 /*
-  Match on the record's own mood_tags when the catalog carries them, and fall
-  back to a derivation from category and format. The schema calls mood_tags
-  "derivable from category, but override here when the category misleads", so
-  an explicit tag always wins.
+  Explicit tags are AUTHORITATIVE, not additive.
+
+  When a program carries mood_tags, they are the whole answer — a curator read
+  what the children actually do and judged it. Adding derived matches on top
+  would dilute that: the derivation reads `fun` as "animals or science or
+  hands-on", which pulls in 15 extra programs nobody called fun, and a chip
+  that returns everything answers nothing.
+
+  The derivation only runs for a program with no tags at all. Every one of the
+  39 catalog programs is now tagged, so in practice it is a safety net for
+  records added before the extraction prompt required them.
 */
 function matchesMood(row: CatalogRow, mood: Mood): boolean {
-  if (row.moodTags?.includes(mood as never)) return true
+  if (row.moodTags?.length) return row.moodTags.includes(mood as never)
 
   const cat = row.venueCategory
   const fmt = row.format ?? []
