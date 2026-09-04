@@ -114,14 +114,30 @@ In development every send goes to a Resend test address. Never a real venue.
 
 **Blocked on** — domain name, Resend account.
 
-**Status: everything except the send is built and walked through in the
-browser.** `trip-logic`, `c-plan`, `c-trip` and `route-plan-trip` are done; the
-demo runs end to end. `email-out` is now built too: `lib/email/relay.ts` for
-addressing, subjects and header construction, `lib/email/send.ts` for the
-Resend call, `docs/email-setup.md` for the DNS. Every screen reads
-`sendingConfigured()`, so with no API key the request is written and stored
-rather than delivered and the copy says so. `/trips` exists as a plain list so
-a trip stays reachable; My trips proper is still §5.6's.
+**Status: the demo passes end to end.** Planned two dates and two asks through
+the plan screen, sent, landed on the trip page with status Asked, the
+`send_request` task already done, the request card, the checklist counted
+backwards and the ratio helper. Resend id `d0d554c5`. From, Reply-To,
+Message-ID and `X-Fieldy-Trip` confirmed on the received message, and pinned in
+`src/lib/email/send.test.ts` against the payload we hand Resend.
+
+`trip-logic`, `c-plan`, `c-trip`, `route-plan-trip` and `email-out` are all
+done. Every screen reads `sendingConfigured()`, so with no API key the request
+is written and stored rather than delivered and the copy says so.
+
+**Two M3 checklist items are still outstanding and are not slice 5's:**
+
+1. **Manual status selector** on the trip header, with the source line under
+   it, and a `system` message written into the thread on every manual change.
+   The design's rail is read only, so this has to be invented in the design's
+   language.
+2. **My trips** proper: five bucket tabs with counts, grouped sections, the New
+   reply dot, four bucket empty states. `/trips` today is a flat newest-first
+   list, built so a trip stays reachable after you navigate away. Logging that
+   in `docs/design-gaps.md` does not make it done.
+
+There is also **no Playwright in this repo at all** — no config, no specs. "Flow
+2 passes" cannot be true yet. That predates slice 4.
 
 ---
 
