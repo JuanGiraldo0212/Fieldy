@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 import { isRenderableImage } from '@/lib/catalog/image-hosts'
-import { cx } from '@/components/ui'
+import { cx, Skeleton } from '@/components/ui'
 
 /*
   The photo strip, and the viewer it opens.
@@ -20,6 +20,9 @@ import { cx } from '@/components/ui'
   Eight of the thirty venues publish more than three photographs, so the strip
   shows three and the viewer walks all of them rather than quietly dropping the
   rest.
+
+  Every photograph here is remote and optimized on demand, so each one gets a
+  skeleton while it is in flight — see Thumb and ViewerImage below.
 */
 
 export type Photo = {
@@ -55,13 +58,7 @@ export function PhotoStrip({
             aria-label={`View photo: ${p.alt}`}
             className="bg-thumb group relative h-[200px] min-w-0 overflow-hidden rounded-card"
           >
-            <Image
-              src={p.url}
-              alt={p.alt}
-              fill
-              sizes="(max-width: 640px) 50vw, 260px"
-              className="object-cover transition-transform duration-200 group-hover:scale-[1.03]"
-            />
+            <Thumb photo={p} />
             {/* The last tile carries the rest, rather than silently dropping
                 photographs a venue took the trouble to publish. */}
             {extra > 0 && i === strip.length - 1 ? (
@@ -85,6 +82,75 @@ export function PhotoStrip({
           onClose={() => setOpenAt(null)}
         />
       ) : null}
+    </>
+  )
+}
+
+/*
+  One strip tile.
+
+  The photographs come off the venues' own servers through our image optimizer,
+  and on a cold cache that is the slowest thing on the page — several seconds
+  for a hero a venue never resized. A skeleton holds each frame so the outing
+  reads immediately instead of opening onto three empty boxes.
+
+  The skeleton sits behind the image, not in place of it: a `fill` image is
+  absolutely positioned over it and simply paints on top when it arrives, so
+  nothing about showing the photograph depends on JavaScript.
+*/
+function Thumb({ photo }: { photo: Photo }) {
+  const [settled, setSettled] = useState(false)
+
+  return (
+    <>
+      {settled ? null : <Skeleton className="absolute inset-0" />}
+      <Image
+        src={photo.url}
+        alt={photo.alt}
+        fill
+        sizes="(max-width: 640px) 50vw, 260px"
+        className="object-cover transition-transform duration-200 group-hover:scale-[1.03]"
+        /* next/image fires onLoad even when the browser had the photograph
+           cached and finished before hydration. On an error the alt text takes
+           over, so the skeleton stops pulsing there too. */
+        onLoad={() => setSettled(true)}
+        onError={() => setSettled(true)}
+      />
+    </>
+  )
+}
+
+/*
+  The full-size photograph in the viewer.
+
+  Mounted with a key of the photo id, so walking to the next one brings its own
+  skeleton back rather than holding the previous photograph on screen while a
+  new one downloads.
+
+  Here the skeleton does take the image's place — it has to, because the
+  intrinsic size is unknown until the photograph lands, so there is no box for a
+  backdrop to fill. `hidden` rather than an unmount: the browser still fetches a
+  display:none image, and unmounting would restart the download.
+*/
+function ViewerImage({ photo }: { photo: Photo }) {
+  const [settled, setSettled] = useState(false)
+
+  return (
+    <>
+      {settled ? null : (
+        <Skeleton tone="dark" className="h-[60vh] w-full max-w-[900px] rounded-card" />
+      )}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={photo.url}
+        alt={photo.alt}
+        onLoad={() => setSettled(true)}
+        onError={() => setSettled(true)}
+        className={cx(
+          'max-h-[74vh] w-auto max-w-full rounded-card object-contain',
+          settled ? null : 'hidden',
+        )}
+      />
     </>
   )
 }
@@ -169,12 +235,7 @@ function Viewer({
         </div>
 
         <div className="relative flex min-h-0 flex-1 items-center justify-center">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={photo.url}
-            alt={photo.alt}
-            className="max-h-[74vh] w-auto max-w-full rounded-card object-contain"
-          />
+          <ViewerImage key={photo.id} photo={photo} />
 
           {photos.length > 1 ? (
             <>
