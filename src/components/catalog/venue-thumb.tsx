@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { useState } from 'react'
 import { isRenderableImage } from '@/lib/catalog/image-hosts'
+import { Skeleton } from '@/components/ui'
 
 /*
   A venue photograph, with the initials tile as its fallback.
@@ -19,6 +20,11 @@ import { isRenderableImage } from '@/lib/catalog/image-hosts'
   onError below can never see it — so a single venue whose photos sit on a new
   domain would crash the entire catalog page rather than losing one thumbnail.
   An unknown host falls back to the tile, exactly like a broken image.
+
+  While the photograph is in flight a skeleton fills the frame. It sits BEHIND
+  the image rather than in place of it: the image paints over it the moment it
+  arrives, so nothing here depends on JavaScript to reveal the photograph — the
+  catalog and outing pages must read without it (next.config.ts).
 */
 export function VenueThumb({
   src,
@@ -32,19 +38,30 @@ export function VenueThumb({
   caption?: string
 }) {
   const [failed, setFailed] = useState(false)
+  const [settled, setSettled] = useState(false)
 
   if (src && !failed && isRenderableImage(src)) {
     return (
-      <Image
-        src={src}
-        alt={alt}
-        width={104}
-        height={104}
-        className="h-full w-full object-cover"
-        onError={() => setFailed(true)}
-        // The thumbnail is 104px; ask for a little more for retina.
-        sizes="104px"
-      />
+      <>
+        {settled ? null : <Skeleton className="absolute inset-0" />}
+        <Image
+          src={src}
+          alt={alt}
+          width={104}
+          height={104}
+          className="relative h-full w-full object-cover"
+          /* next/image calls onLoad even when the browser had the photograph
+             cached and finished before hydration, so the skeleton always
+             stops. */
+          onLoad={() => setSettled(true)}
+          onError={() => {
+            setSettled(true)
+            setFailed(true)
+          }}
+          // The thumbnail is 104px; ask for a little more for retina.
+          sizes="104px"
+        />
+      </>
     )
   }
 
