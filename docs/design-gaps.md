@@ -263,12 +263,28 @@ absorbed:
    adding a step. Spec §5.4.4 requires all three; the design draws the read-only
    state only.
 
-5. **`/trips` is a plain list**, newest first. The grouping, urgency sort,
-   "Needs my reply" chip and suggested-programs empty state of spec §5.6 are
-   later work. It exists because a trip you can only see once is not a trip you
-   have.
+5. **The manual status selector is invented**, because the design's rail is
+   read only and offers no control. The rail stays exactly as drawn and a
+   select sits under it, with the source line spec §5.4.1 asks for. A select
+   rather than tapping a rail step, for one reason: `cancelled` is a real
+   status that is deliberately not on the rail, and a control that can only
+   reach the four drawn steps cannot cancel a trip.
 
-**Not built here, by design:** the reply bubbles, the compose box, the
-suggestion banner and the manual status selector. They arrive with slices 5 and
-6, along with the mail that produces them.
+   The spec gives two source lines, "moved here when the venue replied" and
+   "set by you". A third was needed: a brand new trip is `system` too and no
+   venue has replied to it, so it says "set when the request went out" rather
+   than claiming one did.
+
+   Every manual change writes a `system` message into the thread, the same as
+   an applied suggestion will. A status that changed with nothing in the thread
+   to explain it is how two people at one centre end up disagreeing about what
+   happened.
+
+6. **System events render, reply bubbles do not.** The thin inline grey line of
+   spec §5.4.5 is here because the status selector produces one. The venue
+   bubbles it will sit between arrive with slice 5.
+
+**Not built here, by design:** the reply bubbles, the compose box and the
+suggestion banner. They arrive with slices 5 and 6, along with the mail that
+produces them.
 

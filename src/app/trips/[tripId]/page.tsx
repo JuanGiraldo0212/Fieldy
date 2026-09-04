@@ -35,6 +35,7 @@ import { StatusRail } from '@/components/trip/status-rail'
 import { Checklist } from '@/components/trip/checklist'
 import { CostCard } from '@/components/trip/cost-card'
 import { NotesCard } from '@/components/trip/notes-card'
+import { StatusSelect } from '@/components/trip/status-select'
 
 /*
   The trip page. Spec §5.4, "the heart of the product".
@@ -80,7 +81,10 @@ export default async function TripPage({
   const status = t.status as TripStatus
 
   const request = messages.find((m) => m.isRequest) ?? null
-  const lastParty = messages.at(-1)?.party ?? null
+  /* System events are ours, not a party in the conversation: a status change
+     must not read as "the venue answered". */
+  const lastParty =
+    messages.filter((m) => m.party !== 'system').at(-1)?.party ?? null
   const who = waitingOn(status, lastParty)
   const sentAt = request?.sentAt ?? t.createdAt
   const days = Math.max(
@@ -155,6 +159,12 @@ export default async function TripPage({
         ) : (
           <StatusRail status={status} />
         )}
+
+        <StatusSelect
+          tripId={t.id}
+          status={status}
+          source={t.statusSource as 'system' | 'manual'}
+        />
       </div>
 
       {undelivered ? (
@@ -292,6 +302,20 @@ export default async function TripPage({
             </div>
           </div>
         ) : null}
+
+        {/* System events are thin grey lines inline, spec §5.4.5. The reply
+            bubbles they sit between arrive with slice 5. */}
+        {messages
+          .filter((m) => m.party === 'system')
+          .map((m) => (
+            <div key={m.id} className="flex items-center gap-3 py-2">
+              <span aria-hidden className="border-border flex-1 border-t border-dashed" />
+              <span className="text-meta text-text-faint text-center">
+                {m.body}
+              </span>
+              <span aria-hidden className="border-border flex-1 border-t border-dashed" />
+            </div>
+          ))}
 
         <div className="flex items-center gap-3 py-4">
           <span aria-hidden className="border-border flex-1 border-t border-dashed" />

@@ -181,3 +181,76 @@ export const STATUS_RAIL: { status: TripStatus; label: string; note: string }[] 
   { status: 'confirmed', label: 'Confirmed', note: 'Date is locked in' },
   { status: 'done', label: 'Done', note: 'You went' },
 ]
+
+/* ─── My trips ───────────────────────────────────────────────────────────── */
+
+export const BUCKETS: Record<Bucket, { label: string; empty: [string, string] }> = {
+  needs: {
+    label: 'Needs action',
+    empty: [
+      'Nothing needs you right now',
+      'When a venue replies, the trip moves here so you know it is your turn.',
+    ],
+  },
+  waiting: {
+    label: 'Waiting',
+    empty: [
+      'No requests out',
+      'Trips you have asked about but not heard back on will wait here.',
+    ],
+  },
+  upcoming: {
+    label: 'Upcoming',
+    empty: [
+      'No confirmed trips yet',
+      'Once a venue confirms a date, the trip shows up here with its checklist.',
+    ],
+  },
+  past: {
+    label: 'Past',
+    empty: ['No history yet', 'Trips you have been on, and any you cancelled, collect here.'],
+  },
+}
+
+export type TripRow = {
+  status: TripStatus
+  lastMessageParty: 'educator' | 'venue' | 'system' | null
+  lastMessageAt: Date | null
+  /* The date the row shows: the confirmed one, else the first choice. */
+  showDate: string | null
+}
+
+/*
+  Urgency order within a bucket. Spec §5.6: "trips waiting on the educator
+  first, then trips waiting on the venue the longest, then the rest."
+
+  Longest-waiting first is the part that matters. A request sent three weeks
+  ago and forgotten is the one a director needs to see, and sorting by trip
+  date would bury it under everything happening sooner.
+*/
+export function sortByUrgency<T extends TripRow>(rows: T[], now: Date): T[] {
+  const rank = (r: T) => {
+    const who = waitingOn(r.status, r.lastMessageParty)
+    if (who === 'educator') return 0
+    if (who === 'venue') return 1
+    return 2
+  }
+  return [...rows].sort((a, b) => {
+    const ra = rank(a)
+    const rb = rank(b)
+    if (ra !== rb) return ra - rb
+    if (ra === 1) {
+      /* Both waiting on a venue: the one waiting longest comes first. */
+      const wa = daysWaiting(a.lastMessageAt, now) ?? 0
+      const wb = daysWaiting(b.lastMessageAt, now) ?? 0
+      if (wa !== wb) return wb - wa
+    }
+    /* Same urgency: soonest trip first, and a trip with no date last, because
+       a row with nothing to show should not head the list. */
+    if (a.showDate && b.showDate) return a.showDate < b.showDate ? -1 : 1
+    if (a.showDate) return -1
+    if (b.showDate) return 1
+    return 0
+  })
+}
+

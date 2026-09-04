@@ -9,7 +9,6 @@ import {
   CircleDollarSign,
   Clock,
   Footprints,
-  Heart,
   Info,
   MapPin,
   MessageCircle,
@@ -37,6 +36,8 @@ import { haversineKm, travelLine, type TransportMode } from '@/lib/catalog/dista
 import { costPerChild, feasibility, money } from '@/lib/catalog/feasibility'
 import { effectiveAgeRange, effectiveGrade, initialsOf } from '@/lib/catalog/search'
 import { parseSearchParams } from '@/lib/catalog/url'
+import { getViewer } from '@/lib/auth'
+import { isSaved } from '@/lib/trips/fetch'
 import {
   ConflictBanner,
   FactQuad,
@@ -50,6 +51,7 @@ import { VenueThumb } from '@/components/catalog/venue-thumb'
 import { CatalogMap } from '@/components/catalog/catalog-map'
 import { ReportForm } from '@/components/program/report-form'
 import { PhotoStrip } from '@/components/program/photo-strip'
+import { SaveButton } from '@/components/program/save-button'
 
 /* Until a session exists (slice 3), distance is from the centre of Victoria. */
 const VICTORIA = { lat: 48.4284, lng: -123.3656 }
@@ -93,6 +95,8 @@ export default async function OutingPage({
   if (!found) notFound()
 
   const { program: p, venue: v, images } = found
+  const viewer = await getViewer()
+  const saved = viewer ? await isSaved(viewer.accountId, p.id) : false
   const state = parseSearchParams(await searchParams)
   const bandRange = effectiveAgeRange(state.age_bands)
 
@@ -265,15 +269,7 @@ export default async function OutingPage({
             <MessageCircle size={18} />
             Plan this trip
           </Link>
-          <button
-            type="button"
-            className="border-border-strong bg-surface hover:border-brand text-body flex min-h-[52px] items-center gap-2.5 rounded-pill border px-6 font-bold"
-          >
-            <span className="text-brand flex">
-              <Heart size={18} />
-            </span>
-            Save
-          </button>
+          <SaveButton programId={p.id} saved={saved} />
         </div>
 
         <div className="bg-surface-2 mt-4.5 flex flex-wrap items-center gap-3 rounded-card px-4.5 py-3.5">

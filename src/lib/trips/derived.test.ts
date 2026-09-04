@@ -1,11 +1,13 @@
 import { describe, expect, it } from 'vitest'
 import {
+  BUCKETS,
   bucketOf,
   daysWaiting,
   ratioCheck,
   requiredAdults,
   totalCost,
   tripSummary,
+  sortByUrgency,
   waitingLabel,
   waitingOn,
 } from './derived'
@@ -164,3 +166,79 @@ describe('tripSummary', () => {
     expect(tripSummary({ status: 'cancelled', tasks, today: '2026-12-01' })).toBe('Cancelled')
   })
 })
+
+describe('sortByUrgency', () => {
+  const NOW = new Date('2026-09-20T10:00:00Z')
+  const row = (
+    name: string,
+    over: Partial<Parameters<typeof sortByUrgency>[0][number]> = {},
+  ) => ({
+    name,
+    status: 'requested' as const,
+    lastMessageParty: 'educator' as const,
+    lastMessageAt: new Date('2026-09-19T10:00:00Z'),
+    showDate: '2026-10-01',
+    ...over,
+  })
+
+  it('puts her turn above everything else', () => {
+    const out = sortByUrgency(
+      [row('waiting'), row('hers', { lastMessageParty: 'venue', status: 'replied' })],
+      NOW,
+    )
+    expect(out.map((r) => r.name)).toEqual(['hers', 'waiting'])
+  })
+
+  it('puts the longest wait first among requests that are out', () => {
+    // Three weeks unanswered is the one she needs to see. Sorting by trip date
+    // would bury it under everything happening sooner.
+    const out = sortByUrgency(
+      [
+        row('recent', { lastMessageAt: new Date('2026-09-19T10:00:00Z') }),
+        row('stale', { lastMessageAt: new Date('2026-08-30T10:00:00Z') }),
+      ],
+      NOW,
+    )
+    expect(out.map((r) => r.name)).toEqual(['stale', 'recent'])
+  })
+
+  it('falls back to the soonest trip when urgency ties', () => {
+    const out = sortByUrgency(
+      [
+        row('later', { status: 'confirmed', showDate: '2026-12-01' }),
+        row('sooner', { status: 'confirmed', showDate: '2026-10-05' }),
+      ],
+      NOW,
+    )
+    expect(out.map((r) => r.name)).toEqual(['sooner', 'later'])
+  })
+
+  it('sinks a trip with no date rather than heading the list with it', () => {
+    const out = sortByUrgency(
+      [
+        row('undated', { status: 'confirmed', showDate: null }),
+        row('dated', { status: 'confirmed' }),
+      ],
+      NOW,
+    )
+    expect(out.map((r) => r.name)).toEqual(['dated', 'undated'])
+  })
+
+  it('does not mutate what it was given', () => {
+    const rows = [row('a'), row('b', { status: 'replied', lastMessageParty: 'venue' })]
+    const before = rows.map((r) => r.name)
+    sortByUrgency(rows, NOW)
+    expect(rows.map((r) => r.name)).toEqual(before)
+  })
+})
+
+describe('BUCKETS', () => {
+  it('has an empty state for every bucket', () => {
+    for (const b of ['needs', 'waiting', 'upcoming', 'past'] as const) {
+      expect(BUCKETS[b].label).toBeTruthy()
+      expect(BUCKETS[b].empty[0]).toBeTruthy()
+      expect(BUCKETS[b].empty[1]).toBeTruthy()
+    }
+  })
+})
+

@@ -1,5 +1,5 @@
-import { and, asc, desc, eq } from 'drizzle-orm'
-import { db, message, program, trip, venue } from '@/db'
+import { and, asc, count, desc, eq, isNull, sql } from 'drizzle-orm'
+import { db, message, program, savedOuting, trip, venue } from '@/db'
 
 /*
   One trip, scoped by centre.
@@ -29,18 +29,78 @@ export async function fetchTrip(tripId: string, centreId: string) {
   return { trip: row.trip, program: row.program, venue: row.venue, messages }
 }
 
-/* The centre's trips, newest first.
+/*
+  Every trip in a centre, with the two facts My trips needs beyond the row
+  itself: who spoke last, and whether a venue message is still unread.
 
-   Deliberately plain: the grouping, the urgency sort and the "Needs my reply"
-   filter that spec §5.6 describes belong to the slice that builds My trips
-   properly. This exists so a trip is reachable again after you navigate away,
-   which a trip you can only see once is not. */
+  Both are aggregates over `message`, done in SQL rather than by loading every
+  thread. A centre with forty trips would otherwise mean forty round trips to
+  render one list.
+*/
 export async function fetchTrips(centreId: string) {
+  const lastMessage = db
+    .select({
+      tripId: message.tripId,
+      party: sql<string>`(array_agg(${message.party} order by ${message.sentAt} desc))[1]`.as('party'),
+      at: sql<Date>`max(${message.sentAt})`.as('at'),
+    })
+    .from(message)
+    .groupBy(message.tripId)
+    .as('last_message')
+
+  const unread = db
+    .select({
+      tripId: message.tripId,
+      unread: count().as('unread'),
+    })
+    .from(message)
+    .where(and(eq(message.party, 'venue'), isNull(message.readAt)))
+    .groupBy(message.tripId)
+    .as('unread_venue')
+
   return db
-    .select()
+    .select({
+      trip,
+      program,
+      venue,
+      lastMessageParty: lastMessage.party,
+      lastMessageAt: lastMessage.at,
+      unreadCount: unread.unread,
+    })
     .from(trip)
     .innerJoin(program, eq(trip.programId, program.id))
     .innerJoin(venue, eq(program.venueId, venue.id))
+    .leftJoin(lastMessage, eq(lastMessage.tripId, trip.id))
+    .leftJoin(unread, eq(unread.tripId, trip.id))
     .where(eq(trip.centreId, centreId))
     .orderBy(desc(trip.createdAt))
+}
+
+/*
+  Saved outings, for the first tab. Saved per account rather than per centre:
+  a shortlist is one person's thinking, and two educators at the same centre
+  should not be editing each other's.
+*/
+export async function fetchSaved(accountId: string) {
+  return db
+    .select({ program, venue, savedAt: savedOuting.savedAt })
+    .from(savedOuting)
+    .innerJoin(program, eq(savedOuting.programId, program.id))
+    .innerJoin(venue, eq(program.venueId, venue.id))
+    .where(eq(savedOuting.accountId, accountId))
+    .orderBy(desc(savedOuting.savedAt))
+}
+
+export async function isSaved(accountId: string, programId: string) {
+  const rows = await db
+    .select({ programId: savedOuting.programId })
+    .from(savedOuting)
+    .where(
+      and(
+        eq(savedOuting.accountId, accountId),
+        eq(savedOuting.programId, programId),
+      ),
+    )
+    .limit(1)
+  return rows.length > 0
 }

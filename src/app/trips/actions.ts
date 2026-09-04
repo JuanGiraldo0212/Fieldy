@@ -3,11 +3,12 @@
 import { revalidatePath } from 'next/cache'
 import { and, eq } from 'drizzle-orm'
 import { z } from 'zod'
-import { db, trip } from '@/db'
+import { db, message, trip } from '@/db'
 import { getViewer } from '@/lib/auth'
 import { newId } from '@/lib/ids'
 import { taskSchema, type Task } from '@/lib/schemas'
 import { setTaskDate, toggleTask } from '@/lib/trips/tasks'
+import { STATUS_LABEL } from '@/lib/trips/derived'
 
 /*
   Edits to a trip. Every one of them re-reads the viewer and scopes the write
@@ -200,5 +201,66 @@ export async function saveTripNotes(
     .where(and(eq(trip.id, tripId), eq(trip.centreId, viewer.centreId)))
 
   revalidatePath(`/trips/${tripId}`)
+  return { ok: true }
+}
+
+/* ─── Status ─────────────────────────────────────────────────────────────── */
+
+/*
+  The manual status selector. Spec §5.4.1 and interaction 7.
+
+  Two things happen together and must not come apart. `status_source` becomes
+  `manual`, which is what makes the header say "set by you" rather than
+  claiming a venue moved it. And a `system` message goes into the thread, the
+  same as an applied suggestion writes one, so the thread stays the complete
+  record of how a trip got where it is. A status that changed with nothing in
+  the thread to explain it is how two people at the same centre end up
+  disagreeing about what happened.
+*/
+export async function setTripStatus(
+  _prev: TripState,
+  formData: FormData,
+): Promise<TripState> {
+  const viewer = await getViewer()
+  if (!viewer?.centreId) return { error: 'Your session expired. Sign in again.' }
+  const centreId = viewer.centreId
+
+  const tripId = String(formData.get('tripId') ?? '')
+  const parsed = z
+    .enum(['requested', 'replied', 'confirmed', 'done', 'cancelled'])
+    .safeParse(formData.get('status'))
+  if (!parsed.success) return { error: 'That is not a status.' }
+  const status = parsed.data
+
+  const rows = await db
+    .select({ status: trip.status })
+    .from(trip)
+    .where(and(eq(trip.id, tripId), eq(trip.centreId, centreId)))
+    .limit(1)
+
+  const row = rows[0]
+  if (!row) return { error: 'That trip is not one of yours.' }
+  /* Re-picking the current status is not a change and should not litter the
+     thread with a system message saying nothing happened. */
+  if (row.status === status) return { ok: true }
+
+  await db.transaction(async (tx) => {
+    await tx
+      .update(trip)
+      .set({ status, statusSource: 'manual', updatedAt: new Date() })
+      .where(and(eq(trip.id, tripId), eq(trip.centreId, centreId)))
+
+    await tx.insert(message).values({
+      id: newId(),
+      tripId,
+      party: 'system',
+      authorName: 'Fieldy',
+      body: `${viewer.name || 'Someone at your centre'} set the status to ${STATUS_LABEL[status].toLowerCase()}.`,
+      channel: 'email',
+    })
+  })
+
+  revalidatePath(`/trips/${tripId}`)
+  revalidatePath('/trips')
   return { ok: true }
 }

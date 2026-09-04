@@ -125,19 +125,15 @@ Message-ID and `X-Fieldy-Trip` confirmed on the received message, and pinned in
 done. Every screen reads `sendingConfigured()`, so with no API key the request
 is written and stored rather than delivered and the copy says so.
 
-**Two M3 checklist items are still outstanding and are not slice 5's:**
+The two M3 items that were outstanding are now done: the **manual status
+selector** (with its source line and the `system` message it writes into the
+thread) and **My trips** with the design's five tabs, counts, urgency sort,
+New reply dot and four bucket empty states. Saving an outing was wired at the
+same time, because a Saved tab that nothing can fill is not a tab.
 
-1. **Manual status selector** on the trip header, with the source line under
-   it, and a `system` message written into the thread on every manual change.
-   The design's rail is read only, so this has to be invented in the design's
-   language.
-2. **My trips** proper: five bucket tabs with counts, grouped sections, the New
-   reply dot, four bucket empty states. `/trips` today is a flat newest-first
-   list, built so a trip stays reachable after you navigate away. Logging that
-   in `docs/design-gaps.md` does not make it done.
-
-There is also **no Playwright in this repo at all** — no config, no specs. "Flow
-2 passes" cannot be true yet. That predates slice 4.
+The only thing left on the M3 list is **Playwright**: there is no config and no
+specs anywhere in this repo, so "flow 2 passes" cannot be true. That predates
+slice 4 and is its own piece of work.
 
 ---
 
