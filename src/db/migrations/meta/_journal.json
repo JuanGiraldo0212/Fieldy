@@ -29,6 +29,13 @@
       "when": 1788458771740,
       "tag": "0003_auth_and_rls",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1788491603723,
+      "tag": "0004_aberrant_hawkeye",
+      "breakpoints": true
     }
   ]
 }

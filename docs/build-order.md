@@ -116,11 +116,12 @@ In development every send goes to a Resend test address. Never a real venue.
 
 **Status: everything except the send is built and walked through in the
 browser.** `trip-logic`, `c-plan`, `c-trip` and `route-plan-trip` are done; the
-demo runs end to end up to the last sentence, which needs `email-out`. A
-request is written, stored and shown rather than delivered, and every line of
-copy that would otherwise promise mail says so — see `SENDING_ENABLED` in
-`src/lib/email/status.ts`, which slice 5 deletes. `/trips` exists as a plain
-list so a trip stays reachable; My trips proper is still §5.6's.
+demo runs end to end. `email-out` is now built too: `lib/email/relay.ts` for
+addressing, subjects and header construction, `lib/email/send.ts` for the
+Resend call, `docs/email-setup.md` for the DNS. Every screen reads
+`sendingConfigured()`, so with no API key the request is written and stored
+rather than delivered and the copy says so. `/trips` exists as a plain list so
+a trip stays reachable; My trips proper is still §5.6's.
 
 ---
 

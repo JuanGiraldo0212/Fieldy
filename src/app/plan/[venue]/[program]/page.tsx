@@ -2,7 +2,7 @@ import { notFound, redirect } from 'next/navigation'
 import { getCentre, getRooms, getViewer } from '@/lib/auth'
 import { fetchProgram, practicalFacts } from '@/lib/catalog/program'
 import { askTopics } from '@/lib/trips/asks'
-import { SENDING_ENABLED } from '@/lib/email/status'
+import { sendingConfigured } from '@/lib/email/send'
 import { PlanForm } from '@/components/plan/plan-form'
 
 /*
@@ -69,7 +69,7 @@ export default async function PlanPage({
         transport: r.transport,
       }))}
       topics={topics}
-      sendingEnabled={SENDING_ENABLED}
+      sendingEnabled={sendingConfigured()}
     />
   )
 }

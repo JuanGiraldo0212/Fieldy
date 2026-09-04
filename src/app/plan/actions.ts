@@ -6,7 +6,8 @@ import { and, eq, inArray, isNull } from 'drizzle-orm'
 import { z } from 'zod'
 import { db, message, program, room, trip, venue } from '@/db'
 import { getCentre, getViewer } from '@/lib/auth'
-import { SENDING_ENABLED } from '@/lib/email/status'
+import { requestSubject } from '@/lib/email/relay'
+import { sendRelayMessage } from '@/lib/email/send'
 import { newId, newRelayToken } from '@/lib/ids'
 import { askSchema, dateOptionSchema } from '@/lib/schemas'
 import { requiredAdults } from '@/lib/trips/derived'
@@ -133,6 +134,8 @@ export async function createTrip(
   })
 
   const tripId = newId()
+  const relayToken = newRelayToken()
+  const messageRowId = newId()
 
   /*
     Program level over venue level, resolved now and stored, so a later catalog
@@ -140,6 +143,24 @@ export async function createTrip(
   */
   const venueEmail = p.bookingEmail ?? v.bookingEmail ?? null
 
+  const subject = requestSubject({
+    centreName: centre.name,
+    childrenCount,
+    ageMin: Math.min(...rooms.map((r) => r.ageMin)),
+    ageMax: Math.max(...rooms.map((r) => r.ageMax)),
+    firstDate,
+  })
+
+  /*
+    The trip and its opening message are written first, and the send happens
+    after the transaction commits.
+
+    Not inside it: a database transaction held open across a call to a third
+    party is a lock waiting on somebody else's bad minute. And a trip that
+    exists with an undelivered message is recoverable, because `send_error`
+    drives a retry; a trip rolled back because Resend was slow is a director
+    staring at a form she already filled in.
+  */
   await db.transaction(async (tx) => {
     await tx.insert(trip).values({
       id: tripId,
@@ -148,7 +169,7 @@ export async function createTrip(
       roomIds: d.roomIds,
       status: 'requested',
       statusSource: 'system',
-      relayToken: newRelayToken(),
+      relayToken,
       venueEmail,
       dateOptions: ranked,
       childrenCount,
@@ -161,26 +182,49 @@ export async function createTrip(
     })
 
     await tx.insert(message).values({
-      id: newId(),
+      id: messageRowId,
       tripId,
       party: 'educator',
       authorName: viewer.name || centre.name,
       body: d.message,
       isRequest: true,
       channel: 'email',
-      /*
-        `send_error` is the field the trip page already reads to offer a retry,
-        so an undelivered request uses it rather than inventing a second way to
-        be un-sent. A venue with no published booking email stays un-sent even
-        once sending works, which is why both cases land here.
-      */
-      sendError: !venueEmail
-        ? 'Not sent. This venue publishes no booking email.'
-        : SENDING_ENABLED
-          ? null
-          : 'Not sent yet. Fieldy is not connected to an email service.',
+      subject,
+      /* Cleared below on a successful send. Until then this is what the trip
+         page reads to say, truthfully, that nothing has gone out. */
+      sendError: 'Not sent yet.',
     })
   })
+
+  /*
+    A venue with no published booking email has nowhere to send to. That is a
+    catalog gap, not a failure, and it stays true even once sending works.
+  */
+  if (!venueEmail) {
+    await db
+      .update(message)
+      .set({ sendError: 'Not sent. This venue publishes no booking email.' })
+      .where(eq(message.id, messageRowId))
+  } else {
+    const sent = await sendRelayMessage({
+      token: relayToken,
+      messageRowId,
+      senderName: viewer.name || centre.name,
+      centreName: centre.name,
+      venueEmail,
+      subject,
+      body: d.message,
+    })
+
+    await db
+      .update(message)
+      .set(
+        sent.ok
+          ? { externalMessageId: sent.externalMessageId, sendError: null }
+          : { sendError: sent.error },
+      )
+      .where(eq(message.id, messageRowId))
+  }
 
   revalidatePath('/trips')
   redirect(`/trips/${tripId}`)

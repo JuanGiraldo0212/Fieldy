@@ -1,6 +1,6 @@
 {
-  "id": "571f934e-979b-4f84-941c-77f77bafd31f",
-  "prevId": "d98821ca-ce97-40df-901a-825636ea076d",
+  "id": "54e258d2-55c3-4c86-92d7-7ba4d52b7fca",
+  "prevId": "571f934e-979b-4f84-941c-77f77bafd31f",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -305,6 +305,12 @@
           "primaryKey": false,
           "notNull": true,
           "default": false
+        },
+        "subject": {
+          "name": "subject",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
         },
         "sent_at": {
           "name": "sent_at",

@@ -516,6 +516,11 @@ export const message = pgTable(
     bodyFull: text('body_full'),
     /* The opening request renders as a summary card, not a bubble. */
     isRequest: boolean('is_request').notNull().default(false),
+    /* Stored rather than recomputed: plan §5.3 threads later messages as
+       "Re: " + the first subject, and the first subject describes the group as
+       it was the day the request went out. Recomputing it would silently
+       rewrite the thread's subject when a room's size changed. */
+    subject: text('subject'),
     sentAt: timestamp('sent_at', { withTimezone: true }).notNull().defaultNow(),
     readAt: timestamp('read_at', { withTimezone: true }),
     attachments: jsonb('attachments').$type<Attachment[]>().notNull().default([]),

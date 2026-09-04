@@ -237,15 +237,15 @@ Carried forward, not yet reached:
 **Built to the design**, with these differences, all logged rather than quietly
 absorbed:
 
-1. **The send does not send.** There is no sending domain and no Resend account
-   yet, so a request is written, stored and shown, not delivered. One constant,
-   `SENDING_ENABLED` in `src/lib/email/status.ts`, holds this fact, and every
-   line of copy that would otherwise promise mail reads it: the button says
-   "Save request" rather than "Send request", the preview helper says why, and
-   the trip page carries an amber banner naming the address the request will go
-   to once sending is switched on. The message row's `send_error` records it,
-   which is the field the design already reserves for a failed send. Slice 5
-   deletes the constant.
+1. **The send degrades honestly when mail is not configured.** `mail.fieldy.ca`
+   is verified and the sender is wired, but the screens still read
+   `sendingConfigured()` rather than assuming: with no `RESEND_API_KEY` the
+   button says "Save request" instead of "Send request", the preview helper
+   explains why, and the trip page carries an amber banner naming the address
+   the request will go to. A failed or skipped send lands in the message row's
+   `send_error`, which is the field the design already reserves for it, and the
+   waiting pill stays hidden because nobody is waiting on a venue that was
+   never written to.
 
    The one failure this product cannot afford is a screen that looks like it
    sent when it did not: a director who believes the venue has been asked stops

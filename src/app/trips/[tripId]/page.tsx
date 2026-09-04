@@ -18,6 +18,7 @@ import {
 } from 'lucide-react'
 import { getViewer } from '@/lib/auth'
 import { fetchTrip } from '@/lib/trips/fetch'
+import { sendingConfigured } from '@/lib/email/send'
 import {
   ordinalLabel,
   requestAskLine,
@@ -89,9 +90,9 @@ export default async function TripPage({
   const ratio = ratioCheck(t.roomSnapshots, t.adultsCount)
   const dates = [...t.dateOptions].sort((a, b) => a.rank - b.rank)
 
-  /* Slice 4 stores the request and does not send it: there is no sending
-     domain yet. Saying so plainly beats a page that looks like mail went out
-     when none did. */
+  /* Non-null when the request never left: no API key, no booking address for
+     this venue, or a send that failed. Saying so plainly beats a page that
+     looks like mail went out when none did. */
   const undelivered = request?.sendError ?? null
 
   return (
@@ -167,9 +168,11 @@ export default async function TripPage({
             </div>
             <p className="text-body-sm text-text-strong mt-1 leading-normal">
               {undelivered} Your message is saved below.{' '}
-              {t.venueEmail
-                ? `We will send it to ${t.venueEmail} as soon as sending is switched on.`
-                : `You can reach ${v.name} on ${v.bookingPhone ?? v.website ?? 'their website'} in the meantime.`}
+              {!t.venueEmail
+                ? `You can reach ${v.name} on ${v.bookingPhone ?? v.website ?? 'their website'} in the meantime.`
+                : sendingConfigured()
+                  ? `It was addressed to ${t.venueEmail}. Nothing is lost, so it can go out once that is sorted.`
+                  : `We will send it to ${t.venueEmail} as soon as sending is switched on.`}
             </p>
           </div>
         </div>
