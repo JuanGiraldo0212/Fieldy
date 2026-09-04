@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import { AttachmentChip, Thread, type ThreadMessage } from '@/components/trip/thread'
 import { ComposeBox } from '@/components/trip/compose-box'
 import type { Ask, DateOption } from '@/lib/schemas'
+import { Skeleton } from '@/components/ui'
 
 /*
   The component gallery. Plan §2a.2: "Build each one with a dev-only gallery at
@@ -191,6 +192,20 @@ export default async function ComponentGallery() {
             attachment={{ name: 'notes', url: 'k3', mime: null, size: null }}
             href="#"
           />
+        </div>
+      </Section>
+
+      <Section
+        title="Photo skeleton"
+        note="What a card thumbnail and a strip tile hold while the venue's photograph is still coming down. Hard to catch on a warm cache, so it is here."
+      >
+        <div className="flex flex-wrap items-start gap-3">
+          <span className="bg-thumb relative block h-[104px] w-[104px] overflow-hidden rounded-thumb">
+            <Skeleton className="absolute inset-0" />
+          </span>
+          <span className="bg-thumb relative block h-[200px] w-[260px] max-w-full overflow-hidden rounded-card">
+            <Skeleton className="absolute inset-0" />
+          </span>
         </div>
       </Section>
 

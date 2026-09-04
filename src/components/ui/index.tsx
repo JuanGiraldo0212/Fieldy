@@ -221,3 +221,38 @@ export function CheckRow({
     </button>
   )
 }
+
+/* ─── Skeleton ───────────────────────────────────────────────────────────
+   A placeholder for something that has not arrived yet — today, remote venue
+   photographs, which come off two dozen other people's web servers through
+   our optimizer and are the slowest thing on an outing page.
+
+   It is decorative, so it is aria-hidden: whatever it stands in for carries
+   its own name once it lands, and a screen reader should not be told about
+   the wait.
+
+   The pulse is Tailwind's own `animate-pulse`, deliberately not a new
+   keyframe — globals.css says the design has exactly one and to keep it that
+   way. */
+
+export function Skeleton({
+  className,
+  /* `dark` is for the photo viewer, the one place a skeleton sits on the dim
+     backdrop rather than on one of our pale surfaces. A page-tone block there
+     is a slab of light in a darkened room. */
+  tone = 'light',
+}: {
+  className?: string
+  tone?: 'light' | 'dark'
+}) {
+  return (
+    <span
+      aria-hidden
+      className={cx(
+        'block animate-pulse',
+        tone === 'dark' ? 'bg-white/10' : 'bg-border',
+        className,
+      )}
+    />
+  )
+}
