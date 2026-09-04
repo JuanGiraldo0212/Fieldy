@@ -288,3 +288,58 @@ absorbed:
 suggestion banner. They arrive with slices 5 and 6, along with the mail that
 produces them.
 
+
+---
+
+## Slice 5 — the thread, the compose box, and the mail behind them
+
+7. **The compose field is a textarea, not the design's `<input>`.** The
+   prototype (line 962) draws a single-line input 54px tall inside a 56px
+   field. At rest this is that control, pixel for pixel — same height, same
+   border, same radius, same paperclip. It grows instead of clipping once a
+   follow-up runs past one line.
+
+   A follow-up to a venue is routinely three sentences: "Thank you — one more
+   thing. Is there anywhere the children can leave their wellies?" An input
+   scrolls that sideways under the cursor, which is unusable on a phone, and
+   this is the control that carries every word a director says to a venue after
+   the first request.
+
+8. **The compose box has a "sending" state, which the design does not draw.**
+   The button reads "Sending…" and is disabled while the action runs. Without
+   it, a director on a phone taps Send, sees nothing change, and taps again —
+   and the venue gets the same question twice.
+
+9. **The paperclip in the compose field stays decoration.** It is decoration in
+   the prototype too, and sending attachments is out of scope for the MVP
+   (plan §1). Rendered `aria-hidden`, not as a button: an affordance that does
+   nothing when tapped is worse than no affordance.
+
+10. **"Show full message" is built, though the design never draws it.**
+    Spec §5.4.5 requires it. It appears only when `body_full` actually differs
+    from the stripped body, so it is never a toggle that expands to the same
+    text.
+
+11. **An attachment chip with no working link.** Not a state the design
+    considers, because the design has no failure modes. When we could not
+    fetch or store the bytes, the chip still names the file and is not a link.
+    A director who learns the venue sent "Booking form.pdf" can ask for it
+    again; one who is shown nothing cannot.
+
+12. **A failed message says so inside the thread.** The design's thread has no
+    error state. A follow-up that did not send carries its `send_error` under
+    the author line rather than looking like a message that went out.
+
+13. **`--color-disabled` / `--color-disabled-ink` are new tokens**, lifted from
+    the prototype's own disabled Send button (`#E8EFF7` on `#9FB6D9`). They
+    were not in design-map §3 because nothing before this slice had a disabled
+    primary button.
+
+14. **`/dev/components` now exists**, which design-map §9 lists as a gap. It
+    covers slice 5's thread and compose states. Earlier slices' components are
+    not in it yet.
+
+**Copy corrected here:** the trip page said "Replies will appear here and in
+your email." — the stale string design-map §7.1 flags. It now reads "Replies
+appear here, and we'll email you when one arrives.", and lives on the compose
+box where the design puts it.

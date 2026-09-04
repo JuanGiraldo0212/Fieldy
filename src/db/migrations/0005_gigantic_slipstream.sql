@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX "message_external_id_idx" ON "message" USING btree ("external_message_id") WHERE "message"."external_message_id" is not null;

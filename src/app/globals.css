@@ -69,6 +69,11 @@
      reading once, not a warning. */
   --color-relay-tint: #fff9e9;
 
+  /* The disabled primary button, from the prototype's compose bar. A fill and
+     an ink that read as "not yet", without looking broken. */
+  --color-disabled: #e8eff7;
+  --color-disabled-ink: #9fb6d9;
+
   --color-danger: #d0342b;
   --color-danger-strong: #ae271f;
 
