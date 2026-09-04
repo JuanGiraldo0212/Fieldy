@@ -1,4 +1,3 @@
-import 'server-only'
 import { Resend } from 'resend'
 import {
   deliverTo,
@@ -29,8 +28,24 @@ export function sendingConfigured(): boolean {
   return Boolean(process.env.RESEND_API_KEY && process.env.MAIL_DOMAIN)
 }
 
+/*
+  Deliberately not `import 'server-only'`.
+
+  That would be the stronger guard — a build error rather than a runtime one —
+  but it also makes this module unimportable outside a bundler, and
+  `scripts/retry-send.ts` needs the real sender rather than a copy of it. A
+  second copy of the header construction is a worse risk than this one.
+
+  What is actually protected: `RESEND_API_KEY` has no `NEXT_PUBLIC_` prefix, so
+  Next replaces it with undefined in any client bundle and the key cannot leak
+  that way. The check below turns what would be a confusing undefined into a
+  loud error if this ever runs in a browser.
+*/
 let client: Resend | null = null
 function resend(): Resend {
+  if (typeof window !== 'undefined') {
+    throw new Error('sendRelayMessage is server-side only')
+  }
   client ??= new Resend(process.env.RESEND_API_KEY!)
   return client
 }

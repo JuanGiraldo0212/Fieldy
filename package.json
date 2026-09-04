@@ -18,6 +18,8 @@
     "db:studio": "node --env-file-if-exists=.env.local node_modules/drizzle-kit/bin.cjs studio",
     "import:catalog": "tsx --env-file-if-exists=.env.local scripts/import-catalog.ts",
     "geocode:catalog": "tsx --env-file-if-exists=.env.local scripts/geocode-catalog.ts",
+    "retry:send": "tsx --env-file-if-exists=.env.local scripts/retry-send.ts",
+    "dev:login": "tsx --env-file-if-exists=.env.local scripts/dev-login.ts",
     "db:push": "node --env-file-if-exists=.env.local node_modules/drizzle-kit/bin.cjs push"
   },
   "dependencies": {
@@ -31,7 +33,6 @@
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "resend": "^6.25.0",
-    "server-only": "^0.0.1",
     "ulid": "^3.0.2",
     "zod": "^4.5.4"
   },
