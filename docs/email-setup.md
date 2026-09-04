@@ -127,17 +127,124 @@ both of which real mail systems do, and returns null for anything else. An
 unroutable reply is dropped rather than guessed at: guessing puts a stranger's
 mail in a centre's thread.
 
-The webhook itself, its Svix signature check, the loop guard and attachment
-handling are slice 5.
+### The webhook
 
-Resend posts to a **public URL**, so inbound cannot be tested against
-`localhost` without a tunnel. Outbound works locally today.
+Resend → Webhooks → add an endpoint at `https://<host>/api/email/inbound`,
+subscribed to **`email.received`**. Creating it produces the signing secret;
+put it in `RESEND_WEBHOOK_SECRET`.
+
+Every delivery is verified with Svix (`src/app/api/email/inbound/route.ts`).
+An unsigned or wrongly signed POST gets a 401 and nothing else happens. That
+check is the entire reason the route can be trusted: the URL is public, and
+without it anyone could write into any centre's thread.
+
+The webhook payload carries **metadata only** — no body, no headers, no
+attachments. The route fetches the message with
+`resend.emails.receiving.get(id)` before doing anything with it.
+
+**Status codes are deliberate**, because Svix retries anything that is not
+2xx:
+
+| Situation | Code | Why |
+|---|---|---|
+| Unroutable, a loop, a finished trip, an already-stored message | 200 | Retrying changes nothing; the retries would fail identically |
+| A webhook type that is not `email.received` | 200 | Not ours |
+| Bad signature | 401 | Somebody is posting who should not be |
+| Resend fetch failed, or the database write failed | 500 | A retry could genuinely succeed |
+
+Nothing is ever bounced back to the sender. A bounce to a venue that mistyped
+an address teaches them nothing and makes us look broken; a log line tells us.
+
+### Testing inbound without a tunnel
+
+Resend posts to a **public URL**, so real inbound cannot reach `localhost`.
+`scripts/simulate-venue-reply.ts` exists so that does not block anything:
+
+```bash
+# .env.local
+RESEND_BASE_URL=http://127.0.0.1:4599
+RESEND_WEBHOOK_SECRET=whsec_<any base64; the script and dev server just have to agree>
+
+pnpm simulate:reply                     # newest trip awaiting a reply
+pnpm simulate:reply <tripId> --decline
+pnpm simulate:reply <tripId> --dates
+```
+
+It stands up a fixture server on port 4599 that answers the received-email
+fetch and **swallows the notification the webhook then sends**, then posts a
+genuinely Svix-signed `email.received` to the local route. The real signature
+check, the real fetch, the real storage writes and the real notification path
+all run. Nothing reaches Resend, so a demo run costs none of the hundred daily
+emails.
+
+`RESEND_BASE_URL` must be unset in production.
+
+### The retry job
+
+`POST /api/jobs/retry`, behind `CRON_SECRET` as a bearer token. Schedule it
+from Supabase with pg_cron every five minutes:
+
+```sql
+select cron.schedule(
+  'fieldy-retry', '*/5 * * * *',
+  $$select net.http_post(
+      url := 'https://<host>/api/jobs/retry',
+      headers := '{"Authorization": "Bearer <CRON_SECRET>"}'::jsonb
+    )$$
+);
+```
+
+It pushes through requests that never left (`send_error`) and notifications
+that never arrived (`notify_error`), and gives up on anything that has been
+failing for seven days — a message that has failed for a week is a thing to
+look at, not a thing to keep mailing.
+
+## The notification, and the no-reply address
+
+Plan §5.4a. When a venue message is stored, every account at the centre with
+`email_notifications` on gets one short email:
+
+```
+From:            "Fieldy" <noreply@mail.fieldy.ca>
+Reply-To:        (none — deliberately)
+X-Fieldy-Hops:   1
+Auto-Submitted:  auto-generated
+Subject:         <venue> replied about <program>
+```
+
+It carries who replied, the trip and its first date, the first 200 characters,
+and a button to `/trips/<id>#msg-<message_id>`. It does **not** carry the
+suggestion: a wrong reading pushed into an inbox has no Dismiss button next to
+it.
+
+`noreply@mail.fieldy.ca` receives at the same webhook, because the MX is a
+catch-all. Mail to it resolves no trip and stores nothing; the sender gets one
+auto-response, at most once per address per 24 hours, saying where the reply
+belongs. Someone typing a real answer to their venue and getting silence is the
+failure worth preventing.
+
+### The loop guard
+
+Applied to both paths, before anything is stored:
+
+- `From` on `mail.fieldy.ca` → dropped.
+- `X-Fieldy-Hops` present and ≥ 2 → dropped.
+
+The notification goes out at 1 hop and the auto-response at 2, so a loop dies
+on its second pass.
 
 ## Known unknowns
 
-Resend documents the outbound size cap (40 MB) and not the inbound one. Whether
-a venue's reply-all with CCs counts as several received emails against the
-quota is also undocumented. Both are test items for slice 5, not assumptions.
+Resend documents the outbound size cap (40 MB) and not the inbound one.
+Attachments are therefore capped at **10 MB** in
+`src/lib/email/inbound.ts` (`MAX_ATTACHMENT_BYTES`) — anything larger is
+recorded by name so the educator knows it exists, without the bytes being
+pulled into a webhook that has a response deadline. Raise it once the real cap
+is measured.
+
+Whether a venue's reply-all with CCs counts as several received emails against
+the quota is also undocumented. Still a test item, and one that only a real
+venue reply will answer.
 
 Free tier: 3,000 emails/month, **100/day**, 3 domains, 10 requests/second,
 30-day log retention.

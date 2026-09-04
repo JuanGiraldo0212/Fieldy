@@ -1,4 +1,5 @@
-import { Resend } from 'resend'
+import type { Resend } from 'resend'
+import { resendClient } from './client'
 import {
   deliverTo,
   fromHeader,
@@ -41,13 +42,11 @@ export function sendingConfigured(): boolean {
   that way. The check below turns what would be a confusing undefined into a
   loud error if this ever runs in a browser.
 */
-let client: Resend | null = null
 function resend(): Resend {
   if (typeof window !== 'undefined') {
     throw new Error('sendRelayMessage is server-side only')
   }
-  client ??= new Resend(process.env.RESEND_API_KEY!)
-  return client
+  return resendClient()
 }
 
 export async function sendRelayMessage({

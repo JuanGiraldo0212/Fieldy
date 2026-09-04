@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { after } from 'next/server'
 import { notFound, redirect } from 'next/navigation'
 import {
   ArrowLeft,
@@ -6,7 +7,6 @@ import {
   Calendar,
   Landmark,
   Lock,
-  Mail,
   MapPin,
   MessageSquare,
   Microscope,
@@ -19,12 +19,7 @@ import {
 import { getViewer } from '@/lib/auth'
 import { fetchTrip } from '@/lib/trips/fetch'
 import { sendingConfigured } from '@/lib/email/send'
-import {
-  ordinalLabel,
-  requestAskLine,
-  requestDateLine,
-  shortDate,
-} from '@/lib/trips/asks'
+import { ordinalLabel, shortDate } from '@/lib/trips/asks'
 import {
   ratioCheck,
   waitingLabel,
@@ -36,14 +31,17 @@ import { Checklist } from '@/components/trip/checklist'
 import { CostCard } from '@/components/trip/cost-card'
 import { NotesCard } from '@/components/trip/notes-card'
 import { StatusSelect } from '@/components/trip/status-select'
+import { Thread } from '@/components/trip/thread'
+import { ComposeBox } from '@/components/trip/compose-box'
+import { markThreadRead } from '@/lib/trips/read'
 
 /*
   The trip page. Spec §5.4, "the heart of the product".
 
-  What is here: header and status rail, dates, cost, checklist, the opening
-  request card, notes and the attendance helper. What is not: the reply
-  bubbles, the compose box and the suggestion banner, which arrive with slices
-  5 and 6 along with the mail that produces them.
+  What is here: header and status rail, dates, cost, checklist, the whole
+  conversation with its compose box, notes and the attendance helper. What is
+  not: the suggestion banner, which arrives with slice 6 along with the
+  classifier that produces it.
 */
 
 const CATEGORY_ICONS: Record<string, React.ReactNode> = {
@@ -76,6 +74,18 @@ export default async function TripPage({
   const found = await fetchTrip(tripId, viewer.centreId)
   if (!found) notFound()
   const { trip: t, program: p, venue: v, messages } = found
+
+  /*
+    Spec §5.4.5: unread venue messages carry a dot "until the page is viewed".
+    After the response, not during it — so the render she actually sees still
+    has the dots on it, and the next one does not. Reading it during render
+    would clear them before she ever saw them.
+
+    The centre id is read above rather than inside the callback, because a
+    Server Component cannot touch request APIs once `after` has run.
+  */
+  const centreId = viewer.centreId
+  after(() => markThreadRead(tripId, centreId))
 
   const today = new Date().toISOString().slice(0, 10)
   const status = t.status as TripStatus
@@ -257,8 +267,7 @@ export default async function TripPage({
         </div>
       </div>
 
-      {/* Conversation. The request card only; replies and the compose box
-          arrive with slice 5. */}
+      {/* Conversation. */}
       <section className="bg-surface border-border mt-4 rounded-panel border p-6">
         <div className="mb-4.5 flex flex-wrap items-center gap-3.5">
           <span className="text-brand flex">
@@ -273,59 +282,29 @@ export default async function TripPage({
           ) : null}
         </div>
 
-        {request ? (
-          <div className="bg-surface-3 flex gap-4 rounded-thumb px-5 py-4.5">
-            <span
-              aria-hidden
-              className="bg-brand-tint-2 text-brand flex h-10 w-10 flex-none items-center justify-center rounded-pill"
-            >
-              <Mail size={18} />
+        <Thread
+          messages={messages}
+          dateOptions={t.dateOptions}
+          asks={t.asks}
+          waitingOnVenue={who === 'venue' && !undelivered}
+          undelivered={Boolean(undelivered)}
+        />
+
+        {undelivered ? (
+          <div className="flex items-center gap-3 py-4">
+            <span aria-hidden className="border-border flex-1 border-t border-dashed" />
+            <span className="text-body-sm text-text-faint">
+              Nothing has gone out, so there is nothing to reply to yet.
             </span>
-            <div className="min-w-0 flex-1">
-              <div className="flex flex-wrap items-baseline gap-2.5">
-                <span className="text-body font-bold">
-                  {undelivered ? 'Request written' : 'Request sent'}
-                </span>
-                <span className="text-meta text-text-faint">
-                  {shortDate(request.sentAt.toISOString().slice(0, 10))}
-                </span>
-              </div>
-              <div className="text-body-sm text-text-strong mt-1.5">
-                {requestDateLine(t.dateOptions)}
-              </div>
-              <div className="text-body-sm text-text-strong mt-0.5">
-                {requestAskLine(t.asks)}
-              </div>
-              <div className="bg-surface text-body-sm text-text mt-3 rounded-control px-4 py-3.5 leading-relaxed whitespace-pre-wrap">
-                {request.body}
-              </div>
-            </div>
+            <span aria-hidden className="border-border flex-1 border-t border-dashed" />
           </div>
         ) : null}
 
-        {/* System events are thin grey lines inline, spec §5.4.5. The reply
-            bubbles they sit between arrive with slice 5. */}
-        {messages
-          .filter((m) => m.party === 'system')
-          .map((m) => (
-            <div key={m.id} className="flex items-center gap-3 py-2">
-              <span aria-hidden className="border-border flex-1 border-t border-dashed" />
-              <span className="text-meta text-text-faint text-center">
-                {m.body}
-              </span>
-              <span aria-hidden className="border-border flex-1 border-t border-dashed" />
-            </div>
-          ))}
-
-        <div className="flex items-center gap-3 py-4">
-          <span aria-hidden className="border-border flex-1 border-t border-dashed" />
-          <span className="text-body-sm text-text-faint">
-            {undelivered
-              ? 'Nothing has gone out, so there is nothing to reply to yet.'
-              : 'Replies will appear here and in your email.'}
-          </span>
-          <span aria-hidden className="border-border flex-1 border-t border-dashed" />
-        </div>
+        <ComposeBox
+          tripId={t.id}
+          canSend={Boolean(t.venueEmail)}
+          venueName={v.name}
+        />
       </section>
 
       <NotesCard tripId={t.id} notes={t.notes} ratio={ratio} />
