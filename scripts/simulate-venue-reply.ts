@@ -6,6 +6,7 @@
     pnpm simulate:reply <tripId> --decline  # a "sorry, we're full" reply
     pnpm simulate:reply <tripId> --dates    # a reply proposing other dates
     pnpm simulate:reply <tripId> --file reply.txt
+    pnpm simulate:reply <tripId> --attach     # with a PDF, to exercise Storage
 
   This replaces the prototype's "simulate a venue reply" row, which
   docs/design-map.md §5 marks as prototype-only and not to be built. It is the
@@ -33,10 +34,29 @@ import { createServer } from 'node:http'
 import { readFile } from 'node:fs/promises'
 import { desc, eq, inArray } from 'drizzle-orm'
 import { Webhook } from 'svix'
-import { db, program, trip, venue } from '@/db'
+import { db, message, program, trip, venue } from '@/db'
 import { relayAddress } from '@/lib/email/relay'
 
 const FIXTURE_PORT = Number(process.env.SIMULATE_PORT ?? 4599)
+
+/*
+  A real, if minimal, PDF — 
+  enough that a browser opening the signed URL renders a page rather than
+  refusing a file that claims to be a PDF and is not.
+*/
+const FIXTURE_PDF = Buffer.from(
+  `%PDF-1.4
+1 0 obj<</Type/Catalog/Pages 2 0 R>>endobj
+2 0 obj<</Type/Pages/Kids[3 0 R]/Count 1>>endobj
+3 0 obj<</Type/Page/Parent 2 0 R/MediaBox[0 0 200 100]/Contents 4 0 R/Resources<</Font<</F1 5 0 R>>>>>>endobj
+4 0 obj<</Length 52>>stream
+BT /F1 12 Tf 20 50 Td (Fieldy fixture booking form) Tj ET
+endstream
+endobj
+5 0 obj<</Type/Font/Subtype/Type1/BaseFont/Helvetica>>endobj
+trailer<</Root 1 0 R>>`,
+  'latin1',
+)
 const APP_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000')
   .replace(/\/+$/, '')
 
@@ -104,9 +124,14 @@ function proposeReply(v: { name: string; alt: string[] }): string {
 
 async function main() {
   const args = process.argv.slice(2)
-  const tripId = args.find((a) => !a.startsWith('--')) ?? null
+  const tripId =
+    args.find((a, i) => !a.startsWith('--') && args[i - 1] !== '--file') ?? null
   const flag = (name: string) => args.includes(`--${name}`)
-  const fileArg = args[args.indexOf('--file') + 1]
+  /* Only when --file is actually present. indexOf returns -1 otherwise, and
+     args[0] would then be read as a filename — which makes every other flag
+     look like a missing file. */
+  const fileAt = args.indexOf('--file')
+  const fileArg = fileAt === -1 ? undefined : args[fileAt + 1]
 
   const secret = process.env.RESEND_WEBHOOK_SECRET
   if (!secret) {
@@ -172,7 +197,24 @@ async function main() {
       'In-Reply-To': `<trip-${t.trip.relayToken}.request@mail.fieldy.ca>`,
     },
     message_id: `<${emailId}@${slugDomain(t.venue.name)}>`,
-    attachments: [],
+    /*
+      --attach is the only way to exercise the Storage leg: the raw message
+      always lands in the `mail` bucket, but the attachment download, the
+      upload under att/, and the signed URL the thread mints at render are
+      only reached when a reply actually carries a file.
+    */
+    attachments: flag('attach')
+      ? [
+          {
+            id: 'att_1',
+            filename: 'booking-form.pdf',
+            size: FIXTURE_PDF.length,
+            content_type: 'application/pdf',
+            content_id: null,
+            content_disposition: 'attachment',
+          },
+        ]
+      : [],
   }
 
   const sent: unknown[] = []
@@ -256,6 +298,34 @@ async function main() {
       .where(eq(trip.id, t.trip.id))
       .limit(1)
 
+    /*
+      What actually landed. `raw_ref` is the one line worth reading twice: null
+      means the private `mail` bucket was not written, which on a real Supabase
+      project is a misconfiguration rather than the graceful degradation it is
+      when storage is switched off entirely.
+    */
+    const stored = await db
+      .select({
+        rawRef: message.rawRef,
+        attachments: message.attachments,
+        body: message.body,
+        notifyError: message.notifyError,
+      })
+      .from(message)
+      .where(eq(message.externalMessageId, emailId))
+      .limit(1)
+
+    const m = stored[0]
+    if (m) {
+      console.log('\nStored:')
+      console.log(`  raw_ref      ${m.rawRef ?? 'null  ← the mail bucket was NOT written'}`)
+      console.log(
+        `  attachments  ${m.attachments.length === 0 ? 'none' : m.attachments.map((a) => `${a.name} (${a.size ?? '?'} bytes) → ${a.url}`).join(', ')}`,
+      )
+      console.log(`  notify_error ${m.notifyError ?? 'none'}`)
+      console.log(`  body         ${m.body.split('\n')[0]?.slice(0, 60)}…  (${m.body.length} chars stripped from ${text.length})`)
+    }
+
     console.log(
       `\nTrip is now ${after[0]?.status} (${after[0]?.statusSource}).`,
     )
@@ -298,7 +368,7 @@ function startFixtureServer(fixture: unknown, sent: unknown[]) {
           object: 'attachment',
           id: 'att_1',
           filename: 'booking-form.pdf',
-          size: 12,
+          size: FIXTURE_PDF.length,
           content_type: 'application/pdf',
           content_disposition: 'attachment',
           download_url: `http://127.0.0.1:${FIXTURE_PORT}/blob`,
@@ -307,8 +377,11 @@ function startFixtureServer(fixture: unknown, sent: unknown[]) {
       }
 
       if (req.method === 'GET' && url === '/blob') {
-        res.writeHead(200, { 'content-type': 'application/pdf' })
-        return res.end('a fixture pdf')
+        res.writeHead(200, {
+          'content-type': 'application/pdf',
+          'content-length': String(FIXTURE_PDF.length),
+        })
+        return res.end(FIXTURE_PDF)
       }
 
       if (req.method === 'POST' && url.startsWith('/emails')) {
