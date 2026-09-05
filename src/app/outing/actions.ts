@@ -62,3 +62,25 @@ export async function toggleSaved(
   revalidatePath('/trips')
   return { saved: true }
 }
+
+/*
+  Remove, from the Saved tab. A plain form action rather than the toggle
+  above: a row that says "Remove" must only ever remove, and a double tap on
+  a toggle would put the outing straight back.
+*/
+export async function removeSaved(formData: FormData): Promise<void> {
+  const viewer = await getViewer()
+  if (!viewer) return
+  const programId = String(formData.get('programId') ?? '')
+  if (!programId) return
+
+  await db
+    .delete(savedOuting)
+    .where(
+      and(
+        eq(savedOuting.accountId, viewer.accountId),
+        eq(savedOuting.programId, programId),
+      ),
+    )
+  revalidatePath('/trips')
+}

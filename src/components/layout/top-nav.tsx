@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { getViewer } from '@/lib/auth'
+import { navCounts } from '@/lib/trips/fetch'
 import { NavLinks } from './nav-links'
 import { Logo } from '@/components/ui/logo'
 
@@ -7,12 +8,9 @@ import { Logo } from '@/components/ui/logo'
   The top bar. Sticky, translucent, and the only way to reach anything that is
   not the catalog.
 
-  Two departures from the design, both because the app is not finished yet:
-
-  "My trips" is not here. The design shows it between Find outings and Groups
-  with a count pill, but /trips does not exist until slice 7, and a nav item
-  that 404s is worse than one that is not there yet. It goes back in with the
-  route, and NavLinks already has the shape for it.
+  My trips carries the design's grey count of trips in flight; Inbox, which
+  the design does not have, carries the brand pill with the unread count
+  (spec §5.7). Both numbers come from one cheap query per page.
 
   A signed-out visitor gets "Sign in" where the avatar would be. The design
   only ever draws the signed-in state, but the catalog is public and most
@@ -21,6 +19,7 @@ import { Logo } from '@/components/ui/logo'
 */
 export async function TopNav() {
   const viewer = await getViewer()
+  const counts = viewer?.centreId ? await navCounts(viewer.centreId) : null
 
   const initials =
     viewer?.name
@@ -42,8 +41,15 @@ export async function TopNav() {
 
         <div className="flex-1" />
 
-        <nav className="flex items-center gap-1.5">
-          <NavLinks signedIn={Boolean(viewer?.centreId)} />
+        {/* Five items no longer fit a 375px row once Inbox exists, and a
+            wrapped nav item reads as two. The row scrolls sideways instead,
+            bleeding to the page edge so the last item is not cut off. */}
+        <nav className="-mx-5 flex max-w-[calc(100%+40px)] items-center gap-1.5 overflow-x-auto px-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <NavLinks
+            signedIn={Boolean(viewer?.centreId)}
+            tripCount={counts?.trips ?? 0}
+            unreadCount={counts?.unread ?? 0}
+          />
 
           {viewer ? (
             <Link
