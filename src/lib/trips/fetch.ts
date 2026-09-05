@@ -1,4 +1,4 @@
-import { and, asc, count, desc, eq, isNull, sql } from 'drizzle-orm'
+import { and, asc, count, desc, eq, isNull, ne, notInArray, sql } from 'drizzle-orm'
 import { db, message, program, savedOuting, trip, venue } from '@/db'
 
 /*
@@ -111,4 +111,60 @@ export async function isSaved(accountId: string, programId: string) {
     )
     .limit(1)
   return rows.length > 0
+}
+
+/*
+  The inbox. Spec §5.7: every message across the centre's trips, newest
+  first. System lines are not messages anybody sent and are left out; the
+  request itself is in, because "we asked on Monday, they answered on
+  Thursday" reads better with the Monday present.
+*/
+export async function fetchInbox(centreId: string) {
+  return db
+    .select({
+      id: message.id,
+      tripId: message.tripId,
+      party: message.party,
+      authorName: message.authorName,
+      body: message.body,
+      sentAt: message.sentAt,
+      readAt: message.readAt,
+      programName: program.name,
+      venueName: venue.name,
+      confirmedDate: trip.confirmedDate,
+      dateOptions: trip.dateOptions,
+    })
+    .from(message)
+    .innerJoin(trip, eq(message.tripId, trip.id))
+    .innerJoin(program, eq(trip.programId, program.id))
+    .innerJoin(venue, eq(program.venueId, venue.id))
+    .where(and(eq(trip.centreId, centreId), ne(message.party, 'system')))
+    .orderBy(desc(message.sentAt))
+}
+
+/*
+  The two numbers on the top bar: how many trips are in flight, and how many
+  venue replies nobody has read. Cheap enough to run on every page.
+*/
+export async function navCounts(centreId: string) {
+  const [trips, unread] = await Promise.all([
+    db
+      .select({ n: count() })
+      .from(trip)
+      .where(
+        and(eq(trip.centreId, centreId), notInArray(trip.status, ['done', 'cancelled'])),
+      ),
+    db
+      .select({ n: count() })
+      .from(message)
+      .innerJoin(trip, eq(message.tripId, trip.id))
+      .where(
+        and(
+          eq(trip.centreId, centreId),
+          eq(message.party, 'venue'),
+          isNull(message.readAt),
+        ),
+      ),
+  ])
+  return { trips: trips[0]?.n ?? 0, unread: unread[0]?.n ?? 0 }
 }

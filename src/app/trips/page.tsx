@@ -9,10 +9,10 @@ import {
   LifeBuoy,
   MessageCircle,
 } from 'lucide-react'
-import { getViewer } from '@/lib/auth'
+import { getActiveRoom, getViewer } from '@/lib/auth'
 import { fetchSaved, fetchTrips } from '@/lib/trips/fetch'
-import { shortDate } from '@/lib/trips/asks'
-import { money } from '@/lib/catalog/feasibility'
+import { catalogForRoom, suggestFor } from '@/lib/catalog/for-room'
+import { removeSaved } from '@/app/outing/actions'
 import {
   BUCKETS,
   bucketOf,
@@ -54,9 +54,10 @@ export default async function TripsPage({
 
   const params = await searchParams
   const requested = typeof params.tab === 'string' ? params.tab : ''
-  const [rows, saved] = await Promise.all([
+  const [rows, saved, activeRoom] = await Promise.all([
     fetchTrips(viewer.centreId),
     fetchSaved(viewer.accountId),
+    getActiveRoom(viewer.centreId),
   ])
 
   const now = new Date()
@@ -86,6 +87,18 @@ export default async function TripsPage({
   const tab: TabKey = TABS.some((t) => t.key === requested)
     ? (requested as TabKey)
     : fallback
+
+  /*
+    The Saved tab reads the catalog as the active room sees it, so a saved
+    row carries the same travel line and amber reason as its card, and the
+    empty state can name three that fit. Only fetched when that tab is open.
+  */
+  const catalog = tab === 'saved' ? await catalogForRoom(activeRoom) : []
+  const byId = new Map(catalog.map((r) => [r.id, r]))
+  const suggestions =
+    tab === 'saved' && saved.length === 0
+      ? suggestFor(catalog, saved.map((s) => s.program.id))
+      : []
 
   const bucketRows =
     tab === 'saved'
@@ -143,52 +156,100 @@ export default async function TripsPage({
       {tab === 'saved' ? (
         saved.length > 0 ? (
           <div className="flex flex-col gap-3">
-            {saved.map(({ program: p, venue: v }) => (
-              <div
-                key={p.id}
-                className="bg-surface border-border flex flex-wrap items-center gap-5 rounded-thumb border px-6 py-5"
-              >
-                <Link
-                  href={`/outing/${v.id}/${p.slug}`}
-                  className="min-w-0 flex-1 basis-[220px] no-underline"
+            {saved.map(({ program: p, venue: v }) => {
+              const r = byId.get(p.id)
+              return (
+                <div
+                  key={p.id}
+                  className="bg-surface border-border flex flex-wrap items-center gap-5 rounded-thumb border px-6 py-5"
                 >
-                  <span className="font-display block text-[19px] font-bold tracking-[-0.015em]">
-                    {p.name}
+                  <span
+                    aria-hidden
+                    className="bg-brand-tint text-brand font-display flex h-[52px] w-[52px] flex-none items-center justify-center rounded-pill text-[15px] font-bold"
+                  >
+                    {r?.initials ?? initialsOf(v.name)}
                   </span>
-                  <span className="text-body-sm text-text-muted mt-1 block">
-                    {v.name}
-                    <span aria-hidden className="text-border-strong"> · </span>
-                    {p.isFree || p.costPerChildCad === '0.00'
-                      ? 'Free'
-                      : p.costPerChildCad
-                        ? `${money(Number(p.costPerChildCad))} a child`
-                        : p.costPerGroupCad
-                          ? `${money(Number(p.costPerGroupCad))} per class`
-                          : 'Price not published'}
-                  </span>
-                </Link>
-                <Link
-                  href={`/plan/${v.id}/${p.slug}`}
-                  className="bg-brand hover:bg-brand-hover text-body-sm flex items-center gap-2.5 rounded-pill px-5 py-3.5 font-bold whitespace-nowrap text-white no-underline"
-                >
-                  <MessageCircle size={17} />
-                  Plan this trip
-                </Link>
-              </div>
-            ))}
+                  <Link
+                    href={`/outing/${v.id}/${p.slug}`}
+                    className="min-w-0 flex-1 basis-[220px] no-underline"
+                  >
+                    <span className="font-display block text-[19px] font-bold tracking-[-0.015em]">
+                      {p.name}
+                    </span>
+                    <span className="text-body-sm text-text-muted mt-1 block">
+                      {v.name}
+                      <span aria-hidden className="text-border-strong"> · </span>
+                      {r?.perChildLine ?? 'Price not published'}
+                      {r?.travelLine ? (
+                        <>
+                          <span aria-hidden className="text-border-strong"> · </span>
+                          {r.travelLine}
+                        </>
+                      ) : null}
+                    </span>
+                    {r?.feasibility.level === 'amber' ? (
+                      <span className="text-meta text-warn mt-1.5 block">
+                        {r.feasibility.issueText}
+                      </span>
+                    ) : null}
+                  </Link>
+                  <form action={removeSaved}>
+                    <input type="hidden" name="programId" value={p.id} />
+                    <button
+                      type="submit"
+                      className="text-body-sm text-text-faint hover:text-danger px-1.5 py-2.5 font-semibold"
+                    >
+                      Remove
+                    </button>
+                  </form>
+                  <Link
+                    href={`/plan/${v.id}/${p.slug}`}
+                    className="bg-brand hover:bg-brand-hover text-body-sm flex items-center gap-2.5 rounded-pill px-5 py-3.5 font-bold whitespace-nowrap text-white no-underline"
+                  >
+                    <MessageCircle size={17} />
+                    Plan this trip
+                  </Link>
+                </div>
+              )
+            })}
           </div>
         ) : (
-          <EmptyPanel
-            title="Nothing saved yet"
-            body="Tap Save on any outing and it waits here until you are ready."
-          >
-            <Link
-              href="/"
-              className="bg-brand hover:bg-brand-hover text-body-sm inline-block rounded-pill px-5 py-3 font-bold text-white no-underline"
-            >
-              Find outings
-            </Link>
-          </EmptyPanel>
+          <div className="bg-surface border-border rounded-panel border px-7 py-7">
+            <h2 className="font-display text-display-sm mb-1.5">Nothing saved yet</h2>
+            <p className="text-body text-text-muted mb-4 leading-relaxed">
+              Tap Save on any outing and it waits here until you are ready.
+              {suggestions.length > 0 && activeRoom
+                ? ` Three that fit ${activeRoom.name} right now:`
+                : ''}
+            </p>
+            {suggestions.length > 0 ? (
+              <div className="flex flex-col gap-2">
+                {suggestions.map((r) => (
+                  <Link
+                    key={r.id}
+                    href={`/outing/${r.venueId}/${r.slug}`}
+                    className="bg-surface-2 border-border hover:border-brand block rounded-card border px-4.5 py-3.5 no-underline"
+                  >
+                    <span className="text-body block font-bold">{r.name}</span>
+                    <span className="text-body-sm text-text-muted mt-0.5 block">
+                      {r.venueName}
+                      <span aria-hidden className="text-border-strong"> · </span>
+                      {r.perChildLine}
+                      <span aria-hidden className="text-border-strong"> · </span>
+                      {r.travelLine}
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              <Link
+                href="/"
+                className="bg-brand hover:bg-brand-hover text-body-sm inline-block rounded-pill px-5 py-3 font-bold text-white no-underline"
+              >
+                Find outings
+              </Link>
+            )}
+          </div>
         )
       ) : bucketRows.length > 0 ? (
         <div className="flex flex-col gap-3">
@@ -267,6 +328,15 @@ export default async function TripsPage({
       </div>
     </main>
   )
+}
+
+function initialsOf(name: string): string {
+  return name
+    .split(/\s+/)
+    .filter((w) => /^[A-Z0-9]/.test(w))
+    .slice(0, 2)
+    .map((w) => w[0]!)
+    .join('')
 }
 
 function EmptyPanel({

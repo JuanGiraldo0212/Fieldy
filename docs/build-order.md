@@ -238,6 +238,29 @@ The slice for the director with several trips in flight, and the one that makes 
 
 **Demo** — three replies across three trips. My trips shows them under Needs action with New reply dots. Open Inbox, tap one, land on the right trip scrolled to that message with the dot cleared.
 
+**Status: the demo passes**, with one part that the tooling could not
+judge. Three trips in the local database, a reply on each (`simulate:reply`
+plain, `--dates`, `--decline`): My trips showed the two open ones under Needs
+action with New reply dots and the nav read "My trips 2" grey and "Inbox 2"
+brand. Inbox listed every message newest first under Today, venue rows with
+the unread dot, one preview line each. Opening a row's link took the trip
+page with the message anchored (`#msg-…` present, the message rendered with
+its dot), and the next visit to Inbox showed the dot gone and the pill at 1.
+Saved: the empty state named "Three that fit Toddler room right now:" with
+three rows; saving an outing produced the design's row with the initials
+tile, price, travel line, Remove and Plan this trip.
+
+`c-trips` and `route-trips` were already done in slice 4. This slice added
+`inbox` (`/inbox`, `fetchInbox`, `navCounts`, the nav pills) and `saved` (the
+rows to the design, the three suggestions, `/saved`). `lib/trips/inbox.ts`
+carries the day grouping and the preview line, with tests.
+
+**What could not be verified:** that the page is *scrolled* to the anchored
+message. The Browser pane reports a zero-height viewport on long pages, so
+scroll positions read back as nonsense there. The mechanism is the browser's
+own fragment scrolling plus `scroll-mt-24` on every message, unchanged from
+slice 5; a real browser is needed to watch it happen.
+
 ---
 
 ## Slice 8 — Ship it

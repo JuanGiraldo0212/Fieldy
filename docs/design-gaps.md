@@ -398,3 +398,46 @@ verbatim from design-map §7. Differences, all logged:
     uncontrolled. Once the banner could change the status from elsewhere on
     the page, the select kept showing the old value after the change. Keyed on
     the status now.
+
+---
+
+## Slice 7 — the inbox, the nav pills, and the Saved tab
+
+23. **Gap — `/inbox`.** Spec §5.7 describes it and the design never draws it
+    (design-map §9 item 5). Built in the language of the My trips rows and
+    the thread: the thread's avatars and unread dot, the row's
+    "program · date" line, one truncated preview line with the greeting
+    dropped so eight rows say eight different things. Grouped by day —
+    Today, Yesterday, then the date — in Vancouver time. A row links to the
+    trip page anchored on that message, and nothing is marked read here: the
+    trip page does that after it renders, so the dot survives until she has
+    actually seen the reply. Needs a frame.
+
+24. **Deviation — the unread pill moves from My trips to Inbox.** The
+    prototype's top bar puts the brand unread count on My trips, because the
+    prototype has no inbox. Spec §5.7 gives Inbox its own nav item "with an
+    unread count", so the brand pill lives there and My trips keeps the
+    design's grey count of trips in flight. Inbox shows no pill at all at
+    zero; a grey zero is a nag. Same pills, same sizes, one item over.
+
+25. **Built to the design — the Saved tab rows.** Slice 4 shipped the tab
+    with a plainer row. It now carries the prototype's row (lines 1040-1050):
+    the initials tile, "venue · price · travel line", the amber feasibility
+    reason when there is one, Remove, and Plan this trip. Feasibility and
+    travel are computed against the active room, exactly as the catalog
+    does, so a saved outing reads the same here as on its card.
+
+26. **Built to the design — the Saved empty state's three suggestions.**
+    "Three that fit {room} right now:" with three rows (lines 1053-1066).
+    Green ones first, in the catalog's own order, skipping anything already
+    saved. A signed-in director with no room falls back to the plain "Find
+    outings" button rather than suggestions measured from nowhere.
+
+27. **`/saved` redirects to `/trips?tab=saved`**, per plan §6.
+
+28. **Deviation — the top bar scrolls sideways below 640px.** Five nav items
+    (Find outings, My trips, Inbox, Groups, the avatar) do not fit a 375px
+    row, and the design's `flex-wrap` bar answered by wrapping "Find
+    outings" onto two lines once Inbox arrived. Items are now `nowrap` and
+    the row scrolls horizontally, bleeding to the page edge, with the
+    scrollbar hidden. Same items, same pills, no second line.
