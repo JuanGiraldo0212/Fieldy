@@ -147,13 +147,49 @@ Two Resend unknowns are **test items here, not assumptions**: the inbound messag
 
 **Demo** — run the simulate script. Within two seconds the reply is in the thread with an unread dot, the trip moves to They answered, the waiting pill flips to Your turn, and a notification email arrives with a working deep link and no Reply-To. Reply to that notification from a real mail client and get the auto-response, with nothing stored.
 
+**Status: the demo passes.** `pnpm simulate:reply` against a local Postgres and
+a fixture Resend: webhook 200, the reply stored with its quoted history
+stripped and `body_full` kept, the trip moved `requested → replied` with
+`status_source = system` and `last_venue_reply_at` set, and the notification
+intercepted with `X-Fieldy-Hops: 1` and no Reply-To.
+
+The edge cases were exercised the same way, all correct: a second delivery of
+the same email id is dropped as already stored, mail from our own domain and
+mail carrying `X-Fieldy-Hops: 2` are dropped as loops, an unknown token and a
+foreign domain are dropped as unroutable, a forged signature gets a 401, and
+two replies to `noreply@` produced exactly one auto-response. `/api/jobs/retry`
+recovered a stuck send and two stuck notifications, and rejects a wrong bearer
+token.
+
+`email-in`, `c-thread` and `simulate` are all done, plus two things the slice
+needed and did not have: `message.rfc_message_id` so a follow-up threads inside
+the venue's existing conversation, and `/dev/components`, which the plan
+requires of every component slice and which no earlier slice built.
+
+**What this run could NOT verify**, because the environment has Postgres but no
+Supabase project: the trip page itself (auth redirects to `/login`), the raw
+email and attachment writes to the private `mail` bucket (`storageConfigured()`
+is false, so `raw_ref` came back null — the designed degradation, but the happy
+path is untested), and signed attachment URLs. The thread and compose
+components were verified through `/dev/components` at 390px and 768px instead.
+Those three want one pass against a real Supabase project before slice 6.
+
+**Both Resend unknowns are still open.** The inbound size cap now has a
+provisional 10 MB guard rather than an answer, and the reply-all-with-CCs
+quota question needs a real venue reply — neither is answerable against a
+fixture.
+
 ---
 
 ## Slice 6 — Confirm in one tap
 
 Spec §7 interactions 4 and 5, Playwright flow 3, and success criterion "a confirmation becomes a confirmed trip in one tap, with the evidence visible".
 
-**Agents** — `classify` (`lib/classify/{provider,rules,dates}.ts`) · `suggestions` (the `SuggestionCard`, `applySuggestion`, task regeneration, the system message, the manual status selector) · `evals` (30 hand-written replies in `tests/fixtures/replies/`, the accuracy script)
+**Agents** — `classify` (`lib/classify/{provider,rules,dates}.ts`) · `suggestions` (the `SuggestionCard`, `applySuggestion`, task regeneration, the system message) · `evals` (30 hand-written replies in `tests/fixtures/replies/`, the accuracy script)
+
+The manual status selector listed here was already delivered in slice 4. The
+classifier's seam is marked in `handleInbound` — one call writing
+`message.suggestion`, with nothing above it needing to change.
 
 **Demo** — a simulated reply confirming the first date. The banner appears with its evidence line in curly quotes. Tap Mark confirmed: status becomes Confirmed, the date collapses, unedited tasks move with it, a system message appears in the thread. Then a reply proposing two other dates — pick one, see the prefilled acceptance in the compose box.
 

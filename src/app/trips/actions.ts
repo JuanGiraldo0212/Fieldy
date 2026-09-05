@@ -1,10 +1,12 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
-import { and, eq } from 'drizzle-orm'
+import { and, asc, eq } from 'drizzle-orm'
 import { z } from 'zod'
-import { db, message, trip } from '@/db'
+import { centre, db, message, trip } from '@/db'
 import { getViewer } from '@/lib/auth'
+import { replySubject, threadingHeaders } from '@/lib/email/relay'
+import { sendRelayMessage } from '@/lib/email/send'
 import { newId } from '@/lib/ids'
 import { taskSchema, type Task } from '@/lib/schemas'
 import { setTaskDate, toggleTask } from '@/lib/trips/tasks'
@@ -259,6 +261,128 @@ export async function setTripStatus(
       channel: 'email',
     })
   })
+
+  revalidatePath(`/trips/${tripId}`)
+  revalidatePath('/trips')
+  return { ok: true }
+}
+
+/* ─── The thread ─────────────────────────────────────────────────────────── */
+
+/*
+  A follow-up message. Spec §5.4.6: "A text box docked under the thread with a
+  Send button. Empty after the first request. Sends through Fieldy from the
+  user's name."
+
+  Same shape as the opening request in plan/actions.ts, and for the same
+  reasons: the row is written first, the send happens after, and a failure is
+  recorded on the row rather than rolled back. A message a director typed and
+  watched vanish because Resend had a bad minute is the one outcome worth
+  engineering against — `send_error` puts it on the trip page with a retry
+  instead.
+*/
+export async function sendFollowUp(
+  _prev: TripState,
+  formData: FormData,
+): Promise<TripState> {
+  const viewer = await getViewer()
+  if (!viewer?.centreId) return { error: 'Your session expired. Sign in again.' }
+  const centreId = viewer.centreId
+
+  const tripId = String(formData.get('tripId') ?? '')
+  const parsed = z
+    .string()
+    .trim()
+    .min(1, 'Write something first.')
+    .max(5000, 'That message is too long to send.')
+    .safeParse(formData.get('body'))
+  if (!parsed.success) {
+    return { error: parsed.error.issues[0]?.message ?? 'Write something first.' }
+  }
+  const body = parsed.data
+
+  const rows = await db
+    .select({ trip, centre })
+    .from(trip)
+    .innerJoin(centre, eq(trip.centreId, centre.id))
+    .where(and(eq(trip.id, tripId), eq(trip.centreId, centreId)))
+    .limit(1)
+
+  const row = rows[0]
+  if (!row) return { error: 'That trip is not one of yours.' }
+  const { trip: t, centre: c } = row
+
+  /*
+    Read in send order so the References chain is built oldest-first. This is
+    what puts the follow-up inside the conversation already open in the venue's
+    mailbox rather than starting a second one.
+  */
+  const thread = await db
+    .select({
+      id: message.id,
+      party: message.party,
+      rfcMessageId: message.rfcMessageId,
+      subject: message.subject,
+    })
+    .from(message)
+    .where(eq(message.tripId, tripId))
+    .orderBy(asc(message.sentAt))
+
+  /* The subject the request went out with, which is what the venue's client
+     threads on. Recomputing it would describe a group that may since have
+     changed size. */
+  const firstSubject =
+    thread.find((m) => m.subject)?.subject ?? 'Group visit request'
+  const subject = replySubject(firstSubject)
+
+  const messageRowId = newId()
+  const senderName = viewer.name || c.name
+
+  await db.insert(message).values({
+    id: messageRowId,
+    tripId,
+    party: 'educator',
+    authorName: senderName,
+    body,
+    channel: 'email',
+    subject,
+    /* Cleared below on a successful send. Until then the thread says, plainly,
+       that this one has not gone anywhere. */
+    sendError: 'Not sent yet.',
+  })
+
+  if (!t.venueEmail) {
+    await db
+      .update(message)
+      .set({ sendError: 'Not sent. This venue publishes no booking email.' })
+      .where(eq(message.id, messageRowId))
+  } else {
+    const { inReplyTo, references } = threadingHeaders({
+      token: t.relayToken,
+      messages: thread,
+    })
+
+    const sent = await sendRelayMessage({
+      token: t.relayToken,
+      messageRowId,
+      senderName,
+      centreName: c.name,
+      venueEmail: t.venueEmail,
+      subject,
+      body,
+      inReplyTo,
+      references,
+    })
+
+    await db
+      .update(message)
+      .set(
+        sent.ok
+          ? { externalMessageId: sent.externalMessageId, sendError: null }
+          : { sendError: sent.error },
+      )
+      .where(eq(message.id, messageRowId))
+  }
 
   revalidatePath(`/trips/${tripId}`)
   revalidatePath('/trips')

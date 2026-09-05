@@ -52,6 +52,13 @@ export async function fetchTrips(centreId: string) {
     .select({
       tripId: message.tripId,
       unread: count().as('unread'),
+      /* The oldest unread one, so "New reply" opens the trip at the first
+         message she has not read rather than the last. Slice 5's demo is
+         exactly this: tap the row, land on the right message. */
+      firstUnreadId:
+        sql<string>`(array_agg(${message.id} order by ${message.sentAt} asc))[1]`.as(
+          'first_unread_id',
+        ),
     })
     .from(message)
     .where(and(eq(message.party, 'venue'), isNull(message.readAt)))
@@ -66,6 +73,7 @@ export async function fetchTrips(centreId: string) {
       lastMessageParty: lastMessage.party,
       lastMessageAt: lastMessage.at,
       unreadCount: unread.unread,
+      firstUnreadId: unread.firstUnreadId,
     })
     .from(trip)
     .innerJoin(program, eq(trip.programId, program.id))

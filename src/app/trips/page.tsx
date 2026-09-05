@@ -198,7 +198,13 @@ export default async function TripsPage({
             return (
               <Link
                 key={r.trip.id}
-                href={`/trips/${r.trip.id}`}
+                /* Straight to the message she has not read, per spec §5.7's
+                   "tapping opens the trip page scrolled to that message". */
+                href={
+                  r.firstUnreadId
+                    ? `/trips/${r.trip.id}#msg-${r.firstUnreadId}`
+                    : `/trips/${r.trip.id}`
+                }
                 className="bg-surface border-border hover:border-brand flex flex-wrap items-center gap-5.5 rounded-thumb border px-6 py-5 no-underline"
               >
                 <span className="flex-none basis-[54px] text-center">

@@ -529,6 +529,11 @@ export const message = pgTable(
     rawRef: text('raw_ref'),
     channel: messageChannel('channel').notNull().default('email'),
     externalMessageId: text('external_message_id'),
+    /* The RFC 5322 Message-ID, which is a different thing from the provider's
+       id above. Stored for venue messages so a follow-up can carry a truthful
+       In-Reply-To and land inside the conversation already open in the venue's
+       mailbox. Ours are derived, not stored — see messageId() in relay.ts. */
+    rfcMessageId: text('rfc_message_id'),
     /* Non-null means the trip page shows a retry. */
     sendError: text('send_error'),
     /* Never surfaced: a missed nudge is not the educator's problem. */
@@ -540,6 +545,13 @@ export const message = pgTable(
     index('message_unread_idx')
       .on(t.readAt)
       .where(sql`${t.readAt} is null`),
+    /* Idempotency for the inbound webhook. Svix retries anything that does not
+       answer 2xx quickly enough, and a retry must not put the venue's reply in
+       the thread twice. Partial, because an unsent outbound message has no
+       external id and there may be many of those. */
+    uniqueIndex('message_external_id_idx')
+      .on(t.externalMessageId)
+      .where(sql`${t.externalMessageId} is not null`),
   ],
 )
 
@@ -574,6 +586,26 @@ export const report = pgTable('report', {
   note: text('note'),
   status: reportStatus('status').notNull().default('new'),
   createdAt: timestamp('created_at', { withTimezone: true })
+    .notNull()
+    .defaultNow(),
+})
+
+/*
+  Not an entity in the data model — mechanism.
+
+  Plan §5.4a: anyone who replies to the notification address gets one polite
+  auto-response per 24 hours, and this is the "per 24 hours". It has to be
+  durable rather than in-memory: the webhook runs on whichever instance
+  answers, so an in-process map would let a director who replies three times
+  get three robots, and would forget everything on deploy.
+
+  One row per address, rewritten in place. It never grows beyond the number of
+  people who have ever replied to a no-reply address.
+*/
+export const autoResponse = pgTable('auto_response', {
+  /* Lowercased bare address, not the display form. */
+  address: text('address').primaryKey(),
+  lastSentAt: timestamp('last_sent_at', { withTimezone: true })
     .notNull()
     .defaultNow(),
 })

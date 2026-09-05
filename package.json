@@ -20,6 +20,7 @@
     "geocode:catalog": "tsx --env-file-if-exists=.env.local scripts/geocode-catalog.ts",
     "retry:send": "tsx --env-file-if-exists=.env.local scripts/retry-send.ts",
     "dev:login": "tsx --env-file-if-exists=.env.local scripts/dev-login.ts",
+    "simulate:reply": "tsx --env-file-if-exists=.env.local scripts/simulate-venue-reply.ts",
     "db:push": "node --env-file-if-exists=.env.local node_modules/drizzle-kit/bin.cjs push"
   },
   "dependencies": {
@@ -33,6 +34,7 @@
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "resend": "^6.25.0",
+    "svix": "^2.3.0",
     "ulid": "^3.0.2",
     "zod": "^4.5.4"
   },
