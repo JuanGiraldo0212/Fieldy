@@ -1,0 +1,22 @@
+{
+  "note": "",
+  "sent_at": "2026-09-23T15:00:00Z",
+  "date_options": [
+    {
+      "date": "2026-10-14",
+      "slot": "morning",
+      "rank": 1
+    },
+    {
+      "date": "2026-10-16",
+      "slot": "either",
+      "rank": 2
+    }
+  ],
+  "body": "We're not taking group bookings this fall while the exhibit is rebuilt. Please try us again in January.",
+  "expected": {
+    "intent": "declined",
+    "dates": null,
+    "time": null
+  }
+}

@@ -1,7 +1,8 @@
 import { notFound } from 'next/navigation'
 import { AttachmentChip, Thread, type ThreadMessage } from '@/components/trip/thread'
 import { ComposeBox } from '@/components/trip/compose-box'
-import type { Ask, DateOption } from '@/lib/schemas'
+import { SuggestionCard } from '@/components/trip/suggestion-card'
+import type { Ask, DateOption, Suggestion } from '@/lib/schemas'
 import { Skeleton } from '@/components/ui'
 
 /*
@@ -43,6 +44,18 @@ const ASKS: Ask[] = [
   },
 ]
 
+function suggestion(over: Partial<Suggestion> = {}): Suggestion {
+  return {
+    intent: 'confirmed',
+    dates: ['2026-10-14'],
+    time: '09:30',
+    evidence: 'Wednesday October 14 works for us — we can take the group at 9:30am.',
+    confidence: 0.9,
+    dismissed_at: null,
+    ...over,
+  }
+}
+
 function msg(over: Partial<ThreadMessage> & { id: string }): ThreadMessage {
   return {
     party: 'venue',
@@ -67,8 +80,71 @@ export default async function ComponentGallery() {
     <main className="mx-auto max-w-[940px] px-5 py-8">
       <h1 className="font-display text-display-md m-0">Components</h1>
       <p className="text-body text-text-muted mt-2 mb-8">
-        Dev only. Slice 5: the thread and the compose box.
+        Dev only. Slice 5: the thread and the compose box. Slice 6: the
+        suggestion banner.
       </p>
+
+      <Section
+        title="Suggestion banner"
+        note="The three drawn intents, then the two the design leaves out on purpose: unclear renders nothing, and a dismissed one is gone for good. Buttons post to the real action and will answer “not one of yours” here."
+      >
+        <SuggestionCard
+          messageId="demo-confirmed"
+          suggestion={suggestion()}
+          dateOptions={DATE_OPTIONS}
+          similarHref="/?cat=animals_farms"
+        />
+        <SuggestionCard
+          messageId="demo-confirmed-no-date"
+          suggestion={suggestion({
+            dates: null,
+            time: '10:00',
+            confidence: 0.75,
+            evidence: 'That works — we have you down for the date you asked for at 10 am.',
+          })}
+          dateOptions={DATE_OPTIONS}
+          similarHref="/?cat=animals_farms"
+        />
+        <SuggestionCard
+          messageId="demo-proposed"
+          suggestion={suggestion({
+            intent: 'proposed_dates',
+            dates: ['2026-10-21', '2026-10-23', '2026-10-27'],
+            time: null,
+            evidence: 'Neither of those dates works I am afraid, but we could offer Oct 21, Oct 23 or Oct 27 instead.',
+          })}
+          dateOptions={DATE_OPTIONS}
+          similarHref="/?cat=animals_farms"
+        />
+        <SuggestionCard
+          messageId="demo-declined"
+          suggestion={suggestion({
+            intent: 'declined',
+            dates: null,
+            time: null,
+            confidence: 0.75,
+            evidence: 'Unfortunately we are fully booked for school groups until the end of November.',
+          })}
+          dateOptions={DATE_OPTIONS}
+          similarHref="/?cat=animals_farms"
+        />
+        <div className="text-meta text-text-faint mt-4 leading-normal">
+          Below: an <code>unclear</code> reading and a dismissed one. Both
+          render nothing, which is the point.
+        </div>
+        <SuggestionCard
+          messageId="demo-unclear"
+          suggestion={suggestion({ intent: 'unclear', dates: null, time: null, confidence: 0.5 })}
+          dateOptions={DATE_OPTIONS}
+          similarHref="/?cat=animals_farms"
+        />
+        <SuggestionCard
+          messageId="demo-dismissed"
+          suggestion={suggestion({ dismissed_at: '2026-09-23T15:00:00Z' })}
+          dateOptions={DATE_OPTIONS}
+          similarHref="/?cat=animals_farms"
+        />
+      </Section>
 
       <Section
         title="Thread — the ordinary run"

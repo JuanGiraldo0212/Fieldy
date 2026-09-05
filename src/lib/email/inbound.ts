@@ -1,6 +1,7 @@
 import { and, eq } from 'drizzle-orm'
 import { db, message, program, trip, venue } from '@/db'
 import { newId } from '@/lib/ids'
+import { classify } from '@/lib/classify/provider'
 import type { Attachment } from '@/lib/schemas'
 import { resendClient } from './client'
 import { mailDomain, tokenFromAddress } from './relay'
@@ -193,6 +194,7 @@ export async function handleInbound(
       id: trip.id,
       status: trip.status,
       centreId: trip.centreId,
+      dateOptions: trip.dateOptions,
     })
     .from(trip)
     .where(eq(trip.relayToken, route.token))
@@ -267,6 +269,20 @@ export async function handleInbound(
 
   const venueName = await venueNameForTrip(t.id)
 
+  /*
+    Step 7, the classifier. Synchronous, rule based, milliseconds — so it
+    runs here rather than as a job. It reads the stripped body against the
+    trip's own dates and writes what it thinks the venue meant; it never
+    changes the trip. The banner and the director's tap do that (plan §5.6).
+    A reading that showed nothing (`unclear`) is stored too, so it can be
+    audited later; `null` means there was nothing to read at all.
+  */
+  const suggestion = classify({
+    body,
+    dateOptions: t.dateOptions,
+    sentAt: msg.receivedAt,
+  })
+
   await db.transaction(async (tx) => {
     await tx
       .insert(message)
@@ -284,6 +300,7 @@ export async function handleInbound(
         channel: 'email',
         externalMessageId: msg.emailId,
         rfcMessageId: msg.messageId,
+        suggestion,
       })
       /* The index this leans on is partial and scoped to the id, so a second
          delivery of the same email lands here and changes nothing. */
@@ -311,13 +328,6 @@ export async function handleInbound(
         .where(eq(trip.id, t.id))
     }
   })
-
-  /*
-    Step 7, the rule-based classifier, lands here in slice 6. It is synchronous
-    and takes milliseconds, so it belongs in this handler rather than a job —
-    the seam is one call writing `message.suggestion`, and nothing above needs
-    to change to accommodate it.
-  */
 
   return { stored: true, messageId: messageRowId, tripId: t.id }
 }

@@ -1,0 +1,25 @@
+{
+  "note": "The simulate script's own proposal.",
+  "sent_at": "2026-09-23T15:00:00Z",
+  "date_options": [
+    {
+      "date": "2026-10-14",
+      "slot": "morning",
+      "rank": 1
+    },
+    {
+      "date": "2026-10-16",
+      "slot": "either",
+      "rank": 2
+    }
+  ],
+  "body": "Hello,\n\nNeither of those dates works I am afraid, but we could offer Oct 21 or Oct 23 instead. Let me know which suits and I will hold it.\n\nMargaret",
+  "expected": {
+    "intent": "proposed_dates",
+    "dates": [
+      "2026-10-21",
+      "2026-10-23"
+    ],
+    "time": null
+  }
+}

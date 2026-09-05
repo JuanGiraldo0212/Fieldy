@@ -38,16 +38,21 @@ export function ComposeBox({
      saying so beats a Send button that quietly writes to a drawer. */
   canSend,
   venueName,
+  /* Pre-filled text, from "Move to {date}" on the suggestion banner. Plan
+     §5.6: "a reply the user can send or edit". Hers to change; nothing goes
+     out until she taps Send. */
+  initialBody = '',
 }: {
   tripId: string
   canSend: boolean
   venueName: string
+  initialBody?: string
 }) {
   const [state, send, pending] = useActionState<TripState, FormData>(
     sendFollowUp,
     {},
   )
-  const [body, setBody] = useState('')
+  const [body, setBody] = useState(initialBody)
   const field = useRef<HTMLTextAreaElement>(null)
 
   /* Clear on success only. A failed send keeps what she wrote — retyping a
@@ -55,6 +60,15 @@ export function ComposeBox({
   useEffect(() => {
     if (state.ok) setBody('')
   }, [state.ok])
+
+  /* A pre-filled reply is the reason she is looking at this box, so it
+     should be in view and ready to send rather than below the fold. */
+  useEffect(() => {
+    if (initialBody && field.current) {
+      field.current.scrollIntoView({ block: 'center' })
+      field.current.focus({ preventScroll: true })
+    }
+  }, [initialBody])
 
   useEffect(() => {
     const el = field.current

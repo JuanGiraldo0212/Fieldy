@@ -1,0 +1,22 @@
+{
+  "note": "The design's proposal reply has no concrete date, so there is nothing to put a button on.",
+  "sent_at": "2026-09-23T15:00:00Z",
+  "date_options": [
+    {
+      "date": "2026-10-14",
+      "slot": "morning",
+      "rank": 1
+    },
+    {
+      "date": "2026-10-16",
+      "slot": "either",
+      "rank": 2
+    }
+  ],
+  "body": "That morning is already taken by a school group, sorry. We could do the following week instead — let me know.",
+  "expected": {
+    "intent": "unclear",
+    "dates": null,
+    "time": null
+  }
+}

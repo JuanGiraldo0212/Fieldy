@@ -1,0 +1,22 @@
+{
+  "note": "Questions only. No banner; the compose box is the answer.",
+  "sent_at": "2026-09-23T15:00:00Z",
+  "date_options": [
+    {
+      "date": "2026-10-14",
+      "slot": "morning",
+      "rank": 1
+    },
+    {
+      "date": "2026-10-16",
+      "slot": "either",
+      "rank": 2
+    }
+  ],
+  "body": "Thanks for reaching out! How many adults will be coming, and does anyone have mobility needs? Once I know I can check the calendar.",
+  "expected": {
+    "intent": "unclear",
+    "dates": null,
+    "time": null
+  }
+}

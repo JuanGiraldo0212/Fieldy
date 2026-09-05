@@ -8,9 +8,12 @@ import { getViewer } from '@/lib/auth'
 import { replySubject, threadingHeaders } from '@/lib/email/relay'
 import { sendRelayMessage } from '@/lib/email/send'
 import { newId } from '@/lib/ids'
+import { redirect } from 'next/navigation'
 import { taskSchema, type Task } from '@/lib/schemas'
-import { setTaskDate, toggleTask } from '@/lib/trips/tasks'
+import { regenerateTasks, setTaskDate, toggleTask } from '@/lib/trips/tasks'
 import { STATUS_LABEL } from '@/lib/trips/derived'
+import { collapseDates, confirmedDateFor } from '@/lib/trips/suggestion'
+import { shortDate } from '@/lib/trips/asks'
 
 /*
   Edits to a trip. Every one of them re-reads the viewer and scopes the write
@@ -387,4 +390,189 @@ export async function sendFollowUp(
   revalidatePath(`/trips/${tripId}`)
   revalidatePath('/trips')
   return { ok: true }
+}
+
+/* ─── The suggestion banner ──────────────────────────────────────────────── */
+
+/*
+  Applying, or dismissing, what the classifier read. Plan §5.6, spec §5.5.
+
+  One action, four choices, because they share everything that matters: the
+  message must belong to a trip at the viewer's centre, the suggestion must
+  still be open, and whatever happens the banner must not come back for this
+  message. `dismissed_at` is set on every path — an applied suggestion is a
+  dismissed one too, or the trip would carry a "Mark confirmed" button for a
+  trip already confirmed.
+
+  Every status change writes a `system` message, the same as the manual
+  selector does, so the thread stays the audit log. Spec §5.5: "Every
+  accepted suggestion writes a system event in the thread."
+
+  Nothing here reads the venue's reply again. The suggestion row is what the
+  director saw and tapped, and that is what is applied.
+*/
+const choiceSchema = z.union([
+  z.literal('confirm'),
+  z.literal('cancel'),
+  z.literal('dismiss'),
+  z.string().regex(/^move:\d{4}-\d{2}-\d{2}$/),
+])
+
+export async function applySuggestion(
+  _prev: TripState,
+  formData: FormData,
+): Promise<TripState> {
+  const viewer = await getViewer()
+  if (!viewer?.centreId) return { error: 'Your session expired. Sign in again.' }
+  const centreId = viewer.centreId
+
+  const messageId = String(formData.get('messageId') ?? '')
+  const parsed = choiceSchema.safeParse(formData.get('choice'))
+  if (!messageId || !parsed.success) return { error: 'Which suggestion?' }
+  const choice = parsed.data
+
+  const rows = await db
+    .select({ message, trip })
+    .from(message)
+    .innerJoin(trip, eq(message.tripId, trip.id))
+    .where(and(eq(message.id, messageId), eq(trip.centreId, centreId)))
+    .limit(1)
+
+  const row = rows[0]
+  if (!row) return { error: 'That trip is not one of yours.' }
+  const { message: m, trip: t } = row
+  const s = m.suggestion
+  if (!s || m.party !== 'venue') return { error: 'There is nothing to apply here.' }
+  /* Two taps, or two people: the second one finds it already handled and
+     the page simply re-renders without the banner. */
+  if (s.dismissed_at) {
+    revalidatePath(`/trips/${t.id}`)
+    return { ok: true }
+  }
+
+  const now = new Date()
+  const dismissed = { ...s, dismissed_at: now.toISOString() }
+  const who = viewer.name || 'Someone at your centre'
+
+  /* The choice has to fit the suggestion it came from. A "confirm" against a
+     declined reading, or a move to a date the venue never offered, is a
+     stale or forged form, not a decision. */
+  const offered = s.dates ?? []
+  const moveTo = choice.startsWith('move:') ? choice.slice(5) : null
+  if (choice === 'confirm' && s.intent !== 'confirmed') return { error: 'That suggestion has changed. Reload the page.' }
+  if (choice === 'cancel' && s.intent !== 'declined') return { error: 'That suggestion has changed. Reload the page.' }
+  if (moveTo && (s.intent !== 'proposed_dates' || !offered.includes(moveTo))) {
+    return { error: 'That suggestion has changed. Reload the page.' }
+  }
+
+  if (choice === 'dismiss') {
+    await db
+      .update(message)
+      .set({ suggestion: dismissed })
+      .where(eq(message.id, m.id))
+    revalidatePath(`/trips/${t.id}`)
+    return { ok: true }
+  }
+
+  if (choice === 'confirm') {
+    const date = confirmedDateFor(s, t.dateOptions)
+    if (!date) return { error: 'This trip has no date to confirm.' }
+
+    await db.transaction(async (tx) => {
+      await tx
+        .update(trip)
+        .set({
+          status: 'confirmed',
+          statusSource: 'manual',
+          confirmedDate: date,
+          confirmedTime: s.time,
+          dateOptions: collapseDates(t.dateOptions, date),
+          /* Unedited tasks move with the date; ones she dated herself stay.
+             Plan §5.6. */
+          tasks: regenerateTasks(t.tasks, date),
+          updatedAt: now,
+        })
+        .where(and(eq(trip.id, t.id), eq(trip.centreId, centreId)))
+      await tx
+        .update(message)
+        .set({ suggestion: dismissed })
+        .where(eq(message.id, m.id))
+      await tx.insert(message).values({
+        id: newId(),
+        tripId: t.id,
+        party: 'system',
+        authorName: 'Fieldy',
+        body: `Status set to confirmed for ${shortDate(date)}. ${who} accepted the venue's reply.`,
+        channel: 'email',
+      })
+    })
+
+    revalidatePath(`/trips/${t.id}`)
+    revalidatePath('/trips')
+    return { ok: true }
+  }
+
+  if (choice === 'cancel') {
+    await db.transaction(async (tx) => {
+      await tx
+        .update(trip)
+        .set({ status: 'cancelled', statusSource: 'manual', updatedAt: now })
+        .where(and(eq(trip.id, t.id), eq(trip.centreId, centreId)))
+      await tx
+        .update(message)
+        .set({ suggestion: dismissed })
+        .where(eq(message.id, m.id))
+      await tx.insert(message).values({
+        id: newId(),
+        tripId: t.id,
+        party: 'system',
+        authorName: 'Fieldy',
+        body: `Status set to cancelled. ${who} accepted that the venue cannot take this booking.`,
+        channel: 'email',
+      })
+    })
+
+    revalidatePath(`/trips/${t.id}`)
+    revalidatePath('/trips')
+    return { ok: true }
+  }
+
+  /* Move to one of the offered dates. The status does not change — the
+     venue proposed, and nothing is held until the director says so — but
+     the dates and the checklist do, and the compose box is pre-filled with
+     the acceptance so saying so is one tap away. A trip that was already
+     confirmed keeps its status and takes the new date as the confirmed one:
+     the date card must not go on showing a day the venue just withdrew. */
+  const date = moveTo!
+  await db.transaction(async (tx) => {
+    await tx
+      .update(trip)
+      .set({
+        dateOptions: collapseDates(t.dateOptions, date),
+        tasks: regenerateTasks(t.tasks, date),
+        ...(t.status === 'confirmed'
+          ? { confirmedDate: date, confirmedTime: null }
+          : {}),
+        updatedAt: now,
+      })
+      .where(and(eq(trip.id, t.id), eq(trip.centreId, centreId)))
+    await tx
+      .update(message)
+      .set({ suggestion: dismissed })
+      .where(eq(message.id, m.id))
+    await tx.insert(message).values({
+      id: newId(),
+      tripId: t.id,
+      party: 'system',
+      authorName: 'Fieldy',
+      body: `Trip date moved to ${shortDate(date)}, one of the dates the venue offered.`,
+      channel: 'email',
+    })
+  })
+
+  revalidatePath(`/trips/${t.id}`)
+  revalidatePath('/trips')
+  /* The pre-filled reply rides on the URL rather than in state: it survives
+     a refresh, works without JavaScript, and carries no more than a date. */
+  redirect(`/trips/${t.id}?accept=${date}`)
 }

@@ -1,0 +1,22 @@
+{
+  "note": "A question about our own date is not a confirmation of it.",
+  "sent_at": "2026-09-23T15:00:00Z",
+  "date_options": [
+    {
+      "date": "2026-10-14",
+      "slot": "morning",
+      "rank": 1
+    },
+    {
+      "date": "2026-10-16",
+      "slot": "either",
+      "rank": 2
+    }
+  ],
+  "body": "Would Oct 14 still work for you if we moved it to the afternoon?",
+  "expected": {
+    "intent": "unclear",
+    "dates": null,
+    "time": null
+  }
+}
