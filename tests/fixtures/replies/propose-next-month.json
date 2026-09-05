@@ -1,0 +1,25 @@
+{
+  "note": "",
+  "sent_at": "2026-09-23T15:00:00Z",
+  "date_options": [
+    {
+      "date": "2026-10-14",
+      "slot": "morning",
+      "rank": 1
+    },
+    {
+      "date": "2026-10-16",
+      "slot": "either",
+      "rank": 2
+    }
+  ],
+  "body": "Hi Sarah,\n\nOctober is our busiest month. November is quieter for us — Nov 4 or Nov 6 would both work for your group.\n\nBest,\nTom",
+  "expected": {
+    "intent": "proposed_dates",
+    "dates": [
+      "2026-11-04",
+      "2026-11-06"
+    ],
+    "time": null
+  }
+}

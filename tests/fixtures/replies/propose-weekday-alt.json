@@ -1,0 +1,24 @@
+{
+  "note": "A bare weekday that is not one of ours is never an offer; the 22nd is.",
+  "sent_at": "2026-09-23T15:00:00Z",
+  "date_options": [
+    {
+      "date": "2026-10-14",
+      "slot": "morning",
+      "rank": 1
+    },
+    {
+      "date": "2026-10-16",
+      "slot": "either",
+      "rank": 2
+    }
+  ],
+  "body": "We can't do Wednesdays this term. Would a Thursday work — say the 22nd?",
+  "expected": {
+    "intent": "proposed_dates",
+    "dates": [
+      "2026-10-22"
+    ],
+    "time": null
+  }
+}

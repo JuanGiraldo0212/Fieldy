@@ -195,6 +195,39 @@ classifier's seam is marked in `handleInbound` — one call writing
 
 The eval target — 90 percent on confirmed and declined with zero false confirmations — is a tuning goal, not a release gate. Nothing auto-applies, so `unclear` is always the safe failure.
 
+**Status: the demo passes.** Against a local Postgres carrying every
+migration and the catalog, a trip planned through the plan screen with two
+dates, then `pnpm simulate:reply`: the reply landed with
+`suggestion = confirmed 2026-10-14 at 09:30 (0.9)`, the banner read "Looks
+like the venue confirmed Wed 14 Oct at 9:30 am." with the venue's sentence in
+curly quotes, and Mark confirmed moved the status to Confirmed ("set by you"),
+collapsed the dates to one card with its time, counted the checklist back from
+the new date, and wrote "Status set to confirmed for Wed 14 Oct" into the
+thread. Then `--dates`: "The venue suggested Wed 21 Oct or Mon 26 Oct
+instead." with one button each and Neither; Move to Wed 21 Oct changed the
+date, moved the checklist again, wrote the system line, and opened the compose
+box with the acceptance written and Send enabled. Then `--decline`: "It sounds
+like the venue cannot take this booking." with Mark cancelled, Not quite and
+Find a similar program.
+
+`classify`, `suggestions` and `evals` are all done. The eval is 34 hand-written
+replies in `tests/fixtures/replies/`, at 34 of 34 with zero false
+confirmations (`pnpm eval:classifier` prints the table; the same run is a
+vitest suite so a regression fails the build). The accepted misses are
+written into the fixtures as expected `unclear`, per the plan's rule that
+every failure becomes a rule tweak or an accepted unclear.
+
+Two things chrono-node does not read that venues write constantly were added
+by hand in `dates.ts`: a bare ordinal ("the 15th", "Tuesday the 20th") and a
+second day after a dated one ("Oct 20 or 21"). See `docs/decisions.md` for
+why weak confirms score half and why a bare weekday is never an offer.
+
+**Not verified here:** the trip page at 390px and 620px (the banner's
+buttons wrap; it was checked at 768px and on `/dev/components`), and a
+declined banner's Mark cancelled on a trip that was never confirmed — the
+demo trip was already confirmed by then, so cancellation was exercised from
+that state.
+
 ---
 
 ## Slice 7 — Run eight trips at once

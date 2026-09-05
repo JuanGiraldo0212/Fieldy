@@ -343,3 +343,58 @@ produces them.
 your email." — the stale string design-map §7.1 flags. It now reads "Replies
 appear here, and we'll email you when one arrives.", and lives on the compose
 box where the design puts it.
+
+---
+
+## Slice 6 — the suggestion banner
+
+**Built to the design.** The banner is the prototype's own card (lines
+802-816): the relay tint, the note border, the sentence, the evidence in
+curly quotes in the note ink, a primary button per action, the outlined
+dismiss, and the "Find a similar program" text link on a decline. Copy is
+verbatim from design-map §7. Differences, all logged:
+
+15. **`unclear` renders nothing**, as decided (design-map §9 item 3, plan
+    §5.6). A reply that only asks questions sits in the thread with the compose
+    box under it. The classifier's reading is still stored on the message, so
+    it can be audited, but no card is drawn for it.
+
+16. **The banner has a pending state**, which the design does not draw. Every
+    button disables while the action runs. Two taps on "Mark confirmed" must
+    not write two system messages, and a director on a phone taps twice when
+    nothing changes.
+
+17. **An applied banner is a dismissed one.** The prototype keeps a
+    `dismissed` list per trip and adds the message to it on apply as well as
+    on dismiss. Ours sets `suggestion.dismissed_at` on every path, which is
+    the data model's field for exactly this. Without it a confirmed trip
+    would carry a "Mark confirmed" button forever.
+
+18. **The pre-filled acceptance travels on the URL.** After "Move to {date}"
+    the prototype writes the reply into component state. Ours redirects to
+    `/trips/{id}?accept={date}` and the page renders the compose box with the
+    text in it. It survives a refresh, works without JavaScript, and carries
+    nothing but a date. The page only honours it when that date is the trip's
+    date now, so a stale or hand-typed link pre-fills nothing.
+
+19. **No banner on a finished trip.** The prototype has no notion of a reply
+    arriving after cancellation. Ours never shows the card on a `done` or
+    `cancelled` trip: "Mark confirmed" on a trip somebody cancelled on purpose
+    is an invitation to undo a decision by accident. The inbound leg already
+    stops storing mail for those trips; this covers a reply that landed just
+    before.
+
+20. **A confirmed trip that moves keeps its status.** Not a case the design
+    draws. When the venue confirms and then asks to move, "Move to {date}"
+    takes the new date as the confirmed date, drops the time (the venue named
+    a day, not a slot), and leaves the status alone — the status rail must not
+    step backwards because the venue changed its mind about a Tuesday.
+
+21. **The confirmed time renders as "9:30 am"**, the way the banner writes
+    it, rather than the raw `09:30` the field stores. The design's date card
+    never shows a time, so this is invented in the banner's own language.
+
+22. **The status select remounts on a status change.** Slice 4's select is
+    uncontrolled. Once the banner could change the status from elsewhere on
+    the page, the select kept showing the old value after the change. Keyed on
+    the status now.

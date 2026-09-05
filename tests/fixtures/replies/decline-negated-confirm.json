@@ -1,0 +1,22 @@
+{
+  "note": "Negation within four words flips confirm to decline.",
+  "sent_at": "2026-09-23T15:00:00Z",
+  "date_options": [
+    {
+      "date": "2026-10-14",
+      "slot": "morning",
+      "rank": 1
+    },
+    {
+      "date": "2026-10-16",
+      "slot": "either",
+      "rank": 2
+    }
+  ],
+  "body": "I'm sorry, we cannot confirm either of those dates — the space is under renovation until further notice.",
+  "expected": {
+    "intent": "declined",
+    "dates": null,
+    "time": null
+  }
+}

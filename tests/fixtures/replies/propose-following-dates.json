@@ -1,0 +1,26 @@
+{
+  "note": "Three dates, three buttons. Uncapped.",
+  "sent_at": "2026-09-23T15:00:00Z",
+  "date_options": [
+    {
+      "date": "2026-10-14",
+      "slot": "morning",
+      "rank": 1
+    },
+    {
+      "date": "2026-10-16",
+      "slot": "either",
+      "rank": 2
+    }
+  ],
+  "body": "We are fully booked on the 14th and 16th. We have openings on the following dates: October 27, October 29, November 3. Any of those would work for your group.",
+  "expected": {
+    "intent": "proposed_dates",
+    "dates": [
+      "2026-10-27",
+      "2026-10-29",
+      "2026-11-03"
+    ],
+    "time": null
+  }
+}
