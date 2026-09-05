@@ -269,6 +269,48 @@ Screen-by-screen comparison against the running prototype at 390, 620 and 768px.
 
 **Demo** — all three Playwright flows green in CI, Lighthouse mobile above 85 on the catalog.
 
+**Status: done, with two honest gaps.**
+
+Built: the send-failure retry on the trip page; classifier failures
+swallowed and logged by id; durable rate limits on the report POST and on
+login (migration `0008`, `src/lib/rate-limit.ts`); `/privacy`, linked from
+login and account; `/api/jobs/retention` and its pg_cron line for the 90-day
+raw-email rule; the warmup checklist and bounce/complaint monitoring in
+`docs/email-setup.md`, with the inbound route now logging `email.bounced`
+and `email.complained` by id; `pnpm seed:demo <email>`, which writes a
+centre, two rooms and three trips in three states and sends nothing; and the
+responsive pass at 390, 620 and 768 (`docs/design-gaps.md` items 29–33).
+
+**Playwright.** `playwright.config.ts`, three specs in `e2e/`, and
+`.github/workflows/ci.yml`. Run locally against the seeded database with a
+session from `pnpm dev:login`:
+
+```bash
+E2E_BASE_URL=http://localhost:3000 E2E_COOKIE='sb-…-auth-token=base64-…' pnpm e2e
+```
+
+All three flows pass that way here. Flow 1 covers the anonymous half of
+plan §9 — narrow the catalog, open a program, tap Plan, be asked to sign in
+— and a no-JavaScript render of the catalog; completing the magic link and
+the first-run setup is not automated, because there is no inbox to
+intercept the link from. Flows 2 and 3 skip, with the reason, when
+`E2E_COOKIE` is absent.
+
+**In CI**, the first job (typecheck, unit tests, the classifier eval, a
+build) runs on every push. The e2e job needs `E2E_DATABASE_URL`,
+`E2E_SUPABASE_URL`, `E2E_SUPABASE_PUBLISHABLE_KEY` and `E2E_COOKIE` as
+repository secrets and skips without them — a session cookie lasts an hour,
+so that secret is a real limitation until a test account can mint its own.
+
+**Not done: Lighthouse.** No run was made here; the pane cannot host one and
+a headless run against a dev server would not measure the deployed build.
+Run it against the Vercel preview URL.
+
+**Also not done, and not started:** the two Resend unknowns from slice 5
+(the inbound size cap, reply-all quota accounting) still want a real venue
+reply; and `docs/design-gaps.md` item 10 — "Visit our help center" points
+at the account page for want of a help centre.
+
 ---
 
 ## What carries across slices

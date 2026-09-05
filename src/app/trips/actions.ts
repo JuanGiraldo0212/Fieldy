@@ -6,7 +6,7 @@ import { z } from 'zod'
 import { centre, db, message, trip } from '@/db'
 import { getViewer } from '@/lib/auth'
 import { replySubject, threadingHeaders } from '@/lib/email/relay'
-import { sendRelayMessage } from '@/lib/email/send'
+import { sendingConfigured, sendRelayMessage } from '@/lib/email/send'
 import { newId } from '@/lib/ids'
 import { redirect } from 'next/navigation'
 import { taskSchema, type Task } from '@/lib/schemas'
@@ -575,4 +575,71 @@ export async function applySuggestion(
   /* The pre-filled reply rides on the URL rather than in state: it survives
      a refresh, works without JavaScript, and carries no more than a date. */
   redirect(`/trips/${t.id}?accept=${date}`)
+}
+
+/* ─── Retry a request that never left ────────────────────────────────────── */
+
+/*
+  Plan M6: "email send failure shows on the trip and offers retry." The
+  banner on the trip page says the request has not gone out; this is the
+  button under it. It re-runs the same send the retry job would — the row
+  already holds the body, the subject and the token, so nothing is composed
+  again and the venue cannot receive two versions of one request.
+*/
+export async function retryRequest(
+  _prev: TripState,
+  formData: FormData,
+): Promise<TripState> {
+  const viewer = await getViewer()
+  if (!viewer?.centreId) return { error: 'Your session expired. Sign in again.' }
+  const centreId = viewer.centreId
+
+  const tripId = String(formData.get('tripId') ?? '')
+  const rows = await db
+    .select({ message, trip, centre })
+    .from(message)
+    .innerJoin(trip, eq(message.tripId, trip.id))
+    .innerJoin(centre, eq(trip.centreId, centre.id))
+    .where(
+      and(
+        eq(trip.id, tripId),
+        eq(trip.centreId, centreId),
+        eq(message.isRequest, true),
+      ),
+    )
+    .limit(1)
+
+  const row = rows[0]
+  if (!row) return { error: 'That trip is not one of yours.' }
+  const { message: m, trip: t, centre: c } = row
+  if (!m.sendError) return { ok: true }
+  if (!t.venueEmail) {
+    return { error: 'This venue publishes no booking email, so there is nowhere to send it.' }
+  }
+  if (!sendingConfigured()) {
+    return { error: 'Sending is not switched on yet. Your request is saved and will go out once it is.' }
+  }
+
+  const sent = await sendRelayMessage({
+    token: t.relayToken,
+    messageRowId: m.id,
+    senderName: m.authorName,
+    centreName: c.name,
+    venueEmail: t.venueEmail,
+    subject: m.subject ?? 'Group visit request',
+    body: m.body,
+  })
+
+  await db
+    .update(message)
+    .set(
+      sent.ok
+        ? { externalMessageId: sent.externalMessageId, sendError: null }
+        : { sendError: sent.error },
+    )
+    .where(eq(message.id, m.id))
+
+  revalidatePath(`/trips/${tripId}`)
+  revalidatePath('/trips')
+  return sent.ok ? { ok: true } : { error: `Still not sent. ${sent.error}` }
 }

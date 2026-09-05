@@ -610,6 +610,27 @@ export const autoResponse = pgTable('auto_response', {
     .defaultNow(),
 })
 
+/*
+  Rate limits. Plan M6: "Rate limits on report POST and login."
+
+  A row per key — an address, an IP, or both — holding the current window
+  and the count inside it. Durable, for the same reason `auto_response` is:
+  the app runs on whichever instance answers, and an in-memory counter lets
+  a flood through one instance per instance and forgets everything on
+  deploy. One row is rewritten in place; the table never grows past the
+  number of distinct keys seen in a window.
+
+  Mechanism, not an entity. RLS on, no policies: nothing a signed-in user
+  should read.
+*/
+export const rateLimit = pgTable('rate_limit', {
+  key: text('key').primaryKey(),
+  windowStart: timestamp('window_start', { withTimezone: true })
+    .notNull()
+    .defaultNow(),
+  count: integer('count').notNull().default(1),
+})
+
 /* ─── Inferred types ─────────────────────────────────────────────────────── */
 
 export type Venue = typeof venue.$inferSelect

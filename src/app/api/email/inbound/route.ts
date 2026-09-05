@@ -68,8 +68,16 @@ export async function POST(request: Request) {
 
   const parsed = parseEvent(event)
   if (!parsed) {
-    /* Some other webhook type — a bounce, a delivery receipt — pointed at this
-       URL. Not ours, not an error. */
+    /*
+      Some other webhook type pointed at this URL. Not ours, not an error —
+      but a bounce or a spam complaint is the one signal about the relay's
+      reputation we get, so those two are named in the log (id and type,
+      never the body) where docs/email-setup.md says to look for them.
+    */
+    const kind = eventType(event)
+    if (kind === 'email.bounced' || kind === 'email.complained') {
+      console.warn(`[inbound] ${kind} for ${eventEmailId(event) ?? 'unknown email id'}`)
+    }
     return json({ ok: true, ignored: true }, 200)
   }
 
@@ -116,6 +124,18 @@ export async function POST(request: Request) {
   after(() => notifyVenueReply(messageId))
 
   return json({ ok: true, messageId }, 200)
+}
+
+function eventType(event: unknown): string | null {
+  if (typeof event !== 'object' || event === null) return null
+  const t = (event as { type?: unknown }).type
+  return typeof t === 'string' ? t : null
+}
+
+function eventEmailId(event: unknown): string | null {
+  if (typeof event !== 'object' || event === null) return null
+  const id = (event as { data?: { email_id?: unknown } }).data?.email_id
+  return typeof id === 'string' ? id : null
 }
 
 /*

@@ -32,6 +32,7 @@ import { CostCard } from '@/components/trip/cost-card'
 import { NotesCard } from '@/components/trip/notes-card'
 import { StatusSelect } from '@/components/trip/status-select'
 import { SuggestionCard } from '@/components/trip/suggestion-card'
+import { RetryRequestButton } from '@/components/trip/retry-request'
 import { Thread } from '@/components/trip/thread'
 import { ComposeBox } from '@/components/trip/compose-box'
 import { markThreadRead } from '@/lib/trips/read'
@@ -237,6 +238,9 @@ export default async function TripPage({
                   ? `It was addressed to ${t.venueEmail}. Nothing is lost, so it can go out once that is sorted.`
                   : `We will send it to ${t.venueEmail} as soon as sending is switched on.`}
             </p>
+            {t.venueEmail && sendingConfigured() ? (
+              <RetryRequestButton tripId={t.id} />
+            ) : null}
           </div>
         </div>
       ) : null}

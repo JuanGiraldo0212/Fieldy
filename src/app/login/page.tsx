@@ -58,6 +58,14 @@ export default async function LoginPage({
         ) : null}
 
         <LoginForm next={next} />
+
+        <p className="text-meta text-text-faint mt-5">
+          Signing in means you are fine with how Fieldy keeps things:{' '}
+          <Link href="/privacy" className="text-brand font-semibold no-underline">
+            privacy and terms
+          </Link>
+          .
+        </p>
       </div>
 
       <p className="text-meta text-text-faint mt-4 px-1 leading-relaxed">

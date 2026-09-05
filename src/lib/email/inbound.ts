@@ -277,11 +277,22 @@ export async function handleInbound(
     A reading that showed nothing (`unclear`) is stored too, so it can be
     audited later; `null` means there was nothing to read at all.
   */
-  const suggestion = classify({
-    body,
-    dateOptions: t.dateOptions,
-    sentAt: msg.receivedAt,
-  })
+  let suggestion: ReturnType<typeof classify> = null
+  try {
+    suggestion = classify({
+      body,
+      dateOptions: t.dateOptions,
+      sentAt: msg.receivedAt,
+    })
+  } catch (cause) {
+    /* Plan M6: "classifier failure is invisible." The message is stored
+       without a reading and the thread shows it plainly; a banner that did
+       not appear is not something the director can tell from a reply that
+       simply was not clear. Log the id, never the body. */
+    console.error(
+      `[inbound] classifier failed on ${messageRowId}: ${cause instanceof Error ? cause.message : cause}`,
+    )
+  }
 
   await db.transaction(async (tx) => {
     await tx

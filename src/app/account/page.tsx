@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { eq } from 'drizzle-orm'
 import { account, db } from '@/db'
@@ -32,6 +33,18 @@ export default async function AccountPage() {
         address={centre?.address ?? ''}
         notifications={me?.emailNotifications ?? true}
       />
+
+      <p className="text-meta text-text-faint mt-8">
+        What we keep and for how long:{' '}
+        <Link href="/privacy" className="text-brand font-semibold no-underline">
+          privacy and terms
+        </Link>
+        . To delete a trip's thread or your account, write to{' '}
+        <a href="mailto:hello@fieldy.ca" className="text-brand font-semibold no-underline">
+          hello@fieldy.ca
+        </a>
+        .
+      </p>
     </main>
   )
 }

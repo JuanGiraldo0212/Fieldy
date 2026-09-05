@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { db, report } from '@/db'
 import { newId } from '@/lib/ids'
+import { clientIp, hitRateLimit, limitKey } from '@/lib/rate-limit'
 
 /*
   Data correction reports. Spec §5.2: "Data freshness line: 'Details checked on
@@ -20,38 +21,19 @@ const reportSchema = z.object({
   note: z.string().max(2000).nullable().optional(),
 })
 
-/*
-  A crude per-IP limiter. In-memory, so it resets on deploy and does not span
-  instances — it stops someone holding down a button, not a determined flood.
-  Plan M6 replaces it with something durable; until then this is the difference
-  between a nuisance and a full table.
-*/
-const WINDOW_MS = 60_000
-const MAX_PER_WINDOW = 5
-const hits = new Map<string, number[]>()
-
-function rateLimited(ip: string): boolean {
-  const now = Date.now()
-  const recent = (hits.get(ip) ?? []).filter((t) => now - t < WINDOW_MS)
-  recent.push(now)
-  hits.set(ip, recent)
-  /* Keep the map from growing without bound on a long-lived instance. */
-  if (hits.size > 5000) {
-    for (const [k, v] of hits) if (v.every((t) => now - t > WINDOW_MS)) hits.delete(k)
-  }
-  return recent.length > MAX_PER_WINDOW
-}
+/* Five reports a minute from one client. Durable, across instances and
+   deploys — see src/lib/rate-limit.ts. */
+const RULE = { max: 5, windowSeconds: 60 }
 
 export async function POST(request: Request) {
-  const ip =
-    request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ??
-    request.headers.get('x-real-ip') ??
-    'unknown'
-
-  if (rateLimited(ip)) {
+  const limit = await hitRateLimit(
+    limitKey('report-ip', clientIp(request.headers)),
+    RULE,
+  )
+  if (limit.limited) {
     return NextResponse.json(
       { error: 'Too many reports. Try again in a minute.' },
-      { status: 429 },
+      { status: 429, headers: { 'retry-after': String(limit.retryAfterSeconds) } },
     )
   }
 
