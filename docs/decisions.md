@@ -235,3 +235,44 @@ fail transiently, and nothing else.
 If a model-backed provider ever replaces the rules (plan §5.5 leaves the door
 open with the `SuggestionProvider` interface), that provider is slow and
 fallible and the job comes back. The seam is one call.
+
+---
+
+## Rate limits are a table, and fail open
+
+*Slice 8. Migration `0008`, `src/lib/rate-limit.ts`.*
+
+Plan M6 asks for limits on the report POST and on login. The report route
+had an in-memory map, which on Vercel means one counter per instance and a
+fresh start on every deploy — a nuisance filter, not a limit.
+
+`rate_limit` is one row per key, fixed window, claimed and read in a single
+`insert … on conflict do update … returning` so two requests arriving
+together cannot both slip in as the last allowed one. Same shape and same
+reasoning as `auto_response`.
+
+It fails open. If the database cannot be reached, the limiter returns "not
+limited" and logs. The alternative is refusing every login because the
+counter is down, and the thing the limiter protects against — a script
+hammering a form — is a smaller harm than nobody being able to sign in.
+
+Login went through Supabase's own limits before this, and still does; ours
+sit in front of them and are ours to tune. Getting there meant moving the
+magic-link request from the browser to a server action, which is a change
+worth its own line in `docs/design-gaps.md`.
+
+## Retention deletes by the row, not by listing the bucket
+
+*Slice 8. `src/lib/jobs/retention.ts`.*
+
+The 90-day rule could be enforced by listing `raw/` in Storage and deleting
+by object age. It is enforced from `message.raw_ref` instead, and the row's
+`raw_ref` is nulled only after Storage confirms the delete.
+
+Two reasons. The row is the record of what we hold, and a promise on the
+privacy page about what we hold should be checkable against the rows. And
+an object deleted behind a row that still points at it is a "Show full
+message" that quietly stops working; an object that outlives its row is
+merely a file nobody can reach, which the next pass will not find either —
+so listing would eventually be needed anyway, for cleanup, not for the
+promise.

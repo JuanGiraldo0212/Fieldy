@@ -248,3 +248,66 @@ venue reply will answer.
 
 Free tier: 3,000 emails/month, **100/day**, 3 domains, 10 requests/second,
 30-day log retention.
+
+## Raw email retention
+
+Plan M6. `POST /api/jobs/retention`, behind the same `CRON_SECRET`, deletes
+the `raw/<trip>/<id>.json` copies of inbound mail older than 90 days and nulls
+`message.raw_ref` on each row it cleared. The message row, its bodies and its
+attachments stay. Once a day is plenty:
+
+```sql
+select cron.schedule(
+  'fieldy-retention', '15 3 * * *',
+  $$select net.http_post(
+      url := 'https://<host>/api/jobs/retention',
+      headers := '{"Authorization": "Bearer <CRON_SECRET>"}'::jsonb
+    )$$
+);
+```
+
+Candidates come from `message.raw_ref`, not from listing the bucket: the row
+is the record of what we hold. `raw_ref` is only nulled after Storage confirms
+the object is gone, so a row never claims a copy that no longer exists and
+never loses track of one that does. The privacy page (`/privacy`) promises
+exactly this and nothing more.
+
+## Warming the relay domain
+
+`mail.fieldy.ca` is a new domain writing to strangers, which is the profile
+mailbox providers watch hardest. Reputation is earned by volume that gets
+opened and replied to, and lost by bounces and complaints. The checklist:
+
+1. **Before the first real send**: DKIM, the two Resend CNAMEs and the MX
+   verified (above); DMARC on the apex at `p=none` with `rua=` pointing at a
+   mailbox somebody reads, so the first month's reports say what is failing
+   alignment before the policy tightens.
+2. **Week 1**: real requests only, no seeding, no demo sends to real venues.
+   Under 20 a day. Every request is a message a venue would want, written by
+   a real educator, so the open-and-reply rate takes care of itself.
+3. **Weeks 2–4**: let volume grow with use. The free tier's hundred a day is
+   the ceiling anyway.
+4. **Never**: a reseed against production (`scripts/seed-demo.ts` writes
+   rows and sends nothing, on purpose), a retry loop against an address that
+   bounces (the retry job gives up after seven days), or a send to an address
+   that has complained.
+5. **Watch** the two Resend numbers below weekly for the first two months.
+
+## Bounces and complaints
+
+Two signals, both from Resend, both worth a look every week to start with:
+
+- **Resend → Emails**, filtered to *Bounced* and *Complained*. A hard bounce
+  is a catalog address that is wrong — fix the venue record and the trip's
+  `venue_email`. A complaint is a venue that marked us as spam: stop writing
+  to that address, and look at the request that earned it.
+- **The webhook log.** Point a second Resend webhook (or the same one) at
+  `/api/email/inbound` subscribed to `email.bounced` and `email.complained`.
+  The route already answers 200 to both and logs one line each,
+  `[inbound] email.bounced for <email id>`, with no body. Vercel's log search
+  on `email.complained` is the alarm.
+
+Thresholds that mean stop and look: any complaint at all in the first month;
+bounces above two percent of sends in any week. Resend's own dashboard shows
+the domain's rates; Google Postmaster Tools and Microsoft SNDS show what the
+two biggest receivers think, and both take a domain a day to set up.

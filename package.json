@@ -22,7 +22,8 @@
     "dev:login": "tsx --env-file-if-exists=.env.local scripts/dev-login.ts",
     "simulate:reply": "tsx --env-file-if-exists=.env.local scripts/simulate-venue-reply.ts",
     "db:push": "node --env-file-if-exists=.env.local node_modules/drizzle-kit/bin.cjs push",
-    "eval:classifier": "tsx scripts/eval-classifier.ts"
+    "eval:classifier": "tsx scripts/eval-classifier.ts",
+    "seed:demo": "tsx --env-file-if-exists=.env.local scripts/seed-demo.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.5",

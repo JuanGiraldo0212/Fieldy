@@ -441,3 +441,37 @@ verbatim from design-map §7. Differences, all logged:
     outings" onto two lines once Inbox arrived. Items are now `nowrap` and
     the row scrolls horizontally, bleeding to the page edge, with the
     scrollbar hidden. Same items, same pills, no second line.
+
+---
+
+## Slice 8 — ship it
+
+29. **Gap — "Try sending again" on the trip page.** Plan M6: "email send
+    failure shows on the trip and offers retry." The design has no failure
+    states. The amber banner from slice 4 gains one outlined button in its
+    own colours, disabled while the send runs, with the reason under it if
+    it fails again. Only drawn when there is somewhere to send to and
+    sending is switched on; otherwise the banner's text already says why.
+
+30. **Gap — `/privacy`.** Plan M6. One page, plain prose, the design's type
+    and spacing. Linked from the login card and the account page. Every
+    sentence on it is a promise the code keeps; see the page's own comment.
+
+31. **Deviation — the login form posts to a server action.** The magic-link
+    request used to go from the browser straight to Supabase. It now goes
+    through `login/actions.ts`, where our own per-address and per-client
+    limits sit in front of Supabase's. Same field, same copy, same
+    "check your email" state; the form also works without JavaScript now.
+
+32. **Responsive pass, 390 / 620 / 768.** Catalog, outing, plan, trip, My
+    trips, inbox, groups, account and privacy checked at 390; trip, My
+    trips and the catalog with the map at 620 and 768. Nothing needed
+    changing beyond slice 7's scrolling nav. At 390 the status rail's "They
+    answered" wraps to two lines under its dot, which is how the prototype
+    behaves at that width too.
+
+33. **Empty states, spec §6.** All present: the catalog's no-results panel
+    (slice 1), the four bucket empties and the Saved tab's three
+    suggestions (slices 4 and 7), the inbox's (slice 7), and the thread's
+    "Waiting for venue reply…" tail (slice 5), which is the "an empty thread
+    explains that the venue's reply will appear there" the spec asks for.
