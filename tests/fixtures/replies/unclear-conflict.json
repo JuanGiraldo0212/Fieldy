@@ -1,0 +1,22 @@
+{
+  "note": "A yes and a no of equal weight. Unclear is the safe failure.",
+  "sent_at": "2026-09-23T15:00:00Z",
+  "date_options": [
+    {
+      "date": "2026-10-14",
+      "slot": "morning",
+      "rank": 1
+    },
+    {
+      "date": "2026-10-16",
+      "slot": "either",
+      "rank": 2
+    }
+  ],
+  "body": "We can accommodate your group, but unfortunately not on those dates.",
+  "expected": {
+    "intent": "unclear",
+    "dates": null,
+    "time": null
+  }
+}

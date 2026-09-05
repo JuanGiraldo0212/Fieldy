@@ -1,0 +1,24 @@
+{
+  "note": "",
+  "sent_at": "2026-09-23T15:00:00Z",
+  "date_options": [
+    {
+      "date": "2026-10-14",
+      "slot": "morning",
+      "rank": 1
+    },
+    {
+      "date": "2026-10-16",
+      "slot": "either",
+      "rank": 2
+    }
+  ],
+  "body": "You're all set for Oct 14. Please arrive ten minutes early and park in the lower lot.",
+  "expected": {
+    "intent": "confirmed",
+    "dates": [
+      "2026-10-14"
+    ],
+    "time": null
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "note": "A no to one of our dates and a yes to the other is a yes to the other.",
+  "sent_at": "2026-09-23T15:00:00Z",
+  "date_options": [
+    {
+      "date": "2026-10-14",
+      "slot": "morning",
+      "rank": 1
+    },
+    {
+      "date": "2026-10-16",
+      "slot": "either",
+      "rank": 2
+    }
+  ],
+  "body": "Hi there,\n\nThe 14th is fully booked I'm afraid, but Friday the 16th works for us. Shall I hold it?\n\nMargaret",
+  "expected": {
+    "intent": "confirmed",
+    "dates": [
+      "2026-10-16"
+    ],
+    "time": null
+  }
+}

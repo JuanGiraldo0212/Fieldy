@@ -31,17 +31,19 @@ import { Checklist } from '@/components/trip/checklist'
 import { CostCard } from '@/components/trip/cost-card'
 import { NotesCard } from '@/components/trip/notes-card'
 import { StatusSelect } from '@/components/trip/status-select'
+import { SuggestionCard } from '@/components/trip/suggestion-card'
 import { Thread } from '@/components/trip/thread'
 import { ComposeBox } from '@/components/trip/compose-box'
 import { markThreadRead } from '@/lib/trips/read'
+import { acceptanceReply, openSuggestion } from '@/lib/trips/suggestion'
+import { formatTime } from '@/lib/classify/dates'
 
 /*
   The trip page. Spec §5.4, "the heart of the product".
 
-  What is here: header and status rail, dates, cost, checklist, the whole
-  conversation with its compose box, notes and the attendance helper. What is
-  not: the suggestion banner, which arrives with slice 6 along with the
-  classifier that produces it.
+  Header and status rail, the suggestion banner when a venue reply produced
+  one, dates, cost, checklist, the whole conversation with its compose box,
+  notes and the attendance helper.
 */
 
 const CATEGORY_ICONS: Record<string, React.ReactNode> = {
@@ -62,10 +64,13 @@ const SLOT_LABEL: Record<string, string> = {
 
 export default async function TripPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ tripId: string }>
+  searchParams: Promise<{ accept?: string }>
 }) {
   const { tripId } = await params
+  const { accept } = await searchParams
 
   const viewer = await getViewer()
   if (!viewer) redirect(`/login?next=${encodeURIComponent(`/trips/${tripId}`)}`)
@@ -108,6 +113,31 @@ export default async function TripPage({
      this venue, or a send that failed. Saying so plainly beats a page that
      looks like mail went out when none did. */
   const undelivered = request?.sendError ?? null
+
+  /*
+    The one banner this page may show: the newest venue reply's reading, if
+    it is not dismissed and not unclear. Never on a finished trip — a
+    "Mark confirmed" button on a cancelled trip is an invitation to undo a
+    decision by accident.
+  */
+  const suggested =
+    status === 'done' || status === 'cancelled' ? null : openSuggestion(messages)
+
+  /*
+    After "Move to {date}" the compose box opens with the acceptance written
+    (plan §5.6). Only when the date on the URL is the trip's date now, so a
+    stale link or a typed one pre-fills nothing.
+  */
+  const acceptDate =
+    accept && dates.length === 1 && dates[0]!.date === accept ? accept : null
+  const prefilled = acceptDate
+    ? acceptanceReply({
+        date: acceptDate,
+        childrenCount: t.childrenCount,
+        adultsCount: t.adultsCount,
+        name: viewer.name || '',
+      })
+    : ''
 
   return (
     <main className="mx-auto max-w-[940px] px-5 pt-5.5 pb-[70px]">
@@ -170,12 +200,25 @@ export default async function TripPage({
           <StatusRail status={status} />
         )}
 
+        {/* Keyed on the status, so a change made elsewhere on the page — the
+            suggestion banner — remounts the select with the new value rather
+            than leaving an uncontrolled control showing the old one. */}
         <StatusSelect
+          key={status}
           tripId={t.id}
           status={status}
           source={t.statusSource as 'system' | 'manual'}
         />
       </div>
+
+      {suggested?.suggestion ? (
+        <SuggestionCard
+          messageId={suggested.id}
+          suggestion={suggested.suggestion}
+          dateOptions={t.dateOptions}
+          similarHref={`/?cat=${encodeURIComponent(v.category)}`}
+        />
+      ) : null}
 
       {undelivered ? (
         <div className="bg-warn-tint border-warn-border mt-4 flex flex-wrap items-start gap-3 rounded-card-lg border px-5 py-4">
@@ -218,7 +261,7 @@ export default async function TripPage({
                 </div>
                 {t.confirmedTime ? (
                   <div className="text-meta text-text-muted mt-1">
-                    {t.confirmedTime}
+                    {formatTime(t.confirmedTime)}
                   </div>
                 ) : null}
               </div>
@@ -301,9 +344,11 @@ export default async function TripPage({
         ) : null}
 
         <ComposeBox
+          key={acceptDate ?? 'blank'}
           tripId={t.id}
           canSend={Boolean(t.venueEmail)}
           venueName={v.name}
+          initialBody={prefilled}
         />
       </section>
 

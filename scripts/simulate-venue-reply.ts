@@ -310,6 +310,7 @@ async function main() {
         attachments: message.attachments,
         body: message.body,
         notifyError: message.notifyError,
+        suggestion: message.suggestion,
       })
       .from(message)
       .where(eq(message.externalMessageId, emailId))
@@ -324,6 +325,11 @@ async function main() {
       )
       console.log(`  notify_error ${m.notifyError ?? 'none'}`)
       console.log(`  body         ${m.body.split('\n')[0]?.slice(0, 60)}…  (${m.body.length} chars stripped from ${text.length})`)
+      /* Slice 6. What the banner will say, or why there is none. */
+      const sg = m.suggestion
+      console.log(
+        `  suggestion   ${sg ? `${sg.intent}${sg.dates ? ' ' + sg.dates.join(', ') : ''}${sg.time ? ' at ' + sg.time : ''} (confidence ${sg.confidence}) — “${sg.evidence}”` : 'none — nothing in the reply to read'}`,
+      )
     }
 
     console.log(

@@ -1,0 +1,24 @@
+{
+  "note": "",
+  "sent_at": "2026-09-23T15:00:00Z",
+  "date_options": [
+    {
+      "date": "2026-10-14",
+      "slot": "morning",
+      "rank": 1
+    },
+    {
+      "date": "2026-10-16",
+      "slot": "either",
+      "rank": 2
+    }
+  ],
+  "body": "Confirmed for 14 Oct. Looking forward to hosting the Sunflower room!",
+  "expected": {
+    "intent": "confirmed",
+    "dates": [
+      "2026-10-14"
+    ],
+    "time": null
+  }
+}

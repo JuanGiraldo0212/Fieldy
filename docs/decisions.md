@@ -171,3 +171,67 @@ means a demo run spends none of the Free tier's hundred daily emails and cannot
 reach a real venue.
 
 Unset in production, where the SDK's own base URL applies.
+
+---
+
+## The classifier stores `unclear`, and returns `null` only for silence
+
+*Slice 6. `src/lib/classify/provider.ts`, `handleInbound` in `inbound.ts`.*
+
+Plan §5.5 gives the provider the signature `classify(input): Suggestion |
+null` with "null means no banner". Two different things can mean no banner:
+a reply that said nothing we can read ("How many adults are coming?"), and a
+reply that said something we could not decide ("We can accommodate you, but
+unfortunately not then"). Both draw nothing. Only the second is a reading.
+
+So `null` is reserved for the first — no phrase, no date, nothing scored —
+and the second is stored as `intent: unclear` with its evidence and
+confidence. A director looking at a message with no banner has the same
+experience either way; a developer looking at why a real reply drew nothing
+has the classifier's own account of it on the row rather than an empty
+column.
+
+## Zero false confirmations comes before recall
+
+*Slice 6. `src/lib/classify/rules.ts`, `tests/fixtures/replies/`.*
+
+Plan M5's target is "90 percent on confirmed and declined with zero false
+confirmations". The two pull against each other, and the second wins every
+time they meet.
+
+The asymmetry is in what each mistake costs. A confirmation we missed costs a
+director one read of a message she was going to read anyway. A confirmation
+we invented puts a "Mark confirmed" button under a reply that said no, and a
+director who trusts the product taps it, tells the parents, and books the bus.
+
+Three rules follow from that, each of which lost a fixture or two of recall:
+
+- **Weak confirms score half.** "Booked", "reserved", "that works" are said
+  about lunch rooms and parking as often as about the visit. Alone, they never
+  reach the no-date confirmation; they need one of the trip's own dates beside
+  them or a full-weight phrase like "we have you down".
+- **A bare weekday is never an offer.** chrono resolves "Thursday" to the
+  next one, which is its guess and not the venue's. It can match one of our
+  options on that weekday, and nothing else.
+- **Equal signals are unclear**, not a coin toss. "We can accommodate you but
+  unfortunately not then" is probably a decline. Probably is not enough for a
+  button.
+
+The eval fixtures encode the accepted misses as expected `unclear`, so the
+suite is green at 34 of 34 rather than "89 percent and we know which ones".
+When a real reply reads wrong, it becomes a fixture first and a phrase second.
+
+## The classifier runs inline, not as a job
+
+*Slice 6. `handleInbound` in `src/lib/email/inbound.ts`.*
+
+Plan §5.5 names a job, `message.classify`. There is no queue in this build
+and the classifier is deterministic, offline and takes single-digit
+milliseconds, so it runs inside the webhook's transaction and the suggestion
+is written with the message row. A job would add a moment in which the
+message exists without its reading, a retry path for something that cannot
+fail transiently, and nothing else.
+
+If a model-backed provider ever replaces the rules (plan §5.5 leaves the door
+open with the `SuggestionProvider` interface), that provider is slow and
+fallible and the job comes back. The seam is one call.

@@ -1,0 +1,24 @@
+{
+  "note": "",
+  "sent_at": "2026-09-23T15:00:00Z",
+  "date_options": [
+    {
+      "date": "2026-10-14",
+      "slot": "morning",
+      "rank": 1
+    },
+    {
+      "date": "2026-10-16",
+      "slot": "either",
+      "rank": 2
+    }
+  ],
+  "body": "Unfortunately the 14th is not available. The 15th is free if that works?",
+  "expected": {
+    "intent": "proposed_dates",
+    "dates": [
+      "2026-10-15"
+    ],
+    "time": null
+  }
+}
