@@ -329,16 +329,13 @@ export default async function TripPage({
           ) : null}
         </div>
 
-        {/* The chat ground. One tinted pane behind the whole exchange, so the
+        {/* The chat ground. One grey pane behind the whole exchange, so the
             white and blue bubbles inside it read as two sides of a
             conversation rather than as cards on the page. */}
-        <div className="bg-brand-tint rounded-card-lg px-4 py-4">
+        <div className="bg-chat-ground rounded-card-lg px-4 py-4">
           <Thread
             messages={messages}
-            dateOptions={t.dateOptions}
-            asks={t.asks}
             waitingOnVenue={who === 'venue' && !undelivered}
-            undelivered={Boolean(undelivered)}
           />
 
           {undelivered ? (

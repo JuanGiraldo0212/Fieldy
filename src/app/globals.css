@@ -69,6 +69,14 @@
      reading once, not a warning. */
   --color-relay-tint: #fff9e9;
 
+  /* The thread, read as a chat. A grey-blue ground so a white bubble reads as
+     a bubble; a light blue fill for the venue's side, deep enough to tell the
+     two sides apart at a glance and light enough to take the page's own ink
+     rather than white text. */
+  --color-chat-ground: #eef2f7;
+  --color-chat-them: #d3e4fb;
+  --color-chat-them-border: #bad4f7;
+
   /* The disabled primary button, from the prototype's compose bar. A fill and
      an ink that read as "not yet", without looking broken. */
   --color-disabled: #e8eff7;

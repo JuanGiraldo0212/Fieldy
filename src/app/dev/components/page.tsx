@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation'
 import { AttachmentChip, Thread, type ThreadMessage } from '@/components/trip/thread'
 import { ComposeBox } from '@/components/trip/compose-box'
 import { SuggestionCard } from '@/components/trip/suggestion-card'
-import type { Ask, DateOption, Suggestion } from '@/lib/schemas'
+import type { DateOption, Suggestion } from '@/lib/schemas'
 import { Skeleton } from '@/components/ui'
 
 /*
@@ -27,21 +27,6 @@ const EARLIER = new Date('2026-09-22T09:14:00Z')
 const DATE_OPTIONS: DateOption[] = [
   { date: '2026-10-14', slot: 'morning', rank: 1 },
   { date: '2026-10-16', slot: 'either', rank: 2 },
-]
-
-const ASKS: Ask[] = [
-  {
-    key: 'fact:Washrooms',
-    label: 'Washrooms',
-    question: 'Where are the closest washrooms to the program space?',
-    source: 'gap',
-  },
-  {
-    key: 'fact:Lunch',
-    label: 'Lunch space',
-    question: 'Is there somewhere we can use for lunch?',
-    source: 'gap',
-  },
 ]
 
 function suggestion(over: Partial<Suggestion> = {}): Suggestion {
@@ -148,14 +133,11 @@ export default async function ComponentGallery() {
 
       <Section
         title="Thread — the ordinary run"
-        note="Request card, an educator follow-up, a venue reply carrying the Newest reply mark, and the waiting tail."
+        note="The opening request, an educator follow-up, a venue reply carrying the Newest reply mark, and the waiting tail."
       >
-        <div className="bg-brand-tint rounded-card-lg px-4 py-4">
+        <div className="bg-chat-ground rounded-card-lg px-4 py-4">
           <Thread
-            dateOptions={DATE_OPTIONS}
-            asks={ASKS}
             waitingOnVenue
-            undelivered={false}
             messages={[
               msg({
                 id: 'a',
@@ -187,12 +169,9 @@ export default async function ComponentGallery() {
         title="Thread — unread, attachments, a system event"
         note="The unread dot stays until the page is viewed. A chip with no link is an attachment whose bytes we could not fetch — it still names the file."
       >
-        <div className="bg-brand-tint rounded-card-lg px-4 py-4">
+        <div className="bg-chat-ground rounded-card-lg px-4 py-4">
           <Thread
-            dateOptions={DATE_OPTIONS}
-            asks={ASKS}
             waitingOnVenue={false}
-            undelivered={false}
             messages={[
               msg({
                 id: 'd',
@@ -228,12 +207,9 @@ export default async function ComponentGallery() {
         title="Thread — the request never left"
         note="No venue is being slow, because nobody was written to. The failure sits on the message rather than on the page."
       >
-        <div className="bg-brand-tint rounded-card-lg px-4 py-4">
+        <div className="bg-chat-ground rounded-card-lg px-4 py-4">
           <Thread
-            dateOptions={DATE_OPTIONS}
-            asks={ASKS}
             waitingOnVenue={false}
-            undelivered
             messages={[
               msg({
                 id: 'f',
