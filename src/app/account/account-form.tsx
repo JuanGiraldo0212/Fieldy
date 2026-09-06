@@ -5,6 +5,7 @@ import { CircleCheck } from 'lucide-react'
 import { saveAccount, type AccountState } from './actions'
 import { cx } from '@/components/ui'
 import { AddressField } from '@/components/ui/address-field'
+import { CENTRE_TYPES, ROLES } from '@/lib/roles'
 
 /*
   The account screen. spec §5.10.
@@ -13,21 +14,6 @@ import { AddressField } from '@/components/ui/address-field'
   mail in her name, and she should understand exactly what that means before it
   happens, not after a venue replies to an address she does not recognise.
 */
-
-const ROLES: [string, string][] = [
-  ['director', 'Director'],
-  ['ece', 'ECE'],
-  ['teacher', 'Teacher'],
-  ['other', 'Other'],
-]
-
-const CENTRE_TYPES: [string, string][] = [
-  ['daycare_preschool', 'Daycare or preschool'],
-  ['elementary', 'Elementary'],
-  ['middle', 'Middle school'],
-  ['secondary', 'Secondary'],
-  ['other', 'Other'],
-]
 
 /* Which rates a centre sees, and why. The design's own copy. */
 const TYPE_NOTE: Record<string, string> = {
@@ -43,18 +29,22 @@ export function AccountForm({
   name,
   email,
   role,
+  roleOther,
   phone,
   centreName,
   centreType,
+  centreTypeOther,
   address,
   notifications,
 }: {
   name: string
   email: string
   role: string
+  roleOther: string
   phone: string
   centreName: string
   centreType: string
+  centreTypeOther: string
   address: string
   notifications: boolean
 }) {
@@ -105,6 +95,21 @@ export function AccountForm({
               </Pill>
             ))}
           </div>
+          {/* "Other" is a pill like any other until it is picked, and then it
+              is a question. Unmounting the input when she picks something else
+              is deliberate: the field is not submitted, so the stored text is
+              cleared server-side rather than lingering behind a role she no
+              longer has. */}
+          {pickedRole === 'other' ? (
+            <input
+              name="roleOther"
+              defaultValue={roleOther}
+              maxLength={120}
+              placeholder="What is your role called?"
+              aria-label="What is your role called?"
+              className={cx(field, 'mt-2')}
+            />
+          ) : null}
         </div>
 
         <div>
@@ -116,6 +121,16 @@ export function AccountForm({
               </Pill>
             ))}
           </div>
+          {pickedType === 'other' ? (
+            <input
+              name="centreTypeOther"
+              defaultValue={centreTypeOther}
+              maxLength={120}
+              placeholder="What kind of centre is it?"
+              aria-label="What kind of centre is it?"
+              className={cx(field, 'mt-2')}
+            />
+          ) : null}
           <p className="text-meta text-text-muted mt-2 leading-normal">
             {TYPE_NOTE[pickedType]}
           </p>

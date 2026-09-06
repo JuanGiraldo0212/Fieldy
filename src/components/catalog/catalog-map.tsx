@@ -1,7 +1,7 @@
 'use client'
 
 import 'leaflet/dist/leaflet.css'
-import L from 'leaflet'
+import type * as Leaflet from 'leaflet'
 import { useEffect, useRef } from 'react'
 
 /*
@@ -15,6 +15,18 @@ import { useEffect, useRef } from 'react'
 
   One pin per distinct venue coordinate. Programs that come to you have no pin,
   because there is nowhere to put one.
+
+  Leaflet is imported INSIDE the effect, not at the top of the file. It reads
+  `window` while its own module is evaluating, so a static import cannot be
+  evaluated on the server at all — and "use client" does not save it, because a
+  client component is still prerendered. That threw during SSR and every page
+  rendering a map answered 500 while streaming perfectly good HTML, which is
+  why the pages looked fine and only the server log knew. `ssr: false` is the
+  usual answer and is not available to us: both callers are Server Components,
+  where next/dynamic rejects it (next/dist/docs/01-app/02-guides/lazy-loading).
+
+  The type import above is erased at compile time, so it costs no evaluation.
+  The stylesheet is inert on the server and stays at the top.
 */
 
 export type MapPin = {
@@ -27,7 +39,7 @@ export type MapPin = {
 const HOME_COLOR = '#16202B' // --color-map-pin-home
 const VENUE_COLOR = '#1668D6' // --color-map-pin-venue
 
-function pinIcon(color: string, glyph: string) {
+function pinIcon(L: typeof Leaflet, color: string, glyph: string) {
   return L.divIcon({
     html: `<div style="
       display:flex;align-items:center;justify-content:center;
@@ -53,56 +65,67 @@ export function CatalogMap({
   pins: MapPin[]
 }) {
   const ref = useRef<HTMLDivElement>(null)
-  const mapRef = useRef<L.Map | null>(null)
+  const mapRef = useRef<Leaflet.Map | null>(null)
 
   useEffect(() => {
     if (!ref.current || mapRef.current) return
 
-    const map = L.map(ref.current, {
-      scrollWheelZoom: false, // the page scrolls; the map should not steal it
-      zoomControl: true,
-    })
-    mapRef.current = map
+    /* The import is a promise, so this effect can be cleaned up before Leaflet
+       has arrived. `cancelled` covers that window: without it a fast unmount
+       leaves a map bound to a detached node and nothing left to remove it. */
+    let cancelled = false
 
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors',
-      maxZoom: 19,
-    }).addTo(map)
+    void import('leaflet').then(({ default: L }) => {
+      const el = ref.current
+      if (cancelled || !el || mapRef.current) return
 
-    const points: [number, number][] = []
+      const map = L.map(el, {
+        scrollWheelZoom: false, // the page scrolls; the map should not steal it
+        zoomControl: true,
+      })
+      mapRef.current = map
 
-    L.marker([home.lat, home.lng], { icon: pinIcon(HOME_COLOR, '◉') })
-      .addTo(map)
-      .bindPopup(`<b>You start here</b><br>${homeLabel}`)
-    points.push([home.lat, home.lng])
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors',
+        maxZoom: 19,
+      }).addTo(map)
 
-    for (const p of pins) {
-      L.marker([p.lat, p.lng], { icon: pinIcon(VENUE_COLOR, '★') })
+      const points: [number, number][] = []
+
+      L.marker([home.lat, home.lng], { icon: pinIcon(L, HOME_COLOR, '◉') })
         .addTo(map)
-        .bindPopup(`<b>${p.name}</b>${p.caption ? `<br>${p.caption}` : ''}`)
-      points.push([p.lat, p.lng])
-    }
+        .bindPopup(`<b>You start here</b><br>${homeLabel}`)
+      points.push([home.lat, home.lng])
 
-    /* A dashed line only when there is exactly one venue to draw it to.
-       With twenty pins it would be a scribble. */
-    if (pins.length === 1 && pins[0]) {
-      L.polyline(
-        [
-          [home.lat, home.lng],
-          [pins[0].lat, pins[0].lng],
-        ],
-        { color: VENUE_COLOR, weight: 2, dashArray: '6 6', opacity: 0.8 },
-      ).addTo(map)
-    }
+      for (const p of pins) {
+        L.marker([p.lat, p.lng], { icon: pinIcon(L, VENUE_COLOR, '★') })
+          .addTo(map)
+          .bindPopup(`<b>${p.name}</b>${p.caption ? `<br>${p.caption}` : ''}`)
+        points.push([p.lat, p.lng])
+      }
 
-    if (points.length > 1) {
-      map.fitBounds(points, { padding: [46, 46], maxZoom: 15 })
-    } else {
-      map.setView(points[0] ?? [48.4284, -123.3656], 13)
-    }
+      /* A dashed line only when there is exactly one venue to draw it to.
+         With twenty pins it would be a scribble. */
+      if (pins.length === 1 && pins[0]) {
+        L.polyline(
+          [
+            [home.lat, home.lng],
+            [pins[0].lat, pins[0].lng],
+          ],
+          { color: VENUE_COLOR, weight: 2, dashArray: '6 6', opacity: 0.8 },
+        ).addTo(map)
+      }
+
+      if (points.length > 1) {
+        map.fitBounds(points, { padding: [46, 46], maxZoom: 15 })
+      } else {
+        map.setView(points[0] ?? [48.4284, -123.3656], 13)
+      }
+    })
 
     return () => {
-      map.remove()
+      cancelled = true
+      mapRef.current?.remove()
       mapRef.current = null
     }
   }, [home, homeLabel, pins])

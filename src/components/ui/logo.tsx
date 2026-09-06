@@ -23,7 +23,7 @@ const RAYS = [
 ]
 
 export function SunMark({
-  size = 34,
+  size = 38,
   className,
 }: {
   size?: number
@@ -67,7 +67,7 @@ export function SunMark({
   token so the two stay in proportion wherever this sits.
 */
 export function Logo({
-  size = 34,
+  size = 38,
   className,
 }: {
   size?: number

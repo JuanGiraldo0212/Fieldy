@@ -32,10 +32,13 @@ export async function TopNav() {
   return (
     <header className="border-border sticky top-0 z-40 border-b bg-[rgb(255_255_255_/_0.96)] backdrop-blur-[8px]">
       <div className="mx-auto flex max-w-page flex-wrap items-center gap-4 px-5 py-3.5">
-        <Link href="/" className="flex items-center gap-2 no-underline">
+        {/* The region sits UNDER the lockup and centred on it, not beside it.
+            Beside the wordmark it read as the second half of the name; under
+            it, it reads as what it is — where Fieldy currently covers. */}
+        <Link href="/" className="flex flex-col items-center gap-0.5 no-underline">
           <Logo />
           <span className="text-label text-text-muted tracking-[0.04em] uppercase">
-            Greater Victoria
+            Vancouver Island
           </span>
         </Link>
 

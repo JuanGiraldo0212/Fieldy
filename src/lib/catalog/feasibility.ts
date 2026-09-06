@@ -105,14 +105,15 @@ export function feasibility(
      First match wins: one age reason at most, because two overlapping
      complaints about the same fact read as noise.
 
-     The grade case IS a known mismatch, not a missing fact. The venue did
-     publish its range — in units that cannot answer the question this room is
-     asking. A grades 2 to 12 program may well not take three-year-olds, and
-     that is worth checking before anyone plans a day around it.
+     Grades are never converted to years, here or anywhere. A grade-published
+     program is compared against a grade, or not at all — never against a guess
+     that "K to 3" means "5 to 9".
 
-     Grades are never converted to years, here or anywhere. Flag the mismatch
-     and tell the director to phone, rather than guessing that "K to 3" means
-     "5 to 9" and then quietly filtering on the guess.
+     A pre-school room looking at a grade-published program therefore raises
+     nothing. It used to raise "ages are set by grade here, not years — phone
+     to confirm they take under-fives", which fired on every grade program a
+     daycare saw and amounted to a permanent amber badge on half the catalog.
+     Until we can say something sharper than "phone and ask", say nothing.
 
      An unpublished youngest age raises nothing: the card already says "Ages
      not published", and it becomes an ask on the request. */
@@ -134,10 +135,6 @@ export function feasibility(
         `written for up to ${gradeName(program.gradeMax)}, yours are ${gradeName(grade)}`,
       )
     }
-  } else if (program.ageBasis === 'grades' && group.ageMax <= 5) {
-    reasons.push(
-      'ages are set by grade here, not years — phone to confirm they take under-fives',
-    )
   } else if (program.ageMinYears != null && program.ageMinYears > group.ageMin) {
     reasons.push(
       `built for ${program.ageMinYears}+, your youngest are ${group.ageMin}`,

@@ -332,8 +332,22 @@ export function decorate(
     heroAlt: heroes.get(row.venueId)?.alt ?? null,
     initials: initialsOf(row.venueName),
     transport: state.transport,
-    showRateFlag: row.schoolRateOnly,
+    showRateFlag: row.schoolRateOnly && underFives(state.age_bands),
   }
+}
+
+/*
+  Whether the selection is a pre-school room — the "1 to 3" or "3 to 5" bands,
+  the two AGE_BANDS entries that carry no grade.
+
+  This gates the "School rate — daycares are quoted separately" flag. A school
+  rate is only bad news to someone who cannot pay it; shown to a Grade 3 class
+  it is a warning about a price they are in fact entitled to, on every card.
+  A mixed selection still counts: if any part of the group is under school age,
+  the quote is still not the one on the page.
+*/
+export function underFives(bands: number[]): boolean {
+  return usableBands(bands).some((i) => AGE_BANDS[i]![3] == null)
 }
 
 export function effectiveAgeRange(bands: number[]): { min: number; max: number } {

@@ -161,20 +161,11 @@ export function leadLabel(days: number | null): string {
   return `${days} days ahead`
 }
 
-export function bookingLabel(
-  method: string | null,
-  email: string | null,
-  url: string | null,
-  phone: string | null,
-): string {
-  const contact = email ?? url ?? phone
-  if (!method && !contact) return 'Not published'
-  const m: Record<string, string> = {
-    email: 'Email',
-    phone: 'Phone',
-    web_form: 'Web form',
-    shop: 'Book online',
-  }
-  const label = method ? (m[method] ?? method) : 'Contact'
-  return contact ? `${label} · ${contact}` : label
-}
+/*
+  The "Book by" tile used to carry a second line naming the venue's own booking
+  channel — "Email · bookings@example.ca". It is gone on purpose. Fieldy sends
+  the request and takes the reply, so handing a director an address to write to
+  herself contradicts the promise made two panels lower, and the stored contact
+  is not reliably the method it is filed under: a program marked `email` was
+  showing "Email · 250-655-3300". The tile now says only how far ahead to book.
+*/

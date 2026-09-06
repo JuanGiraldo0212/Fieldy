@@ -6,13 +6,16 @@ import { z } from 'zod'
 import { account, centre, db } from '@/db'
 import { getViewer } from '@/lib/auth'
 import { geocodeAddress, pickedPoint } from '@/lib/catalog/geocode'
+import { CENTRE_TYPE_VALUES, ROLE_VALUES, otherText } from '@/lib/roles'
 
 const schema = z.object({
   name: z.string().trim().min(1, 'We need your name for the request signature.').max(120),
-  role: z.enum(['ece', 'director', 'teacher', 'other']),
+  role: z.enum(ROLE_VALUES),
+  roleOther: z.string().trim().max(120).optional(),
   phone: z.string().trim().max(40).optional(),
   centreName: z.string().trim().min(1, 'What is the centre called?').max(200),
-  centreType: z.enum(['daycare_preschool', 'elementary', 'middle', 'secondary', 'other']),
+  centreType: z.enum(CENTRE_TYPE_VALUES),
+  centreTypeOther: z.string().trim().max(120).optional(),
   address: z.string().trim().min(1, 'We measure every distance from here.').max(300),
   notifications: z.coerce.boolean(),
 })
@@ -29,9 +32,11 @@ export async function saveAccount(
   const parsed = schema.safeParse({
     name: formData.get('name'),
     role: formData.get('role'),
+    roleOther: formData.get('roleOther') ?? '',
     phone: formData.get('phone') ?? '',
     centreName: formData.get('centreName'),
     centreType: formData.get('centreType'),
+    centreTypeOther: formData.get('centreTypeOther') ?? '',
     address: formData.get('address'),
     notifications: formData.get('notifications') === 'on',
   })
@@ -74,6 +79,7 @@ export async function saveAccount(
       .set({
         name: d.centreName,
         type: d.centreType,
+        typeOther: otherText(d.centreType, d.centreTypeOther ?? null),
         address: d.address,
         lat: point.lat,
         lng: point.lng,
@@ -85,6 +91,7 @@ export async function saveAccount(
       .set({
         name: d.name,
         role: d.role,
+        roleOther: otherText(d.role, d.roleOther ?? null),
         phone: d.phone || null,
         emailNotifications: d.notifications,
       })
