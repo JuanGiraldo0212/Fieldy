@@ -475,3 +475,11 @@ verbatim from design-map §7. Differences, all logged:
     suggestions (slices 4 and 7), the inbox's (slice 7), and the thread's
     "Waiting for venue reply…" tail (slice 5), which is the "an empty thread
     explains that the venue's reply will appear there" the spec asks for.
+
+34. **Deviation — the catalog shows forty cards, then "Show the other N
+    outings".** The prototype lists every result. Signed out, that is every
+    program in the region at once, and Lighthouse mobile scored 74 on the
+    page's own weight (11,400 DOM nodes). The first forty render; the link
+    below carries the search state in the URL and works without JavaScript.
+    A director with a room set up rarely has more than thirty results and
+    never sees the link. The map's library also loads only with the map.
