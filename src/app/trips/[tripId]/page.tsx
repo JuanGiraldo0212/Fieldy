@@ -238,7 +238,7 @@ export default async function TripPage({
                   ? `It was addressed to ${t.venueEmail}. Nothing is lost, so it can go out once that is sorted.`
                   : `We will send it to ${t.venueEmail} as soon as sending is switched on.`}
             </p>
-            {t.venueEmail && sendingConfigured() ? (
+            {t.venueEmail && sendingConfigured() && status !== 'cancelled' && status !== 'done' ? (
               <RetryRequestButton tripId={t.id} />
             ) : null}
           </div>
