@@ -21,11 +21,11 @@ import { CheckRow, Field, FieldBox } from '@/components/ui'
   hides the field it belongs to, and no way to see the choice without opening
   it. This is the same checkbox row the filter drawer uses, in a popover under
   the field, with the field itself carrying the summary.
-*/
 
-/* The two pre-school bands carry no grade; everything from Kindergarten up
-   does. Splitting them under headings keeps fifteen rows scannable. */
-const FIRST_SCHOOL_BAND = AGE_BANDS.findIndex((b) => b[3] != null)
+  One flat list, no headings. The bands are already in age order and each row
+  says what it is, so a "Before school" / "School" split only added two lines
+  of chrome between a director and the row she came for.
+*/
 
 function gradeLabel(grade: number): string {
   return grade === 0 ? 'K' : String(grade)
@@ -94,16 +94,6 @@ export function AgeBandSelect({
     )
   }
 
-  const rows = (from: number, to: number) =>
-    AGE_BANDS.slice(from, to).map((b, n) => {
-      const i = from + n
-      return (
-        <CheckRow key={b[2]} checked={value.includes(i)} onChange={() => toggle(i)}>
-          {b[2]}
-        </CheckRow>
-      )
-    })
-
   return (
     <Field label="Age / Grade">
       <div ref={wrap} className="relative">
@@ -136,14 +126,11 @@ export function AgeBandSelect({
                phone once the field itself is on screen. */
             className="border-border-strong bg-surface shadow-card absolute top-[calc(100%+6px)] right-0 left-0 z-30 max-h-[min(60vh,340px)] overflow-y-auto rounded-control border p-3"
           >
-            <div className="text-label text-text-faint mb-1 font-bold uppercase">
-              Before school
-            </div>
-            {rows(0, FIRST_SCHOOL_BAND)}
-            <div className="text-label text-text-faint mt-2.5 mb-1 font-bold uppercase">
-              School
-            </div>
-            {rows(FIRST_SCHOOL_BAND, AGE_BANDS.length)}
+            {AGE_BANDS.map((b, i) => (
+              <CheckRow key={b[2]} checked={value.includes(i)} onChange={() => toggle(i)}>
+                {b[2]}
+              </CheckRow>
+            ))}
           </div>
         ) : null}
       </div>
