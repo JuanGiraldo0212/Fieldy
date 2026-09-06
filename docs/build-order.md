@@ -302,9 +302,12 @@ build) runs on every push. The e2e job needs `E2E_DATABASE_URL`,
 repository secrets and skips without them — a session cookie lasts an hour,
 so that secret is a real limitation until a test account can mint its own.
 
-**Not done: Lighthouse.** No run was made here; the pane cannot host one and
-a headless run against a dev server would not measure the deployed build.
-Run it against the Vercel preview URL.
+**Lighthouse.** Measured on www.fieldy.ca on 6 September, mobile, signed out:
+performance 74 before #10, **91** after — the catalog now arrives with forty
+cards and loads the rest on scroll, and Leaflet loads only with the map.
+Accessibility 96 (the mood chips' ink-on-tint contrast, the design's own
+colours), best practices 100, SEO 100. Preview deployments are behind
+Vercel's SSO, so measure a branch with `pnpm build && next start` locally.
 
 **Also not done, and not started:** the two Resend unknowns from slice 5
 (the inbound size cap, reply-all quota accounting) still want a real venue
