@@ -113,8 +113,7 @@ export function CostCard({
           : 'Nothing entered yet.'}
         {total.incomplete && anyKnown ? (
           <span className="text-warn ml-1 font-semibold">
-            Some of this is still blank, so the total is a floor rather than the
-            answer.
+            Some of this is still blank, so the real total will be higher.
           </span>
         ) : null}
       </div>

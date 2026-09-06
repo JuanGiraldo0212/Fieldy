@@ -487,3 +487,15 @@ verbatim from design-map §7. Differences, all logged:
     spot is a link that reloads the search with everything shown. A director
     with a room set up rarely has more than thirty results and sees none of
     this. The map's library also loads only with the map.
+
+35. **Deviation — the thread is a chat, against spec §6.** Spec §6 says
+    "Educator and venue messages align the same way, distinguished by avatar.
+    This is a shared record, not a chat bubble app." On the product owner's
+    instruction it is now a chat: one light blue pane behind the exchange,
+    the centre's messages right-aligned in white, the venue's left-aligned
+    in brand blue. The avatar, the name and the timestamp still sit above
+    every message, so the identity the spec was protecting is still on the
+    page — what changed is that the side and the colour now say it first.
+    The opening request keeps its full-width summary card, system events
+    keep their thin rules, and "Newest reply" became a ring around the
+    bubble because the fill is now carrying which side spoke.

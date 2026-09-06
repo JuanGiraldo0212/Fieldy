@@ -3,6 +3,7 @@ import { signedUrl } from '@/lib/email/storage'
 import type { Attachment } from '@/lib/schemas'
 import { requestAskLine, requestDateLine, shortDate } from '@/lib/trips/asks'
 import type { Ask, DateOption } from '@/lib/schemas'
+import { cx } from '@/components/ui'
 import { FullMessage } from './full-message'
 
 /*
@@ -14,10 +15,11 @@ import { FullMessage } from './full-message'
   - The **opening request** is a summary card, not a wall of text. A director
     who wrote it does not need to re-read it; she needs to see at a glance what
     she asked and when.
-  - **Messages** — hers and the venue's — are the record. Spec §6: "Educator and
-    venue messages align the same way, distinguished by avatar. This is a
-    shared record, not a chat bubble app." So no left/right, no tails, no
-    colour-coded sides.
+  - **Messages** — hers and the venue's — are the record, laid out as a chat:
+    hers on the right in white, the venue's on the left in blue, on the pane's
+    light blue ground. This departs from spec §6 ("align the same way … not a
+    chat bubble app") on the product owner's instruction; the avatar and the
+    name still carry the identity, so nothing that was doing work was dropped.
   - **System events** are thin grey rules. Lighter than a message, because
     nobody said them.
 
@@ -120,7 +122,7 @@ function RequestCard({
   return (
     <div
       id={`msg-${m.id}`}
-      className="bg-surface-3 flex gap-4 rounded-thumb px-5 py-4.5 scroll-mt-24"
+      className="bg-surface flex gap-4 rounded-thumb px-5 py-4.5 scroll-mt-24"
     >
       <span
         aria-hidden
@@ -143,7 +145,7 @@ function RequestCard({
         <div className="text-body-sm text-text-strong mt-0.5">
           {requestAskLine(asks)}
         </div>
-        <div className="bg-surface text-body-sm text-text mt-3 rounded-control px-4 py-3.5 leading-relaxed whitespace-pre-wrap">
+        <div className="bg-surface-3 text-body-sm text-text mt-3 rounded-control px-4 py-3.5 leading-relaxed whitespace-pre-wrap">
           {m.body}
         </div>
       </div>
@@ -162,32 +164,37 @@ function MessageRow({
   newest: boolean
   links: Map<string, string | null>
 }) {
-  const unread = m.party === 'venue' && m.readAt == null
   const venue = m.party === 'venue'
+  const unread = venue && m.readAt == null
 
   return (
     <div
       id={`msg-${m.id}`}
-      className={
-        newest
-          ? 'border-brand-tint bg-brand-tint/35 mt-3 flex gap-4 rounded-thumb border px-5 py-4.5 scroll-mt-24'
-          : 'mt-3 flex gap-4 rounded-thumb px-5 py-4.5 scroll-mt-24'
-      }
+      className={cx(
+        'mt-3 flex gap-2.5 scroll-mt-24',
+        venue ? 'justify-start' : 'flex-row-reverse',
+      )}
     >
       <span
         aria-hidden
-        className={
+        className={cx(
+          'text-body-sm flex h-9 w-9 flex-none items-center justify-center rounded-pill font-bold',
           venue
-            ? 'bg-success-tint text-success text-body-sm flex h-10 w-10 flex-none items-center justify-center rounded-pill font-bold'
-            : 'bg-brand-tint-2 text-brand text-body-sm flex h-10 w-10 flex-none items-center justify-center rounded-pill font-bold'
-        }
+            ? 'bg-success-tint text-success'
+            : 'border-border bg-surface text-brand border',
+        )}
       >
         {initials(m.authorName)}
       </span>
 
-      <div className="min-w-0 flex-1">
-        <div className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
-          <span className="text-body font-bold">{m.authorName}</span>
+      <div className="min-w-0 max-w-[78%]">
+        <div
+          className={cx(
+            'flex flex-wrap items-baseline gap-x-2.5 gap-y-1',
+            !venue && 'flex-row-reverse',
+          )}
+        >
+          <span className="text-body-sm font-bold">{m.authorName}</span>
           <span className="text-meta text-text-faint">{when(m.sentAt)}</span>
           {unread ? (
             <span
@@ -196,39 +203,54 @@ function MessageRow({
             />
           ) : null}
           {newest ? (
-            <span className="bg-brand-tint text-brand text-label ml-auto rounded-pill px-2.5 py-1 font-bold">
+            <span className="bg-surface text-brand text-label rounded-pill px-2.5 py-1 font-bold">
               Newest reply
             </span>
           ) : null}
         </div>
 
-        {m.sendError ? (
-          <div className="text-meta text-warn mt-1.5 font-semibold">
-            {m.sendError} It has not reached the venue.
-          </div>
-        ) : null}
+        {/* The bubble. The clipped corner points at its own avatar, which is
+            what tells the two sides apart at a glance on a narrow phone where
+            the width difference is small. */}
+        <div
+          className={cx(
+            'mt-1.5 rounded-card px-4 py-3',
+            venue
+              ? 'bg-brand rounded-tl-check text-white'
+              : 'bg-surface text-text rounded-tr-check',
+            /* Spec §5.4.5's highlight on the newest reply. A ring rather than a
+               fill, because the fill is now carrying which side spoke. */
+            newest && 'ring-brand-solid ring-offset-brand-tint ring-2 ring-offset-2',
+          )}
+        >
+          {m.sendError ? (
+            <div className="text-meta text-warn mb-1.5 font-semibold">
+              {m.sendError} It has not reached the venue.
+            </div>
+          ) : null}
 
-        <div className="text-body-sm text-text mt-2 leading-relaxed whitespace-pre-wrap">
-          {m.body}
+          <div className="text-body-sm leading-relaxed whitespace-pre-wrap">
+            {m.body}
+          </div>
+
+          {/* Only when there is genuinely more to see. A toggle that expands to
+              the same text is a toggle nobody trusts a second time. */}
+          {m.bodyFull && m.bodyFull.trim() !== m.body.trim() ? (
+            <FullMessage full={m.bodyFull} onBrand={venue} />
+          ) : null}
+
+          {m.attachments.length > 0 ? (
+            <div className="mt-3 flex flex-wrap gap-2">
+              {m.attachments.map((a) => (
+                <AttachmentChip
+                  key={a.url}
+                  attachment={a}
+                  href={links.get(a.url) ?? null}
+                />
+              ))}
+            </div>
+          ) : null}
         </div>
-
-        {/* Only when there is genuinely more to see. A toggle that expands to
-            the same text is a toggle nobody trusts a second time. */}
-        {m.bodyFull && m.bodyFull.trim() !== m.body.trim() ? (
-          <FullMessage full={m.bodyFull} />
-        ) : null}
-
-        {m.attachments.length > 0 ? (
-          <div className="mt-3 flex flex-wrap gap-2">
-            {m.attachments.map((a) => (
-              <AttachmentChip
-                key={a.url}
-                attachment={a}
-                href={links.get(a.url) ?? null}
-              />
-            ))}
-          </div>
-        ) : null}
       </div>
     </div>
   )
