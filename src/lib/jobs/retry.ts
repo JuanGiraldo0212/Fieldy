@@ -1,4 +1,4 @@
-import { and, eq, gt, isNotNull, sql } from 'drizzle-orm'
+import { and, eq, gt, isNotNull, notInArray, sql } from 'drizzle-orm'
 import { centre, db, message, trip } from '@/db'
 import { notifyVenueReply } from '@/lib/email/notify'
 import { sendingConfigured, sendRelayMessage } from '@/lib/email/send'
@@ -75,6 +75,12 @@ async function retrySends(): Promise<{ attempted: number; recovered: number }> {
         isNotNull(message.sendError),
         eq(message.party, 'educator'),
         isNotNull(trip.venueEmail),
+        /* A request for a trip the director has since cancelled, or been
+           on, must never leave. The venue would receive a booking request
+           for a visit that no longer exists, from a sender who has no idea
+           it went out. Found the hard way: a cancelled test trip's request
+           sat here for three days waiting for a working API key. */
+        notInArray(trip.status, ['done', 'cancelled']),
         recentEnough(),
       ),
     )

@@ -613,6 +613,9 @@ export async function retryRequest(
   if (!row) return { error: 'That trip is not one of yours.' }
   const { message: m, trip: t, centre: c } = row
   if (!m.sendError) return { ok: true }
+  if (t.status === 'cancelled' || t.status === 'done') {
+    return { error: 'This trip is over, so the request will not be sent.' }
+  }
   if (!t.venueEmail) {
     return { error: 'This venue publishes no booking email, so there is nowhere to send it.' }
   }
