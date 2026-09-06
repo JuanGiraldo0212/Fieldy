@@ -64,6 +64,13 @@
       "when": 1788651452722,
       "tag": "0008_married_obadiah_stane",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1788723729083,
+      "tag": "0009_glorious_sersi",
+      "breakpoints": true
     }
   ]
 }

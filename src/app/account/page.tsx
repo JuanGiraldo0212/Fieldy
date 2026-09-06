@@ -27,9 +27,11 @@ export default async function AccountPage() {
         name={me?.name ?? ''}
         email={me?.email ?? viewer.email}
         role={me?.role ?? 'director'}
+        roleOther={me?.roleOther ?? ''}
         phone={me?.phone ?? ''}
         centreName={centre?.name ?? ''}
         centreType={centre?.type ?? 'daycare_preschool'}
+        centreTypeOther={centre?.typeOther ?? ''}
         address={centre?.address ?? ''}
         notifications={me?.emailNotifications ?? true}
       />

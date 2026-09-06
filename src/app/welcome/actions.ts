@@ -8,6 +8,7 @@ import { account, centre, db, room } from '@/db'
 import { getViewer } from '@/lib/auth'
 import { newId } from '@/lib/ids'
 import { geocodeAddress, pickedPoint } from '@/lib/catalog/geocode'
+import { CENTRE_TYPE_VALUES, ROLE_VALUES, otherText } from '@/lib/roles'
 
 /*
   Centre and first room, created together. spec §5.3: "a first time user
@@ -20,9 +21,11 @@ import { geocodeAddress, pickedPoint } from '@/lib/catalog/geocode'
 
 const setupSchema = z.object({
   name: z.string().trim().min(1, 'We need your name for the request signature.').max(120),
-  role: z.enum(['ece', 'director', 'teacher', 'other']),
+  role: z.enum(ROLE_VALUES),
+  roleOther: z.string().trim().max(120).optional(),
   centreName: z.string().trim().min(1, 'What is the centre called?').max(200),
-  centreType: z.enum(['daycare_preschool', 'elementary', 'middle', 'secondary', 'other']),
+  centreType: z.enum(CENTRE_TYPE_VALUES),
+  centreTypeOther: z.string().trim().max(120).optional(),
   address: z.string().trim().min(1, 'We measure every distance from here.').max(300),
   roomName: z.string().trim().min(1, 'Give the room a name.').max(120),
   ageMin: z.coerce.number().min(0).max(18),
@@ -45,8 +48,10 @@ export async function createCentreAndRoom(
   const parsed = setupSchema.safeParse({
     name: formData.get('name'),
     role: formData.get('role'),
+    roleOther: formData.get('roleOther') ?? '',
     centreName: formData.get('centreName'),
     centreType: formData.get('centreType'),
+    centreTypeOther: formData.get('centreTypeOther') ?? '',
     address: formData.get('address'),
     roomName: formData.get('roomName'),
     ageMin: formData.get('ageMin'),
@@ -87,6 +92,7 @@ export async function createCentreAndRoom(
       id: centreId,
       name: d.centreName,
       type: d.centreType,
+      typeOther: otherText(d.centreType, d.centreTypeOther ?? null),
       address: d.address,
       lat: point.lat,
       lng: point.lng,
@@ -110,7 +116,12 @@ export async function createCentreAndRoom(
 
     await tx
       .update(account)
-      .set({ name: d.name, role: d.role, centreId })
+      .set({
+        name: d.name,
+        role: d.role,
+        roleOther: otherText(d.role, d.roleOther ?? null),
+        centreId,
+      })
       .where(eq(account.id, viewer.accountId))
   })
 

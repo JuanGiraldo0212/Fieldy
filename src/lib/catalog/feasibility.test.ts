@@ -95,11 +95,15 @@ describe('feasibility — green', () => {
 })
 
 describe('feasibility — age', () => {
-  it('flags a grade-based program for an under-five room, verbatim', () => {
+  it('says nothing about a grade-based program to an under-five room', () => {
+    // It used to say "ages are set by grade here, not years — phone to confirm
+    // they take under-fives". That fired on every grade-published program a
+    // daycare could see, so the amber badge stopped meaning anything. A
+    // published-in-grades range is not a mismatch we can state, so we do not
+    // state one.
     const r = feasibility(withProgram({ ageBasis: 'grades' }), PRESCHOOL)
-    expect(r.reasons).toContain(
-      'ages are set by grade here, not years — phone to confirm they take under-fives',
-    )
+    expect(r.level).toBe('green')
+    expect(r.reasons).toEqual([])
   })
 
   it('does not flag grades for a school-age room', () => {
@@ -122,6 +126,9 @@ describe('feasibility — age', () => {
   })
 
   it('gives at most one age reason — first match wins', () => {
+    // A program filed under grades that ALSO published a youngest age: the
+    // grade branch has no grade to compare against, so the published age is
+    // what answers the question, and it answers it once.
     const r = feasibility(
       withProgram({ ageBasis: 'grades', ageMinYears: 7 }),
       PRESCHOOL,
@@ -130,14 +137,7 @@ describe('feasibility — age', () => {
       (x) => x.includes('grade') || x.includes('built for'),
     )
     expect(ageReasons).toHaveLength(1)
-    expect(ageReasons[0]).toMatch(/^ages are set by grade/)
-  })
-
-  it('treats the grade mismatch as known, not missing', () => {
-    // The venue DID publish a range, in units that cannot answer this room's
-    // question. That is a real thing to check, so it stays amber.
-    const r = feasibility(withProgram({ ageBasis: 'grades' }), PRESCHOOL)
-    expect(r.level).toBe('amber')
+    expect(ageReasons[0]).toBe('built for 7+, your youngest are 3')
   })
 
   it('never converts grades to years', () => {
@@ -243,9 +243,14 @@ describe('badge labels', () => {
 })
 
 describe('feasibility — against the real catalog', () => {
-  it('marks the Art Gallery workshop amber for a preschool room', () => {
+  it('leaves the Art Gallery workshop green for a preschool room', () => {
     // art-gallery-greater-victoria:school-tour-workshop, verbatim from the DB:
     // grades 2-12, $150 group, capacity 30, school_rate_only.
+    //
+    // Nothing here is a stateable mismatch: grades 2-12 cannot be compared to
+    // a room that has no grade, capacity 30 fits 16, and $150 across 16 is
+    // $9.38 against a $10 budget. The school rate IS worth telling a daycare
+    // about, and it is — as the rate flag on the card, not as an age warning.
     const r = feasibility(
       {
         ageBasis: 'grades',
@@ -257,12 +262,8 @@ describe('feasibility — against the real catalog', () => {
       },
       PRESCHOOL,
     )
-    expect(r.level).toBe('amber')
-    expect(r.reasons).toEqual([
-      'ages are set by grade here, not years — phone to confirm they take under-fives',
-    ])
-    // $150 across 16 is $9.38, under the $10 budget, so cost is NOT a reason.
-    expect(r.issueText).not.toMatch(/budget/)
+    expect(r.level).toBe('green')
+    expect(r.reasons).toEqual([])
   })
 })
 
@@ -321,11 +322,9 @@ describe('feasibility — grade against grade', () => {
     expect(below.reasons[0]).toMatch(/yours are Kindergarten/)
   })
 
-  it('still warns an under-five room, which has no grade to compare', () => {
+  it('says nothing to an under-five room, which has no grade to compare', () => {
     const r = feasibility(gradesOnly, PRESCHOOL)
-    expect(r.reasons).toContain(
-      'ages are set by grade here, not years — phone to confirm they take under-fives',
-    )
+    expect(r.reasons).toEqual([])
   })
 
   it('says nothing when the venue published no grades either', () => {

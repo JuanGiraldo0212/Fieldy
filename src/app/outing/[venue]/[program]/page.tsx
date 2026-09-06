@@ -23,7 +23,6 @@ import {
   Utensils,
 } from 'lucide-react'
 import {
-  bookingLabel,
   daysLabel,
   fetchProgram,
   leadLabel,
@@ -34,7 +33,7 @@ import {
 } from '@/lib/catalog/program'
 import { haversineKm, travelLine, type TransportMode } from '@/lib/catalog/distance'
 import { costPerChild, feasibility, money } from '@/lib/catalog/feasibility'
-import { effectiveAgeRange, effectiveGrade, initialsOf } from '@/lib/catalog/search'
+import { effectiveAgeRange, effectiveGrade, initialsOf, underFives } from '@/lib/catalog/search'
 import { parseSearchParams } from '@/lib/catalog/url'
 import { getViewer } from '@/lib/auth'
 import { isSaved } from '@/lib/trips/fetch'
@@ -224,9 +223,11 @@ export default async function OutingPage({
             label="Cost"
             value={costLabel}
             lines={[totalLabel, p.extraFeesNote]}
+            /* Same gate as the catalog card: only a room that is under school
+               age is told the published number is not theirs. */
             warn={
-              p.schoolRateOnly
-                ? 'School rate. Daycares are quoted through group visits — phone before you budget.'
+              p.schoolRateOnly && underFives(state.age_bands)
+                ? 'School rate. Daycares are quoted through group visits.'
                 : null
             }
           />
@@ -250,14 +251,6 @@ export default async function OutingPage({
             icon={<CalendarCheck size={18} />}
             label="Book by"
             value={leadLabel(p.leadTimeDays)}
-            lines={[
-              bookingLabel(
-                p.bookingMethod ?? v.bookingMethod,
-                p.bookingEmail ?? v.bookingEmail,
-                p.bookingUrl ?? v.bookingUrl,
-                v.bookingPhone,
-              ),
-            ]}
           />
         </FactQuad>
 

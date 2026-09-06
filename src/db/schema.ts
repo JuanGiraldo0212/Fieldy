@@ -51,6 +51,13 @@ export const accountRole = pgEnum('account_role', [
   'director',
   'teacher',
   'other',
+  /* Added after the first round of centres: "Manager" is what the person
+     running a multi-site operator is called, and an ECEA is a distinct
+     certification from an ECE, not a lesser version of one. Appended rather
+     than reordered — a pg enum's order is its sort order and existing rows
+     already carry the first four. */
+  'manager',
+  'ecea',
 ])
 
 export const centreType = pgEnum('centre_type', [
@@ -375,6 +382,10 @@ export const account = pgTable('account', {
   email: text('email').notNull().unique(),
   name: text('name').notNull(),
   role: accountRole('role').notNull().default('director'),
+  /* What she typed when she picked "Other". Null for every other role, and
+     null for "other" too until she fills it in — the field is optional, since
+     a role we have no box for should not block finishing setup. */
+  roleOther: text('role_other'),
   phone: text('phone'),
   centreId: text('centre_id'),
   /* A short "the venue replied" email with a link. Not a forwarded copy: the
@@ -390,6 +401,10 @@ export const centre = pgTable('centre', {
   id: text('id').primaryKey(),
   name: text('name').notNull(),
   type: centreType('type').notNull(),
+  /* Free text behind "Other", same as account.role_other. NOT an input to
+     rateClassOf(): an unrecognised string cannot decide which rates she sees,
+     so "other" keeps its own rate class whatever she writes here. */
+  typeOther: text('type_other'),
   /* `rate_class` is NOT a column. data-model.md calls it "derived from type",
      and the model's third defended rule is that nothing derived is stored.
      A Postgres generated column cannot express it anyway — text-to-enum casts

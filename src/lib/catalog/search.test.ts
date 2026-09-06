@@ -11,6 +11,7 @@ import {
   search,
   bandsFor,
   effectiveGrade,
+  underFives,
   preferredTransport,
   type CatalogRow,
 } from './search'
@@ -84,6 +85,22 @@ describe('initialsOf', () => {
   })
 })
 
+describe('underFives', () => {
+  it('is true for the two bands that carry no grade, and false otherwise', () => {
+    expect(underFives([0])).toBe(true) // 1 to 3 years
+    expect(underFives([1])).toBe(true) // 3 to 5 years
+    expect(underFives([2])).toBe(false) // Kindergarten
+    expect(underFives([14])).toBe(false) // Grade 12
+  })
+
+  it('falls back to the default band rather than throwing on rubbish', () => {
+    // usableBands() drops out-of-range indices and defaults to band 1 (3 to 5),
+    // so an edited URL cannot turn the flag off by accident.
+    expect(underFives([])).toBe(true)
+    expect(underFives([99])).toBe(true)
+  })
+})
+
 describe('decorate — labels', () => {
   it('shows the group TOTAL big for a per-child price', () => {
     // $6 a child for 16 children. The big number is what the trip costs.
@@ -134,6 +151,20 @@ describe('decorate — labels', () => {
     expect(dec(row({ durationMin: 90 })).durationLabel).toBe('1.5 hours')
     expect(dec(row({ durationMin: 60 })).durationLabel).toBe('1 hour')
     expect(dec(row({ durationMin: 45 })).durationLabel).toBe('45 minutes')
+  })
+
+  it('shows the school-rate flag only to a room under school age', () => {
+    // A school rate is only bad news to someone who cannot pay it. Shown to a
+    // Grade 3 class it warns about a price they are entitled to, on every card.
+    const schoolRate = row({ schoolRateOnly: true })
+    expect(dec(schoolRate, state({ age_bands: [0] })).showRateFlag).toBe(true)
+    expect(dec(schoolRate, state({ age_bands: [1] })).showRateFlag).toBe(true)
+    expect(dec(schoolRate, state({ age_bands: [2] })).showRateFlag).toBe(false)
+    expect(dec(schoolRate, state({ age_bands: [5] })).showRateFlag).toBe(false)
+    // A mixed selection still counts: part of the group cannot pay it.
+    expect(dec(schoolRate, state({ age_bands: [1, 4] })).showRateFlag).toBe(true)
+    // And a program with no school rate never shows it, whatever the room.
+    expect(dec(row(), state({ age_bands: [0] })).showRateFlag).toBe(false)
   })
 
   it('has no distance for a program that comes to you', () => {

@@ -4,6 +4,7 @@ import { useActionState, useState } from 'react'
 import { createCentreAndRoom, type SetupState } from './actions'
 import { CheckRow, Field, FieldBox } from '@/components/ui'
 import { AddressField } from '@/components/ui/address-field'
+import { CENTRE_TYPES, ROLES } from '@/lib/roles'
 
 /*
   One screen, not a wizard. Spec §5.3 says the plan screen is one screen and
@@ -14,21 +15,6 @@ import { AddressField } from '@/components/ui/address-field'
   Defaults are the design's own anonymous defaults, so the form arrives mostly
   filled in and she corrects rather than composes.
 */
-
-const ROLES: [string, string][] = [
-  ['director', 'Director'],
-  ['ece', 'ECE'],
-  ['teacher', 'Teacher'],
-  ['other', 'Other'],
-]
-
-const CENTRE_TYPES: [string, string][] = [
-  ['daycare_preschool', 'Daycare or preschool'],
-  ['elementary', 'Elementary'],
-  ['middle', 'Middle school'],
-  ['secondary', 'Secondary'],
-  ['other', 'Other'],
-]
 
 const TRANSPORT: [string, string][] = [
   ['walking', 'Walking'],
@@ -48,6 +34,10 @@ export function SetupForm({
     {},
   )
   const [transport, setTransport] = useState<string[]>(['bus'])
+  /* Both selects become controlled only so we know when to open the "Other"
+     box. Nothing else reads these. */
+  const [role, setRole] = useState('director')
+  const [centreType, setCentreType] = useState('daycare_preschool')
 
   return (
     <form action={action} className="mt-6">
@@ -74,7 +64,8 @@ export function SetupForm({
             <FieldBox>
               <select
                 name="role"
-                defaultValue="director"
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
                 className="text-body-sm h-select w-full cursor-pointer appearance-none border-0 bg-transparent font-semibold outline-none"
               >
                 {ROLES.map(([v, l]) => (
@@ -83,6 +74,18 @@ export function SetupForm({
               </select>
             </FieldBox>
           </Field>
+          {role === 'other' ? (
+            <Field label="What is your role called?">
+              <FieldBox>
+                <input
+                  name="roleOther"
+                  maxLength={120}
+                  placeholder="Program coordinator"
+                  className="text-body-sm w-full border-0 bg-transparent font-semibold outline-none"
+                />
+              </FieldBox>
+            </Field>
+          ) : null}
         </div>
         <p className="text-meta text-text-faint mt-2">
           Your name goes on the request, so the venue knows who is asking.
@@ -106,7 +109,8 @@ export function SetupForm({
             <FieldBox>
               <select
                 name="centreType"
-                defaultValue="daycare_preschool"
+                value={centreType}
+                onChange={(e) => setCentreType(e.target.value)}
                 className="text-body-sm h-select w-full cursor-pointer appearance-none border-0 bg-transparent font-semibold outline-none"
               >
                 {CENTRE_TYPES.map(([v, l]) => (
@@ -115,6 +119,18 @@ export function SetupForm({
               </select>
             </FieldBox>
           </Field>
+          {centreType === 'other' ? (
+            <Field label="What kind of centre is it?">
+              <FieldBox>
+                <input
+                  name="centreTypeOther"
+                  maxLength={120}
+                  placeholder="Family drop-in program"
+                  className="text-body-sm w-full border-0 bg-transparent font-semibold outline-none"
+                />
+              </FieldBox>
+            </Field>
+          ) : null}
         </div>
         <div className="mt-4">
           <AddressField
