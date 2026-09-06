@@ -5,6 +5,7 @@ import { z } from 'zod'
 import { createClient } from '@/lib/supabase/server'
 import { clientIp, hitRateLimit, limitKey } from '@/lib/rate-limit'
 import { safeNext } from '@/lib/safe-next'
+import { requestOrigin } from '@/lib/site-url'
 import { sendError } from './send-error'
 
 /*
@@ -57,16 +58,12 @@ export async function requestMagicLink(
   }
 
   /*
-    The origin we are actually running on, so a link sent from a preview
-    deploy comes back to that preview and not to production. Supabase only
-    honours this if it matches the project's Redirect URLs allow-list;
-    anything else is silently replaced with the project's Site URL. A link
-    that arrives pointing somewhere unexpected is that list being wrong, not
-    this line — Authentication → URL Configuration in the dashboard.
+    On a preview deploy the link comes back to that preview; on production it
+    comes back to the canonical site, whichever host the form was posted to.
+    See requestOrigin — including what to check when a link still lands on the
+    wrong domain.
   */
-  const proto = h.get('x-forwarded-proto') ?? 'http'
-  const host = h.get('x-forwarded-host') ?? h.get('host') ?? 'localhost:3000'
-  const origin = `${proto}://${host}`
+  const origin = requestOrigin(h)
 
   const supabase = await createClient()
   const { error } = await supabase.auth.signInWithOtp({

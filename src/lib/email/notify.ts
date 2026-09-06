@@ -1,6 +1,7 @@
 import { and, eq, lt } from 'drizzle-orm'
 import { account, autoResponse, db, message, program, trip, venue } from '@/db'
 import { longDate } from '@/lib/trips/asks'
+import { siteUrl } from '@/lib/site-url'
 import { resendClient } from './client'
 import { mailDomain } from './relay'
 import { sendingConfigured } from './send'
@@ -28,13 +29,6 @@ import {
 */
 
 const NOTIFY_FROM_LOCAL = 'noreply'
-
-function siteUrl(): string {
-  return (process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000').replace(
-    /\/+$/,
-    '',
-  )
-}
 
 const client = resendClient
 
