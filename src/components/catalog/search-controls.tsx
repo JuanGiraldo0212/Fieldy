@@ -35,10 +35,11 @@ import {
   Volume1,
   type LucideIcon,
 } from 'lucide-react'
-import { AGE_BANDS, RADIUS_OPTIONS, type SearchState } from '@/lib/schemas'
+import { RADIUS_OPTIONS, type SearchState } from '@/lib/schemas'
 import { searchHref, toggleIn } from '@/lib/catalog/url'
 import { CheckRow, Chip, Field, FieldBox, cx } from '@/components/ui'
 import { AddressField } from '@/components/ui/address-field'
+import { AgeBandSelect } from './age-band-select'
 
 /*
   Every control writes to the URL and lets the server re-render. That keeps one
@@ -157,28 +158,10 @@ export function SearchControls({
 
       {/* The always-visible row */}
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <Field label="Age / Grade">
-          <FieldBox>
-            <span className="text-brand flex">
-              <GraduationCap size={18} />
-            </span>
-            <select
-              value={state.age_bands[0] ?? 1}
-              onChange={(e) => go({ ...state, age_bands: [Number(e.target.value)] })}
-              aria-label="Age or grade"
-              className="text-body-sm h-select w-full cursor-pointer appearance-none border-0 bg-transparent font-semibold outline-none"
-            >
-              {AGE_BANDS.map((b, i) => (
-                <option key={b[2]} value={i}>
-                  {b[2]}
-                </option>
-              ))}
-            </select>
-            <span className="text-text-faint flex">
-              <ChevronDown size={15} />
-            </span>
-          </FieldBox>
-        </Field>
+        <AgeBandSelect
+          value={state.age_bands}
+          onChange={(age_bands) => go({ ...state, age_bands })}
+        />
 
         <Field label="Children">
           <FieldBox>
