@@ -316,6 +316,7 @@ produces them.
    nothing when tapped is worse than no affordance.
 
 10. **"Show full message" is built, though the design never draws it.**
+    *(Superseded by entry 36 — it was removed again.)*
     Spec §5.4.5 requires it. It appears only when `body_full` actually differs
     from the stripped body, so it is never a toggle that expands to the same
     text.
@@ -513,3 +514,37 @@ verbatim from design-map §7. Differences, all logged:
     the box and again in the action. Files are stored in the private `mail`
     bucket under `att/<trip>/<message>/` before the send, so the chip on the
     thread names a file we hold and a retry re-attaches it. Needs a frame.
+
+---
+
+## The thread, second pass
+
+36. **Deviation — the opening request is an ordinary message, and "Show full
+    message" is gone.** Both on the product owner's instruction, both a step
+    further from spec §5.4.5 than entry 35.
+
+    The request no longer has a card of its own. It was a summary — the
+    envelope glyph, "Request sent", the ranked dates and the asks on two
+    derived lines, the body quoted inside it. It is now the first white
+    bubble on the right, because it is a message she wrote. Nothing readable
+    was lost: `composeRequest` already writes the dates and every question
+    into the body in prose, which is what the venue receives and now what the
+    thread shows. A request that never left still says so — its `send_error`
+    renders in the bubble, and the page's amber banner is untouched.
+
+    "Show full message" is removed, so entry 10 no longer holds. `body_full`
+    is still stored on every inbound message (schema.ts, decisions.md) — what
+    is gone is the way to read it. The cost is real and worth writing down:
+    when strip.ts trims something it should have kept, a director can no
+    longer see what was cut, and the text is only in the database. Nothing
+    else read that column.
+
+    **Colours.** The chat ground is grey (`--color-chat-ground`) rather than
+    the light blue of entry 35, and the venue's bubble is a light blue fill
+    with the page's own dark ink (`--color-chat-them`,
+    `--color-chat-them-border`, on `--color-info-ink`) rather than solid
+    brand blue with white text, which was too heavy beside the rest of the
+    app. Three new tokens, all in globals.css with their reason. Entry 35's
+    ring around the newest reply went with them: on a bordered light bubble
+    it read as a focused form field, and the "Newest reply" pill above the
+    bubble already carries the mark spec §5.4.5 asks for.

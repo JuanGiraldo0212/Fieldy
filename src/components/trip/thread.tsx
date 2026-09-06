@@ -1,33 +1,29 @@
-import { Mail, Paperclip } from 'lucide-react'
+import { Paperclip } from 'lucide-react'
 import { signedUrl } from '@/lib/email/storage'
 import type { Attachment } from '@/lib/schemas'
-import { requestAskLine, requestDateLine, shortDate } from '@/lib/trips/asks'
-import type { Ask, DateOption } from '@/lib/schemas'
+import { shortDate } from '@/lib/trips/asks'
 import { cx } from '@/components/ui'
-import { FullMessage } from './full-message'
 
 /*
   The conversation. Spec §5.4.5, design-map §5 "Thread".
 
-  Three kinds of thing appear here and they are visually different weights,
-  deliberately:
+  Two kinds of thing appear here:
 
-  - The **opening request** is a summary card, not a wall of text. A director
-    who wrote it does not need to re-read it; she needs to see at a glance what
-    she asked and when.
-  - **Messages** — hers and the venue's — are the record, laid out as a chat:
-    hers on the right in white, the venue's on the left in blue, on the pane's
-    light blue ground. This departs from spec §6 ("align the same way … not a
-    chat bubble app") on the product owner's instruction; the avatar and the
-    name still carry the identity, so nothing that was doing work was dropped.
+  - **Messages** — hers and the venue's — laid out as a chat: hers on the
+    right in white, the venue's on the left in light blue, on the pane's grey
+    ground. This departs from spec §6 ("align the same way … not a chat bubble
+    app") on the product owner's instruction; the avatar and the name still
+    carry the identity, so nothing that was doing work was dropped. The
+    opening request is one of these and nothing more — it is a message she
+    wrote, and it reads like one.
   - **System events** are thin grey rules. Lighter than a message, because
     nobody said them.
 
-  The stripped body is what shows. `body_full` sits behind "Show full message"
-  for the case where the stripping took something it should not have — see
-  strip.ts, which is written to prefer untidy over lossy.
+  What shows is the stripped body. `body_full` is stored and no longer
+  surfaced: "Show full message" was removed on the product owner's
+  instruction, so a body strip.ts got wrong is now only visible in the
+  database. See docs/design-gaps.md 36.
 */
-
 export type ThreadMessage = {
   id: string
   party: 'educator' | 'venue' | 'system'
@@ -43,18 +39,10 @@ export type ThreadMessage = {
 
 export async function Thread({
   messages,
-  dateOptions,
-  asks,
   waitingOnVenue,
-  undelivered,
 }: {
   messages: ThreadMessage[]
-  dateOptions: DateOption[]
-  asks: Ask[]
   waitingOnVenue: boolean
-  /* The opening request never left. The thread says so instead of implying a
-     venue is being slow. */
-  undelivered: boolean
 }) {
   /*
     "Newest reply" marks one message and only one: the most recent thing the
@@ -70,28 +58,18 @@ export async function Thread({
 
   return (
     <div className="flex flex-col">
-      {messages.map((m) => {
-        if (m.party === 'system') return <SystemLine key={m.id} body={m.body} />
-        if (m.isRequest) {
-          return (
-            <RequestCard
-              key={m.id}
-              message={m}
-              dateOptions={dateOptions}
-              asks={asks}
-              undelivered={undelivered}
-            />
-          )
-        }
-        return (
+      {messages.map((m) =>
+        m.party === 'system' ? (
+          <SystemLine key={m.id} body={m.body} />
+        ) : (
           <MessageRow
             key={m.id}
             message={m}
             newest={m.id === newestVenueId}
             links={links}
           />
-        )
-      })}
+        ),
+      )}
 
       {waitingOnVenue ? (
         <div className="flex items-center gap-3 py-4">
@@ -102,53 +80,6 @@ export async function Thread({
           <span aria-hidden className="border-border flex-1 border-t border-dashed" />
         </div>
       ) : null}
-    </div>
-  )
-}
-
-/* ─── The opening request ────────────────────────────────────────────────── */
-
-function RequestCard({
-  message: m,
-  dateOptions,
-  asks,
-  undelivered,
-}: {
-  message: ThreadMessage
-  dateOptions: DateOption[]
-  asks: Ask[]
-  undelivered: boolean
-}) {
-  return (
-    <div
-      id={`msg-${m.id}`}
-      className="bg-surface flex gap-4 rounded-thumb px-5 py-4.5 scroll-mt-24"
-    >
-      <span
-        aria-hidden
-        className="bg-brand-tint-2 text-brand flex h-10 w-10 flex-none items-center justify-center rounded-pill"
-      >
-        <Mail size={18} />
-      </span>
-      <div className="min-w-0 flex-1">
-        <div className="flex flex-wrap items-baseline gap-2.5">
-          <span className="text-body font-bold">
-            {undelivered ? 'Request written' : 'Request sent'}
-          </span>
-          <span className="text-meta text-text-faint">
-            {shortDate(m.sentAt.toISOString().slice(0, 10))}
-          </span>
-        </div>
-        <div className="text-body-sm text-text-strong mt-1.5">
-          {requestDateLine(dateOptions)}
-        </div>
-        <div className="text-body-sm text-text-strong mt-0.5">
-          {requestAskLine(asks)}
-        </div>
-        <div className="bg-surface-3 text-body-sm text-text mt-3 rounded-control px-4 py-3.5 leading-relaxed whitespace-pre-wrap">
-          {m.body}
-        </div>
-      </div>
     </div>
   )
 }
@@ -203,7 +134,7 @@ function MessageRow({
             />
           ) : null}
           {newest ? (
-            <span className="bg-surface text-brand text-label rounded-pill px-2.5 py-1 font-bold">
+            <span className="bg-brand-tint text-brand text-label rounded-pill px-2.5 py-1 font-bold">
               Newest reply
             </span>
           ) : null}
@@ -216,11 +147,8 @@ function MessageRow({
           className={cx(
             'mt-1.5 rounded-card px-4 py-3',
             venue
-              ? 'bg-brand rounded-tl-check text-white'
-              : 'bg-surface text-text rounded-tr-check',
-            /* Spec §5.4.5's highlight on the newest reply. A ring rather than a
-               fill, because the fill is now carrying which side spoke. */
-            newest && 'ring-brand-solid ring-offset-brand-tint ring-2 ring-offset-2',
+              ? 'bg-chat-them border-chat-them-border text-info-ink rounded-tl-check border'
+              : 'bg-surface border-border text-text rounded-tr-check border',
           )}
         >
           {m.sendError ? (
@@ -232,12 +160,6 @@ function MessageRow({
           <div className="text-body-sm leading-relaxed whitespace-pre-wrap">
             {m.body}
           </div>
-
-          {/* Only when there is genuinely more to see. A toggle that expands to
-              the same text is a toggle nobody trusts a second time. */}
-          {m.bodyFull && m.bodyFull.trim() !== m.body.trim() ? (
-            <FullMessage full={m.bodyFull} onBrand={venue} />
-          ) : null}
 
           {m.attachments.length > 0 ? (
             <div className="mt-3 flex flex-wrap gap-2">
