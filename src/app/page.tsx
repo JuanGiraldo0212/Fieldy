@@ -10,7 +10,8 @@ import {
   preferredTransport,
 } from '@/lib/catalog/search'
 import { parseSearchParams, toSearchParams } from '@/lib/catalog/url'
-import { CatalogMap, type MapPin } from '@/components/catalog/catalog-map'
+import dynamic from 'next/dynamic'
+import type { MapPin } from '@/components/catalog/catalog-map'
 import { OutingCard } from '@/components/catalog/outing-card'
 import { SearchControls, SortControl } from '@/components/catalog/search-controls'
 import { EmptyState } from '@/components/ui'
@@ -26,6 +27,25 @@ import { EmptyState } from '@/components/ui'
 */
 
 /*
+  Leaflet is 160 KB of JavaScript that only the open map needs, and the map
+  is closed by default. A static import puts it in every catalog visit's
+  bundle whether or not the map is drawn; this loads it with the map.
+*/
+const CatalogMap = dynamic(() =>
+  import('@/components/catalog/catalog-map').then((m) => m.CatalogMap),
+)
+
+/*
+  How many cards render before "Show more". Plan §8's Lighthouse target is
+  measured on the signed-out catalog, where nothing narrows the list and
+  every program in the region is a card — 76 of them at around 150 DOM
+  nodes each, which is what a phone spends its first three seconds laying
+  out. Forty is more than a screen and a half of scrolling on a phone; the
+  rest is one tap away, and the link works without JavaScript.
+*/
+const FIRST_PAGE = 40
+
+/*
   Where a logged-out visitor is measured from. Once someone has a room, we
   measure from that room's own home base instead, which is what the design's
   "Leaving from" control shows.
@@ -39,6 +59,7 @@ export default async function CatalogPage({
 }) {
   const params = await searchParams
   const mapOpen = params.map === '1'
+  const showAll = params.all === '1'
 
   const viewer = await getViewer()
   const activeRoom = await getActiveRoom(viewer?.centreId ?? null)
@@ -111,9 +132,20 @@ export default async function CatalogPage({
   const mapHref = () => {
     const p = toSearchParams(state)
     if (!mapOpen) p.set('map', '1')
+    if (showAll) p.set('all', '1')
     const qs = p.toString()
     return qs ? `/?${qs}` : '/'
   }
+
+  const showAllHref = () => {
+    const p = toSearchParams(state)
+    if (mapOpen) p.set('map', '1')
+    p.set('all', '1')
+    return `/?${p.toString()}`
+  }
+
+  const visible = showAll ? results : results.slice(0, FIRST_PAGE)
+  const hiddenCount = results.length - visible.length
 
   return (
     <main className="mx-auto max-w-page px-5 pb-16">
@@ -175,11 +207,24 @@ export default async function CatalogPage({
       ) : null}
 
       {results.length > 0 ? (
-        <div className="grid gap-3">
-          {results.map((r) => (
-            <OutingCard key={r.id} result={r} />
-          ))}
-        </div>
+        <>
+          <div className="grid gap-3">
+            {visible.map((r) => (
+              <OutingCard key={r.id} result={r} />
+            ))}
+          </div>
+          {hiddenCount > 0 ? (
+            <div className="mt-5 text-center">
+              <Link
+                href={showAllHref()}
+                scroll={false}
+                className="border-border-strong bg-surface hover:border-brand text-body-sm inline-block rounded-pill border px-5 py-3 font-bold no-underline"
+              >
+                Show the other {hiddenCount} outing{hiddenCount === 1 ? '' : 's'}
+              </Link>
+            </div>
+          ) : null}
+        </>
       ) : (
         /* Not in the design — logged in docs/design-gaps.md. Built plainly,
            and it says which filter to loosen rather than just apologising. */
