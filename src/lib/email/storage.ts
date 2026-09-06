@@ -76,6 +76,22 @@ export async function putObject(
 }
 
 /*
+  The bytes back out, for re-sending a follow-up that carried files. Null
+  when storage is off or the object is gone; the caller decides whether a
+  send without its attachment is better than no send.
+*/
+export async function getObject(key: string): Promise<Uint8Array | null> {
+  if (!storageConfigured()) return null
+  try {
+    const { data, error } = await createAdminClient().storage.from(BUCKET).download(key)
+    if (error || !data) return null
+    return new Uint8Array(await data.arrayBuffer())
+  } catch {
+    return null
+  }
+}
+
+/*
   Null rather than a throw when signing fails. An attachment chip that cannot
   be opened is a bad afternoon; a trip page that will not render because one
   object key went missing is a worse one.

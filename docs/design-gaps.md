@@ -499,3 +499,17 @@ verbatim from design-map §7. Differences, all logged:
     The opening request keeps its full-width summary card, system events
     keep their thin rules, and "Newest reply" became a ring around the
     bubble because the fill is now carrying which side spoke.
+
+---
+
+## Outbound attachments
+
+35. **Gap — the compose box's paperclip is now a control.** The prototype
+    draws it as decoration, and plan §1 left educator attachments out of
+    the MVP; the product owner asked for them after launch. Tapping the clip
+    opens a file picker; chosen files appear as chips above the footnote,
+    each with a remove, in the thread's own attachment-chip language. Up to
+    five files, 10 MB each, 25 MB together, executables refused, checked in
+    the box and again in the action. Files are stored in the private `mail`
+    bucket under `att/<trip>/<message>/` before the send, so the chip on the
+    thread names a file we hold and a retry re-attaches it. Needs a frame.

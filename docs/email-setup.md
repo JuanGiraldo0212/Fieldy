@@ -242,6 +242,16 @@ Applied to both paths, before anything is stored:
 The notification goes out at 1 hop and the auto-response at 2, so a loop dies
 on its second pass.
 
+## Outbound attachments
+
+A follow-up from the compose box can carry files: up to five, 10 MB each,
+25 MB together, executables refused (`src/lib/email/uploads.ts`). They are
+stored in the private `mail` bucket under `att/<trip>/<message>/` **before**
+the send, recorded on `message.attachments` in the same shape as inbound
+files, and passed to Resend as bytes. A retry re-reads them from the bucket.
+Storage must be configured (`SUPABASE_SECRET_KEY`) or the action refuses the
+files and says so; the words can still go without them.
+
 ## Known unknowns
 
 Resend documents the outbound size cap (40 MB) and not the inbound one.
