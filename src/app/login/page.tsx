@@ -45,7 +45,7 @@ export default async function LoginPage({
 
         <h1 className="font-display text-display-md">Sign in to Fieldy</h1>
         <p className="text-body text-text-muted mt-2">
-          We email you a link. No password to forget at 7:40 am.
+          We email you a link. No password to set up or remember.
         </p>
 
         {errorKey && ERRORS[errorKey] ? (

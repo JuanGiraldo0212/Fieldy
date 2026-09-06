@@ -20,7 +20,7 @@ export default async function AccountPage() {
     <main className="mx-auto max-w-[520px] px-5 pt-8 pb-20">
       <h1 className="font-display text-display-md m-0">Your account</h1>
       <p className="text-body text-text-muted mt-1.5 mb-5">
-        Email and a link. No password to forget at 7:40 am.
+        Email and a link. No password to set up or remember.
       </p>
 
       <AccountForm

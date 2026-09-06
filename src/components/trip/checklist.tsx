@@ -55,7 +55,7 @@ export function Checklist({
   const [editing, setEditing] = useState(false)
 
   return (
-    <section className="bg-surface border-border flex flex-col rounded-panel border p-6">
+    <section className="bg-surface border-border flex h-full flex-col rounded-panel border p-6">
       <div className="mb-4.5 flex flex-wrap items-center gap-3.5">
         <span className="bg-warn-tint text-warn flex h-[38px] w-[38px] flex-none items-center justify-center rounded-pill">
           <ListChecks size={19} />

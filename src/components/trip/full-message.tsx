@@ -2,6 +2,8 @@
 
 import { useState } from 'react'
 
+import { cx } from '@/components/ui'
+
 /*
   "Show full message". Spec §5.4.5.
 
@@ -13,7 +15,15 @@ import { useState } from 'react'
   Closed by default, and it stays closed on its own: a venue's quoted copy of
   our request is not something anybody wants to scroll past twice.
 */
-export function FullMessage({ full }: { full: string }) {
+export function FullMessage({
+  full,
+  /* Inside a venue bubble the ground is brand blue, where the usual blue link
+     and off-white panel both disappear. */
+  onBrand = false,
+}: {
+  full: string
+  onBrand?: boolean
+}) {
   const [open, setOpen] = useState(false)
 
   return (
@@ -22,12 +32,22 @@ export function FullMessage({ full }: { full: string }) {
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className="text-meta text-brand font-semibold"
+        className={cx(
+          'text-meta font-semibold',
+          onBrand ? 'text-white underline' : 'text-brand',
+        )}
       >
         {open ? 'Hide full message' : 'Show full message'}
       </button>
       {open ? (
-        <div className="border-border-soft bg-surface-3 text-meta text-text-muted mt-2 max-h-96 overflow-y-auto rounded-control border px-4 py-3 leading-relaxed whitespace-pre-wrap">
+        <div
+          className={cx(
+            'text-meta mt-2 max-h-96 overflow-y-auto rounded-control border px-4 py-3 leading-relaxed whitespace-pre-wrap',
+            onBrand
+              ? 'border-brand-solid bg-brand-solid text-white'
+              : 'border-border-soft bg-surface-3 text-text-muted',
+          )}
+        >
           {full}
         </div>
       ) : null}

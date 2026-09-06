@@ -329,23 +329,28 @@ export default async function TripPage({
           ) : null}
         </div>
 
-        <Thread
-          messages={messages}
-          dateOptions={t.dateOptions}
-          asks={t.asks}
-          waitingOnVenue={who === 'venue' && !undelivered}
-          undelivered={Boolean(undelivered)}
-        />
+        {/* The chat ground. One tinted pane behind the whole exchange, so the
+            white and blue bubbles inside it read as two sides of a
+            conversation rather than as cards on the page. */}
+        <div className="bg-brand-tint rounded-card-lg px-4 py-4">
+          <Thread
+            messages={messages}
+            dateOptions={t.dateOptions}
+            asks={t.asks}
+            waitingOnVenue={who === 'venue' && !undelivered}
+            undelivered={Boolean(undelivered)}
+          />
 
-        {undelivered ? (
-          <div className="flex items-center gap-3 py-4">
-            <span aria-hidden className="border-border flex-1 border-t border-dashed" />
-            <span className="text-body-sm text-text-faint">
-              Nothing has gone out, so there is nothing to reply to yet.
-            </span>
-            <span aria-hidden className="border-border flex-1 border-t border-dashed" />
-          </div>
-        ) : null}
+          {undelivered ? (
+            <div className="flex items-center gap-3 py-4">
+              <span aria-hidden className="border-border flex-1 border-t border-dashed" />
+              <span className="text-body-sm text-text-faint">
+                Nothing has gone out, so there is nothing to reply to yet.
+              </span>
+              <span aria-hidden className="border-border flex-1 border-t border-dashed" />
+            </div>
+          ) : null}
+        </div>
 
         <ComposeBox
           key={acceptDate ?? 'blank'}

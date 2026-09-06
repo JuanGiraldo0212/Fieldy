@@ -150,103 +150,109 @@ export default async function ComponentGallery() {
         title="Thread — the ordinary run"
         note="Request card, an educator follow-up, a venue reply carrying the Newest reply mark, and the waiting tail."
       >
-        <Thread
-          dateOptions={DATE_OPTIONS}
-          asks={ASKS}
-          waitingOnVenue
-          undelivered={false}
-          messages={[
-            msg({
-              id: 'a',
-              party: 'educator',
-              authorName: 'Sarah Chen',
-              isRequest: true,
-              sentAt: EARLIER,
-              body: 'Hello,\n\nWe are hoping to bring our preschool room to your guided tour.\n\nSarah Chen\nSunnyside Daycare',
-            }),
-            msg({
-              id: 'b',
-              party: 'educator',
-              authorName: 'Sarah Chen',
-              sentAt: EARLIER,
-              body: 'One more thing — is there anywhere to leave 18 pairs of wellies?',
-            }),
-            msg({
-              id: 'c',
-              body: 'Tuesday October 14 works for us — we can take the group at 9:30am.\n\nThe picnic shelter is yours for the hour.',
-              bodyFull:
-                'Tuesday October 14 works for us — we can take the group at 9:30am.\n\nThe picnic shelter is yours for the hour.\n\nMargaret Doyle\nEducation Coordinator\n250-555-0134\n\nOn Mon, Sep 22, 2026 at 9:14 AM Sarah Chen wrote:\n\n> Hello,\n>\n> We are hoping to bring our preschool room.',
-            }),
-          ]}
-        />
+        <div className="bg-brand-tint rounded-card-lg px-4 py-4">
+          <Thread
+            dateOptions={DATE_OPTIONS}
+            asks={ASKS}
+            waitingOnVenue
+            undelivered={false}
+            messages={[
+              msg({
+                id: 'a',
+                party: 'educator',
+                authorName: 'Sarah Chen',
+                isRequest: true,
+                sentAt: EARLIER,
+                body: 'Hello,\n\nWe are hoping to bring our preschool room to your guided tour.\n\nSarah Chen\nSunnyside Daycare',
+              }),
+              msg({
+                id: 'b',
+                party: 'educator',
+                authorName: 'Sarah Chen',
+                sentAt: EARLIER,
+                body: 'One more thing — is there anywhere to leave 18 pairs of wellies?',
+              }),
+              msg({
+                id: 'c',
+                body: 'Tuesday October 14 works for us — we can take the group at 9:30am.\n\nThe picnic shelter is yours for the hour.',
+                bodyFull:
+                  'Tuesday October 14 works for us — we can take the group at 9:30am.\n\nThe picnic shelter is yours for the hour.\n\nMargaret Doyle\nEducation Coordinator\n250-555-0134\n\nOn Mon, Sep 22, 2026 at 9:14 AM Sarah Chen wrote:\n\n> Hello,\n>\n> We are hoping to bring our preschool room.',
+              }),
+            ]}
+          />
+        </div>
       </Section>
 
       <Section
         title="Thread — unread, attachments, a system event"
         note="The unread dot stays until the page is viewed. A chip with no link is an attachment whose bytes we could not fetch — it still names the file."
       >
-        <Thread
-          dateOptions={DATE_OPTIONS}
-          asks={ASKS}
-          waitingOnVenue={false}
-          undelivered={false}
-          messages={[
-            msg({
-              id: 'd',
-              party: 'system',
-              authorName: 'Fieldy',
-              body: 'Sarah Chen set the status to confirmed.',
-            }),
-            msg({
-              id: 'e',
-              readAt: null,
-              body: 'Confirmed for the 14th. The booking form is attached — please bring it signed on the day.',
-              attachments: [
-                {
-                  name: 'booking-form.pdf',
-                  url: 'att/demo/1/booking-form.pdf',
-                  mime: 'application/pdf',
-                  size: 184320,
-                },
-                {
-                  name: 'site-map.png',
-                  url: 'att/demo/1/site-map.png',
-                  mime: 'image/png',
-                  size: 2400,
-                },
-              ],
-            }),
-          ]}
-        />
+        <div className="bg-brand-tint rounded-card-lg px-4 py-4">
+          <Thread
+            dateOptions={DATE_OPTIONS}
+            asks={ASKS}
+            waitingOnVenue={false}
+            undelivered={false}
+            messages={[
+              msg({
+                id: 'd',
+                party: 'system',
+                authorName: 'Fieldy',
+                body: 'Sarah Chen set the status to confirmed.',
+              }),
+              msg({
+                id: 'e',
+                readAt: null,
+                body: 'Confirmed for the 14th. The booking form is attached — please bring it signed on the day.',
+                attachments: [
+                  {
+                    name: 'booking-form.pdf',
+                    url: 'att/demo/1/booking-form.pdf',
+                    mime: 'application/pdf',
+                    size: 184320,
+                  },
+                  {
+                    name: 'site-map.png',
+                    url: 'att/demo/1/site-map.png',
+                    mime: 'image/png',
+                    size: 2400,
+                  },
+                ],
+              }),
+            ]}
+          />
+        </div>
       </Section>
 
       <Section
         title="Thread — the request never left"
         note="No venue is being slow, because nobody was written to. The failure sits on the message rather than on the page."
       >
-        <Thread
-          dateOptions={DATE_OPTIONS}
-          asks={ASKS}
-          waitingOnVenue={false}
-          undelivered
-          messages={[
-            msg({
-              id: 'f',
-              party: 'educator',
-              authorName: 'Sarah Chen',
-              isRequest: true,
-              sentAt: EARLIER,
-              body: 'Hello,\n\nWe are hoping to bring our preschool room.',
-            }),
-            msg({
-              id: 'g',
-              party: 'educator',
-              authorName: 'Sarah Chen',
-              body: 'Following up on the above.',
-              sendError: 'Could not send: the mail provider refused the address.',
-            }),
-          ]}
-        />
+        <div className="bg-brand-tint rounded-card-lg px-4 py-4">
+          <Thread
+            dateOptions={DATE_OPTIONS}
+            asks={ASKS}
+            waitingOnVenue={false}
+            undelivered
+            messages={[
+              msg({
+                id: 'f',
+                party: 'educator',
+                authorName: 'Sarah Chen',
+                isRequest: true,
+                sentAt: EARLIER,
+                body: 'Hello,\n\nWe are hoping to bring our preschool room.',
+              }),
+              msg({
+                id: 'g',
+                party: 'educator',
+                authorName: 'Sarah Chen',
+                body: 'Following up on the above.',
+                sendError: 'Could not send: the mail provider refused the address.',
+              }),
+            ]}
+          />
+        </div>
       </Section>
 
       <Section title="Attachment chip" note="Openable, and not.">
