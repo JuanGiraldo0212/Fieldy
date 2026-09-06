@@ -68,10 +68,19 @@ on its own schedule; "Verify" on the domain page skips the wait.
 ```bash
 MAIL_DOMAIN=mail.fieldy.ca
 AUTH_DOMAIN=auth.fieldy.ca
-RESEND_API_KEY=            # Resend → API Keys. Sending permission is enough
+RESEND_API_KEY=            # Resend → API Keys. Must be FULL ACCESS, not sending-only: see below
 RESEND_WEBHOOK_SECRET=     # only exists once the inbound webhook is created
 DEV_EMAIL_OVERRIDE=        # see below
 ```
+
+**The key needs Full access.** A sending-only key sends fine and then fails
+the inbound leg with "This API key is restricted to only send emails" when
+the webhook fetches the message it was told about (`emails.receiving.get`).
+The route answers 500, Svix retries for up to three days, and no reply lands
+until the key is replaced. Found the hard way on 6 September: the first real
+reply sat in Resend's retry queue for exactly this reason. The key must also
+be allowed to send from `mail.fieldy.ca` — a key scoped to `fieldy.ca` alone
+fails with "not authorized to send emails from mail.fieldy.ca".
 
 `sendingConfigured()` in `src/lib/email/send.ts` reads `RESEND_API_KEY` and
 `MAIL_DOMAIN`. Without both, the plan screen says "Save request" rather than
