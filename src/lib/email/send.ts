@@ -59,6 +59,7 @@ export async function sendRelayMessage({
   body,
   inReplyTo,
   references,
+  attachments,
 }: {
   token: string
   messageRowId: string
@@ -70,6 +71,10 @@ export async function sendRelayMessage({
   /* The venue's own Message-ID, when we are answering them. */
   inReplyTo?: string | null
   references?: string[]
+  /* Files the educator attached to a follow-up. Bytes, not URLs: the
+     bucket is private and a venue cannot be handed a signed link that
+     expires in an hour. */
+  attachments?: { filename: string; content: Uint8Array }[]
 }): Promise<SendResult> {
   if (!sendingConfigured()) {
     return { ok: false, error: 'Not sent yet. Fieldy is not connected to an email service.' }
@@ -103,6 +108,14 @@ export async function sendRelayMessage({
       subject: redirected ? `[dev → ${venueEmail}] ${subject}` : subject,
       text: body,
       headers,
+      ...(attachments?.length
+        ? {
+            attachments: attachments.map((a) => ({
+              filename: a.filename,
+              content: Buffer.from(a.content),
+            })),
+          }
+        : {}),
     })
 
     if (error) {

@@ -101,6 +101,20 @@ describe('sendRelayMessage headers', () => {
 })
 
 describe('DEV_EMAIL_OVERRIDE', () => {
+  it('passes attachments through as bytes, and omits the field otherwise', async () => {
+    await sendRelayMessage({
+      ...ARGS,
+      attachments: [{ filename: 'form.pdf', content: new Uint8Array([37, 80, 68, 70]) }],
+    })
+    const withFiles = sendMock.mock.calls.at(-1)![0]
+    expect(withFiles.attachments).toHaveLength(1)
+    expect(withFiles.attachments[0].filename).toBe('form.pdf')
+    expect(Buffer.isBuffer(withFiles.attachments[0].content)).toBe(true)
+
+    await sendRelayMessage(ARGS)
+    expect(sendMock.mock.calls.at(-1)![0].attachments).toBeUndefined()
+  })
+
   it('redirects the send and makes it obvious in the mailbox', async () => {
     process.env.DEV_EMAIL_OVERRIDE = 'me@example.com'
     const r = await sendRelayMessage(ARGS)

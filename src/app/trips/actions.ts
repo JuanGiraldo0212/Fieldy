@@ -7,6 +7,9 @@ import { centre, db, message, trip } from '@/db'
 import { getViewer } from '@/lib/auth'
 import { replySubject, threadingHeaders } from '@/lib/email/relay'
 import { sendingConfigured, sendRelayMessage } from '@/lib/email/send'
+import { attachmentKey, putObject, safeName, storageConfigured } from '@/lib/email/storage'
+import { checkUploads } from '@/lib/email/uploads'
+import type { Attachment } from '@/lib/schemas'
 import { newId } from '@/lib/ids'
 import { redirect } from 'next/navigation'
 import { taskSchema, type Task } from '@/lib/schemas'
@@ -304,6 +307,21 @@ export async function sendFollowUp(
   }
   const body = parsed.data
 
+  /*
+    Files, if any. Checked by the same rule the compose box applied, because
+    the box's check is a courtesy and this one is the gate. Stored before
+    the send so the chip on the thread names a file we actually hold, and
+    so a retry has bytes to attach.
+  */
+  const files = formData
+    .getAll('files')
+    .filter((f): f is File => f instanceof File && f.size > 0)
+  const checked = checkUploads(files)
+  if (!checked.ok) return { error: checked.error }
+  if (files.length > 0 && !storageConfigured()) {
+    return { error: 'Attachments are not available right now. Send the message without them, or try again later.' }
+  }
+
   const rows = await db
     .select({ trip, centre })
     .from(trip)
@@ -341,6 +359,26 @@ export async function sendFollowUp(
   const messageRowId = newId()
   const senderName = viewer.name || c.name
 
+  const attachments: Attachment[] = []
+  const bytes: { filename: string; content: Uint8Array }[] = []
+  for (const f of files) {
+    const content = new Uint8Array(await f.arrayBuffer())
+    const key = attachmentKey(tripId, messageRowId, f.name)
+    const put = await putObject(key, content, f.type || 'application/octet-stream')
+    if (!put.ok) {
+      /* Nothing has been written to the thread yet, so this can be a plain
+         refusal rather than a message that claims a file it does not have. */
+      return { error: `Could not store ${f.name}. Try again, or send without it.` }
+    }
+    attachments.push({
+      name: safeName(f.name),
+      url: key,
+      mime: f.type || null,
+      size: f.size,
+    })
+    bytes.push({ filename: safeName(f.name), content })
+  }
+
   await db.insert(message).values({
     id: messageRowId,
     tripId,
@@ -349,6 +387,7 @@ export async function sendFollowUp(
     body,
     channel: 'email',
     subject,
+    attachments,
     /* Cleared below on a successful send. Until then the thread says, plainly,
        that this one has not gone anywhere. */
     sendError: 'Not sent yet.',
@@ -375,6 +414,7 @@ export async function sendFollowUp(
       body,
       inReplyTo,
       references,
+      attachments: bytes,
     })
 
     await db

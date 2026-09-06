@@ -2,6 +2,7 @@ import { and, eq, gt, isNotNull, notInArray, sql } from 'drizzle-orm'
 import { centre, db, message, trip } from '@/db'
 import { notifyVenueReply } from '@/lib/email/notify'
 import { sendingConfigured, sendRelayMessage } from '@/lib/email/send'
+import { getObject } from '@/lib/email/storage'
 
 /*
   The retry job. Plan §2: "If a step fails it is recorded on the message
@@ -90,6 +91,14 @@ async function retrySends(): Promise<{ attempted: number; recovered: number }> {
 
   for (const row of stuck) {
     const { message: m, trip: t, centre: c } = row
+    /* A follow-up that carried files carries them again. One that can no
+       longer be fetched is left out: the words still go, and the chip on
+       the thread still names the file. */
+    const attachments: { filename: string; content: Uint8Array }[] = []
+    for (const a of m.attachments) {
+      const content = await getObject(a.url)
+      if (content) attachments.push({ filename: a.name, content })
+    }
     const sent = await sendRelayMessage({
       token: t.relayToken,
       messageRowId: m.id,
@@ -98,6 +107,7 @@ async function retrySends(): Promise<{ attempted: number; recovered: number }> {
       venueEmail: t.venueEmail!,
       subject: m.subject ?? 'Group visit request',
       body: m.body,
+      attachments,
     })
 
     await db
