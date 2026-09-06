@@ -50,6 +50,7 @@ export async function TopNav() {
         <nav className="-mx-5 flex max-w-[calc(100%+40px)] items-center gap-1.5 overflow-x-auto px-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           <NavLinks
             signedIn={Boolean(viewer?.centreId)}
+            isAdmin={viewer?.isAdmin ?? false}
             tripCount={counts?.trips ?? 0}
             unreadCount={counts?.unread ?? 0}
           />

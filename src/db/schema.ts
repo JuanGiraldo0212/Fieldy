@@ -7,6 +7,11 @@
   Those files own field names and enum values. Do not rename anything here
   without changing them first. Implementation notes live in plan section 4.1.
 
+  Three columns are NOT in those files, and are recorded in docs/decisions.md
+  instead: `account.is_admin` (the admin gate for /admin), and
+  `venue.edited_at` / `program.edited_at` (a hand edit that the catalog
+  import must not overwrite).
+
   Conventions: ULID text primary keys generated in the app; catalog ids are
   stable slugs; money is numeric(10,2) CAD; timestamps are UTC with timezone;
   dates are plain `date`; times are `HH:MM` text.
@@ -238,6 +243,11 @@ export const venue = pgTable(
     extractedAt: timestamp('extracted_at', { withTimezone: true }),
     extractorVersion: text('extractor_version'),
 
+    /* Set by a save on /admin, never by the import. Non-null means a person
+       corrected this row by hand, and scripts/import-catalog.ts skips it
+       rather than putting the extractor's older reading back on top. */
+    editedAt: timestamp('edited_at', { withTimezone: true }),
+
     createdAt: timestamp('created_at', { withTimezone: true })
       .notNull()
       .defaultNow(),
@@ -338,6 +348,9 @@ export const program = pgTable(
        because trips reference them. */
     active: boolean('active').notNull().default(true),
 
+    /* Same meaning as venue.edited_at. */
+    editedAt: timestamp('edited_at', { withTimezone: true }),
+
     createdAt: timestamp('created_at', { withTimezone: true })
       .notNull()
       .defaultNow(),
@@ -391,6 +404,12 @@ export const account = pgTable('account', {
   /* A short "the venue replied" email with a link. Not a forwarded copy: the
      relay is send-only and the educator never replies by email. */
   emailNotifications: boolean('email_notifications').notNull().default(true),
+  /* The one permission in the system: may open /admin and edit the catalog.
+     Granted by us with SQL (or `pnpm admin:grant`), never by the app. Checked
+     in application code — see requireAdmin() in src/lib/auth.ts — because
+     Drizzle bypasses RLS. When venues get their own accounts, their access
+     will be a separate membership table, not this flag. */
+  isAdmin: boolean('is_admin').notNull().default(false),
   createdAt: timestamp('created_at', { withTimezone: true })
     .notNull()
     .defaultNow(),

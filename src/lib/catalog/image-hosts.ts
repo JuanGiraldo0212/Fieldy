@@ -50,13 +50,31 @@ export const IMAGE_HOSTS = [
 
 const ALLOWED = new Set<string>(IMAGE_HOSTS)
 
+/*
+  The one host that is not a venue's: our own Supabase project, where the
+  photographs a venue hands us are stored (the public `catalog` bucket, see
+  src/lib/catalog/uploads.ts). Derived from the env rather than listed, so
+  the local, preview and production projects each allow their own. NEXT_PUBLIC_
+  values are inlined at build time, so this works in the browser too.
+*/
+export function uploadHost(): string | null {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+  if (!url) return null
+  try {
+    return new URL(url).hostname
+  } catch {
+    return null
+  }
+}
+
 /* A URL we can hand to next/image without it throwing. */
 export function isRenderableImage(url: string | null | undefined): boolean {
   if (!url) return false
   try {
     const u = new URL(url)
     /* http on an https page is mixed content the browser blocks anyway. */
-    return u.protocol === 'https:' && ALLOWED.has(u.hostname)
+    if (u.protocol !== 'https:') return false
+    return ALLOWED.has(u.hostname) || u.hostname === uploadHost()
   } catch {
     return false
   }

@@ -1,5 +1,11 @@
 import type { NextConfig } from 'next'
-import { IMAGE_HOSTS } from './src/lib/catalog/image-hosts'
+import { IMAGE_HOSTS, uploadHost } from './src/lib/catalog/image-hosts'
+
+/* The venues' hosts, plus our own Supabase project for uploaded photographs.
+   Same list isRenderableImage() checks; see image-hosts.ts. */
+const imageHosts = [...IMAGE_HOSTS, uploadHost()].filter(
+  (h): h is string => Boolean(h),
+)
 
 /*
   Catalog photographs are the venues' own, published on their own public sites.
@@ -22,12 +28,21 @@ const nextConfig: NextConfig = {
   // because links get opened inside messaging apps' browsers.
   reactStrictMode: true,
   images: {
-    remotePatterns: IMAGE_HOSTS.map((hostname) => ({
+    remotePatterns: imageHosts.map((hostname) => ({
       protocol: 'https' as const,
       hostname,
     })),
     // Venue photos change rarely; a long cache spares their servers.
     minimumCacheTTL: 60 * 60 * 24 * 7,
+  },
+  experimental: {
+    serverActions: {
+      // Default is 1 MB, which no photograph fits. Files reach us through
+      // server actions — a follow-up's attachments (10 MB each, 25 MB
+      // together, src/lib/email/uploads.ts) and admin photo uploads (same
+      // per-file cap) — so the body limit sits just above the larger total.
+      bodySizeLimit: '30mb',
+    },
   },
 }
 

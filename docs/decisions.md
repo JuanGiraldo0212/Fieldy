@@ -276,3 +276,80 @@ message" that quietly stops working; an object that outlives its row is
 merely a file nobody can reach, which the next pass will not find either —
 so listing would eventually be needed anyway, for cleanup, not for the
 promise.
+
+---
+
+## Admin is a flag on `account`, checked in code
+
+*Admin slice. Migration `0010`, `requireAdmin()` in `src/lib/auth.ts`, `src/app/admin/`.*
+
+**The situation.** The catalog entered the system only through
+`pnpm import:catalog`. There was no way to correct a venue without editing
+a JSON file and re-importing, no way to add a photograph at all, and no
+view of which venues were missing what. `data-model.md` §1 says of
+`account`: "deliberately absent: any role/permission model."
+
+**The decision.** One boolean, `account.is_admin`, default false, granted
+by us with SQL or `pnpm admin:grant <email>` and never from inside the app.
+`getViewer()` carries it; `requireAdmin()` returns the viewer or null; every
+`/admin` page and every admin server action calls it first. Signed out goes
+to login, signed in and not admin gets a 404, not a 403 — the route's
+existence is not announced to whoever guesses it.
+
+It is checked in application code because Drizzle connects as the table
+owner and is exempt from RLS. Same rule as centres: the check in the action
+is the whole of the access control.
+
+**Why not an env var of emails.** It would have needed no migration. But
+when venues get their own accounts, their access to their own page will be
+a membership table (`account_id`, `venue_id`), and the admin flag belongs in
+the same place as that, in the database, where a query can ask it.
+
+**Why not a role enum.** There is one permission. An enum with two values is
+a boolean that will be misread as a plan.
+
+---
+
+## Hand edits win over the import
+
+*Admin slice. `venue.edited_at`, `program.edited_at`, `scripts/import-catalog.ts`.*
+
+The import upserts every field the JSON carries. Once a person has phoned a
+venue and typed what they said, a re-import would put the extractor's older
+reading of the website back on top, and nobody would notice until a
+director hit a "Needs confirmation" that had been confirmed.
+
+So a save on `/admin` stamps `edited_at`, and the import skips any venue or
+program that carries one — whole venue at a time, because a venue's
+programs and images are one record in the JSON — and says so in its report.
+`--force` overrides. Uploaded photographs have ULID ids rather than the
+`venue:slug` ids the import writes, and the import's image replacement is
+scoped to its own ids, so they survive even a forced run.
+
+The alternative was a merge: import fields the JSON has, keep fields the
+person changed. That needs per-field provenance, which is a second schema.
+Skipping a row is one column and one `continue`.
+
+---
+
+## Photographs a venue hands us are hosted; scraped ones still are not
+
+*Admin slice. Public `catalog` bucket (migration `0010`), `src/lib/catalog/photos.ts`, `uploads.ts`.*
+
+The first entry in this file says: do not self-host copies of a venue's
+photographs. That still stands for the photographs the extractor found on
+their websites, which remain remote URLs, `unverified`, credited and proxied.
+
+A photograph the venue sends us to use is a different thing. They chose it,
+they gave it to us for this purpose, and a remote URL for it does not exist.
+It goes in a public bucket under `venues/<venue>/<ulid>.<ext>`, the row is
+`venue_supplied`, and the rights note names who uploaded it and on what
+date, so the claim is checkable. The catalog renders it through the same
+`next/image` path as any other host; our own Supabase host is added to the
+allowlist from `NEXT_PUBLIC_SUPABASE_URL` rather than listed, so local,
+preview and production each allow their own.
+
+Upload goes through a server action, which capped bodies at 1 MB.
+`serverActions.bodySizeLimit` is now 30 MB, which also happens to be the
+first time the follow-up attachment limits in `src/lib/email/uploads.ts`
+(10 MB a file, 25 MB together) could actually be reached.
