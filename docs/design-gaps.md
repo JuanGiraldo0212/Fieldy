@@ -476,10 +476,14 @@ verbatim from design-map §7. Differences, all logged:
     "Waiting for venue reply…" tail (slice 5), which is the "an empty thread
     explains that the venue's reply will appear there" the spec asks for.
 
-34. **Deviation — the catalog shows forty cards, then "Show the other N
-    outings".** The prototype lists every result. Signed out, that is every
-    program in the region at once, and Lighthouse mobile scored 74 on the
-    page's own weight (11,400 DOM nodes). The first forty render; the link
-    below carries the search state in the URL and works without JavaScript.
-    A director with a room set up rarely has more than thirty results and
-    never sees the link. The map's library also loads only with the map.
+34. **Deviation — the catalog arrives with forty cards and loads the rest
+    as you scroll.** The prototype lists every result at once. Signed out,
+    that is every program in the region, and Lighthouse mobile scored 74 on
+    the page's own weight (11,400 DOM nodes). The first forty render on the
+    server; a sentinel at the bottom asks a server action for the next forty,
+    already rendered as the same cards from the same search, and appends
+    them. A "Show the other N outings" button sits beside it for anyone who
+    would rather tap, and for screen readers. With JavaScript off the same
+    spot is a link that reloads the search with everything shown. A director
+    with a room set up rarely has more than thirty results and sees none of
+    this. The map's library also loads only with the map.

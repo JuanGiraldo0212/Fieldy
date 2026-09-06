@@ -1,18 +1,11 @@
 import Link from 'next/link'
-import { getActiveRoom, getViewer } from '@/lib/auth'
-import {
-  emptyHint,
-  fetchCatalog,
-  fetchHeroImages,
-  resultLine,
-  search,
-  bandsFor,
-  preferredTransport,
-} from '@/lib/catalog/search'
-import { parseSearchParams, toSearchParams } from '@/lib/catalog/url'
 import dynamic from 'next/dynamic'
+import { emptyHint, resultLine } from '@/lib/catalog/search'
+import { plainParams, resolveCatalog } from '@/lib/catalog/resolve'
+import { toSearchParams } from '@/lib/catalog/url'
 import type { MapPin } from '@/components/catalog/catalog-map'
 import { OutingCard } from '@/components/catalog/outing-card'
+import { LoadMore } from '@/components/catalog/load-more'
 import { SearchControls, SortControl } from '@/components/catalog/search-controls'
 import { EmptyState } from '@/components/ui'
 
@@ -36,21 +29,14 @@ const CatalogMap = dynamic(() =>
 )
 
 /*
-  How many cards render before "Show more". Plan §8's Lighthouse target is
+  How many cards the page arrives with. Plan §8's Lighthouse target is
   measured on the signed-out catalog, where nothing narrows the list and
   every program in the region is a card — 76 of them at around 150 DOM
   nodes each, which is what a phone spends its first three seconds laying
-  out. Forty is more than a screen and a half of scrolling on a phone; the
-  rest is one tap away, and the link works without JavaScript.
+  out. Forty is more than a screen and a half on a phone; the rest arrives
+  as she scrolls (LoadMore), or behind one link when nothing runs scripts.
 */
 const FIRST_PAGE = 40
-
-/*
-  Where a logged-out visitor is measured from. Once someone has a room, we
-  measure from that room's own home base instead, which is what the design's
-  "Leaving from" control shows.
-*/
-const VICTORIA = { lat: 48.4284, lng: -123.3656 }
 
 export default async function CatalogPage({
   searchParams,
@@ -61,53 +47,8 @@ export default async function CatalogPage({
   const mapOpen = params.map === '1'
   const showAll = params.all === '1'
 
-  const viewer = await getViewer()
-  const activeRoom = await getActiveRoom(viewer?.centreId ?? null)
-
-  /*
-    A room replaces the anonymous defaults, but only where the URL is silent.
-    Someone who has explicitly narrowed the search has said what they want, and
-    having their own room quietly overwrite it on the next navigation would be
-    maddening.
-  */
-  const urlState = parseSearchParams(params)
-  const state = activeRoom
-    ? {
-        ...urlState,
-        age_bands: params.ages
-          ? urlState.age_bands
-          : bandsFor(activeRoom.ageMin, activeRoom.ageMax),
-        children: params.kids ? urlState.children : activeRoom.size,
-        budget_max: params.max
-          ? urlState.budget_max
-          : Number(activeRoom.budgetPerChild ?? urlState.budget_max),
-        transport: params.to
-          ? urlState.transport
-          : preferredTransport(activeRoom.transport, urlState.transport),
-      }
-    : urlState
-
-  /*
-    Where distances are measured from, most specific first: an address the
-    director picked for this search, then her active room's home base, then
-    the centre of Victoria for someone signed out.
-
-    The map reads the same value, so the dark pin is always the place the
-    numbers on the cards were measured from. Those two disagreeing would be
-    worse than either being wrong on its own.
-  */
-  const origin =
-    state.from_lat != null && state.from_lng != null
-      ? { lat: state.from_lat, lng: state.from_lng }
-      : activeRoom?.lat != null && activeRoom.lng != null
-        ? { lat: activeRoom.lat, lng: activeRoom.lng }
-        : VICTORIA
-
-  const originLabel = state.from || activeRoom?.name || 'Victoria'
-  const originAddress = state.from || activeRoom?.address || 'Victoria'
-
-  const [rows, heroes] = await Promise.all([fetchCatalog(), fetchHeroImages()])
-  const results = search(rows, state, origin, heroes)
+  const { viewer, activeRoom, state, origin, originLabel, originAddress, results } =
+    await resolveCatalog(params)
 
   /*
     One pin per distinct venue coordinate — several programs at the same venue
@@ -214,15 +155,12 @@ export default async function CatalogPage({
             ))}
           </div>
           {hiddenCount > 0 ? (
-            <div className="mt-5 text-center">
-              <Link
-                href={showAllHref()}
-                scroll={false}
-                className="border-border-strong bg-surface hover:border-brand text-body-sm inline-block rounded-pill border px-5 py-3 font-bold no-underline"
-              >
-                Show the other {hiddenCount} outing{hiddenCount === 1 ? '' : 's'}
-              </Link>
-            </div>
+            <LoadMore
+              params={plainParams(params)}
+              offset={visible.length}
+              remaining={hiddenCount}
+              fallbackHref={showAllHref()}
+            />
           ) : null}
         </>
       ) : (
