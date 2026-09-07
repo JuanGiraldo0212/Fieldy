@@ -1,0 +1,72 @@
+{
+  "venue": {
+    "id": "bernadette-mccormack-hummingbird-studio",
+    "name": "Bernadette McCormack - Hummingbird Studio",
+    "website": "https://www.bernadettemccormack.com",
+    "description": "Hummingbird Studio is the website of the painter Bernadette McCormack, who has been painting since 1992 and lives in Ladysmith on Vancouver Island. The site is an online shop selling her original paintings, prints, posters and postcards, with prices in Canadian dollars that include taxes and shipping. It publishes no street address, no opening hours and no classes, tours or workshops of any kind. There is nothing here a school or daycare group can visit or book, so this venue is recorded as not hosting children's groups.",
+    "category": "arts_performance",
+    "address": null,
+    "lat": null,
+    "lng": null,
+    "geo_source": null,
+    "hosts_school_groups": false,
+    "hosts_daycare_groups": false,
+    "youngest_age_welcomed_years": null,
+    "booking_email": "missmarymack80@gmail.com",
+    "booking_phone": "(250) 715-5087",
+    "booking_url": null,
+    "booking_method": null,
+    "has_washrooms": null,
+    "has_lunch_space": null,
+    "has_rain_backup": null,
+    "stroller_accessible": null,
+    "wheelchair_accessible": null,
+    "bus_parking": null,
+    "facility_notes": null,
+    "nearby_park": null,
+    "restrictions": null,
+    "languages": null,
+    "general_admission_child_cad": null,
+    "general_admission_adult_cad": null,
+    "hours_notes": null,
+    "seasonal_notes": "The home page says Bernadette will be at the Duke Point Ferry Marketplace from 26 August to 8 September 2026. That is a market stall, not a place to bring a group.",
+    "price_year_or_season": null,
+    "checked_on": "2026-09-03",
+    "checked_by": "scraper"
+  },
+  "programs": [],
+  "images": [
+    {
+      "id": "hero-dot-painting",
+      "url": "https://baf35f149b6429664f25.cdn6.editmysite.com/uploads/b/a3bc21d0-5ce9-11ea-a028-9725be2eaac9/da7573937e5faca9d709a6274c0107e1.jpeg",
+      "role": "hero",
+      "alt": "Hummingbird Studio logo",
+      "alt_source": "site",
+      "caption": null,
+      "found_on_url": "https://www.bernadettemccormack.com/",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    }
+  ],
+  "gaps": [
+    "RETRIEVAL NOTE: this site renders in JavaScript and returns only <head> metadata to a plain fetch. A fetch-only re-run will appear to find an empty site. It was read in a browser instead.",
+    "no address published, cannot geocode. The site names Ladysmith as where the artist lives but gives no street address for a studio anyone can visit.",
+    "This is a single artist's online shop and portfolio. No classes, workshops, studio tours or group visits are offered anywhere on the site, so no program was created.",
+    "The tracker lists this venue in Duncan. The site itself says the artist lives in Ladysmith and calls the Cowichan Valley home. Nothing on the site places a studio in Duncan.",
+    "Opening hours, washrooms, accessibility and parking: nothing published, because there is no public premises.",
+    "The site labels its photographs 'Hummingbird Studio logo'. We recorded that alt text word for word because it is what the site says, but the picture is actually a close up of one of her dot paintings. The alt text should be rewritten by hand before this record is published.",
+    "The only two large pictures on the site are used as branding. There is no photograph of a place a group would arrive at, because there is no such place."
+  ],
+  "conflicts": [],
+  "pages_opened": [
+    "https://www.bernadettemccormack.com/",
+    "https://bernadettemccormack.com"
+  ],
+  "pages_useful": [
+    "https://www.bernadettemccormack.com/"
+  ],
+  "extracted_at": "2026-09-03T00:00:00Z",
+  "extractor_version": "v2.0"
+}

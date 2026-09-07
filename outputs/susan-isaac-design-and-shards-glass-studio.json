@@ -1,0 +1,233 @@
+{
+  "venue": {
+    "id": "susan-isaac-design-shards-glass-studio",
+    "name": "Susan Isaac Design and Shards Glass Studio",
+    "website": "https://www.susanisaacdesign.com",
+    "description": "Susan Isaac Design and Shards Glass Studio is a one artist fused glass studio run by Susan Isaac, who also sells jewellery, scarves and paper goods through an online shop. The studio teaches three hour fused glass workshops in which each person makes a plate, tray, sun catcher, garden ornament or pendants, and it takes private group bookings as well as scheduled classes. Workshops are published as ages 8 to adult, and children aged 5 to 7 may come only if each brings an adult helper who stays with that child alone. The studio has moved from Sooke to 1665 Peterson Road on Gabriola Island and says it is closed until October 2026 while it sets up, with no dates and no prices published yet.",
+    "category": "arts_performance",
+    "address": "1665 Peterson Road, Gabriola Island, BC",
+    "lat": null,
+    "lng": null,
+    "geo_source": "geocode_pending",
+    "hosts_school_groups": null,
+    "hosts_daycare_groups": false,
+    "youngest_age_welcomed_years": 5,
+    "booking_email": "susan@susanisaacdesign.com",
+    "booking_phone": null,
+    "booking_url": null,
+    "booking_method": "email",
+    "has_washrooms": null,
+    "has_lunch_space": null,
+    "has_rain_backup": null,
+    "stroller_accessible": null,
+    "wheelchair_accessible": null,
+    "bus_parking": null,
+    "facility_notes": null,
+    "nearby_park": null,
+    "restrictions": [
+      "Youngsters (age 5-7) may attend as long as they bring an adult helper who dedicates time to them alone."
+    ],
+    "languages": null,
+    "general_admission_child_cad": null,
+    "general_admission_adult_cad": null,
+    "hours_notes": "The studio page says visits are by appointment or come by chance. A separate page says the studio is closed until October 2026 while it moves.",
+    "seasonal_notes": "Workshops are expected to restart in October 2026 at the new Gabriola Island studio. No dates were published at the time of checking.",
+    "price_year_or_season": null,
+    "checked_on": "2026-09-03",
+    "checked_by": "scraper"
+  },
+  "programs": [
+    {
+      "id": "fused-glass-workshop",
+      "name": "Fused glass workshop",
+      "description": "A three hour beginner session. Glass and supplies are included, and each person makes one piece up to seven inches, a plate, sun catcher, pot or garden ornament, or instead two four inch pieces or two pendants with cords. Extra glass costs a small amount more. The studio runs scheduled Saturday classes, listed as glassware from 10 to 1 and culinary from 1 to 4, and private bookings where you and Susan pick a date that suits your group. The price is shown only as to be announced, plus GST, per person. Ages are published as 8 to adult, and children aged 5 to 7 may attend if each brings an adult helper, who is not charged. Registration is by email. Finished pieces are fired for 18 hours and returned one to three days later, so nothing goes home on the day. You may bring your own food, and Susan provides coffee, tea, hot chocolate and a snack.",
+      "what_children_do": "Lay coloured glass pieces onto a base at the studio bench to build a plate, sun catcher, garden ornament or a pair of pendants, with the teacher working alongside them for about three hours. The piece is left behind to be fired in the kiln, so they go home empty handed and collect it later.",
+      "our_note": "The studio is on Gabriola Island now rather than in Sooke, so for a Victoria group this is a ferry trip and most of a day. Ages start at 8, and the studio's own pages disagree about whether it takes six people or ten, so settle numbers and the price by email before you plan anything around it.",
+      "practical_summary": "No price, no dates and no group rate are published, and the studio says it is closed until October 2026. Nothing is stated about washrooms, parking or where a group would eat, although you are welcome to bring food and hot drinks are provided.",
+      "comes_to_you": false,
+      "age_min_years": 8,
+      "age_max_years": null,
+      "grade_min": null,
+      "grade_max": null,
+      "age_basis": "years",
+      "duration_min": 180,
+      "capacity_max": null,
+      "capacity_min": null,
+      "cost_per_child_cad": null,
+      "cost_per_group_cad": null,
+      "cost_per_adult_cad": null,
+      "free_adults_per_children": null,
+      "is_free": false,
+      "tax_included": false,
+      "extra_fees_note": "Additional glass or supplies are available for a nominal fee. The workshop price itself is listed only as to be announced, plus GST, per person.",
+      "school_rate_only": false,
+      "deposit_required": null,
+      "payment_timing": null,
+      "cancellation_note": "If you are sick you must stay home. If you become ill you are welcome to a refund if you notify me 24 hours in advance. No Shows do not receive a refund.",
+      "months_offered": null,
+      "days_offered": null,
+      "time_slots": null,
+      "lead_time_days": null,
+      "chaperone_ratio": null,
+      "adults_free": null,
+      "indoor": true,
+      "outdoor": false,
+      "format": [
+        "guided",
+        "hands_on"
+      ],
+      "sensory_friendly": null,
+      "low_noise": null,
+      "neurodiversity_friendly": null,
+      "mood_tags": [
+        "creative",
+        "play"
+      ],
+      "curriculum_tags": null,
+      "booking_email": "susan@susanisaacdesign.com",
+      "booking_url": null,
+      "booking_method": "email",
+      "source_url": "https://www.susanisaacdesign.com/fused-glass-workshops",
+      "evidence": "We welcome artists from ages 8 to adult.",
+      "checked_on": "2026-09-03",
+      "image_ids": [
+        "program-workshop-students"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "id": "hero-studio-exterior",
+      "url": "https://images.squarespace-cdn.com/content/v1/621bd5de2bdd0c31cce0fa36/5ee3542b-0b97-4c07-90f3-41100dc01f0f/shards-of-glass-studio-in-sooke-bc-near-victoria.jpg",
+      "role": "hero",
+      "alt": "Shards of Glass studio in Sooke BC Canada",
+      "alt_source": "site",
+      "caption": null,
+      "found_on_url": "https://www.susanisaacdesign.com/visit-the-studio",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    },
+    {
+      "id": "program-workshop-students",
+      "url": "https://images.squarespace-cdn.com/content/v1/621bd5de2bdd0c31cce0fa36/808177e9-570b-4a7e-a771-84a25f9a9df9/student-in-fused-glass-studio.jpg",
+      "role": "program",
+      "alt": "Students in Shards of Glass Art Studio in Sooke BC",
+      "alt_source": "site",
+      "caption": null,
+      "found_on_url": "https://www.susanisaacdesign.com/fused-glass-workshops",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    },
+    {
+      "id": "space-studio-supplies",
+      "url": "https://images.squarespace-cdn.com/content/v1/621bd5de2bdd0c31cce0fa36/d365522e-af94-4e92-a914-6865fe6fbda6/fused-glass-supplies-in-studio.jpg",
+      "role": "space",
+      "alt": "fused glass art making supplies at Shards of Glass studio",
+      "alt_source": "site",
+      "caption": null,
+      "found_on_url": "https://www.susanisaacdesign.com/visit-the-studio",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    },
+    {
+      "id": "activity-teaching-in-studio",
+      "url": "https://images.squarespace-cdn.com/content/v1/621bd5de2bdd0c31cce0fa36/4c3c7868-d0ac-48a9-b083-39966b6a7b0a/susan-isaac-and-student-in-studio-fused-glass-workshops.jpg",
+      "role": "activity",
+      "alt": "Students at Shards of Glass studio in Sooke BC",
+      "alt_source": "site",
+      "caption": null,
+      "found_on_url": "https://www.susanisaacdesign.com/visit-the-studio",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    }
+  ],
+  "gaps": [
+    "PRICE: the workshop price is published only as to be announced plus GST per person. No group rate and no school or daycare rate is published anywhere.",
+    "The studio has moved out of the region. The tracker row lists Sooke, but the site now gives 1665 Peterson Road, Gabriola Island, which is near Nanaimo and needs a ferry from the Lower Island.",
+    "The site says the studio is closed until October 2026 and that workshop dates are still to be announced, so there is nothing bookable at the time of checking.",
+    "The site never mentions school groups, daycares, preschools or field trips. The private workshops are pitched at staff parties, birthdays and adult social groups, so whether a class would be taken is unknown.",
+    "Group size is contradicted on the site itself: the workshop page says 10 participants and the questions below it say groups are limited to between 4 and 6 people. Recorded as unknown.",
+    "Three phone numbers appear on the site: 250-247-0796 on the footer of every page, 250-642-4942 in the workshop questions, and a text number of 250 889 4972 on the contact page. None is dated, so no phone number was recorded.",
+    "Washrooms, a lunch space, wheelchair and stroller access, parking and bus parking are not stated anywhere on the site.",
+    "Months of the year are unknown. No workshop calendar is published for the new location.",
+    "All four photographs show the former Sooke studio, not the new Gabriola Island premises. There are no photographs of the new studio on the site.",
+    "The site's social preview picture is the business logo rather than a photograph, so the studio exterior photograph from the visit page was used as the main picture instead.",
+    "The two day Fused Glass and Culinary Weekends are described on the site but carry no dates, no prices and no ages, and the last listed events were in 2024. They were not recorded as a program."
+  ],
+  "conflicts": [
+    {
+      "field": "address",
+      "values": [
+        "1665 Peterson Road, Gabriola Island, BC",
+        "3809 Otter Point Rd, Sooke, BC"
+      ],
+      "sources": [
+        "https://www.susanisaacdesign.com/visit-the-studio",
+        "https://www.susanisaacdesign.com/fused-glass-workshops"
+      ],
+      "note": "Their pages give two different studio addresses. The visit page says they have moved to Gabriola Island, while the workshop questions further down still say Sooke. Check which one is right before anyone gets in a vehicle."
+    },
+    {
+      "field": "capacity_max",
+      "values": [
+        "10 participants",
+        "between 4 and 6 people"
+      ],
+      "sources": [
+        "https://www.susanisaacdesign.com/fused-glass-workshops",
+        "https://www.susanisaacdesign.com/fused-glass-workshops"
+      ],
+      "note": "One part of the workshop page says ten people, and the questions lower down the same page say they cap a group at four to six. Worth settling how many children they will actually take when you book."
+    },
+    {
+      "field": "hours_notes",
+      "values": [
+        "We are closed until October 2026 as we unpack and add to our infrastructure",
+        "Starting July By Appointment or Come By Chance"
+      ],
+      "sources": [
+        "https://www.susanisaacdesign.com/visit-the-studio",
+        "https://www.susanisaacdesign.com/get-in-touch"
+      ],
+      "note": "Two of their pages disagree about when the studio is open again. One says closed until October, the other says July by appointment. Ask before you travel."
+    },
+    {
+      "field": "booking_phone",
+      "values": [
+        "250-247-0796",
+        "250-642-4942",
+        "250 889 4972"
+      ],
+      "sources": [
+        "https://www.susanisaacdesign.com/",
+        "https://www.susanisaacdesign.com/fused-glass-workshops",
+        "https://www.susanisaacdesign.com/get-in-touch"
+      ],
+      "note": "Three different phone numbers appear across their site and none of them is marked as current. Email is the route they ask you to use for workshops, so start there."
+    }
+  ],
+  "pages_opened": [
+    "https://www.susanisaacdesign.com/",
+    "https://www.susanisaacdesign.com/visit-the-studio",
+    "https://www.susanisaacdesign.com/fused-glass-workshops",
+    "https://www.susanisaacdesign.com/culinary-workshops-1",
+    "https://www.susanisaacdesign.com/faqs",
+    "https://www.susanisaacdesign.com/get-in-touch"
+  ],
+  "pages_useful": [
+    "https://www.susanisaacdesign.com/",
+    "https://www.susanisaacdesign.com/visit-the-studio",
+    "https://www.susanisaacdesign.com/fused-glass-workshops",
+    "https://www.susanisaacdesign.com/get-in-touch"
+  ],
+  "extracted_at": "2026-09-03T12:00:00-07:00",
+  "extractor_version": "v2.0"
+}

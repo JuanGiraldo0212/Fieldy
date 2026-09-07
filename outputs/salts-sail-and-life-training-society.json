@@ -1,0 +1,283 @@
+{
+  "venue": {
+    "id": "salts-sail-and-life-training-society",
+    "name": "SALTS – Sail and Life Training Society",
+    "website": "https://www.salts.ca/",
+    "description": "SALTS has offered tall ship sail training on the BC coast since 1974, sailing two wooden schooners, the Pacific Swift and the Pacific Grace, from Victoria's Upper Harbour. Each spring and fall the ships take school and youth groups on four and five day trips to the Gulf Islands, open to participants aged 13 to 22 with up to four adult leaders on board. A group books the whole ship for a flat fee that covers all meals, sail training materials and equipment. SALTS also runs a handful of all ages public day sails each year, and one free day sail in September for grade 8 to 12 teachers who want to try the ship before bringing a class.",
+    "category": "nature_outdoors",
+    "address": "451 Herald Street, Victoria, BC V8W 3N8",
+    "lat": 48.42994,
+    "lng": -123.37084,
+    "geo_source": "geocoded",
+    "hosts_school_groups": true,
+    "hosts_daycare_groups": false,
+    "youngest_age_welcomed_years": null,
+    "booking_email": "booking@salts.ca",
+    "booking_phone": "250-383-6811 ext 109",
+    "booking_url": null,
+    "booking_method": "email",
+    "has_washrooms": true,
+    "has_lunch_space": true,
+    "has_rain_backup": null,
+    "stroller_accessible": null,
+    "wheelchair_accessible": null,
+    "bus_parking": null,
+    "facility_notes": {
+      "washrooms": "These multipurpose areas each have bunks, a table for dining, and a single occupancy bathroom (\"head\") with sink and toilet.",
+      "lunch_space": "Trip fees include all meals aboard ship. The main hold has a table for dining and is open to the galley area. Day sail passengers bring a bag lunch and water."
+    },
+    "nearby_park": null,
+    "restrictions": [
+      "Everyone who sails with SALTS is considered a \"trainee\" and will take an active part in sailing the ship. Although no previous experience is necessary, physical agility and mental alertness are essential for safe participation.",
+      "Smoking/vaping, consumption of alcohol, and gum are not permitted on the dock or on board SALTS vessels.",
+      "Cell phones and other electronic devices should be turned off for the duration of the sailing or only be used to take photos.",
+      "Health status will be verified at the dock and anyone who is unwell will not be permitted to board.",
+      "There are no showers on board.",
+      "All medical and mental health conditions must be reported as well as any medications being brought on board must be reviewed and accepted by SALTS prior to finalizing the trip assignment."
+    ],
+    "languages": null,
+    "general_admission_child_cad": null,
+    "general_admission_adult_cad": null,
+    "hours_notes": "Public office and marina hours are 8:30 AM to 4:30 PM, Monday through Friday. Please contact us in advance to arrange any in-person visit. Office closed stat holidays and from Dec 23 to Jan 4.",
+    "seasonal_notes": "Group trips are offered from March to June, September and October. During the summer months individual trainees sign up for ten day trips, so the ships are not available to groups then. Public day sails are scheduled on a few named dates in May and September.",
+    "price_year_or_season": "Group trip fees are published for Fall 2026 to Spring 2027 and Fall 2027 to Spring 2028. The day sail fee is published for the 2026 season.",
+    "checked_on": "2026-09-03",
+    "checked_by": "scraper"
+  },
+  "programs": [
+    {
+      "id": "group-sail-training-trip",
+      "name": "Group sail training trip, four or five days",
+      "description": "A four or five day residential voyage for a school, post secondary programme or youth group, sailing from Victoria's Upper Harbour to the Gulf Islands aboard the Pacific Swift or the Pacific Grace. Open to participants aged 13 to 22. Each ship takes 18 to 30 trainees in total, young people and leaders together, and up to four adults may join each trip, including a minimum of one male and one female teacher, leader or chaperone. The fee is for the whole ship and includes all meals aboard, sail training materials and equipment. Fall 2026 to Spring 2027 rates are $38,892.00 plus GST for a five day Monday to Friday trip and $30,996.00 plus GST for a four day trip in a week with a Monday or Friday statutory holiday. Fall 2027 to Spring 2028 rates are $40,080.00 and $31,920.00 plus GST. Groups typically arrive at the dock at 10:00 am to begin boarding at 10:30 am, and the ship returns by 3:00 pm to disembark by 3:30 pm on the last day. Bookings are finalised about a year ahead and current groups get first option on the following year.",
+      "what_children_do": "Haul on lines and handle the sails, take a turn at the wheel and on watch, learn navigation, knots and the parts of the ship, and row the ship's dories ashore to beaches and local marine parks. They sleep in bunks below deck, eat at a table in the hold and take a turn at galley chores.",
+      "our_note": "The fee buys the whole ship, not a seat, so what it costs each family depends entirely on how many young people you bring. Dates are settled roughly a year out and returning groups get first refusal, so plan two years ahead rather than one. There is a free day sail for grade 8 to 12 teachers each September if you want to try the ship before you commit a class.",
+      "practical_summary": "Meals, bunks and all the sail training gear are included, and each sleeping area below deck has a toilet and sink. There are no showers, and nothing is published about wheelchair access aboard or about what happens in bad weather, so it is worth a call.",
+      "comes_to_you": false,
+      "age_min_years": 13,
+      "age_max_years": 22,
+      "grade_min": null,
+      "grade_max": null,
+      "age_basis": "years",
+      "duration_min": null,
+      "capacity_max": 30,
+      "capacity_min": 18,
+      "cost_per_child_cad": null,
+      "cost_per_group_cad": 38892.0,
+      "cost_per_adult_cad": null,
+      "free_adults_per_children": null,
+      "is_free": false,
+      "tax_included": false,
+      "extra_fees_note": "Trip fees include all meals aboard ship, sail training materials and equipment. Groups arrange and pay for their own travel to and from Victoria, and for any accommodation before or after the voyage.",
+      "school_rate_only": false,
+      "deposit_required": true,
+      "payment_timing": "A signed group trip agreement and a first 25% deposit secure the booking. A second 25% deposit is due six months before sailing and the balance one month before the trip.",
+      "cancellation_note": null,
+      "months_offered": [
+        3,
+        4,
+        5,
+        6,
+        9,
+        10
+      ],
+      "days_offered": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "time_slots": [
+        "10:30"
+      ],
+      "lead_time_days": null,
+      "chaperone_ratio": null,
+      "adults_free": null,
+      "indoor": true,
+      "outdoor": true,
+      "format": [
+        "guided",
+        "hands_on"
+      ],
+      "sensory_friendly": null,
+      "low_noise": null,
+      "neurodiversity_friendly": null,
+      "mood_tags": [
+        "active",
+        "explore",
+        "learn"
+      ],
+      "curriculum_tags": null,
+      "booking_email": "booking@salts.ca",
+      "booking_url": null,
+      "booking_method": "email",
+      "source_url": "https://www.salts.ca/sail-with-us/group-sails/group-cost-and-reservations.html",
+      "evidence": "5-Day Trips, Monday to Friday: $38,892.00 plus GST",
+      "checked_on": "2026-09-03",
+      "image_ids": [
+        "program-climbing-the-rigging",
+        "activity-trainees-on-deck"
+      ]
+    },
+    {
+      "id": "public-day-sail",
+      "name": "Public day sail",
+      "description": "A five hour sailing on one of the schooners, 10:00 am to 3:00 pm, open to anyone who can take an active part in sailing the ship. The site says all ages are welcome but the number of children under 12 is limited, and each child must be accompanied by a responsible adult and wear a personal floatation device, which is provided. The fee is $125 per person, or $100 per person for a current SALTS society member, with membership covering one or two discounted day sails a year depending on the type. In 2026 the sailings are Friday May 15 and Saturday May 23 from the SALTS Dock at Swift Street Landing, and Sunday September 6 and Monday September 7 from Ship Point in Victoria's Inner Harbour. Places are requested through an online reservation form and assigned first come first served, with a wait list if the date is full. Check in is 15 minutes before the sailing. Everyone brings a bag lunch and water.",
+      "what_children_do": "After a watch group orientation and safety briefing they haul lines and handle sails, stand watch at the bow or the helm, take a turn at the wheel to steer the ship, and climb the rigging if they want to, with the Victoria shoreline and the Olympic Peninsula in view.",
+      "our_note": "This is a public sailing rather than a group charter, so berths are assigned one request at a time and a large party could end up split across dates. Every child under 12 needs their own adult aboard and the number of young children is capped, so a group of little ones would be paying two fares for each child. Pack lunches and warm waterproof layers, and expect it to be much colder on the water than on the dock.",
+      "practical_summary": "Five hours afloat with a toilet below deck, a packed lunch and no shelter beyond what you wear. Boarding is at the SALTS dock on Swift Street or at Ship Point depending on the date, and there is no parking of its own, so allow time to find a spot downtown and walk.",
+      "comes_to_you": false,
+      "age_min_years": null,
+      "age_max_years": null,
+      "grade_min": null,
+      "grade_max": null,
+      "age_basis": null,
+      "duration_min": 300,
+      "capacity_max": null,
+      "capacity_min": null,
+      "cost_per_child_cad": 125.0,
+      "cost_per_group_cad": null,
+      "cost_per_adult_cad": 125.0,
+      "free_adults_per_children": null,
+      "is_free": false,
+      "tax_included": null,
+      "extra_fees_note": "Trainees bring their own bag lunch and drinks. Parking downtown is at the visitor's own cost.",
+      "school_rate_only": false,
+      "deposit_required": null,
+      "payment_timing": "Payment is not required until you receive an email notification of your assigned sailing along with a secure online payment link.",
+      "cancellation_note": "If you must cancel, please provide as much notice as possible and no less than 72 hours notice. Day Sail trip fees are non-refundable.",
+      "months_offered": [
+        5,
+        9
+      ],
+      "days_offered": [
+        1,
+        5,
+        6,
+        7
+      ],
+      "time_slots": [
+        "10:00"
+      ],
+      "lead_time_days": null,
+      "chaperone_ratio": null,
+      "adults_free": false,
+      "indoor": false,
+      "outdoor": true,
+      "format": [
+        "guided",
+        "hands_on"
+      ],
+      "sensory_friendly": null,
+      "low_noise": null,
+      "neurodiversity_friendly": null,
+      "mood_tags": [
+        "active",
+        "learn"
+      ],
+      "curriculum_tags": null,
+      "booking_email": null,
+      "booking_url": null,
+      "booking_method": "web_form",
+      "source_url": "https://www.salts.ca/sail-with-us/day-sails/public-day-sails.html",
+      "evidence": "$125/person",
+      "checked_on": "2026-09-03",
+      "image_ids": [
+        "program-day-sail-schooner"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "id": "hero-two-schooners-under-sail",
+      "url": "https://www.salts.ca/media2/images/crop_1200_630/headers-large/header2.jpg",
+      "role": "hero",
+      "alt": "Two wooden schooners under full white sail on open water beneath a wide blue sky.",
+      "alt_source": "generated",
+      "caption": null,
+      "found_on_url": "https://www.salts.ca/",
+      "width": 1200,
+      "height": 630,
+      "rights_note": null,
+      "usage": "unverified"
+    },
+    {
+      "id": "program-climbing-the-rigging",
+      "url": "https://www.salts.ca/media2/images/crop_870_595/newsletters/imports-18-of-72-crop.jpg",
+      "role": "program",
+      "alt": "A young person in a green jacket and a safety harness, gripping the ropes of a ship's rigging and looking up, with sail and blue sky behind.",
+      "alt_source": "generated",
+      "caption": null,
+      "found_on_url": "https://www.salts.ca/sail-with-us/group-sails.html",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    },
+    {
+      "id": "activity-trainees-on-deck",
+      "url": "https://www.salts.ca/media2/images/crop_870_595/update2024/lynden-knodel-pic-154-of-641-1-resized.jpg",
+      "role": "activity",
+      "alt": "Three teenagers in jackets stand arm in arm on a ship's deck among the rigging, with a forested shoreline behind them.",
+      "alt_source": "generated",
+      "caption": null,
+      "found_on_url": "https://www.salts.ca/sail-with-us/group-sails.html",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    },
+    {
+      "id": "program-day-sail-schooner",
+      "url": "https://www.salts.ca/media2/images/crop_570_385/update2019ships/img-20180902-141047-166-2019.jpg",
+      "role": "program",
+      "alt": "A schooner under sail on calm blue water, seen from another ship's deck between coils of rope and a wooden block.",
+      "alt_source": "generated",
+      "caption": null,
+      "found_on_url": "https://www.salts.ca/sail-with-us/day-sails/public-day-sails.html",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    }
+  ],
+  "gaps": [
+    "no single youngest age applies across the site: group trips are open to ages 13 to 22, while public day sails say all ages but cap how many children under 12 can be aboard, so youngest age welcomed is left blank",
+    "daycare and preschool groups are ruled out of the group programme by the published age range of 13 to 22; the site never addresses under fives directly",
+    "no per student or per child price exists for group trips at all. The published figure is the fee for chartering the whole ship, so the cost per family depends on the size of the group",
+    "no minimum notice period is published for a group booking. The site only says bookings are finalised about a year ahead and that returning groups get first option, which is practice rather than a stated deadline",
+    "the cancellation policy page was not opened, so no cancellation terms are recorded for group trips",
+    "no adult to child ratio is published. The site states only that up to four adults may join each trip, including a minimum of one male and one female teacher, leader or chaperone",
+    "wheelchair access aboard the ships is not addressed anywhere. The only accessibility statement on the site is about the office, which is in a heritage building with access only by stairs",
+    "no rain or bad weather backup is described. The packing advice assumes you sail in whatever the weather does",
+    "bus parking and drop off at the dock are not mentioned. The day sail advice points visitors at downtown Victoria pay parking operators",
+    "the group information request form and the day sail reservation form are both hosted on an external form service, so nothing about what those forms ask could be recorded from the venue's own pages",
+    "the educator day sail is a free September sailing for current grade 8 to 12 teachers only, not a children's programme, so it is described in the venue text rather than recorded as a bookable programme",
+    "the cross links between the public day sail and educator day sail pages are swapped on the site, each pointing at the other's page, so a director following a link may land on the wrong one",
+    "no image on the site carries usable alt text, so every alt here was written after opening the image in a browser and looking at it",
+    "no photo credits appear next to the images used, so no rights note could be recorded",
+    "COORDINATES: the Google map on their contact page carries only the centre of the map view, with no pin on the office. The point we had, 48.43049 and -123.37246, was that view centre. It has been cleared. The address stands and the coordinates still need to be worked out from it."
+  ],
+  "conflicts": [],
+  "pages_opened": [
+    "https://www.salts.ca/",
+    "https://www.salts.ca/sail-with-us/group-sails.html",
+    "https://www.salts.ca/sail-with-us/group-sails/group-cost-and-reservations.html",
+    "https://www.salts.ca/sail-with-us/day-sails/public-day-sails.html",
+    "https://www.salts.ca/sail-with-us/day-sails/educator-day-sails.html",
+    "https://www.salts.ca/sail-with-us/day-sails/preparation.html",
+    "https://www.salts.ca/sail-with-us/faqs.html",
+    "https://www.salts.ca/about-us/contact.html"
+  ],
+  "pages_useful": [
+    "https://www.salts.ca/",
+    "https://www.salts.ca/sail-with-us/group-sails.html",
+    "https://www.salts.ca/sail-with-us/group-sails/group-cost-and-reservations.html",
+    "https://www.salts.ca/sail-with-us/day-sails/public-day-sails.html",
+    "https://www.salts.ca/sail-with-us/day-sails/preparation.html",
+    "https://www.salts.ca/sail-with-us/faqs.html",
+    "https://www.salts.ca/about-us/contact.html"
+  ],
+  "extracted_at": "2026-09-07T10:00:00-07:00",
+  "extractor_version": "v2.0"
+}

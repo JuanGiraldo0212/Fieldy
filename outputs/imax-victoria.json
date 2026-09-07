@@ -1,0 +1,310 @@
+{
+  "venue": {
+    "id": "imax-victoria",
+    "name": "IMAX Victoria",
+    "website": "https://imaxvictoria.com/",
+    "description": "IMAX Victoria is a 369 seat giant screen theatre inside the Royal BC Museum at 675 Belleville Street, with a screen more than six storeys high and about 80 feet wide. It shows documentaries of roughly 45 minutes on the hour through the day and full length Hollywood features in the evening. School groups can book onto a film from the daily schedule, pick a title from the education film library for a 9am or 10am start, or take a virtual screening in their own classroom. The theatre also runs a sensory sensitive screening about once a month with low lighting, low volume and the doors left open.",
+    "category": "arts_performance",
+    "address": "675 Belleville Street, Victoria BC V8W 1A1",
+    "lat": 48.41972,
+    "lng": -123.36787,
+    "geo_source": "geocoded",
+    "hosts_school_groups": true,
+    "hosts_daycare_groups": null,
+    "youngest_age_welcomed_years": 0,
+    "booking_email": "Groups@royalbcmuseum.bc.ca",
+    "booking_phone": "250-356-7226",
+    "booking_url": null,
+    "booking_method": "email",
+    "has_washrooms": true,
+    "has_lunch_space": null,
+    "has_rain_backup": true,
+    "stroller_accessible": null,
+    "wheelchair_accessible": true,
+    "bus_parking": null,
+    "facility_notes": {
+      "washrooms": "During a Hollywood feature there are three stairs to access the washrooms because the gift shop is closed. For step free access, exit through the doors you came in by and ask a staff member or the security desk for the Royal BC Museum accessible washroom.",
+      "wheelchair_accessible": "The theatre is wheelchair accessible with space for up to 6 wheelchairs and a ramped main entrance. Row C is the most accessible, on the same level and with no stairs. Large outdoor mobility scooters may not fit through the entry vestibule.",
+      "bus_parking": "There are four accessible parking spots in the rear parking lot accessed off Douglas or Superior St and one directly outside the museum on Belleville Street. There is a drop off and pickup zone at the main entrance on Belleville.",
+      "rain_backup": "The whole visit is inside the theatre and the museum building."
+    },
+    "nearby_park": null,
+    "restrictions": [
+      "No additional discounts or coupons, including the Educator Preview program, are accepted with a group reservation.",
+      "There are no refunds or exchanges after tickets have been paid for and printed.",
+      "Check film rating for age suitability."
+    ],
+    "languages": null,
+    "general_admission_child_cad": 7,
+    "general_admission_adult_cad": 14,
+    "hours_notes": "The theatre publishes a daily schedule rather than opening hours. On the current schedule documentary films start on the hour from 10:00am to 6:00pm, with a Hollywood feature at 7:15pm on some evenings. Ticket age bands are Adult 19 to 64, Senior 65 and over, Student 19 and over with ID, Youth 6 to 18, Child 3 to 5, and Infant 2 and under free.",
+    "seasonal_notes": "A sensory sensitive screening runs about once a month, with low lighting and low volume throughout, the doors left open, and movement and discussion during the film not restricted. Single use foam earplugs are available.",
+    "price_year_or_season": "Public ticket rates come from the showtimes page, updated in 2026. The only group rate sheet on the site is a PDF marked effective August 31, 2016 and was not used.",
+    "checked_on": "2026-09-03",
+    "checked_by": "scraper"
+  },
+  "programs": [
+    {
+      "id": "school-screening-scheduled-film",
+      "name": "School visit IMAX screening",
+      "description": "A school group books onto a film from the theatre's current daily schedule. Scheduled films begin on the hour and last about 45 minutes. Many IMAX films come with an Educator Guide of activities and discussion points, and a film can be previewed in advance. Bookings need at least five business days' notice. No current group ticket rate is published, so ask for a quote when you book.",
+      "what_children_do": "Sit in a raked theatre seat in the dark for about 45 minutes and watch a documentary on a screen six storeys high, with the sound coming from all around them.",
+      "our_note": "Forty five minutes in a dark room with very loud wraparound sound is a lot for under fives, so ask about the monthly sensory sensitive screening if any of your group would find that hard. The film schedule is set by the theatre rather than by you, so pick your date around the title you want.",
+      "practical_summary": "Everything is indoors with washrooms in the building and step free access through the main ramped entrance. There is no published group rate, no stated maximum group size and no indoor lunch space, so ask about all three when you email.",
+      "comes_to_you": false,
+      "age_min_years": null,
+      "age_max_years": null,
+      "grade_min": null,
+      "grade_max": null,
+      "age_basis": null,
+      "duration_min": 45,
+      "capacity_max": null,
+      "capacity_min": null,
+      "cost_per_child_cad": null,
+      "cost_per_group_cad": null,
+      "cost_per_adult_cad": null,
+      "free_adults_per_children": null,
+      "is_free": null,
+      "tax_included": null,
+      "extra_fees_note": "Documentary tickets carry a $1 surcharge for 3D films. Concession snacks can be pre-ordered at a discounted rate.",
+      "school_rate_only": false,
+      "deposit_required": null,
+      "payment_timing": "Pay at the box office when you arrive, showing your confirmation letter, or in advance of the visit.",
+      "cancellation_note": "Report any changes to your booking with 48 hours advance notice.",
+      "months_offered": null,
+      "days_offered": null,
+      "time_slots": null,
+      "lead_time_days": 5,
+      "chaperone_ratio": null,
+      "adults_free": null,
+      "indoor": true,
+      "outdoor": false,
+      "format": null,
+      "sensory_friendly": null,
+      "low_noise": null,
+      "neurodiversity_friendly": null,
+      "mood_tags": [
+        "learn"
+      ],
+      "curriculum_tags": null,
+      "booking_email": null,
+      "booking_url": null,
+      "booking_method": null,
+      "source_url": "https://imaxvictoria.com/schools/",
+      "evidence": "our large format films provide students of all ages with larger-than-life experiences that captivate, enlighten and inspire",
+      "checked_on": "2026-09-03",
+      "image_ids": [
+        "hero-students-in-theatre"
+      ]
+    },
+    {
+      "id": "library-film-screening",
+      "name": "Library film screening",
+      "description": "A school group picks a title from the theatre's education film library and it is screened for them at 9am or 10am. The library covers extreme environments, space, culture and biology, and each film is tagged with the grades and subjects it suits, from Kindergarten to Grade 12. A dedicated screening needs a minimum of 45 students and must be booked two or more weeks ahead, subject to availability. Groups smaller than 45 can join a Scheduled Library Screening instead, where groups are combined to fill the theatre. No ticket rate is published.",
+      "what_children_do": "Sit in the theatre before the public schedule starts and watch a documentary chosen for their grade, on a screen six storeys high.",
+      "our_note": "The 45 student minimum is the catch here, so a single class will usually be pushed onto a shared screening with other groups instead. If you want a specific title on a specific morning, start the conversation more than two weeks out.",
+      "practical_summary": "Everything is indoors with washrooms in the building and step free access through the main ramped entrance. No price is published and there is no indoor lunch space listed, so ask about both when you email.",
+      "comes_to_you": false,
+      "age_min_years": null,
+      "age_max_years": null,
+      "grade_min": null,
+      "grade_max": null,
+      "age_basis": null,
+      "duration_min": 45,
+      "capacity_max": null,
+      "capacity_min": 45,
+      "cost_per_child_cad": null,
+      "cost_per_group_cad": null,
+      "cost_per_adult_cad": null,
+      "free_adults_per_children": null,
+      "is_free": null,
+      "tax_included": null,
+      "extra_fees_note": null,
+      "school_rate_only": false,
+      "deposit_required": null,
+      "payment_timing": "Pay at the box office when you arrive, showing your confirmation letter, or in advance of the visit.",
+      "cancellation_note": "Report any changes to your booking with 48 hours advance notice.",
+      "months_offered": null,
+      "days_offered": null,
+      "time_slots": [
+        "09:00",
+        "10:00"
+      ],
+      "lead_time_days": 14,
+      "chaperone_ratio": null,
+      "adults_free": null,
+      "indoor": true,
+      "outdoor": false,
+      "format": null,
+      "sensory_friendly": null,
+      "low_noise": null,
+      "neurodiversity_friendly": null,
+      "mood_tags": [
+        "learn"
+      ],
+      "curriculum_tags": null,
+      "booking_email": null,
+      "booking_url": null,
+      "booking_method": null,
+      "source_url": "https://imaxvictoria.com/schools/film-library/",
+      "evidence": "we can only accommodate requests made with a minimum of 45 students attending booked two or more weeks in advance",
+      "checked_on": "2026-09-03",
+      "image_ids": null
+    },
+    {
+      "id": "virtual-classroom-screening",
+      "name": "IMAX virtual screening",
+      "description": "A documentary of 40 to 45 minutes streamed for viewing in your own classroom, chosen from a short selection that currently includes Humpback Whales, Dream Big, Dolphins and Fungi: The Web Of Life. Educator resources come with each screening, including lesson plans, activities, discussion questions and supporting documents. The fee is $100.00 plus GST per class, with a maximum of 35 students per classroom, and bookings need at least five business days' notice.",
+      "what_children_do": "Watch a 40 to 45 minute documentary on the classroom screen, then work through the activities and discussion questions that come with it.",
+      "our_note": "The $100 covers the whole class rather than each child, so with 30 children it works out around three dollars each. There is no travel and no theatre sound, which makes this the easier version for a group that would struggle with the dark and the volume.",
+      "practical_summary": "This runs in your own room, so washrooms, lunch and weather are your own arrangements. The fee is per class and excludes GST, and the cap is 35 students in a classroom.",
+      "comes_to_you": true,
+      "age_min_years": null,
+      "age_max_years": null,
+      "grade_min": null,
+      "grade_max": null,
+      "age_basis": null,
+      "duration_min": 45,
+      "capacity_max": 35,
+      "capacity_min": null,
+      "cost_per_child_cad": null,
+      "cost_per_group_cad": 100,
+      "cost_per_adult_cad": null,
+      "free_adults_per_children": null,
+      "is_free": false,
+      "tax_included": false,
+      "extra_fees_note": null,
+      "school_rate_only": true,
+      "deposit_required": null,
+      "payment_timing": null,
+      "cancellation_note": "Report any changes to your booking with 48 hours advance notice.",
+      "months_offered": null,
+      "days_offered": null,
+      "time_slots": null,
+      "lead_time_days": 5,
+      "chaperone_ratio": null,
+      "adults_free": null,
+      "indoor": true,
+      "outdoor": false,
+      "format": null,
+      "sensory_friendly": null,
+      "low_noise": null,
+      "neurodiversity_friendly": null,
+      "mood_tags": [
+        "learn"
+      ],
+      "curriculum_tags": null,
+      "booking_email": null,
+      "booking_url": null,
+      "booking_method": null,
+      "source_url": "https://imaxvictoria.com/schools/",
+      "evidence": "Fee: $100.00 + GST per class",
+      "checked_on": "2026-09-03",
+      "image_ids": null
+    }
+  ],
+  "images": [
+    {
+      "id": "hero-students-in-theatre",
+      "url": "https://imaxvictoria.com/wp-content/uploads/2014/04/Schools_1800x720-1500x430.jpg",
+      "role": "hero",
+      "alt": "Four young people sitting in dark theatre seats, looking up at a screen with their mouths open, one of them holding a drink cup.",
+      "alt_source": "generated",
+      "caption": null,
+      "found_on_url": "https://imaxvictoria.com/schools/",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    }
+  ],
+  "gaps": [
+    "no current group or school ticket rate is published anywhere on the site; the Group Rates link on the school planning page now redirects to the schools page",
+    "the only group price sheet on the site is a PDF marked effective August 31, 2016, giving rates such as $9.30 for youth 6 to 18 and $5.85 for children 3 to 5, and one complimentary chaperone for 15 to 29 paid admissions. It is ten years old and was not recorded as a current price",
+    "no minimum age is stated for a school screening. The age recorded comes from the ticket bands, which price an Infant at age 2 and younger for free",
+    "no maximum group size is published for an in theatre school screening",
+    "no chaperone ratio or number of free adult places is published on any current page",
+    "no indoor lunch space is described anywhere; the school planning page suggests a lunch break at a restaurant off site",
+    "bus parking is not addressed; the accessibility page describes accessible car parking and a drop off zone at the main entrance only",
+    "the group booking email is hidden by Cloudflare email protection on the schools page and the planning page. The address recorded here was readable as plain text on the film library page",
+    "the schools page describes Royal BC Museum Digital Field Trips at a fee of $75, but that program is run by the museum on its own site and was not recorded here",
+    "some library films are listed as available in French, but the site does not say which, and no other languages are mentioned",
+    "the homepage Open Graph image is a photograph only 370 pixels wide, below the size we keep, and the rest of the homepage images are film posters, so the hero was taken from the schools page banner",
+    "the film library grid loads its film thumbnails from a placeholder image, so no film artwork could be collected",
+    "COORDINATES: the Google map on their contact page carries only the centre of the map view, with no pin on the theatre. The point we had, 48.41982 and -123.36959, was that view centre, which is why it sat about 160 m from the Royal BC Museum record even though both share the same street address. It has been cleared. The address stands and the coordinates still need to be worked out from it."
+  ],
+  "conflicts": [
+    {
+      "field": "lead_time_days",
+      "values": [
+        "two business days",
+        "five business days"
+      ],
+      "sources": [
+        "https://imaxvictoria.com/schools/",
+        "https://imaxvictoria.com/schools/plan-your-imax-visit/"
+      ],
+      "note": "Their pages give two different answers on how much notice to give. One says two business days, the other says five. Five is on the page they update most, so allow that and you are safe either way."
+    },
+    {
+      "field": "arrival_time_before_show",
+      "values": [
+        "at least 15 minutes",
+        "at least 30 minutes"
+      ],
+      "sources": [
+        "https://imaxvictoria.com/schools/plan-your-imax-visit/",
+        "https://imaxvictoria.com/wp-content/uploads/2016/07/School-Visits-at-IMAX.pdf"
+      ],
+      "note": "One page says arrive fifteen minutes early and their printed booking guide says thirty. With a group of small children and any snacks to collect, thirty is the safer plan."
+    },
+    {
+      "field": "wheelchair_spaces",
+      "values": [
+        "up to 6 wheelchairs",
+        "eight seat-free stalls in Row C"
+      ],
+      "sources": [
+        "https://imaxvictoria.com/accessibility/",
+        "https://imaxvictoria.com/faq/"
+      ],
+      "note": "Two of their pages give different numbers of wheelchair spaces, six on one and eight on the other. If you need more than one space, say so when you book rather than counting on either number."
+    },
+    {
+      "field": "group_office_hours",
+      "values": [
+        "9:00 a.m. to 4:00 p.m. Monday to Friday",
+        "9 a.m. to 5 p.m. Monday to Friday"
+      ],
+      "sources": [
+        "https://imaxvictoria.com/schools/",
+        "https://imaxvictoria.com/schools/film-library/"
+      ],
+      "note": "Their pages disagree about when the group office is open, one says nine to four and the other nine to five. Ring in the morning and you will reach someone either way."
+    }
+  ],
+  "pages_opened": [
+    "https://imaxvictoria.com/",
+    "https://imaxvictoria.com/schools/",
+    "https://imaxvictoria.com/showtimes/",
+    "https://imaxvictoria.com/schools/film-library-2022/",
+    "https://imaxvictoria.com/schools/film-library/",
+    "https://imaxvictoria.com/schools/plan-your-imax-visit/",
+    "https://imaxvictoria.com/groups/group-pricing/",
+    "https://imaxvictoria.com/faq/",
+    "https://imaxvictoria.com/accessibility/",
+    "https://imaxvictoria.com/contact-us/",
+    "https://imaxvictoria.com/wp-content/uploads/2016/07/School-Visits-at-IMAX.pdf"
+  ],
+  "pages_useful": [
+    "https://imaxvictoria.com/schools/",
+    "https://imaxvictoria.com/showtimes/",
+    "https://imaxvictoria.com/schools/film-library/",
+    "https://imaxvictoria.com/schools/plan-your-imax-visit/",
+    "https://imaxvictoria.com/faq/",
+    "https://imaxvictoria.com/accessibility/",
+    "https://imaxvictoria.com/contact-us/"
+  ],
+  "extracted_at": "2026-09-07T10:00:00-07:00",
+  "extractor_version": "v2.0"
+}

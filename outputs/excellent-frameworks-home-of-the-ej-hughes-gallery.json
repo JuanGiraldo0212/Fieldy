@@ -1,0 +1,92 @@
+{
+  "venue": {
+    "id": "excellent-frameworks-home-of-the-ej-hughes-gallery",
+    "name": "Excellent Frameworks - Home of the EJ Hughes Gallery",
+    "website": "https://excellentframeworks.ca",
+    "description": "Excellent Frameworks is a custom picture framing business on Kenneth Street in downtown Duncan, and it houses the E.J. Hughes Gallery. The gallery sells original and reproduction works by E.J. Hughes along with paintings, pottery, jewellery, prints and mixed media by other Vancouver Island and Canadian artists, and the shop now also carries art supplies. It is open Monday to Saturday and is indigenously owned and locally operated. The site describes framing services, the artists it represents and calls for artists to submit work, but no tours, no workshops, no education programme and nothing at all addressed to schools, daycares or children's groups, so on the evidence of the site this is a retail shop and selling gallery rather than a place that hosts group visits.",
+    "category": "arts_performance",
+    "address": "115 Kenneth Street, Duncan, BC V9L 1N5",
+    "lat": 48.77864,
+    "lng": -123.70873,
+    "geo_source": "geocoded",
+    "hosts_school_groups": false,
+    "hosts_daycare_groups": false,
+    "youngest_age_welcomed_years": null,
+    "booking_email": "info@excellentframeworks.ca",
+    "booking_phone": "250-746-7112",
+    "booking_url": null,
+    "booking_method": null,
+    "has_washrooms": null,
+    "has_lunch_space": null,
+    "has_rain_backup": null,
+    "stroller_accessible": null,
+    "wheelchair_accessible": null,
+    "bus_parking": null,
+    "facility_notes": null,
+    "nearby_park": null,
+    "restrictions": null,
+    "languages": null,
+    "general_admission_child_cad": null,
+    "general_admission_adult_cad": null,
+    "hours_notes": "Monday to Saturday, 10:00 am to 4:00 pm. Closed Sundays and long weekends.",
+    "seasonal_notes": null,
+    "price_year_or_season": null,
+    "checked_on": "2026-09-03",
+    "checked_by": "scraper"
+  },
+  "programs": [],
+  "images": [
+    {
+      "id": "hero-gallery-room",
+      "url": "https://excellentframeworks.ca/wp-content/uploads/2019/04/gallery-shot.jpg",
+      "role": "hero",
+      "alt": "A narrow gallery room with framed landscape paintings hung on dark blue walls, a rack of prints along one side and a carpeted floor lit by ceiling spotlights.",
+      "alt_source": "generated",
+      "caption": null,
+      "found_on_url": "https://excellentframeworks.ca/about-us/",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    },
+    {
+      "id": "space-front-entry",
+      "url": "https://excellentframeworks.ca/wp-content/uploads/2021/01/front-entry.jpg",
+      "role": "space",
+      "alt": "Excellent Frameworks Front Door and Window",
+      "alt_source": "site",
+      "caption": null,
+      "found_on_url": "https://excellentframeworks.ca/contact/",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    }
+  ],
+  "gaps": [
+    "This is a framing business with a selling gallery attached, and its site offers nothing for children's groups. There is no schools, education, learning, tours or groups page, no workshop, no group rate, no minimum or maximum group size and no booking route for a visiting class. Programs was left as an empty list for that reason and not because a page failed to load.",
+    "The site never says whether it is free to walk in and look at the gallery, and it says nothing about washrooms, step free access, stroller room in the aisles, or anywhere a group could eat.",
+    "The gallery shows listed on the site are calls for artists to submit work rather than events for visitors, and the most recent one was already closed to registration in April 2026.",
+    "If you did want to bring a group, the only published way to ask is the shop's general email address and phone number.",
+    "The site publishes no social sharing photograph, only a logo tile, so an interior photograph of the gallery from the story page was used as the main image instead.",
+    "Neither image carries alt text on the site for the gallery room, so that description was written after opening the image in a browser and looking at it. The front door photo does carry the site's own alt text.",
+    "Their story page says the business has been in Duncan for over forty years while a sidebar on the shows page says over fifty. Neither number matters for a visit.",
+    "COORDINATES: the Google map on their contact page carries only the centre of the map view, with no pin on the shop. The point we had, 48.77867 and -123.71092, was that view centre. It has been cleared. The address stands and the coordinates still need to be worked out from it."
+  ],
+  "conflicts": [],
+  "pages_opened": [
+    "https://www.excellentframeworks.ca",
+    "https://excellentframeworks.ca/",
+    "https://excellentframeworks.ca/contact/",
+    "https://excellentframeworks.ca/about-us/",
+    "https://excellentframeworks.ca/category/blog/"
+  ],
+  "pages_useful": [
+    "https://excellentframeworks.ca/",
+    "https://excellentframeworks.ca/contact/",
+    "https://excellentframeworks.ca/about-us/",
+    "https://excellentframeworks.ca/category/blog/"
+  ],
+  "extracted_at": "2026-09-07T10:00:00-07:00",
+  "extractor_version": "v2.0"
+}

@@ -3,48 +3,106 @@
 
   ONE list, read by two places that must never disagree:
 
-    - next.config.ts, as the `remotePatterns` allowlist for the image optimizer
-    - VenueThumb, to decide whether an image is renderable at all
+    - src/app/api/photo/[key]/route.ts, the proxy every photograph is fetched
+      through, which refuses any host not listed here
+    - VenueThumb and the other renderers, to decide whether an image is
+      renderable at all before handing it to next/image
 
-  Why an allowlist and not a wildcard: `next/image` would otherwise proxy any
-  URL that reached the database, which makes our optimizer an open proxy for
-  anyone who can get a string into the catalog.
+  Why an allowlist and not a wildcard: the proxy would otherwise fetch any URL
+  that reached the database, which makes it an open proxy for anyone who can
+  get a string into the catalog.
 
-  Why VenueThumb checks it too: `next/image` THROWS on an unconfigured host,
-  during render, before any onError handler can catch it. One new venue whose
-  photos sit somewhere new would take down the whole catalog page. Checking here
-  turns that into an initials tile for one card.
+  Why the list is not `images.remotePatterns` in next.config.ts, where it began:
+  Next caps that at 50 hosts, and the catalog passed 50 venue websites. So the
+  photographs are served from our own origin (`photoSrc()` below builds the
+  path) and the optimizer only ever sees a local path; `localPatterns` in
+  next.config.ts pins it to that one route.
+
+  Why the renderers check it too: a photograph whose host is not listed would
+  come back from the proxy as a 400 and land as a broken image. Checking here
+  turns that into an initials tile for one card, with no request made.
 
   Keeping it current: `pnpm import:catalog` fails loudly when a record carries a
   host that is not in this list, and prints the line to paste. It is checked at
   import rather than at render because import is where a human is watching.
 */
 export const IMAGE_HOSTS = [
+  'admin.discoverparks.ca',
   'aggv.ca',
+  'assets.hollywoodbowlgroup.co.uk',
+  'baf35f149b6429664f25.cdn6.editmysite.com',
   'bcam.net',
   'bcarchives.ca',
+  'bcforestdiscoverycentre.com',
   'beaconhillchildrensfarm.ca',
   'butchartgardens.com',
+  'butterflygardens.com',
+  'canadianindigenousart.com',
   'cdn.intelligencebank.com',
+  'cdn.onc-prod.intergalactic.space',
+  'cdn.sanity.io',
+  'chemainustheatrefestival.ca',
+  'coastsalishjourney.com',
   'conservancy.bc.ca',
+  'cvrd.ca',
+  'd932ee93f57e0124e6d8.cdn6.editmysite.com',
   'discoverthepast.com',
   'dq5pwpg1q8ru0.cloudfront.net',
+  'duncan.ca',
+  'excellentframeworks.ca',
   'flyingsquirrelsports.ca',
+  'glaskrafter.ca',
   'gvpl.ca',
+  'hcp.ca',
+  'heathergoldminc.store',
   'heritageacresbc.ca',
   'i0.wp.com',
   'images.squarespace-cdn.com',
+  'imaxvictoria.com',
+  'img1.wsimg.com',
+  'irp.cdn-website.com',
+  'kelpreef.com',
+  'ladysmitharts.ca',
   'ltgov.bc.ca',
+  'maryfoxpottery.ca',
+  'metchosinmuseum.ca',
+  'militarymuseum.ca',
+  'miniatureworld.com',
+  'missa.ca',
+  'mmbc.bc.ca',
+  'nanaimoartgallery.ca',
+  'nanaimomuseum.ca',
   'navalandmilitarymuseum.org',
+  'nrs.objectstore.gov.bc.ca',
+  'oldcem.bc.ca',
+  'orcaspirit.com',
   'pcweb2.azureedge.net',
+  'pointellicehouse.com',
   'rbcm.ca',
+  'shop.oceanriver.com',
+  'sidneymuseum.ca',
+  'sookeregionmuseum.ca',
+  'static.wixstatic.com',
+  'theavenuegallery.com',
   'thecastle.ca',
+  'tntpaintball.com',
+  'vancouverislandy.com',
   'victoriahighlandgames.com',
   'www.carrhouse.org',
+  'www.cowichanestuary.ca',
   'www.fgpaddle.com',
   'www.gofishbc.com',
   'www.gvshof.ca',
   'www.hatleypark.ca',
+  'www.ladysmithhistoricalsociety.ca',
+  'www.leg.bc.ca',
+  'www.lyndiaterregallery.com',
+  'www.morrellnaturesanctuary.ca',
+  'www.nationaltoymuseumcanada.ca',
+  'www.porttheatre.com',
+  'www.royalroads.ca',
+  'www.salts.ca',
+  'www.uvic.ca',
   'www.victoria.ca',
 ] as const
 
@@ -83,6 +141,34 @@ export function isRenderableImage(url: string | null | undefined): boolean {
 export function hostOf(url: string): string | null {
   try {
     return new URL(url).hostname
+  } catch {
+    return null
+  }
+}
+
+/*
+  The path next/image is handed for a photograph: our own proxy route with the
+  photograph's URL as the one path segment, base64url so that slashes, query
+  strings and the odd accented character in a venue's filename survive the
+  trip. Runs in the browser too (btoa, not Buffer), because the renderers are
+  client components. Encode to ASCII first: btoa rejects anything beyond it.
+*/
+export const PHOTO_ROUTE = '/api/photo'
+
+export function photoSrc(url: string): string {
+  const b64 = btoa(encodeURIComponent(url))
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=+$/, '')
+  return `${PHOTO_ROUTE}/${b64}`
+}
+
+/* The inverse, on the server. null for a key that was not made by photoSrc. */
+export function decodePhotoKey(key: string): string | null {
+  if (!/^[A-Za-z0-9_-]+$/.test(key)) return null
+  try {
+    const b64 = key.replace(/-/g, '+').replace(/_/g, '/')
+    return decodeURIComponent(atob(b64))
   } catch {
     return null
   }

@@ -1,0 +1,1124 @@
+{
+  "venue": {
+    "id": "royal-bc-museum",
+    "name": "Royal BC Museum",
+    "website": "https://rbcm.ca/",
+    "description": "The Royal BC Museum sits at 675 Belleville Street in Victoria, beside the Inner Harbour and the BC Legislature. It holds core galleries on natural history and human history plus a feature exhibition space, and its Learning and Engagement team runs 60 minute guided Learning Labs for classes from September to May, self guided school visits Tuesday to Friday, live online programs, and outreach kits that are shipped to schools. The museum shares its site with IMAX Victoria, Thunderbird Park, Helmcken House and the BC Archives, all of which are booked separately. The First Peoples gallery and parts of the Becoming BC gallery are closed at the moment while the museum is modernised.",
+    "category": "museums_history",
+    "address": "675 Belleville Street, Victoria, BC V8W 9W2",
+    "lat": 48.41981,
+    "lng": -123.36745,
+    "geo_source": "site_embed",
+    "hosts_school_groups": true,
+    "hosts_daycare_groups": null,
+    "youngest_age_welcomed_years": null,
+    "booking_email": "learning@royalbcmuseum.bc.ca",
+    "booking_phone": null,
+    "booking_url": "https://rbcm.ca/field-trip-booking-information/",
+    "booking_method": "shop",
+    "has_washrooms": true,
+    "has_lunch_space": true,
+    "has_rain_backup": null,
+    "stroller_accessible": true,
+    "wheelchair_accessible": true,
+    "bus_parking": null,
+    "facility_notes": {
+      "washrooms": "Wheelchair-accessible washrooms are located on every floor.",
+      "lunch_space": "Groups are welcome to bring their own snacks and lunches. Food and drink are only permitted in designated areas, including Carl Hall or the adjacent community room on the museum's main floor. You are also welcome to eat outside at our picnic tables. Water stations are available on the main and second floors.",
+      "wheelchair_accessible": "There are six access ramps located outside the museum building. All floors of the museum can be reached by elevator, located in the lobby. Transport-style wheelchairs are available for use within the museum on a first-come, first-served basis.",
+      "stroller_accessible": "If you require assistance with your stroller, please let the box office staff know when you arrive and we would be happy to assist you.",
+      "bus_parking": "The Royal BC Museum does not own or operate a parking lot, but there are several privately run lots nearby as well as parking on the surrounding streets. There is a short-term parking drop-off zone on Belleville Street in front of the museum's main entrance."
+    },
+    "nearby_park": "Thunderbird Park, next to the group entrance at the corner of Douglas Street and Belleville Street",
+    "restrictions": [
+      "Bags larger than 30 cm by 30 cm are not allowed in the exhibit areas, except for first aid and medical equipment bags.",
+      "We provide storage bins on a first come first serve basis should your group require storage. Please note these bins are located in a non-secure storage area and cannot be guaranteed during busy times.",
+      "Please note food, gum and drinks are not permitted in the museum galleries",
+      "We encourage photography, but please refrain from using flash, tripods or monopods. Photographs may not be permitted in special exhibitions.",
+      "Review the School Group Behaviour Agreement with your class and chaperones prior to your visit. A signed copy of the agreement is required upon arrival prior to receiving your tickets.",
+      "If you arrive onsite without a prior booking, you may be turned away due to capacity limitations.",
+      "Please use the group entrance doors located on the east side of the building, closest to Thunderbird Park, at the corner of Douglas St and Belleville St."
+    ],
+    "languages": [
+      "English"
+    ],
+    "general_admission_child_cad": null,
+    "general_admission_adult_cad": null,
+    "hours_notes": "On the day we checked, the home page listed the museum open 10 am to 6 pm, with the Royal Museum Shop 10 am to 5 pm and the food outlets on their own hours. The site keeps a separate All Hours page for the full week, and IMAX Victoria and the BC Archives publish their own hours.",
+    "seasonal_notes": "Guided Learning Labs run September to May, on Tuesdays, Wednesdays and Fridays. Self-guided school visits run Tuesday to Friday and cost $2 per student in low season, rising to $8 per student while a feature exhibition is on. Outreach kits are loaned September to June, and school program bookings close in June and reopen in late August. From June 19 to September 7 the Canada Strong Pass gives free museum admission to children 17 and under and half price to ages 18 to 24. The First Peoples gallery and parts of the Becoming BC gallery are closed for modernisation work.",
+    "price_year_or_season": "Prices read on 2026-09-03. Self-guided school rates are given as low season $2 per student and, when a feature exhibition is on display, $8 per student. Digital Field Trip bookings are open for September 29, 2026 to June 24, 2027.",
+    "checked_on": "2026-09-03",
+    "checked_by": "scraper"
+  },
+  "programs": [
+    {
+      "id": "learning-lab-amazing-adaptations",
+      "name": "Amazing Adaptations Learning Lab",
+      "description": "A 60 minute guided Learning Lab in the Natural History gallery for grades K to 3, about the body parts and behaviours that help BC plants and animals survive. The class is introduced to the museum, visits the Woolly Mammoth and Climate on the Move galleries, then splits in two so that one half does a teacher led activity in the forest gallery while the other handles specimens with a museum educator, before swapping. Learning Labs run September to May on Tuesdays, Wednesdays and Fridays. The museum recommends booking at least two weeks, or 10 business days, ahead.",
+      "what_children_do": "Walk into the forest gallery and the mammoth gallery to look closely at animals and plants. Then in a group of about fifteen they sit with a museum educator and handle real specimens, while the other half does an activity with their teacher, and the two groups swap over.",
+      "our_note": "The $150 is for the whole class, not per child, and it buys one hour. Ask whether your students also need a self guided ticket for gallery time before or after, because the site does not say whether the lab fee covers the galleries. If the price is a problem, there is a box on the booking form where you can ask for a reduced rate.",
+      "practical_summary": "Washrooms on every floor, indoor lunch space in Carl Hall or the community room, picnic tables outside, and step free access throughout. There is no museum car park, only a drop off zone on Belleville Street, so plan the coach.",
+      "comes_to_you": false,
+      "age_min_years": null,
+      "age_max_years": null,
+      "grade_min": 0,
+      "grade_max": 3,
+      "age_basis": "grades",
+      "duration_min": 60,
+      "capacity_max": 30,
+      "capacity_min": null,
+      "cost_per_child_cad": null,
+      "cost_per_group_cad": 150,
+      "cost_per_adult_cad": null,
+      "free_adults_per_children": null,
+      "is_free": false,
+      "tax_included": true,
+      "extra_fees_note": "Fees are in Canadian funds and are tax exempt for BC schools. If the fee presents a barrier you can request a 25% discounted rate in the notes section of the booking form, with a limited number given each month. Adults beyond the required chaperone numbers are charged the regular admission rate.",
+      "school_rate_only": true,
+      "deposit_required": null,
+      "payment_timing": "Payment is required upon booking. To book a Learning Lab online you must pay at the time of the booking with a credit card. Schools without a credit card can email the group booking office and ask to pay on arrival.",
+      "cancellation_note": "To change or cancel a booked school program, do so at least two weeks, or 10 business days, in advance. If you do not come and have not cancelled, the cost of the program is invoiced to your school.",
+      "months_offered": [
+        9,
+        10,
+        11,
+        12,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "days_offered": [
+        2,
+        3,
+        5
+      ],
+      "time_slots": null,
+      "lead_time_days": null,
+      "chaperone_ratio": [
+        {
+          "children_per_adult": 5,
+          "applies_to": "grades K to 8"
+        },
+        {
+          "children_per_adult": 10,
+          "applies_to": "grades 9 to 12"
+        }
+      ],
+      "adults_free": true,
+      "indoor": true,
+      "outdoor": false,
+      "format": [
+        "guided",
+        "hands_on"
+      ],
+      "sensory_friendly": null,
+      "low_noise": null,
+      "neurodiversity_friendly": null,
+      "mood_tags": [
+        "play",
+        "learn"
+      ],
+      "curriculum_tags": [
+        "Science K to 3",
+        "adaptations",
+        "habitats",
+        "BC animals",
+        "First Peoples Principles of Learning"
+      ],
+      "booking_email": null,
+      "booking_url": "https://sales.royalbcmuseum.bc.ca/DateSelection.aspx?item=12594",
+      "booking_method": "shop",
+      "source_url": "https://rbcm.ca/learning-department/in-person-field-trips/",
+      "evidence": "Learning Labs are $150 for core galleries and $200 for feature exhibitions.",
+      "checked_on": "2026-09-03",
+      "image_ids": [
+        "activity-specimen-handling"
+      ]
+    },
+    {
+      "id": "learning-lab-super-skeletons",
+      "name": "Super Skeletons Learning Lab",
+      "description": "A 60 minute guided Learning Lab for middle school, grades 5 to 6, on skeletal systems and biomimicry. Students break into three groups, explore the skeletons of different animals, pick their favourite features for a superhero character and then share their choices with the class. Learning Labs run September to May on Tuesdays, Wednesdays and Fridays.",
+      "what_children_do": "Split into three small groups and look closely at the skeletons of different animals, then choose the features they want for an invented superhero and explain the choice to the rest of the class.",
+      "our_note": "This one is pitched at grades 5 and 6, so it is not a fit for a daycare or an early years group. The $150 covers the class, and the room is capped at 30 students.",
+      "practical_summary": "Indoors throughout, with washrooms on every floor and indoor lunch space. Whether the fee includes gallery time outside the hour is not stated, so ask when you book.",
+      "comes_to_you": false,
+      "age_min_years": null,
+      "age_max_years": null,
+      "grade_min": 5,
+      "grade_max": 6,
+      "age_basis": "grades",
+      "duration_min": 60,
+      "capacity_max": 30,
+      "capacity_min": null,
+      "cost_per_child_cad": null,
+      "cost_per_group_cad": 150,
+      "cost_per_adult_cad": null,
+      "free_adults_per_children": null,
+      "is_free": false,
+      "tax_included": true,
+      "extra_fees_note": "Fees are in Canadian funds and are tax exempt for BC schools. A 25% discounted rate can be requested in the notes section of the booking form. Adults beyond the required chaperone numbers are charged the regular admission rate.",
+      "school_rate_only": true,
+      "deposit_required": null,
+      "payment_timing": "Payment is required upon booking, by credit card when you book online.",
+      "cancellation_note": "To change or cancel a booked school program, do so at least two weeks, or 10 business days, in advance. If you do not come and have not cancelled, the cost is invoiced to your school.",
+      "months_offered": [
+        9,
+        10,
+        11,
+        12,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "days_offered": [
+        2,
+        3,
+        5
+      ],
+      "time_slots": null,
+      "lead_time_days": null,
+      "chaperone_ratio": [
+        {
+          "children_per_adult": 5,
+          "applies_to": "grades K to 8"
+        },
+        {
+          "children_per_adult": 10,
+          "applies_to": "grades 9 to 12"
+        }
+      ],
+      "adults_free": true,
+      "indoor": true,
+      "outdoor": false,
+      "format": [
+        "guided",
+        "hands_on"
+      ],
+      "sensory_friendly": null,
+      "low_noise": null,
+      "neurodiversity_friendly": null,
+      "mood_tags": [
+        "explore",
+        "learn"
+      ],
+      "curriculum_tags": [
+        "Science 5",
+        "Science 6",
+        "biomimicry",
+        "organ systems"
+      ],
+      "booking_email": null,
+      "booking_url": "https://sales.royalbcmuseum.bc.ca/DateSelection.aspx?item=12594",
+      "booking_method": "shop",
+      "source_url": "https://rbcm.ca/learning-department/in-person-field-trips/",
+      "evidence": "Learning Labs are $150 for core galleries and $200 for feature exhibitions.",
+      "checked_on": "2026-09-03",
+      "image_ids": null
+    },
+    {
+      "id": "learning-lab-natural-history-tour",
+      "name": "Enhanced Natural History Tour",
+      "description": "A 60 minute guided tour of the Natural History gallery with a museum educator, built around a theme the teacher chooses in advance. The site lists it for all grades and says the audience varies. The educator adds hands on moments depending on the theme. This lab takes a smaller group than the others, 20 students, and runs September to May on Tuesdays, Wednesdays and Fridays.",
+      "what_children_do": "Walk the Natural History gallery with a museum educator, stopping at the displays that fit the theme their teacher picked, with some things to handle along the way depending on that theme.",
+      "our_note": "The cap here is 20 students, lower than the other labs, so a full class may need splitting or a second booking. Because the content is set by the theme you give them, it is worth sending your topic well before the day.",
+      "practical_summary": "Indoors, step free, with washrooms on every floor and indoor lunch space. The exact content is agreed with you rather than published, so confirm it when you book.",
+      "comes_to_you": false,
+      "age_min_years": null,
+      "age_max_years": null,
+      "grade_min": 0,
+      "grade_max": 12,
+      "age_basis": "grades",
+      "duration_min": 60,
+      "capacity_max": 20,
+      "capacity_min": null,
+      "cost_per_child_cad": null,
+      "cost_per_group_cad": 150,
+      "cost_per_adult_cad": null,
+      "free_adults_per_children": null,
+      "is_free": false,
+      "tax_included": true,
+      "extra_fees_note": "Fees are in Canadian funds and are tax exempt for BC schools. A 25% discounted rate can be requested in the notes section of the booking form.",
+      "school_rate_only": true,
+      "deposit_required": null,
+      "payment_timing": "Payment is required upon booking, by credit card when you book online.",
+      "cancellation_note": "To change or cancel a booked school program, do so at least two weeks, or 10 business days, in advance.",
+      "months_offered": [
+        9,
+        10,
+        11,
+        12,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "days_offered": [
+        2,
+        3,
+        5
+      ],
+      "time_slots": null,
+      "lead_time_days": null,
+      "chaperone_ratio": [
+        {
+          "children_per_adult": 5,
+          "applies_to": "grades K to 8"
+        },
+        {
+          "children_per_adult": 10,
+          "applies_to": "grades 9 to 12"
+        }
+      ],
+      "adults_free": true,
+      "indoor": true,
+      "outdoor": false,
+      "format": [
+        "guided",
+        "hands_on"
+      ],
+      "sensory_friendly": null,
+      "low_noise": null,
+      "neurodiversity_friendly": null,
+      "mood_tags": [
+        "explore",
+        "learn"
+      ],
+      "curriculum_tags": [
+        "natural history",
+        "BC ecosystems"
+      ],
+      "booking_email": null,
+      "booking_url": "https://sales.royalbcmuseum.bc.ca/DateSelection.aspx?item=12594",
+      "booking_method": "shop",
+      "source_url": "https://rbcm.ca/learning-department/in-person-field-trips/",
+      "evidence": "Learning Labs are $150 for core galleries and $200 for feature exhibitions.",
+      "checked_on": "2026-09-03",
+      "image_ids": null
+    },
+    {
+      "id": "learning-lab-exploring-identity",
+      "name": "Exploring Identity Learning Lab",
+      "description": "A 60 minute guided Learning Lab for grades 4 to 10 in the Old Town gallery and the Hayashi Photography Studio exhibit. The class splits in two, with one group looking closely at historical photographs and reflecting on identity while the other uses storytelling to learn about Japanese Canadian experiences in BC, then the groups swap. Runs September to May on Tuesdays, Wednesdays and Fridays.",
+      "what_children_do": "Stand and look closely at historical photographs in the gallery and talk about what they show, then move to a storytelling activity about Japanese Canadian families in BC, and swap with the other half of the class.",
+      "our_note": "The subject matter includes dispossession and internment, so it suits a class that has already met those ideas. One hour, one price for the whole class, 30 students at most.",
+      "practical_summary": "Indoors and step free, washrooms on every floor, indoor lunch space and picnic tables outside. Nothing is published about quiet or sensory friendly timings.",
+      "comes_to_you": false,
+      "age_min_years": null,
+      "age_max_years": null,
+      "grade_min": 4,
+      "grade_max": 10,
+      "age_basis": "grades",
+      "duration_min": 60,
+      "capacity_max": 30,
+      "capacity_min": null,
+      "cost_per_child_cad": null,
+      "cost_per_group_cad": 150,
+      "cost_per_adult_cad": null,
+      "free_adults_per_children": null,
+      "is_free": false,
+      "tax_included": true,
+      "extra_fees_note": "Fees are in Canadian funds and are tax exempt for BC schools. A 25% discounted rate can be requested in the notes section of the booking form.",
+      "school_rate_only": true,
+      "deposit_required": null,
+      "payment_timing": "Payment is required upon booking, by credit card when you book online.",
+      "cancellation_note": "To change or cancel a booked school program, do so at least two weeks, or 10 business days, in advance.",
+      "months_offered": [
+        9,
+        10,
+        11,
+        12,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "days_offered": [
+        2,
+        3,
+        5
+      ],
+      "time_slots": null,
+      "lead_time_days": null,
+      "chaperone_ratio": [
+        {
+          "children_per_adult": 5,
+          "applies_to": "grades K to 8"
+        },
+        {
+          "children_per_adult": 10,
+          "applies_to": "grades 9 to 12"
+        }
+      ],
+      "adults_free": true,
+      "indoor": true,
+      "outdoor": false,
+      "format": [
+        "guided",
+        "interactive"
+      ],
+      "sensory_friendly": null,
+      "low_noise": null,
+      "neurodiversity_friendly": null,
+      "mood_tags": [
+        "explore",
+        "learn"
+      ],
+      "curriculum_tags": [
+        "Social Studies",
+        "identity",
+        "Japanese Canadian history",
+        "primary sources"
+      ],
+      "booking_email": null,
+      "booking_url": "https://sales.royalbcmuseum.bc.ca/DateSelection.aspx?item=12594",
+      "booking_method": "shop",
+      "source_url": "https://rbcm.ca/learning-department/in-person-field-trips/",
+      "evidence": "Learning Labs are $150 for core galleries and $200 for feature exhibitions.",
+      "checked_on": "2026-09-03",
+      "image_ids": null
+    },
+    {
+      "id": "learning-lab-object-based-learning",
+      "name": "Object Based Learning Lab",
+      "description": "A 60 minute guided Learning Lab using objects from the museum's handling collection. The site lists it for grades 4 and up and for Theory of Knowledge learners. Small groups each get a mystery object to draw and describe, form a hypothesis about it, then spread out into the Old Town gallery to find where it might belong and report back. Runs September to May on Tuesdays, Wednesdays and Fridays.",
+      "what_children_do": "Sit in a small group with a real museum object, draw it and describe it, then walk into the Old Town gallery to find the place it might have come from and explain the reasoning to the class.",
+      "our_note": "This is the most hands on of the labs, with real collection objects rather than a display case. The site gives a lower grade limit but no upper one, so ask if you are near the top or bottom of the range.",
+      "practical_summary": "Indoors, step free, washrooms on every floor and indoor lunch space. Bring clipboards and pencils, as the museum asks groups to supply their own.",
+      "comes_to_you": false,
+      "age_min_years": null,
+      "age_max_years": null,
+      "grade_min": 4,
+      "grade_max": null,
+      "age_basis": "grades",
+      "duration_min": 60,
+      "capacity_max": 30,
+      "capacity_min": null,
+      "cost_per_child_cad": null,
+      "cost_per_group_cad": 150,
+      "cost_per_adult_cad": null,
+      "free_adults_per_children": null,
+      "is_free": false,
+      "tax_included": true,
+      "extra_fees_note": "Fees are in Canadian funds and are tax exempt for BC schools. A 25% discounted rate can be requested in the notes section of the booking form.",
+      "school_rate_only": true,
+      "deposit_required": null,
+      "payment_timing": "Payment is required upon booking, by credit card when you book online.",
+      "cancellation_note": "To change or cancel a booked school program, do so at least two weeks, or 10 business days, in advance.",
+      "months_offered": [
+        9,
+        10,
+        11,
+        12,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "days_offered": [
+        2,
+        3,
+        5
+      ],
+      "time_slots": null,
+      "lead_time_days": null,
+      "chaperone_ratio": [
+        {
+          "children_per_adult": 5,
+          "applies_to": "grades K to 8"
+        },
+        {
+          "children_per_adult": 10,
+          "applies_to": "grades 9 to 12"
+        }
+      ],
+      "adults_free": true,
+      "indoor": true,
+      "outdoor": false,
+      "format": [
+        "guided",
+        "hands_on"
+      ],
+      "sensory_friendly": null,
+      "low_noise": null,
+      "neurodiversity_friendly": null,
+      "mood_tags": [
+        "play",
+        "learn"
+      ],
+      "curriculum_tags": [
+        "critical and reflective thinking",
+        "creative thinking",
+        "material culture"
+      ],
+      "booking_email": null,
+      "booking_url": "https://sales.royalbcmuseum.bc.ca/DateSelection.aspx?item=12594",
+      "booking_method": "shop",
+      "source_url": "https://rbcm.ca/learning-department/in-person-field-trips/",
+      "evidence": "Learning Labs are $150 for core galleries and $200 for feature exhibitions.",
+      "checked_on": "2026-09-03",
+      "image_ids": null
+    },
+    {
+      "id": "learning-lab-museum-careers",
+      "name": "Museum Career Learning Lab",
+      "description": "A 60 minute guided Learning Lab for grades 10 to 12, and for international and business students, on the range of jobs a museum needs, from carpenters to researchers. It runs as an introduction, a presentation about the different roles, small group discussion, then a walk into the Natural History gallery to see where those roles show up in the exhibition. Runs September to May on Tuesdays, Wednesdays and Fridays.",
+      "what_children_do": "Sit through a short presentation about museum jobs, talk in small groups about which ones interest them, then walk into the Natural History gallery to spot the work behind the displays and the labels.",
+      "our_note": "This is a careers session for senior students, not a gallery activity, and no group size limit is published for it. Ask what the maximum is when you book.",
+      "practical_summary": "Indoors and step free, washrooms on every floor. No group size is published for this one, so confirm numbers before you commit.",
+      "comes_to_you": false,
+      "age_min_years": null,
+      "age_max_years": null,
+      "grade_min": 10,
+      "grade_max": 12,
+      "age_basis": "grades",
+      "duration_min": 60,
+      "capacity_max": null,
+      "capacity_min": null,
+      "cost_per_child_cad": null,
+      "cost_per_group_cad": 150,
+      "cost_per_adult_cad": null,
+      "free_adults_per_children": null,
+      "is_free": false,
+      "tax_included": true,
+      "extra_fees_note": "Fees are in Canadian funds and are tax exempt for BC schools. A 25% discounted rate can be requested in the notes section of the booking form.",
+      "school_rate_only": true,
+      "deposit_required": null,
+      "payment_timing": "Payment is required upon booking, by credit card when you book online.",
+      "cancellation_note": "To change or cancel a booked school program, do so at least two weeks, or 10 business days, in advance.",
+      "months_offered": [
+        9,
+        10,
+        11,
+        12,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "days_offered": [
+        2,
+        3,
+        5
+      ],
+      "time_slots": null,
+      "lead_time_days": null,
+      "chaperone_ratio": [
+        {
+          "children_per_adult": 10,
+          "applies_to": "grades 9 to 12"
+        }
+      ],
+      "adults_free": true,
+      "indoor": true,
+      "outdoor": false,
+      "format": [
+        "guided"
+      ],
+      "sensory_friendly": null,
+      "low_noise": null,
+      "neurodiversity_friendly": null,
+      "mood_tags": [
+        "learn"
+      ],
+      "curriculum_tags": [
+        "career-life development",
+        "curation",
+        "conservation"
+      ],
+      "booking_email": null,
+      "booking_url": "https://sales.royalbcmuseum.bc.ca/DateSelection.aspx?item=12594",
+      "booking_method": "shop",
+      "source_url": "https://rbcm.ca/learning-department/in-person-field-trips/",
+      "evidence": "Learning Labs are $150 for core galleries and $200 for feature exhibitions.",
+      "checked_on": "2026-09-03",
+      "image_ids": null
+    },
+    {
+      "id": "learning-lab-ancient-egypt-afterlife",
+      "name": "Guide to the Afterlife in Ancient Egypt Learning Lab",
+      "description": "The feature exhibition Learning Lab, 60 minutes, listed for grades 7 and up, tied to the Ancient Egypt: Obsessed with Life exhibition. The class splits in two, with one group touring the exhibition while the other goes to the Oasis gallery classroom to learn about the Book of the Dead, then the groups swap. Feature exhibition labs cost more than the core gallery ones. There is also a downloadable Ancient Egypt educator guide for schools doing this exhibition on their own.",
+      "what_children_do": "Half the class walks the Ancient Egypt exhibition with an educator while the other half sits in the Oasis gallery classroom working through the Book of the Dead, then they trade places.",
+      "our_note": "This is the $200 version rather than $150 because it is the feature exhibition. No group size is published for it, and the museum has not said whether the fee covers general entry to the rest of the galleries, so settle both when you book.",
+      "practical_summary": "Indoors and step free, with washrooms on every floor and indoor lunch space. Group size and whether gallery admission is included are both unstated, which makes a phone call worthwhile.",
+      "comes_to_you": false,
+      "age_min_years": null,
+      "age_max_years": null,
+      "grade_min": 7,
+      "grade_max": null,
+      "age_basis": "grades",
+      "duration_min": 60,
+      "capacity_max": null,
+      "capacity_min": null,
+      "cost_per_child_cad": null,
+      "cost_per_group_cad": 200,
+      "cost_per_adult_cad": null,
+      "free_adults_per_children": null,
+      "is_free": false,
+      "tax_included": true,
+      "extra_fees_note": "Fees are in Canadian funds and are tax exempt for BC schools. A 25% discounted rate can be requested in the notes section of the booking form.",
+      "school_rate_only": true,
+      "deposit_required": null,
+      "payment_timing": "Payment is required upon booking, by credit card when you book online.",
+      "cancellation_note": "To change or cancel a booked school program, do so at least two weeks, or 10 business days, in advance.",
+      "months_offered": [
+        9,
+        10,
+        11,
+        12,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "days_offered": [
+        2,
+        3,
+        5
+      ],
+      "time_slots": null,
+      "lead_time_days": null,
+      "chaperone_ratio": [
+        {
+          "children_per_adult": 5,
+          "applies_to": "grades K to 8"
+        },
+        {
+          "children_per_adult": 10,
+          "applies_to": "grades 9 to 12"
+        }
+      ],
+      "adults_free": true,
+      "indoor": true,
+      "outdoor": false,
+      "format": [
+        "guided",
+        "interactive"
+      ],
+      "sensory_friendly": null,
+      "low_noise": null,
+      "neurodiversity_friendly": null,
+      "mood_tags": [
+        "explore",
+        "learn"
+      ],
+      "curriculum_tags": [
+        "Social Studies 7",
+        "ancient world",
+        "religious and cultural practices"
+      ],
+      "booking_email": null,
+      "booking_url": "https://sales.royalbcmuseum.bc.ca/DateSelection.aspx?item=12594",
+      "booking_method": "shop",
+      "source_url": "https://rbcm.ca/learning-department/in-person-field-trips/",
+      "evidence": "Learning Labs are $150 for core galleries and $200 for feature exhibitions.",
+      "checked_on": "2026-09-03",
+      "image_ids": null
+    },
+    {
+      "id": "self-guided-school-visit",
+      "name": "Self-guided school visit",
+      "description": "BC public and independent grade schools can book the core galleries for a self guided visit, Tuesday to Friday, for grades K to 12. Free inquiry guides for grades K to 2, 3 to 7 and 8 to 12 can be downloaded in English, with French versions for the K to 2 and 3 to 7 guides, along with a set of blackline master activity sheets. Core gallery visits are $2 per student in low season and $8 per student while a feature exhibition is on, and during a feature exhibition the higher rate automatically includes both the core galleries and the exhibition. The museum limits itself to three classes a day on Tuesdays and Thursdays and two a day on Wednesdays and Fridays. Teachers who have booked a school visit can arrange a free preview visit beforehand.",
+      "what_children_do": "Move through the galleries in small chaperoned groups at their own pace, looking at the forest and tide pool displays, the mammoth and the recreated Old Town street, with an activity sheet or inquiry guide to fill in as they go.",
+      "our_note": "The price per student more than triples when a feature exhibition is on, and there is no way to pay for just the core galleries at those times, so check which rate applies to your date before you budget. Bring your own clipboards and pencils, print the inquiry guides in advance, and plan on one to two hours in the galleries.",
+      "practical_summary": "Washrooms on every floor, indoor lunch space in Carl Hall or the community room, picnic tables outside and water stations on two floors, and the whole route is step free. There is no museum car park, only a drop off zone in front on Belleville Street.",
+      "comes_to_you": false,
+      "age_min_years": null,
+      "age_max_years": null,
+      "grade_min": 0,
+      "grade_max": 12,
+      "age_basis": "grades",
+      "duration_min": null,
+      "capacity_max": 35,
+      "capacity_min": null,
+      "cost_per_child_cad": 2,
+      "cost_per_group_cad": null,
+      "cost_per_adult_cad": null,
+      "free_adults_per_children": null,
+      "is_free": false,
+      "tax_included": true,
+      "extra_fees_note": "Core gallery visits are $2 per student in low season and $8 per student when a feature exhibition is on display. Fees are in Canadian funds and are tax exempt for BC schools. A 25% discounted rate can be requested in the notes section of the booking form. Adults beyond the required chaperone numbers are charged the regular admission rate.",
+      "school_rate_only": true,
+      "deposit_required": null,
+      "payment_timing": "Payment is required upon booking. On arrival you present your confirmation letter and signed behaviour agreement at the box office, confirm your student and chaperone numbers and pay for your tickets. There are no refunds or exchanges once tickets are printed.",
+      "cancellation_note": "To cancel a self-guided visit, do so at least a week, or 5 business days, in advance. If you do not come and have not cancelled, the cost is invoiced to your school.",
+      "months_offered": null,
+      "days_offered": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "time_slots": null,
+      "lead_time_days": 2,
+      "chaperone_ratio": [
+        {
+          "children_per_adult": 5,
+          "applies_to": "grades K to 8"
+        },
+        {
+          "children_per_adult": 10,
+          "applies_to": "grades 9 to 12"
+        }
+      ],
+      "adults_free": true,
+      "indoor": true,
+      "outdoor": false,
+      "format": [
+        "self_guided"
+      ],
+      "sensory_friendly": null,
+      "low_noise": null,
+      "neurodiversity_friendly": null,
+      "mood_tags": [
+        "explore",
+        "learn"
+      ],
+      "curriculum_tags": [
+        "natural history",
+        "BC history",
+        "inquiry guides",
+        "French inquiry guides"
+      ],
+      "booking_email": null,
+      "booking_url": "https://rbcm.ca/bc-grade-school-form/",
+      "booking_method": "web_form",
+      "source_url": "https://rbcm.ca/learning-department/in-person-field-trips/",
+      "evidence": "Core gallery visits are $2 per student in low season and $8 per student when we have feature exhibitions.",
+      "checked_on": "2026-09-03",
+      "image_ids": [
+        "activity-natural-history-gallery",
+        "activity-tide-pool",
+        "space-old-town-gallery"
+      ]
+    },
+    {
+      "id": "digital-field-trip",
+      "name": "Digital field trip",
+      "description": "A live 30 minute online session led by a museum educator, delivered to the classroom over a two way video link so the class and the educator can see and hear each other. Topics listed are Amazing Adaptations for grades K to 3, Dinosaurs! Adaptations and Habitats for grades K to 2, Investigating Insects for grades 3 to 5, Meet the Mammoth for grades 1 and 3 to 4, Gold Rush of BC for grade 4 and Ancient Egypt for grade 7. The class needs a computer with a camera, a wired high speed internet connection and a large screen with sound. Sessions run Tuesday and Thursday at 9:30 am, 10:30 am and 1:00 pm, and a free 5 to 15 minute tech test can be booked on a Wednesday afternoon. Most programs can be adjusted for other age groups on request.",
+      "what_children_do": "Sit together in their own classroom in front of a screen, answer the educator's questions, look at specimens and objects held up to the camera, and do a short paper and pencil activity at their desks.",
+      "our_note": "This is $75 for the class, not per child, and it is only half an hour, so it works better as a lead in or follow up than as the day's outing. Book the free tech test the first time; a wired connection and a big screen are what makes it work.",
+      "practical_summary": "Nothing to arrange on the day beyond a room, a camera and a wired connection, and children need paper and a pencil for some topics. Cancellation terms for online sessions are not published.",
+      "comes_to_you": true,
+      "age_min_years": null,
+      "age_max_years": null,
+      "grade_min": 0,
+      "grade_max": 12,
+      "age_basis": "grades",
+      "duration_min": 30,
+      "capacity_max": 30,
+      "capacity_min": null,
+      "cost_per_child_cad": null,
+      "cost_per_group_cad": 75,
+      "cost_per_adult_cad": null,
+      "free_adults_per_children": null,
+      "is_free": false,
+      "tax_included": true,
+      "extra_fees_note": "Fees are in Canadian funds and are tax exempt for BC schools. A 25% discounted rate can be requested in the notes section of the booking form. The tech test is free.",
+      "school_rate_only": true,
+      "deposit_required": null,
+      "payment_timing": "Payment is required upon booking.",
+      "cancellation_note": "To change or cancel a booked school program, do so at least two weeks, or 10 business days, in advance.",
+      "months_offered": [
+        9,
+        10,
+        11,
+        12,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "days_offered": [
+        2,
+        4
+      ],
+      "time_slots": [
+        "09:30",
+        "10:30",
+        "13:00"
+      ],
+      "lead_time_days": 2,
+      "chaperone_ratio": null,
+      "adults_free": null,
+      "indoor": true,
+      "outdoor": false,
+      "format": [
+        "guided",
+        "interactive"
+      ],
+      "sensory_friendly": null,
+      "low_noise": null,
+      "neurodiversity_friendly": null,
+      "mood_tags": [
+        "learn",
+        "explore"
+      ],
+      "curriculum_tags": [
+        "Science K to 5",
+        "Social Studies 4",
+        "Social Studies 7",
+        "adaptations",
+        "gold rush",
+        "ancient Egypt"
+      ],
+      "booking_email": "dft@royalbcmuseum.bc.ca",
+      "booking_url": "https://sales.royalbcmuseum.bc.ca/DateSelection.aspx?item=12606",
+      "booking_method": "shop",
+      "source_url": "https://rbcm.ca/learning-department/digital-field-trips/",
+      "evidence": "$75 per class",
+      "checked_on": "2026-09-03",
+      "image_ids": null
+    },
+    {
+      "id": "outreach-kit-loan",
+      "name": "Outreach kit loan",
+      "description": "A box of museum objects, stories and hands on activity plans, with a detailed educator guide, shipped out to your classroom for a two week loan. Kits currently listed are Bats of British Columbia, Building Community: Paldi and the Legacy of South Asian Canadians in BC, Great Bear Rainforest, Having a Voice: Voting Rights and Democracy in BC, Museum Mystery Suitcase for seniors, the Ocean, Freshwater and Us giant floor map, and The Writing on the Wall on Chinese Canadian historical wrongs. The audience is given as K to 12, varying by topic. Loans run September to June, one kit per two week period with no extensions, and are open to BC schools and organisations, with individuals considered case by case. Rural addresses may have to collect from the nearest Purolator or Canada Post depot.",
+      "what_children_do": "Handle real museum objects and replicas in their own classroom, and work through the activities in the educator guide, which for the giant floor map means walking and sitting on a map of the coast spread across the floor.",
+      "our_note": "The $50 is for the kit for a fortnight and includes shipping, so it is the cheapest way to get museum objects in front of children if you cannot travel. Watch the return date: it is $50 a week late and $500 if a kit goes missing, and an unpaid invoice blocks your school from booking anything else.",
+      "practical_summary": "Nothing to arrange on site, but you need somewhere to store the kit and a plan for returning it on time. Check your nearest courier depot first if you are outside a town.",
+      "comes_to_you": true,
+      "age_min_years": null,
+      "age_max_years": null,
+      "grade_min": 0,
+      "grade_max": 12,
+      "age_basis": "grades",
+      "duration_min": null,
+      "capacity_max": null,
+      "capacity_min": null,
+      "cost_per_child_cad": null,
+      "cost_per_group_cad": 50,
+      "cost_per_adult_cad": null,
+      "free_adults_per_children": null,
+      "is_free": false,
+      "tax_included": null,
+      "extra_fees_note": "The $50 is per two-week loan and includes shipping. A 25% discounted rate can be requested in the notes section of the booking form. Late returns are invoiced at $50 per week overdue, and a kit that is not returned is invoiced at its full replacement cost of $500. Wilful damage is assessed and discussed with the school.",
+      "school_rate_only": false,
+      "deposit_required": null,
+      "payment_timing": null,
+      "cancellation_note": null,
+      "months_offered": [
+        9,
+        10,
+        11,
+        12,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "days_offered": null,
+      "time_slots": null,
+      "lead_time_days": null,
+      "chaperone_ratio": null,
+      "adults_free": null,
+      "indoor": true,
+      "outdoor": false,
+      "format": [
+        "hands_on",
+        "self_guided"
+      ],
+      "sensory_friendly": null,
+      "low_noise": null,
+      "neurodiversity_friendly": null,
+      "mood_tags": [
+        "play",
+        "learn"
+      ],
+      "curriculum_tags": [
+        "BC history",
+        "natural history",
+        "democracy",
+        "Chinese Canadian history",
+        "South Asian Canadian history"
+      ],
+      "booking_email": "outreach@royalbcmuseum.bc.ca",
+      "booking_url": null,
+      "booking_method": "email",
+      "source_url": "https://rbcm.ca/learning-department/outreach-kits/",
+      "evidence": "$50 per two-week loan",
+      "checked_on": "2026-09-03",
+      "image_ids": null
+    },
+    {
+      "id": "provocation-pack-loan",
+      "name": "Provocation pack loan",
+      "description": "A curated set of specimens, artifacts, reproductions and props from the museum's handling collection, with an identification key, lent out for open ended classroom use. The packs listed are Archaeology, Botany, Entomology, Invertebrate, Modern History, Paleontology in two versions called Fossils versus Wood and Replica versus Fossil, and Vertebrate. Each pack has its own online booking calendar. How the pack is used is left to the teacher, and the museum invites classes to share what they make on its Learning Portal.",
+      "what_children_do": "Handle real and replica specimens in their own classroom, sort and compare them against an identification key, and use them however the teacher has planned rather than following a set lesson.",
+      "our_note": "Grades, price and loan length are not on the part of the page we could read, so treat this as a call rather than a booking. Ask what it costs, how long you keep it and whether the pack you want suits your age group.",
+      "practical_summary": "Nothing to arrange on site. The cost, the loan period and the age range are all unpublished, so ask about all three before you plan a session around it.",
+      "comes_to_you": true,
+      "age_min_years": null,
+      "age_max_years": null,
+      "grade_min": null,
+      "grade_max": null,
+      "age_basis": null,
+      "duration_min": null,
+      "capacity_max": null,
+      "capacity_min": null,
+      "cost_per_child_cad": null,
+      "cost_per_group_cad": null,
+      "cost_per_adult_cad": null,
+      "free_adults_per_children": null,
+      "is_free": null,
+      "tax_included": null,
+      "extra_fees_note": null,
+      "school_rate_only": false,
+      "deposit_required": null,
+      "payment_timing": null,
+      "cancellation_note": null,
+      "months_offered": null,
+      "days_offered": null,
+      "time_slots": null,
+      "lead_time_days": null,
+      "chaperone_ratio": null,
+      "adults_free": null,
+      "indoor": true,
+      "outdoor": false,
+      "format": [
+        "hands_on",
+        "self_guided"
+      ],
+      "sensory_friendly": null,
+      "low_noise": null,
+      "neurodiversity_friendly": null,
+      "mood_tags": [
+        "play",
+        "explore"
+      ],
+      "curriculum_tags": [
+        "archaeology",
+        "botany",
+        "entomology",
+        "invertebrates",
+        "palaeontology",
+        "modern history"
+      ],
+      "booking_email": "learning@royalbcmuseum.bc.ca",
+      "booking_url": "https://rbcm.ca/learning-department/provocation-packs/",
+      "booking_method": "shop",
+      "source_url": "https://rbcm.ca/learning-department/provocation-packs/",
+      "evidence": "Curated into discipline-based provocation packs, each set includes selected items and an identification key to support diverse educational and creative projects.",
+      "checked_on": "2026-09-03",
+      "image_ids": null
+    },
+    {
+      "id": "group-visit",
+      "name": "Group visit",
+      "description": "Groups of more than 15 people book through an online group booking request form, and a Group Services Coordinator follows up. The museum says discounted rates are available for groups of 15 or more booked in advance, that schools outside BC are eligible for youth rates, and that therapeutic visits are free. No group rate is published, so the site also offers a separate rate inquiry form. Sensory friendly visits cannot be booked through group bookings; those are run by IMAX Victoria.",
+      "what_children_do": null,
+      "our_note": "This is the route for a daycare, a community group or an out of province school, since the cheap school rates are written for BC grade schools. No prices are published for it, so send the rate inquiry form early and ask what a group of your size and age range would pay.",
+      "practical_summary": "Washrooms on every floor, indoor lunch space and picnic tables outside, and step free access throughout. Prices for groups are not published and there is no museum car park, so ask about both when the coordinator calls back.",
+      "comes_to_you": false,
+      "age_min_years": null,
+      "age_max_years": null,
+      "grade_min": null,
+      "grade_max": null,
+      "age_basis": null,
+      "duration_min": null,
+      "capacity_max": null,
+      "capacity_min": 15,
+      "cost_per_child_cad": null,
+      "cost_per_group_cad": null,
+      "cost_per_adult_cad": null,
+      "free_adults_per_children": null,
+      "is_free": null,
+      "tax_included": null,
+      "extra_fees_note": null,
+      "school_rate_only": false,
+      "deposit_required": null,
+      "payment_timing": null,
+      "cancellation_note": null,
+      "months_offered": null,
+      "days_offered": null,
+      "time_slots": null,
+      "lead_time_days": null,
+      "chaperone_ratio": null,
+      "adults_free": null,
+      "indoor": true,
+      "outdoor": false,
+      "format": [
+        "self_guided"
+      ],
+      "sensory_friendly": null,
+      "low_noise": null,
+      "neurodiversity_friendly": null,
+      "mood_tags": [
+        "explore",
+        "learn"
+      ],
+      "curriculum_tags": null,
+      "booking_email": null,
+      "booking_url": "https://rbcm.ca/group-visits/group-booking-request/",
+      "booking_method": "web_form",
+      "source_url": "https://rbcm.ca/group-visits/",
+      "evidence": "For groups over 15 people, please fill out the group booking online form and submit.",
+      "checked_on": "2026-09-03",
+      "image_ids": null
+    }
+  ],
+  "images": [
+    {
+      "id": "hero-museum-exterior",
+      "url": "https://rbcm.ca/wp-content/uploads/2025/04/51386369597_3f68522269_c.jpg",
+      "role": "hero",
+      "alt": "Exterior of the Royal BC Museum building against a blue sky. The main building has 3 stories, tall columns in the front and a large producing wing on the left. On the right is a 6-story wing on the right advertising an Orca exhibition and a turtle IMAX documentary. Leading up to the building are two sets of stairs and several trees.",
+      "alt_source": "site",
+      "caption": null,
+      "found_on_url": "https://rbcm.ca/field-trip-booking-information/",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    },
+    {
+      "id": "activity-natural-history-gallery",
+      "url": "https://rbcm.ca/wp-content/uploads/2025/03/54139831891_6ca65555a2_k.webp",
+      "role": "activity",
+      "alt": "Two children and an adult visitor admiring the Natural History gallery installation. A realistic-looking grizzly bear walks through a canopied forest, approaching a creek filled with smooth pebbles. There is moss covering the forest floor and trees. In the background are wall-height informative displays about trees.",
+      "alt_source": "site",
+      "caption": null,
+      "found_on_url": "https://rbcm.ca/what-to-expect/",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    },
+    {
+      "id": "activity-tide-pool",
+      "url": "https://rbcm.ca/wp-content/uploads/2025/04/2024MG0606368-1-1.webp",
+      "role": "activity",
+      "alt": "Two children and a woman peer over a tidal pool display in the Natural History gallery. Inside the tide pool are colourful anemones and mollusc shells. In the background is a realistic-looking beach scene with driftwood and seals perched on top of rocks to the left, and a forest scene to the right. Other museum visitors mill about.",
+      "alt_source": "site",
+      "caption": null,
+      "found_on_url": "https://rbcm.ca/what-to-expect/",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    },
+    {
+      "id": "space-old-town-gallery",
+      "url": "https://rbcm.ca/wp-content/uploads/2025/03/53084394641_cbde0c459c_k.webp",
+      "role": "space",
+      "alt": "Wide shot of the Old Town, New Approach gallery. On either side are recreations of the facades of old buildings spanning two stories. In the background is a painted sign advertising a paint and oil company and an old-fashioned horse-drawn cart. A free-standing orange and green informational sign sits in the middle of the shiny black cobblestone floor.",
+      "alt_source": "site",
+      "caption": null,
+      "found_on_url": "https://rbcm.ca/what-to-expect/",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    },
+    {
+      "id": "activity-specimen-handling",
+      "url": "https://rbcm.ca/wp-content/uploads/2025/05/VERT_2025MG0426414.jpeg",
+      "role": "activity",
+      "alt": "Interactive station at the museum. A museum staff member, wearing a nametag and vest, holds out a small log for a female visitor to feel. She has blond hair in a bun, and is wearing a black tank top and cross-body purse. Behind her listening in is a male visitor with dark hair, glasses and a backpack over his white shirt. On the table separating the staff member is a textured, fossil-like object. Behind them, almost out of view is a display of a wooly mammoth.",
+      "alt_source": "site",
+      "caption": null,
+      "found_on_url": "https://rbcm.ca/learning-department/",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    }
+  ],
+  "gaps": [
+    "general admission prices for a child and an adult are not published in the page text we could read; the home page rates panel shows member rates only, so what a family or a non-school group pays at the door is unknown",
+    "the site never says whether the $150 or $200 Learning Lab fee includes admission to the galleries, or whether a class doing a lab and then gallery time also pays the self-guided rate; this is the single most useful thing to settle on the phone",
+    "the price and loan terms for Provocation Packs sit in a Details and Booking Information section that would not retrieve; grades, cost, loan length and who may borrow are all unknown for that offering",
+    "no group rate is published for non-school groups of 15 or more; the site only offers a rate inquiry form",
+    "no booking phone number is published anywhere on the pages opened, only email addresses and web forms",
+    "months for self-guided school visits: unknown, the site gives the days as Tuesday to Friday but never the months",
+    "the museum does not say whether it takes preschool or daycare groups; school rates are written for BC public and independent grade schools and grades start at K, and there is no stated youngest age, so daycares would have to go through group bookings",
+    "capacity for the Museum Career lab and the Ancient Egypt feature exhibition lab is not published, while the other labs give a maximum",
+    "nothing is published about sensory friendly or quiet times in the museum itself; the sensory sensitive screenings named on the accessibility page belong to IMAX Victoria, not the museum",
+    "bus parking and coach drop off for a school group is not addressed; the site says only that there is no museum car park and that there is a short term drop off zone on Belleville Street",
+    "the tracker website www.royalbcmuseum.bc.ca redirects to rbcm.ca, which is the site read for this record",
+    "coordinates were taken from the Google Maps link the museum publishes in the Location block of its own home page, which carries 48.4198111 and -123.3674497",
+    "the museum's own pages also cover the BC Archives, Helmcken House and St Ann's Schoolhouse, Thunderbird Park and IMAX Victoria; those are separate records and their detail has deliberately been left out of this one",
+    "this record already carries the maximum of five images, so none were added. Every alt here is the site's own, and the museum writes long, careful descriptions rather than file names, so none needed rewriting",
+    "THIS PASS (2026-09-07): opened the site in a browser and checked all five image links. Three of them no longer loaded, because the museum has re-saved those photographs in a different image format and dropped the old files. Those three addresses have been corrected. Nothing else in the record was changed.",
+    "the First Peoples gallery and parts of the Becoming BC gallery are closed for modernisation work, with no reopening date given"
+  ],
+  "conflicts": [
+    {
+      "field": "capacity_max",
+      "values": [
+        "Up to 30 participants per program.",
+        "For groups larger than 50 and joining from one location, or for participants joining from more than 40 different locations, please email us at dft@royalbcmuseum.bc.ca to book a webinar format visit instead."
+      ],
+      "sources": [
+        "https://rbcm.ca/learning-department/digital-field-trips/",
+        "https://rbcm.ca/learning-department/digital-field-trips/"
+      ],
+      "note": "Their online session page says up to 30 people, then says to email for a webinar version if your group is over 50. If your class sits between the two numbers it is not clear which applies, so ask when you book."
+    },
+    {
+      "field": "extra_fees_note",
+      "values": [
+        "you can request a discounted rate in the notes section of the program booking form",
+        "you can request a 25% discounted rate in the notes section of the program booking form"
+      ],
+      "sources": [
+        "https://rbcm.ca/learning-department/in-person-field-trips/",
+        "https://rbcm.ca/field-trip-booking-information/"
+      ],
+      "note": "Two of their pages describe the hardship discount differently. One just says a discounted rate, the other says 25 per cent. Ask for the exact figure when you request it, and note there are only a few each month."
+    }
+  ],
+  "pages_opened": [
+    "https://www.royalbcmuseum.bc.ca/",
+    "https://rbcm.ca/",
+    "https://rbcm.ca/learning-department/in-person-field-trips/",
+    "https://rbcm.ca/field-trip-booking-information/",
+    "https://rbcm.ca/learning-department/digital-field-trips/",
+    "https://rbcm.ca/learning-department/outreach-kits/",
+    "https://rbcm.ca/learning-department/provocation-packs/",
+    "https://rbcm.ca/group-visits/",
+    "https://rbcm.ca/learning-department/",
+    "https://rbcm.ca/accessibility/",
+    "https://rbcm.ca/what-to-expect/",
+    "https://rbcm.ca/wp-json/wp/v2/pages?slug=in-person-field-trips",
+    "https://rbcm.ca/wp-json/wp/v2/pages?slug=field-trip-booking-information",
+    "https://rbcm.ca/wp-json/wp/v2/pages?slug=digital-field-trips",
+    "https://rbcm.ca/wp-json/wp/v2/pages?slug=outreach-kits",
+    "https://rbcm.ca/wp-json/wp/v2/pages?slug=provocation-packs",
+    "https://rbcm.ca/wp-json/wp/v2/pages?slug=group-visits",
+    "https://rbcm.ca/wp-json/wp/v2/pages?slug=learning-department",
+    "https://rbcm.ca/wp-json/wp/v2/pages?slug=accessibility",
+    "https://rbcm.ca/wp-json/wp/v2/pages?slug=what-to-expect",
+    "https://rbcm.ca/wp-json/wp/v2/pages/4445",
+    "https://rbcm.ca/wp-json/wp/v2/pages/2134",
+    "https://rbcm.ca/wp-json/wp/v2/pages/1905",
+    "https://rbcm.ca/wp-json/wp/v2/pages/1914"
+  ],
+  "pages_useful": [
+    "https://rbcm.ca/",
+    "https://rbcm.ca/learning-department/in-person-field-trips/",
+    "https://rbcm.ca/field-trip-booking-information/",
+    "https://rbcm.ca/learning-department/digital-field-trips/",
+    "https://rbcm.ca/learning-department/outreach-kits/",
+    "https://rbcm.ca/learning-department/provocation-packs/",
+    "https://rbcm.ca/group-visits/",
+    "https://rbcm.ca/learning-department/",
+    "https://rbcm.ca/accessibility/",
+    "https://rbcm.ca/what-to-expect/"
+  ],
+  "extracted_at": "2026-09-07T18:40:00Z",
+  "extractor_version": "v2.0"
+}

@@ -6,8 +6,8 @@
     "description": "The Centre of the Universe is the visitor centre at the Dominion Astrophysical Observatory on West Saanich Road in Victoria, a designated National Historic Site whose 1.8-metre Plaskett Telescope has been in use since June 1918. A visit combines a guided tour inside the historic Plaskett dome, a live planetarium show, and an interactive exhibit gallery with telescope models and a real meteorite. It is run by the non-profit Friends of the Dominion Astrophysical Observatory, which also runs school tours, community group tours, camp group visits and evening star parties. General admission is $21 for adults, $15 for youth aged 7 to 19 and students with valid ID, and free for kids under 6.",
     "category": "science",
     "address": "5071 West Saanich Road, Victoria, BC",
-    "lat": 48.520021,
-    "lng": -123.418766,
+    "lat": 48.52037,
+    "lng": -123.41876,
     "geo_source": "site_embed",
     "hosts_school_groups": true,
     "hosts_daycare_groups": true,
@@ -67,29 +67,52 @@
       "payment_timing": null,
       "cancellation_note": null,
       "months_offered": null,
-      "days_offered": [2, 3, 4, 5],
-      "time_slots": ["09:30"],
+      "days_offered": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "time_slots": [
+        "09:30"
+      ],
       "lead_time_days": null,
       "chaperone_ratio": [
-        {"children_per_adult": 6, "applies_to": "Grades K-2"},
-        {"children_per_adult": 12, "applies_to": "Grades 3-12"}
+        {
+          "children_per_adult": 6,
+          "applies_to": "Grades K-2"
+        },
+        {
+          "children_per_adult": 12,
+          "applies_to": "Grades 3-12"
+        }
       ],
       "adults_free": null,
       "indoor": true,
       "outdoor": null,
-      "format": ["guided", "interactive"],
+      "format": [
+        "guided",
+        "interactive"
+      ],
       "sensory_friendly": null,
       "low_noise": null,
       "neurodiversity_friendly": null,
-      "mood_tags": ["learn", "explore"],
-      "curriculum_tags": ["astronomy"],
+      "mood_tags": [
+        "learn",
+        "explore"
+      ],
+      "curriculum_tags": [
+        "astronomy"
+      ],
       "booking_email": "schools@centreoftheuniverse.org",
       "booking_url": "https://www.centreoftheuniverse.org/school-tours",
       "booking_method": "email",
       "source_url": "https://www.centreoftheuniverse.org/school-tours",
       "evidence": "School year 2024/5 cost: $80 per class",
       "checked_on": "2026-09-03",
-      "image_ids": ["program-school-bus-dome"]
+      "image_ids": [
+        "program-school-bus-dome"
+      ]
     },
     {
       "id": "camp-group-visit",
@@ -126,12 +149,21 @@
       "adults_free": true,
       "indoor": true,
       "outdoor": null,
-      "format": ["guided", "hands_on"],
+      "format": [
+        "guided",
+        "hands_on"
+      ],
       "sensory_friendly": null,
       "low_noise": null,
       "neurodiversity_friendly": null,
-      "mood_tags": ["play", "creative", "learn"],
-      "curriculum_tags": ["astronomy"],
+      "mood_tags": [
+        "play",
+        "creative",
+        "learn"
+      ],
+      "curriculum_tags": [
+        "astronomy"
+      ],
       "booking_email": null,
       "booking_url": "https://www.centreoftheuniverse.org/camps",
       "booking_method": "web_form",
@@ -175,19 +207,29 @@
       "adults_free": true,
       "indoor": true,
       "outdoor": null,
-      "format": ["guided", "hands_on"],
+      "format": [
+        "guided",
+        "hands_on"
+      ],
       "sensory_friendly": null,
       "low_noise": null,
       "neurodiversity_friendly": null,
-      "mood_tags": ["learn", "explore"],
-      "curriculum_tags": ["astronomy"],
+      "mood_tags": [
+        "learn",
+        "explore"
+      ],
+      "curriculum_tags": [
+        "astronomy"
+      ],
       "booking_email": "info@centreoftheuniverse.org",
       "booking_url": "https://www.centreoftheuniverse.org/community-tours",
       "booking_method": "email",
       "source_url": "https://www.centreoftheuniverse.org/community-tours",
       "evidence": "Cost: $10.00 per participant (leaders included)",
       "checked_on": "2026-09-03",
-      "image_ids": ["program-community-group"]
+      "image_ids": [
+        "program-community-group"
+      ]
     }
   ],
   "images": [
@@ -257,7 +299,8 @@
     "no deposit, payment-timing or cancellation terms are published for school or community tours",
     "duration of the community group tour is not stated",
     "the booking widget on /book-a-tour is JavaScript and did not render in the fetched text, so the general-admission booking route could not be confirmed",
-    "the homepage og:image is a logo social card rather than a photograph, so the hero was taken from the lead photo on the visit page"
+    "the homepage og:image is a logo social card rather than a photograph, so the hero was taken from the lead photo on the visit page",
+    "COORDINATES: their contact page links through to Google Maps, where the pin on the visitor centre is 48.52037 and -123.41876. That is the point used here. The value we had before, 48.520021 and -123.418766, was the centre of the map view behind the same link, about 40 m away. Note that the map embed on their visit page is centred on somewhere else entirely, roughly 3.5 km off, so ignore that one."
   ],
   "conflicts": [],
   "pages_opened": [
@@ -280,6 +323,6 @@
     "https://www.centreoftheuniverse.org/community-tours",
     "https://www.centreoftheuniverse.org/camps"
   ],
-  "extracted_at": "2026-09-03T18:40:00Z",
+  "extracted_at": "2026-09-07T10:00:00-07:00",
   "extractor_version": "v2.0"
 }

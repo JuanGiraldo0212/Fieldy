@@ -5,7 +5,7 @@ import { useActionState, useEffect, useRef, useState } from 'react'
 import { CircleCheck, Trash2, Upload } from 'lucide-react'
 import { removePhoto, updatePhoto, uploadPhotos, type AdminState } from '@/app/admin/actions'
 import { Input, Labeled, Select, Skeleton, TextArea, cx } from '@/components/ui'
-import { isRenderableImage } from '@/lib/catalog/image-hosts'
+import { isRenderableImage, photoSrc } from '@/lib/catalog/image-hosts'
 import { IMAGE_ROLES, IMAGE_USAGES } from '@/lib/catalog/options'
 import { MAX_PHOTOS_PER_UPLOAD } from '@/lib/catalog/photos'
 import { fileSize } from '@/lib/email/uploads'
@@ -68,7 +68,7 @@ function PhotoCard({ photo, venueName }: { photo: AdminPhoto; venueName: string 
           <>
             {settled ? null : <Skeleton className="absolute inset-0" />}
             <Image
-              src={photo.url}
+              src={photoSrc(photo.url)}
               alt={photo.alt}
               fill
               sizes="(max-width: 640px) 100vw, 400px"

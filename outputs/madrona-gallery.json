@@ -1,0 +1,74 @@
+{
+  "venue": {
+    "id": "madrona-gallery",
+    "name": "Madrona Gallery",
+    "website": "https://www.madronagallery.com",
+    "description": "Madrona Gallery is a commercial fine art dealer on View Street in downtown Victoria. It exhibits and sells historic and contemporary Canadian art, including work by Emily Carr and members of the Group of Seven, along with a collection of Inuit carvings, drawings and prints. The gallery runs a rotating programme of selling exhibitions, most of them two weeks long, and is open seven days a week. Its website describes no tours, no workshops, no education programme and nothing at all addressed to schools, daycares or children's groups, so on the evidence of the site this is a retail gallery rather than a place that hosts group visits.",
+    "category": "arts_performance",
+    "address": "606 View Street, Victoria, BC V8W 1J4",
+    "lat": 48.42578,
+    "lng": -123.36739,
+    "geo_source": "geocoded",
+    "hosts_school_groups": false,
+    "hosts_daycare_groups": false,
+    "youngest_age_welcomed_years": null,
+    "booking_email": "info@madronagallery.com",
+    "booking_phone": "250 380 4660",
+    "booking_url": null,
+    "booking_method": null,
+    "has_washrooms": null,
+    "has_lunch_space": null,
+    "has_rain_backup": null,
+    "stroller_accessible": null,
+    "wheelchair_accessible": null,
+    "bus_parking": null,
+    "facility_notes": null,
+    "nearby_park": null,
+    "restrictions": null,
+    "languages": null,
+    "general_admission_child_cad": null,
+    "general_admission_adult_cad": null,
+    "hours_notes": "Open Monday to Sunday, 10am to 5:30pm.",
+    "seasonal_notes": null,
+    "price_year_or_season": null,
+    "checked_on": "2026-09-03",
+    "checked_by": "scraper"
+  },
+  "programs": [],
+  "images": [
+    {
+      "id": "hero-gallery-interior",
+      "url": "https://images.squarespace-cdn.com/content/v1/52f8526ae4b0bae912c8a4ca/3e98e381-78e1-489d-b398-cf5203b32f83/Yelland+2024+in+situ+2.jpeg",
+      "role": "hero",
+      "alt": "A corner of a gallery room with two large framed paintings hung on grey and white walls and a small dark figure sculpture on a white plinth, above a pale wood floor.",
+      "alt_source": "generated",
+      "caption": null,
+      "found_on_url": "https://www.madronagallery.com/contact",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    }
+  ],
+  "gaps": [
+    "This is a commercial art dealer and its site offers nothing for children's groups. There is no education, schools, learning, tours or groups page, no workshop, no group rate and no booking route for a visiting group. Programs was left empty for that reason rather than because a page failed to load.",
+    "The site does not say whether it is free to walk in, and it does not publish anything about washrooms, accessibility, stroller access or where a group could eat.",
+    "If you want to bring a group of children, there is no published way to ask. The only contact given is the gallery's general email address and phone number.",
+    "The site's social sharing image is the gallery's leaf logo rather than a photograph, so an interior photograph from the contact page was used as the main image instead.",
+    "That interior photograph has no alt text on the site, so the description of it was written after opening the image in a browser and looking at it.",
+    "No coordinates are published on the site, so only the street address was recorded and the pin is left for geocoding later."
+  ],
+  "conflicts": [],
+  "pages_opened": [
+    "https://www.madronagallery.com",
+    "https://www.madronagallery.com/about",
+    "https://www.madronagallery.com/contact"
+  ],
+  "pages_useful": [
+    "https://www.madronagallery.com",
+    "https://www.madronagallery.com/about",
+    "https://www.madronagallery.com/contact"
+  ],
+  "extracted_at": "2026-09-03T00:00:00Z",
+  "extractor_version": "v2.0"
+}

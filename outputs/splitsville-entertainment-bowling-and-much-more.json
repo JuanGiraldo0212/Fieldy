@@ -1,0 +1,352 @@
+{
+  "venue": {
+    "id": "splitsville-nanaimo",
+    "name": "Splitsville Bowl Nanaimo",
+    "website": "https://www.splitsvillebowl.ca/nanaimo-bowling",
+    "description": "Splitsville Bowl Nanaimo is a 16 lane ten pin bowling centre at 171 Calder Road, with an arcade, a lounge and food served at the lanes. It is open seven days a week and takes bookings online. Bumpers, ball ramps and lightweight balls mean young children can bowl, and the centre lists school trip, birthday and group packages. School trip prices are published for the whole chain rather than for Nanaimo on its own.",
+    "category": "community_civic",
+    "address": "171 Calder Rd, Nanaimo, British Columbia, V9R 6J2",
+    "lat": 49.16855,
+    "lng": -123.9864,
+    "geo_source": "site_embed",
+    "hosts_school_groups": true,
+    "hosts_daycare_groups": null,
+    "youngest_age_welcomed_years": null,
+    "booking_email": null,
+    "booking_phone": "250-754-2442",
+    "booking_url": "https://splitvilleentertainment.tripleseat.com/party_request/5699",
+    "booking_method": "web_form",
+    "has_washrooms": null,
+    "has_lunch_space": null,
+    "has_rain_backup": true,
+    "stroller_accessible": null,
+    "wheelchair_accessible": true,
+    "bus_parking": null,
+    "facility_notes": {
+      "wheelchair_accessible": "All Splitsville Bowl centres have wheelchair-accessible bowling lanes, except for our Calgary Glamorgan centre. Accessible parking spaces are available close to the entrance.",
+      "rain_backup": "We are a weatherproof solution for planning your trip so get ready for a great time rain or shine."
+    },
+    "nearby_park": null,
+    "restrictions": [
+      "Outside food and drinks are not permitted, except for peanut-free birthday cakes as part of our birthday party packages",
+      "Children under the age of 12 are required to be supervised by an adult or caregiver over the age of 16",
+      "Guests must wear enclosed footwear on the bowling lanes, open-toed shoes, Crocs, and slip-ons are not permitted for safety reasons",
+      "No under 19's are permitted in centre after 10pm"
+    ],
+    "languages": null,
+    "general_admission_child_cad": null,
+    "general_admission_adult_cad": null,
+    "hours_notes": "Open 7 days a week. Monday and Tuesday 10:00am to 11:00pm, Wednesday and Thursday 10:00am to midnight, Friday and Saturday 10:00am to 1:00am, Sunday 10:00am to 11:00pm. Hours can vary during holiday periods. The same page also carries a standing line saying the hours are being updated and asking you to call.",
+    "seasonal_notes": null,
+    "price_year_or_season": null,
+    "checked_on": "2026-09-07",
+    "checked_by": "scraper"
+  },
+  "programs": [
+    {
+      "id": "school-trip-bowling",
+      "name": "School trip bowling",
+      "description": "The chain publishes school trip prices per person: 60 minutes of bowling $7.99, 90 minutes $10.99 and 120 minutes $13.99. Two pizza slices with a pop is $5.99 per person and arcade play cards start at $5 per person. Mini golf at $5 per person is only at some centres, and the ones named are Richmond Hill and Calgary Highfield. School pricing runs Monday to Friday between 9:00am and 3:00pm. The chain recommends contacting the events team six to eight weeks ahead for a group event, though no minimum notice is published for school trips.",
+      "what_children_do": "Bowl on a lane with bumpers, ball ramps and lightweight balls available so every child can knock pins down. Groups can add arcade play cards, and pizza and pop between games.",
+      "our_note": "The banner says trips start at $20 a child but the list underneath prices an hour of bowling at $7.99, so ask for a written quote showing what is in it. School pricing only runs on weekdays between 9am and 3pm, and food and arcade cards are charged on top of the bowling.",
+      "practical_summary": "Everything is indoors, parking is free on site and the lanes are wheelchair accessible. Washrooms, somewhere to eat packed lunches and bus parking are not mentioned, and outside food is not allowed, so ask about lunch when you book.",
+      "comes_to_you": false,
+      "age_min_years": null,
+      "age_max_years": null,
+      "grade_min": null,
+      "grade_max": null,
+      "age_basis": null,
+      "duration_min": 60,
+      "capacity_max": null,
+      "capacity_min": null,
+      "cost_per_child_cad": 7.99,
+      "cost_per_group_cad": null,
+      "cost_per_adult_cad": null,
+      "free_adults_per_children": null,
+      "is_free": false,
+      "tax_included": null,
+      "extra_fees_note": "Food, arcade play cards and mini golf are extra. Two pizza slices with a pop is $5.99 per person and arcade play cards start at $5 per person.",
+      "school_rate_only": true,
+      "deposit_required": null,
+      "payment_timing": null,
+      "cancellation_note": "Reservations are non-refundable, but credit can be applied to a rescheduled date if the change occurs 48 hours in advance of the original reservation date.",
+      "months_offered": null,
+      "days_offered": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "time_slots": null,
+      "lead_time_days": null,
+      "chaperone_ratio": null,
+      "adults_free": null,
+      "indoor": true,
+      "outdoor": false,
+      "format": [
+        "self_guided"
+      ],
+      "sensory_friendly": null,
+      "low_noise": null,
+      "neurodiversity_friendly": null,
+      "mood_tags": [
+        "play",
+        "active"
+      ],
+      "curriculum_tags": null,
+      "booking_email": null,
+      "booking_url": "https://splitvilleentertainment.tripleseat.com/party_request/39422",
+      "booking_method": "web_form",
+      "source_url": "https://www.splitsvillebowl.ca/party/schools",
+      "evidence": "60 minutes of bowling - $7.99 per person",
+      "checked_on": "2026-09-07",
+      "image_ids": [
+        "program-school-trip"
+      ]
+    },
+    {
+      "id": "kids-party-package",
+      "name": "Kids birthday party package",
+      "description": "The Nanaimo centre lists two kids party packages. Rock 'N' Bowl starts at $99 for up to six children and includes 90 minutes of bowling, one large pizza, a French fry platter, unlimited fountain drinks and a free bowling coupon for each guest. The $16.50 a child figure quoted on the page is that $99 shared between six children on a Monday to Thursday booking. Strike 'N' Play starts at $149 for up to six children and adds six $10 arcade cards. Both are for children 15 and under. Book more than four lanes, meaning 24 or more guests, and you go through the events team instead.",
+      "what_children_do": "Bowl for 90 minutes on a lane, with bumpers and a ramp for the smaller ones, then sit down together for pizza and fries. Each child takes home a coupon for a free game.",
+      "our_note": "The $99 covers six children, so eighteen children is three packages rather than three times a single child's price. Book at least 72 hours ahead, and remember no outside food comes in except a nut free cake, which they cannot refrigerate.",
+      "practical_summary": "Indoors with free parking, accessible lanes and a host who runs the party. Washrooms and space for packed lunches are not mentioned, and the kitchen will not store food you bring, so plan the eating around their menu.",
+      "comes_to_you": false,
+      "age_min_years": null,
+      "age_max_years": 15,
+      "grade_min": null,
+      "grade_max": null,
+      "age_basis": "years",
+      "duration_min": 90,
+      "capacity_max": 6,
+      "capacity_min": null,
+      "cost_per_child_cad": null,
+      "cost_per_group_cad": 99.0,
+      "cost_per_adult_cad": null,
+      "free_adults_per_children": null,
+      "is_free": false,
+      "tax_included": null,
+      "extra_fees_note": "The $16.50 a child rate is the $99 package shared between six children and applies Monday to Thursday. Strike 'N' Play with arcade cards starts at $149 for the same six children.",
+      "school_rate_only": false,
+      "deposit_required": null,
+      "payment_timing": null,
+      "cancellation_note": "Reservations are non-refundable, but credit can be applied to a rescheduled date if the change occurs 48 hours in advance of the original reservation date.",
+      "months_offered": null,
+      "days_offered": null,
+      "time_slots": null,
+      "lead_time_days": 3,
+      "chaperone_ratio": null,
+      "adults_free": null,
+      "indoor": true,
+      "outdoor": false,
+      "format": [
+        "self_guided"
+      ],
+      "sensory_friendly": null,
+      "low_noise": null,
+      "neurodiversity_friendly": null,
+      "mood_tags": [
+        "play",
+        "active"
+      ],
+      "curriculum_tags": null,
+      "booking_email": null,
+      "booking_url": null,
+      "booking_method": "shop",
+      "source_url": "https://www.splitsvillebowl.ca/nanaimo-bowling/groups-parties",
+      "evidence": "Starting at $99, up to six (6) kids per package.",
+      "checked_on": "2026-09-07",
+      "image_ids": [
+        "activity-birthday-party"
+      ]
+    },
+    {
+      "id": "lane-booking",
+      "name": "Bowling lane booking",
+      "description": "Lanes are booked by the hour and priced per lane for up to six guests. From opening to 6pm Monday to Friday a 60 minute lane starts at $39.99, 75 minutes at $49.99 and 90 minutes at $59.99. Evenings and weekends cost more. Children can wear their own clean, dry, flat soled closed toe shoes or borrow bowling shoes at no extra cost. The site says bowling suits ages 3 to 93 and that children under 3 can bowl with an adult helping and a ball ramp.",
+      "what_children_do": "Take turns rolling a ball down a lane, with the bumpers up and a ramp to push the ball off for anyone too small to throw it. Six children share a lane, so the rest of the group waits and watches between turns.",
+      "our_note": "Six to a lane is the limit, so work out how many lanes you need before you look at the price. Weekday daytime is the cheapest slot. Booking ahead is recommended rather than required, but a large group is worth reserving.",
+      "practical_summary": "Indoors, free parking on site and wheelchair accessible lanes. Washrooms, lunch space and bus parking are not mentioned on the site.",
+      "comes_to_you": false,
+      "age_min_years": null,
+      "age_max_years": null,
+      "grade_min": null,
+      "grade_max": null,
+      "age_basis": null,
+      "duration_min": 60,
+      "capacity_max": 6,
+      "capacity_min": null,
+      "cost_per_child_cad": null,
+      "cost_per_group_cad": 39.99,
+      "cost_per_adult_cad": null,
+      "free_adults_per_children": null,
+      "is_free": false,
+      "tax_included": null,
+      "extra_fees_note": null,
+      "school_rate_only": false,
+      "deposit_required": null,
+      "payment_timing": null,
+      "cancellation_note": "Reservations are non-refundable, but credit can be applied to a rescheduled date if the change occurs 48 hours in advance of the original reservation date.",
+      "months_offered": null,
+      "days_offered": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "time_slots": null,
+      "lead_time_days": null,
+      "chaperone_ratio": null,
+      "adults_free": null,
+      "indoor": true,
+      "outdoor": false,
+      "format": [
+        "self_guided"
+      ],
+      "sensory_friendly": null,
+      "low_noise": null,
+      "neurodiversity_friendly": null,
+      "mood_tags": [
+        "play",
+        "active"
+      ],
+      "curriculum_tags": null,
+      "booking_email": null,
+      "booking_url": null,
+      "booking_method": "shop",
+      "source_url": "https://www.splitsvillebowl.ca/nanaimo-bowling",
+      "evidence": "Pricing is per lane for up to 6 guests.",
+      "checked_on": "2026-09-07",
+      "image_ids": [
+        "hero-bowling"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "id": "hero-bowling",
+      "url": "https://assets.hollywoodbowlgroup.co.uk/transform/6ae61b5a-1070-462c-9701-c3c6af7c2cb7/HB-family-bowling-selfie",
+      "role": "hero",
+      "alt": "Bowling at Nanaimo Splitsville",
+      "alt_source": "site",
+      "caption": null,
+      "found_on_url": "https://www.splitsvillebowl.ca/nanaimo-bowling",
+      "width": 800,
+      "height": 534,
+      "rights_note": null,
+      "usage": "unverified"
+    },
+    {
+      "id": "program-school-trip",
+      "url": "https://assets.hollywoodbowlgroup.co.uk/transform/68d56046-9b54-4c4c-a6eb-767fc210ede6/school-kids-bowling",
+      "role": "program",
+      "alt": "Kid bowling at Splitsville",
+      "alt_source": "site",
+      "caption": null,
+      "found_on_url": "https://www.splitsvillebowl.ca/party/schools",
+      "width": 800,
+      "height": 537,
+      "rights_note": null,
+      "usage": "unverified"
+    },
+    {
+      "id": "activity-birthday-party",
+      "url": "https://assets.hollywoodbowlgroup.co.uk/transform/837f591f-3a3f-4672-b646-87104a46351e/birthday-bowling-parties",
+      "role": "activity",
+      "alt": "Kids enjoy their birthday party at Splitsville Bowl",
+      "alt_source": "site",
+      "caption": null,
+      "found_on_url": "https://www.splitsvillebowl.ca/nanaimo-bowling",
+      "width": 800,
+      "height": 537,
+      "rights_note": null,
+      "usage": "unverified"
+    },
+    {
+      "id": "space-arcade",
+      "url": "https://assets.hollywoodbowlgroup.co.uk/transform/50aa139e-025c-4f88-a600-b03eb6bc2bed/stock-splitsville-arcade-airhockey-kids1",
+      "role": "space",
+      "alt": "Arcade at Splitsville Entertainment",
+      "alt_source": "site",
+      "caption": null,
+      "found_on_url": "https://www.splitsvillebowl.ca/nanaimo-bowling",
+      "width": 800,
+      "height": 533,
+      "rights_note": null,
+      "usage": "unverified"
+    }
+  ],
+  "gaps": [
+    "Washrooms are not mentioned anywhere on the site.",
+    "Nowhere to eat a packed lunch is stated, and outside food and drink is not allowed except a nut free birthday cake.",
+    "Bus parking is not mentioned. The site says only that on site parking is free and that accessible spaces are near the entrance.",
+    "No minimum notice is published for a school trip. Six to eight weeks is a recommendation for group events, and 72 hours is the stated minimum for a birthday party.",
+    "No age range is published for school trips. The only stated age limit is that the kids party packages are for children 15 and under.",
+    "How many adults have to come with a school group is not stated. The general house rule is that children under 12 need an adult or caregiver over 16 with them.",
+    "Whether prices include tax is not stated.",
+    "No year or season is attached to any price on the site.",
+    "School trip prices are published once for the whole chain and are not repeated on the Nanaimo pages, so they may not hold at this centre.",
+    "The venue now trades as Splitsville Bowl. The old splitsville.ca address redirects to splitsvillebowl.ca, and the tracker name Splitsville Entertainment is the former brand.",
+    "The photographs are the chain's own library rather than pictures of the Nanaimo centre, and they are served from the parent company's asset server rather than from a splitsvillebowl.ca address.",
+    "RETRIEVAL NOTE: the frequently asked questions on this site sit inside collapsed accordions and do not appear in a plain fetch. The supervision rule, the six per lane limit, the cancellation terms and the outside food rule were all read from the live page in a browser."
+  ],
+  "conflicts": [
+    {
+      "field": "cost_per_child_cad",
+      "values": [
+        "School Trips Starting at just $20",
+        "60 minutes of bowling - $7.99 per person"
+      ],
+      "sources": [
+        "https://www.splitsvillebowl.ca/party/schools"
+      ],
+      "note": "Their school trips page says trips start at $20 a child at the top of the page, then lists an hour of bowling at $7.99 a head further down. The cheaper figure is bowling on its own. Ask for a written quote so you can see what the $20 is meant to cover."
+    },
+    {
+      "field": "hours_notes",
+      "values": [
+        "We are just updating our opening hours, please call us for the latest opening hours",
+        "Monday 10:00am to 11:00pm, through to Friday and Saturday 10:00am to 1:00am"
+      ],
+      "sources": [
+        "https://www.splitsvillebowl.ca/nanaimo-bowling"
+      ],
+      "note": "Their Nanaimo page lists full opening hours in the questions further down, and higher up on the same page says the hours are being updated and to call. Worth a quick call to confirm the day you want."
+    },
+    {
+      "field": "lat",
+      "values": [
+        "49.1666, -123.9424",
+        "49.168550183267165, -123.986397"
+      ],
+      "sources": [
+        "https://www.splitsvillebowl.ca/nanaimo-bowling"
+      ],
+      "note": "Two hidden map points on their Nanaimo page sit about three kilometres apart. The street address is the thing to trust, 171 Calder Road off the Nanaimo Parkway at Exit 18. We use the point that matches that address."
+    }
+  ],
+  "pages_opened": [
+    "https://splitsville.ca/",
+    "https://www.splitsvillebowl.ca/",
+    "https://www.splitsvillebowl.ca/nanaimo-bowling",
+    "https://www.splitsvillebowl.ca/nanaimo-bowling/groups-parties",
+    "https://www.splitsvillebowl.ca/party/schools",
+    "https://www.splitsvillebowl.ca/centres",
+    "https://www.splitsvillebowl.ca/party/kids-birthday-parties",
+    "https://www.splitsvillebowl.ca/faqs",
+    "https://www.splitsvillebowl.ca/accessibility"
+  ],
+  "pages_useful": [
+    "https://www.splitsvillebowl.ca/nanaimo-bowling",
+    "https://www.splitsvillebowl.ca/nanaimo-bowling/groups-parties",
+    "https://www.splitsvillebowl.ca/party/schools",
+    "https://www.splitsvillebowl.ca/centres",
+    "https://www.splitsvillebowl.ca/party/kids-birthday-parties",
+    "https://www.splitsvillebowl.ca/faqs",
+    "https://www.splitsvillebowl.ca/accessibility"
+  ],
+  "extracted_at": "2026-09-07T19:40:00Z",
+  "extractor_version": "v2.0"
+}

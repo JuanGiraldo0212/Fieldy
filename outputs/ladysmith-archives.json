@@ -1,0 +1,159 @@
+{
+  "venue": {
+    "id": "ladysmith-archives",
+    "name": "Ladysmith Archives",
+    "website": "https://www.ladysmithhistoricalsociety.ca/archives/",
+    "description": "The Ladysmith Archives is the research and collections service of the Ladysmith and District Historical Society, in Unit B at 1115 1st Avenue, below Tim Horton's. It gives free public access to thousands of documents about the Ladysmith area, including newspapers, photographs, maps, letters and ledgers, and it also looks after Ray Knight's collection for the Town of Ladysmith. There is a reading room with a microfilm reader and printer, volunteers retrieve materials and help focus a search, and Society members can use Ancestry.com on two computers there. This is a place to do research by appointment rather than a museum to walk around, and the site describes nothing for children or for groups.",
+    "category": "museums_history",
+    "address": "Unit B, 1115 1st Avenue, Ladysmith, BC",
+    "lat": 48.99811,
+    "lng": -123.82365,
+    "geo_source": "geocoded",
+    "hosts_school_groups": null,
+    "hosts_daycare_groups": null,
+    "youngest_age_welcomed_years": null,
+    "booking_email": null,
+    "booking_phone": "250-245-0100",
+    "booking_url": null,
+    "booking_method": "phone",
+    "has_washrooms": null,
+    "has_lunch_space": null,
+    "has_rain_backup": null,
+    "stroller_accessible": null,
+    "wheelchair_accessible": null,
+    "bus_parking": null,
+    "facility_notes": null,
+    "nearby_park": null,
+    "restrictions": null,
+    "languages": null,
+    "general_admission_child_cad": 0,
+    "general_admission_adult_cad": 0,
+    "hours_notes": "Archives office: Monday to Friday, 9:00 a.m. to 2:00 p.m. Research visits are arranged by phone on 250-245-0100.",
+    "seasonal_notes": null,
+    "price_year_or_season": "The 25 cents a page copying charge was last published in 2019, so check it still holds.",
+    "checked_on": "2026-09-03",
+    "checked_by": "scraper"
+  },
+  "programs": [
+    {
+      "id": "research-visit",
+      "name": "Research visit by appointment",
+      "description": "Free public access to the archive's holdings in its reading room, arranged by ringing 250-245-0100 for an appointment. Volunteers help focus a search and fetch materials, and the room has a microfilm reader and printer. Members of the Society can use Ancestry.com on two computers there. Copies cost 25 cents a page. If you cannot come in person, small focused requests can be sent through the research request form on their page. Nothing on the site describes a school visit, a daycare visit or any group booking, and no age range or group size is given.",
+      "what_children_do": null,
+      "our_note": "This is a working research room with a big table, two computers and a microfilm reader, not a place set up for a group of children to look around. If you want a heritage outing in Ladysmith, the Society's museum on 1st Avenue is the one to ask about, and their industrial heritage site by the harbour is the other.",
+      "practical_summary": "Free to use, open weekday mornings and early afternoons, with a charge if you take copies. Washrooms, step free access, how many people can come at once and whether children are welcome are all unpublished, so ring first.",
+      "comes_to_you": false,
+      "age_min_years": null,
+      "age_max_years": null,
+      "grade_min": null,
+      "grade_max": null,
+      "age_basis": null,
+      "duration_min": null,
+      "capacity_max": null,
+      "capacity_min": null,
+      "cost_per_child_cad": null,
+      "cost_per_group_cad": null,
+      "cost_per_adult_cad": null,
+      "free_adults_per_children": null,
+      "is_free": true,
+      "tax_included": null,
+      "extra_fees_note": "Please be advised that photocopying fees apply (.25 per page).",
+      "school_rate_only": false,
+      "deposit_required": null,
+      "payment_timing": null,
+      "cancellation_note": null,
+      "months_offered": null,
+      "days_offered": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "time_slots": null,
+      "lead_time_days": null,
+      "chaperone_ratio": null,
+      "adults_free": null,
+      "indoor": true,
+      "outdoor": false,
+      "format": [
+        "self_guided"
+      ],
+      "sensory_friendly": null,
+      "low_noise": null,
+      "neurodiversity_friendly": null,
+      "mood_tags": [
+        "explore",
+        "learn"
+      ],
+      "curriculum_tags": null,
+      "booking_email": null,
+      "booking_url": null,
+      "booking_method": "phone",
+      "source_url": "https://www.ladysmithhistoricalsociety.ca/archives/",
+      "evidence": "The Ladysmith Archives provides free, public access to thousands of documents related to the history of the Ladysmith area.",
+      "checked_on": "2026-09-03",
+      "image_ids": [
+        "hero-reading-room"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "id": "hero-reading-room",
+      "url": "https://www.ladysmithhistoricalsociety.ca/wp-content/uploads/2015/08/Reading-room.jpg",
+      "role": "hero",
+      "alt": "Reading room",
+      "alt_source": "site",
+      "caption": null,
+      "found_on_url": "https://www.ladysmithhistoricalsociety.ca/archives/",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    }
+  ],
+  "gaps": [
+    "This is a distinct site from the Ladysmith Museum and the Ladysmith Industrial Heritage Museum, which are catalogued separately. All three are run by the Ladysmith and District Historical Society from the same website, but the archives is a research service in its own unit at 1115 1st Avenue with its own phone number and its own opening hours. Nothing from either sibling record has been repeated here, and this was re-checked page by page during verification.",
+    "The archives is not a visitable attraction in the field trip sense. It is a reading room where people come to look up records. No tour, no display and no children's activity is described anywhere on its page.",
+    "Nothing on the site says whether school or daycare groups are taken, so that was left open rather than answered. There is no reason given anywhere for refusing them, it simply is not addressed.",
+    "No youngest age, group size, visit length or notice period is published.",
+    "Washrooms, lunch space, step free access, stroller access and parking are not mentioned at all. The unit is described as being below Tim Horton's, which may mean stairs, but the site does not say.",
+    "No booking email is published for the archives. The home page says volunteers can help with a request by email, but no address is given anywhere for the archives. The page carries a research request form and a contact form instead, and the phone number is the only direct route given.",
+    "The archives page itself was last revised in December 2019, so the 25 cents a page copying charge and the description of the room may both be out of date. The opening hours used here come from their contact page, which was revised in December 2025.",
+    "The only postal code the site prints under the archives heading, V9G 1A6, belongs to the Society's PO Box 813 and is the same one it prints for the museum. It has been left out of the street address rather than attached to a building it may not describe.",
+    "The map coordinates come from the Google map the archives page embeds under the line saying it shows the location of the Ladysmith Archives. No pin was hand placed.",
+    "The Historically Speaking talks, which can be requested by groups of ten or more, belong to the Society as a whole and are recorded against the Ladysmith Museum. They are not repeated here.",
+    "The archives page carries one photograph, of the reading room, and it has the site's own alt text. It was opened in a browser and looked at during verification: it shows a windowless carpeted room with a wooden table, about seven office chairs, a map cabinet, filing cabinets and bookshelves. There are no other photographs on the page.",
+    "RETRIEVAL NOTE: this record was finished in a browser. The map coordinates and the largest image size both sit in markup that a plain fetch of the page text will not surface.",
+    "COORDINATES: the historical society publishes a Google map embed for the archives, but it carries only the centre of the map view and no pin on the place itself. The point we had, 48.9979 and -123.82598, was that view centre. It has been cleared. The address stands and the coordinates still need to be worked out from it."
+  ],
+  "conflicts": [
+    {
+      "field": "hours_notes",
+      "values": [
+        "Archives office: Monday to Friday, 9:00 a.m. to 2:00 p.m.",
+        "please call us at 250-245-0100 to make an appointment"
+      ],
+      "sources": [
+        "https://www.ladysmithhistoricalsociety.ca/contact-hours/",
+        "https://www.ladysmithhistoricalsociety.ca/archives/"
+      ],
+      "note": "Their pages do not agree on whether you can just walk in. One gives office hours of Monday to Friday, 9 to 2. Another says to phone 250-245-0100 and book a time. Ring first and you will not waste the trip."
+    }
+  ],
+  "pages_opened": [
+    "https://www.ladysmithhistoricalsociety.ca/",
+    "https://www.ladysmithhistoricalsociety.ca/archives/",
+    "https://www.ladysmithhistoricalsociety.ca/contact-hours/",
+    "https://www.ladysmithhistoricalsociety.ca/programs/",
+    "https://www.ladysmithhistoricalsociety.ca/calendar/"
+  ],
+  "pages_useful": [
+    "https://www.ladysmithhistoricalsociety.ca/",
+    "https://www.ladysmithhistoricalsociety.ca/archives/",
+    "https://www.ladysmithhistoricalsociety.ca/contact-hours/"
+  ],
+  "extracted_at": "2026-09-07T10:00:00-07:00",
+  "extractor_version": "v2.0"
+}

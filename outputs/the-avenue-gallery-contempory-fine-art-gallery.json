@@ -1,0 +1,77 @@
+{
+  "venue": {
+    "id": "avenue-gallery",
+    "name": "The Avenue Gallery Contemporary Fine Art Gallery",
+    "website": "https://theavenuegallery.com",
+    "description": "The Avenue Gallery is a commercial contemporary art gallery at 2184 Oak Bay Avenue in Victoria, showing paintings, sculpture, glass, ceramics and jewellery by more than 60 Canadian artists since 2002. It sells and ships artwork worldwide, offers in home and corporate art consulting, and takes private appointments with the gallery owner for collectors who want to view work outside opening hours. The site describes no school visits, no daycare visits, no children's workshops and no group tours, so this is recorded as a gallery that does not host children's groups. Anyone is welcome to walk in during opening hours, and the gallery is wheelchair accessible.",
+    "category": "arts_performance",
+    "address": "2184 Oak Bay Avenue, Victoria, British Columbia V8R 1G3",
+    "lat": 48.42667,
+    "lng": -123.31637,
+    "geo_source": "site_embed",
+    "hosts_school_groups": false,
+    "hosts_daycare_groups": false,
+    "youngest_age_welcomed_years": null,
+    "booking_email": "info@theavenuegallery.com",
+    "booking_phone": "250-598-2184",
+    "booking_url": null,
+    "booking_method": null,
+    "has_washrooms": null,
+    "has_lunch_space": null,
+    "has_rain_backup": null,
+    "stroller_accessible": null,
+    "wheelchair_accessible": true,
+    "bus_parking": null,
+    "facility_notes": {
+      "wheelchair_accessible": "The Avenue Gallery is wheelchair accessible."
+    },
+    "nearby_park": null,
+    "restrictions": null,
+    "languages": null,
+    "general_admission_child_cad": null,
+    "general_admission_adult_cad": null,
+    "hours_notes": "Monday to Saturday 10 am to 5 pm. Sunday 12 to 4 pm.",
+    "seasonal_notes": null,
+    "price_year_or_season": null,
+    "checked_on": "2026-09-03",
+    "checked_by": "scraper"
+  },
+  "programs": [],
+  "images": [
+    {
+      "id": "hero-exterior",
+      "url": "https://theavenuegallery.com/wp-content/uploads/2019/04/Exterior-evening-shot-high-res-march-2015-long-crop2-350x390.jpg",
+      "role": "hero",
+      "alt": "A shop front at night under a dark awning lettered The Avenue Gallery, with a large landscape painting lit in the window and a wet street in front.",
+      "alt_source": "generated",
+      "caption": null,
+      "found_on_url": "https://theavenuegallery.com/contact/",
+      "width": 350,
+      "height": 390,
+      "rights_note": null,
+      "usage": "unverified"
+    }
+  ],
+  "gaps": [
+    "This is a commercial dealer gallery. Nothing on any page mentions school groups, daycare groups, children's workshops, guided tours or an education contact, so both group questions are answered no rather than left open.",
+    "The only private visit the gallery offers is an appointment with the owner for collectors, outside opening hours. It is not a children's programme.",
+    "No admission price is published, so it is not confirmed on the site that walking in is free.",
+    "Washrooms, lunch space and parking are not mentioned anywhere on the site.",
+    "The only photograph of the building itself is 350 by 390 pixels, which is small for a card image. The picture the site offers for sharing is a photograph of a painting rather than of the gallery, so it was not used.",
+    "No photograph on the site carries alt text. The description here was written after opening the image in a browser and looking at it.",
+    "COORDINATES: their contact page publishes both a map embed centred near the gallery and a link through to Google Maps with a pin on the gallery itself. The point here is now that pin, 48.42667 and -123.31637. The value we had before was the view centre, about 30 m away."
+  ],
+  "conflicts": [],
+  "pages_opened": [
+    "https://theavenuegallery.com/",
+    "https://theavenuegallery.com/contact/",
+    "https://theavenuegallery.com/client-care/"
+  ],
+  "pages_useful": [
+    "https://theavenuegallery.com/",
+    "https://theavenuegallery.com/contact/",
+    "https://theavenuegallery.com/client-care/"
+  ],
+  "extracted_at": "2026-09-07T10:00:00-07:00",
+  "extractor_version": "v2.0"
+}

@@ -1,0 +1,85 @@
+{
+  "venue": {
+    "id": "metchosin-international-summer-school-of-the-arts",
+    "name": "Metchosin International Summer School of the Arts",
+    "website": "https://missa.ca",
+    "description": "The Metchosin International Summer School of the Arts is a registered charity that has run a summer arts school on southern Vancouver Island since 1984. It offers two day and five day workshops in painting, ceramics, textiles, creative writing, improv and other creative arts, taught by practising artists, with the option to stay on campus. Its terms state that classes are open to students 19 years or older at the start of their registered workshop, so it does not take children, school classes or daycare groups. The summer program runs on the campus of Pearson College in Metchosin, while the only street address the site publishes is its office on Hillside Avenue in Victoria.",
+    "category": "arts_performance",
+    "address": "770-B Hillside Ave, Victoria, BC, V8T 1Z6",
+    "lat": null,
+    "lng": null,
+    "geo_source": "geocode_pending",
+    "hosts_school_groups": false,
+    "hosts_daycare_groups": false,
+    "youngest_age_welcomed_years": 19,
+    "booking_email": "info@missa.ca",
+    "booking_phone": "778-966-4772",
+    "booking_url": "https://missa.ca/workshops/",
+    "booking_method": "shop",
+    "has_washrooms": null,
+    "has_lunch_space": null,
+    "has_rain_backup": null,
+    "stroller_accessible": null,
+    "wheelchair_accessible": null,
+    "bus_parking": null,
+    "facility_notes": null,
+    "nearby_park": null,
+    "restrictions": [
+      "Classes are open to students 19 years or older at the start of their registered workshop.",
+      "Accommodation is only available to registered MISSA students. If partners want to stay, they must also register for a course at the same time.",
+      "No pets please. Overnight camping is not permitted on campus."
+    ],
+    "languages": null,
+    "general_admission_child_cad": null,
+    "general_admission_adult_cad": null,
+    "hours_notes": "Courses run 9 am to 4 pm each day during the summer program.",
+    "seasonal_notes": "The summer program runs once a year. The 2026 program has finished and the site says the next one runs 25 June to 9 July 2027 on the campus of Pearson College in Metchosin. The site also mentions possible autumn and winter workshops in 2026.",
+    "price_year_or_season": null,
+    "checked_on": "2026-09-03",
+    "checked_by": "scraper"
+  },
+  "programs": [],
+  "images": [
+    {
+      "id": "hero-painting-outdoors",
+      "url": "https://missa.ca/wp-content/uploads/2024/02/1-Explore-the-arts-new-image-V2-e1706908948397.jpg",
+      "role": "hero",
+      "alt": "An adult in a green fleece paints a forest scene on a canvas set on an easel, standing on a leaf covered path among tall conifers.",
+      "alt_source": "generated",
+      "caption": null,
+      "found_on_url": "https://missa.ca/",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    }
+  ],
+  "gaps": [
+    "This is an adults only art school. Their terms and conditions state that classes are open to students 19 years or older at the start of their registered workshop, so no children's program has been recorded and no school or daycare booking route exists.",
+    "The tracker lists this venue under Victoria, and the office address on Hillside Avenue is in Victoria, but the workshops themselves run at Pearson College in Metchosin. No street address is published for the campus, only a campus map linked as a PDF.",
+    "The 2027 course list, fees and material fees were not published at the time of checking, so no prices are recorded. The workshops page carries only empty date headings for the finished 2026 season.",
+    "Accommodation rates for 2027 are not published either. The page says rooms will be single, double or quad, that rates are per person and include breakfast and dinner, but gives no figures.",
+    "RETRIEVAL NOTE: the photographs on this site are CSS background images and do not appear in a plain fetch. The header photo recorded here was collected in a browser.",
+    "The image the site offers for social sharing returns a not found error, so the header photo comes from the banner on their home page instead.",
+    "Alt text for the header photo was written after opening the image in a browser and looking at it.",
+    "The site is inconsistent about its own dates. The page title still reads July 12 to 26, 2024, the workshops page lists 2026 sessions running 18 to 31 July, and the home page advertises 25 June to 9 July 2027. The 2027 dates appear on the most recently updated pages."
+  ],
+  "conflicts": [],
+  "pages_opened": [
+    "https://www.missa.ca",
+    "https://missa.ca/workshops/",
+    "https://missa.ca/about/",
+    "https://missa.ca/contact/",
+    "https://missa.ca/terms-conditions/",
+    "https://missa.ca/accommodations-2025/"
+  ],
+  "pages_useful": [
+    "https://www.missa.ca",
+    "https://missa.ca/workshops/",
+    "https://missa.ca/about/",
+    "https://missa.ca/contact/",
+    "https://missa.ca/terms-conditions/"
+  ],
+  "extracted_at": "2026-09-03T18:50:00Z",
+  "extractor_version": "v2.0"
+}

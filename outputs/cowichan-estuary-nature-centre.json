@@ -1,0 +1,341 @@
+{
+  "venue": {
+    "id": "cowichan-estuary-nature-centre",
+    "name": "Cowichan Estuary Nature Centre",
+    "website": "https://www.cowichanestuary.ca/",
+    "description": "A small nature interpretive centre on the edge of the Cowichan Estuary at Cowichan Bay, run as a charitable society by a volunteer board with a part time staff team. Inside there is a marine aquarium and an open observation tank with intertidal creatures, plus microscopes, telescopes and interactive displays about the estuary and the Cowichan and Koksilah watersheds. Outside, an interpretive trail runs from the centre to a wildlife viewing tower. The society says its education programs for school classes, children, youth and adults are led by professional nature educators assisted by volunteers.",
+    "category": "nature_outdoors",
+    "address": "1845 Cowichan Bay Rd, Cowichan Bay, BC V0R 1N0",
+    "lat": 48.74278,
+    "lng": -123.62707,
+    "geo_source": "geocoded",
+    "hosts_school_groups": true,
+    "hosts_daycare_groups": null,
+    "youngest_age_welcomed_years": 0,
+    "booking_email": "info@cowichanestuary.ca",
+    "booking_phone": "250-597-2288",
+    "booking_url": null,
+    "booking_method": "email",
+    "has_washrooms": null,
+    "has_lunch_space": null,
+    "has_rain_backup": null,
+    "stroller_accessible": null,
+    "wheelchair_accessible": null,
+    "bus_parking": null,
+    "facility_notes": null,
+    "nearby_park": "The Nature Centre is at 1845 Cowichan Bay Rd in Hecate Park.",
+    "restrictions": null,
+    "languages": null,
+    "general_admission_child_cad": null,
+    "general_admission_adult_cad": null,
+    "hours_notes": "Saturday and Sunday 11:00 to 15:00. Closed Monday to Friday and holidays.",
+    "seasonal_notes": "The times on the home page are labelled Summer and Fall hours, so they change through the year. The school program runs on Thursdays, when the centre is closed to drop in visitors.",
+    "price_year_or_season": "Fall 2026, as published on the programs pages in September 2026",
+    "checked_on": "2026-09-03",
+    "checked_by": "scraper"
+  },
+  "programs": [
+    {
+      "id": "school-program-estuary-explorers",
+      "name": "Estuary Explorers school program",
+      "description": "The centre's school program, run at the Nature Centre on Thursdays in two sessions, 9:30 to 11:00 and 11:30 to 13:00. Children explore how animals use their shape, size, colour and behaviour to survive, how fast changing conditions affect them, and what people can do to keep habitats healthy. The site lists the age range as K to 5 and gives sample curriculum links in science from Kindergarten to Grade 4. It costs $10 a student, and the most a group pays is $250, which is 25 students at $10 each. You book through a form on the page, choosing a Thursday date and a morning or afternoon session. The page says the program runs all school year and that dates begin on 8 October 2026.",
+      "what_children_do": "Take part in hands on activities and up close encounters with estuary animals, then talk through what they noticed. The site says learners look at how animals use shape, size, colour and behaviour to survive, and work out what would help keep those homes healthy.",
+      "our_note": "The centre is only open to the public at weekends, so a Thursday class visit gets the place to itself. The price stops climbing at $250, which means a class of 28 pays no more than a class of 25, worth knowing if you are deciding whether to split a group.",
+      "practical_summary": "This is at the Nature Centre in Hecate Park, right on the water. Toilets, somewhere to eat and coach parking are not mentioned anywhere on the site, so ask when you book.",
+      "comes_to_you": false,
+      "age_min_years": null,
+      "age_max_years": null,
+      "grade_min": 0,
+      "grade_max": 5,
+      "age_basis": "grades",
+      "duration_min": 90,
+      "capacity_max": null,
+      "capacity_min": null,
+      "cost_per_child_cad": 10,
+      "cost_per_group_cad": null,
+      "cost_per_adult_cad": null,
+      "free_adults_per_children": null,
+      "is_free": null,
+      "tax_included": null,
+      "extra_fees_note": "The total is capped at $250, which is what 25 students at $10 each comes to.",
+      "school_rate_only": true,
+      "deposit_required": null,
+      "payment_timing": null,
+      "cancellation_note": null,
+      "months_offered": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        9,
+        10,
+        11,
+        12
+      ],
+      "days_offered": [
+        4
+      ],
+      "time_slots": [
+        "09:30",
+        "11:30"
+      ],
+      "lead_time_days": null,
+      "chaperone_ratio": null,
+      "adults_free": null,
+      "indoor": null,
+      "outdoor": null,
+      "format": [
+        "guided",
+        "hands_on"
+      ],
+      "sensory_friendly": null,
+      "low_noise": null,
+      "neurodiversity_friendly": null,
+      "mood_tags": [
+        "play",
+        "learn"
+      ],
+      "curriculum_tags": [
+        "science"
+      ],
+      "booking_email": "info@cowichanestuary.ca",
+      "booking_url": "https://www.cowichanestuary.ca/estuary-explorers/",
+      "booking_method": "web_form",
+      "source_url": "https://www.cowichanestuary.ca/estuary-explorers/",
+      "evidence": "Cost: $10/student to a maximum of $250/25 students",
+      "checked_on": "2026-09-03",
+      "image_ids": [
+        "program-exhibit-corner"
+      ]
+    },
+    {
+      "id": "parent-tot-drop-in",
+      "name": "Barnacle Buddies parent and tot drop in",
+      "description": "A one hour drop in play group for children aged 0 to 5 with a guardian, run by the centre's educator. Each session has a guided group activity and a craft, and there is coffee and tea for the adults. It runs Tuesdays 10:30 to 11:30 from 6 October to 15 December 2026. It costs $10 a drop in session, paid by card, Interac or cash at the centre. The site asks you to register in advance by email if you can.",
+      "what_children_do": "Settle into the centre with a grown up, join a group activity led by the educator, and make a craft to take away.",
+      "our_note": "Every child needs their own adult here, so it suits a parent and tot morning rather than a staffed group outing. The site says $10 a drop in session but not whether that covers the child, the adult or the pair, so check before you turn up with several families.",
+      "practical_summary": "It runs inside the centre on a Tuesday morning, which is a day it is otherwise closed to the public. Toilets and a place to eat are not mentioned on the site.",
+      "comes_to_you": false,
+      "age_min_years": 0,
+      "age_max_years": 5,
+      "grade_min": null,
+      "grade_max": null,
+      "age_basis": "years",
+      "duration_min": 60,
+      "capacity_max": null,
+      "capacity_min": null,
+      "cost_per_child_cad": 10,
+      "cost_per_group_cad": null,
+      "cost_per_adult_cad": null,
+      "free_adults_per_children": null,
+      "is_free": null,
+      "tax_included": null,
+      "extra_fees_note": "The site writes the price as $10 drop in per session. It does not say whether one payment covers a child, an adult or both together.",
+      "school_rate_only": false,
+      "deposit_required": null,
+      "payment_timing": "Card, Interac or cash at the centre.",
+      "cancellation_note": null,
+      "months_offered": [
+        10,
+        11,
+        12
+      ],
+      "days_offered": [
+        2
+      ],
+      "time_slots": [
+        "10:30"
+      ],
+      "lead_time_days": null,
+      "chaperone_ratio": null,
+      "adults_free": null,
+      "indoor": true,
+      "outdoor": null,
+      "format": [
+        "guided",
+        "hands_on"
+      ],
+      "sensory_friendly": null,
+      "low_noise": null,
+      "neurodiversity_friendly": null,
+      "mood_tags": [
+        "play",
+        "creative"
+      ],
+      "curriculum_tags": null,
+      "booking_email": "info@cowichanestuary.ca",
+      "booking_url": null,
+      "booking_method": "email",
+      "source_url": "https://www.cowichanestuary.ca/barnacle-buddies/",
+      "evidence": "a welcoming and playful program for young learners (ages 0–5) and their guardians",
+      "checked_on": "2026-09-03",
+      "image_ids": [
+        "activity-touch-tank"
+      ]
+    },
+    {
+      "id": "home-learner-series",
+      "name": "Nature Seekers home learner series",
+      "description": "A six week series for home learner families with children aged 6 to 12, running Fridays 10:00 to 12:00 for six consecutive weeks from 16 October 2026. Children learn to identify plants, animals and natural signs, look at seasonal cycles, and build observation and outdoor skills. Every child gets a waterproof field notebook to use as a nature journal. Tuition is $150 a child, with additional siblings at $90 each, and the group is capped at 12 children. Registration is required and goes through email.",
+      "what_children_do": "Spend each session outdoors around the centre, looking for plants, animals and natural signs, and writing and drawing what they notice in their own waterproof field notebook.",
+      "our_note": "This is a commitment to six Fridays in a row rather than a single outing, and the price is for the whole series. Twelve places is a small cohort, so ask early if you want more than one or two children in it.",
+      "practical_summary": "Sessions are outdoors whatever the weather, so children need clothes they can get wet and dirty in. Toilets and shelter are not described on the site.",
+      "comes_to_you": false,
+      "age_min_years": 6,
+      "age_max_years": 12,
+      "grade_min": null,
+      "grade_max": null,
+      "age_basis": "years",
+      "duration_min": 120,
+      "capacity_max": 12,
+      "capacity_min": null,
+      "cost_per_child_cad": 150,
+      "cost_per_group_cad": null,
+      "cost_per_adult_cad": null,
+      "free_adults_per_children": null,
+      "is_free": null,
+      "tax_included": null,
+      "extra_fees_note": "The $150 covers all six weeks. Additional siblings are $90 each.",
+      "school_rate_only": false,
+      "deposit_required": null,
+      "payment_timing": null,
+      "cancellation_note": null,
+      "months_offered": [
+        10,
+        11
+      ],
+      "days_offered": [
+        5
+      ],
+      "time_slots": [
+        "10:00"
+      ],
+      "lead_time_days": null,
+      "chaperone_ratio": null,
+      "adults_free": null,
+      "indoor": null,
+      "outdoor": true,
+      "format": [
+        "guided",
+        "hands_on"
+      ],
+      "sensory_friendly": null,
+      "low_noise": null,
+      "neurodiversity_friendly": null,
+      "mood_tags": [
+        "explore",
+        "learn"
+      ],
+      "curriculum_tags": [
+        "science"
+      ],
+      "booking_email": "info@cowichanestuary.ca",
+      "booking_url": null,
+      "booking_method": "email",
+      "source_url": "https://www.cowichanestuary.ca/nature-seekers/",
+      "evidence": "Tuition: $150 per child",
+      "checked_on": "2026-09-03",
+      "image_ids": [
+        "activity-outdoor-session"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "id": "hero-centre-from-shore",
+      "url": "https://www.cowichanestuary.ca/wp-content/uploads/CENC-Banner.jpg",
+      "role": "hero",
+      "alt": "Cowichan Estuary Nature Centre",
+      "alt_source": "site",
+      "caption": null,
+      "found_on_url": "https://www.cowichanestuary.ca/",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    },
+    {
+      "id": "activity-touch-tank",
+      "url": "https://www.cowichanestuary.ca/wp-content/uploads/cropped-cropped2-touch-tank-1-1.jpg",
+      "role": "activity",
+      "alt": "A young child reaches a finger into an open water tank indoors, with a painted estuary mural and a model salmon on the wall behind.",
+      "alt_source": "generated",
+      "caption": null,
+      "found_on_url": "https://www.cowichanestuary.ca/",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    },
+    {
+      "id": "activity-outdoor-session",
+      "url": "https://www.cowichanestuary.ca/wp-content/uploads/2378-2.jpg",
+      "role": "activity",
+      "alt": "Children sit on folding chairs on the grass outside a wooden building under leafy trees, facing two adults seated in front of them.",
+      "alt_source": "generated",
+      "caption": null,
+      "found_on_url": "https://www.cowichanestuary.ca/",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    },
+    {
+      "id": "program-exhibit-corner",
+      "url": "https://www.cowichanestuary.ca/wp-content/uploads/029A0758-1.jpg",
+      "role": "program",
+      "alt": "A corner inside the centre with a large painted mural of an estuary, wooden shelves of books and souvenirs, a rug on the floor and model fish hanging from the ceiling.",
+      "alt_source": "generated",
+      "caption": null,
+      "found_on_url": "https://www.cowichanestuary.ca/estuary-explorers/",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    }
+  ],
+  "gaps": [
+    "RETRIEVAL NOTE: plain fetching of this site returns badly out of date cached pages. A fetch of the home page returned 2024 opening hours and a 2024 annual meeting notice, and a fetch of the Barnacle Buddies page returned the Winter 2025 timetable, while the live pages show Fall 2026 content. Several program pages return nothing at all to a fetch. Everything in this record was read from the live pages in a browser. A fetch-only re-run will overwrite it with stale information.",
+    "Admission price for a general visit: not published. An older cached version of the home page said the centre admits by donation, but that sentence is not on the live site, so we have not recorded it. Worth asking.",
+    "Washrooms: never listed. The only mention anywhere is on the summer camp page, which says campers must be able to use the washroom independently. That is not a statement that there are washrooms for visiting groups.",
+    "Somewhere indoors to eat a packed lunch: not mentioned.",
+    "Coach or bus parking: not mentioned. The centre is in Hecate Park at Cowichan Bay.",
+    "Step free and buggy access: not mentioned anywhere.",
+    "Largest class the school program can take: not stated. The price stops at 25 students, but the site does not say that is the limit.",
+    "How much notice the school program needs: not stated. Booking is by a form on the page.",
+    "Whether adults or helpers pay for the school program, and how many adults have to come: not stated.",
+    "The school program page writes the range as Ages K to 5, which mixes a school grade with a number. Its curriculum examples run from Kindergarten to Grade 4. We recorded it as Kindergarten to Grade 5. Confirm which they mean.",
+    "Months the school program runs: the page says all school year and that dates begin 8 October 2026. We recorded September to June. The exact first and last months are not spelled out.",
+    "Whether the centre takes daycare groups as groups: not addressed. The parent and tot session is for children with their own guardian.",
+    "Rain plan for the school program: not stated. There is an indoor centre and an outdoor trail, but the page does not say which the session uses.",
+    "The Barnacle Buddies price is written as $10 drop in per session without saying whether that is per child, per adult or per pair.",
+    "Summer and spring break day camps are also run at the centre, at $325 a child for five days in 2026. They are booked child by child through an outside ticketing site, not as a group visit, so we have not recorded them as a program.",
+    "COORDINATES: the Google map on their contact page and home page carries only the centre of the map view, with no pin on the place itself. The point we had, 48.74279 and -123.62963, was that view centre. It has been cleared. The address stands and the coordinates still need to be worked out from it."
+  ],
+  "conflicts": [],
+  "pages_opened": [
+    "https://www.cowichanestuary.ca/",
+    "https://www.cowichanestuary.ca/estuary-explorers/",
+    "https://www.cowichanestuary.ca/nature-seekers/",
+    "https://www.cowichanestuary.ca/barnacle-buddies/",
+    "https://www.cowichanestuary.ca/summer-camps/",
+    "https://www.cowichanestuary.ca/whats-inside-the-centre/",
+    "https://www.cowichanestuary.ca/whats-outside-the-centre/",
+    "https://www.cowichanestuary.ca/contact/",
+    "https://www.cowichanestuary.ca/about-cenc-society/"
+  ],
+  "pages_useful": [
+    "https://www.cowichanestuary.ca/",
+    "https://www.cowichanestuary.ca/estuary-explorers/",
+    "https://www.cowichanestuary.ca/nature-seekers/",
+    "https://www.cowichanestuary.ca/barnacle-buddies/",
+    "https://www.cowichanestuary.ca/whats-inside-the-centre/",
+    "https://www.cowichanestuary.ca/whats-outside-the-centre/",
+    "https://www.cowichanestuary.ca/contact/",
+    "https://www.cowichanestuary.ca/about-cenc-society/"
+  ],
+  "extracted_at": "2026-09-07T10:00:00-07:00",
+  "extractor_version": "v2.0"
+}

@@ -6,9 +6,9 @@
     "description": "Fairway Gorge Paddling Club is a paddling club on the Gorge waterway at 2940 Jutland Road in Victoria, offering dragon boat, outrigger canoe, kayak and stand-up paddleboard programs. Through its Group Adventures page it takes bookings from classrooms, workplaces, social groups and sports teams for guided dragon boat and ocean kayak sessions, and can accommodate groups of 10 to 120 people for one-time or multi-session bookings. FGPC supplies the coaches, guides, PFDs, paddles and safety equipment. It also runs summer Paddlesport Adventure Camps for children aged 6 to 12 and a youth sprint kayak club.",
     "category": "nature_outdoors",
     "address": "2940 Jutland Road, Victoria, BC V8T 5K6",
-    "lat": 48.43916,
-    "lng": -123.38096,
-    "geo_source": "site_embed",
+    "lat": 48.43925,
+    "lng": -123.3794,
+    "geo_source": "geocoded",
     "hosts_school_groups": true,
     "hosts_daycare_groups": null,
     "youngest_age_welcomed_years": null,
@@ -75,11 +75,17 @@
       "adults_free": null,
       "indoor": false,
       "outdoor": true,
-      "format": ["guided", "hands_on"],
+      "format": [
+        "guided",
+        "hands_on"
+      ],
       "sensory_friendly": null,
       "low_noise": null,
       "neurodiversity_friendly": null,
-      "mood_tags": ["active", "play"],
+      "mood_tags": [
+        "active",
+        "play"
+      ],
       "curriculum_tags": null,
       "booking_email": null,
       "booking_url": null,
@@ -87,7 +93,9 @@
       "source_url": "https://www.fgpaddle.com/group-adventures/",
       "evidence": "1 Dragon Boat: $350 / boat",
       "checked_on": "2026-09-03",
-      "image_ids": ["activity-dragon-boat"]
+      "image_ids": [
+        "activity-dragon-boat"
+      ]
     },
     {
       "id": "ocean-kayak-group-adventure",
@@ -127,11 +135,17 @@
       "adults_free": null,
       "indoor": false,
       "outdoor": true,
-      "format": ["guided", "hands_on"],
+      "format": [
+        "guided",
+        "hands_on"
+      ],
       "sensory_friendly": null,
       "low_noise": null,
       "neurodiversity_friendly": null,
-      "mood_tags": ["active", "explore"],
+      "mood_tags": [
+        "active",
+        "explore"
+      ],
       "curriculum_tags": null,
       "booking_email": null,
       "booking_url": null,
@@ -168,19 +182,35 @@
       "deposit_required": null,
       "payment_timing": null,
       "cancellation_note": "To withdraw from any camp, participants must give notice at least one week prior to the program start date. Refunds subject to a 15% administrative fee.",
-      "months_offered": [7, 8],
-      "days_offered": [1, 2, 3, 4, 5],
+      "months_offered": [
+        7,
+        8
+      ],
+      "days_offered": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
       "time_slots": null,
       "lead_time_days": null,
       "chaperone_ratio": null,
       "adults_free": null,
       "indoor": null,
       "outdoor": true,
-      "format": ["guided", "hands_on"],
+      "format": [
+        "guided",
+        "hands_on"
+      ],
       "sensory_friendly": null,
       "low_noise": null,
       "neurodiversity_friendly": null,
-      "mood_tags": ["active", "play", "learn"],
+      "mood_tags": [
+        "active",
+        "play",
+        "learn"
+      ],
       "curriculum_tags": null,
       "booking_email": null,
       "booking_url": "https://www.fgpaddle.com/store/#!/2026-Paddlesport-Adventure-Camps/p/587624605/category=0",
@@ -229,7 +259,8 @@
     "wheelchair, stroller and bus parking information - not stated",
     "staff-to-child ratio for the summer camps - not stated",
     "the homepage og:image is a news-update graphic rather than a photograph, so the hero was taken from the Group Adventures page og:image instead",
-    "no image on the site carries an alt attribute; both recorded alts are generated from the filename and the surrounding page context, not from viewing the photo"
+    "no image on the site carries an alt attribute; both recorded alts are generated from the filename and the surrounding page context, not from viewing the photo",
+    "COORDINATES: the Google map on their location and hours page carries only the centre of the map view, with no pin on the club. The point we had, 48.43916 and -123.38096, was that view centre. It has been cleared. The address stands and the coordinates still need to be worked out from it."
   ],
   "conflicts": [],
   "pages_opened": [
@@ -246,6 +277,6 @@
     "https://www.fgpaddle.com/junior-programs/kids-camps/",
     "https://www.fgpaddle.com/about-us/location-hours/"
   ],
-  "extracted_at": "2026-09-03T00:00:00Z",
+  "extracted_at": "2026-09-07T10:00:00-07:00",
   "extractor_version": "v2.0"
 }
