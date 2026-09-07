@@ -36,7 +36,8 @@ import { haversineKm, travelLine, type TransportMode } from '@/lib/catalog/dista
 import { costPerChild, feasibility, money } from '@/lib/catalog/feasibility'
 import { effectiveAgeRange, effectiveGrade, initialsOf, underFives } from '@/lib/catalog/search'
 import { parseSearchParams } from '@/lib/catalog/url'
-import { getViewer } from '@/lib/auth'
+import { resolveOrigin, stateWithRoom } from '@/lib/catalog/resolve'
+import { getActiveRoom, getViewer } from '@/lib/auth'
 import { isRenderableImage } from '@/lib/catalog/image-hosts'
 import {
   CATEGORY_LABEL,
@@ -61,9 +62,6 @@ import { CatalogMap } from '@/components/catalog/catalog-map'
 import { ReportForm } from '@/components/program/report-form'
 import { PhotoStrip } from '@/components/program/photo-strip'
 import { SaveButton } from '@/components/program/save-button'
-
-/* Until a session exists (slice 3), distance is from the centre of Victoria. */
-const VICTORIA = { lat: 48.4284, lng: -123.3656 }
 
 /*
   The head of the page: its own title and snippet, a canonical without the
@@ -150,13 +148,25 @@ export default async function OutingPage({
   const { program: p, venue: v, images } = found
   const viewer = await getViewer()
   const saved = viewer ? await isSaved(viewer.accountId, p.id) : false
-  const state = parseSearchParams(await searchParams)
+
+  /*
+    The same reconciliation the catalog does, for the same reason: this page
+    is reached by tapping a card, and the distance printed here has to be the
+    distance printed there. Reading the URL alone measured every visitor from
+    the centre of Victoria, so a director with a room across town saw one
+    number on the card and another on the outing — and the dark pin on the
+    map sat somewhere she had never named.
+  */
+  const rawParams = await searchParams
+  const activeRoom = await getActiveRoom(viewer?.centreId ?? null)
+  const state = stateWithRoom(parseSearchParams(rawParams), rawParams, activeRoom)
+  const { origin, originLabel, originAddress } = resolveOrigin(state, activeRoom)
   const bandRange = effectiveAgeRange(state.age_bands)
 
   const km =
     p.comesToYou || v.lat == null || v.lng == null
       ? null
-      : haversineKm(VICTORIA, { lat: v.lat, lng: v.lng })
+      : haversineKm(origin, { lat: v.lat, lng: v.lng })
 
   const costChild = p.costPerChildCad == null ? null : Number(p.costPerChildCad)
   const costGroup = p.costPerGroupCad == null ? null : Number(p.costPerGroupCad)
@@ -425,8 +435,8 @@ export default async function OutingPage({
             {v.lat != null && v.lng != null ? (
               <div className="w-full max-w-full sm:w-[340px] sm:flex-none">
                 <CatalogMap
-                  home={VICTORIA}
-                  homeLabel="Victoria"
+                  home={origin}
+                  homeLabel={originAddress}
                   pins={[
                     {
                       lat: v.lat,
@@ -436,6 +446,9 @@ export default async function OutingPage({
                     },
                   ]}
                 />
+                <p className="text-meta-sm text-text-faint mt-2">
+                  The dark pin is {originLabel}.
+                </p>
                 <div className="mt-2 text-right">
                   <a
                     href={`https://www.openstreetmap.org/?mlat=${v.lat}&mlon=${v.lng}#map=16/${v.lat}/${v.lng}`}
