@@ -9,6 +9,8 @@
   - Upserts venues by slug and programs by (venue_id, slug), in one transaction.
   - Fields present in the JSON overwrite the database; fields absent are left
     untouched, so hand edits to columns the JSON does not carry survive.
+    Coordinates count as absent when the JSON has none (`geocode_pending`), so
+    a pin geocoded into the database survives a re-extraction of the venue.
   - Programs in the database but missing from the JSON are marked active=false,
     never deleted, because trips reference them.
   - Images are copied as references. Nothing is uploaded.
@@ -180,9 +182,11 @@ if (!dryRun) {
   const db = drizzle(client)
 
   const existingVenues = new Map(
-    (await db.select({ id: venue.id, editedAt: venue.editedAt }).from(venue)).map(
-      (r) => [r.id, r],
-    ),
+    (
+      await db
+        .select({ id: venue.id, lat: venue.lat, lng: venue.lng, editedAt: venue.editedAt })
+        .from(venue)
+    ).map((r) => [r.id, r]),
   )
   const existingPrograms = new Map(
     (
@@ -211,6 +215,16 @@ if (!dryRun) {
       continue
     }
 
+    /* Coordinates are the one field the database can know better than the
+       JSON: `pnpm geocode:catalog` writes them into the JSON, but a venue
+       re-extracted afterwards comes back `geocode_pending` with none, and
+       loading that null on top would wipe a good pin and kill distance, radius
+       and the maps for that venue. So a JSON with no coordinates leaves a pin
+       the database already has alone (undefined is "do not set" to drizzle);
+       a JSON WITH coordinates still wins, since site_embed beats geocoded, and
+       a venue with no pin anywhere keeps its `geocode_pending` marker. */
+    const keepDbPin =
+      v.lat == null && v.lng == null && priorVenue?.lat != null && priorVenue?.lng != null
     const venueRow = {
       id: v.id,
       name: v.name,
@@ -218,9 +232,9 @@ if (!dryRun) {
       description: v.description,
       category: v.category,
       address: v.address,
-      lat: v.lat,
-      lng: v.lng,
-      geoSource: v.geo_source,
+      lat: keepDbPin ? undefined : v.lat,
+      lng: keepDbPin ? undefined : v.lng,
+      geoSource: keepDbPin ? undefined : v.geo_source,
       hostsSchoolGroups: v.hosts_school_groups,
       hostsDaycareGroups: v.hosts_daycare_groups,
       youngestAgeWelcomedYears: v.youngest_age_welcomed_years,
