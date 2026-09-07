@@ -134,10 +134,10 @@ export function ProgramForm({
         </div>
 
         <Labeled label="Description" htmlFor="description" className="sm:col-span-2">
-          <TextArea id="description" name="description" defaultValue={v.description ?? ''} />
+          <TextArea id="description" name="description" maxLength={2000} defaultValue={v.description ?? ''} />
         </Labeled>
         <Labeled label="What children do" htmlFor="whatChildrenDo" className="sm:col-span-2">
-          <TextArea id="whatChildrenDo" name="whatChildrenDo" defaultValue={v.whatChildrenDo ?? ''} />
+          <TextArea id="whatChildrenDo" name="whatChildrenDo" maxLength={2000} defaultValue={v.whatChildrenDo ?? ''} />
         </Labeled>
         <Labeled
           label="Our note"
@@ -145,10 +145,10 @@ export function ProgramForm({
           hint="Our own voice on the outing page. The one thing a director should know before she books."
           className="sm:col-span-2"
         >
-          <TextArea id="ourNote" name="ourNote" defaultValue={v.ourNote ?? ''} />
+          <TextArea id="ourNote" name="ourNote" maxLength={2000} defaultValue={v.ourNote ?? ''} />
         </Labeled>
         <Labeled label="Practical summary" htmlFor="practicalSummary" className="sm:col-span-2">
-          <TextArea id="practicalSummary" name="practicalSummary" defaultValue={v.practicalSummary ?? ''} />
+          <TextArea id="practicalSummary" name="practicalSummary" maxLength={1000} defaultValue={v.practicalSummary ?? ''} />
         </Labeled>
       </Fieldset>
 
@@ -307,7 +307,7 @@ export function ProgramForm({
           <Input id="sourceUrl" name="sourceUrl" type="url" defaultValue={v.sourceUrl ?? ''} placeholder="https://" />
         </Labeled>
         <Labeled label="Evidence" htmlFor="evidence" hint="The sentence on the page, or who said it on the phone and when." className="sm:col-span-2">
-          <TextArea id="evidence" name="evidence" defaultValue={v.evidence ?? ''} />
+          <TextArea id="evidence" name="evidence" maxLength={2000} defaultValue={v.evidence ?? ''} />
         </Labeled>
       </Fieldset>
 

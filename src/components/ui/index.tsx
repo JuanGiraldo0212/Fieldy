@@ -13,6 +13,7 @@ const cx = (...parts: (string | false | null | undefined)[]) =>
   parts.filter(Boolean).join(' ')
 
 export { cx }
+export { TextArea } from './text-area'
 
 /* ─── Badge ──────────────────────────────────────────────────────────────
    Feasibility badges. Two tones, because the design has no red level. */
@@ -230,8 +231,12 @@ export function CheckRow({
    really yes / no / not known, and "not known" is data (schema comment on
    venue.has_washrooms). A checkbox cannot say it, so a select does. */
 
-export const inputClass =
-  'border-border-strong bg-input text-body h-field w-full rounded-control border px-3.5 outline-none focus:border-brand disabled:text-text-muted'
+/* Everything a field looks like except its height: a single-line Input is
+   exactly h-field tall, a TextArea grows with its rows. */
+export const fieldClass =
+  'border-border-strong bg-input text-body w-full rounded-control border px-3.5 outline-none focus:border-brand disabled:text-text-muted'
+
+export const inputClass = cx(fieldClass, 'h-field')
 
 export const labelClass =
   'text-label text-text-muted mb-1.5 block font-bold uppercase'
@@ -262,16 +267,6 @@ export function Labeled({
 
 export function Input(props: React.InputHTMLAttributes<HTMLInputElement>) {
   return <input {...props} className={cx(inputClass, props.className)} />
-}
-
-export function TextArea(props: React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
-  return (
-    <textarea
-      rows={3}
-      {...props}
-      className={cx(inputClass, 'h-auto py-3 leading-relaxed', props.className)}
-    />
-  )
 }
 
 export function Select(props: React.SelectHTMLAttributes<HTMLSelectElement>) {
