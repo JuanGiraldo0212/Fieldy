@@ -155,7 +155,7 @@ export function VenueForm({
         </Labeled>
 
         <Labeled label="Description" htmlFor="description" className="sm:col-span-2">
-          <TextArea id="description" name="description" defaultValue={v.description ?? ''} />
+          <TextArea id="description" name="description" maxLength={2000} defaultValue={v.description ?? ''} />
         </Labeled>
 
         <Labeled label="Hosts school groups" htmlFor="hostsSchoolGroups">
@@ -187,7 +187,7 @@ export function VenueForm({
           hint="One per line. No food in the gallery, closed-toe shoes, that sort of thing."
           className="sm:col-span-2"
         >
-          <TextArea id="restrictions" name="restrictions" defaultValue={v.restrictions?.join('\n') ?? ''} />
+          <TextArea id="restrictions" name="restrictions" maxLength={2000} defaultValue={v.restrictions?.join('\n') ?? ''} />
         </Labeled>
       </Fieldset>
 
@@ -276,10 +276,10 @@ export function VenueForm({
 
       <Fieldset id="hours" title="Hours and season">
         <Labeled label="Hours" htmlFor="hoursNotes" className="sm:col-span-2">
-          <TextArea id="hoursNotes" name="hoursNotes" defaultValue={v.hoursNotes ?? ''} />
+          <TextArea id="hoursNotes" name="hoursNotes" maxLength={1000} defaultValue={v.hoursNotes ?? ''} />
         </Labeled>
         <Labeled label="Seasonal notes" htmlFor="seasonalNotes" className="sm:col-span-2">
-          <TextArea id="seasonalNotes" name="seasonalNotes" defaultValue={v.seasonalNotes ?? ''} />
+          <TextArea id="seasonalNotes" name="seasonalNotes" maxLength={1000} defaultValue={v.seasonalNotes ?? ''} />
         </Labeled>
       </Fieldset>
 
