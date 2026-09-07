@@ -1,0 +1,71 @@
+{
+  "venue": {
+    "id": "b-c-artifacts-mobile-museum",
+    "name": "B.C. Artifacts Mobile Museum",
+    "website": "https://mobilemuseum.ca",
+    "description": "The BC Artifacts Mobile Museum was a travelling display that set up in a school library, gym or classroom and showed a collection of First Nations, fur trade, pioneer, gold rush and railway artifacts alongside a presentation. It is no longer operating. The mobilemuseum.ca address now sends visitors to bcartifacts.com, which states that the mobile museum is closed, and an earlier version of the same site said the owner had decided to retire and was looking for someone to take the business on. There is nothing to book.",
+    "category": "comes_to_you",
+    "address": null,
+    "lat": null,
+    "lng": null,
+    "geo_source": null,
+    "hosts_school_groups": false,
+    "hosts_daycare_groups": false,
+    "youngest_age_welcomed_years": null,
+    "booking_email": null,
+    "booking_phone": null,
+    "booking_url": null,
+    "booking_method": null,
+    "has_washrooms": null,
+    "has_lunch_space": null,
+    "has_rain_backup": null,
+    "stroller_accessible": null,
+    "wheelchair_accessible": null,
+    "bus_parking": null,
+    "facility_notes": null,
+    "nearby_park": null,
+    "restrictions": null,
+    "languages": null,
+    "general_admission_child_cad": null,
+    "general_admission_adult_cad": null,
+    "hours_notes": null,
+    "seasonal_notes": null,
+    "price_year_or_season": null,
+    "checked_on": "2026-09-03",
+    "checked_by": "scraper"
+  },
+  "programs": [],
+  "images": [],
+  "gaps": [
+    "This venue is closed and is recorded here only so it is not chased again. The current site says in plain words that the BC Artifacts Mobile Museum is now closed.",
+    "No price was ever published on the site for the school visit, so there is no per visit, per day or per student figure to record, and no travel radius or mileage charge.",
+    "No address was published for the business, so there are no coordinates for it. It travelled to schools rather than receiving visitors.",
+    "The older version of the site described 50 to 60 minute presentations, groups kept under 35 students, an hour and a half of set up before the first presentation and bookings taken up to a year ahead. None of that has been recorded as a program because the offering no longer exists.",
+    "The retirement notice gave a phone number and two email addresses for anyone interested in buying the business. They are not recorded as booking contacts because there is nothing to book.",
+    "RETRIEVAL NOTE: fetching mobilemuseum.ca returns an older page describing the tour and a retirement notice, while loading the same address in a browser follows the redirect to bcartifacts.com and shows the closure notice. A fetch only re-run will look as though this venue is still trading."
+  ],
+  "conflicts": [
+    {
+      "field": "hosts_school_groups",
+      "values": [
+        "The BC Artifacts Mobile Museum are now closed!",
+        "I have decided to retire from presenting and move to Vancouver Island."
+      ],
+      "sources": [
+        "https://www.bcartifacts.com/",
+        "https://mobilemuseum.ca/"
+      ],
+      "note": "Their old web address now sends you to a different site that says the travelling museum is closed. An older version of the same page said the owner was retiring and hoping someone would buy the business and keep it going. Either way there is nothing to book at the moment, so plan around it."
+    }
+  ],
+  "pages_opened": [
+    "https://mobilemuseum.ca/",
+    "https://www.bcartifacts.com/"
+  ],
+  "pages_useful": [
+    "https://mobilemuseum.ca/",
+    "https://www.bcartifacts.com/"
+  ],
+  "extracted_at": "2026-09-03T00:00:00Z",
+  "extractor_version": "v2.0"
+}

@@ -1,0 +1,56 @@
+{
+  "venue": {
+    "id": "pacific-northwest-raptors",
+    "name": "Pacific Northwest Raptors",
+    "website": "https://the-raptors.com",
+    "description": "Pacific Northwest Raptors is the former name of the birds of prey centre at 1877 Herd Rd in Duncan that now trades as The Raptors. It is the same organisation at the same address, and the footer of the current site says so in plain words: also known as Pacific Northwest Raptors Ltd. The old web address, pnwraptors.com, redirects to the-raptors.com. Everything about visiting, prices, school field trips and school visits is recorded under The Raptors, so use that entry rather than this one.",
+    "category": "animals_farms",
+    "address": "1877 Herd Rd, Duncan, BC V9L 5W4",
+    "lat": 48.82047,
+    "lng": -123.66144,
+    "geo_source": "geocoded",
+    "hosts_school_groups": null,
+    "hosts_daycare_groups": null,
+    "youngest_age_welcomed_years": null,
+    "booking_email": null,
+    "booking_phone": null,
+    "booking_url": null,
+    "booking_method": null,
+    "has_washrooms": null,
+    "has_lunch_space": null,
+    "has_rain_backup": null,
+    "stroller_accessible": null,
+    "wheelchair_accessible": null,
+    "bus_parking": null,
+    "facility_notes": null,
+    "nearby_park": null,
+    "restrictions": null,
+    "languages": null,
+    "general_admission_child_cad": null,
+    "general_admission_adult_cad": null,
+    "hours_notes": null,
+    "seasonal_notes": null,
+    "price_year_or_season": null,
+    "checked_on": "2026-09-03",
+    "checked_by": "scraper"
+  },
+  "programs": [],
+  "images": [],
+  "gaps": [
+    "This is a duplicate entry. It is the former name of the venue recorded as The Raptors, at the same address, 1877 Herd Rd in Duncan. The programs, prices and practical details live in the-raptors.json and were deliberately not copied here, so that a director is not shown the same venue twice.",
+    "The tracker row was left as done rather than not for groups, because this organisation does host school and community groups. It is only the name that is out of date.",
+    "No image was recorded here. The hero image and the two programme photographs sit on the sibling record for The Raptors.",
+    "RETRIEVAL NOTE: www.pnwraptors.com redirects to the-raptors.com, which renders in JavaScript and returns only <head> metadata to a plain fetch. A fetch-only re-run will appear to find an empty site."
+  ],
+  "conflicts": [],
+  "pages_opened": [
+    "https://pnwraptors.com/",
+    "https://the-raptors.com/",
+    "https://the-raptors.com/contact"
+  ],
+  "pages_useful": [
+    "https://the-raptors.com/contact"
+  ],
+  "extracted_at": "2026-09-03T00:00:00Z",
+  "extractor_version": "v2.0"
+}

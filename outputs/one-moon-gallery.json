@@ -1,0 +1,61 @@
+{
+  "venue": {
+    "id": "one-moon-gallery",
+    "name": "One Moon Gallery",
+    "website": "https://onemoon.ca/",
+    "description": "One Moon Gallery is the private showroom and online shop of Coast Salish artist Darlene Gait, on the Esquimalt Nation reserve in front of the traditional Big House. The site describes it as a place to view and purchase her paintings and limited edition prints, and gives opening hours of Saturday and Sunday, 10 am to 5 pm. Nothing on the site offers a tour, a workshop, a group visit or any programme for school or daycare groups, and the only events listed are past events between 2007 and 2011. It is recorded here as a retail gallery that does not host children's groups.",
+    "category": "arts_performance",
+    "address": "1192 Kosapsum Crescent, Esquimalt, Victoria, B.C. V9A 7K7",
+    "lat": 48.44468,
+    "lng": -123.43033,
+    "geo_source": "geocoded",
+    "hosts_school_groups": false,
+    "hosts_daycare_groups": false,
+    "youngest_age_welcomed_years": null,
+    "booking_email": "dar04@live.ca",
+    "booking_phone": "1 250 294-6388",
+    "booking_url": null,
+    "booking_method": null,
+    "has_washrooms": null,
+    "has_lunch_space": null,
+    "has_rain_backup": null,
+    "stroller_accessible": null,
+    "wheelchair_accessible": null,
+    "bus_parking": null,
+    "facility_notes": null,
+    "nearby_park": null,
+    "restrictions": null,
+    "languages": null,
+    "general_admission_child_cad": null,
+    "general_admission_adult_cad": null,
+    "hours_notes": "Gallery Hours: Saturday and Sunday 10 am to 5 pm.",
+    "seasonal_notes": null,
+    "price_year_or_season": null,
+    "checked_on": "2026-09-03",
+    "checked_by": "scraper"
+  },
+  "programs": [],
+  "images": [],
+  "gaps": [
+    "The site publishes no tour, workshop, group visit or any other programme for school or daycare groups, and no group rate. Whether the gallery would host a visit from a children's group is not addressed anywhere on it.",
+    "There is no photograph of the gallery itself on the site, only paintings, a painted banner and a portrait of the artist, so there is no hero image for this record.",
+    "The site looks out of date. The copyright line runs to 2011, the events page lists nothing after 2011 and the shop links no longer resolve, so the opening hours and the phone number are worth checking before anyone drives out.",
+    "No coordinates are published. The map on the contact page is a driving directions map from downtown rather than a pin on the gallery, so the location is pending geocoding.",
+    "Washrooms, parking, accessibility and anywhere to eat are not mentioned at all."
+  ],
+  "conflicts": [],
+  "pages_opened": [
+    "https://onemoon.ca/",
+    "https://onemoon.ca/index.html",
+    "https://onemoon.ca/html/contact.html",
+    "https://onemoon.ca/html/events.html",
+    "https://onemoon.ca/html/galleries.html"
+  ],
+  "pages_useful": [
+    "https://onemoon.ca/index.html",
+    "https://onemoon.ca/html/contact.html",
+    "https://onemoon.ca/html/events.html"
+  ],
+  "extracted_at": "2026-09-03T18:20:00Z",
+  "extractor_version": "v2.0"
+}

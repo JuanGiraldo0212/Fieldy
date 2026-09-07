@@ -1,0 +1,103 @@
+{
+  "venue": {
+    "id": "glaskrafter-art-glass",
+    "name": "Glaskrafter Art Glass",
+    "website": "https://glaskrafter.ca",
+    "description": "Glaskrafter Art Glass is the studio of the glass artist Christopher Smith, on Sabre Road in Lantzville at the edge of Nanoose Bay. He has worked in art glass since 1977 and now makes mostly kiln cast glass, including life size cast salmon and steelhead that are sold in galleries from Tofino to La Conner, Washington. Beside the studio is Phoenix Gallery, a small gallery of glass and ceramic art shared with the ceramic artist Jane Murray-Smith, open most days the artists are working and otherwise by appointment. The site lists no classes, workshops, tours or group visits, so there is nothing here a school or daycare group can book.",
+    "category": "arts_performance",
+    "address": "8226 Sabre Road, Lantzville, BC V0R 2H0",
+    "lat": 49.2517557,
+    "lng": -124.1320251,
+    "geo_source": "site_embed",
+    "hosts_school_groups": false,
+    "hosts_daycare_groups": false,
+    "youngest_age_welcomed_years": null,
+    "booking_email": "glaskrafter@gmail.com",
+    "booking_phone": "250-240-1096",
+    "booking_url": "https://glaskrafter.ca/contact",
+    "booking_method": "phone",
+    "has_washrooms": null,
+    "has_lunch_space": null,
+    "has_rain_backup": null,
+    "stroller_accessible": null,
+    "wheelchair_accessible": null,
+    "bus_parking": null,
+    "facility_notes": null,
+    "nearby_park": null,
+    "restrictions": null,
+    "languages": null,
+    "general_admission_child_cad": null,
+    "general_admission_adult_cad": null,
+    "hours_notes": "The gallery is open most days the artists are working in their studios. At other times, phone or text first for an appointment or come by chance.",
+    "seasonal_notes": null,
+    "price_year_or_season": null,
+    "checked_on": "2026-09-07",
+    "checked_by": "scraper"
+  },
+  "programs": [],
+  "images": [
+    {
+      "id": "hero-cast-glass-salmon",
+      "url": "https://glaskrafter.ca/application/files/6816/3650/0347/Chumwebcopy.jpg",
+      "role": "hero",
+      "alt": "Two cast glass salmon on a polished steel base shaped like river grass, photographed against a white background.",
+      "alt_source": "generated",
+      "caption": null,
+      "found_on_url": "https://glaskrafter.ca/",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    },
+    {
+      "id": "space-gallery-display",
+      "url": "https://glaskrafter.ca/application/files/2816/5784/3030/kiln-cast-02.jpg",
+      "role": "space",
+      "alt": "Glass salmon sculptures standing among tall blue glass reeds on a display table in a white walled room.",
+      "alt_source": "generated",
+      "caption": null,
+      "found_on_url": "https://glaskrafter.ca/",
+      "width": 512,
+      "height": 512,
+      "rights_note": null,
+      "usage": "unverified"
+    }
+  ],
+  "gaps": [
+    "This is a working artist's studio with a small gallery attached, not a venue that runs anything for children. No classes, workshops, studio tours, demonstrations or group visits appear anywhere on the site, so no program was created.",
+    "There are no set opening hours. The gallery is open when the artists happen to be working, or by appointment made by phone or text, which makes it hard to plan a group around.",
+    "Price, admission, ages, group size, notice period, washrooms, lunch space, parking and accessibility: none of it is published, because the site does not treat the studio as a place groups book.",
+    "The studio sits behind the artist's home on a rural road. Nothing on the site says whether a bus can turn or park there.",
+    "The tracker lists the website as glaskrafter.com. That address now redirects to glaskrafter.ca, which is where the live site is.",
+    "The home page says the studio is on Nanoose Bay while the address given everywhere is Lantzville. The about page explains it sits on the edge of Nanoose Bay, so both are the same place.",
+    "The footer carries a 2021 copyright line, so parts of the site may not have been updated recently. The home page does describe a 2022 exhibition.",
+    "The photographs on the site are labelled with their file names rather than real alt text, so the two we recorded were opened in a browser and looked at before their descriptions were written."
+  ],
+  "conflicts": [
+    {
+      "field": "booking_email",
+      "values": [
+        "glaskrafter@gmail.com",
+        "chris@glaskrafter.com"
+      ],
+      "sources": [
+        "https://glaskrafter.ca/contact",
+        "https://glaskrafter.ca/"
+      ],
+      "note": "Their site gives two different email addresses for the same studio. The contact page uses one and the footer uses the other. If the first bounces, try the second, or phone instead."
+    }
+  ],
+  "pages_opened": [
+    "https://glaskrafter.com/",
+    "https://glaskrafter.ca/",
+    "https://glaskrafter.ca/about",
+    "https://glaskrafter.ca/contact"
+  ],
+  "pages_useful": [
+    "https://glaskrafter.ca/",
+    "https://glaskrafter.ca/about",
+    "https://glaskrafter.ca/contact"
+  ],
+  "extracted_at": "2026-09-07T00:00:00Z",
+  "extractor_version": "v2.0"
+}

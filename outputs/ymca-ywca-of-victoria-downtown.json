@@ -1,0 +1,91 @@
+{
+  "venue": {
+    "id": "ymca-ywca-victoria-downtown",
+    "name": "YMCA / YWCA of Victoria Downtown",
+    "website": "https://vancouverislandy.com/contact-us/victoria/",
+    "description": "The Downtown Y is a membership recreation centre on the fourth floor of the Bay Centre at 1150 Douglas Street in Victoria, with a pool alongside fitness and program space. Everything it publishes for children is either childminding, where the child and the parent are both Y members and the parent stays in the building, or drop in recreation and registered courses that a child needs an active Y membership to join. Nothing on the site is offered as a bookable visit for a school class or a daycare group, and there is no group booking route or group rate published for this location. The organisation's school and group outdoor education runs at its Camp Thunderbird outdoor centre near Sooke instead.",
+    "category": "community_civic",
+    "address": "Unit 470 - 1150 Douglas St, Victoria, BC V8W 3M9",
+    "lat": null,
+    "lng": null,
+    "geo_source": "geocode_pending",
+    "hosts_school_groups": null,
+    "hosts_daycare_groups": null,
+    "youngest_age_welcomed_years": null,
+    "booking_email": "info@vancouverislandy.ca",
+    "booking_phone": "250-386-7511",
+    "booking_url": null,
+    "booking_method": null,
+    "has_washrooms": null,
+    "has_lunch_space": null,
+    "has_rain_backup": null,
+    "stroller_accessible": null,
+    "wheelchair_accessible": null,
+    "bus_parking": null,
+    "facility_notes": null,
+    "nearby_park": null,
+    "restrictions": [
+      "Children must have an active Y membership to participate.",
+      "Y childminding programs require a parent/guardian remain in the building at all times. Both the child and parent/guardian must be Y members.",
+      "All children under the age of 10 must be accompanied by a responsible adult 16+years of age at all times in the pool.",
+      "In the pool, children under 7 years must be within arm's reach of an adult at all times, maximum 3:1 ratio. Children 7 to 9 years need an adult on the deck viewing area, maximum 8:1 ratio.",
+      "There is no smoking anywhere on Y property. This includes parking lots.",
+      "Athletic/closed toe shoes are required.",
+      "After mall hours, access to the Downtown Y is available exclusively through the street-level entrance on View Street."
+    ],
+    "languages": null,
+    "general_admission_child_cad": null,
+    "general_admission_adult_cad": null,
+    "hours_notes": "Monday to Thursday 6:00am to 9:00pm. Friday 6:00am to 8:00pm. Saturday and Sunday 7:30am to 5:00pm. Closed statutory holidays, including Good Friday and Easter Monday. Phone calls are taken Monday to Friday 8:05am to 3:25pm.",
+    "seasonal_notes": null,
+    "price_year_or_season": null,
+    "checked_on": "2026-09-03",
+    "checked_by": "scraper"
+  },
+  "programs": [],
+  "images": [
+    {
+      "id": "hero-pool-swimmer",
+      "url": "https://vancouverislandy.com/wp-content/uploads/2020/09/HFA.Aquatics.2020.png",
+      "role": "hero",
+      "alt": "A swimmer wearing red goggles looks up from the water beside a blue lane rope in an indoor pool.",
+      "alt_source": "generated",
+      "caption": null,
+      "found_on_url": "https://vancouverislandy.com/program-services/health-fitness-aquatics-downtown/pool-aquatics-downtown/",
+      "width": 1100,
+      "height": 424,
+      "rights_note": null,
+      "usage": "unverified"
+    }
+  ],
+  "gaps": [
+    "NOTHING BOOKABLE FOUND: this location publishes no field trip, no school program, no group rate, no facility rental and no birthday booking. A search of their own site for school groups and for rentals returns nothing for this branch. If you want to bring a group here, you would have to ring and ask, because the answer is not on the site.",
+    "PRICE: no admission price of any kind is published for this location. Access to children's programming runs through Y membership, and membership prices are only shown inside their online portal.",
+    "AGE: children's programming is described as ages 0 to 12, with childminding for ages 0 to 5 at this branch. No youngest age for a visiting group is published because no group visit is published.",
+    "CAPACITY, LEAD TIME, LUNCH SPACE, WASHROOMS, RAIN BACKUP: none of these are stated, because the site does not treat this location as somewhere a group books a visit.",
+    "ACCESSIBILITY: no step free, stroller or wheelchair information is published for this branch.",
+    "The pool supervision ratios recorded here are set for the whole organisation and appear on a page shared by both recreation centres, so they apply at the Westhills Y as well as here.",
+    "IMAGES: the page's own social sharing image is a promotional graphic reading Find Your Y at the Bay Centre rather than a photograph, so it was skipped. The photograph used instead is the banner from the pool page for this branch and carries no alt text on the site, so the alt line was written after opening the image in a browser and looking at it.",
+    "The Recreation Programs link in their own menu, which is labelled for Downtown, now lands on the Westhills recreation page. There is no separate recreation programs page for this branch.",
+    "This is one of three separate records for the YMCA-YWCA of Vancouver Island. The Westhills Y in Langford is the same kind of membership centre. All of the organisation's school and group outdoor education runs at Camp Thunderbird near Sooke, which has its own record.",
+    "COORDINATES: the Google map on their Victoria contact page carries only the centre of the map view, with no pin on the building. The point we had, 48.42529 and -123.3695, was that view centre. It has been cleared. The address stands and the coordinates still need to be worked out from it."
+  ],
+  "conflicts": [],
+  "pages_opened": [
+    "https://vancouverislandy.com/",
+    "https://vancouverislandy.com/sitemap/",
+    "https://vancouverislandy.com/contact-us/victoria/",
+    "https://vancouverislandy.com/program-services/health-fitness-aquatics-downtown/child-teen-downtown/",
+    "https://vancouverislandy.com/program-services/health-fitness-aquatics-downtown/pool-aquatics-downtown/",
+    "https://vancouverislandy.com/rec-sports-racquets-programs-downtown-2/",
+    "https://vancouverislandy.com/y-facilities/"
+  ],
+  "pages_useful": [
+    "https://vancouverislandy.com/contact-us/victoria/",
+    "https://vancouverislandy.com/program-services/health-fitness-aquatics-downtown/child-teen-downtown/",
+    "https://vancouverislandy.com/program-services/health-fitness-aquatics-downtown/pool-aquatics-downtown/",
+    "https://vancouverislandy.com/y-facilities/"
+  ],
+  "extracted_at": "2026-09-07T10:00:00-07:00",
+  "extractor_version": "v2.0"
+}

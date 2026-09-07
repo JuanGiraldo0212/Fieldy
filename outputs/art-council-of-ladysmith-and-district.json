@@ -1,0 +1,389 @@
+{
+  "venue": {
+    "id": "arts-council-ladysmith-district",
+    "name": "Arts Council of Ladysmith and District",
+    "website": "https://ladysmitharts.ca",
+    "description": "The Arts Council of Ladysmith and District is a community arts organisation with an office and classroom at 610 Oyster Bay Drive in Ladysmith. It runs an art education programme of classes and workshops for children and adults, taught by working artists, and it also runs the Ladysmith Gallery on High Street and the Arts on the Avenue festival each August. The children's classes are after school series that families sign up for one child at a time, with materials included. The site does not describe any school or daycare group booking.",
+    "category": "arts_performance",
+    "address": "610 Oyster Bay Drive, Ladysmith, BC V9G 1S8",
+    "lat": 48.99512,
+    "lng": -123.81564,
+    "geo_source": "geocoded",
+    "hosts_school_groups": null,
+    "hosts_daycare_groups": null,
+    "youngest_age_welcomed_years": null,
+    "booking_email": "education@ladysmitharts.ca",
+    "booking_phone": "250-245-1252",
+    "booking_url": "https://ladysmitharts.ca/education/",
+    "booking_method": "web_form",
+    "has_washrooms": null,
+    "has_lunch_space": null,
+    "has_rain_backup": null,
+    "stroller_accessible": null,
+    "wheelchair_accessible": null,
+    "bus_parking": null,
+    "facility_notes": null,
+    "nearby_park": null,
+    "restrictions": [
+      "Students must be within the listed age range at the start of the course.",
+      "Children are asked to bring a water bottle and a nut free snack, and to wear clothes that can get paint or glue on them."
+    ],
+    "languages": null,
+    "general_admission_child_cad": null,
+    "general_admission_adult_cad": null,
+    "hours_notes": "The office and classroom on Oyster Bay Drive are open by appointment with staff. Ring 250-245-1252 to arrange a time.",
+    "seasonal_notes": null,
+    "price_year_or_season": "Class fees are the autumn 2026 term prices.",
+    "checked_on": "2026-09-03",
+    "checked_by": "scraper"
+  },
+  "programs": [
+    {
+      "id": "kids-drawing-class",
+      "name": "Wild Creature Lab, ages 6 to 9",
+      "description": "A six week after school drawing class for children aged 6 to 9, taught by Joshua Eliaou Tuil. Children explore animal shapes, movement, textures and expressions and invent creatures of their own through guided drawing games. All materials are provided, including graphite pencils, drawing pens, coloured pencils, markers and paper. Fridays 3:30 pm to 4:30 pm, 11 September to 16 October 2026. The fee covers one child for the whole series.",
+      "what_children_do": "Sit at tables in the classroom and draw. They play guided drawing games, mix features from real animals in unexpected ways, and end up designing creatures of their own on heavier paper.",
+      "our_note": "This is a registered class that families sign a child up for, not a group booking, so a whole daycare cannot simply arrive. If you want something for a group, the education coordinator is the person to ask.",
+      "practical_summary": "Nothing is published about washrooms, lunch space, parking or step free access at the Oyster Bay Drive classroom, so ask before you commit.",
+      "comes_to_you": false,
+      "age_min_years": 6,
+      "age_max_years": 9,
+      "grade_min": null,
+      "grade_max": null,
+      "age_basis": "years",
+      "duration_min": 60,
+      "capacity_max": null,
+      "capacity_min": null,
+      "cost_per_child_cad": 162,
+      "cost_per_group_cad": null,
+      "cost_per_adult_cad": null,
+      "free_adults_per_children": null,
+      "is_free": false,
+      "tax_included": null,
+      "extra_fees_note": "All materials will be provided.",
+      "school_rate_only": false,
+      "deposit_required": null,
+      "payment_timing": "You pay by card at the time you register online.",
+      "cancellation_note": null,
+      "months_offered": [
+        9,
+        10
+      ],
+      "days_offered": [
+        5
+      ],
+      "time_slots": [
+        "15:30"
+      ],
+      "lead_time_days": null,
+      "chaperone_ratio": null,
+      "adults_free": null,
+      "indoor": true,
+      "outdoor": null,
+      "format": [
+        "guided",
+        "hands_on"
+      ],
+      "sensory_friendly": null,
+      "low_noise": null,
+      "neurodiversity_friendly": null,
+      "mood_tags": [
+        "creative",
+        "play"
+      ],
+      "curriculum_tags": null,
+      "booking_email": "education@ladysmitharts.ca",
+      "booking_url": "https://ladysmitharts.ca/event/wild-creature-lab/",
+      "booking_method": "web_form",
+      "source_url": "https://ladysmitharts.ca/event/wild-creature-lab/",
+      "evidence": "Age: Ages 6-9 Skill: Beginner",
+      "checked_on": "2026-09-03",
+      "image_ids": [
+        "activity-childrens-drawing-class"
+      ]
+    },
+    {
+      "id": "kids-animation-class",
+      "name": "Animation Lab, ages 10 to 13",
+      "description": "A six week after school stop motion animation class for children aged 10 to 13, taught by Joshua Eliaou Tuil. Children make characters, build simple scenes and turn them into short animated sequences using clay animation, paper cut outs and pixilation. Each participant must have access to a camera and a tripod or camera stand, and a phone camera works. Fridays 4:45 pm to 5:45 pm, 11 September to 16 October 2026. The fee covers one child for the whole series.",
+      "what_children_do": "Build characters and small sets on a table, move them a fraction at a time and photograph each frame, and sometimes step in front of the camera and become the animated character themselves. By the end each child has a short film.",
+      "our_note": "Every child needs their own camera and something to hold it steady, and a phone counts. Check who is supplying that before you sign anyone up, because it is not included.",
+      "practical_summary": "Nothing is published about washrooms, lunch space, parking or step free access at the classroom, so ask before you commit.",
+      "comes_to_you": false,
+      "age_min_years": 10,
+      "age_max_years": 13,
+      "grade_min": null,
+      "grade_max": null,
+      "age_basis": "years",
+      "duration_min": 60,
+      "capacity_max": null,
+      "capacity_min": null,
+      "cost_per_child_cad": 162,
+      "cost_per_group_cad": null,
+      "cost_per_adult_cad": null,
+      "free_adults_per_children": null,
+      "is_free": false,
+      "tax_included": null,
+      "extra_fees_note": "Each participant must have access to a camera and a tripod or camera stand for creating the animations during the class. A phone camera works as well.",
+      "school_rate_only": false,
+      "deposit_required": null,
+      "payment_timing": "You pay by card at the time you register online.",
+      "cancellation_note": null,
+      "months_offered": [
+        9,
+        10
+      ],
+      "days_offered": [
+        5
+      ],
+      "time_slots": [
+        "16:45"
+      ],
+      "lead_time_days": null,
+      "chaperone_ratio": null,
+      "adults_free": null,
+      "indoor": true,
+      "outdoor": null,
+      "format": [
+        "guided",
+        "hands_on"
+      ],
+      "sensory_friendly": null,
+      "low_noise": null,
+      "neurodiversity_friendly": null,
+      "mood_tags": [
+        "creative",
+        "play"
+      ],
+      "curriculum_tags": null,
+      "booking_email": "education@ladysmitharts.ca",
+      "booking_url": "https://ladysmitharts.ca/event/animation-lab/",
+      "booking_method": "web_form",
+      "source_url": "https://ladysmitharts.ca/event/animation-lab/",
+      "evidence": "Age: Ages 10-13 Skill: Beginner",
+      "checked_on": "2026-09-03",
+      "image_ids": [
+        "program-animation-sketchbook"
+      ]
+    },
+    {
+      "id": "kids-clay-mixed-media-younger",
+      "name": "Kids' Clay & Mixed Media, ages 6 to 8",
+      "description": "A five week after school art class for children aged 6 to 8, taught by Jennifer O'Brien. Children work with clay, watercolours, acrylics, pastels and mixed media across the series. Tuesdays 3:30 pm to 4:30 pm, 15 September to 13 October 2026. The class is run by one teacher on their own, and a child who needs one to one support is welcome to bring a responsible helper. The fee covers one child for the whole series.",
+      "what_children_do": "Sit at tables and make things with their hands. Over the weeks they shape clay, paint with watercolours and acrylics, draw with pastels and build mixed media pieces, taking each project in their own direction.",
+      "our_note": "There is one teacher and no assistant, so a child who needs one to one support has to bring their own helper, and sometimes that is a condition of joining. Ring the education coordinator first if that applies to any of your children.",
+      "practical_summary": "Nothing is published about washrooms, lunch space, parking or step free access at the classroom. Children bring their own water bottle and a nut free snack.",
+      "comes_to_you": false,
+      "age_min_years": 6,
+      "age_max_years": 8,
+      "grade_min": null,
+      "grade_max": null,
+      "age_basis": "years",
+      "duration_min": 60,
+      "capacity_max": null,
+      "capacity_min": null,
+      "cost_per_child_cad": 136,
+      "cost_per_group_cad": null,
+      "cost_per_adult_cad": null,
+      "free_adults_per_children": null,
+      "is_free": false,
+      "tax_included": null,
+      "extra_fees_note": null,
+      "school_rate_only": false,
+      "deposit_required": null,
+      "payment_timing": "You pay by card at the time you register online.",
+      "cancellation_note": null,
+      "months_offered": [
+        9,
+        10
+      ],
+      "days_offered": [
+        2
+      ],
+      "time_slots": [
+        "15:30"
+      ],
+      "lead_time_days": null,
+      "chaperone_ratio": null,
+      "adults_free": null,
+      "indoor": true,
+      "outdoor": null,
+      "format": [
+        "guided",
+        "hands_on"
+      ],
+      "sensory_friendly": null,
+      "low_noise": null,
+      "neurodiversity_friendly": null,
+      "mood_tags": [
+        "creative",
+        "play"
+      ],
+      "curriculum_tags": null,
+      "booking_email": "education@ladysmitharts.ca",
+      "booking_url": "https://ladysmitharts.ca/event/kids-clay-mixed-media-6-8-year-old/",
+      "booking_method": "web_form",
+      "source_url": "https://ladysmitharts.ca/event/kids-clay-mixed-media-6-8-year-old/",
+      "evidence": "Age: 6-8 Years Old Skill: Beginner",
+      "checked_on": "2026-09-03",
+      "image_ids": null
+    },
+    {
+      "id": "kids-clay-mixed-media-older",
+      "name": "Kids' Clay & Mixed Media, ages 9 to 12",
+      "description": "A five week after school art class for children aged 9 to 12, taught by Jennifer O'Brien. Children shape clay, paint with watercolours and acrylics, draw with pastels and experiment with mixed media. Tuesdays 4:45 pm to 5:45 pm, 15 September to 13 October 2026. The class is run by one teacher on their own, and a child who needs one to one support is welcome to bring a responsible helper. The fee covers one child for the whole series.",
+      "what_children_do": "Work at tables with clay, paint, pastels and mixed materials, taking a different project each week and finishing pieces to take home.",
+      "our_note": "Same teacher and same materials as the younger class, just an hour later and pitched older. Children come in clothes that can get paint on them and bring their own snack.",
+      "practical_summary": "Nothing is published about washrooms, lunch space, parking or step free access at the classroom. Children bring their own water bottle and a nut free snack.",
+      "comes_to_you": false,
+      "age_min_years": 9,
+      "age_max_years": 12,
+      "grade_min": null,
+      "grade_max": null,
+      "age_basis": "years",
+      "duration_min": 60,
+      "capacity_max": null,
+      "capacity_min": null,
+      "cost_per_child_cad": 136,
+      "cost_per_group_cad": null,
+      "cost_per_adult_cad": null,
+      "free_adults_per_children": null,
+      "is_free": false,
+      "tax_included": null,
+      "extra_fees_note": null,
+      "school_rate_only": false,
+      "deposit_required": null,
+      "payment_timing": "You pay by card at the time you register online.",
+      "cancellation_note": null,
+      "months_offered": [
+        9,
+        10
+      ],
+      "days_offered": [
+        2
+      ],
+      "time_slots": [
+        "16:45"
+      ],
+      "lead_time_days": null,
+      "chaperone_ratio": null,
+      "adults_free": null,
+      "indoor": true,
+      "outdoor": null,
+      "format": [
+        "guided",
+        "hands_on"
+      ],
+      "sensory_friendly": null,
+      "low_noise": null,
+      "neurodiversity_friendly": null,
+      "mood_tags": [
+        "creative",
+        "play"
+      ],
+      "curriculum_tags": null,
+      "booking_email": "education@ladysmitharts.ca",
+      "booking_url": "https://ladysmitharts.ca/event/kids-clay-mixed-media-9-12-year-old/",
+      "booking_method": "web_form",
+      "source_url": "https://ladysmitharts.ca/event/kids-clay-mixed-media-9-12-year-old/",
+      "evidence": "Age: 9-12 Years Old Skill: Beginner",
+      "checked_on": "2026-09-03",
+      "image_ids": null
+    }
+  ],
+  "images": [
+    {
+      "id": "hero-art-materials",
+      "url": "https://ladysmitharts.ca/wp-content/uploads/2025/12/Classes-Feature-Image.jpg",
+      "role": "hero",
+      "alt": "Oil pastels and crayons in a clear tray above rolls of patterned tape, resting on a paint splashed surface beside an open sketchbook holding a blue magazine collage.",
+      "alt_source": "generated",
+      "caption": null,
+      "found_on_url": "https://ladysmitharts.ca/",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    },
+    {
+      "id": "activity-childrens-drawing-class",
+      "url": "https://ladysmitharts.ca/wp-content/uploads/2026/07/Wild-Creature-Lab-scaled.jpg",
+      "role": "activity",
+      "alt": "Seen from above, a child with fair hair draws a brightly coloured creature in felt pen at a wooden table set with printed worksheets, a clipboard and a mug.",
+      "alt_source": "generated",
+      "caption": null,
+      "found_on_url": "https://ladysmitharts.ca/education/",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    },
+    {
+      "id": "program-animation-sketchbook",
+      "url": "https://ladysmitharts.ca/wp-content/uploads/2026/07/Animation-Lab.jpg",
+      "role": "program",
+      "alt": "A hand holds open a spiral bound sketchbook filled with a grid of pencil drawings showing a figure running, frame by frame.",
+      "alt_source": "generated",
+      "caption": null,
+      "found_on_url": "https://ladysmitharts.ca/event/animation-lab/",
+      "width": 1448,
+      "height": 1086,
+      "rights_note": null,
+      "usage": "unverified"
+    }
+  ],
+  "gaps": [
+    "No school group, daycare group or field trip offering is published anywhere on the site. Searching their own site for school groups returns nothing, so a group visit would have to be arranged directly with the education coordinator.",
+    "The Ladysmith Gallery at Unit 7, 32 High Street is run by this same arts council and is catalogued separately. Nothing from the gallery's own pages has been recorded here, and the gallery keeps its own phone number and email.",
+    "The youngest published children's class starts at age 6. Nothing at all is published for under fives.",
+    "No class size limit is published for any of the children's classes, so there is no way to know how many children a class holds.",
+    "Whether the classroom has washrooms, a change table, somewhere to eat, step free access or parking is not published. The office is open by appointment only, so it is worth asking before turning up.",
+    "How far ahead you need to register is not published, and there is no stated refund or cancellation policy for classes.",
+    "Whether classes suit neurodiverse children is not addressed directly. The clay classes do say there is one teacher on their own and that a child needing one to one support must bring a helper.",
+    "No photograph of the Oyster Bay Drive classroom or its building is published, so the main picture here is of art materials from their classes page.",
+    "The About page carries a photograph of the gallery interior. It has been left out on purpose so that this record stays about the arts council rather than the gallery.",
+    "RETRIEVAL NOTE: this site fetches fine without a browser, but its class listings and search results are loaded by JavaScript. A browser was used to read the class listings and the site search, and to look at the photographs before writing descriptions of them.",
+    "COORDINATES: the map for the Oyster Bay Drive office on their contact page is a Google embed that publishes only the centre of the map view. There is no pin on the place itself, on that page or anywhere else on their site. The point we had, 48.97245 and -123.80774, was that view centre, which sat about 2.5 km south of every other Ladysmith venue in this catalog. It has been cleared. The address stands and the coordinates still need to be worked out from it."
+  ],
+  "conflicts": [
+    {
+      "field": "address postal code",
+      "values": [
+        "610 Oyster Bay Drive, Ladysmith, BC V9G 1S8",
+        "610 Oyster Bay Drive, Ladysmith, BC V9G 1B8"
+      ],
+      "sources": [
+        "https://ladysmitharts.ca/event/wild-creature-lab/",
+        "https://ladysmitharts.ca/event/kids-clay-mixed-media-6-8-year-old/"
+      ],
+      "note": "Their own class pages give two different postal codes for the same building on Oyster Bay Drive. The street number and town match on both, so either will get you there. The second one is also the postal code on their mailing box, so use the first if you are sending anything to the building."
+    }
+  ],
+  "pages_opened": [
+    "https://ladysmitharts.ca/",
+    "https://ladysmitharts.ca/about/",
+    "https://ladysmitharts.ca/education/",
+    "https://ladysmitharts.ca/contact/",
+    "https://ladysmitharts.ca/get-involved/",
+    "https://ladysmitharts.ca/gallery-rental/",
+    "https://ladysmitharts.ca/ladysmith-gallery/",
+    "https://ladysmitharts.ca/events/category/classes/kids-classes/",
+    "https://ladysmitharts.ca/event/wild-creature-lab/",
+    "https://ladysmitharts.ca/event/animation-lab/",
+    "https://ladysmitharts.ca/event/kids-clay-mixed-media-6-8-year-old/",
+    "https://ladysmitharts.ca/event/kids-clay-mixed-media-9-12-year-old/"
+  ],
+  "pages_useful": [
+    "https://ladysmitharts.ca/",
+    "https://ladysmitharts.ca/about/",
+    "https://ladysmitharts.ca/education/",
+    "https://ladysmitharts.ca/contact/",
+    "https://ladysmitharts.ca/events/category/classes/kids-classes/",
+    "https://ladysmitharts.ca/event/wild-creature-lab/",
+    "https://ladysmitharts.ca/event/animation-lab/",
+    "https://ladysmitharts.ca/event/kids-clay-mixed-media-6-8-year-old/",
+    "https://ladysmitharts.ca/event/kids-clay-mixed-media-9-12-year-old/"
+  ],
+  "extracted_at": "2026-09-07T10:00:00-07:00",
+  "extractor_version": "v2.0"
+}

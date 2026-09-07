@@ -1,0 +1,73 @@
+{
+  "venue": {
+    "id": "point-ellice-house-museum-and-gardens",
+    "name": "Point Ellice House Museum and Gardens",
+    "website": "https://pointellicehouse.com/",
+    "description": "Point Ellice House is a heritage house museum and garden in Victoria. On the day this record was made its website published nothing but a single notice: as of September 1st, 2026 the site is offline and the house is closed for the season, with updates promised for Spring 2027. No visiting information, opening hours, address, admission prices, school programme or group tour detail is published anywhere on the domain at present. Nothing here should be read as the venue not serving school or daycare groups, only that it is publishing nothing at all right now.",
+    "category": "museums_history",
+    "address": null,
+    "lat": null,
+    "lng": null,
+    "geo_source": null,
+    "hosts_school_groups": null,
+    "hosts_daycare_groups": null,
+    "youngest_age_welcomed_years": null,
+    "booking_email": null,
+    "booking_phone": null,
+    "booking_url": null,
+    "booking_method": null,
+    "has_washrooms": null,
+    "has_lunch_space": null,
+    "has_rain_backup": null,
+    "stroller_accessible": null,
+    "wheelchair_accessible": null,
+    "bus_parking": null,
+    "facility_notes": null,
+    "nearby_park": null,
+    "restrictions": null,
+    "languages": null,
+    "general_admission_child_cad": null,
+    "general_admission_adult_cad": null,
+    "hours_notes": null,
+    "seasonal_notes": "The house is closed for the season as of September 1st, 2026. The notice asks visitors to check for updates in Spring 2027.",
+    "price_year_or_season": null,
+    "checked_on": "2026-09-03",
+    "checked_by": "scraper"
+  },
+  "programs": [],
+  "images": [
+    {
+      "id": "hero-house-exterior",
+      "url": "https://pointellicehouse.com/PointElliceHouse-Exterior-w-Logo.jpg",
+      "role": "hero",
+      "alt": "A cream and pink heritage house with a brick chimney and a large bay window, seen across a lawn past yellow irises and shrubs, with the words Point Ellice House printed over the sky.",
+      "alt_source": "generated",
+      "caption": null,
+      "found_on_url": "https://pointellicehouse.com/",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    }
+  ],
+  "gaps": [
+    "RETRIEVAL NOTE: the whole website is offline for the season. Every path on the domain, including the sitemap, resolves to one notice page saying the site went offline on September 1st, 2026 and that the house is closed until Spring 2027. This is not a rendering problem: the page was confirmed in a browser and its full text is four lines long. This venue needs re-running in Spring 2027",
+    "the tracker's address for this venue, www.PointElliceHouse.com, is dead. The www host returns a Non-Existent Site page from the BC government. The bare host, pointellicehouse.com, redirects to pointellicehouse.econ.gov.bc.ca and serves the offline notice",
+    "no address is published, so the map pin cannot be set and is left blank rather than guessed",
+    "nothing is published about school programmes or group tours, so whether the museum hosts school or daycare groups is left unanswered rather than recorded as no",
+    "no prices, opening hours, contact details, booking route, capacity, minimum age, washrooms, lunch space, rain backup or parking are published anywhere on the domain at present",
+    "the only image on the site is the exterior photograph recorded here. It carries the museum's own logo over the sky and has no alt text, so the alt was written after opening the image in a browser and looking at it"
+  ],
+  "conflicts": [],
+  "pages_opened": [
+    "https://pointellicehouse.com/",
+    "https://pointellicehouse.com/sitemap.xml",
+    "https://www.pointellicehouse.com/",
+    "https://pointellicehouse.com/PointElliceHouse-Exterior-w-Logo.jpg"
+  ],
+  "pages_useful": [
+    "https://pointellicehouse.com/"
+  ],
+  "extracted_at": "2026-09-03T14:45:00-07:00",
+  "extractor_version": "v2.0"
+}

@@ -1,0 +1,76 @@
+{
+  "venue": {
+    "id": "side-street-studio",
+    "name": "Side Street Studio",
+    "website": "https://www.sidestreetstudio.com/",
+    "description": "Side Street Studio is a shop and gallery on Oak Bay Avenue in Victoria that has sold the work of British Columbia artists since 1984, including pottery, jewellery, glass, wood, textiles, prints and West Coast First Nations art. It began as a collective of six women artists and keeps two rules: everything is made in British Columbia by small artisan businesses, and everything must be the best of its kind. Despite the name it is a retail store rather than a working teaching studio. The website, including its full sitemap, lists no classes, workshops, birthday parties, camps, tours or group visits for children, so there is nothing here a daycare or school can book.",
+    "category": "arts_performance",
+    "address": "204-2250 Oak Bay Ave. Victoria, BC V8R 1G5",
+    "lat": null,
+    "lng": null,
+    "geo_source": "geocode_pending",
+    "hosts_school_groups": false,
+    "hosts_daycare_groups": false,
+    "youngest_age_welcomed_years": null,
+    "booking_email": null,
+    "booking_phone": "(250) 592-1262",
+    "booking_url": null,
+    "booking_method": null,
+    "has_washrooms": null,
+    "has_lunch_space": null,
+    "has_rain_backup": null,
+    "stroller_accessible": null,
+    "wheelchair_accessible": null,
+    "bus_parking": null,
+    "facility_notes": null,
+    "nearby_park": null,
+    "restrictions": null,
+    "languages": null,
+    "general_admission_child_cad": null,
+    "general_admission_adult_cad": null,
+    "hours_notes": null,
+    "seasonal_notes": null,
+    "price_year_or_season": null,
+    "checked_on": "2026-09-03",
+    "checked_by": "scraper"
+  },
+  "programs": [],
+  "images": [],
+  "gaps": [
+    "This is a retail gallery, not a teaching studio. No children's classes, workshops, birthday parties, camps or group visits are published anywhere on the site, including on the sitemap page, so no programs are recorded.",
+    "There is no photograph of the shop or its interior anywhere on the site, so there is no picture for the card. The home page banner is a title graphic with the shop name set in large type over a forest photograph, and the Open Graph image is the logo, so neither was used.",
+    "opening hours: left blank because two of their own pages give different hours.",
+    "washrooms, lunch space, stroller and wheelchair access: unknown. The unit number suggests it is not at street level, and nothing on the site addresses access.",
+    "whether a small group of children could visit the shop at all, and whether the owner would host anything for a group: unknown, and would need a phone call.",
+    "No published coordinates were found. The contact page carries a Google Maps embed, but its only coordinates are the centre of a wide map view rather than a pin on the shop, so the address is recorded and the coordinates are left for geocoding."
+  ],
+  "conflicts": [
+    {
+      "field": "hours_notes",
+      "values": [
+        "Mon-Fri 11-5, Sat 10-5, Closed Sundays",
+        "Mon-Sat 10-5, Sun 12-4, Closed Canada Day July 1st"
+      ],
+      "sources": [
+        "https://www.sidestreetstudio.com/pages/contact-us",
+        "https://www.sidestreetstudio.com/pages/about-side-street-studio"
+      ],
+      "note": "Two of their pages give different opening hours. One says Monday to Friday 11 to 5, Saturday 10 to 5 and closed Sunday. The other says Monday to Saturday 10 to 5 and Sunday 12 to 4. Ring before you go."
+    }
+  ],
+  "pages_opened": [
+    "https://www.sidestreetstudio.com/",
+    "https://www.sidestreetstudio.com/pages/visit-the-studio",
+    "https://www.sidestreetstudio.com/pages/about-side-street-studio",
+    "https://www.sidestreetstudio.com/pages/contact-us",
+    "https://www.sidestreetstudio.com/pages/sitemap"
+  ],
+  "pages_useful": [
+    "https://www.sidestreetstudio.com/",
+    "https://www.sidestreetstudio.com/pages/about-side-street-studio",
+    "https://www.sidestreetstudio.com/pages/contact-us",
+    "https://www.sidestreetstudio.com/pages/sitemap"
+  ],
+  "extracted_at": "2026-09-03T19:05:00Z",
+  "extractor_version": "v2.0"
+}

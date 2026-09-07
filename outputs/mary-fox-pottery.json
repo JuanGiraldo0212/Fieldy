@@ -1,0 +1,81 @@
+{
+  "venue": {
+    "id": "mary-fox-pottery",
+    "name": "Mary Fox Pottery",
+    "website": "https://maryfoxpottery.ca",
+    "description": "Mary Fox Pottery is one artist's working studio with a retail gallery attached, at 321 3rd Avenue in Ladysmith. The gallery is open to the public year round with regular shop hours and sells Mary Fox's own vessels and bowls along with tableware made in the studio. The rest of the site is her portfolio, her books, and the Mary Fox Legacy Project, which is a two year apprenticeship and a future artist residency for adult potters. There are no classes, no workshops, no studio tours and nothing published for children or for school and daycare groups, so this is a shop to browse rather than a place a group can book.",
+    "category": "arts_performance",
+    "address": "321 3rd Avenue, PO Box 35, Ladysmith, BC V9G 1A1",
+    "lat": 48.99059,
+    "lng": -123.81828,
+    "geo_source": "site_embed",
+    "hosts_school_groups": false,
+    "hosts_daycare_groups": false,
+    "youngest_age_welcomed_years": null,
+    "booking_email": null,
+    "booking_phone": "(250) 245-3778",
+    "booking_url": null,
+    "booking_method": null,
+    "has_washrooms": null,
+    "has_lunch_space": null,
+    "has_rain_backup": null,
+    "stroller_accessible": null,
+    "wheelchair_accessible": null,
+    "bus_parking": null,
+    "facility_notes": null,
+    "nearby_park": null,
+    "restrictions": null,
+    "languages": null,
+    "general_admission_child_cad": null,
+    "general_admission_adult_cad": null,
+    "hours_notes": "The gallery is open to the public year round. From 1 May to 26 September it is open Monday to Saturday, 10 am to 5 pm, with Sunday by chance. From 27 September to 30 April it is open Tuesday to Saturday, 10 am to 5 pm, with Mondays by chance or by appointment only.",
+    "seasonal_notes": null,
+    "price_year_or_season": null,
+    "checked_on": "2026-09-03",
+    "checked_by": "scraper"
+  },
+  "programs": [],
+  "images": [
+    {
+      "id": "hero-potter-at-the-wheel",
+      "url": "https://maryfoxpottery.ca/wp-content/uploads/2024/08/cropped-Header.jpg",
+      "role": "hero",
+      "alt": "Mary Fox Pottery Header working on leatherhard chalice",
+      "alt_source": "site",
+      "caption": null,
+      "found_on_url": "https://maryfoxpottery.ca/",
+      "width": 1600,
+      "height": 650,
+      "rights_note": null,
+      "usage": "unverified"
+    }
+  ],
+  "gaps": [
+    "NOT FOR GROUPS: this is a working potter's studio with a retail gallery on the front. The site sells finished work and explains how to order it. There is no class, no workshop, no drop in clay session, no studio tour and no group booking of any kind anywhere on the site.",
+    "Nothing on the site is written for children. Searching their own site for school, group, workshop and class returns only blog posts about the adult apprenticeship and about book launches.",
+    "The Legacy Project is a two year apprenticeship for a young adult potter and a planned artist residency, not a programme for visiting children. Their own blog says the apprenticeship program has been discontinued, so parts of the Legacy Project pages are out of date.",
+    "If you want a clay session for a group in this area, the Arts Council of Ladysmith and District runs children's clay and mixed media classes, and it is a separate entry in this catalogue.",
+    "Whether the shop has a washroom, step free access at the door or anywhere to park is not published.",
+    "COORDINATES: the site publishes no map embed. The coordinates here are the destination point carried in the Google driving directions link on their own contact page, 48.9905928 by -123.8182808, which resolves to the 3rd Avenue address they print beside it.",
+    "The gallery hours are given twice on the site. The site wide footer adds a Sunday by chance line for summer that the contact page leaves out. Both agree on the weekday hours and on the two seasons."
+  ],
+  "conflicts": [],
+  "pages_opened": [
+    "https://maryfoxpottery.ca",
+    "https://maryfoxpottery.ca/gallery-studio/",
+    "https://maryfoxpottery.ca/contact/",
+    "https://maryfoxpottery.ca/about/",
+    "https://maryfoxpottery.ca/legacy/",
+    "https://maryfoxpottery.ca/?s=school",
+    "https://maryfoxpottery.ca/?s=group",
+    "https://maryfoxpottery.ca/?s=workshop"
+  ],
+  "pages_useful": [
+    "https://maryfoxpottery.ca",
+    "https://maryfoxpottery.ca/contact/",
+    "https://maryfoxpottery.ca/about/",
+    "https://maryfoxpottery.ca/legacy/"
+  ],
+  "extracted_at": "2026-09-03T16:40:00Z",
+  "extractor_version": "v2.0"
+}

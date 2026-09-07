@@ -1,0 +1,75 @@
+{
+  "venue": {
+    "id": "mark-loria-gallery",
+    "name": "Mark Loria Gallery",
+    "website": "https://www.markloriagallery.com",
+    "description": "Mark Loria Gallery is a commercial art gallery at 621 Fort Street in Victoria that sells contemporary Canadian Indigenous fine art, mainly from the Northwest Coast and Coast Salish region. It shows and sells prints, paintings, carvings, wearable art and jewellery, and puts on occasional exhibitions and print signings. The gallery publishes no school programs, no group tours, no workshops and no children's activities, and nothing on the site is set up for a class or daycare visit. Anyone may walk in during opening hours, but this is a retail gallery rather than a place that hosts children's groups.",
+    "category": "arts_performance",
+    "address": "621 Fort St, Victoria, British Columbia V8W 1G1",
+    "lat": 48.42472,
+    "lng": -123.3671,
+    "geo_source": "geocoded",
+    "hosts_school_groups": false,
+    "hosts_daycare_groups": false,
+    "youngest_age_welcomed_years": null,
+    "booking_email": "info@markloriagallery.com",
+    "booking_phone": "(250) 383-8224",
+    "booking_url": null,
+    "booking_method": null,
+    "has_washrooms": null,
+    "has_lunch_space": null,
+    "has_rain_backup": null,
+    "stroller_accessible": null,
+    "wheelchair_accessible": null,
+    "bus_parking": null,
+    "facility_notes": null,
+    "nearby_park": null,
+    "restrictions": null,
+    "languages": null,
+    "general_admission_child_cad": null,
+    "general_admission_adult_cad": null,
+    "hours_notes": "Monday closed. Tuesday to Saturday 11:00 to 18:00. Sunday 11:00 to 15:00. Their page calls these summer hours.",
+    "seasonal_notes": null,
+    "price_year_or_season": null,
+    "checked_on": "2026-09-03",
+    "checked_by": "scraper"
+  },
+  "programs": [],
+  "images": [
+    {
+      "id": "hero-artwork-detail",
+      "url": "https://d932ee93f57e0124e6d8.cdn6.editmysite.com/uploads/b/d932ee93f57e0124e6d8034e96357e37edbca0b0e76915efc478ceac237ba15d/2021-05-20_18-22-21_1621560152.jpg",
+      "role": "hero",
+      "alt": "A close view of a Northwest Coast style artwork, with bold black formline shapes over red, pale green and light blue on a black ground.",
+      "alt_source": "generated",
+      "caption": null,
+      "found_on_url": "https://www.markloriagallery.com/about",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    }
+  ],
+  "gaps": [
+    "RETRIEVAL NOTE: this site renders in JavaScript and returns only <head> metadata to a plain fetch. A fetch-only re-run will appear to find an empty site.",
+    "This is a commercial gallery that sells art. Their home page, about page, exhibitions page and sitemap contain nothing about school visits, daycare visits, group tours, workshops or children's activities, so no program has been recorded.",
+    "The site does not say whether entry is free, whether there are washrooms, or whether a group of any kind can be brought in. If you want to bring children, ring the gallery first.",
+    "The image the site offers for social sharing is its own logo rather than a photograph, so the header photo here was taken from the banner on their about page instead.",
+    "The photographs on their home page are pulled from their Instagram feed and are served from Instagram, not from the gallery's own site, so they were not recorded.",
+    "Alt text for the header photo was written after opening the image in a browser and looking at it."
+  ],
+  "conflicts": [],
+  "pages_opened": [
+    "https://www.markloriagallery.com/",
+    "https://www.markloriagallery.com/about",
+    "https://www.markloriagallery.com/exhibitions",
+    "https://www.markloriagallery.com/sitemap.xml"
+  ],
+  "pages_useful": [
+    "https://www.markloriagallery.com/",
+    "https://www.markloriagallery.com/about",
+    "https://www.markloriagallery.com/exhibitions"
+  ],
+  "extracted_at": "2026-09-03T18:45:00Z",
+  "extractor_version": "v2.0"
+}

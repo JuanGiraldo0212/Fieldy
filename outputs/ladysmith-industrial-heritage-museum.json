@@ -1,0 +1,211 @@
+{
+  "venue": {
+    "id": "ladysmith-industrial-heritage-museum",
+    "name": "Ladysmith Industrial Heritage Museum",
+    "website": "https://www.ladysmithhistoricalsociety.ca/industrial-heritage-museum/",
+    "description": "The Industrial Heritage site sits at 614 Oyster Bay Drive, on the former Comox Logging and Railway Company yard by Ladysmith Harbour. It is looked after by the Industrial Heritage Preservation Committee of the Ladysmith and District Historical Society with support from the Town of Ladysmith. Volunteers are refurbishing steam Locomotive No. 11, the Locomotive Shop, the railway yard, the First Aid shed, a box car, a tube tumbler and the Humdirgen, a very rare machine built in the site's Machine Shop in 1945 to tip logs off railcars into the water. Work parties are normally every Saturday from 9 am to noon, and that is when visitors of all ages are invited to come and watch. The interpretive and interactive displays are described as a future plan rather than something already installed.",
+    "category": "museums_history",
+    "address": "614 Oyster Bay Drive, Ladysmith, BC",
+    "lat": null,
+    "lng": null,
+    "geo_source": "geocode_pending",
+    "hosts_school_groups": null,
+    "hosts_daycare_groups": null,
+    "youngest_age_welcomed_years": null,
+    "booking_email": null,
+    "booking_phone": "250-245-3075",
+    "booking_url": null,
+    "booking_method": null,
+    "has_washrooms": null,
+    "has_lunch_space": null,
+    "has_rain_backup": null,
+    "stroller_accessible": null,
+    "wheelchair_accessible": null,
+    "bus_parking": null,
+    "facility_notes": null,
+    "nearby_park": null,
+    "restrictions": null,
+    "languages": null,
+    "general_admission_child_cad": null,
+    "general_admission_adult_cad": null,
+    "hours_notes": "Work parties are normally every Saturday from 9 am to noon, and their calendar lists the heritage site as open 9 to noon on Saturdays. That is when visitors are invited to come by.",
+    "seasonal_notes": null,
+    "price_year_or_season": null,
+    "checked_on": "2026-09-03",
+    "checked_by": "scraper"
+  },
+  "programs": [
+    {
+      "id": "saturday-site-visit",
+      "name": "Saturday visit to the heritage site",
+      "description": "The site invites people to come by on a Saturday morning while the volunteer work party is on, watch the restoration work and ask questions. The page names what is there to see: steam Locomotive No. 11, which has been moved inside the Locomotive Shop, the Machine Shop with its blacksmith shop, lathes and large tools, the restored First Aid building, the track, a log car and the Humdirgen, which has had engine work and now runs. The restored First Aid building is used as a reception point for visitors who stop in on a Saturday. No price, visit length, group size, booking process or notice period is published, and nothing on the page is written for schools or daycares.",
+      "what_children_do": "Walk around an old railway yard beside the harbour, looking at a steam locomotive, a log car, the Humdirgen and the old workshops, and asking the volunteers what they are fixing.",
+      "our_note": "This is a working restoration yard rather than a finished museum, so what is out and what is behind a shop door changes week to week. Saturday morning is the only time the site says anyone is there, which rules out an ordinary weekday class trip unless you ring the heritage committee first. The way in is a gravel road and the yard has track running through it, so sensible shoes beat sandals.",
+      "practical_summary": "Outdoors on an old railway yard, open Saturday mornings while the volunteers are there, with the restored First Aid building as the place visitors are met. No price, washrooms, parking, rain cover or group size is published, so ring before you take a group.",
+      "comes_to_you": false,
+      "age_min_years": null,
+      "age_max_years": null,
+      "grade_min": null,
+      "grade_max": null,
+      "age_basis": null,
+      "duration_min": null,
+      "capacity_max": null,
+      "capacity_min": null,
+      "cost_per_child_cad": null,
+      "cost_per_group_cad": null,
+      "cost_per_adult_cad": null,
+      "free_adults_per_children": null,
+      "is_free": null,
+      "tax_included": null,
+      "extra_fees_note": null,
+      "school_rate_only": false,
+      "deposit_required": null,
+      "payment_timing": null,
+      "cancellation_note": null,
+      "months_offered": null,
+      "days_offered": [
+        6
+      ],
+      "time_slots": null,
+      "lead_time_days": null,
+      "chaperone_ratio": null,
+      "adults_free": null,
+      "indoor": true,
+      "outdoor": true,
+      "format": [
+        "self_guided"
+      ],
+      "sensory_friendly": null,
+      "low_noise": null,
+      "neurodiversity_friendly": null,
+      "mood_tags": [
+        "explore",
+        "learn"
+      ],
+      "curriculum_tags": null,
+      "booking_email": null,
+      "booking_url": null,
+      "booking_method": null,
+      "source_url": "https://www.ladysmithhistoricalsociety.ca/industrial-heritage-museum/",
+      "evidence": "Come by and watch these amazing industrial artfacts come to life, bring your camera, and your questions, we welcome visitors of all ages.",
+      "checked_on": "2026-09-03",
+      "image_ids": [
+        "hero-locomotive-11",
+        "space-machine-shop",
+        "space-first-aid-building",
+        "program-volunteers-restoring",
+        "activity-hand-pump-car"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "id": "hero-locomotive-11",
+      "url": "https://www.ladysmithhistoricalsociety.ca/wp-content/uploads/2020/04/CL-Number-11-Loci-1.jpg",
+      "role": "hero",
+      "alt": "A black steam locomotive tender lettered Comox Logging Co Ltd and numbered 11, coupled to the locomotive behind it, standing on track beside mown grass and trees, with the yellow end of another machine in the foreground.",
+      "alt_source": "generated",
+      "caption": "Steam Locomotive No. 11",
+      "found_on_url": "https://www.ladysmithhistoricalsociety.ca/industrial-heritage-museum/",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    },
+    {
+      "id": "space-machine-shop",
+      "url": "https://www.ladysmithhistoricalsociety.ca/wp-content/uploads/2020/04/P1210883Machine-Shop2.jpg",
+      "role": "space",
+      "alt": "historic Comox Logging Machine Shop",
+      "alt_source": "site",
+      "caption": "Historic machine shop of Comox Logging & Railway Co.",
+      "found_on_url": "https://www.ladysmithhistoricalsociety.ca/industrial-heritage-museum/",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    },
+    {
+      "id": "activity-hand-pump-car",
+      "url": "https://www.ladysmithhistoricalsociety.ca/wp-content/uploads/2020/04/P1210421Q-kids-handpump-car.jpg",
+      "role": "activity",
+      "alt": "rail pump car",
+      "alt_source": "site",
+      "caption": "Restored hand pump rail car ride during Heritage Week.",
+      "found_on_url": "https://www.ladysmithhistoricalsociety.ca/industrial-heritage-museum/",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    },
+    {
+      "id": "space-first-aid-building",
+      "url": "https://www.ladysmithhistoricalsociety.ca/wp-content/uploads/2020/04/P1210855restored-First-Aid-Shed-2.jpg",
+      "role": "space",
+      "alt": "original first aid shed Comox Logging & Railway Co.",
+      "alt_source": "site",
+      "caption": "After restoration work, the Comox Logging & Railway Co. First Aid station. Before photo below.",
+      "found_on_url": "https://www.ladysmithhistoricalsociety.ca/industrial-heritage-museum/",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    },
+    {
+      "id": "program-volunteers-restoring",
+      "url": "https://www.ladysmithhistoricalsociety.ca/wp-content/uploads/2020/04/P1120572IHPC-volunteers-1.jpg",
+      "role": "program",
+      "alt": "volunteers restoring industrial heritage artifacts",
+      "alt_source": "site",
+      "caption": "Volunteers at Ladysmith Industrial Heritage Site",
+      "found_on_url": "https://www.ladysmithhistoricalsociety.ca/industrial-heritage-museum/",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    }
+  ],
+  "gaps": [
+    "This is a distinct site from the Ladysmith Museum and the Ladysmith Archives, which are catalogued separately. All three are run by the Ladysmith and District Historical Society from one website, but this one is an outdoor yard at 614 Oyster Bay Drive with its own phone contact and its own Saturday morning hours. Nothing from either sibling record has been repeated here, and this was re-checked page by page during verification.",
+    "PRICE IS THE BIGGEST GAP. Nothing on the page says whether a visit costs anything, whether donations are expected, or whether a group would be charged. Ask when you ring.",
+    "No coordinates are published for this site anywhere on the website, so the map pin is still to be filled in. A geocoder was tried during verification and could not resolve the house number 614; it returned three points spread along Oyster Bay Drive about 700 metres apart, so nothing was recorded rather than dropping the pin in roughly the right area. Their other two sites have map embeds on the website and this one does not.",
+    "The page says visitors of all ages are welcome, but nothing anywhere addresses school or daycare groups, so that was left open rather than answered. The page describes enabling educational experiences on the site as a goal for the future.",
+    "Washrooms are not confirmed for visitors. The page lists a lunch and washroom building among the surviving structures on the yard, but does not say whether it is open to people who come by.",
+    "Parking, bus parking, rain shelter, group size, visit length and how much notice to give are all unpublished.",
+    "There is no booking process at all. The only route given is a phone number for the Heritage Committee chairperson for more information, and the home page names her as Shirley Blackstaff on the same number.",
+    "The site publishes an opening window of 9 to noon rather than session start times, so no start time was recorded. An earlier draft of this record listed a 09:00 slot, which would have read as a booked session that the site does not offer.",
+    "The page mentions a Heritage BC community event in February and a hand pump rail car ride photographed during Heritage Week, and a banner across the site advertises an Arts and Heritage Open House at 614 Oyster Bay Drive on June 6, free, with no year given. None of these is described as a bookable offering with a price and an age range, so none was recorded as a programme. The Society's wider special events, including BC Family Day and BC Heritage Week, sit on the Society's programmes page and are recorded against the Ladysmith Museum.",
+    "The site's own social preview image is an archival black and white photograph of the rail yard in its working days, which is not what a group would see on arrival, so a current photograph of Locomotive No. 11 was used as the main picture instead.",
+    "The photographs on this page date from 2020 and the locomotive picture shows it outside on the track, while the text says it has since been moved inside the Locomotive Shop. The main picture was opened in a browser and looked at during verification before its description was written; the other four carry the site's own alt text.",
+    "This page carries no last modified date in its markup, so there is no way to tell how current the Saturday arrangement is. Their calendar page listed the site as open on Saturdays through July and August 2026, which is the most recent confirmation available.",
+    "RETRIEVAL NOTE: this record was finished in a browser. The full size image URLs sit in srcset markup that a plain fetch of the page text will not surface, and the calendar page is where the Saturday opening is confirmed with a date."
+  ],
+  "conflicts": [
+    {
+      "field": "hours_notes",
+      "values": [
+        "Our work parties are normally every Saturday at 9 am-noon.",
+        "Work parties are every Saturday from 9 am to noon."
+      ],
+      "sources": [
+        "https://www.ladysmithhistoricalsociety.ca/industrial-heritage-museum/",
+        "https://www.ladysmithhistoricalsociety.ca/"
+      ],
+      "note": "One page says the volunteers are there every Saturday from 9 to noon. Another says normally every Saturday, which is not quite a promise. Phone 250-245-3075 the week before if you are bringing a group."
+    }
+  ],
+  "pages_opened": [
+    "https://www.ladysmithhistoricalsociety.ca/",
+    "https://www.ladysmithhistoricalsociety.ca/industrial-heritage-museum/",
+    "https://www.ladysmithhistoricalsociety.ca/programs/",
+    "https://www.ladysmithhistoricalsociety.ca/contact-hours/",
+    "https://www.ladysmithhistoricalsociety.ca/calendar/"
+  ],
+  "pages_useful": [
+    "https://www.ladysmithhistoricalsociety.ca/",
+    "https://www.ladysmithhistoricalsociety.ca/industrial-heritage-museum/",
+    "https://www.ladysmithhistoricalsociety.ca/calendar/"
+  ],
+  "extracted_at": "2026-09-03T22:45:00Z",
+  "extractor_version": "v2.0"
+}

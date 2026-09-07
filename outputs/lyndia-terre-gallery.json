@@ -1,0 +1,89 @@
+{
+  "venue": {
+    "id": "lyndia-terre-gallery",
+    "name": "Lyndia Terre Gallery",
+    "website": "https://www.lyndiaterregallery.com",
+    "description": "The Lyndia Terre Gallery is a small private commercial gallery at 1811 Northwest Bay Rd in Nanoose Bay, opened by the Montreal born artist Lyndia Terre, who moved to Vancouver Island in 2006 and bought the building in March 2007. It shows contemporary and traditional art by Lyndia Terre and by other artists she represents, and it is open by event or by appointment only, on 250-468-9010. The site has not been updated since 2010, when it was showing a drawing exhibition called Markings, and it says nothing anywhere about children, school groups, daycare groups, workshops or classes. On that basis this is a gallery for buyers and visitors rather than a venue that hosts children's groups, and we have recorded no programs for it.",
+    "category": "arts_performance",
+    "address": "1811 Northwest Bay Rd., Nanoose Bay, BC V9P 9C7",
+    "lat": 49.29995,
+    "lng": -124.22996,
+    "geo_source": "geocoded",
+    "hosts_school_groups": false,
+    "hosts_daycare_groups": false,
+    "youngest_age_welcomed_years": null,
+    "booking_email": "info@lyndiaterregallery.com",
+    "booking_phone": "250-468-9010",
+    "booking_url": null,
+    "booking_method": "phone",
+    "has_washrooms": null,
+    "has_lunch_space": null,
+    "has_rain_backup": null,
+    "stroller_accessible": null,
+    "wheelchair_accessible": null,
+    "bus_parking": null,
+    "facility_notes": null,
+    "nearby_park": null,
+    "restrictions": null,
+    "languages": null,
+    "general_admission_child_cad": null,
+    "general_admission_adult_cad": null,
+    "hours_notes": "Open by event or by appointment. The gallery is always open by appointment. Please call 250-468-9010 or email for information or directions.",
+    "seasonal_notes": null,
+    "price_year_or_season": null,
+    "checked_on": "2026-09-07",
+    "checked_by": "scraper"
+  },
+  "programs": [],
+  "images": [
+    {
+      "id": "hero-gallery-room",
+      "url": "https://www.lyndiaterregallery.com/global_graphics/events/markings/DSC01619.jpg",
+      "role": "hero",
+      "alt": "A white walled gallery room with a wooden floor and two patterned rugs, a single upholstered armchair against the wall, a large unframed drawing on the left and three framed works on the right.",
+      "alt_source": "generated",
+      "caption": null,
+      "found_on_url": "https://www.lyndiaterregallery.com/index.html",
+      "width": null,
+      "height": null,
+      "rights_note": "All images on this site are protected by international copyright law. They are being presented here for viewing purposes only, and are not to be downloaded, copied, altered or reproduced by any other means without written permission from the artist.",
+      "usage": "unverified"
+    }
+  ],
+  "gaps": [
+    "This is a private commercial gallery open by event or by appointment, and nothing on the site mentions children, school groups, daycare groups, tours, workshops or classes. We have recorded no programs rather than inventing a group visit.",
+    "The website appears to have been abandoned. Its front page still advertises an exhibition that ran from 18 July to 8 August 2010 and invites visitors to a meet the artists event on 25 July 2010. Before anyone sends a group here, it is worth a phone call to find out whether the gallery is still open at all.",
+    "No price, no ages, no capacity, no washrooms, no lunch space, no parking and no accessibility information are published anywhere on the site.",
+    "The map is not published anywhere on the site, so the coordinates here come from the street address on the contact page.",
+    "The photographs on the site have no alt text of their own, so the one recorded here was opened in a browser and looked at before its description was written."
+  ],
+  "conflicts": [
+    {
+      "field": "booking_email",
+      "values": [
+        "info@lyndiaterregallery.com",
+        "lyndia.terre@shaw.ca"
+      ],
+      "sources": [
+        "https://www.lyndiaterregallery.com/index.html",
+        "https://www.lyndiaterregallery.com/contact.html"
+      ],
+      "note": "Their pages print one email address but the link behind it actually sends to a different one. If the first bounces, try the other. We use the one printed on the page."
+    }
+  ],
+  "pages_opened": [
+    "https://www.lyndiaterregallery.com/index.html",
+    "https://www.lyndiaterregallery.com/menumachine/lyndia_terre_gallery_menu/navigation.html",
+    "https://www.lyndiaterregallery.com/history.html",
+    "https://www.lyndiaterregallery.com/contact.html",
+    "https://www.lyndiaterregallery.com/cur_events.html"
+  ],
+  "pages_useful": [
+    "https://www.lyndiaterregallery.com/index.html",
+    "https://www.lyndiaterregallery.com/history.html",
+    "https://www.lyndiaterregallery.com/contact.html",
+    "https://www.lyndiaterregallery.com/cur_events.html"
+  ],
+  "extracted_at": "2026-09-07T00:00:00Z",
+  "extractor_version": "v2.0"
+}
