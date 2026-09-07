@@ -316,6 +316,49 @@ at the account page for want of a help centre.
 
 ---
 
+## Slice 9 — Admin: venues, programs, photos
+
+The first screen that is ours rather than a director's. Until now the
+catalog changed only through `pnpm import:catalog`; there was no way to
+correct a venue without editing JSON, no way to add a photograph, and no
+view of which venues were missing what.
+
+**Agents** — `admin-data` (`account.is_admin`, `edited_at` columns, the
+`catalog` bucket, `requireAdmin()`, `completeness.ts`, the import guard) ·
+`admin-routes` (`/admin`, `/admin/venues/[venue]`, the program pages, the
+server actions) · `c-admin` (`components/admin/`: the list, the two forms,
+the ask panel, the program table, the photo manager)
+
+**Demo** — grant yourself with `pnpm admin:grant <email>`. Open `/admin`:
+the venues sorted worst first, red for cannot-be-booked, amber for worth a
+call. Open one, read "To ask the venue", phone them, set Washrooms to Yes
+and Bus parking to No, save; the outing page shows the answers instead of
+"Needs confirmation" and the ask list is two shorter. Add a venue, add a
+program, see it on `/`. Upload a photo the venue sent; it renders on the
+card and the strip. Hide a program; it leaves `/`. Run
+`pnpm import:catalog`: the venue you edited is skipped with a warning.
+
+**Status: built, and the demo passes except the upload.** Verified in the
+Browser pane against the local database on 6 September: signed out, `/admin`
+went to login; signed in without the flag, 404 and no nav item; with it, the
+list sorted worst first with the red and amber pills. BC Archives: Washrooms
+to Yes and Bus parking to No, saved; the outing page read "No bus parking"
+and the ask panel dropped both rows; `checked_by` became the admin's name.
+A new venue from the form minted `test-nature-centre-and-pond` from its
+name and landed on its page with three blocking items; a new program on it
+appeared on `/`, and "Hide from catalog" took it off again. A correction
+report resolved from the panel. `pnpm import:catalog` afterwards skipped
+`bc-archives` and said so. At 375px the ask panel stacks above the forms.
+
+**Not verified:** the upload itself. The local `.env.local` leaves
+`SUPABASE_SECRET_KEY` empty on purpose, so `storageConfigured()` is false and
+the action answers "Storage is not configured on this server"; the pure half
+(`checkPhotos`, keys, URLs) has unit tests. The first real upload needs the
+`catalog` bucket to exist in the Supabase project, which migration `0010`
+creates.
+
+---
+
 ## What carries across slices
 
 **`components/ui/`** is created in slice 1 and **extended, never rewritten**, by later slices. The agent that first needs a primitive owns adding it.

@@ -16,6 +16,8 @@ export type Viewer = {
   email: string
   name: string
   centreId: string | null
+  /* May open /admin and edit the catalog. See account.is_admin in the schema. */
+  isAdmin: boolean
 }
 
 /* `cache` dedupes this within a single render pass: a page and three of its
@@ -33,6 +35,7 @@ export const getViewer = cache(async (): Promise<Viewer | null> => {
       email: account.email,
       name: account.name,
       centreId: account.centreId,
+      isAdmin: account.isAdmin,
     })
     .from(account)
     .where(eq(account.id, user.id))
@@ -47,10 +50,24 @@ export const getViewer = cache(async (): Promise<Viewer | null> => {
       email: user.email ?? '',
       name: '',
       centreId: null,
+      isAdmin: false,
     }
   }
   return row
 })
+
+/*
+  The admin gate. Null for a signed-out visitor and for a signed-in one who is
+  not an admin; the caller decides between a login redirect and a 404. Every
+  /admin page AND every admin server action calls this — rendering a form only
+  to admins is not a boundary, because the action's POST can be sent without
+  the form. Same rule as the centre scoping above: Drizzle is exempt from RLS,
+  so this check is the whole of the access control.
+*/
+export async function requireAdmin(): Promise<Viewer | null> {
+  const viewer = await getViewer()
+  return viewer?.isAdmin ? viewer : null
+}
 
 /* The rooms a viewer can actually use: theirs, and not archived. */
 export const getRooms = cache(async (centreId: string) => {

@@ -548,3 +548,32 @@ verbatim from design-map §7. Differences, all logged:
     ring around the newest reply went with them: on a bordered light bubble
     it read as a focused form field, and the "Newest reply" pill above the
     bubble already carries the mark spec §5.4.5 asks for.
+
+---
+
+## Admin — the catalog editor
+
+### Gap — `/admin`, the venue page, the program page
+
+*Admin slice. `src/app/admin/`, `src/components/admin/`.*
+
+Not a director's screen, so the design has no frame for it and was never
+going to. Built in the design's language — the same tokens, the 48px field,
+the ring-not-fill selection on the filter chips, the sticky save row — and
+three things it needed that `components/ui` did not have:
+
+- **A red pill.** `Badge` deliberately has no red level, because the catalog
+  never tells a director "no". The admin list has to tell us "cannot be
+  booked", which is a different afternoon from "worth a call". `Pill` lives
+  in `components/admin/venue-list.tsx`, not in `ui`, so no director screen
+  can reach for it.
+- **A three-way control.** Every yes/no fact in the catalog is yes / no /
+  not known, and a checkbox cannot say the third. `TriState` is a select
+  with "Not known" first. It is in `ui` because the venue and program forms
+  share it and a later venue-facing form will too.
+- **Form primitives** (`Input`, `TextArea`, `Select`, `Labeled`,
+  `Fieldset`). The account and room forms carried their class strings inline;
+  sixty fields wanted names.
+
+To draw properly before venues see it: the venue page, which will become
+the venue's own page when they join.

@@ -14,15 +14,21 @@
   - Images are copied as references. Nothing is uploaded.
   - Validates and loads. It does not transform — geocoding lives in its own
     script for exactly that reason.
+  - A venue or program with `edited_at` set was corrected by hand on /admin
+    and is SKIPPED, with a warning, because the JSON is the extractor's older
+    reading of the website and a phone call beats a web page. `--force` puts
+    the JSON back on top. Photographs uploaded on /admin (ULID ids, not the
+    `venue:slug` form this script writes) are never touched either way.
 
   Usage:
     pnpm import:catalog              validate and load
     pnpm import:catalog --dry-run    validate and report, touch no database
+    pnpm import:catalog --force      overwrite hand-edited rows too
 */
 
 import { readFileSync, readdirSync } from 'node:fs'
 import { join } from 'node:path'
-import { and, eq, inArray, notInArray } from 'drizzle-orm'
+import { and, eq, inArray, like, notInArray } from 'drizzle-orm'
 import { drizzle } from 'drizzle-orm/postgres-js'
 import postgres from 'postgres'
 import { image, program, venue } from '@/db/schema'
@@ -31,6 +37,7 @@ import { IMAGE_HOSTS, hostOf } from '@/lib/catalog/image-hosts'
 
 const CATALOG_DIR = 'outputs'
 const dryRun = process.argv.includes('--dry-run')
+const force = process.argv.includes('--force')
 
 /* ─── Read and validate ──────────────────────────────────────────────────── */
 
@@ -155,6 +162,8 @@ type Diff = {
   newPrograms: string[]
   priceChanges: string[]
   deactivated: string[]
+  skippedVenues: string[]
+  skippedPrograms: string[]
 }
 
 const diff: Diff = {
@@ -162,14 +171,18 @@ const diff: Diff = {
   newPrograms: [],
   priceChanges: [],
   deactivated: [],
+  skippedVenues: [],
+  skippedPrograms: [],
 }
 
 if (!dryRun) {
   const client = postgres(process.env.DATABASE_URL!, { max: 1, prepare: false })
   const db = drizzle(client)
 
-  const existingVenues = new Set(
-    (await db.select({ id: venue.id }).from(venue)).map((r) => r.id),
+  const existingVenues = new Map(
+    (await db.select({ id: venue.id, editedAt: venue.editedAt }).from(venue)).map(
+      (r) => [r.id, r],
+    ),
   )
   const existingPrograms = new Map(
     (
@@ -179,6 +192,7 @@ if (!dryRun) {
           venueId: program.venueId,
           costChild: program.costPerChildCad,
           costGroup: program.costPerGroupCad,
+          editedAt: program.editedAt,
         })
         .from(program)
     ).map((r) => [r.id, r]),
@@ -187,7 +201,15 @@ if (!dryRun) {
   for (const { data } of parsed) {
     const v = data.venue
 
-    if (!existingVenues.has(v.id)) diff.newVenues.push(v.id)
+    const priorVenue = existingVenues.get(v.id)
+    if (!priorVenue) diff.newVenues.push(v.id)
+
+    /* Hand-edited on /admin. The whole record — venue, its programs, its
+       images — is left as the person left it. */
+    if (priorVenue?.editedAt && !force) {
+      diff.skippedVenues.push(v.id)
+      continue
+    }
 
     const venueRow = {
       id: v.id,
@@ -242,9 +264,13 @@ if (!dryRun) {
       .values(venueRow)
       .onConflictDoUpdate({ target: venue.id, set: venueRow })
 
-    /* Images are replaced wholesale: they are a pure projection of the JSON,
-       with no hand-edited columns to preserve. */
-    await db.delete(image).where(eq(image.venueId, v.id))
+    /* The JSON's images are replaced wholesale: they are a pure projection of
+       it, with no hand-edited columns to preserve. Only those, though — the
+       ids this script writes are `venue:slug`, and a photograph uploaded on
+       /admin has a ULID id and is not the JSON's to replace. */
+    await db
+      .delete(image)
+      .where(and(eq(image.venueId, v.id), like(image.id, `${v.id}:%`)))
     if ((data.images ?? []).length > 0) {
       await db.insert(image).values(
         data.images.map((i) => ({
@@ -271,6 +297,11 @@ if (!dryRun) {
       seenProgramIds.push(id)
 
       const prior = existingPrograms.get(id)
+      if (prior?.editedAt && !force) {
+        /* Seen, so it is not deactivated below; not written. */
+        diff.skippedPrograms.push(id)
+        continue
+      }
       if (!prior) {
         diff.newPrograms.push(id)
       } else if (
@@ -381,6 +412,12 @@ if (dryRun) {
   line('New programs', diff.newPrograms)
   line('Changed prices', diff.priceChanges)
   line('Deactivated programs', diff.deactivated)
+  if (diff.skippedVenues.length || diff.skippedPrograms.length) {
+    console.log()
+    line('Skipped: venues edited by hand on /admin', diff.skippedVenues)
+    line('Skipped: programs edited by hand on /admin', diff.skippedPrograms)
+    console.log('  The JSON is older than the person. Re-run with --force to overwrite anyway.')
+  }
   console.log()
 }
 

@@ -24,10 +24,12 @@ type Item = {
 
 export function NavLinks({
   signedIn,
+  isAdmin = false,
   tripCount = 0,
   unreadCount = 0,
 }: {
   signedIn: boolean
+  isAdmin?: boolean
   tripCount?: number
   unreadCount?: number
 }) {
@@ -54,6 +56,8 @@ export function NavLinks({
           { href: '/rooms', label: 'Groups' },
         ]
       : []),
+    /* Only for us, for now. The catalog editor; see src/app/admin. */
+    ...(isAdmin ? [{ href: '/admin', label: 'Admin' }] : []),
   ]
 
   return (

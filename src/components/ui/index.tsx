@@ -222,6 +222,111 @@ export function CheckRow({
   )
 }
 
+/* ─── Form controls ──────────────────────────────────────────────────────
+   The account and room forms carried these class strings inline. The admin
+   forms have sixty fields, so they get names. Same tokens, same 48px field.
+
+   TriState is the one that matters: every yes/no fact in the catalog is
+   really yes / no / not known, and "not known" is data (schema comment on
+   venue.has_washrooms). A checkbox cannot say it, so a select does. */
+
+export const inputClass =
+  'border-border-strong bg-input text-body h-field w-full rounded-control border px-3.5 outline-none focus:border-brand disabled:text-text-muted'
+
+export const labelClass =
+  'text-label text-text-muted mb-1.5 block font-bold uppercase'
+
+export function Labeled({
+  label,
+  htmlFor,
+  hint,
+  children,
+  className,
+}: {
+  label: string
+  htmlFor?: string
+  hint?: string
+  children: ReactNode
+  className?: string
+}) {
+  return (
+    <div className={cx('min-w-0', className)}>
+      <label className={labelClass} htmlFor={htmlFor}>
+        {label}
+      </label>
+      {children}
+      {hint ? <p className="text-meta text-text-faint mt-1.5">{hint}</p> : null}
+    </div>
+  )
+}
+
+export function Input(props: React.InputHTMLAttributes<HTMLInputElement>) {
+  return <input {...props} className={cx(inputClass, props.className)} />
+}
+
+export function TextArea(props: React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
+  return (
+    <textarea
+      rows={3}
+      {...props}
+      className={cx(inputClass, 'h-auto py-3 leading-relaxed', props.className)}
+    />
+  )
+}
+
+export function Select(props: React.SelectHTMLAttributes<HTMLSelectElement>) {
+  return <select {...props} className={cx(inputClass, 'bg-input', props.className)} />
+}
+
+/* null | true | false, as '' | 'true' | 'false' on the wire. */
+export function TriState({
+  name,
+  id,
+  defaultValue,
+  yes = 'Yes',
+  no = 'No',
+}: {
+  name: string
+  id?: string
+  defaultValue: boolean | null | undefined
+  yes?: string
+  no?: string
+}) {
+  const v = defaultValue == null ? '' : defaultValue ? 'true' : 'false'
+  return (
+    <Select name={name} id={id ?? name} defaultValue={v}>
+      <option value="">Not known</option>
+      <option value="true">{yes}</option>
+      <option value="false">{no}</option>
+    </Select>
+  )
+}
+
+/* A titled group on a long form, with an id so a "what is missing" list can
+   link straight to it. */
+export function Fieldset({
+  id,
+  title,
+  note,
+  children,
+}: {
+  id: string
+  title: string
+  note?: string
+  children: ReactNode
+}) {
+  return (
+    <fieldset
+      id={id}
+      className="bg-surface border-border scroll-mt-24 rounded-card-lg border p-5.5"
+    >
+      <legend className="font-display text-display-sm px-1">{title}</legend>
+      {note ? <p className="text-body-sm text-text-muted mt-1 mb-4">{note}</p> : null}
+      <div className="mt-3 grid gap-3.5 sm:grid-cols-2">{children}</div>
+    </fieldset>
+  )
+}
+
 /* ─── Skeleton ───────────────────────────────────────────────────────────
    A placeholder for something that has not arrived yet — today, remote venue
    photographs, which come off two dozen other people's web servers through
