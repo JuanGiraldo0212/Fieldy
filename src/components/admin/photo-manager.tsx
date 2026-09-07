@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { useActionState, useEffect, useRef, useState } from 'react'
 import { CircleCheck, Trash2, Upload } from 'lucide-react'
 import { removePhoto, updatePhoto, uploadPhotos, type AdminState } from '@/app/admin/actions'
-import { Input, Labeled, Select, Skeleton, cx } from '@/components/ui'
+import { Input, Labeled, Select, Skeleton, TextArea, cx } from '@/components/ui'
 import { isRenderableImage } from '@/lib/catalog/image-hosts'
 import { IMAGE_ROLES, IMAGE_USAGES } from '@/lib/catalog/options'
 import { MAX_PHOTOS_PER_UPLOAD } from '@/lib/catalog/photos'
@@ -96,7 +96,7 @@ function PhotoCard({ photo, venueName }: { photo: AdminPhoto; venueName: string 
       <form action={action} className="mt-3 grid gap-2.5">
         <input type="hidden" name="imageId" value={photo.id} />
         <Labeled label="Description" htmlFor={`alt-${photo.id}`}>
-          <Input id={`alt-${photo.id}`} name="alt" required defaultValue={photo.alt} />
+          <TextArea id={`alt-${photo.id}`} name="alt" required rows={3} maxLength={300} defaultValue={photo.alt} />
         </Labeled>
         <Labeled label="Caption" htmlFor={`caption-${photo.id}`}>
           <Input id={`caption-${photo.id}`} name="caption" defaultValue={photo.caption ?? ''} />
@@ -217,7 +217,7 @@ function UploadForm({ venueId, hasHero }: { venueId: string; hasHero: boolean })
             </Select>
           </Labeled>
           <Labeled label="Description" htmlFor="upload-alt" hint="What is in the picture. Read aloud by screen readers.">
-            <Input id="upload-alt" name="alt" placeholder="Children at the touch tank" />
+            <TextArea id="upload-alt" name="alt" rows={3} maxLength={300} placeholder="Children at the touch tank" />
           </Labeled>
           <Labeled label="Caption" htmlFor="upload-caption">
             <Input id="upload-caption" name="caption" />
