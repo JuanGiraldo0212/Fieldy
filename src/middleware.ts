@@ -37,9 +37,10 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    /* Everything except static assets and the image optimizer. The catalog is
-       public, so this refreshes a session when there is one and does nothing
-       when there is not. */
-    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+    /* Everything except static assets, the image optimizer and the photograph
+       proxy it fetches from (no session to refresh on an image request). The
+       catalog is public, so this refreshes a session when there is one and
+       does nothing when there is not. */
+    '/((?!_next/static|_next/image|api/photo|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
   ],
 }

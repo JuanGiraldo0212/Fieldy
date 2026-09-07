@@ -39,8 +39,11 @@ trivially reversible.
 2. **Proxy, not hotlink.** Images go through `next/image`, so our server fetches
    and caches them. Otherwise every visitor's browser would contact thirteen
    venue domains, spending their bandwidth on our traffic and telling each of
-   them who is browsing our catalog. `remotePatterns` is an explicit allowlist
-   of those thirteen hosts; a wildcard would make our optimizer an open proxy.
+   them who is browsing our catalog. An explicit allowlist of those hosts
+   gates every fetch; a wildcard would make our optimizer an open proxy.
+   (It began as `remotePatterns`; when the catalog passed Next's cap of 50
+   hosts it moved to our own `/api/photo/<key>` route, which the optimizer
+   fetches from and which holds the same list — `src/lib/catalog/image-hosts.ts`.)
 3. **Fail quietly.** These URLs point at sites we do not control and will rot.
    A failed load falls back to the initials tile rather than showing a broken
    image.

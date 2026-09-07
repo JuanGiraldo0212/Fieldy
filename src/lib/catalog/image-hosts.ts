@@ -3,17 +3,24 @@
 
   ONE list, read by two places that must never disagree:
 
-    - next.config.ts, as the `remotePatterns` allowlist for the image optimizer
-    - VenueThumb, to decide whether an image is renderable at all
+    - src/app/api/photo/[key]/route.ts, the proxy every photograph is fetched
+      through, which refuses any host not listed here
+    - VenueThumb and the other renderers, to decide whether an image is
+      renderable at all before handing it to next/image
 
-  Why an allowlist and not a wildcard: `next/image` would otherwise proxy any
-  URL that reached the database, which makes our optimizer an open proxy for
-  anyone who can get a string into the catalog.
+  Why an allowlist and not a wildcard: the proxy would otherwise fetch any URL
+  that reached the database, which makes it an open proxy for anyone who can
+  get a string into the catalog.
 
-  Why VenueThumb checks it too: `next/image` THROWS on an unconfigured host,
-  during render, before any onError handler can catch it. One new venue whose
-  photos sit somewhere new would take down the whole catalog page. Checking here
-  turns that into an initials tile for one card.
+  Why the list is not `images.remotePatterns` in next.config.ts, where it began:
+  Next caps that at 50 hosts, and the catalog passed 50 venue websites. So the
+  photographs are served from our own origin (`photoSrc()` below builds the
+  path) and the optimizer only ever sees a local path; `localPatterns` in
+  next.config.ts pins it to that one route.
+
+  Why the renderers check it too: a photograph whose host is not listed would
+  come back from the proxy as a 400 and land as a broken image. Checking here
+  turns that into an initials tile for one card, with no request made.
 
   Keeping it current: `pnpm import:catalog` fails loudly when a record carries a
   host that is not in this list, and prints the line to paste. It is checked at
@@ -134,6 +141,34 @@ export function isRenderableImage(url: string | null | undefined): boolean {
 export function hostOf(url: string): string | null {
   try {
     return new URL(url).hostname
+  } catch {
+    return null
+  }
+}
+
+/*
+  The path next/image is handed for a photograph: our own proxy route with the
+  photograph's URL as the one path segment, base64url so that slashes, query
+  strings and the odd accented character in a venue's filename survive the
+  trip. Runs in the browser too (btoa, not Buffer), because the renderers are
+  client components. Encode to ASCII first: btoa rejects anything beyond it.
+*/
+export const PHOTO_ROUTE = '/api/photo'
+
+export function photoSrc(url: string): string {
+  const b64 = btoa(encodeURIComponent(url))
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=+$/, '')
+  return `${PHOTO_ROUTE}/${b64}`
+}
+
+/* The inverse, on the server. null for a key that was not made by photoSrc. */
+export function decodePhotoKey(key: string): string | null {
+  if (!/^[A-Za-z0-9_-]+$/.test(key)) return null
+  try {
+    const b64 = key.replace(/-/g, '+').replace(/_/g, '/')
+    return decodeURIComponent(atob(b64))
   } catch {
     return null
   }

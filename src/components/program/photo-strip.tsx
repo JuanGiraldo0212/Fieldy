@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { ChevronLeft, ChevronRight, X } from 'lucide-react'
-import { isRenderableImage } from '@/lib/catalog/image-hosts'
+import { isRenderableImage, photoSrc } from '@/lib/catalog/image-hosts'
 import { cx, Skeleton } from '@/components/ui'
 
 /*
@@ -105,7 +105,7 @@ function Thumb({ photo }: { photo: Photo }) {
     <>
       {settled ? null : <Skeleton className="absolute inset-0" />}
       <Image
-        src={photo.url}
+        src={photoSrc(photo.url)}
         alt={photo.alt}
         fill
         sizes="(max-width: 640px) 50vw, 260px"
@@ -140,9 +140,11 @@ function ViewerImage({ photo }: { photo: Photo }) {
       {settled ? null : (
         <Skeleton tone="dark" className="h-[60vh] w-full max-w-[900px] rounded-card" />
       )}
+      {/* Through the proxy like the thumbnails, so the full-size view does not
+          hotlink what the strip took care not to. */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src={photo.url}
+        src={photoSrc(photo.url)}
         alt={photo.alt}
         onLoad={() => setSettled(true)}
         onError={() => setSettled(true)}

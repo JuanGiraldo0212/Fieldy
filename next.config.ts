@@ -1,11 +1,5 @@
 import type { NextConfig } from 'next'
-import { IMAGE_HOSTS, uploadHost } from './src/lib/catalog/image-hosts'
-
-/* The venues' hosts, plus our own Supabase project for uploaded photographs.
-   Same list isRenderableImage() checks; see image-hosts.ts. */
-const imageHosts = [...IMAGE_HOSTS, uploadHost()].filter(
-  (h): h is string => Boolean(h),
-)
+import { PHOTO_ROUTE } from './src/lib/catalog/image-hosts'
 
 /*
   Catalog photographs are the venues' own, published on their own public sites.
@@ -13,25 +7,23 @@ const imageHosts = [...IMAGE_HOSTS, uploadHost()].filter(
   than hotlinking, which means:
 
     - they are fetched and cached by our server, not by every visitor's browser,
-      so we are not spending two dozen venues' bandwidth on our traffic
-    - a visitor's browser never contacts two dozen third-party hosts, which
+      so we are not spending seventy venues' bandwidth on our traffic
+    - a visitor's browser never contacts seventy third-party hosts, which
       would leak who is browsing the catalog to every one of them
     - they are resized and re-encoded, so a 3 MB hero does not land on a phone
 
-  The host list lives in src/lib/catalog/image-hosts.ts because VenueThumb has
-  to read the same list: next/image throws on an unconfigured host, so the
-  component checks before rendering rather than letting one new venue crash the
-  catalog.
+  The venue hosts are NOT listed here as `remotePatterns`: Next caps that list
+  at 50 and the catalog is past it. Instead every photograph's `src` is a path
+  on our own origin, `/api/photo/<key>`, and that route holds the allowlist
+  (src/lib/catalog/image-hosts.ts). `localPatterns` pins the optimizer to that
+  one route, so it cannot be pointed at anything else on the site either.
 */
 const nextConfig: NextConfig = {
   // Catalog and program pages must render usefully without JS (plan section 8),
   // because links get opened inside messaging apps' browsers.
   reactStrictMode: true,
   images: {
-    remotePatterns: imageHosts.map((hostname) => ({
-      protocol: 'https' as const,
-      hostname,
-    })),
+    localPatterns: [{ pathname: `${PHOTO_ROUTE}/**`, search: '' }],
     // Venue photos change rarely; a long cache spares their servers.
     minimumCacheTTL: 60 * 60 * 24 * 7,
   },

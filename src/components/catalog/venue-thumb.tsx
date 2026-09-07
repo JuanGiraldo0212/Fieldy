@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { useState } from 'react'
-import { isRenderableImage } from '@/lib/catalog/image-hosts'
+import { isRenderableImage, photoSrc } from '@/lib/catalog/image-hosts'
 import { Skeleton } from '@/components/ui'
 
 /*
@@ -15,11 +15,11 @@ import { Skeleton } from '@/components/ui'
 
   next/image, not a raw <img>: see next.config.ts for why.
 
-  The host is checked BEFORE rendering, not caught after. next/image throws on
-  a host that is not in remotePatterns, and it throws during render, where the
-  onError below can never see it — so a single venue whose photos sit on a new
-  domain would crash the entire catalog page rather than losing one thumbnail.
-  An unknown host falls back to the tile, exactly like a broken image.
+  The host is checked BEFORE rendering, not caught after. The photograph is
+  fetched through our own proxy route (photoSrc), which refuses a host that is
+  not allowlisted — so an unknown host would otherwise cost a request and land
+  as a broken image. Checked here, it falls back to the tile with no request
+  made, exactly like a broken image would.
 
   While the photograph is in flight a skeleton fills the frame. It sits BEHIND
   the image rather than in place of it: the image paints over it the moment it
@@ -45,7 +45,7 @@ export function VenueThumb({
       <>
         {settled ? null : <Skeleton className="absolute inset-0" />}
         <Image
-          src={src}
+          src={photoSrc(src)}
           alt={alt}
           width={104}
           height={104}
