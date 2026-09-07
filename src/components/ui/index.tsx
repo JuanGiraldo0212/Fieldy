@@ -303,7 +303,12 @@ export function TriState({
 }
 
 /* A titled group on a long form, with an id so a "what is missing" list can
-   link straight to it. */
+   link straight to it.
+
+   The title stays a <legend> so the group keeps its name for a screen reader,
+   but a legend by default sits on the fieldset's top border, half outside the
+   card. Floating it makes the browser lay it out as an ordinary block inside
+   the padding; the note and the grid clear it so they stack underneath. */
 export function Fieldset({
   id,
   title,
@@ -320,9 +325,9 @@ export function Fieldset({
       id={id}
       className="bg-surface border-border scroll-mt-24 rounded-card-lg border p-5.5"
     >
-      <legend className="font-display text-display-sm px-1">{title}</legend>
-      {note ? <p className="text-body-sm text-text-muted mt-1 mb-4">{note}</p> : null}
-      <div className="mt-3 grid gap-3.5 sm:grid-cols-2">{children}</div>
+      <legend className="font-display text-display-sm float-left w-full p-0">{title}</legend>
+      {note ? <p className="text-body-sm text-text-muted clear-both mt-1 mb-0">{note}</p> : null}
+      <div className="clear-both grid gap-3.5 pt-4 sm:grid-cols-2">{children}</div>
     </fieldset>
   )
 }
