@@ -1,6 +1,13 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { VenueForm } from '@/components/admin/venue-form'
 import { adminPage } from '../../gate'
+
+/* One person's own pages: nothing here is for a search index. */
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+}
+
 
 export default async function NewVenuePage() {
   await adminPage('/admin/venues/new')

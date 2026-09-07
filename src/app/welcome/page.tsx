@@ -1,6 +1,13 @@
+import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import { getViewer } from '@/lib/auth'
 import { SetupForm } from './setup-form'
+
+/* One person's own pages: nothing here is for a search index. */
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+}
+
 
 /*
   First run. Two things get collected because the catalog cannot do its job

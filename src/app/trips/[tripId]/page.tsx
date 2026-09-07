@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { after } from 'next/server'
 import { notFound, redirect } from 'next/navigation'
@@ -38,6 +39,12 @@ import { ComposeBox } from '@/components/trip/compose-box'
 import { markThreadRead } from '@/lib/trips/read'
 import { acceptanceReply, openSuggestion } from '@/lib/trips/suggestion'
 import { formatTime } from '@/lib/classify/dates'
+
+/* One person's own pages: nothing here is for a search index. */
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+}
+
 
 /*
   The trip page. Spec §5.4, "the heart of the product".

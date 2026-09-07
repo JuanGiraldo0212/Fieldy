@@ -13,7 +13,10 @@ import Link from 'next/link'
 */
 
 export const metadata: Metadata = {
-  title: 'Privacy and terms · Fieldy',
+  title: 'Privacy and terms',
+  description:
+    'What Fieldy stores about your centre, who can read it, how long it is kept, and what we promise not to do with it.',
+  alternates: { canonical: '/privacy' },
 }
 
 const UPDATED = '5 September 2026'

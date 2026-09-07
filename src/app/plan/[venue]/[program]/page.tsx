@@ -1,9 +1,16 @@
+import type { Metadata } from 'next'
 import { notFound, redirect } from 'next/navigation'
 import { getCentre, getRooms, getViewer } from '@/lib/auth'
 import { fetchProgram, practicalFacts } from '@/lib/catalog/program'
 import { askTopics } from '@/lib/trips/asks'
 import { sendingConfigured } from '@/lib/email/send'
 import { PlanForm } from '@/components/plan/plan-form'
+
+/* One person's own pages: nothing here is for a search index. */
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+}
+
 
 /*
   Plan a request. Spec §5.3: "One screen, not a wizard."

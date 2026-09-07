@@ -1,8 +1,15 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Plus } from 'lucide-react'
 import { listVenuesForAdmin } from '@/lib/catalog/admin'
 import { VenueList } from '@/components/admin/venue-list'
 import { adminPage } from './gate'
+
+/* One person's own pages: nothing here is for a search index. */
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+}
+
 
 /*
   The catalog, worst first. Not in the design (docs/design-gaps.md): this is

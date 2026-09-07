@@ -309,6 +309,13 @@ Accessibility 96 (the mood chips' ink-on-tint contrast, the design's own
 colours), best practices 100, SEO 100. Preview deployments are behind
 Vercel's SSO, so measure a branch with `pnpm build && next start` locally.
 
+**Search.** Lighthouse's SEO 100 checks that a title and a viewport exist,
+not that anything is indexed, and on 7 September nothing was: no sitemap,
+no robots file, one title on every page. `docs/decisions.md` ("Search
+engines get one page per outing") records the pass that fixed the code
+side. The step that is not code — verifying www.fieldy.ca in Google Search
+Console and submitting `/sitemap.xml` — is still to do, and needs a person.
+
 **Also not done, and not started:** the two Resend unknowns from slice 5
 (the inbound size cap, reply-all quota accounting) still want a real venue
 reply; and `docs/design-gaps.md` item 10 — "Visit our help center" points

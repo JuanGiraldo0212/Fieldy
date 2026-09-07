@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { emptyHint, resultLine } from '@/lib/catalog/search'
@@ -37,6 +38,17 @@ const CatalogMap = dynamic(() =>
   as she scrolls (LoadMore), or behind one link when nothing runs scripts.
 */
 const FIRST_PAGE = 40
+
+/*
+  Every filtered view — a query, an age band, the map open, all 211 cards —
+  is the same page asked a narrower question, and there are more of those
+  URLs than a crawler should spend a budget on. One canonical folds them
+  back onto the catalog itself. The title and description are the root's
+  (layout.tsx), which are written for exactly this page.
+*/
+export const metadata: Metadata = {
+  alternates: { canonical: '/' },
+}
 
 export default async function CatalogPage({
   searchParams,
