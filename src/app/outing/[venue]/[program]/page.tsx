@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import {
@@ -36,6 +37,15 @@ import { costPerChild, feasibility, money } from '@/lib/catalog/feasibility'
 import { effectiveAgeRange, effectiveGrade, initialsOf, underFives } from '@/lib/catalog/search'
 import { parseSearchParams } from '@/lib/catalog/url'
 import { getViewer } from '@/lib/auth'
+import { isRenderableImage } from '@/lib/catalog/image-hosts'
+import {
+  CATEGORY_LABEL,
+  jsonLdScript,
+  outingDescription,
+  outingJsonLd,
+  outingPath,
+  outingTitle,
+} from '@/lib/seo'
 import { isSaved } from '@/lib/trips/fetch'
 import {
   ConflictBanner,
@@ -55,15 +65,59 @@ import { SaveButton } from '@/components/program/save-button'
 /* Until a session exists (slice 3), distance is from the centre of Victoria. */
 const VICTORIA = { lat: 48.4284, lng: -123.3656 }
 
-const CATEGORY_LABEL: Record<string, string> = {
-  animals_farms: 'Animals and farms',
-  nature_outdoors: 'Nature and outdoors',
-  museums_history: 'Museums and history',
-  arts_performance: 'Arts and performance',
-  science: 'Science',
-  community_civic: 'Community and civic',
-  comes_to_you: 'Comes to you',
+/*
+  The head of the page: its own title and snippet, a canonical without the
+  search state (the same outing is one page whatever the visitor's group
+  size), and the venue's hero photograph as the card a shared link shows.
+
+  The photograph goes through our image optimizer rather than as the
+  venue's URL, for the reasons next.config.ts gives — and because a preview
+  fetcher is one more third party that would otherwise learn which venue a
+  director is looking at. A venue whose photo we cannot render inherits the
+  root card (src/app/opengraph-image.tsx).
+
+  A deactivated program keeps answering for the trips that reference it, but
+  tells search engines to forget it.
+*/
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ venue: string; program: string }>
+}): Promise<Metadata> {
+  const { venue: venueId, program: slug } = await params
+  const found = await fetchProgram(venueId, slug)
+  if (!found) notFound()
+
+  const { program: p, venue: v, images } = found
+  const meta = { program: p, venue: v }
+  const hero = images.find((i) => i.role === 'hero')
+  const photo =
+    hero && isRenderableImage(hero.url)
+      ? [
+          {
+            url: `/_next/image?url=${encodeURIComponent(hero.url)}&w=1200&q=75`,
+            alt: hero.alt,
+          },
+        ]
+      : undefined
+
+  const title = outingTitle(meta)
+  const description = outingDescription(meta)
+  return {
+    title,
+    description,
+    alternates: { canonical: outingPath(v.id, p.slug) },
+    robots: p.active ? undefined : { index: false, follow: false },
+    openGraph: {
+      title: `${title} · Fieldy`,
+      description,
+      url: outingPath(v.id, p.slug),
+      ...(photo ? { images: photo } : {}),
+    },
+    twitter: photo ? { card: 'summary_large_image', images: photo } : undefined,
+  }
 }
+
 
 const FACT_ICONS: Record<string, React.ReactNode> = {
   washrooms: <Toilet size={20} />,
@@ -173,6 +227,12 @@ export default async function OutingPage({
 
   return (
     <main className="mx-auto max-w-[820px] px-5 pt-5 pb-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLdScript(outingJsonLd({ program: p, venue: v })),
+        }}
+      />
       <Link href="/" className="text-body-sm text-brand inline-block py-2 font-semibold no-underline">
         ← All outings
       </Link>

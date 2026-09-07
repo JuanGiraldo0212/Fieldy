@@ -1,8 +1,16 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { Mail } from 'lucide-react'
 import { getViewer } from '@/lib/auth'
 import { LoginForm } from './login-form'
+
+/* One person's own pages: nothing here is for a search index. */
+export const metadata: Metadata = {
+  title: 'Sign in',
+  robots: { index: false, follow: false },
+}
+
 
 /*
   Magic link only. spec §5.10: "Email plus magic link. No passwords." The

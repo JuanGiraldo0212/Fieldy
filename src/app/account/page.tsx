@@ -1,9 +1,16 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { eq } from 'drizzle-orm'
 import { account, db } from '@/db'
 import { getCentre, getViewer } from '@/lib/auth'
 import { AccountForm } from './account-form'
+
+/* One person's own pages: nothing here is for a search index. */
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+}
+
 
 export default async function AccountPage() {
   const viewer = await getViewer()

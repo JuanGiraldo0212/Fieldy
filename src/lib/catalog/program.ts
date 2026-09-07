@@ -8,11 +8,17 @@
   an unknown here is the next step rather than a dead end.
 */
 
+import { cache } from 'react'
 import { and, eq } from 'drizzle-orm'
 import { db, image, program, venue } from '@/db'
 import { travelCaveat, travelTime, type TransportMode } from './distance'
 
-export async function fetchProgram(venueId: string, slug: string) {
+/*
+  Memoised per request (React cache): generateMetadata and the page both ask
+  for the same outing during one render, and the second call must not be a
+  second round trip to the database.
+*/
+export const fetchProgram = cache(async (venueId: string, slug: string) => {
   const rows = await db
     .select()
     .from(program)
@@ -29,7 +35,7 @@ export async function fetchProgram(venueId: string, slug: string) {
     .where(eq(image.venueId, venueId))
 
   return { program: row.program, venue: row.venue, images }
-}
+})
 
 /* ─── Practical facts ────────────────────────────────────────────────────── */
 

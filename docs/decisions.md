@@ -356,3 +356,53 @@ Upload goes through a server action, which capped bodies at 1 MB.
 `serverActions.bodySizeLimit` is now 30 MB, which also happens to be the
 first time the follow-up attachment limits in `src/lib/email/uploads.ts`
 (10 MB a file, 25 MB together) could actually be reached.
+
+## Search engines get one page per outing, and nothing behind a login
+
+*SEO pass, 7 September. `src/lib/seo/`, `src/app/robots.ts`, `src/app/sitemap.ts`, `src/app/opengraph-image.tsx`, `generateMetadata` on the outing page.*
+
+On 7 September `site:fieldy.ca` returned nothing. Every page shipped
+`<title>Fieldy</title>` and the catalog's one-line description, there was
+no sitemap and no robots file, and the catalog's filtered views — every
+query, age band, the map open — were distinct URLs with no canonical. To a
+crawler that is two hundred copies of one page plus an unbounded number of
+copies of another. And "Fieldy" is already an AI note-taker and a
+field-service product in the results, so the brand name on its own will not
+rank for a long time.
+
+What changed, and why each:
+
+- **Titles and snippets are written from the row**, in `src/lib/seo`, from
+  the same fields the page renders: `Program · Venue`, then where, who it is
+  for and what it costs before any prose. Nulls stay out — an unpublished
+  price is left unsaid, never guessed, same as the amber tiles on the page.
+- **The words a director searches are on every page**, on the right of the
+  separator: "field trips for Victoria BC classrooms and daycares". Not
+  the brand, which nobody searching for a field trip types.
+- **One canonical for the catalog.** `/` whatever the search state, so the
+  filtered views fold back onto the catalog instead of competing with it.
+  The outing page's canonical drops the search state for the same reason.
+- **The sitemap is read from the database per request**, not at build:
+  the CI build runs with no database, and a program added on /admin has to
+  be listed before the next deploy. Only active programs, the catalog's own
+  predicate; a deactivated program still answers for the trips that
+  reference it and says `noindex` itself.
+- **Everything behind a login says `noindex`** in its own metadata *and* is
+  disallowed in robots.txt. Belt and braces: a leaked link to someone's
+  inbox is dropped from an index even by a crawler that ignores one of the
+  two.
+- **The share card is the venue's hero photograph through our own
+  optimizer**, `/_next/image?url=…&w=1200`, not the venue's URL. Same
+  reasons as `next.config.ts`: a link preview fetcher is one more third
+  party that would otherwise learn which venue a director is looking at.
+  Where there is no renderable photo the root card (a generated PNG with
+  the sun and the tagline) cascades down.
+- **Structured data** is a schema.org `Service` from an `Organization`, with
+  an `Offer` only when a price is published and an audience for the age
+  range. There is no field-trip type; `Event` wants a date these do not
+  have, `TouristAttraction` is a place, not a program.
+
+What this does not do: submit the site to Google. Search Console needs a
+person's Google account to verify the domain and hand it the sitemap; until
+that happens the crawler finds the site on its own schedule, which for a
+domain with no inbound links is weeks.

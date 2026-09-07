@@ -1,7 +1,14 @@
+import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import { getActiveRoom, getCentre, getRooms, getViewer } from '@/lib/auth'
 import { RoomsScreen } from '@/components/rooms/rooms-screen'
 import type { EditableRoom } from '@/components/rooms/room-dialog'
+
+/* One person's own pages: nothing here is for a search index. */
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+}
+
 
 export default async function RoomsPage() {
   const viewer = await getViewer()

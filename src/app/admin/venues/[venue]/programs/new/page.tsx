@@ -1,9 +1,16 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { eq } from 'drizzle-orm'
 import { db, venue } from '@/db'
 import { ProgramForm } from '@/components/admin/program-form'
 import { adminPage } from '../../../../gate'
+
+/* One person's own pages: nothing here is for a search index. */
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+}
+
 
 export default async function NewProgramPage({
   params,

@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { Inbox as InboxIcon } from 'lucide-react'
@@ -5,6 +6,12 @@ import { getViewer } from '@/lib/auth'
 import { fetchInbox } from '@/lib/trips/fetch'
 import { shortDate } from '@/lib/trips/asks'
 import { groupByDay, preview, type InboxItem } from '@/lib/trips/inbox'
+
+/* One person's own pages: nothing here is for a search index. */
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+}
+
 
 /*
   The inbox. Spec §5.7, and a gap: the design has no frame for it, so this

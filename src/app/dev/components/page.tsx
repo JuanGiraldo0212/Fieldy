@@ -1,9 +1,16 @@
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { AttachmentChip, Thread, type ThreadMessage } from '@/components/trip/thread'
 import { ComposeBox } from '@/components/trip/compose-box'
 import { SuggestionCard } from '@/components/trip/suggestion-card'
 import type { DateOption, Suggestion } from '@/lib/schemas'
 import { Skeleton } from '@/components/ui'
+
+/* One person's own pages: nothing here is for a search index. */
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+}
+
 
 /*
   The component gallery. Plan §2a.2: "Build each one with a dev-only gallery at

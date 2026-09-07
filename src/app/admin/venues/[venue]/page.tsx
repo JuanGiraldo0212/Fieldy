@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ExternalLink, Phone, Plus } from 'lucide-react'
@@ -8,6 +9,12 @@ import { PhotoManager } from '@/components/admin/photo-manager'
 import { ProgramTable } from '@/components/admin/program-table'
 import { VenueForm, type VenueFormValues } from '@/components/admin/venue-form'
 import { adminPage } from '../../gate'
+
+/* One person's own pages: nothing here is for a search index. */
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+}
+
 
 const CATEGORY = new Map<string, string>(VENUE_CATEGORIES)
 

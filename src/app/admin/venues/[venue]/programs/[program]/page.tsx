@@ -1,9 +1,16 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { fetchProgramForAdmin, fetchVenueForAdmin } from '@/lib/catalog/admin'
 import { ProgramForm } from '@/components/admin/program-form'
 import { programFormValues } from '@/lib/catalog/admin-forms'
 import { adminPage } from '../../../../gate'
+
+/* One person's own pages: nothing here is for a search index. */
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+}
+
 
 export default async function AdminProgramPage({
   params,
