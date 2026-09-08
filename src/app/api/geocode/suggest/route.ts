@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { queriesFor } from '@/lib/catalog/geocode'
 
 /*
   Address suggestions for the room and centre forms.
@@ -42,6 +43,9 @@ export type Suggestion = {
    should never be told to slow down. */
 let lastCall = 0
 async function politeDelay() {
+  /* No one is being polite to under vitest, and the ladder's tests would
+     otherwise spend a real second on every rung they assert. */
+  if (process.env.VITEST) return
   const since = Date.now() - lastCall
   if (since < 1100) await new Promise((r) => setTimeout(r, 1100 - since))
   lastCall = Date.now()
@@ -129,14 +133,48 @@ async function viaMapbox(q: string, token: string): Promise<Suggestion[]> {
     )
 }
 
+/*
+  The same ladder the submit-time geocoder climbs, for the same reason: a
+  four-part address with a postcode matches nothing at Nominatim while its
+  street and locality match exactly, so a director who types her whole address
+  correctly is the one who gets an empty list. Rungs are tried in order and
+  the first that answers wins, so a street match always beats a name match.
+
+  Capped, because every Nominatim call waits its turn behind politeDelay, and
+  the cap is four rather than three so the first name rung is inside it: a
+  full address with a postcode already spends three rungs on phrasings of the
+  address itself, and cutting the ladder there would drop the only rung that
+  answers for a place like Butchart Gardens. The cost is paid only when every
+  rung misses; the first rung is the typed text, which answers almost always.
+*/
+const MAX_RUNGS = 4
+
+async function ladder(
+  q: string,
+  name: string | undefined,
+  token: string | undefined,
+): Promise<Suggestion[]> {
+  for (const rung of queriesFor(q, name).slice(0, MAX_RUNGS)) {
+    const hits = token ? await viaMapbox(rung, token) : await viaNominatim(rung)
+    if (hits.length) return hits
+  }
+  return []
+}
+
 export async function GET(request: Request) {
-  const q = new URL(request.url).searchParams.get('q')?.trim() ?? ''
+  const params = new URL(request.url).searchParams
+  const q = params.get('q')?.trim() ?? ''
   /* Two characters match half of Victoria; it wastes their quota and ours. */
   if (q.length < 3) return NextResponse.json({ suggestions: [] })
 
+  /* The venue form knows what the place is called and OpenStreetMap often
+     knows the name when it does not know the address: "800 Benvenuto Avenue,
+     Brentwood Bay" is nothing, "Butchart Gardens, Brentwood Bay" is the
+     garden. A room or centre address has no name to send and sends none. */
+  const name = params.get('name')?.trim().slice(0, 200) || undefined
+
   try {
-    const token = process.env.MAPBOX_TOKEN
-    const suggestions = token ? await viaMapbox(q, token) : await viaNominatim(q)
+    const suggestions = await ladder(q, name, process.env.MAPBOX_TOKEN)
     return NextResponse.json({ suggestions })
   } catch {
     /* A dead geocoder must not block the form. The field stays typeable and

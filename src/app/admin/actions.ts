@@ -52,7 +52,11 @@ const NOT_ADMIN = 'You are not signed in as an admin.'
 /* ─── Field helpers ──────────────────────────────────────────────────────── */
 
 const str = (max: number) =>
-  z.string().trim().max(max).transform((s) => s || null)
+  z
+    .string()
+    .trim()
+    .max(max, `Too long — keep it under ${max} characters.`)
+    .transform((s) => s || null)
 
 const tri = z
   .enum(['', 'true', 'false'])
@@ -112,9 +116,17 @@ const email = z
 
 const today = () => new Date().toISOString().slice(0, 10)
 
+/* The field name an editor sees is the label, not the column: a message
+   reading "priceYearOrSeason:" sends them hunting for a field that is
+   spelled that way nowhere on the page. */
+function fieldName(key: string): string {
+  const words = key.replace(/([A-Z])/g, ' $1').toLowerCase().trim()
+  return words.charAt(0).toUpperCase() + words.slice(1)
+}
+
 function firstIssue(e: z.ZodError): string {
   const i = e.issues[0]
-  return i ? `${i.path.length ? `${String(i.path[0])}: ` : ''}${i.message}` : 'Something is missing.'
+  return i ? `${i.path.length ? `${fieldName(String(i.path[0]))}: ` : ''}${i.message}` : 'Something is missing.'
 }
 
 /* Facility notes come in one field per fact, written under the canonical key
@@ -160,7 +172,7 @@ const venueSchema = z.object({
   busParking: tri,
   generalAdmissionChildCad: money,
   generalAdmissionAdultCad: money,
-  priceYearOrSeason: str(40),
+  priceYearOrSeason: str(300),
   hoursNotes: str(1000),
   seasonalNotes: str(1000),
 })
@@ -198,6 +210,20 @@ function venueInput(formData: FormData) {
   }
 }
 
+/* Where the saved point came from. A kept pin keeps the provenance it had —
+   calling a coordinate `admin_geocoded` when the geocoder just refused this
+   address would be a lie the next editor has no way to catch. */
+function geoSourceFor(
+  formData: FormData,
+  point: { lat: number; lng: number },
+  existing: { lat: number | null; lng: number | null; geoSource: string | null } | undefined,
+): string {
+  if (existing && point.lat === existing.lat && point.lng === existing.lng) {
+    return existing.geoSource ?? 'admin_geocoded'
+  }
+  return formData.get('addressLat') ? 'admin_picked' : 'admin_geocoded'
+}
+
 export async function saveVenue(
   _prev: AdminState,
   formData: FormData,
@@ -225,22 +251,31 @@ export async function saveVenue(
   /* A point picked from the address list wins. Otherwise only geocode when
      the address is new or changed, so fixing a typo in the description does
      not depend on a third-party service being up. A failure is reported,
-     not fatal: the row saves and completeness() keeps flagging it. */
+     not fatal: the row saves and completeness() keeps flagging it.
+
+     A failure does not throw away the pin the venue already had. Some venues
+     are unknown to the geocoder at any phrasing — CFB Esquimalt's museum has
+     no OpenStreetMap record — and for those the picker is empty too, so
+     nulling the coordinate would lose a point published by the venue itself
+     with no way to restore it from this form. The old pin is at worst as
+     stale as it was a moment ago, and the notice says which address it is
+     for. Clearing the address field still clears the coordinates. */
   let point = pickedPoint(formData.get('addressLat'), formData.get('addressLng'))
   let notice: string | undefined
   if (!point && d.address) {
-    if (
-      existing &&
-      existing.address === d.address &&
-      existing.lat != null &&
-      existing.lng != null
-    ) {
-      point = { lat: existing.lat, lng: existing.lng }
+    const had =
+      existing && existing.lat != null && existing.lng != null
+        ? { lat: existing.lat, lng: existing.lng }
+        : null
+    if (had && existing?.address === d.address) {
+      point = had
     } else {
-      point = await geocodeAddress(d.address)
+      point = await geocodeAddress(d.address, d.name)
       if (!point) {
-        notice =
-          'Saved, but the address could not be placed on the map. Try a fuller address, or pick one from the list.'
+        point = had
+        notice = had
+          ? 'Saved, but the new address could not be placed on the map, so the pin still shows the old one. Try a fuller address, or pick one from the list.'
+          : 'Saved, but the address could not be placed on the map. Try a fuller address, or pick one from the list.'
       }
     }
   }
@@ -254,7 +289,7 @@ export async function saveVenue(
     address: d.address,
     lat: point?.lat ?? null,
     lng: point?.lng ?? null,
-    geoSource: point ? (formData.get('addressLat') ? 'admin_picked' : 'admin_geocoded') : null,
+    geoSource: point ? geoSourceFor(formData, point, existing) : null,
     hostsSchoolGroups: d.hostsSchoolGroups,
     hostsDaycareGroups: d.hostsDaycareGroups,
     youngestAgeWelcomedYears: d.youngestAgeWelcomedYears,
