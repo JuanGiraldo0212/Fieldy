@@ -1,17 +1,17 @@
 # Batch summary — Vancouver Island field trip catalog
 
-Last run 2026-09-07 · `extractor_version` v2.0 · **113 of 191** tracker rows have a record
+Last run 2026-09-07 · `extractor_version` v2.0 · **128 of 191** tracker rows have a record
 
-All 113 files pass `validate_v2.py` with zero schema errors, and every one has a matching `verification.md`. 18 are publishable.
+All 128 files pass `validate_v2.py` with zero schema errors, every one has a matching `verification.md`, and **35 are publishable** (up from 18, after the geocode backfill and the coordinate audit).
 
-**Three regions complete: Greater Victoria, Cowichan Valley and Nanaimo.**
+**Three regions complete: Greater Victoria, Cowichan Valley and Nanaimo.** Central Island is well under way.
 
 | Region | With a record | Pending |
 |---|---|---|
 | Greater Victoria | 72 | **0** |
 | Cowichan Valley | 26 | **0** |
 | Nanaimo | 14 | **0** |
-| Central Island | 1 | 41 |
+| Central Island | 16 | 26 |
 | West Coast / Alberni | 0 | 23 |
 | North Island | 1 | 12 |
 | Island wide | 0 | 1 |
@@ -20,11 +20,11 @@ All 113 files pass `validate_v2.py` with zero schema errors, and every one has a
 
 | Status | Count |
 |---|---|
-| `done` | 91 |
-| `not_for_groups` | 19 |
-| `no_website` | 3 |
+| `done` | 102 |
+| `not_for_groups` | 21 |
+| `no_website` | 5 |
 | `error` | 1 |
-| `pending` | 77 |
+| `pending` | 62 |
 
 `not_for_groups` (15): Bateman Foundation (permanently closed), Fairmont Empress (hotel), Gulf Islands Cruising School (adults-only certification), MISSA (students 19+), and the commercial galleries and studios — Madrona, Mark Loria, One Moon, Side Street, Avenue Gallery, Excellent Frameworks, Mary Fox Pottery, Susan Isaac, Bernadette McCormack, Saanichton Christmas Tree Farm, Clayworks.
 
@@ -205,6 +205,22 @@ One judgement left standing: Coast Salish Journey uses a legacy embed's `saddr` 
 **Whose price is it.** The Port Theatre's $25 is the theatre's own Student ticket, not a group or school rate. Two other prices were deliberately not recorded: a Discovery Series student price on a page a season out of date, and a family-concert price belonging to the Vancouver Island Symphony rather than the theatre. Like Chemainus, the Port Theatre has **no current school programming** — confirmed in the live DOM, not assumed.
 
 **A second organisation kept separate.** Nanaimo Arts Council and Nanaimo Art Gallery are different bodies. The Arts Council's only child-facing item runs in the Gallery's Art Lab, and no data was shared between the two records.
+
+## Batch 8 (venues 114-128) - Central Island under way
+
+**Publishable:** Campbell River Art Gallery, Cumberland Museum (8 programs), Aboriginal Journeys, Grey Wolf Expeditions, Echo Players.
+
+**A stale price list, and this one was expensive.** A plain fetch of Courtenay Museum's school programmes page returned a cached copy where **every fee was $30 to $35 too low** ($120 vs $150, $155 vs $180, $215 vs $250) and which listed a Riverway Walk programme that no longer exists. It also carried a "+ GST" line the live page has dropped. All corrected from the live DOM and recorded as conflicts. That is now the ninth stale-content catch, and the second where a director quoting our number would have underbudgeted.
+
+**Two more sites that a fetch says are healthy and are not.** Black Creek Studio Gallery returns a complete homepage to a fetch, with address, phone and hours; in a browser both domain forms serve a WP Engine "Site Not Configured" 404. None of that cached content was recorded as fact, only as unverified leads for a phone call. Big Qualicum's tracker path answers 200 but **silently redirects to the DFO department homepage**, so a fetch-only run would have filed the department front page as the venue. Gilda's Box of Treasures' listed directory URL does the same thing, redirecting the whole path to a different site.
+
+**The per-class inference, stated rather than hidden.** Courtenay Museum prints a bare "$150.00 (Maximum 30 persons)" and never says per class or per student. Recorded as a group cost, with the reasoning and the money at stake named in gaps: at a class of 22 the wrong reading is a ~$3,150 error. Campbell River Art Gallery's classroom visit had the same shape and got the same treatment.
+
+**Whose price, again.** Echo Players publishes Adults $28, Students $17 and "Groups (10 or more) $24 per person". The group rate sits between senior and adult and well above the student price, so it is an adult group discount: recorded as `cost_per_adult_cad` with `cost_per_child_cad` null, the 10 as `capacity_min`, and the $17-vs-$24 ambiguity spelled out. Like Chemainus and the Port Theatre, it has **no school programming at all**. That is three community theatres in a row.
+
+**Minimum ages that exclude daycares:** Aboriginal Journeys publishes 5, Arrowsmith is adults only at 19. Grey Wolf publishes two ages on two pages, 5 on the tour page and 3 in an older FAQ, recorded as 5 with a conflict.
+
+**A file-persistence failure worth knowing about.** One sub-batch reported writing three files and updating the tracker; the tracker edit persisted but the JSON never reached disk. Caught by reconciling files against non-pending rows. Agents are now asked to `ls -la` their output before finishing, and the reconciliation check is worth running after every batch.
 
 ## Outstanding, needs the browser reconnected
 
