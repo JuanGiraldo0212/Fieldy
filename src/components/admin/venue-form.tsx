@@ -199,6 +199,7 @@ export function VenueForm({
         <div className="sm:col-span-2">
           <AddressField
             defaultValue={v.address ?? ''}
+            placeName={name}
             hint={
               v.lat != null && v.lng != null
                 ? `On the map at ${v.lat.toFixed(5)}, ${v.lng.toFixed(5)}.`
@@ -269,8 +270,13 @@ export function VenueForm({
         <Labeled label="Adult (CAD)" htmlFor="generalAdmissionAdultCad">
           <Input id="generalAdmissionAdultCad" name="generalAdmissionAdultCad" type="number" min={0} step={0.01} defaultValue={v.generalAdmissionAdultCad ?? ''} />
         </Labeled>
-        <Labeled label="Prices are for" htmlFor="priceYearOrSeason" hint="A year or a season, as the venue writes it: 2026, or Summer 2026.">
-          <Input id="priceYearOrSeason" name="priceYearOrSeason" defaultValue={v.priceYearOrSeason ?? ''} />
+        <Labeled
+          label="Prices are for"
+          htmlFor="priceYearOrSeason"
+          className="sm:col-span-2"
+          hint="A year or a season, as the venue writes it: 2026, or Summer 2026. Room for a sentence when the venue dates its rates unevenly."
+        >
+          <TextArea id="priceYearOrSeason" name="priceYearOrSeason" rows={3} maxLength={300} defaultValue={v.priceYearOrSeason ?? ''} />
         </Labeled>
       </Fieldset>
 

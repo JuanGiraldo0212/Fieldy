@@ -1,7 +1,7 @@
 import type { Point } from './distance'
 
 /*
-  Address to coordinates, for a centre or a room.
+  Address to coordinates, for a centre, a room or a catalog venue.
 
   Same provider as scripts/geocode-catalog.ts, and the same refusal to accept a
   city centroid: a home base in the middle of Victoria would silently
@@ -113,26 +113,59 @@ async function viaMapbox(
 /*
   Progressively looser phrasings, most specific first. Nominatim matches
   literally: an address with a postcode often returns nothing at all, while the
-  same address without one resolves cleanly. Every rung faces the same
-  precision and region checks, so a later rung is a rephrasing of the question,
-  never a lower bar.
+  same address without one resolves cleanly, and a four-part address matches
+  nothing while its street and locality match exactly. Every rung faces the
+  same precision and region checks, so a later rung is a rephrasing of the
+  question, never a lower bar.
+
+  The name rungs are the ladder scripts/geocode-catalog.ts already climbs, and
+  they are why the catalog has coordinates the address alone cannot find:
+  "800 Benvenuto Avenue, Brentwood Bay" is unknown to OpenStreetMap, while
+  "Butchart Gardens, Brentwood Bay" returns the garden. A venue is a named
+  place; a director's home base is not, so the caller passes a name only when
+  there is one. Designation suffixes defeat the index the same way there as
+  here — "Butchart Gardens – National Historic Site" finds nothing — so
+  anything after a dash is dropped first.
 */
-function queriesFor(address: string): string[] {
+export function queriesFor(address: string, name?: string): string[] {
   const out = [address]
   const noPostcode = address
     .replace(/,?\s*[A-Z]\d[A-Z]\s*\d[A-Z]\d\s*$/i, '')
     .trim()
   if (noPostcode !== address) out.push(noPostcode)
+
+  const parts = noPostcode.split(',').map((p) => p.trim()).filter(Boolean)
+  const street = parts[0]
+  const locality = parts[1]
+  if (street && locality && /\d/.test(street)) out.push(`${street}, ${locality}`)
+
+  const shortName = name?.split(/\s+[–—-]\s+/)[0]?.trim()
+  if (shortName) {
+    if (locality) {
+      out.push(`${shortName}, ${locality}`)
+      if (name !== shortName) out.push(`${name}, ${locality}`)
+    }
+    out.push(`${shortName}, British Columbia, Canada`)
+  }
+
   if (!/(bc|british columbia)/i.test(address)) {
     out.push(`${noPostcode}, British Columbia`)
   }
   return [...new Set(out)]
 }
 
-export async function geocodeAddress(address: string): Promise<Point | null> {
+/*
+  `name` is the venue's, when the caller has one. It only ever adds rungs to
+  the ladder; every rung still has to survive the precision and region checks,
+  so a name can never place a pin the address checks would have refused.
+*/
+export async function geocodeAddress(
+  address: string,
+  name?: string,
+): Promise<Point | null> {
   const token = process.env.MAPBOX_TOKEN
   try {
-    for (const q of queriesFor(address)) {
+    for (const q of queriesFor(address, name)) {
       const hit = token
         ? await viaMapbox(q, token, address)
         : await viaNominatim(q, address)

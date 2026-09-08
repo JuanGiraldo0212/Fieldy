@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { pickedPoint } from './geocode'
+import { pickedPoint, queriesFor } from './geocode'
 
 /*
   The address picker sends the coordinates of whatever the director chose, so
@@ -39,5 +39,48 @@ describe('pickedPoint', () => {
     // lat and lng the wrong way round is a real mistake, and -123 is not a
     // latitude anywhere.
     expect(pickedPoint('-123.3530579', '48.4151121')).toBeNull()
+  })
+})
+
+/*
+  The ladder is the whole of the geocoder's recall: OpenStreetMap knows plenty
+  of these venues by name and none of them by their full mailing address, and
+  the catalog's own coordinates came from exactly these rungs.
+*/
+describe('queriesFor', () => {
+  it('drops the postcode, which Nominatim matches literally', () => {
+    expect(queriesFor('800 Benvenuto Avenue, Brentwood Bay, BC V8M 1J8')).toContain(
+      '800 Benvenuto Avenue, Brentwood Bay, BC',
+    )
+  })
+
+  it('tries street and locality alone, which is what a four-part address hides', () => {
+    // "110 Island Highway, View Royal, Victoria, British Columbia" matches
+    // nothing; "110 Island Highway, View Royal" is Craigflower Manor.
+    expect(
+      queriesFor('110 Island Highway, View Royal, Victoria, British Columbia'),
+    ).toContain('110 Island Highway, View Royal')
+  })
+
+  it('asks by name when there is one, and drops the designation suffix', () => {
+    const qs = queriesFor(
+      '800 Benvenuto Avenue, Brentwood Bay, BC V8M 1J8',
+      'Butchart Gardens – National Historic Site',
+    )
+    expect(qs).toContain('Butchart Gardens, Brentwood Bay')
+    expect(qs).toContain('Butchart Gardens, British Columbia, Canada')
+  })
+
+  it('asks the address before the name, so a street match always wins', () => {
+    const qs = queriesFor('1040 Moss Street, Victoria, BC', 'Art Gallery of Greater Victoria')
+    expect(qs[0]).toBe('1040 Moss Street, Victoria, BC')
+    expect(qs.indexOf('Art Gallery of Greater Victoria, Victoria')).toBeGreaterThan(0)
+  })
+
+  it('adds no name rungs for a home base, which has no name to ask by', () => {
+    expect(queriesFor('350 Linden Avenue, Victoria, BC')).toEqual([
+      '350 Linden Avenue, Victoria, BC',
+      '350 Linden Avenue, Victoria',
+    ])
   })
 })

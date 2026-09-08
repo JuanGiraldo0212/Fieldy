@@ -29,6 +29,10 @@ export function AddressField({
      acts on a pick immediately rather than waiting for a submit. */
   hideLabel,
   placeholder = 'Start typing, then pick your address',
+  /* What the place is called, when it is a named place. The catalog's venues
+     are; a director's home base is not. Sent along so the geocoder can fall
+     back to the name for an address OpenStreetMap has never heard of. */
+  placeName,
   onPick,
   onClear,
   rounded = 'rounded-control',
@@ -40,6 +44,7 @@ export function AddressField({
   required?: boolean
   hideLabel?: boolean
   placeholder?: string
+  placeName?: string
   onPick?: (s: Suggestion) => void
   onClear?: () => void
   rounded?: string
@@ -65,7 +70,11 @@ export function AddressField({
     setLoading(true)
     const t = setTimeout(async () => {
       try {
-        const res = await fetch(`/api/geocode/suggest?q=${encodeURIComponent(q)}`)
+        const place = placeName?.trim()
+        const res = await fetch(
+          `/api/geocode/suggest?q=${encodeURIComponent(q)}` +
+            (place ? `&name=${encodeURIComponent(place)}` : ''),
+        )
         const json = (await res.json()) as { suggestions: Suggestion[] }
         if (!cancelled) {
           setSuggestions(json.suggestions ?? [])
@@ -83,7 +92,7 @@ export function AddressField({
       clearTimeout(t)
       setLoading(false)
     }
-  }, [value, picked])
+  }, [value, picked, placeName])
 
   /* Clicking away closes the list without choosing anything. */
   useEffect(() => {
