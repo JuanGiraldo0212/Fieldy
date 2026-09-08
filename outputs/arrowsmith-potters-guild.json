@@ -1,0 +1,84 @@
+{
+  "venue": {
+    "id": "arrowsmith-potters-guild",
+    "name": "Arrowsmith Potters' Guild",
+    "website": "https://www.arrowsmithpottersguild.com/",
+    "description": "The Arrowsmith Potters' Guild is a member run pottery studio and shop in the old VIA Rail train station in Parksville, founded in 1995. The studio has eight wheels, three kilns, a slab roller and a large potting table, and the Train Station Pottery Shop sells members' work seven days a week. Courses and workshops run through the year, but the guild states that classes are for adults only with a minimum age of 19 unless a class says otherwise. On that basis this is not a venue for a school or daycare group.",
+    "category": "arts_performance",
+    "address": "600 Alberni Hwy, Parksville, BC V9P 1J9",
+    "lat": 49.308169,
+    "lng": -124.32341,
+    "geo_source": "site_embed",
+    "hosts_school_groups": false,
+    "hosts_daycare_groups": false,
+    "youngest_age_welcomed_years": 19,
+    "booking_email": null,
+    "booking_phone": "(250) 954-1872",
+    "booking_url": "https://www.arrowsmithpottersguild.com/contact.html",
+    "booking_method": "web_form",
+    "has_washrooms": null,
+    "has_lunch_space": null,
+    "has_rain_backup": null,
+    "stroller_accessible": null,
+    "wheelchair_accessible": false,
+    "bus_parking": null,
+    "facility_notes": {
+      "wheelchair_accessible": "Our gift shop is currently accessible by walkers, but not wheelchairs."
+    },
+    "nearby_park": null,
+    "restrictions": [
+      "At this time, classes are for adults only (min. 19 years old) unless stated otherwise.",
+      "Please do not attend classes or use the studio if you are unwell."
+    ],
+    "languages": null,
+    "general_admission_child_cad": null,
+    "general_admission_adult_cad": null,
+    "hours_notes": "The Train Station Pottery Shop is open Monday to Saturday 10 am to 4 pm, and Sunday noon to 4 pm. The studio is open during shop hours; outside those hours a member with a key has to be present.",
+    "seasonal_notes": null,
+    "price_year_or_season": null,
+    "checked_on": "2026-09-07",
+    "checked_by": "scraper"
+  },
+  "programs": [],
+  "images": [
+    {
+      "id": "hero-throwing-on-the-wheel",
+      "url": "https://www.arrowsmithpottersguild.com/uploads/1/2/1/9/121983160/published/20240108-140522.jpg",
+      "role": "hero",
+      "alt": "Two hands shaping a cylinder of grey clay on a potter's wheel, with a white plastic tub of water beside the wheel head.",
+      "alt_source": "generated",
+      "caption": null,
+      "found_on_url": "https://www.arrowsmithpottersguild.com/classes.html",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    }
+  ],
+  "gaps": [
+    "Classes here are adults only, minimum 19 years old, so there is nothing a children's group can book. That sentence sits at the foot of the classes page and applies to every course and workshop listed.",
+    "The shop itself is open to visitors of any age, but nothing on the site describes a demonstration, a tour or a visit that a group could arrange, and there is no children's or family offering anywhere on the site.",
+    "The only email route is a contact form. No address is published, so there is nobody to write to directly to ask whether they would ever make an exception for older students.",
+    "Washrooms, somewhere to eat and parking are not mentioned anywhere on the site. The only accessibility note says the gift shop takes walkers but not wheelchairs.",
+    "A plain fetch of the classes page returned exactly the same course list as the live page rendered in a browser, so there was no stale copy to work around.",
+    "The Open Graph image is a line drawing of the train station with the guild wordmark, so it was skipped as a hero. The hero is the studio photograph from the classes page instead.",
+    "Two other studio photographs on the classes page are only about 300 pixels across, too small to use.",
+    "The photograph used has no real alt text on the site, only the word Picture, so the alt was written after looking at the image.",
+    "The map on the contact page carries a marker with the guild's own coordinates, which is where the point comes from."
+  ],
+  "conflicts": [],
+  "pages_opened": [
+    "https://www.arrowsmithpottersguild.com/",
+    "https://www.arrowsmithpottersguild.com/classes.html",
+    "https://www.arrowsmithpottersguild.com/faqs.html",
+    "https://www.arrowsmithpottersguild.com/contact.html"
+  ],
+  "pages_useful": [
+    "https://www.arrowsmithpottersguild.com/",
+    "https://www.arrowsmithpottersguild.com/classes.html",
+    "https://www.arrowsmithpottersguild.com/faqs.html",
+    "https://www.arrowsmithpottersguild.com/contact.html"
+  ],
+  "extracted_at": "2026-09-07T00:00:00Z",
+  "extractor_version": "v2.0"
+}

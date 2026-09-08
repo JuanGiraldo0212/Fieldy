@@ -1,0 +1,193 @@
+{
+  "venue": {
+    "id": "grey-wolf-expeditions",
+    "name": "Grey Wolf Expeditions",
+    "website": "https://greywolfexpeditions.com/",
+    "description": "Grey Wolf Expeditions is a sea kayaking and land based whale watching tour company with its office at 1811 Surgenor Rd in Black Creek, founded in 2010 by Sandra Zgela and Jesse D. Haslehurst, who guide the trips themselves. It runs one Vancouver Island offering, a 4 day and 3 night all inclusive Orca Camp trip on a Northern Resident orca rubbing beach in Johnstone Strait, reached by a two hour truck drive and then a boat and with no public or road access. The camp is solar powered and has walk in tents, a heated covered dining area, a hot shower and an outdoor sauna, and the trip includes meals, kayaking, shore fishing, a hike to a waterfall and a full day boat tour into Blackfish Sound. The company also sells a 7 day tour in Croatia, which is not a Vancouver Island outing and is not recorded here.",
+    "category": "nature_outdoors",
+    "address": "1811 Surgenor Rd, Black Creek, BC V9J 1G6",
+    "lat": 49.80881,
+    "lng": -125.10075,
+    "geo_source": "geocoded",
+    "hosts_school_groups": null,
+    "hosts_daycare_groups": false,
+    "youngest_age_welcomed_years": 5,
+    "booking_email": "info@greywolfexpeditions.com",
+    "booking_phone": "250-337-5717",
+    "booking_url": "https://greywolfexpeditions.com/book-tours/",
+    "booking_method": "shop",
+    "has_washrooms": null,
+    "has_lunch_space": null,
+    "has_rain_backup": null,
+    "stroller_accessible": null,
+    "wheelchair_accessible": null,
+    "bus_parking": null,
+    "facility_notes": {
+      "rain_backup": "There is a heated and covered group dinning area, essential oil outdoor sauna, hot shower and private tenting areas (max. 2 occupancy per tent or as a family you can request to sleep 4 max)."
+    },
+    "nearby_park": null,
+    "restrictions": [
+      "Maximum 10 people per tour. Sorry, no exceptions.",
+      "they must be fully potty-trained and able to communicate effectively",
+      "Orca Camp is a comfortable wilderness camp located on northern Vancouver Island. It has no public access, or street access and is only accessible for our exclusive clients, via our personal boat."
+    ],
+    "languages": null,
+    "general_admission_child_cad": null,
+    "general_admission_adult_cad": null,
+    "hours_notes": "Office hours Monday to Sunday 9:00 a.m to 9:00 p.m.",
+    "seasonal_notes": "The only dates published are for 2027: July 6 to 9, July 27 to 30 and September 7 to 10. The booking page says 2028 trip dates will be available for booking by October 2026. Their best time for orcas is given as July, August and early September.",
+    "price_year_or_season": "2027 season",
+    "checked_on": "2026-09-07",
+    "checked_by": "scraper"
+  },
+  "programs": [
+    {
+      "id": "orca-camp-multi-day-tour",
+      "name": "4 Day Orca Camp Tour",
+      "description": "A 4 day and 3 night all inclusive land based whale watching and sea kayaking trip in Johnstone Strait. Day one meets at the Black Creek office at 8 am, then a two hour truck drive and a boat ride into a wilderness camp with no road access. Days two to four cover kayaking of roughly two to four hours when the weather allows, whale watching from shore, shore fishing, a hike of about 60 minutes to a hidden waterfall, disc golf, board games and an outdoor sauna, plus a full day boat tour into Blackfish Sound with a stop at Telegraph Cove. The return to Campbell River is about 5:00 pm on day four. The price is C$3495 plus 5% tax per person, and the site describes group sizes variously as 6 to 10, 8 to 10, and a hard maximum of 10 people per tour. Only 2027 dates are on sale.",
+      "what_children_do": "Ride two hours in a truck and then a boat into a camp reached no other way, sleep three nights in a walk in tent, sit in a stable double kayak for a couple of hours a day when the water allows, walk about an hour to a hidden waterfall, fish from the beach, and watch for orcas from the shore and from a full day boat trip.",
+      "our_note": "This is a four day overnight wilderness trip at nearly $3,500 a head, so it sits on a family wish list rather than a class outing list. Their own pages give two different youngest ages, three on one and five on another, so pin that down before you count a small child in. Once you are in camp there is no road out, so anything a child needs has to travel in with you on the boat.",
+      "practical_summary": "Everything is included once you arrive, with meals, walk in tents, gear, a hot shower, a sauna and a heated covered dining area at camp. The camp has no road or public access, the trip caps at ten people, and the youngest age is given two different ways on their own pages, so settle that on the phone first.",
+      "comes_to_you": false,
+      "age_min_years": 5,
+      "age_max_years": null,
+      "grade_min": null,
+      "grade_max": null,
+      "age_basis": "years",
+      "duration_min": null,
+      "capacity_max": 10,
+      "capacity_min": null,
+      "cost_per_child_cad": 3495,
+      "cost_per_group_cad": null,
+      "cost_per_adult_cad": 3495,
+      "free_adults_per_children": null,
+      "is_free": false,
+      "tax_included": false,
+      "extra_fees_note": "C$3495 + 5% tax, Price Per Person, with the same figure for every participant and no single supplement. Complimentary pick up and drop off in Campbell River. The online booking fee charged by their third party booking software is non-refundable.",
+      "school_rate_only": false,
+      "deposit_required": null,
+      "payment_timing": null,
+      "cancellation_note": "Under the policy effective March 15, 2026, cancelling 150 days or more before departure refunds 75% of the total tour price, 120 to 149 days before refunds 50%, and 119 days or less gets no refund. All cancellations must be submitted in writing by email, and the online booking fee is non-refundable.",
+      "months_offered": [7, 9],
+      "days_offered": null,
+      "time_slots": ["08:00"],
+      "lead_time_days": null,
+      "chaperone_ratio": null,
+      "adults_free": null,
+      "indoor": false,
+      "outdoor": true,
+      "format": ["guided"],
+      "sensory_friendly": null,
+      "low_noise": null,
+      "neurodiversity_friendly": null,
+      "mood_tags": ["active", "explore"],
+      "curriculum_tags": null,
+      "booking_email": null,
+      "booking_url": null,
+      "booking_method": null,
+      "source_url": "https://greywolfexpeditions.com/kayaking-tours-vancouver-island/orca-camp-tour-vancouver-island/",
+      "evidence": "Kids ages 5+ are welcome.",
+      "checked_on": "2026-09-07",
+      "image_ids": ["program-orca-spyhopping", "activity-kayak-and-orca"]
+    }
+  ],
+  "images": [
+    {
+      "id": "hero-johnstone-strait",
+      "url": "https://greywolfexpeditions.com/wp-content/uploads/2026/07/HOME-HERO-SLIDE-3.jpg",
+      "role": "hero",
+      "alt": "A wide calm channel of water backed by steep forested mountains under low cloud, with two small dark shapes breaking the surface, and the words Paddle with us and Beyond the Ordinary printed across the lower part of the picture.",
+      "alt_source": "generated",
+      "caption": null,
+      "found_on_url": "https://greywolfexpeditions.com/",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    },
+    {
+      "id": "program-orca-spyhopping",
+      "url": "https://greywolfexpeditions.com/wp-content/uploads/2024/09/Orca-Camp-Vancouver-Island-Grey-Wolf-Expeditions-1024x512.jpg",
+      "role": "program",
+      "alt": "Whale Watching, Vancouver Island, BC, Grey Wolf Expeditions",
+      "alt_source": "site",
+      "caption": null,
+      "found_on_url": "https://greywolfexpeditions.com/",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    },
+    {
+      "id": "activity-kayak-and-orca",
+      "url": "https://greywolfexpeditions.com/wp-content/uploads/2023/09/Grey-Wolf-Expeditions-Kayak-Orca-Camp-Vancouver-Island-4-1024x453.png",
+      "role": "activity",
+      "alt": "Two people in a red double kayak on flat grey water, with a dark dorsal fin breaking the surface further out and low forested hills behind.",
+      "alt_source": "generated",
+      "caption": null,
+      "found_on_url": "https://greywolfexpeditions.com/kayaking-tours-vancouver-island/orca-camp-tour-vancouver-island/",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    }
+  ],
+  "gaps": [
+    "MINIMUM AGE. The tour page says 'Kids ages 5+ are welcome.' and the frequently asked questions page says 'kids ages 3 and up are welcome' with the added condition that they must be potty trained and able to communicate. The 5 figure is on the page they updated most recently, so 5 is what is recorded. Either way, a daycare group of under fives is out, which is why daycare groups are marked as not hosted here. Recorded as a conflict as well, because a director may be told either number.",
+    "STILL TRADING. Confirmed in a live browser on 2026-09-07. The site loads, the home page and the tour page were both updated in August 2026, the booking page is selling 2027 dates and says 2028 dates open for booking by October 2026. This is an operating business, not a dormant listing. The footer copyright line still reads 2025, which is not evidence of anything.",
+    "school groups: the site never mentions schools, classes, camps or educational groups anywhere. It says 'Families, couples and groups welcome'. That is silence about schools rather than a refusal, so whether they host a school group is unknown.",
+    "price is a per person figure, not a per group one. C$3495 plus 5% tax is what each participant pays, so a party of ten is about C$36,700 before tax. It has been recorded against both the child and the adult price because the site charges everyone the same and states no child rate, no group rate and no single supplement.",
+    "duration: the trip is 4 days and 3 nights, which does not fit a minutes field, so the length is left in the description instead. Day one meets at 8 am and day four returns to Campbell River around 5:00 pm.",
+    "group size: the site gives three different figures on one page, 'small group sizes ranging from 6-10 people per trip', 'limited to just 8 to 10 guests per expedition' and '10 people max per tour'. The booking page settles the top end with 'Maximum 10 people per tour. Sorry, no exceptions.' The lower end is unclear. The booking page also says solo travellers may have to book for a minimum of 2 people if the calendar shows no solo space, which is a booking rule rather than a minimum group size, so no minimum has been recorded.",
+    "washrooms and lunch space: the camp has a hot shower and a heated covered dining area, but nothing on the site says what the toilet arrangements are, at the camp or at the Black Creek office. Both are left unknown.",
+    "wheelchair, stroller and bus access: nothing is published. The camp is reached by truck and boat and has no road access, and the site asks for a moderate level of fitness, so a group with mobility needs would have to ask directly.",
+    "lead time: no minimum notice is published. The cancellation page says a spot can be held for 24 and no longer than 48 hours after an enquiry, which is a hold, not a notice period.",
+    "deposit: the site mentions interest free payment plans for bookings over $4000 and over $8000, but does not say what deposit is needed for a $3495 booking, so that is left unknown.",
+    "phone numbers: the contact page gives 250-337-5717 as the phone, 1-877-337-5717 toll free and +1-250-204-2292 for cell, text and WhatsApp. The footer and the tour page lead with the cell number. Both reach the same company.",
+    "coordinates: the contact page carries a Google map, but it is an address query embed rather than a place pin, so it publishes no latitude or longitude. The point recorded was geocoded from the published street address and lands on the Black Creek office. The camp itself is far to the north in Johnstone Strait and its location is not published.",
+    "images: the Open Graph image on the home page is a stylised paddle graphic rather than a photograph, so it was not used as the hero. The home page banner photographs all carry their own file names as alt text, which a screen reader would read out loud, so the hero and activity alt lines here were written by us after opening each image and looking at it. One image had genuine alt text and it was kept.",
+    "the site's other tour, a 7 day trip to Croatia, is a real product on this domain but is not a Vancouver Island outing, so it has not been recorded as a program."
+  ],
+  "conflicts": [
+    {
+      "field": "age_min_years",
+      "values": ["kids ages 3 and up are welcome", "Kids ages 5+ are welcome"],
+      "sources": [
+        "https://greywolfexpeditions.com/faq-orca-camp/",
+        "https://greywolfexpeditions.com/kayaking-tours-vancouver-island/orca-camp-tour-vancouver-island/"
+      ],
+      "note": "Two of their pages give a different youngest age for children. One says three and up, the other says five and up. We use five here, so ask them to confirm the number before you count a younger child in."
+    },
+    {
+      "field": "meeting_point",
+      "values": [
+        "a convenient meeting point at our head office in Black Creek near Campbell River",
+        "The tour starts and ends in Campbell River. We can arrange pick-up and drop-off at your hotel, free off charge."
+      ],
+      "sources": [
+        "https://greywolfexpeditions.com/kayaking-tours-vancouver-island/orca-camp-tour-vancouver-island/",
+        "https://greywolfexpeditions.com/faq-orca-camp/"
+      ],
+      "note": "They describe where you meet two different ways. One says the day starts at their office in Black Creek at 8 in the morning, another says the trip starts in Campbell River with a free pick up from your hotel. Ask which one applies to you when you book, because the two are about 40 minutes apart."
+    }
+  ],
+  "pages_opened": [
+    "https://greywolfexpeditions.com/",
+    "https://greywolfexpeditions.com/kayaking-tours-vancouver-island/",
+    "https://greywolfexpeditions.com/kayaking-tours-vancouver-island/orca-camp-tour-vancouver-island/",
+    "https://greywolfexpeditions.com/faq-orca-camp/",
+    "https://greywolfexpeditions.com/contact/",
+    "https://greywolfexpeditions.com/cancellation-policy/",
+    "https://greywolfexpeditions.com/book-tours/"
+  ],
+  "pages_useful": [
+    "https://greywolfexpeditions.com/",
+    "https://greywolfexpeditions.com/kayaking-tours-vancouver-island/orca-camp-tour-vancouver-island/",
+    "https://greywolfexpeditions.com/faq-orca-camp/",
+    "https://greywolfexpeditions.com/contact/",
+    "https://greywolfexpeditions.com/cancellation-policy/",
+    "https://greywolfexpeditions.com/book-tours/"
+  ],
+  "extracted_at": "2026-09-07T19:35:00Z",
+  "extractor_version": "v2.0"
+}
