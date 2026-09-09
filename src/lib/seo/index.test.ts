@@ -6,6 +6,7 @@ import {
   outingJsonLd,
   outingPath,
   outingTitle,
+  venueCity,
   type OutingMeta,
 } from './index'
 
@@ -55,6 +56,16 @@ describe('the title and snippet a search result shows', () => {
     )
   })
 
+  /* The catalog reaches up the island; the town comes from the address. */
+  it('names the venue\'s own town, not Victoria for everyone', () => {
+    const m = base()
+    m.venue.name = 'Ladysmith Museum'
+    m.venue.address = 'Unit B, 1115 1st Avenue, Ladysmith, BC'
+    expect(outingDescription(m)).toMatch(/^Ladysmith Museum, Ladysmith BC\./)
+    m.venue.address = null
+    expect(outingDescription(m)).toMatch(/^Ladysmith Museum, Vancouver Island BC\./)
+  })
+
   it('says a program comes to the classroom instead of a place', () => {
     const m = base()
     m.program.comesToYou = true
@@ -85,6 +96,22 @@ describe('the title and snippet a search result shows', () => {
 
   it('clip leaves a short string alone and squashes whitespace', () => {
     expect(clip('  two\n words ')).toBe('two words')
+  })
+})
+
+describe('the town in an address', () => {
+  it.each([
+    ['675 Belleville Street, Victoria, BC V8W 9W2', 'Victoria'],
+    ['9799 Waterwheel Crescent, Chemainus, British Columbia, Canada V0R 1K0', 'Chemainus'],
+    ['9811 Seaport Place, Sidney, BC, V8L 4X3', 'Sidney'],
+    ["Fisherman's Wharf, Dock A, 1 Dallas Rd. Victoria, BC, Canada", 'Victoria'],
+    ['Discovery Harbour Marina (G dock), Campbell River, BC', 'Campbell River'],
+    ['1845 Cowichan Bay Rd, Cowichan Bay, BC V0R 1N0', 'Cowichan Bay'],
+    ['Save-On-Foods Memorial Centre, 1925 Blanshard St.', null],
+    ['1925 Blanshard St, BC', null],
+    [null, null],
+  ])('%s → %s', (address, city) => {
+    expect(venueCity(address)).toBe(city)
   })
 })
 

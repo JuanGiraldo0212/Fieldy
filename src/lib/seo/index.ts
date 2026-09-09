@@ -23,7 +23,7 @@ export const SITE_NAME = 'Fieldy'
 */
 export const HOME_TITLE = 'Fieldy · Field trips for Victoria BC classrooms and daycares'
 export const HOME_DESCRIPTION =
-  'Every school and daycare field trip around Victoria, BC in one place: ' +
+  'Every school and daycare field trip around Victoria and across Vancouver Island in one place: ' +
   'prices, ages, group sizes, washrooms, bus parking. Search, then send one ' +
   'request and keep the replies together.'
 
@@ -90,6 +90,22 @@ export type OutingMeta = {
   }
 }
 
+/*
+  The town, read from the venue's own address, because the catalog reaches
+  from Sooke to Campbell River and "Ladysmith Museum, Victoria BC" was what
+  Google showed for a week. The city is whatever sits before "BC" or
+  "British Columbia"; an address without either (a Victoria street with no
+  town, or none at all) falls back to the island rather than to a guess.
+*/
+export function venueCity(address: string | null): string | null {
+  if (!address) return null
+  const m = /(?:^|,)\s*([^,]+?)\s*,?\s*(?:BC|B\.C\.|British Columbia)\b/i.exec(address)
+  if (!m) return null
+  /* "1 Dallas Rd. Victoria": the town follows the last full stop. */
+  const part = m[1]!.split('.').pop()!.trim()
+  return part.length > 1 && !/\d/.test(part) ? part : null
+}
+
 export function outingTitle(m: OutingMeta): string {
   return `${m.program.name} · ${m.venue.name}`
 }
@@ -122,9 +138,10 @@ function costClause(p: OutingMeta['program']): string | null {
 */
 export function outingDescription(m: OutingMeta): string {
   const { program: p, venue: v } = m
+  const city = venueCity(v.address)
   const where = p.comesToYou
     ? `${v.name} comes to your classroom`
-    : `${v.name}, Victoria BC`
+    : `${v.name}, ${city ? `${city} BC` : 'Vancouver Island BC'}`
   const facts = [ageClause(p), costClause(p)].filter(Boolean).join(', ')
   const lead = facts ? `${where}. ${capitalise(facts)}.` : `${where}.`
   const prose = p.description ?? p.whatChildrenDo ?? p.practicalSummary ?? ''
