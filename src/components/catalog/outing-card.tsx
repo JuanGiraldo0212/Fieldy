@@ -108,8 +108,10 @@ export function OutingCard({ result: r }: { result: SearchResult }) {
           </span>
         ) : null}
 
+        {/* Two lines, then an ellipsis. The whole note is on the outing page;
+            here it only has to say why this one is worth a look. */}
         {r.ourNote ? (
-          <span className="text-body-sm text-text-strong mt-3 block italic">
+          <span className="text-body-sm text-text-strong mt-3 line-clamp-2 italic">
             “{r.ourNote}”
           </span>
         ) : null}
