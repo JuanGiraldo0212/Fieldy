@@ -113,7 +113,8 @@ export function outingTitle(m: OutingMeta): string {
 function ageClause(p: OutingMeta['program']): string | null {
   if (p.ageBasis === 'grades') {
     if (p.gradeMin == null || p.gradeMax == null) return null
-    return `grades ${p.gradeMin === 0 ? 'K' : p.gradeMin} to ${p.gradeMax}`
+    const g = (n: number) => (n < 0 ? 'Pre-K' : n === 0 ? 'K' : String(n))
+    return `grades ${g(p.gradeMin)} to ${g(p.gradeMax)}`
   }
   if (p.ageMinYears == null) return null
   return p.ageMaxYears == null

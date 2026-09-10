@@ -34,7 +34,7 @@ import {
 } from '@/lib/catalog/program'
 import { haversineKm, travelLine, type TransportMode } from '@/lib/catalog/distance'
 import { costPerChild, feasibility, money } from '@/lib/catalog/feasibility'
-import { effectiveAgeRange, effectiveGrade, initialsOf, underFives } from '@/lib/catalog/search'
+import { effectiveAgeRange, effectiveGrades, initialsOf, underFives } from '@/lib/catalog/search'
 import { parseSearchParams } from '@/lib/catalog/url'
 import { resolveOrigin, stateWithRoom } from '@/lib/catalog/resolve'
 import { getActiveRoom, getViewer } from '@/lib/auth'
@@ -185,7 +185,7 @@ export default async function OutingPage({
     {
       ageMin: bandRange.min,
       ageMax: bandRange.max,
-      grade: effectiveGrade(state.age_bands),
+      grades: effectiveGrades(state.age_bands),
       size: state.children,
       budgetPerChild: state.budget_max,
     },
