@@ -112,7 +112,7 @@ export function completeness(
     add({
       key: 'coords',
       label: venue.address
-        ? 'Address not geocoded, so distance and the map are blank'
+        ? 'Address has no map pin, so distance and the map are blank'
         : 'No address',
       severity: 'blocking',
       section: 'location',
@@ -143,7 +143,7 @@ export function completeness(
   if (!images.some((i) => i.role === 'hero')) {
     add({
       key: 'hero',
-      label: 'No hero photo (the catalog shows an initials tile)',
+      label: 'No card photo (the catalog shows a letters tile)',
       severity: 'ask',
       section: 'photos',
     })

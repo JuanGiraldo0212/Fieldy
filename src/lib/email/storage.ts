@@ -60,7 +60,7 @@ export async function putObject(
   contentType: string,
 ): Promise<{ ok: true } | { ok: false; error: string }> {
   if (!storageConfigured()) {
-    return { ok: false, error: 'Storage is not configured.' }
+    return { ok: false, error: 'File storage is not switched on for this site.' }
   }
   try {
     const { error } = await createAdminClient()
@@ -70,7 +70,7 @@ export async function putObject(
   } catch (cause) {
     return {
       ok: false,
-      error: cause instanceof Error ? cause.message : 'upload failed',
+      error: cause instanceof Error ? cause.message : 'The file did not save.',
     }
   }
 }

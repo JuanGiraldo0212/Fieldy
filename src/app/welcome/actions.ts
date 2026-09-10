@@ -43,7 +43,7 @@ export async function createCentreAndRoom(
   formData: FormData,
 ): Promise<SetupState> {
   const viewer = await getViewer()
-  if (!viewer) return { error: 'Your session expired. Sign in again.' }
+  if (!viewer) return { error: 'You have been signed out. Sign in again.' }
 
   const parsed = setupSchema.safeParse({
     name: formData.get('name'),

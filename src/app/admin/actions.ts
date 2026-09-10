@@ -66,16 +66,40 @@ const checkbox = z.preprocess((v) => v === 'on' || v === 'true', z.boolean())
 
 const blankToNull = (v: unknown) => (v === '' || v == null ? null : Number(v))
 
+/* Zod's own wording for these ("Too small: expected number to be >=0") is
+   written for whoever wrote the schema, not for whoever is filling the form. */
+const NOT_A_NUMBER = 'That needs to be a number.'
+const between = (min: number, max: number) => `Use a number from ${min} to ${max}.`
+
 const num = (min: number, max: number) =>
-  z.preprocess(blankToNull, z.number().min(min).max(max).nullable())
+  z.preprocess(
+    blankToNull,
+    z
+      .number({ error: NOT_A_NUMBER })
+      .min(min, between(min, max))
+      .max(max, between(min, max))
+      .nullable(),
+  )
 
 const int = (min: number, max: number) =>
-  z.preprocess(blankToNull, z.number().int().min(min).max(max).nullable())
+  z.preprocess(
+    blankToNull,
+    z
+      .number({ error: NOT_A_NUMBER })
+      .int('That needs to be a whole number.')
+      .min(min, between(min, max))
+      .max(max, between(min, max))
+      .nullable(),
+  )
 
 /* numeric(10,2) wants a string; keep two decimals so a re-read compares. */
 const money = z.preprocess(
   blankToNull,
-  z.number().min(0).max(100000).nullable(),
+  z
+    .number({ error: NOT_A_NUMBER })
+    .min(0, 'A price cannot be negative.')
+    .max(100000, 'That price is too large.')
+    .nullable(),
 ).transform((n) => (n == null ? null : n.toFixed(2)))
 
 const list = (separator: RegExp, max: number) =>
@@ -239,13 +263,13 @@ export async function saveVenue(
   /* The id is the slug in every outing URL. Minted once, on creation. */
   const id = isNew ? d.id || slugify(d.name) : d.id
   if (!isSlug(id)) {
-    return { error: 'The id can only have lowercase letters, digits and single dashes.' }
+    return { error: 'The link name can only have lowercase letters, digits and single dashes.' }
   }
 
   const existing = (
     await db.select().from(venue).where(eq(venue.id, id)).limit(1)
   )[0]
-  if (isNew && existing) return { error: `A venue with the id "${id}" already exists.` }
+  if (isNew && existing) return { error: `A venue with the link name "${id}" already exists.` }
   if (!isNew && !existing) return { error: 'That venue no longer exists.' }
 
   /* A point picked from the address list wins. Otherwise only geocode when
@@ -466,14 +490,14 @@ export async function saveProgram(
 
   const slug = isNew ? d.slug || slugify(d.name) : d.slug
   if (!isSlug(slug)) {
-    return { error: 'The id can only have lowercase letters, digits and single dashes.' }
+    return { error: 'The link name can only have lowercase letters, digits and single dashes.' }
   }
   const id = `${d.venueId}:${slug}`
 
   const existing = (
     await db.select().from(program).where(eq(program.id, id)).limit(1)
   )[0]
-  if (isNew && existing) return { error: `This venue already has a program with the id "${slug}".` }
+  if (isNew && existing) return { error: `This venue already has a program with the link name "${slug}".` }
   if (!isNew && !existing) return { error: 'That program no longer exists.' }
 
   /* One ratio from the form. The extractor sometimes stored several (an

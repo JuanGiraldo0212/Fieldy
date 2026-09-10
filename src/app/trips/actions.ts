@@ -32,7 +32,7 @@ export type TripState = { error?: string; ok?: boolean }
 
 async function loadTasks(tripId: string) {
   const viewer = await getViewer()
-  if (!viewer?.centreId) return { error: 'Your session expired. Sign in again.' as const }
+  if (!viewer?.centreId) return { error: 'You have been signed out. Sign in again.' as const }
 
   const rows = await db
     .select({ tasks: trip.tasks })
@@ -161,7 +161,7 @@ export async function saveTripCosts(
   formData: FormData,
 ): Promise<TripState> {
   const viewer = await getViewer()
-  if (!viewer?.centreId) return { error: 'Your session expired. Sign in again.' }
+  if (!viewer?.centreId) return { error: 'You have been signed out. Sign in again.' }
 
   const tripId = String(formData.get('tripId') ?? '')
   const parsed = z
@@ -197,7 +197,7 @@ export async function saveTripNotes(
   formData: FormData,
 ): Promise<TripState> {
   const viewer = await getViewer()
-  if (!viewer?.centreId) return { error: 'Your session expired. Sign in again.' }
+  if (!viewer?.centreId) return { error: 'You have been signed out. Sign in again.' }
 
   const tripId = String(formData.get('tripId') ?? '')
   const notes = String(formData.get('notes') ?? '').trim()
@@ -230,7 +230,7 @@ export async function setTripStatus(
   formData: FormData,
 ): Promise<TripState> {
   const viewer = await getViewer()
-  if (!viewer?.centreId) return { error: 'Your session expired. Sign in again.' }
+  if (!viewer?.centreId) return { error: 'You have been signed out. Sign in again.' }
   const centreId = viewer.centreId
 
   const tripId = String(formData.get('tripId') ?? '')
@@ -292,7 +292,7 @@ export async function sendFollowUp(
   formData: FormData,
 ): Promise<TripState> {
   const viewer = await getViewer()
-  if (!viewer?.centreId) return { error: 'Your session expired. Sign in again.' }
+  if (!viewer?.centreId) return { error: 'You have been signed out. Sign in again.' }
   const centreId = viewer.centreId
 
   const tripId = String(formData.get('tripId') ?? '')
@@ -463,7 +463,7 @@ export async function applySuggestion(
   formData: FormData,
 ): Promise<TripState> {
   const viewer = await getViewer()
-  if (!viewer?.centreId) return { error: 'Your session expired. Sign in again.' }
+  if (!viewer?.centreId) return { error: 'You have been signed out. Sign in again.' }
   const centreId = viewer.centreId
 
   const messageId = String(formData.get('messageId') ?? '')
@@ -631,7 +631,7 @@ export async function retryRequest(
   formData: FormData,
 ): Promise<TripState> {
   const viewer = await getViewer()
-  if (!viewer?.centreId) return { error: 'Your session expired. Sign in again.' }
+  if (!viewer?.centreId) return { error: 'You have been signed out. Sign in again.' }
   const centreId = viewer.centreId
 
   const tripId = String(formData.get('tripId') ?? '')

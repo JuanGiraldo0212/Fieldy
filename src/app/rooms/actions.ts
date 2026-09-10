@@ -40,7 +40,7 @@ export async function saveRoom(
   formData: FormData,
 ): Promise<RoomState> {
   const viewer = await getViewer()
-  if (!viewer?.centreId) return { error: 'Your session expired. Sign in again.' }
+  if (!viewer?.centreId) return { error: 'You have been signed out. Sign in again.' }
 
   const parsed = roomSchema.safeParse({
     id: formData.get('id') || undefined,
@@ -131,7 +131,7 @@ export async function archiveRoom(
   formData: FormData,
 ): Promise<RoomState> {
   const viewer = await getViewer()
-  if (!viewer?.centreId) return { error: 'Your session expired. Sign in again.' }
+  if (!viewer?.centreId) return { error: 'You have been signed out. Sign in again.' }
 
   const id = String(formData.get('id') ?? '')
   if (!id) return { error: 'Which room?' }
@@ -171,7 +171,7 @@ export async function restoreRoom(
   formData: FormData,
 ): Promise<RoomState> {
   const viewer = await getViewer()
-  if (!viewer?.centreId) return { error: 'Your session expired. Sign in again.' }
+  if (!viewer?.centreId) return { error: 'You have been signed out. Sign in again.' }
 
   const id = String(formData.get('id') ?? '')
   await db

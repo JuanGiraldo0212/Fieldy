@@ -125,7 +125,7 @@ export function VenueForm({
 
         {mode === 'new' ? (
           <Labeled
-            label="Id"
+            label="Link name"
             htmlFor="id"
             hint="Goes in every link to this venue and cannot change later."
           >
