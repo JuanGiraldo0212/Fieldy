@@ -114,7 +114,7 @@ export function ProgramForm({
         </Labeled>
 
         {mode === 'new' ? (
-          <Labeled label="Id" htmlFor="slug" hint="Goes in the link to this program and cannot change later.">
+          <Labeled label="Link name" htmlFor="slug" hint="Goes in the link to this program and cannot change later.">
             <Input
               id="slug"
               name="slug"

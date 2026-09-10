@@ -119,7 +119,11 @@ export async function sendRelayMessage({
     })
 
     if (error) {
-      return { ok: false, error: `Could not send: ${error.message}` }
+      /* The provider's own wording lands in a trip page banner, where
+         "domain not verified" means nothing to a director. Keep the detail
+         in the log, give the reader a sentence they can act on. */
+      console.warn(`[send] refused for trip ${token}: ${error.message}`)
+      return { ok: false, error: 'The mail service would not take it.' }
     }
     return {
       ok: true,
@@ -131,9 +135,9 @@ export async function sendRelayMessage({
       A network blip or a bad key. The message row still exists with this
       recorded on it, so nothing is lost and the retry has something to retry.
     */
-    return {
-      ok: false,
-      error: `Could not send: ${cause instanceof Error ? cause.message : 'unknown error'}`,
-    }
+    console.warn(
+      `[send] failed for trip ${token}: ${cause instanceof Error ? cause.message : cause}`,
+    )
+    return { ok: false, error: 'The connection to the mail service dropped.' }
   }
 }

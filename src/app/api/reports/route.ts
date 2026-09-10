@@ -41,13 +41,17 @@ export async function POST(request: Request) {
   try {
     body = await request.json()
   } catch {
-    return NextResponse.json({ error: 'Expected JSON' }, { status: 400 })
+    return NextResponse.json({ error: 'We could not read that. Try again.' }, { status: 400 })
   }
 
   const parsed = reportSchema.safeParse(body)
   if (!parsed.success) {
+    /* The form's own controls keep the lengths in range, so anything that
+       lands here is malformed rather than mistyped. Zod's wording for it
+       ("String must contain at most 2000 character(s)") goes straight into a
+       banner the reporter reads, so it does not get to speak. */
     return NextResponse.json(
-      { error: parsed.error.issues[0]?.message ?? 'Invalid report' },
+      { error: 'That report did not come through. Try again.' },
       { status: 400 },
     )
   }

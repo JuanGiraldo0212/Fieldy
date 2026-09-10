@@ -56,7 +56,7 @@ export async function createTrip(
   formData: FormData,
 ): Promise<PlanState> {
   const viewer = await getViewer()
-  if (!viewer?.centreId) return { error: 'Your session expired. Sign in again.' }
+  if (!viewer?.centreId) return { error: 'You have been signed out. Sign in again.' }
 
   const parsed = planSchema.safeParse({
     venueId: formData.get('venueId'),
@@ -72,7 +72,7 @@ export async function createTrip(
   const d = parsed.data
 
   const centre = await getCentre(viewer.centreId)
-  if (!centre) return { error: 'Your session expired. Sign in again.' }
+  if (!centre) return { error: 'You have been signed out. Sign in again.' }
 
   /*
     Scope the rooms by centre. Drizzle connects as the table owner and is

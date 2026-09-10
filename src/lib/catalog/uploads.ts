@@ -19,7 +19,7 @@ export async function putPhoto(
   contentType: string,
 ): Promise<{ ok: true } | { ok: false; error: string }> {
   if (!storageConfigured()) {
-    return { ok: false, error: 'Storage is not configured on this server.' }
+    return { ok: false, error: 'Photo storage is not switched on for this site.' }
   }
   try {
     const { error } = await createAdminClient()
@@ -29,7 +29,7 @@ export async function putPhoto(
   } catch (cause) {
     return {
       ok: false,
-      error: cause instanceof Error ? cause.message : 'upload failed',
+      error: cause instanceof Error ? cause.message : 'The photo did not save.',
     }
   }
 }

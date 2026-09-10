@@ -141,7 +141,7 @@ describe('failure', () => {
     sendMock.mockResolvedValue({ data: null, error: { message: 'domain not verified' } })
     expect(await sendRelayMessage(ARGS)).toEqual({
       ok: false,
-      error: 'Could not send: domain not verified',
+      error: 'The mail service would not take it.',
     })
   })
 
@@ -150,7 +150,7 @@ describe('failure', () => {
     sendMock.mockRejectedValue(new Error('ECONNRESET'))
     expect(await sendRelayMessage(ARGS)).toEqual({
       ok: false,
-      error: 'Could not send: ECONNRESET',
+      error: 'The connection to the mail service dropped.',
     })
   })
 

@@ -27,7 +27,7 @@ export async function saveAccount(
   formData: FormData,
 ): Promise<AccountState> {
   const viewer = await getViewer()
-  if (!viewer?.centreId) return { error: 'Your session expired. Sign in again.' }
+  if (!viewer?.centreId) return { error: 'You have been signed out. Sign in again.' }
 
   const parsed = schema.safeParse({
     name: formData.get('name'),

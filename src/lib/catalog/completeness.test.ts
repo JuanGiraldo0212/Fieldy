@@ -78,11 +78,11 @@ describe('completeness', () => {
     expect(c.items.find((i) => i.key === 'coords')).toBeUndefined()
   })
 
-  it('distinguishes a missing address from an ungeocoded one', () => {
+  it('distinguishes a missing address from an unpinned one', () => {
     const noAddress = completeness({ ...fullVenue, address: null, lat: null, lng: null }, [fullProgram], hero)
-    const notGeocoded = completeness({ ...fullVenue, lat: null, lng: null }, [fullProgram], hero)
+    const notPinned = completeness({ ...fullVenue, lat: null, lng: null }, [fullProgram], hero)
     expect(noAddress.items[0]?.label).toBe('No address')
-    expect(notGeocoded.items[0]?.label).toMatch(/not geocoded/)
+    expect(notPinned.items[0]?.label).toMatch(/no map pin/)
   })
 
   it('a known no is complete; only null is a gap', () => {
