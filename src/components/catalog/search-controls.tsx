@@ -42,10 +42,10 @@ import { AddressField } from '@/components/ui/address-field'
 import { AgeBandSelect } from './age-band-select'
 
 /*
-  Every control writes to the URL and lets the server re-render. That keeps one
-  source of truth for the search, makes the view shareable, and means the
-  catalog still works with JavaScript disabled for the parts that matter
-  (plan section 8 — links get opened inside messaging apps' browsers).
+  The controls edit a draft; Search writes it to the URL and lets the server
+  re-render. The URL stays the one source of truth for the results, which keeps
+  the view shareable, and the list does not jump around while she is still
+  setting up the question.
 */
 
 /* Icons and sizes are the design's own — 20px on mood chips, 18px on
@@ -102,47 +102,71 @@ export function SearchControls({
   const router = useRouter()
   const [pending, startTransition] = useTransition()
   const [filtersOpen, setFiltersOpen] = useState(false)
-  const [query, setQuery] = useState(state.query)
+  const [draft, setDraft] = useState(state)
+  /* The two number boxes hold what was typed, so either can be emptied on the
+     way to a new number; they are read as numbers only on Search. */
+  const [children, setChildren] = useState(String(state.children))
   const [budget, setBudget] = useState(String(state.budget_max))
+  /* The address box keeps its own text; bumping this redraws it from the draft. */
+  const [addressKey, setAddressKey] = useState(0)
 
-  /* Typed budgets commit on blur or Enter, not on every keystroke: navigating
-     mid-number would refetch for "1" on the way to "15". */
-  const commitBudget = () => {
-    const n = Number(budget)
-    if (Number.isFinite(n) && n >= 0 && n !== state.budget_max) {
-      go({ ...state, budget_max: n })
-    }
+  /* The URL moved without us — back button, sort, a shared link — so the
+     draft starts again from what the results now show. Sort is left out: it
+     applies on its own and should not throw away an unsearched draft. */
+  const urlKey = searchHref({ ...state, sort: 'best_match' })
+  const [seenKey, setSeenKey] = useState(urlKey)
+  if (urlKey !== seenKey) {
+    setSeenKey(urlKey)
+    setDraft(state)
+    setChildren(String(state.children))
+    setBudget(String(state.budget_max))
+    setAddressKey((k) => k + 1)
   }
 
-  const go = (next: SearchState) => {
+  const set = (patch: Partial<SearchState>) => setDraft((d) => ({ ...d, ...patch }))
+
+  /* What Search would ask for. A box left empty or nonsensical falls back to
+     the last searched value rather than to a surprise. */
+  const kidsN = Math.floor(Number(children))
+  const budgetN = Number(budget)
+  const next: SearchState = {
+    ...draft,
+    sort: state.sort,
+    children: children.trim() && Number.isFinite(kidsN) && kidsN >= 1 ? kidsN : state.children,
+    budget_max:
+      budget.trim() && Number.isFinite(budgetN) && budgetN >= 0 ? budgetN : state.budget_max,
+  }
+  const dirty = searchHref(next) !== searchHref(state)
+
+  const search = () => {
+    setChildren(String(next.children))
+    setBudget(String(next.budget_max))
     startTransition(() => router.push(searchHref(next), { scroll: false }))
   }
 
   const extras =
-    state.environment.length + state.accessibility.length + state.formats.length
+    draft.environment.length + draft.accessibility.length + draft.formats.length
 
   return (
-    <div
+    <form
       className={cx(
         'bg-surface border-border shadow-card rounded-panel border p-4 sm:p-[18px]',
         pending && 'opacity-70',
       )}
+      onSubmit={(e) => {
+        e.preventDefault()
+        search()
+      }}
     >
       {/* Search */}
-      <form
-        className="mb-4 flex gap-2.5"
-        onSubmit={(e) => {
-          e.preventDefault()
-          go({ ...state, query })
-        }}
-      >
+      <div className="mb-4 flex gap-2.5">
         <div className="border-border-strong bg-surface flex h-control-lg flex-1 items-center gap-2.5 rounded-control border px-4">
           <span className="text-text-faint flex">
             <Search size={19} />
           </span>
           <input
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            value={draft.query}
+            onChange={(e) => set({ query: e.target.value })}
             placeholder="Search a place or activity"
             aria-label="Search a place or activity"
             className="text-body h-full w-full border-0 bg-transparent outline-none"
@@ -154,13 +178,18 @@ export function SearchControls({
         >
           Search
         </button>
-      </form>
+      </div>
+      {dirty ? (
+        <p className="text-meta text-brand -mt-2 mb-3 font-semibold" role="status">
+          Filters changed. Press Search to update the list.
+        </p>
+      ) : null}
 
       {/* The always-visible row */}
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <AgeBandSelect
-          value={state.age_bands}
-          onChange={(age_bands) => go({ ...state, age_bands })}
+          value={draft.age_bands}
+          onChange={(age_bands) => set({ age_bands })}
         />
 
         <Field label="Children">
@@ -168,10 +197,9 @@ export function SearchControls({
             <input
               type="number"
               min={1}
-              value={state.children}
-              onChange={(e) =>
-                go({ ...state, children: Math.max(1, Number(e.target.value) || 1) })
-              }
+              inputMode="numeric"
+              value={children}
+              onChange={(e) => setChildren(e.target.value)}
               aria-label="Number of children"
               className="text-body-sm w-full border-0 bg-transparent font-bold outline-none"
             />
@@ -187,9 +215,9 @@ export function SearchControls({
               <Bus size={18} />
             </span>
             <select
-              value={state.transport}
+              value={draft.transport}
               onChange={(e) =>
-                go({ ...state, transport: e.target.value as SearchState['transport'] })
+                set({ transport: e.target.value as SearchState['transport'] })
               }
               aria-label="How you travel"
               className="text-body-sm h-select w-full cursor-pointer appearance-none border-0 bg-transparent font-semibold outline-none"
@@ -217,13 +245,6 @@ export function SearchControls({
               inputMode="decimal"
               value={budget}
               onChange={(e) => setBudget(e.target.value)}
-              onBlur={() => commitBudget()}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  e.preventDefault()
-                  commitBudget()
-                }
-              }}
               aria-label="Budget per child"
               className="text-body-sm w-full border-0 bg-transparent font-bold outline-none"
             />
@@ -233,14 +254,11 @@ export function SearchControls({
               <button
                 key={b}
                 type="button"
-                aria-pressed={state.budget_max === b}
-                onClick={() => {
-                  setBudget(String(b))
-                  go({ ...state, budget_max: b })
-                }}
+                aria-pressed={next.budget_max === b}
+                onClick={() => setBudget(String(b))}
                 className={cx(
                   'text-meta-sm rounded-pill border px-2.5 py-1 font-semibold',
-                  state.budget_max === b
+                  next.budget_max === b
                     ? 'bg-brand-tint-2 border-brand text-brand'
                     : 'border-border-soft bg-surface text-text-muted hover:border-brand',
                 )}
@@ -257,19 +275,16 @@ export function SearchControls({
           <div className="flex flex-col gap-2 sm:flex-row sm:gap-0">
             <div className="min-w-0 flex-1">
               <AddressField
+                key={addressKey}
                 name="from"
                 hideLabel
                 rounded="rounded-control sm:rounded-l-control sm:rounded-r-none"
-                defaultValue={state.from}
+                defaultValue={draft.from}
                 placeholder={originLabel}
-                onPick={(s) =>
-                  go({ ...state, from: s.label, from_lat: s.lat, from_lng: s.lng })
-                }
+                onPick={(s) => set({ from: s.label, from_lat: s.lat, from_lng: s.lng })}
                 /* Emptying the box goes back to the room's own home base
                    rather than leaving the search measured from nowhere. */
-                onClear={() =>
-                  go({ ...state, from: '', from_lat: null, from_lng: null })
-                }
+                onClear={() => set({ from: '', from_lat: null, from_lng: null })}
               />
             </div>
             <div className="border-border-strong bg-surface flex h-control items-center gap-2.5 rounded-control border px-3 sm:rounded-l-none sm:border-l-0">
@@ -277,8 +292,8 @@ export function SearchControls({
                 <Radar size={18} />
               </span>
               <select
-                value={state.radius_km}
-                onChange={(e) => go({ ...state, radius_km: Number(e.target.value) })}
+                value={draft.radius_km}
+                onChange={(e) => set({ radius_km: Number(e.target.value) })}
                 aria-label="How far you will travel"
                 className="text-body-sm h-select cursor-pointer appearance-none border-0 bg-transparent font-semibold outline-none"
               >
@@ -290,12 +305,15 @@ export function SearchControls({
               </select>
             </div>
           </div>
-          {state.from ? (
+          {draft.from ? (
             <p className="text-meta text-text-faint mt-1.5">
-              Measuring from {state.from}.{' '}
+              Measuring from {draft.from}.{' '}
               <button
                 type="button"
-                onClick={() => go({ ...state, from: '', from_lat: null, from_lng: null })}
+                onClick={() => {
+                  set({ from: '', from_lat: null, from_lng: null })
+                  setAddressKey((k) => k + 1)
+                }}
                 className="text-brand font-semibold underline"
               >
                 Use {originLabel} instead
@@ -314,21 +332,18 @@ export function SearchControls({
           {Object.entries(MOOD_STYLE).map(([key, m]) => (
             <Chip
               key={key}
-              active={state.moods.includes(key)}
+              active={draft.moods.includes(key)}
               tint={m.tint}
               ink={m.ink}
               onClick={() => {
                 /* Surprise me is exclusive: it replaces the result set with
                    three, so combining it with other moods is meaningless. */
                 if (key === 'surprise') {
-                  go({
-                    ...state,
-                    moods: state.moods.includes('surprise') ? [] : ['surprise'],
-                  })
+                  set({ moods: draft.moods.includes('surprise') ? [] : ['surprise'] })
                   return
                 }
-                const without = { ...state, moods: state.moods.filter((x) => x !== 'surprise') }
-                go(toggleIn(without, 'moods', key))
+                const without = { ...draft, moods: draft.moods.filter((x) => x !== 'surprise') }
+                setDraft(toggleIn(without, 'moods', key))
               }}
             >
               <m.Icon size={20} />
@@ -347,8 +362,8 @@ export function SearchControls({
           {CATEGORIES.map(([value, label, Icon]) => (
             <Chip
               key={value}
-              active={state.categories.includes(value)}
-              onClick={() => go(toggleIn(state, 'categories', value))}
+              active={draft.categories.includes(value)}
+              onClick={() => setDraft(toggleIn(draft, 'categories', value))}
             >
               <span className="text-brand flex">
                 <Icon size={18} />
@@ -376,9 +391,9 @@ export function SearchControls({
       </div>
 
       {/*
-        The drawer. The design edits a draft here and commits on Apply; this
-        applies each toggle immediately, which is a deliberate simplification
-        while the filter set is small — logged in docs/design-gaps.md.
+        The drawer. Its toggles land in the same draft as everything else and
+        wait for Search; the design's separate Apply and Cancel are not built —
+        logged in docs/design-gaps.md.
       */}
       {filtersOpen ? (
         <div className="border-border mt-4 grid grid-cols-1 gap-x-6 gap-y-4 border-t pt-4 sm:grid-cols-3">
@@ -389,8 +404,8 @@ export function SearchControls({
             {ENVIRONMENT.map(([v, label, Icon]) => (
               <CheckRow
                 key={v}
-                checked={state.environment.includes(v)}
-                onChange={() => go(toggleIn(state, 'environment', v))}
+                checked={draft.environment.includes(v)}
+                onChange={() => setDraft(toggleIn(draft, 'environment', v))}
                 icon={<Icon size={17} />}
               >
                 {label}
@@ -404,8 +419,8 @@ export function SearchControls({
             {ACCESSIBILITY.map(([v, label, Icon]) => (
               <CheckRow
                 key={v}
-                checked={state.accessibility.includes(v)}
-                onChange={() => go(toggleIn(state, 'accessibility', v))}
+                checked={draft.accessibility.includes(v)}
+                onChange={() => setDraft(toggleIn(draft, 'accessibility', v))}
                 icon={<Icon size={17} />}
               >
                 {label}
@@ -419,8 +434,8 @@ export function SearchControls({
             {FORMATS.map(([v, label, Icon]) => (
               <CheckRow
                 key={v}
-                checked={state.formats.includes(v)}
-                onChange={() => go(toggleIn(state, 'formats', v))}
+                checked={draft.formats.includes(v)}
+                onChange={() => setDraft(toggleIn(draft, 'formats', v))}
                 icon={<Icon size={17} />}
               >
                 {label}
@@ -432,7 +447,7 @@ export function SearchControls({
               <button
                 type="button"
                 onClick={() =>
-                  go({ ...state, environment: [], accessibility: [], formats: [] })
+                  set({ environment: [], accessibility: [], formats: [] })
                 }
                 className="text-body-sm text-brand font-semibold underline"
               >
@@ -442,7 +457,7 @@ export function SearchControls({
           ) : null}
         </div>
       ) : null}
-    </div>
+    </form>
   )
 }
 

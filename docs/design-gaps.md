@@ -44,16 +44,22 @@ pre-selected asks on the request.
 The three retired strings are listed in `docs/design-map.md` §7 so nobody
 reinstates them from the prototype.
 
-### Deviation — filter drawer applies immediately
+### Deviation — the whole panel commits on Search, the drawer has no Apply
 
 *Slice 1. `src/components/catalog/search-controls.tsx`.*
 
 The design's drawer edits a draft and commits on **Apply**, with **Cancel**
-discarding. Ours applies each toggle straight to the URL.
+discarding. Ours folds the drawer into one draft for the whole panel: every
+control — query, ages, children, travel, budget, leaving from, moods, types
+and the drawer's checkboxes — edits the draft, and the results change only
+when **Search** is pressed (or Enter in any box). A line under the search bar
+says when the draft differs from what the list shows.
 
-Reason: every other control on the screen applies immediately, and with twelve
-checkboxes the draft/commit distinction costs more than it buys. Revisit if the
-filter set grows, or if testing shows people expect Cancel to undo.
+Reason: applying each control immediately made the list reshuffle while she
+was still setting up the question, and one commit button for the panel is
+simpler than a second one inside the drawer. Sort still applies on its own —
+it sits above the results and reorders rather than narrows them. Revisit
+Cancel if testing shows people expect to throw a draft away.
 
 ### Deviation — the "Fun" mood chip is "Play"
 
