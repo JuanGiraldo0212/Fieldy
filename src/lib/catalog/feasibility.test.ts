@@ -278,7 +278,7 @@ describe('feasibility — grade against grade', () => {
   const classOf = (grade: number, over: Partial<GroupCriteria> = {}): GroupCriteria => ({
     ageMin: grade + 5,
     ageMax: grade + 6,
-    grade,
+    grades: { youngest: grade, oldest: grade },
     size: 22,
     budgetPerChild: 12,
     ...over,
@@ -317,9 +317,49 @@ describe('feasibility — grade against grade', () => {
     expect(r.reasons).toContain('written for up to Grade 3, yours are Grade 5')
     const below = feasibility(
       withProgram({ ageBasis: 'grades', ageMinYears: null, gradeMin: 2, gradeMax: 5 }),
-      { ...classOf(1), grade: 0 },
+      classOf(0),
     )
     expect(below.reasons[0]).toMatch(/yours are Kindergarten/)
+  })
+
+  it('catches a several-grade group wholly below the range', () => {
+    // The bug: picking Grades 1 to 3 skipped the check, so a Grades 4 to 12
+    // tour said "Fits your group".
+    const r = feasibility(
+      withProgram({ ageBasis: 'grades', ageMinYears: null, gradeMin: 4, gradeMax: 12 }),
+      { ...classOf(1), grades: { youngest: 1, oldest: 3 } },
+    )
+    expect(r.level).toBe('amber')
+    expect(r.reasons).toContain('written for Grade 4 and up, yours are Grade 1 to Grade 3')
+  })
+
+  it('names the youngest when only part of the group is below', () => {
+    const r = feasibility(gradesOnly, { ...classOf(1), grades: { youngest: 1, oldest: 3 } })
+    expect(r.reasons).toContain('written for Grade 2 and up, your youngest are Grade 1')
+  })
+
+  it('names the oldest when only part of the group is above', () => {
+    const r = feasibility(
+      withProgram({ ageBasis: 'grades', ageMinYears: null, gradeMin: 0, gradeMax: 3 }),
+      { ...classOf(2), grades: { youngest: 2, oldest: 5 } },
+    )
+    expect(r.reasons).toContain('written for up to Grade 3, your oldest are Grade 5')
+  })
+
+  it('passes a several-grade group inside the range', () => {
+    const r = feasibility(
+      withProgram({ ageBasis: 'grades', ageMinYears: null, gradeMin: 0, gradeMax: 3 }),
+      { ...classOf(1), grades: { youngest: 1, oldest: 3 } },
+    )
+    expect(r.level).toBe('green')
+  })
+
+  it('never flags a class against a program open from pre-kindergarten', () => {
+    const r = feasibility(
+      withProgram({ ageBasis: 'grades', ageMinYears: null, gradeMin: -1, gradeMax: null }),
+      { ...classOf(0), grades: { youngest: 0, oldest: 12 } },
+    )
+    expect(r.level).toBe('green')
   })
 
   it('says nothing to an under-five room, which has no grade to compare', () => {

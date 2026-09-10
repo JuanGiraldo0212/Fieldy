@@ -10,7 +10,7 @@ import {
   resultLine,
   search,
   bandsFor,
-  effectiveGrade,
+  effectiveGrades,
   underFives,
   preferredTransport,
   type CatalogRow,
@@ -143,6 +143,17 @@ describe('decorate — labels', () => {
     expect(dec(row({ ageMinYears: null })).ageLabel).toBe('Ages not published')
     expect(dec(row({ ageBasis: 'grades', gradeMin: 0, gradeMax: 3 })).ageLabel).toBe('Grades K to 3')
     expect(dec(row({ ageBasis: 'grades', gradeMin: 2, gradeMax: 12 })).ageLabel).toBe('Grades 2 to 12')
+    // The catalog stores pre-kindergarten as -1; it used to read "Grades -1".
+    expect(dec(row({ ageBasis: 'grades', gradeMin: -1, gradeMax: null })).ageLabel).toBe('Grades Pre-K and up')
+    expect(dec(row({ ageBasis: 'grades', gradeMin: -1, gradeMax: 2 })).ageLabel).toBe('Grades Pre-K to 2')
+    expect(dec(row({ ageBasis: 'grades', gradeMin: null, gradeMax: 7 })).ageLabel).toBe('Up to Grade 7')
+  })
+
+  it('does not tell a Grades 1 to 3 group that a Grades 4 to 12 tour fits', () => {
+    const older = row({ ageBasis: 'grades', ageMinYears: null, gradeMin: 4, gradeMax: 12 })
+    const r = dec(older, state({ age_bands: [3, 4, 5] }))
+    expect(r.badge).toBe('Needs confirmation')
+    expect(r.feasibility.issueText).toBe('written for Grade 4 and up, yours are Grade 1 to Grade 3')
   })
 
   it('is honest about unpublished capacity and duration', () => {
@@ -218,6 +229,50 @@ describe('applyFilters — exclusions', () => {
     // Swan Lake is about 5 km out.
     expect(all([row()], state({ transport: 'walking', radius_km: 0 }))).toHaveLength(0)
     expect(all([row()], state({ transport: 'bus', radius_km: 0 }))).toHaveLength(1)
+  })
+
+  describe('grades', () => {
+    const graded = (gradeMin: number | null, gradeMax: number | null) =>
+      row({ ageBasis: 'grades', ageMinYears: null, gradeMin, gradeMax, venueLat: 48.42, venueLng: -123.36 })
+    const grades1to3 = state({ age_bands: [3, 4, 5], radius_km: 0 })
+
+    it('drops a program written only for older grades', () => {
+      // The report: a Grades 1 to 3 search listed a Grades 4 to 12 tour.
+      expect(all([graded(4, 12)], grades1to3)).toHaveLength(0)
+    })
+
+    it('drops a program written only for younger grades', () => {
+      expect(all([graded(0, 0)], state({ age_bands: [4, 5], radius_km: 0 }))).toHaveLength(0)
+    })
+
+    it('keeps a partial overlap, which is badged instead', () => {
+      const [r] = all([graded(2, 12)], grades1to3)
+      expect(r?.badge).toBe('Needs confirmation')
+      expect(r?.feasibility.issueText).toBe('written for Grade 2 and up, your youngest are Grade 1')
+    })
+
+    it('keeps a program inside the picked grades, and one open from pre-K', () => {
+      expect(all([graded(0, 3), graded(-1, null)], grades1to3)).toHaveLength(2)
+    })
+
+    it('keeps a program whose grades are not published', () => {
+      expect(all([graded(null, null)], grades1to3)).toHaveLength(1)
+    })
+
+    it('never drops a years-published program on grades', () => {
+      expect(all([row({ venueLat: 48.42, venueLng: -123.36 })], grades1to3)).toHaveLength(1)
+    })
+
+    it('leaves a pre-school room alone, which has no grade', () => {
+      expect(all([graded(4, 12)], state({ age_bands: [1], radius_km: 0 }))).toHaveLength(1)
+    })
+
+    it('keeps a low-grade program for a mixed room, whose under-fives may fit it', () => {
+      // 3 to 5 years plus Grade 3: the pre-schoolers are below Grade 3.
+      expect(all([graded(-1, 0)], state({ age_bands: [1, 5], radius_km: 0 }))).toHaveLength(1)
+      // But a program for older grades still goes: nobody in the room is old enough.
+      expect(all([graded(4, 12)], state({ age_bands: [1, 5], radius_km: 0 }))).toHaveLength(0)
+    })
   })
 
   it('filters by category', () => {
@@ -444,27 +499,30 @@ describe('preferredTransport', () => {
   })
 })
 
-describe('effectiveGrade', () => {
-  it('is the grade when one grade is picked', () => {
-    expect(effectiveGrade([2])).toBe(0)   // band 2 is Kindergarten, grade 0
-    expect(effectiveGrade([3])).toBe(1)   // band 3 is Grade 1
-    expect(effectiveGrade([14])).toBe(12) // band 14 is Grade 12
+describe('effectiveGrades', () => {
+  it('is the grade at both ends when one grade is picked', () => {
+    expect(effectiveGrades([2])).toEqual({ youngest: 0, oldest: 0 })   // band 2 is Kindergarten
+    expect(effectiveGrades([3])).toEqual({ youngest: 1, oldest: 1 })   // band 3 is Grade 1
+    expect(effectiveGrades([14])).toEqual({ youngest: 12, oldest: 12 }) // band 14 is Grade 12
   })
 
   it('is null for the pre-school bands, which have no grade', () => {
-    expect(effectiveGrade([0])).toBeNull()
-    expect(effectiveGrade([1])).toBeNull()
+    expect(effectiveGrades([0])).toBeNull()
+    expect(effectiveGrades([1])).toBeNull()
   })
 
-  it('is null when several grades are picked', () => {
-    // A group spanning Grades 2 to 4 has no single grade, and testing against
-    // one of them would answer a question nobody asked.
-    expect(effectiveGrade([4, 5, 6])).toBeNull()
+  it('spans the picked grades when several are picked', () => {
+    // Grades 1 to 3, picked in any order.
+    expect(effectiveGrades([5, 3, 4])).toEqual({ youngest: 1, oldest: 3 })
+  })
+
+  it('ignores the pre-school part of a mixed selection', () => {
+    expect(effectiveGrades([1, 2, 3])).toEqual({ youngest: 0, oldest: 1 })
   })
 
   it('falls back to the default band rather than throwing', () => {
-    expect(effectiveGrade([])).toBeNull()
-    expect(effectiveGrade([99])).toBeNull()
+    expect(effectiveGrades([])).toBeNull()
+    expect(effectiveGrades([99])).toBeNull()
   })
 })
 

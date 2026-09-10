@@ -245,15 +245,22 @@ function perChildLineFor(row: CatalogRow, size: number): string {
 function ageLabelFor(row: CatalogRow): string {
   if (row.ageBasis === 'grades') {
     if (row.gradeMin == null && row.gradeMax == null) return 'Grades not published'
-    const g = (n: number) => (n === 0 ? 'K' : String(n))
     if (row.gradeMin != null && row.gradeMax != null) {
-      return `Grades ${g(row.gradeMin)} to ${g(row.gradeMax)}`
+      return `Grades ${gradeShort(row.gradeMin)} to ${gradeShort(row.gradeMax)}`
     }
-    return `Grades ${g(row.gradeMin ?? row.gradeMax!)}`
+    return row.gradeMin != null
+      ? `Grades ${gradeShort(row.gradeMin)} and up`
+      : `Up to Grade ${gradeShort(row.gradeMax!)}`
   }
   if (row.ageMinYears == null) return 'Ages not published'
   if (row.ageMaxYears == null) return `Ages ${row.ageMinYears}+`
   return `Ages ${row.ageMinYears} to ${row.ageMaxYears}`
+}
+
+/* "K" for grade 0, "Pre-K" for the catalog's -1. */
+export function gradeShort(n: number): string {
+  if (n < 0) return 'Pre-K'
+  return n === 0 ? 'K' : String(n)
 }
 
 function capacityLabelFor(row: CatalogRow): string {
@@ -309,7 +316,7 @@ export function decorate(
     {
       ageMin: band.min,
       ageMax: band.max,
-      grade: effectiveGrade(state.age_bands),
+      grades: effectiveGrades(state.age_bands),
       size: state.children,
       budgetPerChild: state.budget_max,
     },
@@ -364,33 +371,53 @@ function usableBands(bands: number[]): number[] {
 }
 
 /*
-  The grade to compare a grade-published program against, or null.
+  The grades to compare a grade-published program against, youngest to
+  oldest, or null.
 
-  Null when the selection is one of the two pre-school bands, and null when
-  several grades are selected at once: a group spanning Grades 2 to 4 has no
-  single grade, and picking one of them to test against would quietly answer a
-  question nobody asked.
+  Null when the selection is only pre-school bands, which have no grade. A
+  selection spanning several grades keeps both ends: a Grades 1 to 3 group
+  must still hear that a Grades 4 to 12 program is not written for them.
 */
-export function effectiveGrade(bands: number[]): number | null {
+export function effectiveGrades(
+  bands: number[],
+): { youngest: number; oldest: number } | null {
   const use = usableBands(bands)
   const grades = use.map((i) => AGE_BANDS[i]![3]).filter((g): g is number => g != null)
-  return grades.length === 1 ? grades[0]! : null
+  if (!grades.length) return null
+  return { youngest: Math.min(...grades), oldest: Math.max(...grades) }
 }
 
 /* ─── Filter and sort ────────────────────────────────────────────────────── */
 
 /*
   Exclusions, not badges. A program outside the radius, out of walking range,
-  or failing a checked filter is REMOVED from results. Only age, capacity and
-  budget produce an amber badge — see feasibility.ts.
+  failing a checked filter, or written for none of the picked grades is
+  REMOVED from results. Only age, capacity and budget produce an amber badge —
+  see feasibility.ts.
 */
 export function applyFilters(
   results: SearchResult[],
   state: SearchState,
 ): SearchResult[] {
   const q = state.query.trim().toLowerCase()
+  const grades = effectiveGrades(state.age_bands)
+  const preschool = underFives(state.age_bands)
 
   return results.filter((r) => {
+    /*
+      Grades. A program written for none of the picked grades is not an
+      outing for this group, so it goes — a Grades 1 to 3 search does not list
+      a Grades 4 to 12 tour. A partial overlap stays, with its amber badge.
+      A pre-school band in the selection is younger than any grade, so it can
+      still fit a program whose top grade sits below the picked grades; only
+      the "too young" side excludes then.
+    */
+    if (r.ageBasis === 'grades' && grades != null) {
+      if (r.gradeMin != null && grades.oldest < r.gradeMin) return false
+      if (!preschool && r.gradeMax != null && grades.youngest > r.gradeMax) return false
+    }
+
+
     if (state.categories.length && !state.categories.includes(r.venueCategory)) {
       return false
     }

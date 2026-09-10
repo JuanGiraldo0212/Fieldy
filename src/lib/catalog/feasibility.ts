@@ -49,9 +49,9 @@ export type Feasibility = {
 export type GroupCriteria = {
   ageMin: number
   ageMax: number
-  /* The grade the director picked, when she picked one. Null for the two
-     pre-school bands and for a selection spanning several grades. */
-  grade?: number | null
+  /* The grades the director picked, youngest to oldest — equal when she
+     picked one. Null when only the two pre-school bands are picked. */
+  grades?: { youngest: number; oldest: number } | null
   size: number
   budgetPerChild: number
 }
@@ -117,22 +117,34 @@ export function feasibility(
 
      An unpublished youngest age raises nothing: the card already says "Ages
      not published", and it becomes an ask on the request. */
-  const grade = group.grade ?? null
-  const gradeName = (g: number) => (g === 0 ? 'Kindergarten' : `Grade ${g}`)
+  const grades = group.grades ?? null
 
-  if (program.ageBasis === 'grades' && grade != null) {
+  if (program.ageBasis === 'grades' && grades != null) {
     /*
       Both sides speak grades, so compare them. This is the case that used to
       fall through entirely: a "Grades 2 to 12" program publishes no ages, so
       with nothing to compare, a Grade 1 class was told it fitted.
+
+      A selection of several grades is compared by its ends. It used to be
+      skipped, which told a Grades 1 to 3 group that a Grades 4 to 12 program
+      fitted them. When the whole group is outside the range the reason names
+      the whole group; when only part of it is, it names that end.
     */
-    if (program.gradeMin != null && grade < program.gradeMin) {
+    const { youngest, oldest } = grades
+    const whole = youngest === oldest
+      ? gradeName(youngest)
+      : `${gradeName(youngest)} to ${gradeName(oldest)}`
+    if (program.gradeMin != null && youngest < program.gradeMin) {
       reasons.push(
-        `written for ${gradeName(program.gradeMin)} and up, yours are ${gradeName(grade)}`,
+        oldest < program.gradeMin || youngest === oldest
+          ? `written for ${gradeName(program.gradeMin)} and up, yours are ${whole}`
+          : `written for ${gradeName(program.gradeMin)} and up, your youngest are ${gradeName(youngest)}`,
       )
-    } else if (program.gradeMax != null && grade > program.gradeMax) {
+    } else if (program.gradeMax != null && oldest > program.gradeMax) {
       reasons.push(
-        `written for up to ${gradeName(program.gradeMax)}, yours are ${gradeName(grade)}`,
+        youngest > program.gradeMax || youngest === oldest
+          ? `written for up to ${gradeName(program.gradeMax)}, yours are ${whole}`
+          : `written for up to ${gradeName(program.gradeMax)}, your oldest are ${gradeName(oldest)}`,
       )
     }
   } else if (program.ageMinYears != null && program.ageMinYears > group.ageMin) {
@@ -163,6 +175,12 @@ export function feasibility(
     reasons,
     issueText: reasons.join(' · '),
   }
+}
+
+/* Grade 0 is Kindergarten; the catalog stores pre-kindergarten as -1. */
+export function gradeName(g: number): string {
+  if (g < 0) return 'Pre-K'
+  return g === 0 ? 'Kindergarten' : `Grade ${g}`
 }
 
 /* The badge label on a catalog card. */
