@@ -1,0 +1,87 @@
+{
+  "venue": {
+    "id": "needle-arts-centre",
+    "name": "Needle & Arts Centre",
+    "website": "https://www.needlenart.com/",
+    "description": "Needle & Arts is a yarn and needlework business selling knitting and crochet supplies through its own online shop. Its physical store closed for retirement on 31 March 2020 and there is no longer anywhere to visit, though it still offers home delivery between Campbell River and the Comox Valley and a pickup spot in Campbell River. The site lists yarn, needles, notions, patterns and kits, and nothing else. There are no classes, workshops, tours or visits published anywhere on it, so there is nothing here a school or daycare group could book.",
+    "category": "arts_performance",
+    "address": "6414 A Bishop Road, Courtenay, BC V9J 1V3",
+    "lat": null,
+    "lng": null,
+    "geo_source": "geocode_pending",
+    "hosts_school_groups": false,
+    "hosts_daycare_groups": false,
+    "youngest_age_welcomed_years": null,
+    "booking_email": "info@needlenart.com",
+    "booking_phone": "250-203-2807",
+    "booking_url": null,
+    "booking_method": null,
+    "has_washrooms": null,
+    "has_lunch_space": null,
+    "has_rain_backup": null,
+    "stroller_accessible": null,
+    "wheelchair_accessible": null,
+    "bus_parking": null,
+    "facility_notes": null,
+    "nearby_park": null,
+    "restrictions": null,
+    "languages": null,
+    "general_admission_child_cad": null,
+    "general_admission_adult_cad": null,
+    "hours_notes": "The online shop is open 24 hours a day, seven days a week. There is no physical store to visit; it closed at the end of March 2020.",
+    "seasonal_notes": null,
+    "price_year_or_season": null,
+    "checked_on": "2026-09-10",
+    "checked_by": "scraper"
+  },
+  "programs": [],
+  "images": [],
+  "gaps": [
+    "NOT FOR GROUPS: this is an online yarn and needlework retailer with no premises. The about page states the physical store 'closed for retirement on March 31, 2020' and the home page says the business is 'Now only online as our physical location closed down end of March 2020'. Nothing on the site is bookable by a children's group.",
+    "No classes, workshops, lessons, drop-in sessions or events for children appear anywhere on the site. The news page carries only product newsletters and sale announcements, the most recent dated 25 August 2026, so the site is current rather than abandoned.",
+    "The tracker lists this venue in Campbell River. Every address on the site is in the Comox Valley: the site footer gives 6414 A Bishop Road, Courtenay, the contact page gives a mailing address on Cliffe Avenue in Courtenay, and the contact page also says the physical location is in Merville. Campbell River appears only as a delivery and pickup area.",
+    "COORDINATES: no coordinates are published and the street number does not resolve to a point, only the road itself does, and the site gives two different addresses. Rather than drop a pin that could be a long way out, the coordinates have been left blank for someone to fill in later.",
+    "IMAGES: no image has been recorded. The Open Graph image is the shop's wordmark rather than a photograph, and every other picture on the site is either a stock photograph of yarn or a supplier product shot, none of which shows anything a group would arrive at. There is no premises to photograph.",
+    "The opening hours block in the site footer reads 'All Day' for every day of the week, which describes the online shop rather than any premises."
+  ],
+  "conflicts": [
+    {
+      "field": "address",
+      "values": [
+        "6414 A Bishop Road, Courtenay, BC V9J 1V3",
+        "Needle & Arts 357, Unit 6 - 2401 Cliffe Avenue, Courtenay, BC, V9N 2L5"
+      ],
+      "sources": [
+        "https://www.needlenart.com/",
+        "https://www.needlenart.com/contact"
+      ],
+      "note": "Their site gives two different addresses, one on Bishop Road and one on Cliffe Avenue, and the contact page also says the physical location is in Merville. There is no shop to walk into either way, so treat both as postal addresses."
+    },
+    {
+      "field": "booking_phone",
+      "values": [
+        "250-203-2807",
+        "250-287-8898"
+      ],
+      "sources": [
+        "https://www.needlenart.com/",
+        "https://www.needlenart.com/contact"
+      ],
+      "note": "Two different phone numbers appear on their site, one in the footer and one on the contact page. If the first does not answer, try the other, or email them instead."
+    }
+  ],
+  "pages_opened": [
+    "https://www.needlenart.com/",
+    "https://www.needlenart.com/about",
+    "https://www.needlenart.com/contact",
+    "https://www.needlenart.com/whatsnew"
+  ],
+  "pages_useful": [
+    "https://www.needlenart.com/",
+    "https://www.needlenart.com/about",
+    "https://www.needlenart.com/contact",
+    "https://www.needlenart.com/whatsnew"
+  ],
+  "extracted_at": "2026-09-10T18:40:00Z",
+  "extractor_version": "v2.0"
+}

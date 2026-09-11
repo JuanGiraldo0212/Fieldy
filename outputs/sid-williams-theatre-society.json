@@ -1,0 +1,212 @@
+{
+ "venue": {
+  "id": "sid-williams-theatre",
+  "name": "Sid Williams Theatre Society",
+  "website": "https://www.sidwilliamstheatre.com/",
+  "description": "The Sid Williams Theatre is a 500 seat performing arts centre on Cliffe Avenue in downtown Courtenay, run by a registered charity, the Sid Williams Theatre Society. It presents its own season of concerts, plays, documentaries and family films, typically between September and early June, and rents the building to community groups and commercial promoters the rest of the time. The family films screen on weekend afternoons and admission to them is free. No school matinee, class workshop, backstage tour or group rate is published anywhere on the site, so what a class books here is seats at a public event.",
+  "category": "arts_performance",
+  "address": "442 Cliffe Avenue, Courtenay, BC V9N 2J2",
+  "lat": 49.69195,
+  "lng": -124.99727,
+  "geo_source": "geocoded",
+  "hosts_school_groups": null,
+  "hosts_daycare_groups": null,
+  "youngest_age_welcomed_years": null,
+  "booking_email": "tickets@sidtheatre.com",
+  "booking_phone": "250-338-2430",
+  "booking_url": "https://www.sidwilliamstheatre.com/events/",
+  "booking_method": "shop",
+  "has_washrooms": true,
+  "has_lunch_space": false,
+  "has_rain_backup": null,
+  "stroller_accessible": null,
+  "wheelchair_accessible": true,
+  "bus_parking": null,
+  "facility_notes": {
+   "washrooms": "Two gender-neutral, single-occupancy accessible washrooms, one on the main (street) level and one on the lower (fountain) level.",
+   "wheelchair_accessible": "A platform area for accessible seating (including wheelchairs) is located in Orchestra Centre at the rear of the auditorium. Balcony level seating is accessible by stairs only, 19 stairs.",
+   "lunch_space": "No outside food or drink permitted in the venue."
+  },
+  "nearby_park": null,
+  "restrictions": [
+   "No outside food or drink permitted in the venue.",
+   "All patrons entering the theatre must have a ticket regardless of age.",
+   "Children ages 13 and under must be accompanied by, and be seated next to, a supervising adult.",
+   "Patrons are not allowed to bring large or bulky items (bags, backpacks, etc.) into the auditorium.",
+   "Scent sensitive facility: please refrain from wearing fragrance or scented products when attending the theatre."
+  ],
+  "languages": null,
+  "general_admission_child_cad": null,
+  "general_admission_adult_cad": null,
+  "hours_notes": "Box office Tuesday to Friday 12 pm to 5 pm, and from 2 hours before an event starts. Closed Saturdays, Sundays, Mondays and statutory holidays. Lobby doors open 1 hour before an event and the auditorium doors about 30 minutes before.",
+  "seasonal_notes": "The society presents its own season typically between September and early June.",
+  "price_year_or_season": null,
+  "checked_on": "2026-09-10",
+  "checked_by": "scraper"
+ },
+ "programs": [
+  {
+   "id": "family-film-screening",
+   "name": "Family Film Series screening",
+   "description": "The theatre picks a few family films each season and screens them on weekend afternoons. Children are encouraged to come in costume or dressed in the theme of the film, special guests appear dressed as characters from it, and local sponsors usually provide door prizes. The series page says admission is free. Everyone who comes in needs a ticket, whatever their age, and children of 13 and under have to sit next to a supervising adult.",
+   "what_children_do": "Sit in the auditorium and watch a film, often dressed up in its theme. Characters from the film come out to meet them and door prizes are handed out.",
+   "our_note": "These land on a weekend afternoon, so it is a family outing rather than a weekday class trip. If you want to bring a group, phone the box office first, because nothing on the site covers holding a block of seats.",
+   "practical_summary": "Washrooms on both levels, step free seating at the back of the auditorium and a lift down to the lower level. There is nowhere to eat a packed lunch, because outside food and drink are not allowed, and nothing is said about parking a bus.",
+   "comes_to_you": false,
+   "age_min_years": null,
+   "age_max_years": null,
+   "grade_min": null,
+   "grade_max": null,
+   "age_basis": null,
+   "duration_min": null,
+   "capacity_max": null,
+   "capacity_min": null,
+   "cost_per_child_cad": null,
+   "cost_per_group_cad": null,
+   "cost_per_adult_cad": null,
+   "free_adults_per_children": null,
+   "is_free": true,
+   "tax_included": null,
+   "extra_fees_note": "Their box office page says a ticket handling fee of $3.40 including GST applies to every ticket, bought by any method. It does not say whether a free film still carries it.",
+   "school_rate_only": false,
+   "deposit_required": null,
+   "payment_timing": null,
+   "cancellation_note": "All purchases are final, no refunds. The only exceptions are for events that are rescheduled, postponed, or cancelled.",
+   "months_offered": null,
+   "days_offered": [
+    6,
+    7
+   ],
+   "time_slots": null,
+   "lead_time_days": null,
+   "chaperone_ratio": null,
+   "adults_free": null,
+   "indoor": true,
+   "outdoor": false,
+   "format": null,
+   "sensory_friendly": null,
+   "low_noise": null,
+   "neurodiversity_friendly": null,
+   "mood_tags": [
+    "play",
+    "explore"
+   ],
+   "curriculum_tags": null,
+   "booking_email": null,
+   "booking_url": null,
+   "booking_method": null,
+   "source_url": "https://www.sidwilliamstheatre.com/series/family-films/",
+   "evidence": "These films are an affordable afternoon for the whole family - admission is free!",
+   "checked_on": "2026-09-10",
+   "image_ids": null
+  }
+ ],
+ "images": [
+  {
+   "id": "hero-stage-lights",
+   "url": "https://www.sidwilliamstheatre.com/site/assets/files/1/lights_1600x350.1200x630p50x50.jpg",
+   "role": "hero",
+   "alt": "A theatre stage with the curtain closed, washed in blue and purple light from lamps overhead.",
+   "alt_source": "generated",
+   "caption": null,
+   "found_on_url": "https://www.sidwilliamstheatre.com/",
+   "width": 1200,
+   "height": 630,
+   "rights_note": null,
+   "usage": "unverified"
+  },
+  {
+   "id": "space-auditorium-from-balcony",
+   "url": "https://www.sidwilliamstheatre.com/site/assets/files/1022/auditorium_4.1400x0.jpg",
+   "role": "space",
+   "alt": "The auditorium seen from the balcony, rows of seats facing a stage with a large projection screen lowered and orange side curtains.",
+   "alt_source": "generated",
+   "caption": null,
+   "found_on_url": "https://www.sidwilliamstheatre.com/venue-rentals/",
+   "width": null,
+   "height": null,
+   "rights_note": null,
+   "usage": "unverified"
+  },
+  {
+   "id": "space-balcony-seating",
+   "url": "https://www.sidwilliamstheatre.com/site/assets/files/1022/auditorium_1.1400x0.jpg",
+   "role": "space",
+   "alt": "Curved rows of dark padded theatre seats on a balcony level, lit by lamps on the side wall.",
+   "alt_source": "generated",
+   "caption": null,
+   "found_on_url": "https://www.sidwilliamstheatre.com/venue-rentals/",
+   "width": null,
+   "height": null,
+   "rights_note": null,
+   "usage": "unverified"
+  },
+  {
+   "id": "space-view-from-stage",
+   "url": "https://www.sidwilliamstheatre.com/site/assets/files/814942/stageview_1600x350.jpg",
+   "role": "space",
+   "alt": "The empty auditorium seen from the stage, with rows of seats on the floor and a balcony across the back.",
+   "alt_source": "generated",
+   "caption": null,
+   "found_on_url": "https://www.sidwilliamstheatre.com/plan-your-visit/accessibility/",
+   "width": null,
+   "height": null,
+   "rights_note": null,
+   "usage": "unverified"
+  }
+ ],
+ "gaps": [
+  "PRICE, AND WHOSE PRICE. There is no group rate, no school rate and no student rate anywhere on this site. Ticket prices sit on each individual event page and change with the show, so a class trip costs whatever that event costs. The only price we could record is the family films, which the series page says are free.",
+  "The free family films and the box office page disagree about money. The box office page says a $3.40 handling fee including GST applies to all tickets by all methods of purchase, and nobody says whether a free film still carries it. On a class of 25 that is about $85.",
+  "No school matinee, student matinee rate, class workshop, backstage tour, drama class or theatre school is published anywhere on the site. The only child facing thing the society runs itself is the family film series.",
+  "The upcoming events list is loaded by script and did not render for us, so we could not confirm a family film is scheduled this season. The series page is live and Family Film Series is still one of the filters on their events page, so the series itself has not been retired.",
+  "Months the family films run: unknown. They say a few each season, and their own season runs roughly September to early June, but no months or dates for the films are published.",
+  "Youngest age welcomed: not stated. Everyone entering needs a ticket including babies in arms, and children of 13 and under must be seated next to a supervising adult, which for a class means an adult beside every child.",
+  "How many adults have to come with a group of children: not stated as a ratio anywhere.",
+  "Somewhere for a group to eat a packed lunch: there is none. No outside food or drink is allowed in the building.",
+  "Bus parking: not stated. Two public car parks sit beside the theatre, Jubilee Square and Upper Filberg Centre, and the site says both fill up quickly.",
+  "How a group reserves a block of seats, and whether that is even possible, is not published. Accessible platform seats can only be bought by phone or in person.",
+  "COORDINATES: the map on their directions page carries only a map centre, not a place pin, so the point here was geocoded from the street address instead. It lands on the theatre.",
+  "IMAGES: none of the photographs on this site carry alt text, so every description here was written after opening the picture and looking at it."
+ ],
+ "conflicts": [
+  {
+   "field": "is_free",
+   "values": [
+    "admission is free",
+    "Ticket handling fee - $3.40 (incl GST) per ticket"
+   ],
+   "sources": [
+    "https://www.sidwilliamstheatre.com/series/family-films/",
+    "https://www.sidwilliamstheatre.com/events-tickets/box-office-info/"
+   ],
+   "note": "Their family film page says admission is free. Their box office page says a $3.40 handling fee goes on every ticket, however you buy it. Nobody says which applies to a free film, so ask when you reserve seats."
+  }
+ ],
+ "pages_opened": [
+  "https://www.sidwilliamstheatre.com/",
+  "https://www.sidwilliamstheatre.com/support/student-bursaries/",
+  "https://www.sidwilliamstheatre.com/plan-your-visit/accessibility/",
+  "https://www.sidwilliamstheatre.com/plan-your-visit/getting-here/",
+  "https://www.sidwilliamstheatre.com/events-tickets/box-office-info/",
+  "https://www.sidwilliamstheatre.com/plan-your-visit/audience-info/",
+  "https://www.sidwilliamstheatre.com/about/",
+  "https://www.sidwilliamstheatre.com/venue-rentals/",
+  "https://www.sidwilliamstheatre.com/series/family-films/",
+  "https://www.sidwilliamstheatre.com/support/superstar-program/",
+  "https://www.sidwilliamstheatre.com/events-tickets/upcoming-events/",
+  "https://www.sidwilliamstheatre.com/search/"
+ ],
+ "pages_useful": [
+  "https://www.sidwilliamstheatre.com/",
+  "https://www.sidwilliamstheatre.com/plan-your-visit/accessibility/",
+  "https://www.sidwilliamstheatre.com/plan-your-visit/getting-here/",
+  "https://www.sidwilliamstheatre.com/events-tickets/box-office-info/",
+  "https://www.sidwilliamstheatre.com/plan-your-visit/audience-info/",
+  "https://www.sidwilliamstheatre.com/about/",
+  "https://www.sidwilliamstheatre.com/venue-rentals/",
+  "https://www.sidwilliamstheatre.com/series/family-films/"
+ ],
+ "extracted_at": "2026-09-10T23:50:00Z",
+ "extractor_version": "v2.0"
+}

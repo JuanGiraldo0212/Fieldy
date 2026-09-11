@@ -1,0 +1,286 @@
+{
+  "venue": {
+    "id": "maritime-heritage-centre",
+    "name": "Maritime Heritage Centre",
+    "website": "https://www.maritimeheritagecentre.ca/",
+    "description": "The Maritime Heritage Centre is a museum on the Campbell River waterfront built around the BCP 45, the seine fishing boat pictured on the old Canadian five dollar bill. The galleries hold model boats, knot displays, swords and archival photographs, along with interactive stations including a knot board, a bridge simulator, a magnetic signal flag board and a lighthouse light. Admission is $8 for adults and $5 for children and seniors, and children under five are free. The centre also rents its halls and rooms out for weddings, meetings and other events, which run outside museum hours.",
+    "category": "museums_history",
+    "address": "621 Island Highway, Campbell River, BC, V9W 0B7",
+    "lat": 50.01993,
+    "lng": -125.23701,
+    "geo_source": "geocoded",
+    "hosts_school_groups": true,
+    "hosts_daycare_groups": null,
+    "youngest_age_welcomed_years": null,
+    "booking_email": "info@maritimeheritagecentre.ca",
+    "booking_phone": "250-286-3161",
+    "booking_url": null,
+    "booking_method": "email",
+    "has_washrooms": null,
+    "has_lunch_space": null,
+    "has_rain_backup": null,
+    "stroller_accessible": null,
+    "wheelchair_accessible": null,
+    "bus_parking": null,
+    "facility_notes": null,
+    "nearby_park": null,
+    "restrictions": null,
+    "languages": null,
+    "general_admission_child_cad": 5,
+    "general_admission_adult_cad": 8,
+    "hours_notes": "Tuesday to Friday 10:00 AM to 4:30 PM, and Saturday 10:00 AM to 2:00 PM. Their contact page gives a different set of days, so check before you travel.",
+    "seasonal_notes": "Closed for stat holidays, and from December 21 to January 5.",
+    "price_year_or_season": "The $60 school program price was posted in August 2025 and carries no school year label. The $8 and $5 admission prices carry no year.",
+    "checked_on": "2026-09-07",
+    "checked_by": "scraper"
+  },
+  "programs": [
+    {
+      "id": "school-program",
+      "name": "School program",
+      "description": "A visit for one class, priced at $60 for the class and covering up to 30 students, running about an hour and a half. It takes in a tour of the fishing boat BCP 45, a scavenger hunt through the museum exhibits in small groups, and a hands on maritime activity chosen to suit the age and curriculum, such as knot tying, flag making, signal codes or buoyancy. The centre says it can be adapted for all grades and books it by email. It also suggests pairing the day with the Discovery Passage Aquarium nearby, which is a separate organisation and books separately.",
+      "what_children_do": "Climb aboard the BCP 45, the fishing boat from the old five dollar bill, and hear what life at sea and the fishing industry were like. Then work through the museum exhibits in small groups on a scavenger hunt. Finish with a hands on activity, for example tying knots or laying out signal flags.",
+      "our_note": "The $60 is for the whole class, not for each child, which makes this one of the cheaper outings on the island. The site says nothing about washrooms, coat and bag storage, or where a class eats, so put all three in the same email you use to reserve.",
+      "practical_summary": "The visit is indoors, runs about an hour and a half and costs $60 for a class of up to 30. Washrooms, a lunch space, coach parking and how many adults have to come are all unstated, so ask when you email.",
+      "comes_to_you": false,
+      "age_min_years": null,
+      "age_max_years": null,
+      "grade_min": null,
+      "grade_max": null,
+      "age_basis": null,
+      "duration_min": 90,
+      "capacity_max": 30,
+      "capacity_min": null,
+      "cost_per_child_cad": null,
+      "cost_per_group_cad": 60,
+      "cost_per_adult_cad": null,
+      "free_adults_per_children": null,
+      "is_free": false,
+      "tax_included": null,
+      "extra_fees_note": "The $60 covers up to 30 students. The site does not say what a larger class costs, or whether accompanying adults pay admission.",
+      "school_rate_only": true,
+      "deposit_required": null,
+      "payment_timing": null,
+      "cancellation_note": null,
+      "months_offered": null,
+      "days_offered": null,
+      "time_slots": null,
+      "lead_time_days": null,
+      "chaperone_ratio": null,
+      "adults_free": null,
+      "indoor": true,
+      "outdoor": null,
+      "format": [
+        "guided",
+        "hands_on"
+      ],
+      "sensory_friendly": null,
+      "low_noise": null,
+      "neurodiversity_friendly": null,
+      "mood_tags": [
+        "play",
+        "explore",
+        "learn"
+      ],
+      "curriculum_tags": null,
+      "booking_email": "info@maritimeheritagecentre.ca",
+      "booking_url": null,
+      "booking_method": "email",
+      "source_url": "https://www.maritimeheritagecentre.ca/affordable-educational-and-unforgettable-school-programs-at-the-maritime-heritage-centre/",
+      "evidence": "$60 per class (includes up to 30 students)",
+      "checked_on": "2026-09-07",
+      "image_ids": [
+        "program-school-visit",
+        "space-bcp-45"
+      ]
+    },
+    {
+      "id": "self-guided-museum-visit",
+      "name": "Self-guided museum visit",
+      "description": "The museum is open to drop in visitors at $8 for adults and $5 for children and seniors, with children under five free. Interactive stations include a knot board, a bridge simulator, a magnetic signal flag board and a lighthouse light, alongside the BCP 45 and the display galleries. No group rate is published for a visit that is not the school program, and no group booking route is given for one.",
+      "what_children_do": "Try the knots on the knot board, take the seat at the bridge simulator and steer a ship, spell out messages with magnetic signal flags, and see the lighthouse light working up close.",
+      "our_note": "Under fives are free and the rest is $5 a head, so a small group can do this cheaply on a drop in. If you have a whole class, the $60 school program adds a guided boat tour and a scavenger hunt for less than paying per child.",
+      "practical_summary": "Open Tuesday to Friday until 4:30 and Saturday until 2:00, at $8 for adults and $5 for children, with under fives free. Washrooms, a lunch space and coach parking are not stated, so it is worth a call.",
+      "comes_to_you": false,
+      "age_min_years": null,
+      "age_max_years": null,
+      "grade_min": null,
+      "grade_max": null,
+      "age_basis": null,
+      "duration_min": null,
+      "capacity_max": null,
+      "capacity_min": null,
+      "cost_per_child_cad": 5,
+      "cost_per_group_cad": null,
+      "cost_per_adult_cad": 8,
+      "free_adults_per_children": null,
+      "is_free": false,
+      "tax_included": null,
+      "extra_fees_note": "Children under 5 are free. No group rate is published for a drop in visit.",
+      "school_rate_only": false,
+      "deposit_required": null,
+      "payment_timing": null,
+      "cancellation_note": null,
+      "months_offered": null,
+      "days_offered": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "time_slots": null,
+      "lead_time_days": null,
+      "chaperone_ratio": null,
+      "adults_free": null,
+      "indoor": true,
+      "outdoor": null,
+      "format": [
+        "self_guided",
+        "interactive"
+      ],
+      "sensory_friendly": null,
+      "low_noise": null,
+      "neurodiversity_friendly": null,
+      "mood_tags": [
+        "play",
+        "explore"
+      ],
+      "curriculum_tags": null,
+      "booking_email": null,
+      "booking_url": null,
+      "booking_method": null,
+      "source_url": "https://www.maritimeheritagecentre.ca/get-hands-on-with-our-interactive-exhibits/",
+      "evidence": "Kids under 5 are always free!",
+      "checked_on": "2026-09-07",
+      "image_ids": [
+        "activity-knot-display"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "id": "hero-exterior",
+      "url": "https://www.maritimeheritagecentre.ca/wp-content/uploads/2024/11/Maritime-Heritage-Centre-Campbell-River-scaled.jpg",
+      "role": "hero",
+      "alt": "A two storey blue and grey building with a lighthouse shaped tower at one end, seen across an empty paved parking lot.",
+      "alt_source": "generated",
+      "caption": null,
+      "found_on_url": "https://www.maritimeheritagecentre.ca/",
+      "width": 2133,
+      "height": 1600,
+      "rights_note": null,
+      "usage": "unverified"
+    },
+    {
+      "id": "program-school-visit",
+      "url": "https://www.maritimeheritagecentre.ca/wp-content/uploads/2025/08/2025-07-24-Maritime-Heritage-Museum-35-scaled.jpg",
+      "role": "program",
+      "alt": "A museum display case holding a canvas diving suit and brass diving helmet, lit against a blue underwater backdrop with coral.",
+      "alt_source": "generated",
+      "caption": null,
+      "found_on_url": "https://www.maritimeheritagecentre.ca/affordable-educational-and-unforgettable-school-programs-at-the-maritime-heritage-centre/",
+      "width": 2401,
+      "height": 1600,
+      "rights_note": null,
+      "usage": "unverified"
+    },
+    {
+      "id": "activity-knot-display",
+      "url": "https://www.maritimeheritagecentre.ca/wp-content/uploads/2024/11/2023-03-17-Maritime-Heritage-Museum-58.jpg",
+      "role": "activity",
+      "alt": "A person leaning over a long wooden display bench, handling white ropes laid out along its length.",
+      "alt_source": "generated",
+      "caption": null,
+      "found_on_url": "https://www.maritimeheritagecentre.ca/get-hands-on-with-our-interactive-exhibits/",
+      "width": 1600,
+      "height": 1067,
+      "rights_note": null,
+      "usage": "unverified"
+    },
+    {
+      "id": "space-bcp-45",
+      "url": "https://www.maritimeheritagecentre.ca/wp-content/uploads/2024/11/2023-03-17-Maritime-Heritage-Museum-68.jpg",
+      "role": "space",
+      "alt": "The fishing boat B.C.P. 45 standing indoors in the museum hall, with a beamed wooden ceiling and display cases around it.",
+      "alt_source": "generated",
+      "caption": null,
+      "found_on_url": "https://www.maritimeheritagecentre.ca/",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    },
+    {
+      "id": "space-gallery-hull",
+      "url": "https://www.maritimeheritagecentre.ca/wp-content/uploads/2024/11/2023-03-17-Maritime-Heritage-Museum-19.jpg",
+      "role": "space",
+      "alt": "A man in a vest and cap looking up at the hull of a boat displayed on a stand in a museum gallery.",
+      "alt_source": "generated",
+      "caption": null,
+      "found_on_url": "https://www.maritimeheritagecentre.ca/",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    }
+  ],
+  "gaps": [
+    "RETRIEVAL NOTE: a plain fetch of the school programs page returned a stale cached page footer carrying different opening hours and holiday dates from the rest of the site. The live page in a browser carries the same footer as every other page. Re-read the hours in a browser, not from a fetch.",
+    "The $60 is for the class, not for each child. Their page reads '$60 per class (includes up to 30 students)', so a class of 30 is $60 in total, not $1,800. Confirm on booking, because the difference is $1,740.",
+    "Nothing is published about washrooms, an indoor or outdoor place to eat lunch, coat and bag storage, or coach and bus parking.",
+    "How many adults have to come with a class is not stated, and neither is whether accompanying adults pay admission on top of the $60.",
+    "No age or grade range is published for the school program. The page says only that it can be adapted for all grades, so both the age and grade fields are unanswered.",
+    "No minimum notice, deposit, payment timing or cancellation policy is published for the school program.",
+    "Daycares and preschools are not mentioned anywhere on the site. The programs are written for classes and grades, so whether a group of under fives is taken is unanswered.",
+    "The school program price was posted in August 2025 with no school year attached. Confirm it still stands for 2026 to 2027.",
+    "Coordinates were geocoded from the published street address. The map on the contact page is a Google search by venue name and carries no place pin, and the address link elsewhere on the site carries a viewport centre 6 km away at 50.019962, -125.3192368. The destination coordinates inside that same link, 50.0199923 and -125.2368285, agree with the geocoded point to about 15 metres.",
+    "The site prints the postal code as V9W 0B7, while the map link behind that same address line uses V9W 5C1. Give a driver the street address rather than the postal code.",
+    "The site suggests pairing the visit with the Discovery Passage Aquarium next door. That is a different organisation with its own prices and booking, and nothing about it was taken from this site.",
+    "Whether the school program runs on particular days or at set start times is not published, and museum opening hours end at 4:30 on weekdays and 2:00 on Saturdays."
+  ],
+  "conflicts": [
+    {
+      "field": "hours_notes",
+      "values": [
+        "Monday 10:00 AM to 4:30 PM, Tuesday to Friday 10:00 AM to 4:30 PM, Saturday 10:00 AM to 2:00 PM, Sunday 10:00 AM to 2:00 PM",
+        "Tuesday to Friday 10:00 AM to 4:30 PM, Saturday 10:00 AM to 2:00 PM"
+      ],
+      "sources": [
+        "https://www.maritimeheritagecentre.ca/contact-us/",
+        "https://www.maritimeheritagecentre.ca/"
+      ],
+      "note": "Their contact page and the bottom of every page give different opening days. One has them open seven days a week, the other only Tuesday to Saturday. We show the shorter set. Worth checking when you book, especially for a Monday."
+    },
+    {
+      "field": "seasonal_notes",
+      "values": [
+        "Closed for Holidays Dec 23 to Jan 6",
+        "Closed for Stat holidays, and from December 21 to January 5"
+      ],
+      "sources": [
+        "https://www.maritimeheritagecentre.ca/contact-us/",
+        "https://www.maritimeheritagecentre.ca/"
+      ],
+      "note": "Two of their pages give different Christmas closing dates. One says December 21 to January 5, the other December 23 to January 6. Assume the longer closure and check before you plan a December visit."
+    }
+  ],
+  "pages_opened": [
+    "https://www.maritimeheritagecentre.ca/",
+    "https://www.maritimeheritagecentre.ca/learn/",
+    "https://www.maritimeheritagecentre.ca/affordable-educational-and-unforgettable-school-programs-at-the-maritime-heritage-centre/",
+    "https://www.maritimeheritagecentre.ca/get-hands-on-with-our-interactive-exhibits/",
+    "https://www.maritimeheritagecentre.ca/contact-us/",
+    "https://www.maritimeheritagecentre.ca/about-us/exhibits/",
+    "https://www.maritimeheritagecentre.ca/venue-rentals/"
+  ],
+  "pages_useful": [
+    "https://www.maritimeheritagecentre.ca/",
+    "https://www.maritimeheritagecentre.ca/affordable-educational-and-unforgettable-school-programs-at-the-maritime-heritage-centre/",
+    "https://www.maritimeheritagecentre.ca/get-hands-on-with-our-interactive-exhibits/",
+    "https://www.maritimeheritagecentre.ca/contact-us/",
+    "https://www.maritimeheritagecentre.ca/venue-rentals/"
+  ],
+  "extracted_at": "2026-09-07T00:00:00Z",
+  "extractor_version": "v2.0"
+}

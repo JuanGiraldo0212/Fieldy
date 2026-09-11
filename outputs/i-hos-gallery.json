@@ -1,0 +1,100 @@
+{
+  "venue": {
+    "id": "i-hos-gallery",
+    "name": "I-Hos Gallery",
+    "website": "https://ihosgallery.com/",
+    "description": "I-Hos Gallery is a retail art gallery owned by the K'ómoks Band, on the site of the original K'ómoks village between Courtenay and Comox. It sells traditional and contemporary Northwest Coast work by more than 50 Indigenous artists, including masks, carvings, jewellery, prints and woven cedar, and the building carries a house front design and entrance pole made for the gallery in 1995. The site is open and trading, with an artist bursary running and hours posted. It is a shop and describes no tours, workshops, admission or bookable visits for children's groups, so treat it as somewhere to walk into rather than a field trip you can book.",
+    "category": "arts_performance",
+    "address": "3310 Comox Rd Courtenay, BC V9N 3P8",
+    "lat": 49.67851,
+    "lng": -124.95928,
+    "geo_source": "geocoded",
+    "hosts_school_groups": false,
+    "hosts_daycare_groups": false,
+    "youngest_age_welcomed_years": null,
+    "booking_email": "Sales@ihosgallery.com",
+    "booking_phone": "1-250-339-7702",
+    "booking_url": null,
+    "booking_method": null,
+    "has_washrooms": null,
+    "has_lunch_space": null,
+    "has_rain_backup": null,
+    "stroller_accessible": null,
+    "wheelchair_accessible": null,
+    "bus_parking": null,
+    "facility_notes": null,
+    "nearby_park": null,
+    "restrictions": null,
+    "languages": null,
+    "general_admission_child_cad": null,
+    "general_admission_adult_cad": null,
+    "hours_notes": "Thursday to Tuesday, 10am to 5pm. Closed Wednesdays and holidays.",
+    "seasonal_notes": null,
+    "price_year_or_season": null,
+    "checked_on": "2026-09-07",
+    "checked_by": "scraper"
+  },
+  "programs": [],
+  "images": [
+    {
+      "id": "hero-roadside-sign",
+      "url": "https://ihosgallery.com/cdn/shop/files/sign_1_1024x1024.jpg",
+      "role": "hero",
+      "alt": "A roadside sign reading I-Hos Gallery, Gilakas'la Welcome, Open, standing on grass beside a road with water and snowy mountains behind.",
+      "alt_source": "generated",
+      "caption": null,
+      "found_on_url": "https://ihosgallery.com/pages/contact",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    },
+    {
+      "id": "space-gallery-interior",
+      "url": "https://ihosgallery.com/cdn/shop/files/ihos-about_1024x1024.jpg",
+      "role": "space",
+      "alt": "A gallery interior with heavy timber posts and beams, glass display cases of jewellery and small carvings, and framed prints covering the walls.",
+      "alt_source": "generated",
+      "caption": null,
+      "found_on_url": "https://ihosgallery.com/pages/about-us",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    }
+  ],
+  "gaps": [
+    "The site describes no tour, talk, workshop or group visit of any kind, so there is nothing here a group leader can book from the website.",
+    "Nothing says whether a class or a daycare group may come in together, or how many people can be on the floor at once. That is the first thing to ask if you want to bring children.",
+    "There is no admission price because the gallery is a shop, and nothing suggests a charge to look around.",
+    "Washrooms, lunch space, parking and bus access are not mentioned anywhere on the site.",
+    "Nothing says whether the building is step-free or stroller friendly.",
+    "The pieces are largely in glass cases and on walls, and the site says nothing about anything children may touch.",
+    "Their social card image is a promotional graphic saying Shop Online rather than a photograph, so the main picture here is the roadside sign photo from their contact page instead.",
+    "The map on their contact page carries only a map centre, which sits about two kilometres west of the address, so the location here was geocoded from the street address instead.",
+    "The description on their contact page still carries a third set of hours, Monday to Saturday, which does not match either set shown on the page itself."
+  ],
+  "conflicts": [
+    {
+      "field": "hours_notes",
+      "values": ["Thursday - Tuesday | OPEN 10am – 5pm", "Hours: Thursday-Sunday, 10-5pm"],
+      "sources": [
+        "https://ihosgallery.com/pages/contact",
+        "https://ihosgallery.com/"
+      ],
+      "note": "Their opening hours are given two different ways. The main text says Thursday through Tuesday, while the small print at the bottom of every page says Thursday through Sunday. Phone ahead if you are going on a Monday or Tuesday."
+    }
+  ],
+  "pages_opened": [
+    "https://ihosgallery.com/",
+    "https://ihosgallery.com/pages/about-us",
+    "https://ihosgallery.com/pages/contact"
+  ],
+  "pages_useful": [
+    "https://ihosgallery.com/",
+    "https://ihosgallery.com/pages/about-us",
+    "https://ihosgallery.com/pages/contact"
+  ],
+  "extracted_at": "2026-09-07T00:00:00Z",
+  "extractor_version": "v2.0"
+}
