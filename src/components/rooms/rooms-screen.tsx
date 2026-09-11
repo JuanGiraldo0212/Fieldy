@@ -3,8 +3,9 @@
 import { useActionState, useState } from 'react'
 import { MapPin, Plus } from 'lucide-react'
 import { archiveRoom, restoreRoom, type RoomState } from '@/app/rooms/actions'
-import { RoomDialog, ROOM_ICONS, type EditableRoom, type RoomIcon } from './room-dialog'
+import { RoomAvatar, RoomDialog, ROOM_ICONS, type EditableRoom, type RoomIcon } from './room-dialog'
 import { cx } from '@/components/ui'
+import { roomPhotoSrc } from '@/lib/rooms/photo'
 
 /*
   "Group profiles" — the design's own word for rooms, and what a director calls
@@ -61,14 +62,12 @@ export function RoomsScreen({
 
       <div className="flex flex-col gap-4">
         {live.map((r) => {
-          const { Icon, tint, ink } = ROOM_ICONS[r.icon as RoomIcon] ?? ROOM_ICONS.users
+          const { tint, ink } = ROOM_ICONS[r.icon as RoomIcon] ?? ROOM_ICONS.users
           const isActive = r.id === activeRoomId
           return (
             <div key={r.id} className="bg-surface border-border rounded-panel border p-6 sm:px-7 sm:py-6.5">
               <div className="flex flex-wrap items-center gap-5">
-                <span className={cx('flex h-room-avatar w-room-avatar flex-none items-center justify-center rounded-pill', tint, ink)}>
-                  <Icon size={24} />
-                </span>
+                <RoomAvatar icon={r.icon} photo={roomPhotoSrc(r.id, r.photoKey)} />
                 <h2 className="font-display text-room m-0 flex-1 basis-[200px]">{r.name}</h2>
 
                 {isActive ? (

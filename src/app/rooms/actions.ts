@@ -4,9 +4,12 @@ import { revalidatePath } from 'next/cache'
 import { and, eq, isNull, ne } from 'drizzle-orm'
 import { z } from 'zod'
 import { db, room } from '@/db'
+import type { Room } from '@/db/schema'
 import { getViewer } from '@/lib/auth'
 import { newId } from '@/lib/ids'
 import { geocodeAddress, pickedPoint } from '@/lib/catalog/geocode'
+import { checkRoomPhoto, roomPhotoKey } from '@/lib/rooms/photo'
+import { putRoomPhoto, removeRoomPhoto } from '@/lib/rooms/photo-storage'
 
 /*
   Rooms. spec §5.8.
@@ -64,18 +67,31 @@ export async function saveRoom(
     return { error: 'The oldest age cannot be younger than the youngest.' }
   }
 
+  /* A file input with nothing chosen still submits one empty File. */
+  const photo = formData.get('photo')
+  const upload = photo instanceof File && photo.size > 0 ? photo : null
+  if (upload) {
+    const check = checkRoomPhoto(upload)
+    if (!check.ok) return { error: check.error }
+  }
+
+  let prior: Room | undefined
+  if (d.id) {
+    prior = (
+      await db
+        .select()
+        .from(room)
+        .where(and(eq(room.id, d.id), eq(room.centreId, viewer.centreId)))
+        .limit(1)
+    )[0]
+    if (!prior) return { error: 'That room is not one of yours.' }
+  }
+
   /* A point chosen from the picker wins: it is the one she saw. Otherwise
      only geocode when the address is new or changed, so renaming a room does
      not depend on a third-party service being up. */
   let point = pickedPoint(formData.get('addressLat'), formData.get('addressLng'))
-  if (!point && d.id) {
-    const existing = await db
-      .select()
-      .from(room)
-      .where(and(eq(room.id, d.id), eq(room.centreId, viewer.centreId)))
-      .limit(1)
-    const prior = existing[0]
-    if (!prior) return { error: 'That room is not one of yours.' }
+  if (!point && prior) {
     point =
       prior.address === d.address && prior.lat != null && prior.lng != null
         ? { lat: prior.lat, lng: prior.lng }
@@ -91,10 +107,25 @@ export async function saveRoom(
     }
   }
 
+  /* The new photo is stored before the row points at it, and the old one is
+     removed only after the row has stopped pointing at it, so there is never
+     a moment when the avatar is a broken image. */
+  const id = d.id ?? newId()
+  let photoKey = prior?.photoKey ?? null
+  if (upload) {
+    const key = roomPhotoKey(viewer.centreId, id, newId(), upload.type)
+    const put = await putRoomPhoto(key, new Uint8Array(await upload.arrayBuffer()), upload.type)
+    if (!put.ok) return { error: put.error }
+    photoKey = key
+  } else if (formData.get('removePhoto') === '1') {
+    photoKey = null
+  }
+
   const values = {
     centreId: viewer.centreId,
     name: d.name,
     icon: d.icon,
+    photoKey,
     ageMin: d.ageMin,
     ageMax: d.ageMax,
     size: d.size,
@@ -108,14 +139,15 @@ export async function saveRoom(
     updatedAt: new Date(),
   }
 
-  if (d.id) {
+  if (prior) {
     await db
       .update(room)
       .set(values)
-      .where(and(eq(room.id, d.id), eq(room.centreId, viewer.centreId)))
+      .where(and(eq(room.id, id), eq(room.centreId, viewer.centreId)))
   } else {
-    await db.insert(room).values({ id: newId(), ...values })
+    await db.insert(room).values({ id, ...values })
   }
+  if (prior?.photoKey && prior.photoKey !== photoKey) await removeRoomPhoto(prior.photoKey)
 
   revalidatePath('/', 'layout')
   return { ok: true }
