@@ -1,0 +1,88 @@
+{
+  "venue": {
+    "id": "island-cycle",
+    "name": "Island Cycle",
+    "website": "https://icyclebc.com/",
+    "description": "Island Cycle is a bicycle shop and repair centre in the heart of Parksville that has been trading for 30 years. It sells new and used bikes and ebikes, parts, tools, clothing and accessories, and services and repairs all makes and models, along with golf cart brakes and tires and mobility walkers. The website is a store and a flat rate repair price list. It describes no rides, lessons, rentals or bookable visits for children's groups.",
+    "category": "community_civic",
+    "address": "114 Hirst Ave E #5, Parksville, BC V9P 2G9",
+    "lat": 49.31921,
+    "lng": -124.31184,
+    "geo_source": "geocoded",
+    "hosts_school_groups": false,
+    "hosts_daycare_groups": false,
+    "youngest_age_welcomed_years": null,
+    "booking_email": null,
+    "booking_phone": "250-248-0647",
+    "booking_url": null,
+    "booking_method": null,
+    "has_washrooms": null,
+    "has_lunch_space": null,
+    "has_rain_backup": null,
+    "stroller_accessible": null,
+    "wheelchair_accessible": null,
+    "bus_parking": null,
+    "facility_notes": null,
+    "nearby_park": null,
+    "restrictions": null,
+    "languages": null,
+    "general_admission_child_cad": null,
+    "general_admission_adult_cad": null,
+    "hours_notes": "Monday to Thursday 10:00 to 5:00, Friday 11:00 to 2:00. Closed on weekends and holidays.",
+    "seasonal_notes": null,
+    "price_year_or_season": null,
+    "checked_on": "2026-09-07",
+    "checked_by": "scraper"
+  },
+  "programs": [],
+  "images": [
+    {
+      "id": "hero-storefront",
+      "url": "https://icyclebc.com/wp-content/uploads/2016/01/storefront-1024x768.jpg",
+      "role": "hero",
+      "alt": "A single storey brick shop with a green sign reading Island Cycle, a row of bikes parked along the front wall and a bicycle mounted on the roof.",
+      "alt_source": "generated",
+      "caption": null,
+      "found_on_url": "https://icyclebc.com/",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    }
+  ],
+  "gaps": [
+    "The site is a shop and a repair price list. There is no ride, lesson, bike rental, safety course or group visit anywhere on it, so there is nothing a group leader can book.",
+    "Nothing says whether a class may come in as a group, and the shop is small enough that this is worth a call before anyone turns up.",
+    "The tracker had this venue at its online store address on myshopify.com. That store is real and is run by the same business, but the shop's own site is at icyclebc.com and carries the hours, directions and repair rates.",
+    "The shop keeps a trails and rides page listing local mountain bike trails and road routes, which may be useful for planning a ride, but it is not something the shop runs.",
+    "Washrooms, parking and step-free access are not mentioned anywhere on the site.",
+    "Their online store still shows a block headed COVID-19 hours, which suggests that page has not been revised in some time.",
+    "No map pin or coordinates are published, so the location here was geocoded from the street address and checked against the point their own directions link resolves to."
+  ],
+  "conflicts": [
+    {
+      "field": "hours_notes",
+      "values": ["Friday 11 to 2", "Friday, Closed", "Friday by appointment for pickup or dropoff"],
+      "sources": [
+        "https://icyclebc.com/directions/",
+        "https://island-cycle.myshopify.com/",
+        "https://icyclebc.com/"
+      ],
+      "note": "Their pages disagree about Fridays. One says 11 to 2, their online store says closed, and a banner on that store says Friday is by appointment for drop off and pick up. Monday to Thursday, 10 to 5, is the same everywhere. Ring first if you need a Friday."
+    }
+  ],
+  "pages_opened": [
+    "https://island-cycle.myshopify.com/",
+    "https://icyclebc.com/",
+    "https://icyclebc.com/directions/",
+    "https://icyclebc.com/repairs/"
+  ],
+  "pages_useful": [
+    "https://island-cycle.myshopify.com/",
+    "https://icyclebc.com/",
+    "https://icyclebc.com/directions/",
+    "https://icyclebc.com/repairs/"
+  ],
+  "extracted_at": "2026-09-07T00:00:00Z",
+  "extractor_version": "v2.0"
+}

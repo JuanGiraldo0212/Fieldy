@@ -1,0 +1,253 @@
+{
+ "venue": {
+  "id": "old-school-house-arts-centre",
+  "name": "The Old School House Arts Centre",
+  "website": "https://www.theoldschoolhouse.org/",
+  "description": "The Old School House Arts Centre is a community arts centre in a bright yellow 1912 schoolhouse in the middle of Qualicum Beach, run as a registered charity. It is open Tuesday to Saturday from 10am to 4pm and holds changing exhibitions, resident artist studios, a classroom, a small outdoor gallery and a community room that can be hired by the hour. Its classes are sold one place at a time through its own online shop, and the ones for young people are a term long after school art drop in for grades 8 to 12 and half day art camps on school professional development days. No school tour, class workshop or group visit is published anywhere on the site.",
+  "category": "arts_performance",
+  "address": "122 Fern Road West, Qualicum Beach, BC V9K 1T2",
+  "lat": 49.345972,
+  "lng": -124.442969,
+  "geo_source": "site_embed",
+  "hosts_school_groups": null,
+  "hosts_daycare_groups": null,
+  "youngest_age_welcomed_years": null,
+  "booking_email": "info@theoldschoolhouse.org",
+  "booking_phone": "250-752-6133",
+  "booking_url": "https://shop.theoldschoolhouse.org/collections/tosh-classes-and-workshops-1",
+  "booking_method": "shop",
+  "has_washrooms": null,
+  "has_lunch_space": null,
+  "has_rain_backup": null,
+  "stroller_accessible": null,
+  "wheelchair_accessible": null,
+  "bus_parking": null,
+  "facility_notes": null,
+  "nearby_park": null,
+  "restrictions": null,
+  "languages": null,
+  "general_admission_child_cad": null,
+  "general_admission_adult_cad": null,
+  "hours_notes": "Tuesday to Saturday 10:00 am to 4:00 pm. Closed Monday and Sunday.",
+  "seasonal_notes": null,
+  "price_year_or_season": "Fall 2026",
+  "checked_on": "2026-09-10",
+  "checked_by": "scraper"
+ },
+ "programs": [
+  {
+   "id": "teen-drop-in-art-session",
+   "name": "Teen Drop-In art session",
+   "description": "An after school art drop in for young people in grades 8 to 12, run by local artist Brooke Emily in the arts centre classroom. It runs on ten Tuesdays from 22 September to 24 November 2026, 3:30pm to 5:30pm. The fee is a single payment of $50 for the whole term and covers casual attendance, so a teen does not have to come every week. A base supply of art materials is provided, including donated materials. Homeschooled teens are named as welcome.",
+   "what_children_do": "Work at their own pace on their own projects in the classroom, using watercolours, acrylics, pencils, pastels and canvas from the materials laid out for them, alongside other teenagers.",
+   "our_note": "You book one teenager at a time through their online shop, so this is a family registration rather than something a class arrives at together. The single fee covers the whole term whether they come once or every week, which suits a young person who is not sure yet.",
+   "practical_summary": "It runs in the classroom at the arts centre, which is open Tuesday to Saturday from 10 to 4. Nothing is published about washrooms, somewhere to eat or step free access, so ask if that matters.",
+   "comes_to_you": false,
+   "age_min_years": null,
+   "age_max_years": null,
+   "grade_min": 8,
+   "grade_max": 12,
+   "age_basis": "grades",
+   "duration_min": 120,
+   "capacity_max": null,
+   "capacity_min": null,
+   "cost_per_child_cad": 50,
+   "cost_per_group_cad": null,
+   "cost_per_adult_cad": null,
+   "free_adults_per_children": null,
+   "is_free": false,
+   "tax_included": null,
+   "extra_fees_note": null,
+   "school_rate_only": false,
+   "deposit_required": null,
+   "payment_timing": null,
+   "cancellation_note": "All classes and workshops are non-refundable. Cancellations made at least 7 days before the session start date will receive a 100% credit. No credit will be issued for cancellations made within 6 days of the class start date.",
+   "months_offered": [
+    9,
+    10,
+    11
+   ],
+   "days_offered": [
+    2
+   ],
+   "time_slots": [
+    "15:30"
+   ],
+   "lead_time_days": null,
+   "chaperone_ratio": null,
+   "adults_free": null,
+   "indoor": true,
+   "outdoor": false,
+   "format": [
+    "hands_on"
+   ],
+   "sensory_friendly": null,
+   "low_noise": null,
+   "neurodiversity_friendly": null,
+   "mood_tags": [
+    "creative",
+    "play"
+   ],
+   "curriculum_tags": null,
+   "booking_email": null,
+   "booking_url": null,
+   "booking_method": null,
+   "source_url": "https://shop.theoldschoolhouse.org/collections/kids-classes/products/teen-drop-in-fall-session-brooke-emily-sept-22-nov-24-2026-tuesdays-3-30pm-5-30pm",
+   "evidence": "One-time $50 term payment for casual, flexible attendance (no need to commit to every session)",
+   "checked_on": "2026-09-10",
+   "image_ids": [
+    "program-painting-in-progress"
+   ]
+  },
+  {
+   "id": "pro-d-day-art-camp",
+   "name": "Pro-D Day Art Camp",
+   "description": "A half day art camp on school professional development days, 9am to 12pm, listed for 9 and 23 October 2026 with Brooke Emily and 6 November 2026 with Megan Riera. It is $40 per session and all supplies are included; children bring a water bottle and a nut free snack. Rotary bursaries are available on request. No age range is published for it.",
+   "what_children_do": "Spend a morning making things with a range of materials and techniques, partly on projects the artist sets and partly on whatever they want to make.",
+   "our_note": "These fall on school professional development days, which is exactly when a daycare is looking for somewhere to go. Places are bought one child at a time through their online shop, so ring first if you want to bring several, and ask what ages they take, because the listing does not say.",
+   "practical_summary": "Supplies are included, and children need to bring a water bottle and a nut free snack. Washrooms, somewhere to eat and step free access are not covered on the site, so check when you book.",
+   "comes_to_you": false,
+   "age_min_years": null,
+   "age_max_years": null,
+   "grade_min": null,
+   "grade_max": null,
+   "age_basis": null,
+   "duration_min": 180,
+   "capacity_max": null,
+   "capacity_min": null,
+   "cost_per_child_cad": 40,
+   "cost_per_group_cad": null,
+   "cost_per_adult_cad": null,
+   "free_adults_per_children": null,
+   "is_free": false,
+   "tax_included": null,
+   "extra_fees_note": null,
+   "school_rate_only": false,
+   "deposit_required": null,
+   "payment_timing": null,
+   "cancellation_note": "All classes and workshops are non-refundable. Cancellations made at least 7 days before the session start date will receive a 100% credit. No credit will be issued for cancellations made within 6 days of the class start date.",
+   "months_offered": [
+    10,
+    11
+   ],
+   "days_offered": null,
+   "time_slots": [
+    "09:00"
+   ],
+   "lead_time_days": null,
+   "chaperone_ratio": null,
+   "adults_free": null,
+   "indoor": true,
+   "outdoor": false,
+   "format": [
+    "guided",
+    "hands_on"
+   ],
+   "sensory_friendly": null,
+   "low_noise": null,
+   "neurodiversity_friendly": null,
+   "mood_tags": [
+    "creative",
+    "play"
+   ],
+   "curriculum_tags": null,
+   "booking_email": null,
+   "booking_url": null,
+   "booking_method": null,
+   "source_url": "https://shop.theoldschoolhouse.org/collections/kids-classes/products/pro-d-day-art-camp-brooke-emily-oct-9-2026-9am-12pm",
+   "evidence": "$40 per session",
+   "checked_on": "2026-09-10",
+   "image_ids": null
+  }
+ ],
+ "images": [
+  {
+   "id": "hero-exterior",
+   "url": "https://images.squarespace-cdn.com/content/v1/5cdf852a77196f0001428c44/546fc28f-505e-4ee7-b7e2-50a99855813c/TOSH+Exterior+-+Zoey+Heath+.jpg",
+   "role": "hero",
+   "alt": "Image of exterior of TOSH. It is an old yellow schoolhouse. There is a tree and shrub in front of the building",
+   "alt_source": "site",
+   "caption": null,
+   "found_on_url": "https://www.theoldschoolhouse.org/about-tosh",
+   "width": null,
+   "height": null,
+   "rights_note": null,
+   "usage": "unverified"
+  },
+  {
+   "id": "program-painting-in-progress",
+   "url": "https://shop.theoldschoolhouse.org/cdn/shop/files/IMG_4272_1681dffb-ae9a-46cb-82a0-bf31606c1306_2048x.jpg",
+   "role": "program",
+   "alt": "A hand holding a brush over a half finished painting of an orange cat, with a loaded paint tray and other brushes on the table.",
+   "alt_source": "generated",
+   "caption": null,
+   "found_on_url": "https://shop.theoldschoolhouse.org/collections/kids-classes/products/teen-drop-in-fall-session-brooke-emily-sept-22-nov-24-2026-tuesdays-3-30pm-5-30pm",
+   "width": null,
+   "height": null,
+   "rights_note": null,
+   "usage": "unverified"
+  },
+  {
+   "id": "space-community-room",
+   "url": "https://images.squarespace-cdn.com/content/v1/5cdf852a77196f0001428c44/e47a6c4e-6fbc-4056-b8db-59e70fb9711b/343734078_803982090632776_7858286793461808468_n.jpg",
+   "role": "space",
+   "alt": "An empty room with white walls, a wooden floor, track lighting and tall windows either side of a double glass door, with tables folded against one wall.",
+   "alt_source": "generated",
+   "caption": null,
+   "found_on_url": "https://www.theoldschoolhouse.org/",
+   "width": null,
+   "height": null,
+   "rights_note": null,
+   "usage": "unverified"
+  }
+ ],
+ "gaps": [
+  "NO GROUP OFFERING. No school tour, class workshop, gallery visit for groups, birthday booking or outreach visit into a classroom is published anywhere on the site. Everything for children is sold one place at a time through their online shop, so a class would be buying individual registrations, not booking a group. That is the single most important thing to settle by phone if you want to bring a class.",
+  "AGES for the Pro-D day camps: not stated. The listing says only that it is for kids. Their summer art camp in August 2026 was advertised for ages 6 to 12, but that is a different program and its last week ran 10 to 14 August 2026, so it has already finished.",
+  "Whether it costs anything to walk in and look at the galleries is not stated anywhere on the site.",
+  "Washrooms, somewhere for a group to eat, rain backup, stroller access, step free access and bus parking are not mentioned anywhere. The building is a 1912 schoolhouse, so step free access is worth asking about specifically.",
+  "Group size for the classes is not published, so there is no way to tell from the site how many places would be available on a given date.",
+  "How many adults have to come with a group of children: not stated, because there is no group offering to attach it to.",
+  "Their contact page and the footer of every page give the postal code V9K 1T2, while the map settings behind the contact page carry V9K 2K1 for the same street address. The street address itself is the same in both.",
+  "COORDINATES: taken from the map settings published behind their contact page rather than from a visible pin on the page. They land on Fern Road West in Qualicum Beach.",
+  "Nothing for children is published beyond 24 November 2026, which is the last date of the teen drop in. The camps listed run to 6 November 2026.",
+  "The exhibition and resident artist application pages still say applications reopen in 2025 for the 2026 and 2027 seasons, so parts of the site have not been rewritten. The class listings and the price on them are current, and were read from the live pages today."
+ ],
+ "conflicts": [
+  {
+   "field": "community_space_hourly_rate",
+   "values": [
+    "$15 per hour",
+    "affordable hourly rates from $19.00"
+   ],
+   "sources": [
+    "https://www.theoldschoolhouse.org/faq",
+    "https://www.theoldschoolhouse.org/"
+   ],
+   "note": "Two of their pages give different prices for hiring the community room, $15 an hour on one and from $19 an hour on the other. Worth settling on the phone if you want the room for a group."
+  }
+ ],
+ "pages_opened": [
+  "https://www.theoldschoolhouse.org/",
+  "https://www.theoldschoolhouse.org/about-tosh",
+  "https://www.theoldschoolhouse.org/contact",
+  "https://www.theoldschoolhouse.org/faq",
+  "https://shop.theoldschoolhouse.org/collections/tosh-classes-and-workshops-1",
+  "https://shop.theoldschoolhouse.org/collections/kids-classes",
+  "https://shop.theoldschoolhouse.org/collections/kids-classes/products/teen-drop-in-fall-session-brooke-emily-sept-22-nov-24-2026-tuesdays-3-30pm-5-30pm",
+  "https://shop.theoldschoolhouse.org/collections/kids-classes/products/pro-d-day-art-camp-brooke-emily-oct-9-2026-9am-12pm",
+  "https://www.theoldschoolhouse.org/tosh-arts-centre-update-working"
+ ],
+ "pages_useful": [
+  "https://www.theoldschoolhouse.org/",
+  "https://www.theoldschoolhouse.org/about-tosh",
+  "https://www.theoldschoolhouse.org/contact",
+  "https://www.theoldschoolhouse.org/faq",
+  "https://shop.theoldschoolhouse.org/collections/tosh-classes-and-workshops-1",
+  "https://shop.theoldschoolhouse.org/collections/kids-classes",
+  "https://shop.theoldschoolhouse.org/collections/kids-classes/products/teen-drop-in-fall-session-brooke-emily-sept-22-nov-24-2026-tuesdays-3-30pm-5-30pm",
+  "https://shop.theoldschoolhouse.org/collections/kids-classes/products/pro-d-day-art-camp-brooke-emily-oct-9-2026-9am-12pm"
+ ],
+ "extracted_at": "2026-09-10T23:50:00Z",
+ "extractor_version": "v2.0"
+}

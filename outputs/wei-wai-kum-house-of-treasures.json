@@ -1,0 +1,99 @@
+{
+ "venue": {
+  "id": "wei-wai-kum-house-of-treasures",
+  "name": "Wei Wai Kum House of Treasures",
+  "website": "https://weiwaikumhouseoftreasures.com/",
+  "description": "Wei Wai Kum House of Treasures is a First Nation art gallery and shop at the Discovery Harbour Centre on the Island Highway in Campbell River, open seven days a week from 10am to 5pm and closed on holidays. It sells original West Coast First Nation carving, painting and prints alongside jewellery, clothing, serving ware and other home accessories, and it takes orders through its own online shop. The gallery is trading: the address, hours and a 2026 copyright line are all on the live page, and product photographs on it were added through July 2026. It is a retail gallery, and the site publishes no tour, workshop, demonstration or group visit of any kind.",
+  "category": "arts_performance",
+  "address": "1370 Island Highway, Campbell River 11, British Columbia V9W 7K6, Canada",
+  "lat": 50.033198,
+  "lng": -125.248766,
+  "geo_source": "site_embed",
+  "hosts_school_groups": false,
+  "hosts_daycare_groups": false,
+  "youngest_age_welcomed_years": null,
+  "booking_email": "nwcart@telus.net",
+  "booking_phone": "250-286-1440",
+  "booking_url": null,
+  "booking_method": null,
+  "has_washrooms": null,
+  "has_lunch_space": null,
+  "has_rain_backup": null,
+  "stroller_accessible": null,
+  "wheelchair_accessible": null,
+  "bus_parking": null,
+  "facility_notes": null,
+  "nearby_park": null,
+  "restrictions": null,
+  "languages": null,
+  "general_admission_child_cad": null,
+  "general_admission_adult_cad": null,
+  "hours_notes": "Monday to Sunday 10am to 5pm. Closed on Holidays.",
+  "seasonal_notes": null,
+  "price_year_or_season": null,
+  "checked_on": "2026-09-10",
+  "checked_by": "scraper"
+ },
+ "programs": [],
+ "images": [
+  {
+   "id": "hero-entrance",
+   "url": "https://img1.wsimg.com/isteam/ip/7fc3ad25-0c6c-49cd-a8ad-a5f1f4e799d6/IMG_20250717_122027_046.jpg",
+   "role": "hero",
+   "alt": "Entrance to Wei Wai Kum House of Treasures.",
+   "alt_source": "site",
+   "caption": null,
+   "found_on_url": "https://weiwaikumhouseoftreasures.com/store-photo-gallery",
+   "width": null,
+   "height": null,
+   "rights_note": null,
+   "usage": "unverified"
+  },
+  {
+   "id": "space-gallery-interior",
+   "url": "https://img1.wsimg.com/isteam/ip/7fc3ad25-0c6c-49cd-a8ad-a5f1f4e799d6/IMG_20250717_124116_347-d298cdf.jpg",
+   "role": "space",
+   "alt": "Art and craft shop interior with masks and displays.",
+   "alt_source": "site",
+   "caption": null,
+   "found_on_url": "https://weiwaikumhouseoftreasures.com/store-photo-gallery",
+   "width": null,
+   "height": null,
+   "rights_note": null,
+   "usage": "unverified"
+  },
+  {
+   "id": "space-shop-floor",
+   "url": "https://img1.wsimg.com/isteam/ip/7fc3ad25-0c6c-49cd-a8ad-a5f1f4e799d6/IMG_20250805_123430_576.jpg",
+   "role": "space",
+   "alt": "Colorful gift shop with various items and art.",
+   "alt_source": "site",
+   "caption": null,
+   "found_on_url": "https://weiwaikumhouseoftreasures.com/store-photo-gallery",
+   "width": null,
+   "height": null,
+   "rights_note": null,
+   "usage": "unverified"
+  }
+ ],
+ "gaps": [
+  "NOT FOR GROUPS: this is a retail art gallery and shop. The words group, tour, school, student, children and workshop do not appear anywhere on the live site, and there is nothing on it a children's group could book.",
+  "OPERATING STATUS: open and trading, checked in a browser today. The live page carries the street address, hours of 10am to 5pm seven days, a phone number, an email address and a 2026 copyright line, and the photographs it loads have filenames dated as recently as July 2026. This is not a dormant listing.",
+  "Whether a group may simply walk in, and whether the gallery would talk to a class about the work, is not addressed on the site. If you want that, the phone number is the only route.",
+  "Washrooms, somewhere to eat and bus parking are not mentioned. The gallery sits inside the Discovery Harbour Centre, which the site names but says nothing further about.",
+  "Step free access and stroller access are not mentioned anywhere.",
+  "IMAGES: the Open Graph image on the home page is a small product photograph of jewellery on a black background, 500 pixels across, not a picture of the place, so the entrance photograph from their store gallery has been used as the main image instead. The store gallery pictures do carry the shop's own alt text and it has been kept word for word.",
+  "The large photographs on the home page are loaded as background images rather than as ordinary pictures, so they carry no alt text at all. None of them were used here."
+ ],
+ "conflicts": [],
+ "pages_opened": [
+  "https://weiwaikumhouseoftreasures.com/",
+  "https://weiwaikumhouseoftreasures.com/store-photo-gallery"
+ ],
+ "pages_useful": [
+  "https://weiwaikumhouseoftreasures.com/",
+  "https://weiwaikumhouseoftreasures.com/store-photo-gallery"
+ ],
+ "extracted_at": "2026-09-10T23:50:00Z",
+ "extractor_version": "v2.0"
+}

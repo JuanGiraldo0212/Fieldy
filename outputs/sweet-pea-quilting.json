@@ -1,0 +1,62 @@
+{
+ "venue": {
+  "id": "sweet-pea-quilting",
+  "name": "Sweet Pea Quilting",
+  "website": "https://www.sweetpeaquilting.ca",
+  "description": "Sweet Pea Quilting is a quilt shop in Parksville selling fabric, kits, patterns and quilting supplies, with a longarm quilting service that takes quilts in for finishing. It runs one day quilting classes in an onsite classroom, taught by experienced instructors, priced from $30 for a sew day up to $375 for a twelve month block of the month programme, and these are aimed at quilters working on their own projects. Nothing on the site is offered to schools, daycares or groups of children, and there is no children's class, holiday camp, tour or group visit. It is a shop with a classroom attached.",
+  "category": "arts_performance",
+  "address": null,
+  "lat": null,
+  "lng": null,
+  "geo_source": null,
+  "hosts_school_groups": false,
+  "hosts_daycare_groups": false,
+  "youngest_age_welcomed_years": null,
+  "booking_email": null,
+  "booking_phone": "250-586-1050",
+  "booking_url": null,
+  "booking_method": null,
+  "has_washrooms": null,
+  "has_lunch_space": null,
+  "has_rain_backup": null,
+  "stroller_accessible": null,
+  "wheelchair_accessible": null,
+  "bus_parking": null,
+  "facility_notes": null,
+  "nearby_park": null,
+  "restrictions": null,
+  "languages": null,
+  "general_admission_child_cad": null,
+  "general_admission_adult_cad": null,
+  "hours_notes": null,
+  "seasonal_notes": null,
+  "price_year_or_season": null,
+  "checked_on": "2026-09-10",
+  "checked_by": "scraper"
+ },
+ "programs": [],
+ "images": [],
+ "gaps": [
+  "NOT FOR GROUPS: this is a retail quilt shop with a longarm service and a classroom used for one day quilting classes. Nothing on the site is bookable by a children's group, and no class, tour, visit or camp for children appears anywhere on it.",
+  "THE SITE DOES NOT LOAD IN A BROWSER TODAY. https://www.sweetpeaquilting.ca returns a Cloudflare Origin DNS error, number 1016, and the bare domain sweetpeaquilting.ca does not resolve at all. The content recorded here came back to a plain fetch over http and reads as recent, with classes dated to November 2026 and a Christmas longarm cutoff of 18 November, but it should be treated as possibly cached. Worth re-checking before anyone relies on this record, and worth a phone call to confirm the shop is still trading.",
+  "No address is published in anything we could retrieve, so there are no coordinates on this record. The tracker places the shop in Parksville. The only contact detail on the page is the phone number, 250.586.1050.",
+  "Opening hours are not published in anything we could retrieve.",
+  "No images have been recorded. The page came back as plain text with no image addresses in it, and the site does not render in a browser, so there was nothing that could be checked by looking at it.",
+  "The class prices recorded in the description are the published ones for adult quilting classes and are per person. They are not a children's price and there is no children's price on the site.",
+  "One published class price on the page is mistyped as $75.0:0, for the Arctic Feathers class on 2 November. The others are clean."
+ ],
+ "conflicts": [],
+ "pages_opened": [
+  "https://www.sweetpeaquilting.ca/",
+  "http://www.sweetpeaquilting.ca/",
+  "https://sweetpeaquilting.ca/",
+  "http://www.sweetpeaquilting.ca/about",
+  "http://www.sweetpeaquilting.ca/contact-us",
+  "https://sweetpeaquilting.ca/sitemap.xml"
+ ],
+ "pages_useful": [
+  "http://www.sweetpeaquilting.ca/"
+ ],
+ "extracted_at": "2026-09-10T23:50:00Z",
+ "extractor_version": "v2.0"
+}
