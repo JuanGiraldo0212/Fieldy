@@ -1,10 +1,11 @@
 'use client'
 
 import { useActionState, useEffect, useRef, useState } from 'react'
-import { Baby, Backpack, GraduationCap, Users, X } from 'lucide-react'
+import { Baby, Backpack, Camera, GraduationCap, Users, X } from 'lucide-react'
 import { saveRoom, type RoomState } from '@/app/rooms/actions'
 import { CheckRow, Field, FieldBox, cx } from '@/components/ui'
 import { AddressField } from '@/components/ui/address-field'
+import { ROOM_PHOTO_EDGE, roomPhotoSrc } from '@/lib/rooms/photo'
 
 /*
   The room editor. The design has it as a modal over the Group profiles screen
@@ -37,6 +38,7 @@ export type EditableRoom = {
   id: string
   name: string
   icon: RoomIcon
+  photoKey: string | null
   ageMin: number
   ageMax: number
   size: number
@@ -49,6 +51,58 @@ export type EditableRoom = {
 }
 
 const NOTES_MAX = 300
+
+/*
+  The room's face: its group photo when there is one, its icon otherwise, and
+  the icon again if the photo will not load. Decorative — the room's name is
+  always beside it.
+*/
+export function RoomAvatar({ icon, photo }: { icon: string; photo: string | null }) {
+  const [failed, setFailed] = useState<string | null>(null)
+  const { Icon, tint, ink } = ROOM_ICONS[icon as RoomIcon] ?? ROOM_ICONS.users
+  if (photo && failed !== photo) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element -- private, see /api/room-photo
+      <img
+        src={photo}
+        alt=""
+        onError={() => setFailed(photo)}
+        className="bg-thumb h-room-avatar w-room-avatar flex-none rounded-pill object-cover"
+      />
+    )
+  }
+  return (
+    <span className={cx('flex h-room-avatar w-room-avatar flex-none items-center justify-center rounded-pill', tint, ink)}>
+      <Icon size={24} />
+    </span>
+  )
+}
+
+/*
+  Shrink and re-encode in the browser before anything is sent. A phone's
+  original is several megabytes for a 56px circle, and re-encoding through a
+  canvas drops the EXIF block, which on a phone photo includes where it was
+  taken. createImageBitmap honours the EXIF rotation before it is lost.
+*/
+async function shrinkPhoto(file: File): Promise<File> {
+  const bitmap = await createImageBitmap(file, { imageOrientation: 'from-image' })
+  const scale = Math.min(1, ROOM_PHOTO_EDGE / Math.max(bitmap.width, bitmap.height))
+  const canvas = document.createElement('canvas')
+  canvas.width = Math.round(bitmap.width * scale)
+  canvas.height = Math.round(bitmap.height * scale)
+  const ctx = canvas.getContext('2d')
+  if (!ctx) throw new Error('no canvas')
+  /* A transparent PNG would otherwise come out black. */
+  ctx.fillStyle = '#fff'
+  ctx.fillRect(0, 0, canvas.width, canvas.height)
+  ctx.drawImage(bitmap, 0, 0, canvas.width, canvas.height)
+  bitmap.close()
+  const blob = await new Promise<Blob | null>((resolve) =>
+    canvas.toBlob(resolve, 'image/jpeg', 0.85),
+  )
+  if (!blob) throw new Error('no blob')
+  return new File([blob], 'group.jpg', { type: 'image/jpeg' })
+}
 
 export function RoomDialog({
   room,
@@ -67,6 +121,19 @@ export function RoomDialog({
     room?.transport?.length ? room.transport : ['bus'],
   )
   const [notes, setNotes] = useState(room?.notes ?? '')
+  /* The photo about to be saved, already shrunk, with a URL to preview it. */
+  const [picked, setPicked] = useState<{ file: File; url: string } | null>(null)
+  const [removed, setRemoved] = useState(false)
+  const [shrinking, setShrinking] = useState(false)
+  const [photoError, setPhotoError] = useState<string | null>(null)
+
+  const saved = !removed && room ? roomPhotoSrc(room.id, room.photoKey) : null
+  const shown = picked?.url ?? saved
+
+  useEffect(() => {
+    if (!picked) return
+    return () => URL.revokeObjectURL(picked.url)
+  }, [picked])
 
   useEffect(() => {
     const el = ref.current
@@ -86,6 +153,21 @@ export function RoomDialog({
     if (state.ok) onClose()
   }, [state.ok, onClose])
 
+  async function pick(file: File | undefined) {
+    if (!file) return
+    setPhotoError(null)
+    setShrinking(true)
+    try {
+      const small = await shrinkPhoto(file)
+      setPicked({ file: small, url: URL.createObjectURL(small) })
+      setRemoved(false)
+    } catch {
+      setPhotoError('We could not read that picture. Try a JPEG or PNG.')
+    } finally {
+      setShrinking(false)
+    }
+  }
+
   return (
     <dialog
       ref={ref}
@@ -96,11 +178,16 @@ export function RoomDialog({
       className="bg-transparent p-0 backdrop:bg-[rgb(22_32_43_/_0.42)] open:fixed open:inset-0 open:m-auto open:max-h-none open:w-full open:max-w-[min(560px,94vw)]"
     >
       <form
-        action={action}
+        /* The file input has no name: what is sent is the shrunk copy. */
+        action={(fd) => {
+          if (picked) fd.set('photo', picked.file)
+          action(fd)
+        }}
         className="bg-surface shadow-modal max-h-[92vh] overflow-y-auto rounded-panel p-6"
       >
         {room ? <input type="hidden" name="id" value={room.id} /> : null}
         <input type="hidden" name="icon" value={icon} />
+        {removed && !picked ? <input type="hidden" name="removePhoto" value="1" /> : null}
         {transport.map((t) => (
           <input key={t} type="hidden" name="transport" value={t} />
         ))}
@@ -117,6 +204,59 @@ export function RoomDialog({
           >
             <X size={18} />
           </button>
+        </div>
+
+        <div className="mb-4">
+          <div className="text-label text-text-muted mb-2 font-bold uppercase">
+            Group photo
+          </div>
+          <div className="flex items-center gap-4">
+            <RoomAvatar icon={icon} photo={shown} />
+            <div className="min-w-0">
+              <div className="flex flex-wrap items-center gap-2">
+                <label
+                  className={cx(
+                    'border-border-strong bg-surface hover:border-brand text-body-sm text-brand flex cursor-pointer items-center gap-2 rounded-pill border px-4 py-2 font-semibold',
+                    shrinking && 'pointer-events-none opacity-60',
+                  )}
+                >
+                  <Camera size={16} />
+                  {shrinking ? 'Preparing' : shown ? 'Change photo' : 'Add a photo'}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="sr-only"
+                    onChange={(e) => {
+                      void pick(e.target.files?.[0])
+                      /* So choosing the same file again still fires. */
+                      e.target.value = ''
+                    }}
+                  />
+                </label>
+                {shown ? (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setPicked(null)
+                      setRemoved(true)
+                      setPhotoError(null)
+                    }}
+                    className="text-body-sm text-text-muted hover:text-text px-2 py-2 font-semibold"
+                  >
+                    Remove
+                  </button>
+                ) : null}
+              </div>
+              <p className="text-meta text-text-faint mt-1.5 mb-0">
+                Only people at your centre can see it.
+              </p>
+            </div>
+          </div>
+          {photoError ? (
+            <p className="text-warn text-meta mt-2 mb-0" role="alert">
+              {photoError}
+            </p>
+          ) : null}
         </div>
 
         <div className="mb-4">
@@ -145,6 +285,11 @@ export function RoomDialog({
               )
             })}
           </div>
+          {shown ? (
+            <p className="text-meta text-text-faint mt-1.5 mb-0">
+              Shown instead of the photo if you remove it.
+            </p>
+          ) : null}
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
@@ -252,7 +397,7 @@ export function RoomDialog({
         <div className="mt-5 flex items-center gap-3">
           <button
             type="submit"
-            disabled={pending || transport.length === 0}
+            disabled={pending || shrinking || transport.length === 0}
             className="bg-brand-solid hover:bg-brand-solid-hover text-body-sm rounded-pill px-6 py-3 font-bold text-white disabled:opacity-60"
           >
             {pending ? 'Saving' : room ? 'Save changes' : 'Create room'}

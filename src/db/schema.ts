@@ -446,6 +446,9 @@ export const room = pgTable(
       .references(() => centre.id, { onDelete: 'cascade' }),
     name: text('name').notNull(),
     icon: roomIcon('icon').notNull().default('users'),
+    /* The group photo, when there is one: an object key in the private `rooms`
+       bucket (src/lib/rooms/photo.ts). The icon stays as the fallback. */
+    photoKey: text('photo_key'),
     ageMin: real('age_min').notNull(),
     ageMax: real('age_max').notNull(),
     size: integer('size').notNull(),
