@@ -1,10 +1,12 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
+import { redirect } from 'next/navigation'
 import { eq } from 'drizzle-orm'
 import { z } from 'zod'
 import { account, centre, db } from '@/db'
 import { getViewer } from '@/lib/auth'
+import { createClient } from '@/lib/supabase/server'
 import { geocodeAddress, pickedPoint } from '@/lib/catalog/geocode'
 import { CENTRE_TYPE_VALUES, ROLE_VALUES, otherText } from '@/lib/roles'
 
@@ -100,4 +102,28 @@ export async function saveAccount(
 
   revalidatePath('/', 'layout')
   return { saved: true }
+}
+
+/*
+  Sign out.
+
+  `scope: 'local'` rather than the library's default `'global'`: global revokes
+  every refresh token the account holds, so signing out of the centre's shared
+  desktop would also sign her out on her phone, which is not what the button
+  says it does.
+
+  The result is not checked, and that is deliberate. @supabase/ssr clears the
+  session cookie whether or not the revocation call reaches the auth server
+  (see GoTrueClient._signOut: it removes the local session on the error path
+  too, for every scope but 'others'). So there is no failure to report — this
+  browser is signed out either way, and the only place to go is /login.
+*/
+export async function signOut() {
+  const supabase = await createClient()
+  await supabase.auth.signOut({ scope: 'local' })
+
+  /* The top bar draws the viewer's initials on every page, so everything
+     cached above this one is now showing the wrong person. */
+  revalidatePath('/', 'layout')
+  redirect('/login')
 }
