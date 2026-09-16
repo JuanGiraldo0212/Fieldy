@@ -199,7 +199,7 @@ export function ComposeBox({
         <span aria-hidden className="flex">
           <Lock size={15} />
         </span>
-        Replies appear here, and we'll email you when one arrives.
+        Replies appear here, and we&rsquo;ll email you when one arrives.
       </div>
     </form>
   )

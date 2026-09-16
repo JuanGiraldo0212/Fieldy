@@ -34,7 +34,7 @@ export default function PrivacyPage() {
         <p>
           Fieldy is a free planner for educators on Vancouver Island. You find
           an outing, we write and send a booking request to the venue in your
-          name, and the venue's reply lands on your trip page. That is the
+          name, and the venue&rsquo;s reply lands on your trip page. That is the
           whole product, and everything below follows from it.
         </p>
       </Section>
@@ -43,7 +43,7 @@ export default function PrivacyPage() {
         <ul>
           <li>
             <strong>Your account and centre.</strong> Your name, email, role,
-            your centre's name, type and address, and the rooms you set up:
+            your centre&rsquo;s name, type and address, and the rooms you set up:
             ages, group size, ratio, budget, transport and any notes. This is
             what the catalog measures against.
           </li>
@@ -59,7 +59,7 @@ export default function PrivacyPage() {
           </li>
           <li>
             <strong>The raw email.</strong> For ninety days we also keep the
-            venue's reply exactly as it arrived — headers and both bodies — so
+            venue&rsquo;s reply exactly as it arrived — headers and both bodies — so
             that a threading or formatting problem can be checked against the
             bytes we received. After ninety days it is deleted automatically.
             The message itself, as shown on your trip, stays.
@@ -74,11 +74,11 @@ export default function PrivacyPage() {
           message, so they can always reach you directly. Their replies come
           back to Fieldy and appear on your trip page; if you have
           notifications on, we email you a short note with a link when one
-          arrives. We never forward the venue's email to you and we never send
+          arrives. We never forward the venue&rsquo;s email to you and we never send
           anything to a venue that you did not write or approve.
         </p>
         <p>
-          Nothing in a venue's reply is read by a person at Fieldy in the
+          Nothing in a venue&rsquo;s reply is read by a person at Fieldy in the
           ordinary course of things. A rule-based reader looks for a
           confirmation, an offer of other dates, or a decline, and shows you
           what it found with the sentence it found it in. It never changes a
@@ -109,7 +109,7 @@ export default function PrivacyPage() {
 
       <Section title="Deletion">
         <p>
-          Ask, and we will delete a trip's thread, a trip, a room, or your
+          Ask, and we will delete a trip&rsquo;s thread, a trip, a room, or your
           whole account and centre. Write to{' '}
           <a href="mailto:hello@fieldy.ca">hello@fieldy.ca</a> from the address
           on your account. Deleting a trip removes its correspondence and
