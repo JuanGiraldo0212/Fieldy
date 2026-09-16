@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Bricolage_Grotesque, Nunito_Sans } from 'next/font/google'
 import './globals.css'
+import { Analytics } from '@/components/layout/analytics'
 import { TopNav } from '@/components/layout/top-nav'
 import {
   HOME_DESCRIPTION,
@@ -81,6 +82,8 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: jsonLdScript(websiteJsonLd()) }}
         />
+        {/* Page counts, no cookie and no search terms. See the component. */}
+        <Analytics />
       </body>
     </html>
   )
