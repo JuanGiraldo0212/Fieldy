@@ -58,8 +58,13 @@ export function VenueThumb({
             setSettled(true)
             setFailed(true)
           }}
-          // The thumbnail is 104px; ask for a little more for retina.
-          sizes="104px"
+          /* No `sizes` on purpose. A `sizes` string with no `vw` in it does
+             not narrow anything — Next hands the browser every configured
+             width as a candidate, and a 104px tile could be served a 1200px
+             photograph at our expense. Without it Next emits an `x`
+             descriptor pair off the intrinsic width instead: 128 for a
+             plain screen, 256 for a retina one, and nothing else is ever
+             requested. Two transformations per photograph, not seven. */
         />
       </>
     )

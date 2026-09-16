@@ -67,12 +67,19 @@ function PhotoCard({ photo, venueName }: { photo: AdminPhoto; venueName: string 
         {renderable ? (
           <>
             {settled ? null : <Skeleton className="absolute inset-0" />}
+            {/* Deliberately the same intrinsic width as the catalog's strip
+                tile (src/components/program/photo-strip.tsx), so this screen
+                asks the optimizer for widths the public pages have already
+                bought rather than a third set of its own. Vercel bills per
+                width, and editing a venue should not cost anything that
+                showing it did not. Slightly soft on a full-bleed phone; an
+                admin screen can wear that. */}
             <Image
               src={photoSrc(photo.url)}
               alt={photo.alt}
-              fill
-              sizes="(max-width: 640px) 100vw, 400px"
-              className="object-cover"
+              width={260}
+              height={180}
+              className="relative h-full w-full object-cover"
               onLoad={() => setSettled(true)}
               onError={() => {
                 setSettled(true)

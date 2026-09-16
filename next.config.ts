@@ -24,8 +24,38 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   images: {
     localPatterns: [{ pathname: `${PHOTO_ROUTE}/**`, search: '' }],
-    // Venue photos change rarely; a long cache spares their servers.
-    minimumCacheTTL: 60 * 60 * 24 * 7,
+    /*
+      Vercel bills one image transformation per unique source photograph,
+      width, quality and format, and re-bills it when the cached result
+      expires. Both multipliers are held down here.
+
+      The ladder first. Next's default is fifteen widths, up to 3840, and a
+      component that passes `sizes` can have a browser pick any of them. The
+      largest photograph this site optimizes is a 260px strip tile, so the
+      widths above 1200 were only ever a way to spend the quota — a phone
+      picking 2048 for a thumbnail costs exactly as much as a hero would.
+      Everything the catalog asks for now lands on one of seven:
+
+        - 128 and 256 for the 104px catalog thumbnail
+        - 384 and 640 for the 200px strip tile and the admin tile, which are
+          deliberately given the same intrinsic width so the admin screens
+          reuse the transformations the catalog has already paid for
+        - 96, 828 and 1200 as headroom
+
+      Raising the ceiling later is free; lowering it is not, because changing
+      a width changes the cache key and every photograph still in circulation
+      is transformed afresh. Budget for that before touching this list.
+    */
+    imageSizes: [96, 128, 256, 384],
+    deviceSizes: [640, 828, 1200],
+    /*
+      Then the expiry. Venue photographs change about never, so there is no
+      reason to buy the same transformation again every week. 31 days is the
+      longest Vercel honours. The proxy route's own `s-maxage` has to agree:
+      Next takes whichever of the two is LARGER, so a shorter header there
+      would quietly cap this (src/app/api/photo/[key]/route.ts).
+    */
+    minimumCacheTTL: 60 * 60 * 24 * 31,
   },
   experimental: {
     serverActions: {
