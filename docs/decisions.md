@@ -406,3 +406,33 @@ What this does not do: submit the site to Google. Search Console needs a
 person's Google account to verify the domain and hand it the sitemap; until
 that happens the crawler finds the site on its own schedule, which for a
 domain with no inbound links is weeks.
+
+## Analytics counts pages, and drops the query string
+
+Vercel Web Analytics, `<Analytics />` from `@vercel/analytics/next` at the
+end of the root layout's `<body>`. The question it answers is the only one
+worth asking right now: does anybody reach the catalog, and do they open an
+outing once they are there. A deploy without that number is a deploy into
+the dark.
+
+Why Vercel and not a self-hosted counter or a Google tag:
+
+- **No new processor.** Vercel already serves every page a director opens
+  and is already named in the privacy page. A Plausible or a GA tag would
+  be one more party learning which venue somebody is looking at, which is
+  the same objection that put venue photographs behind our own optimizer.
+- **No consent banner.** It is cookieless and stores no device identifier,
+  so nothing here needs a lawful-basis dialogue on top of a product whose
+  whole point is that it gets out of the way.
+
+What it does not get is the search box. The catalog keeps its state in the
+query string (`?q=`, `?grade=`), and what a director typed is the closest
+thing this product has to a private thought. `beforeSend` in
+`src/components/layout/analytics.tsx` rewrites every event's URL down to its
+pathname, so the report reads `/` and `/outing/goldstream/nature-house` and
+never the words. Trip and room IDs stay in the path: they are opaque, and
+Vercel's own request logs already have them.
+
+This is the client wrapper's whole reason for existing — `beforeSend` is a
+function, and a function cannot cross from a server layout into a client
+component as a prop.

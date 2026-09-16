@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/privacy' },
 }
 
-const UPDATED = '5 September 2026'
+const UPDATED = '16 September 2026'
 
 export default function PrivacyPage() {
   return (
@@ -93,6 +93,17 @@ export default function PrivacyPage() {
           public. We do not sell or share your data, and we do not use it for
           advertising. The services that hold it on our behalf are Supabase
           (database and storage), Vercel (hosting) and Resend (email).
+        </p>
+      </Section>
+
+      <Section title="How we count visits">
+        <p>
+          We count page views so we know whether the catalog is reaching
+          anyone. There is no cookie, no advertising tag and no device
+          identifier, nothing is tied to your account, and the counting is
+          done by Vercel, who host the site and therefore already serve every
+          page you open. We strip the query string before the count is
+          recorded, so what you typed into the search box is never part of it.
         </p>
       </Section>
 

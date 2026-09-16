@@ -29,6 +29,7 @@
   "dependencies": {
     "@supabase/ssr": "^0.12.5",
     "@supabase/supabase-js": "^2.115.0",
+    "@vercel/analytics": "^2.0.1",
     "chrono-node": "2.10.1",
     "drizzle-orm": "^0.45.2",
     "leaflet": "^1.9.4",
