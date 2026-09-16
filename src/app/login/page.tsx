@@ -16,6 +16,12 @@ export const metadata: Metadata = {
   Magic link only. spec §5.10: "Email plus magic link. No passwords." The
   design has no frame for this screen (docs/design-gaps.md), so it is built in
   the design's language and kept to one field.
+
+  The copy avoids the word "account" on purpose. There is no registration step
+  anywhere: the callback's trigger makes the account row on the first link, and
+  /welcome collects the centre afterwards. A director who reads "create an
+  account" here looks for a form that does not exist, so the screen says what
+  actually happens instead — one field, one link, same on every visit.
 */
 
 const ERRORS: Record<string, string> = {
@@ -53,7 +59,8 @@ export default async function LoginPage({
 
         <h1 className="font-display text-display-md">Sign in to Fieldy</h1>
         <p className="text-body text-text-muted mt-2">
-          We email you a link. No password to set up or remember.
+          We email you a link. Nothing to sign up for and no password to set:
+          the first link signs you in, and so does every one after it.
         </p>
 
         {errorKey && ERRORS[errorKey] ? (
@@ -77,8 +84,8 @@ export default async function LoginPage({
       </div>
 
       <p className="text-meta text-text-faint mt-4 px-1 leading-relaxed">
-        You only need an account to plan a trip or save an outing. Browsing is
-        open to everyone.
+        Browsing the catalog is open to everyone. The link only matters when you
+        want to plan a trip or save an outing.
       </p>
     </main>
   )

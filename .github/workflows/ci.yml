@@ -30,8 +30,14 @@ jobs:
     name: Playwright flows
     runs-on: ubuntu-latest
     # The flows need a database and, for two of three, a session. Both come
-    # from repository secrets; without them this job is skipped, not red.
-    if: ${{ secrets.E2E_DATABASE_URL != '' }}
+    # from repository secrets; without them the work is skipped, not red.
+    #
+    # The gate is a step rather than a job-level `if`. A job `if` can only read
+    # github, needs, vars and inputs — naming `secrets` there is not a false
+    # condition, it is an invalid workflow file, and GitHub then fails the
+    # whole run in 0s before any job starts. That took the typecheck job down
+    # with it, which has nothing to do with e2e. Secrets do reach job `env`,
+    # so the presence check happens there and every real step hangs off it.
     env:
       DATABASE_URL: ${{ secrets.E2E_DATABASE_URL }}
       DATABASE_POOL_URL: ${{ secrets.E2E_DATABASE_URL }}
@@ -40,17 +46,32 @@ jobs:
       E2E_COOKIE: ${{ secrets.E2E_COOKIE }}
       MAIL_DOMAIN: mail.fieldy.ca
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
+      - name: Are the e2e secrets set?
+        id: gate
+        run: |
+          if [ -z "$DATABASE_URL" ]; then
+            echo "No E2E_DATABASE_URL on this repository. Skipping the flows."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
+      - if: steps.gate.outputs.ready == 'true'
+        uses: actions/checkout@v4
+      - if: steps.gate.outputs.ready == 'true'
+        uses: pnpm/action-setup@v4
+      - if: steps.gate.outputs.ready == 'true'
+        uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: pnpm
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm exec playwright install --with-deps chromium
-      - run: pnpm e2e
+      - if: steps.gate.outputs.ready == 'true'
+        run: pnpm install --frozen-lockfile
+      - if: steps.gate.outputs.ready == 'true'
+        run: pnpm exec playwright install --with-deps chromium
+      - if: steps.gate.outputs.ready == 'true'
+        run: pnpm e2e
       - uses: actions/upload-artifact@v4
-        if: failure()
+        if: failure() && steps.gate.outputs.ready == 'true'
         with:
           name: playwright-traces
           path: test-results
