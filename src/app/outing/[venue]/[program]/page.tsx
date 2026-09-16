@@ -38,7 +38,7 @@ import { effectiveAgeRange, effectiveGrades, initialsOf, underFives } from '@/li
 import { parseSearchParams } from '@/lib/catalog/url'
 import { resolveOrigin, stateWithRoom } from '@/lib/catalog/resolve'
 import { getActiveRoom, getViewer } from '@/lib/auth'
-import { isRenderableImage } from '@/lib/catalog/image-hosts'
+import { isRenderableImage, photoSrc } from '@/lib/catalog/image-hosts'
 import {
   CATEGORY_LABEL,
   jsonLdScript,
@@ -89,14 +89,27 @@ export async function generateMetadata({
   const { program: p, venue: v, images } = found
   const meta = { program: p, venue: v }
   const hero = images.find((i) => i.role === 'hero')
+  /*
+    The card photograph for the share preview, served straight off our proxy.
+
+    It used to point at `/_next/image?url=<the venue's own URL>`, which never
+    worked: the optimizer only accepts remote hosts named in
+    `images.remotePatterns`, that list is empty, and `localPatterns` pins the
+    optimizer to /api/photo anyway (next.config.ts). Every outing shared into a
+    message thread came up with a blank card.
+
+    Going through the proxy rather than the optimizer also keeps the card free.
+    Vercel bills a transformation per width, crawlers fetch this once per
+    outing, and a scraper does its own resizing regardless — so an optimized
+    width here would be a per-venue charge for something nobody looks at at
+    full size. The proxy's own cache still spares the venue's server.
+
+    Relative on purpose: `metadataBase` (src/app/layout.tsx) resolves it
+    against www.fieldy.ca, so a preview never cites the vercel.app alias.
+  */
   const photo =
     hero && isRenderableImage(hero.url)
-      ? [
-          {
-            url: `/_next/image?url=${encodeURIComponent(hero.url)}&w=1200&q=75`,
-            alt: hero.alt,
-          },
-        ]
+      ? [{ url: photoSrc(hero.url), alt: hero.alt }]
       : undefined
 
   const title = outingTitle(meta)

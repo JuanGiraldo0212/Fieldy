@@ -62,7 +62,7 @@ export default async function AccountPage() {
         <Link href="/privacy" className="text-brand font-semibold no-underline">
           privacy and terms
         </Link>
-        . To delete a trip's thread or your account, write to{' '}
+        . To delete a trip&rsquo;s thread or your account, write to{' '}
         <a href="mailto:hello@fieldy.ca" className="text-brand font-semibold no-underline">
           hello@fieldy.ca
         </a>

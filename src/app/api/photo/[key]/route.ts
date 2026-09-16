@@ -27,6 +27,13 @@ import { decodePhotoKey, isRenderableImage } from '@/lib/catalog/image-hosts'
   The optimizer sits in front of this route, resizes what comes back, and caches
   it for `minimumCacheTTL` (next.config.ts); the Cache-Control here is for the
   CDN and the optimizer's own revalidation, not the browser directly.
+
+  That makes `s-maxage` below a cost control, not just a courtesy to the venue.
+  Next keeps a transformed image for whichever is LARGER of `minimumCacheTTL`
+  and this header, and Vercel bills a fresh transformation every time one
+  expires. The two are kept in step at 31 days deliberately: shortening this
+  header alone would not shorten the optimizer's cache, but shortening both
+  would multiply the bill by the number of times a year they turn over.
 */
 
 const UPSTREAM_TIMEOUT_MS = 15_000
@@ -69,7 +76,7 @@ export async function GET(
 
   const headers = new Headers({
     'Content-Type': type,
-    'Cache-Control': 'public, max-age=86400, s-maxage=604800, stale-while-revalidate=86400',
+    'Cache-Control': 'public, max-age=86400, s-maxage=2678400, stale-while-revalidate=86400',
     'X-Content-Type-Options': 'nosniff',
   })
   const length = upstream.headers.get('content-length')

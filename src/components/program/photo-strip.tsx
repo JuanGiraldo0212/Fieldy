@@ -94,9 +94,18 @@ export function PhotoStrip({
   for a hero a venue never resized. A skeleton holds each frame so the outing
   reads immediately instead of opening onto three empty boxes.
 
-  The skeleton sits behind the image, not in place of it: a `fill` image is
+  The skeleton sits behind the image, not in place of it: the image is
   absolutely positioned over it and simply paints on top when it arrives, so
   nothing about showing the photograph depends on JavaScript.
+
+  Sized rather than `fill`, because `fill` obliges us to pass `sizes`, and a
+  `sizes` of `(max-width: 640px) 50vw, 260px` leaves the browser free to pick
+  any configured width at or above 320 — Vercel bills a transformation per
+  width, so one photograph could be bought four times over for the same
+  200px tile. An intrinsic width instead pins it to an `x` descriptor pair,
+  384 and 640, which is what the tile actually renders at on a phone and on a
+  retina desktop. The CSS still drives the layout: `h-full w-full` fills the
+  button exactly as `fill` did, and 260x200 only shapes the srcset.
 */
 function Thumb({ photo }: { photo: Photo }) {
   const [settled, setSettled] = useState(false)
@@ -107,9 +116,9 @@ function Thumb({ photo }: { photo: Photo }) {
       <Image
         src={photoSrc(photo.url)}
         alt={photo.alt}
-        fill
-        sizes="(max-width: 640px) 50vw, 260px"
-        className="object-cover transition-transform duration-200 group-hover:scale-[1.03]"
+        width={260}
+        height={200}
+        className="relative h-full w-full object-cover transition-transform duration-200 group-hover:scale-[1.03]"
         /* next/image fires onLoad even when the browser had the photograph
            cached and finished before hydration. On an error the alt text takes
            over, so the skeleton stops pulsing there too. */
