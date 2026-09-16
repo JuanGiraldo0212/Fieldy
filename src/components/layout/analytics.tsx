@@ -15,22 +15,30 @@ import { Analytics as VercelAnalytics } from '@vercel/analytics/next'
   the words someone was looking for. Returning null there would drop the
   event entirely; we want the pageview, just not the tail of the URL.
 
+  The URL has to stay absolute. The collector rejects a bare pathname with a
+  400 and the pageview is simply lost, so this trims the query and the hash
+  off the href rather than replacing it with `pathname`.
+
   Nothing renders — the component only injects the script tag — so it sits at
   the end of <body> in the root layout with the JSON-LD.
 */
 export function Analytics() {
   return (
     <VercelAnalytics
-      beforeSend={(event) => ({ ...event, url: pathOf(event.url) })}
+      beforeSend={(event) => ({ ...event, url: withoutQuery(event.url) })}
     />
   )
 }
 
-// The pathname alone, with any query string and hash cut off. The URL arrives
-// absolute; a relative base keeps `new URL` from throwing if it ever is not.
-function pathOf(url: string): string {
+// Same URL, minus the query string and the fragment. The href arrives
+// absolute; a base keeps `new URL` from throwing if it ever does not, and a
+// URL we cannot parse is cut at the first `?` or `#` rather than sent whole.
+function withoutQuery(url: string): string {
   try {
-    return new URL(url, 'https://www.fieldy.ca').pathname
+    const parsed = new URL(url, 'https://www.fieldy.ca')
+    parsed.search = ''
+    parsed.hash = ''
+    return parsed.href
   } catch {
     return url.split(/[?#]/)[0] ?? url
   }
