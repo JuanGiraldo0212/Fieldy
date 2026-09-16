@@ -428,11 +428,16 @@ Why Vercel and not a self-hosted counter or a Google tag:
 What it does not get is the search box. The catalog keeps its state in the
 query string (`?q=`, `?grade=`), and what a director typed is the closest
 thing this product has to a private thought. `beforeSend` in
-`src/components/layout/analytics.tsx` rewrites every event's URL down to its
-pathname, so the report reads `/` and `/outing/goldstream/nature-house` and
-never the words. Trip and room IDs stay in the path: they are opaque, and
-Vercel's own request logs already have them.
+`src/components/layout/analytics.tsx` trims the query and the fragment off
+every event's URL, so the report reads `/` and
+`/outing/goldstream/nature-house` and never the words. Trip and room IDs stay
+in the path: they are opaque, and Vercel's own request logs already have them.
 
-This is the client wrapper's whole reason for existing — `beforeSend` is a
-function, and a function cannot cross from a server layout into a client
-component as a prop.
+It trims rather than replaces: the URL has to stay absolute. Handing the
+collector a bare `/privacy` gets a 400 back and the pageview is dropped on
+the floor, silently, because the send is fire-and-forget. That is worth
+knowing before anyone reaches for `new URL(...).pathname` here again.
+
+The client wrapper exists for this hook alone — `beforeSend` is a function,
+and a function cannot cross from a server layout into a client component as
+a prop.
