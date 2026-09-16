@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation'
 import { eq } from 'drizzle-orm'
 import { account, db } from '@/db'
 import { getCentre, getViewer } from '@/lib/auth'
+import { signOut } from './actions'
 import { AccountForm } from './account-form'
 
 /* One person's own pages: nothing here is for a search index. */
@@ -42,6 +43,19 @@ export default async function AccountPage() {
         address={centre?.address ?? ''}
         notifications={me?.emailNotifications ?? true}
       />
+
+      {/* Sign out lives here, not in the top bar. That row already scrolls
+          sideways at 375px, and the avatar that leads to this page is where a
+          person looks for it. A plain form with a server action, so it works
+          on a page whose JavaScript has not loaded yet. */}
+      <form action={signOut} className="mt-3.5">
+        <button
+          type="submit"
+          className="border-border-strong bg-surface hover:border-brand text-body text-text-strong h-control-lg w-full rounded-control border font-bold"
+        >
+          Sign out
+        </button>
+      </form>
 
       <p className="text-meta text-text-faint mt-8">
         What we keep and for how long:{' '}
