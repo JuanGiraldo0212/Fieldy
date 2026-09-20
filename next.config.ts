@@ -10,7 +10,8 @@ import { PHOTO_ROUTE } from './src/lib/catalog/image-hosts'
       so we are not spending seventy venues' bandwidth on our traffic
     - a visitor's browser never contacts seventy third-party hosts, which
       would leak who is browsing the catalog to every one of them
-    - they are resized and re-encoded, so a 3 MB hero does not land on a phone
+    - they are resized and re-encoded — when the optimizer is on, which as of
+      2026-09-20 it is not; see `unoptimized` below
 
   The venue hosts are NOT listed here as `remotePatterns`: Next caps that list
   at 50 and the catalog is past it. Instead every photograph's `src` is a path
@@ -23,6 +24,30 @@ const nextConfig: NextConfig = {
   // because links get opened inside messaging apps' browsers.
   reactStrictMode: true,
   images: {
+    /*
+      The optimizer is OFF (2026-09-20).
+
+      Vercel meters image transformations, the month's allowance ran out, and
+      every `/_next/image` request started coming back `402` with
+      `x-vercel-error: OPTIMIZED_IMAGE_REQUEST_PAYMENT_REQUIRED`. The failure
+      is total rather than graceful: not a larger file, a broken image on
+      every card in the catalog.
+
+      `unoptimized` makes next/image render the `src` it is given verbatim, so
+      a photograph is fetched straight from /api/photo/<key>. Nothing that the
+      proxy is there for changes — our server still fetches the venue's file,
+      the allowlist still gates it, no visitor's browser contacts seventy
+      venue domains. What is given up is the resize and the re-encode: a phone
+      now receives the venue's original bytes for a 104px tile. That is spent
+      in bandwidth, which is not metered the way transformations are, and the
+      route's 31-day `s-maxage` keeps the CDN answering rather than the venue.
+
+      To put the optimizer back: delete this one line, having first bought the
+      quota for it. Everything below is kept correct for that day and is inert
+      until then — `unoptimized` skips srcset generation, so the width ladder
+      is never consulted and `minimumCacheTTL` has no cache to govern.
+    */
+    unoptimized: true,
     localPatterns: [{ pathname: `${PHOTO_ROUTE}/**`, search: '' }],
     /*
       Vercel bills one image transformation per unique source photograph,

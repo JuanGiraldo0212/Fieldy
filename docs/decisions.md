@@ -441,3 +441,44 @@ knowing before anyone reaches for `new URL(...).pathname` here again.
 The client wrapper exists for this hook alone — `beforeSend` is a function,
 and a function cannot cross from a server layout into a client component as
 a prop.
+
+## The image optimizer is off until its quota is paid for
+
+*2026-09-20. `next.config.ts`.*
+
+Vercel meters image transformations. The month's allowance ran out, and the
+way that surfaces is not a larger file or a slower one: `/_next/image`
+returns `402` with `x-vercel-error: OPTIMIZED_IMAGE_REQUEST_PAYMENT_REQUIRED`,
+so every photograph on every card in the catalog is a broken image. There is
+no degraded mode to fall back to — `VenueThumb`'s `onError` tile catches a
+dead venue host, not a dead optimizer, and the strip and the admin grid have
+nothing at all.
+
+`images.unoptimized: true` takes the optimizer out of the path. next/image
+then renders the `src` it is given verbatim, which is already
+`/api/photo/<key>` on our own origin, so:
+
+- **The proxy is untouched**, and with it everything the proxy was for. Our
+  server still fetches the venue's file, `IMAGE_HOSTS` still gates it,
+  redirects are still followed to a checked host, and no visitor's browser
+  contacts seventy venue domains. The decision above stands in full.
+- **The transformation bill goes to zero**, permanently, not just until the
+  next allowance. The route's `s-maxage=2678400` means the CDN answers for 31
+  days and the venue's server is spared just as it was.
+- **What is given up is the resize and the re-encode.** Measured on the Legacy
+  Gallery photograph: 130 KB from the venue against about 7 KB at `w=256`.
+  A phone loading a screen of 104px thumbnails now pays roughly eighteen
+  times the bytes for them. Bandwidth is not metered the way transformations
+  are, so this is a real cost paid in a cheaper currency — but it is a real
+  cost, and it is the reason this is a stopgap and not a design.
+
+The width ladder and `minimumCacheTTL` below it are left in place and left
+correct. `unoptimized` skips srcset generation entirely, so neither is
+consulted while it is set, and turning the optimizer back on is deleting one
+line — once the quota for it has been bought.
+
+**Revisit when** the plan can carry the optimizer's cost, or when it is worth
+shrinking the photographs once at import time and storing those instead. The
+second is the better end state and a larger piece of work: it makes the bytes
+small without buying a transformation per width per month, at the price of
+holding a copy, which the photograph decision above deliberately does not do.
