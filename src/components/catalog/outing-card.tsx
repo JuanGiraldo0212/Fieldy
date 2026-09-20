@@ -6,7 +6,6 @@ import {
   Check,
   Clock,
   Footprints,
-  Info,
   TriangleAlert,
   Truck,
   Users,
@@ -144,17 +143,6 @@ export function OutingCard({ result: r }: { result: SearchResult }) {
           </span>
         </span>
       </span>
-
-      {/* Only daycare accounts see this. A school rate quoted to a daycare is
-          a number they cannot actually pay. */}
-      {r.showRateFlag ? (
-        <span className="bg-info-tint border-info-border text-info-ink text-meta flex basis-full items-center gap-2.5 rounded-control border px-3.5 py-[11px] font-semibold">
-          <span className="text-brand flex">
-            <Info size={16} />
-          </span>
-          School rate — daycares are quoted separately
-        </span>
-      ) : null}
     </Link>
   )
 }

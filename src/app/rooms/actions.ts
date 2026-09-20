@@ -23,7 +23,7 @@ import { putRoomPhoto, removeRoomPhoto } from '@/lib/rooms/photo-storage'
 const roomSchema = z.object({
   id: z.string().optional(),
   name: z.string().trim().min(1, 'Give the room a name.').max(120),
-  icon: z.enum(['baby', 'backpack', 'cap', 'users']),
+  icon: z.enum(['baby', 'smile', 'heart', 'star']),
   ageMin: z.coerce.number().min(0).max(18),
   ageMax: z.coerce.number().min(0).max(18),
   size: z.coerce.number().int().min(1).max(200),

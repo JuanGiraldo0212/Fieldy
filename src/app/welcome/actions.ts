@@ -102,7 +102,7 @@ export async function createCentreAndRoom(
       id: roomId,
       centreId,
       name: d.roomName,
-      icon: 'users',
+      icon: 'smile',
       ageMin: d.ageMin,
       ageMax: d.ageMax,
       size: d.size,

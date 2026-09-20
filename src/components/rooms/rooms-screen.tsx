@@ -62,7 +62,7 @@ export function RoomsScreen({
 
       <div className="flex flex-col gap-4">
         {live.map((r) => {
-          const { tint, ink } = ROOM_ICONS[r.icon as RoomIcon] ?? ROOM_ICONS.users
+          const { tint, ink } = ROOM_ICONS[r.icon as RoomIcon] ?? ROOM_ICONS.smile
           const isActive = r.id === activeRoomId
           return (
             <div key={r.id} className="bg-surface border-border rounded-panel border p-6 sm:px-7 sm:py-6.5">
@@ -95,10 +95,9 @@ export function RoomsScreen({
                 </form>
               </div>
 
-              <div className="border-border-soft mt-5.5 grid grid-cols-2 gap-5 border-t pt-5 sm:grid-cols-4">
+              <div className="border-border-soft mt-5.5 grid grid-cols-2 gap-5 border-t pt-5 sm:grid-cols-3">
                 <Stat label="Ages" value={`${r.ageMin} to ${r.ageMax}`} />
                 <Stat label="Children" value={String(r.size)} />
-                <Stat label="Adults needed" value={String(Math.ceil(r.size / r.ratioChildrenPerAdult))} />
                 <Stat
                   label="Budget"
                   value={r.budgetPerChild ? `$${Number(r.budgetPerChild)} each` : 'Not set'}
@@ -117,7 +116,6 @@ export function RoomsScreen({
 
               <p className="text-meta text-text-faint mt-3">
                 Travels by {r.transport.map((t) => TRANSPORT_LABEL[t] ?? t).join(', ').toLowerCase()}.
-                One adult for every {r.ratioChildrenPerAdult} children.
               </p>
 
               {r.notes ? (

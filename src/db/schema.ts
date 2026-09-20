@@ -77,9 +77,9 @@ export const rateClass = pgEnum('rate_class', ['daycare', 'school'])
 
 export const roomIcon = pgEnum('room_icon', [
   'baby',
-  'backpack',
-  'cap',
-  'users',
+  'smile',
+  'heart',
+  'star',
 ])
 
 export const transportMode = pgEnum('transport_mode', [
@@ -445,7 +445,7 @@ export const room = pgTable(
       .notNull()
       .references(() => centre.id, { onDelete: 'cascade' }),
     name: text('name').notNull(),
-    icon: roomIcon('icon').notNull().default('users'),
+    icon: roomIcon('icon').notNull().default('smile'),
     /* The group photo, when there is one: an object key in the private `rooms`
        bucket (src/lib/rooms/photo.ts). The icon stays as the fallback. */
     photoKey: text('photo_key'),

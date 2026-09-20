@@ -102,12 +102,12 @@
   /* ── Room avatar tints ────────────────────────────────────────────────── */
   --color-room-baby: #eef0fe;
   --color-room-baby-ink: #4a55c7;
-  --color-room-backpack: #e7f5ec;
-  --color-room-backpack-ink: #22794f;
-  --color-room-cap: #fff3d6;
-  --color-room-cap-ink: #8a6410;
-  --color-room-users: #e7f0fd;
-  --color-room-users-ink: #1668d6;
+  --color-room-smile: #e7f5ec;
+  --color-room-smile-ink: #22794f;
+  --color-room-heart: #fdecef;
+  --color-room-heart-ink: #b8405b;
+  --color-room-star: #fff3d6;
+  --color-room-star-ink: #8a6410;
 
   /* ── Logo ─────────────────────────────────────────────────────────────────
      The sun mark. Four ray colours cycling twice around a warm core, drawn in

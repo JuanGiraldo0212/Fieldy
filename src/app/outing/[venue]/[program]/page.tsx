@@ -34,7 +34,7 @@ import {
 } from '@/lib/catalog/program'
 import { haversineKm, travelLine, type TransportMode } from '@/lib/catalog/distance'
 import { costPerChild, feasibility, money } from '@/lib/catalog/feasibility'
-import { effectiveAgeRange, effectiveGrades, initialsOf, underFives } from '@/lib/catalog/search'
+import { effectiveAgeRange, effectiveGrades, initialsOf } from '@/lib/catalog/search'
 import { parseSearchParams } from '@/lib/catalog/url'
 import { resolveOrigin, stateWithRoom } from '@/lib/catalog/resolve'
 import { getActiveRoom, getViewer } from '@/lib/auth'
@@ -306,13 +306,6 @@ export default async function OutingPage({
             label="Cost"
             value={costLabel}
             lines={[totalLabel, p.extraFeesNote]}
-            /* Same gate as the catalog card: only a room that is under school
-               age is told the published number is not theirs. */
-            warn={
-              p.schoolRateOnly && underFives(state.age_bands)
-                ? 'School rate. Daycares are quoted through group visits.'
-                : null
-            }
           />
           <FactTile
             icon={<Baby size={18} />}
