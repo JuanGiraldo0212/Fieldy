@@ -1,0 +1,117 @@
+{
+  "venue": {
+    "id": "zeballos-expeditions",
+    "name": "Zeballos Expeditions",
+    "website": "https://www.zeballosexpeditions.com/",
+    "description": "Zeballos Expeditions is a store and water taxi operator at 203 Pandora Ave in the village of Zeballos, on the northwest coast of Vancouver Island. The hotel and restaurant it used to run have been sold to new owners, and the company says it is considering its next steps. The store is open 2 to 7 pm for groceries, liquor, ice, bait and parking, and a shared water taxi shuttle runs between Tahsis and Zeballos. The site describes no tour, guided trip or workshop, and nothing on it can be booked by a group.",
+    "category": "nature_outdoors",
+    "address": "203 Pandora Ave, Zeballos, British Columbia V0P 2A0",
+    "lat": null,
+    "lng": null,
+    "geo_source": "geocode_pending",
+    "hosts_school_groups": null,
+    "hosts_daycare_groups": null,
+    "youngest_age_welcomed_years": null,
+    "booking_email": "info@zeballosexpeditions.com",
+    "booking_phone": "1-250-761-4137",
+    "booking_url": null,
+    "booking_method": null,
+    "has_washrooms": null,
+    "has_lunch_space": null,
+    "has_rain_backup": null,
+    "stroller_accessible": null,
+    "wheelchair_accessible": null,
+    "bus_parking": null,
+    "facility_notes": {
+      "bus_parking": "Secure parking $6/day & $30/week. Call: 250 761 4099"
+    },
+    "nearby_park": null,
+    "restrictions": null,
+    "languages": [
+      "English",
+      "Italian",
+      "French"
+    ],
+    "general_admission_child_cad": null,
+    "general_admission_adult_cad": null,
+    "hours_notes": "The store is open 2 to 7 pm.",
+    "seasonal_notes": null,
+    "price_year_or_season": null,
+    "checked_on": "2026-09-20",
+    "checked_by": "scraper"
+  },
+  "programs": [],
+  "images": [
+    {
+      "id": "hero-zeballos-fog-lifting",
+      "url": "https://www.zeballosexpeditions.com/images/gallery/misc/4-ZeballosFogLifting.jpg",
+      "role": "hero",
+      "alt": "Fog lifting over Zeballos.",
+      "alt_source": "generated",
+      "caption": null,
+      "found_on_url": "https://www.zeballosexpeditions.com/",
+      "width": null,
+      "height": null,
+      "rights_note": "All photos on this website are either our own or generously provided by Milos Lammr and other guests and are copyright by the photographers. You may not use any of the photos without the express permission of the copyright owner.",
+      "usage": "unverified"
+    },
+    {
+      "id": "space-trollers-at-zeballos",
+      "url": "https://www.zeballosexpeditions.com/images/gallery/misc/4-TrollersAtZeballos.jpg",
+      "role": "space",
+      "alt": "Fishing trollers at Zeballos.",
+      "alt_source": "generated",
+      "caption": null,
+      "found_on_url": "https://www.zeballosexpeditions.com/",
+      "width": null,
+      "height": null,
+      "rights_note": "All photos on this website are either our own or generously provided by Milos Lammr and other guests and are copyright by the photographers. You may not use any of the photos without the express permission of the copyright owner.",
+      "usage": "unverified"
+    },
+    {
+      "id": "activity-kayak-on-the-beach",
+      "url": "https://www.zeballosexpeditions.com/images/gallery/misc/4-KayakOnTheBeach.jpg",
+      "role": "activity",
+      "alt": "A kayak on the beach.",
+      "alt_source": "generated",
+      "caption": null,
+      "found_on_url": "https://www.zeballosexpeditions.com/",
+      "width": null,
+      "height": null,
+      "rights_note": "All photos on this website are either our own or generously provided by Milos Lammr and other guests and are copyright by the photographers. You may not use any of the photos without the express permission of the copyright owner.",
+      "usage": "unverified"
+    }
+  ],
+  "gaps": [
+    "RETRIEVAL NOTE: this is not a rendering failure. The whole site is now one page, served as plain HTML, and a plain fetch returns all of it. The home page is also served at index.aspx. Its own sitemap lists only index.aspx and transportation.html, and transportation.html now returns a not-found page.",
+    "the site no longer describes any tour, guided trip, workshop or other bookable activity; it says the hotel and restaurant have been sold, that the store and the water taxi continue, and that the company is considering its next steps",
+    "nothing on the site says whether school groups or daycare groups are welcome, so both group questions are left unanswered rather than answered no",
+    "no price is published for anything except the store's parking, which is $6 a day and $30 a week",
+    "no minimum or maximum age is published for anything on the site",
+    "no group capacity, lead time or booking route is published; the phone number and email recorded are the general contact details, not a stated booking route",
+    "washrooms, indoor lunch space, rain shelter, stroller access and wheelchair access are not mentioned anywhere on the site",
+    "the only parking the site describes is the store's own secure parking at $6 a day and $30 a week. It does not say whether a bus or a van can park there, or where a group would park",
+    "the site does not say how to reach Zeballos by road or what the road is like, which matters because the village is at the end of a long gravel road on the northwest coast",
+    "the water taxi shuttle is listed with a single date, \"Tahsis Zeballos: Aug 26th 9 am\", with no year, no price and no way to book it given",
+    "the store's hours are given as 2 to 7 pm without saying which days of the week",
+    "no coordinates are published on the site: there is no map embed, no structured address block and no location meta tags. The geocoder available in this run could not resolve 203 Pandora Ave, Zeballos and returned only a village-wide centroid, which would put the pin in the wrong place, so the address is recorded and the coordinates are left for a backfill pass",
+    "every photograph on the site has an empty alt attribute, and no browser was available in this run, so the alt text written here rests on the site's own file name for each photo rather than on having seen the image",
+    "the home page banner photographs have file names that say nothing about what is in them, so the hero photo is taken from the site's own photo gallery instead of from the banner",
+    "the site states that its photos may not be used without the express permission of the copyright owner, recorded against each image",
+    "the languages recorded are the ones the site says its staff speak, and it adds that they speak a little Spanish. The site offers no tours, so these are not tour languages",
+    "the site carries a 2025 copyright line and no other date, so how current the store hours and the shuttle date are cannot be told from the page"
+  ],
+  "conflicts": [],
+  "pages_opened": [
+    "https://www.zeballosexpeditions.com/",
+    "https://www.zeballosexpeditions.com/index.aspx",
+    "https://www.zeballosexpeditions.com/Sitemap.xml",
+    "https://www.zeballosexpeditions.com/robots.txt",
+    "https://www.zeballosexpeditions.com/transportation.html"
+  ],
+  "pages_useful": [
+    "https://www.zeballosexpeditions.com/"
+  ],
+  "extracted_at": "2026-09-20T15:12:40-07:00",
+  "extractor_version": "v2.0"
+}

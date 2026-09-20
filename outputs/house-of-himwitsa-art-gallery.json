@@ -1,0 +1,93 @@
+{
+  "venue": {
+    "id": "house-of-himwitsa-art-gallery",
+    "name": "House of Himwitsa Native Art Gallery",
+    "website": "https://himwitsa.com/",
+    "description": "House of Himwitsa is a Native art gallery and gift shop at 300 Main St in downtown Tofino, next to the marina, established in 1991. The site says the gallery is guided by the hands of the First Nations and sells carvings, masks, panels, paddles, baskets, jewellery, Cowichan knitting, pottery, prints and books by local artists. The same building holds Himwitsa Lodge upstairs and the Dockside smoked fish store through the side entrance, and the home page carries a 360 degree virtual tour of the store. The whole site is an online and walk-in shop: it describes no school visit, group tour, workshop, demonstration or children's activity anywhere, so this is recorded as a retail gallery rather than a place that hosts children's groups.",
+    "category": "arts_performance",
+    "address": "300 Main St, Tofino, BC V0R 2Z0",
+    "lat": 49.15393,
+    "lng": -125.9092,
+    "geo_source": "geocoded",
+    "hosts_school_groups": false,
+    "hosts_daycare_groups": false,
+    "youngest_age_welcomed_years": null,
+    "booking_email": null,
+    "booking_phone": "(250) 725-2017",
+    "booking_url": null,
+    "booking_method": null,
+    "has_washrooms": null,
+    "has_lunch_space": null,
+    "has_rain_backup": null,
+    "stroller_accessible": null,
+    "wheelchair_accessible": null,
+    "bus_parking": null,
+    "facility_notes": null,
+    "nearby_park": null,
+    "restrictions": null,
+    "languages": null,
+    "general_admission_child_cad": null,
+    "general_admission_adult_cad": null,
+    "hours_notes": "The gallery and store are open 10am to 5pm every day. The Dockside fish store, through the side entrance, closes earlier in the afternoon. The front desk is open every day from 10am to 5pm, and lodge check-in runs 3pm to 11pm daily.",
+    "seasonal_notes": "The lodge upstairs will be closed for December, January and February in 2027. No seasonal change is published for the gallery and store.",
+    "price_year_or_season": null,
+    "checked_on": "2026-09-20",
+    "checked_by": "scraper"
+  },
+  "programs": [],
+  "images": [
+    {
+      "id": "hero-gallery",
+      "url": "https://himwitsa.com/cdn/shop/files/Himwitsa_Gallery_x1000_hero.jpg?v=1691170736&width=3500",
+      "role": "hero",
+      "alt": "The House of Himwitsa native art gallery in Tofino.",
+      "alt_source": "generated",
+      "caption": null,
+      "found_on_url": "https://himwitsa.com/pages/store",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    }
+  ],
+  "gaps": [
+    "This is a retail gallery and gift shop. Their own site search was run for school, group, tour and education across every page and article: school and tour return no results at all, group appears only in the lodge terms of service, and education appears only in the privacy policy. The about page, contact page, gallery and gifts page, artists page, testimonials page, lodge page and the single news post were all read in full and none of them mentions a school visit, a field trip, a group tour, a workshop, a demonstration or anything for children. Both the school and daycare fields are set to false on that basis rather than left null.",
+    "If you want to take a group of children in, ring (250) 725-2017 first. Nothing on the site says whether a group is welcome, how many people fit in the gallery at once, whether there is any charge, or whether the carvings and jewellery can be touched.",
+    "There is no email address anywhere on the site. The only written route is a contact form on the contact page with name, email and comment boxes, so there is nobody to write to directly.",
+    "Washrooms, somewhere to eat, rain shelter, stroller access, wheelchair access and parking are not mentioned anywhere on the site. The only location detail is that the building is in downtown Tofino next to the marina, with the fish store through a side entrance.",
+    "Admission is not mentioned. It reads as a shop anyone can walk into during opening hours, but the site never says entry is free, so both admission fields are left null.",
+    "No coordinates are published on the site. There is no map embed, no JSON-LD address or geo block and no latitude or longitude meta tag, only a Google directions link built from the street address. The full address is captured and geo_source is geocode_pending for a later backfill pass.",
+    "The 360 degree virtual store tour on the home page is hosted on demo.360immersion.com, which is not the venue's own domain, so nothing from inside it has been used here.",
+    "The hero photograph carries an empty alt attribute on the site, so the alt recorded here was written by us. There was no way to view the image file in this run, so the description rests on the photo's position as the banner of the gallery and gifts page and on its file name rather than on seeing the frame. It should be checked by a human before publish.",
+    "The other photographs on the site are product shots of individual pieces against a plain background. The one further non-product photo, the banner on the about page, also has an empty alt attribute and could not be viewed, so it was left out rather than described from guesswork.",
+    "Audit trail for the fish store hours: the footer on every page says 10am to 4pm, and the body of the contact page says 10am to close (3-4pm). Neither page is dated. The gallery and store hours, 10am to 5pm daily, are the same on every page."
+  ],
+  "conflicts": [
+    {
+      "field": "hours_notes",
+      "values": ["Dockside Fish Store: 10am to 4pm", "Dockside Fish Store: 10am to close (3-4pm)"],
+      "sources": ["https://himwitsa.com/pages/contact", "https://himwitsa.com/"],
+      "note": "Their pages give two closing times for the smoked fish store, one says 4pm and another says it closes somewhere around 3 to 4pm. The gallery itself is open until 5pm every day on every page. If the fish store matters to your visit, go earlier in the afternoon."
+    }
+  ],
+  "pages_opened": [
+    "https://himwitsa.com/",
+    "https://himwitsa.com/pages/about-us",
+    "https://himwitsa.com/pages/contact",
+    "https://himwitsa.com/pages/store",
+    "https://himwitsa.com/pages/artists-collection",
+    "https://himwitsa.com/pages/testimonials",
+    "https://himwitsa.com/pages/himwitsa-lodge",
+    "https://himwitsa.com/blogs/news/himwitsa-connected",
+    "https://himwitsa.com/sitemap.xml",
+    "https://himwitsa.com/sitemap_pages_1.xml?from=93611426040&to=111767093496"
+  ],
+  "pages_useful": [
+    "https://himwitsa.com/",
+    "https://himwitsa.com/pages/about-us",
+    "https://himwitsa.com/pages/contact",
+    "https://himwitsa.com/pages/store"
+  ],
+  "extracted_at": "2026-09-20T11:12:00-07:00",
+  "extractor_version": "v2.0"
+}

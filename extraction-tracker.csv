@@ -130,7 +130,7 @@ horne-lake-cave-tours-and-outdoor-centre.json,Horne Lake Cave Tours and Outdoor 
 i-hos-gallery.json,I-Hos Gallery,Central Island,Courtenay,www.ihosgallery.com,,pending
 island-cycle.json,Island Cycle,Central Island,Parksville,www.island-cycle.myshopify.com,,pending
 kitty-coleman-woodland-gardens.json,Kitty Coleman Woodland Gardens,Central Island,Courtenay,www.woodlandgardens.ca,,pending
-larry-aguilar-pottery-studio.json,Larry Aguilar Pottery Studio,Central Island,Qualicum Beach,www.facebook.com/Larry.Aguilar.,,pending
+larry-aguilar-pottery-studio.json,Larry Aguilar Pottery Studio,Central Island,Qualicum Beach,www.facebook.com/Larry.Aguilar.,,no_website
 maritime-heritage-centre.json,Maritime Heritage Centre,Central Island,Campbell River,www.maritimeheritagecentre.ca,yes,pending
 mcmillan-arts-centre-the-mac.json,McMillan Arts Centre – The MAC,Central Island,Parksville,www.mcmillanartscentre.com,,pending
 milner-gardens-and-woodlands.json,Milner Gardens and Woodlands,Central Island,Qualicum Beach,www.milnergardens.viu.ca,,pending
@@ -153,40 +153,40 @@ strathcona-park-lodge-and-outdoor-education-centre.json,Strathcona Park Lodge an
 sweet-pea-quilting.json,Sweet Pea Quilting,Central Island,Parksville,www.sweetpeaquilting.ca,,pending
 the-old-school-house-arts-centre.json,The Old School House Arts Centre,Central Island,Qualicum Beach,www.theoldschoolhouse.org,yes,pending
 wei-wai-kum-house-of-treasures.json,Wei Wai Kum House of Treasures,Central Island,Campbell River,www.weiwaikumhouseoftreasures.com,,pending
-ahtsik-native-art-gallery-gordon-dick-studio.json,Ahtsik Native Art Gallery + Gordon Dick Studio,West Coast / Alberni,Port Alberni,www.ahtsik.com,,pending
-alberni-valley-museum.json,Alberni Valley Museum,West Coast / Alberni,Port Alberni,www.playinpa.ca/museum,,pending
-bamfield-marine-sciences-centre.json,Bamfield Marine Sciences Centre,West Coast / Alberni,Bamfield,www.bamfieldmsc.com,,pending
-cedar-coast-art-and-ecology-centre.json,Cedar Coast Art and Ecology Centre,West Coast / Alberni,Tofino,www.thecedarcoast.ca,,pending
-cedar-coast-field-station.json,Cedar Coast Field Station,West Coast / Alberni,Tofino,www.cedarcoastfieldstation.org,,pending
-hot-springs-cove-maquinna-provincial-park.json,Hot Springs Cove Maquinna Provincial Park,West Coast / Alberni,35 km NW from Tofino,www.tourismtofino.com,,pending
-house-of-himwitsa-art-gallery.json,House of Himwitsa Art Gallery,West Coast / Alberni,Tofino,www.himwitsa.com,,pending
-jamies-whaling-station-adventure-centres-tofino.json,Jamie’s Whaling Station & Adventure Centres – Tofino,West Coast / Alberni,Tofino,www.jamies.com,,pending
-jamies-whaling-station-adventure-centres-ucluelet.json,Jamie’s Whaling Station & Adventure Centres – Ucluelet,West Coast / Alberni,Ucluelet,www.jamies.com,,pending
-mclean-mill-national-historic-park.json,McLean Mill National Historic Park,West Coast / Alberni,Port Alberni,www.mcleanmill.ca,,pending
-naawayasum-gardens-formerly-tofino-botanical-gardens.json,Naa’Waya’Sum Gardens (Formerly Tofino Botanical Gardens),West Coast / Alberni,Tofino,www.clayoquotcampus.ca/,,pending
-pacific-rim-national-park-reserve.json,Pacific Rim National Park Reserve,West Coast / Alberni,Ucluelet,www.pc.gc.ca/en/pn-np/bc/pacificrim,,pending
-pacific-rim-national-park-kwisitis-visitor-centre.json,Pacific Rim National Park – Kwisitis Visitor Centre,West Coast / Alberni,Ucluelet,www.pc.gc.ca/en/pn-np/bc/pacificrim,,pending
-port-alberni-echo-aquatic-centre-and-fitness-studio.json,Port Alberni Echo Aquatic Centre and Fitness Studio,West Coast / Alberni,Port Alberni,www.playinpa.ca,,pending
-port-alberni-maritime-discovery-centre.json,Port Alberni Maritime Discovery Centre,West Coast / Alberni,Port Alberni,www.portalbernimaritimeheritage.ca,,pending
-raincoast-education-society.json,Raincoast Education Society,West Coast / Alberni,Ucluelet,www.raincoasteducation.org,,pending
-remote-passages-marine-excursions.json,Remote Passages Marine Excursions,West Coast / Alberni,Tofino,www.remotepassages.com,,pending
-roy-henry-vickers-gallery.json,Roy Henry Vickers Gallery,West Coast / Alberni,Tofino,www.royhenryvickers.com,,pending
-the-whale-centre.json,The Whale Centre,West Coast / Alberni,Tofino,www.tofinowhalecentre.com,,pending
-tofino-sea-kayaking-co.json,Tofino Sea Kayaking Co.,West Coast / Alberni,Tofino,www.tofinoseakayaking.com,,pending
-tofino-tourism.json,Tofino Tourism,West Coast / Alberni,Tofino,www.tourismtofino.com,,pending
-west-coast-aquatic-safaris.json,West Coast Aquatic Safaris,West Coast / Alberni,Tofino,www.whalesafaris.com,,pending
-west-coast-nest.json,West Coast Nest,West Coast / Alberni,Tofino,www.westcoastnest.org,,pending
-alert-bay-public-library-museum.json,Alert Bay Public Library & Museum,North Island,Alert Bay,www.alertbay.bc.libraries.coop,,pending
-ecosummer-expeditions.json,Ecosummer Expeditions,North Island,Telegraph Cove,www.ecosummer.com,,pending
+ahtsik-native-art-gallery-gordon-dick-studio.json,Ahtsik Native Art Gallery + Gordon Dick Studio,West Coast / Alberni,Port Alberni,www.ahtsik.com,,done
+alberni-valley-museum.json,Alberni Valley Museum,West Coast / Alberni,Port Alberni,www.playinpa.ca/museum,,done
+bamfield-marine-sciences-centre.json,Bamfield Marine Sciences Centre,West Coast / Alberni,Bamfield,www.bamfieldmsc.com,,done
+cedar-coast-art-and-ecology-centre.json,Cedar Coast Art and Ecology Centre,West Coast / Alberni,Tofino,www.thecedarcoast.ca,,not_for_groups
+cedar-coast-field-station.json,Cedar Coast Field Station,West Coast / Alberni,Tofino,www.cedarcoastfieldstation.org,,no_website
+hot-springs-cove-maquinna-provincial-park.json,Hot Springs Cove Maquinna Provincial Park,West Coast / Alberni,35 km NW from Tofino,www.tourismtofino.com,,done
+house-of-himwitsa-art-gallery.json,House of Himwitsa Art Gallery,West Coast / Alberni,Tofino,www.himwitsa.com,,not_for_groups
+jamies-whaling-station-adventure-centres-tofino.json,Jamie’s Whaling Station & Adventure Centres – Tofino,West Coast / Alberni,Tofino,www.jamies.com,,done
+jamies-whaling-station-adventure-centres-ucluelet.json,Jamie’s Whaling Station & Adventure Centres – Ucluelet,West Coast / Alberni,Ucluelet,www.jamies.com,,done
+mclean-mill-national-historic-park.json,McLean Mill National Historic Park,West Coast / Alberni,Port Alberni,www.mcleanmill.ca,,done
+naawayasum-gardens-formerly-tofino-botanical-gardens.json,Naa’Waya’Sum Gardens (Formerly Tofino Botanical Gardens),West Coast / Alberni,Tofino,www.clayoquotcampus.ca/,,done
+pacific-rim-national-park-reserve.json,Pacific Rim National Park Reserve,West Coast / Alberni,Ucluelet,www.pc.gc.ca/en/pn-np/bc/pacificrim,,error
+pacific-rim-national-park-kwisitis-visitor-centre.json,Pacific Rim National Park – Kwisitis Visitor Centre,West Coast / Alberni,Ucluelet,www.pc.gc.ca/en/pn-np/bc/pacificrim,,error
+port-alberni-echo-aquatic-centre-and-fitness-studio.json,Port Alberni Echo Aquatic Centre and Fitness Studio,West Coast / Alberni,Port Alberni,www.playinpa.ca,,done
+port-alberni-maritime-discovery-centre.json,Port Alberni Maritime Discovery Centre,West Coast / Alberni,Port Alberni,www.portalbernimaritimeheritage.ca,,done
+raincoast-education-society.json,Raincoast Education Society,West Coast / Alberni,Ucluelet,www.raincoasteducation.org,,done
+remote-passages-marine-excursions.json,Remote Passages Marine Excursions,West Coast / Alberni,Tofino,www.remotepassages.com,,done
+roy-henry-vickers-gallery.json,Roy Henry Vickers Gallery,West Coast / Alberni,Tofino,www.royhenryvickers.com,,done
+the-whale-centre.json,The Whale Centre,West Coast / Alberni,Tofino,www.tofinowhalecentre.com,,done
+tofino-sea-kayaking-co.json,Tofino Sea Kayaking Co.,West Coast / Alberni,Tofino,www.tofinoseakayaking.com,,done
+tofino-tourism.json,Tofino Tourism,West Coast / Alberni,Tofino,www.tourismtofino.com,,not_for_groups
+west-coast-aquatic-safaris.json,West Coast Aquatic Safaris,West Coast / Alberni,Tofino,www.whalesafaris.com,,done
+west-coast-nest.json,West Coast Nest,West Coast / Alberni,Tofino,www.westcoastnest.org,,done
+alert-bay-public-library-museum.json,Alert Bay Public Library & Museum,North Island,Alert Bay,www.alertbay.bc.libraries.coop,,done
+ecosummer-expeditions.json,Ecosummer Expeditions,North Island,Telegraph Cove,www.ecosummer.com,,done
 henschel-fine-arts.json,Henschel Fine Arts,North Island,Port McNeill,,,no_website
-kwakiutl-art-of-the-copper-maker-gallery.json,Kwakiutl Art of The Copper Maker Gallery,North Island,Port Hardy,www.calvinhunt.com,,pending
-mount-cain-alpine-park.json,Mount Cain Alpine Park,North Island,Port McNeill,www.mountcain.com,,pending
-port-hardy-museum-archives.json,Port Hardy Museum & Archives,North Island,Port Hardy,www.porthardymuseum.com,,pending
-port-mcneill-district-museum.json,Port McNeill & District Museum,North Island,Port McNeill,www.town.portmcneill.bc.ca,,pending
-sea-wolf-adventures.json,Sea Wolf Adventures,North Island,Port McNeil,www.seawolfadventures.ca,,pending
-sointula-museum.json,Sointula Museum,North Island,Sointula,www.sointulamuseum.ca,,pending
-the-whale-interpretive-centre.json,The Whale Interpretive Centre,North Island,Telegraph Cove,www.killerwhalecentre.org,,pending
-umista-cultural-centre.json,U’Mista Cultural Centre,North Island,Alert Bay,www.umista.ca,,pending
-zeballos-expeditions.json,Zeballos Expeditions,North Island,Zeballos,www.zeballosexpeditions.com,,pending
-zeballos-heritage-museum.json,Zeballos Heritage Museum,North Island,Zeballos,www.zeballos.com,,pending
-cineplex-education-cinema-more.json,Cineplex – Education Cinema & More,Island wide,Vancouver Island,www.cineplex.com/groupsales,,pending
+kwakiutl-art-of-the-copper-maker-gallery.json,Kwakiutl Art of The Copper Maker Gallery,North Island,Port Hardy,www.calvinhunt.com,,error
+mount-cain-alpine-park.json,Mount Cain Alpine Park,North Island,Port McNeill,www.mountcain.com,,done
+port-hardy-museum-archives.json,Port Hardy Museum & Archives,North Island,Port Hardy,www.porthardymuseum.com,,done
+port-mcneill-district-museum.json,Port McNeill & District Museum,North Island,Port McNeill,www.town.portmcneill.bc.ca,,done
+sea-wolf-adventures.json,Sea Wolf Adventures,North Island,Port McNeil,www.seawolfadventures.ca,,done
+sointula-museum.json,Sointula Museum,North Island,Sointula,www.sointulamuseum.ca,,done
+the-whale-interpretive-centre.json,The Whale Interpretive Centre,North Island,Telegraph Cove,www.killerwhalecentre.org,,done
+umista-cultural-centre.json,U’Mista Cultural Centre,North Island,Alert Bay,www.umista.ca,,done
+zeballos-expeditions.json,Zeballos Expeditions,North Island,Zeballos,www.zeballosexpeditions.com,,not_for_groups
+zeballos-heritage-museum.json,Zeballos Heritage Museum,North Island,Zeballos,www.zeballos.com,,done
+cineplex-education-cinema-more.json,Cineplex – Education Cinema & More,Island wide,Vancouver Island,www.cineplex.com/groupsales,,done

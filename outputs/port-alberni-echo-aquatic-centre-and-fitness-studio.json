@@ -1,0 +1,171 @@
+{
+  "venue": {
+    "id": "echo-aquatic-centre-fitness-studio",
+    "name": "Echo Aquatic Centre & Fitness Studio",
+    "website": "https://playinpa.ca/facility-info/",
+    "description": "The Echo Aquatic Centre & Fitness Studio is run by the City of Port Alberni Parks, Recreation and Culture department, on the same Wallace Street site as the Echo '67 Community Centre and the Alberni Valley Museum. It is a natatorium with a fitness studio, hot tub and sauna, a main pool and a tot pool, and 4 universal changerooms all equipped for portable lift. Drop-in admission is $3.50 for a child aged 5 to 12 and free for children under 5. Swimmers under the age of 7 must be directly supervised by a parent or adult guardian who is in the water and within arms' reach of the child.",
+    "category": "community_civic",
+    "address": "4255 Wallace Street, Port Alberni BC V9Y 3Y6",
+    "lat": 49.25126,
+    "lng": -124.79704,
+    "geo_source": "site_embed",
+    "hosts_school_groups": null,
+    "hosts_daycare_groups": null,
+    "youngest_age_welcomed_years": null,
+    "booking_email": null,
+    "booking_phone": "250-720-2514",
+    "booking_url": null,
+    "booking_method": null,
+    "has_washrooms": null,
+    "has_lunch_space": null,
+    "has_rain_backup": true,
+    "stroller_accessible": null,
+    "wheelchair_accessible": null,
+    "bus_parking": null,
+    "facility_notes": {
+      "washrooms": "4 universal changerooms all equipped for portable lift.",
+      "rain_backup": "Natatorium with Fitness Studio, hot tub and sauna. Main pool and tot pool."
+    },
+    "nearby_park": null,
+    "restrictions": [
+      "Swimmers under the age of 7, must be directly supervised by a parent or adult guardian who is in the water and within arms' reach of the child.",
+      "Toddlers, children and youth cannot be in the shallow tank or tot pool Monday to Friday 6:00-10:00am. This time is designated as an adult-only swim session.",
+      "Youth 13-15 years of age may access the Fitness Studio under direct supervision of an adult 19 years of age or older.",
+      "You must present your membership pass to gain entry to drop-in sessions."
+    ],
+    "languages": null,
+    "general_admission_child_cad": 3.5,
+    "general_admission_adult_cad": 6.5,
+    "hours_notes": "Facility hours are Sunday 8:00am to 3:30pm, Monday 6:00am to 1:00pm and 4:00 to 5:30pm, Tuesday 6:00am to 1:00pm, Wednesday 6:00am to 1:00pm and 4:00 to 7:30pm, Thursday 6:00am to 1:00pm, Friday 6:00am to 1:00pm and 4:00 to 7:30pm, Saturday 8:00 to 9:00am and 12:00 to 7:30pm. Closed statutory holidays. Hours are subject to change with no notice. The pool and fitness studio are closed to the public during swimming lessons, so not every open hour is a swim you can drop into.",
+    "seasonal_notes": null,
+    "price_year_or_season": "Rates & Passes effective January 1, 2026",
+    "checked_on": "2026-09-20",
+    "checked_by": "scraper"
+  },
+  "programs": [
+    {
+      "id": "public-swim-drop-in",
+      "name": "Public swim drop-in",
+      "description": "There is no school, daycare or group swim rate published and no group booking route, so a group pays the public drop-in price. That is $3.50 for a child aged 5 to 12, $3.50 for a youth 13 to 18, $6.50 for an adult 19 to 59, and free for children under 5. The pool and fitness studio close to the public during swimming lessons, and Monday to Friday from 6:00 to 10:00am is an adult-only session when children cannot use the shallow tank or the tot pool.",
+      "what_children_do": "Swim in the main pool or the shallow tot pool, with a hot tub and a sauna in the same room. Any child under 7 stays within arms' reach of an adult who is in the water with them. Groups change in one of four universal changerooms.",
+      "our_note": "There is no school or daycare rate here, so budget the public drop-in price and remember that under-fives get in free. The under-seven rule is what will shape your day: every child under 7 needs an adult in the water within arms' reach, which in practice is close to one adult per child, so ask the pool what they will accept before you commit. Phone ahead as well, because the pool closes to the public during swim lessons and the printed schedule on the site has run out.",
+      "practical_summary": "The pool is indoors with four universal changerooms set up for a portable lift, and the child and adult drop-in prices are published. Whether there is anywhere for a group to eat, whether a bus can park, and how many adults a group of small children has to bring are not stated, so it is worth a call.",
+      "comes_to_you": false,
+      "age_min_years": null,
+      "age_max_years": null,
+      "grade_min": null,
+      "grade_max": null,
+      "age_basis": null,
+      "duration_min": null,
+      "capacity_max": null,
+      "capacity_min": null,
+      "cost_per_child_cad": 3.5,
+      "cost_per_group_cad": null,
+      "cost_per_adult_cad": 6.5,
+      "free_adults_per_children": null,
+      "is_free": false,
+      "tax_included": null,
+      "extra_fees_note": "Children under 5 get in free. Youth 13 to 18 pay $3.50 and seniors 60 to 75 pay $3.50. A family rate of $14.00 covers a maximum 2 adults and up to 4 children from the same family.",
+      "school_rate_only": false,
+      "deposit_required": null,
+      "payment_timing": null,
+      "cancellation_note": null,
+      "months_offered": null,
+      "days_offered": null,
+      "time_slots": null,
+      "lead_time_days": null,
+      "chaperone_ratio": null,
+      "adults_free": false,
+      "indoor": true,
+      "outdoor": false,
+      "format": [
+        "self_guided"
+      ],
+      "sensory_friendly": null,
+      "low_noise": null,
+      "neurodiversity_friendly": null,
+      "mood_tags": [
+        "active",
+        "play"
+      ],
+      "curriculum_tags": null,
+      "booking_email": null,
+      "booking_url": null,
+      "booking_method": null,
+      "source_url": "https://playinpa.ca/wp-content/uploads/2026/03/rates-passes.pdf",
+      "evidence": "FREE admission for children under 5 and adults 75+!",
+      "checked_on": "2026-09-20",
+      "image_ids": null
+    }
+  ],
+  "images": [
+    {
+      "id": "hero-echo-aquatic-centre",
+      "url": "https://playinpa.ca/wp-content/uploads/2018/06/echo-aquatic-centre-e1527880869578.jpg",
+      "role": "hero",
+      "alt": "The Echo Aquatic Centre and Fitness Studio building.",
+      "alt_source": "generated",
+      "caption": null,
+      "found_on_url": "https://playinpa.ca/facility-info/",
+      "width": 500,
+      "height": 375,
+      "rights_note": null,
+      "usage": "unverified"
+    }
+  ],
+  "gaps": [
+    "no school, daycare or group swim rate is published anywhere on the site; the rate sheet gives public drop-in prices only",
+    "no group booking route, lead time or group contact is published for the pool, and the site never says whether children's groups are welcome",
+    "how many adults a children's group has to bring is not stated as a number. The site says only that swimmers under 7 must have a parent or adult guardian in the water within arms' reach of the child",
+    "the 1 lifeguard to 1-40 swimmers ratio on the pool operation page is the facility's own staffing standard, not a rule about how many adults a visiting group must bring, and was not recorded as a group rule",
+    "no minimum age to use the pool is stated",
+    "no capacity limit for a group is stated",
+    "no indoor lunch space or eating area is mentioned anywhere on the site",
+    "washrooms are not stated directly. The site describes 4 universal changerooms all equipped for portable lift, which is recorded as a note rather than as a yes",
+    "bus parking is not mentioned",
+    "whether the building is wheelchair accessible is not stated; only the portable lift changerooms are described",
+    "stroller access is not mentioned",
+    "the booking email is hidden by Cloudflare email protection and cannot be read, so no email address is recorded",
+    "the live drop-in schedule failed to load on the schedules page, and the downloadable pool schedule covers June 29 to August 28, 2026, which has passed. Exact public swim times are unknown",
+    "whether the swim rates include tax is not stated. The rate sheet marks +gst only against the group fitness punch card",
+    "the venue has no page of its own. Everything about it sits in one block on the shared facility info page",
+    "the homepage publishes no og:image and its banner is a generic site header, so the hero is the Echo Aquatic Centre photo from the facility info page. That photo carries no alt text on the site and was not viewed, so its description rests on the site's own labelling of it",
+    "the eLeisure Guide is published on calameo.com rather than the venue's own domain, so it was not used as a source",
+    "coordinates: two Google Maps links on the site give slightly different points for 4255 Wallace Street. The one recorded is the footer link, whose Google place is named Echo Aquatic and Fitness Centre; the other resolves to the Parks & Recreation Dept office"
+  ],
+  "conflicts": [
+    {
+      "field": "hours_notes",
+      "values": [
+        "Sunday 8:00am to 3:30pm and Saturday 12:00 to 7:30pm",
+        "closed Saturday afternoons and all day Sunday"
+      ],
+      "sources": [
+        "https://playinpa.ca/facility-info/",
+        "https://playinpa.ca/pool-operation-faq/"
+      ],
+      "note": "Their own pages disagree about the weekend. The facility listing shows the pool open Saturday afternoon and Sunday morning, while their pool questions page says it is closed Saturday afternoons and all day Sunday. Worth settling on the phone before you plan a weekend visit."
+    }
+  ],
+  "pages_opened": [
+    "https://playinpa.ca/",
+    "https://playinpa.ca/facility-info/",
+    "https://playinpa.ca/wp-content/uploads/2026/03/rates-passes.pdf",
+    "https://playinpa.ca/pool-operation-faq/",
+    "https://playinpa.ca/swim-lessons/",
+    "https://playinpa.ca/schedules/",
+    "https://playinpa.ca/birthday-party-faqs/",
+    "https://playinpa.ca/contact-us/",
+    "https://playinpa.ca/guide/",
+    "https://playinpa.ca/2026-fall-eleisure-guide-is-available-for-viewing/"
+  ],
+  "pages_useful": [
+    "https://playinpa.ca/facility-info/",
+    "https://playinpa.ca/wp-content/uploads/2026/03/rates-passes.pdf",
+    "https://playinpa.ca/pool-operation-faq/",
+    "https://playinpa.ca/swim-lessons/",
+    "https://playinpa.ca/schedules/"
+  ],
+  "extracted_at": "2026-09-20T11:12:00-07:00",
+  "extractor_version": "v2.0"
+}
