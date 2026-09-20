@@ -1,7 +1,7 @@
 'use client'
 
 import { useActionState, useEffect, useRef, useState } from 'react'
-import { Baby, Backpack, Camera, GraduationCap, Users, X } from 'lucide-react'
+import { Baby, Camera, Heart, Smile, Star, X } from 'lucide-react'
 import { saveRoom, type RoomState } from '@/app/rooms/actions'
 import { CheckRow, Field, FieldBox, cx } from '@/components/ui'
 import { AddressField } from '@/components/ui/address-field'
@@ -21,9 +21,9 @@ import { ROOM_PHOTO_EDGE, roomPhotoSrc } from '@/lib/rooms/photo'
 
 export const ROOM_ICONS = {
   baby: { Icon: Baby, tint: 'bg-room-baby', ink: 'text-room-baby-ink' },
-  backpack: { Icon: Backpack, tint: 'bg-room-backpack', ink: 'text-room-backpack-ink' },
-  cap: { Icon: GraduationCap, tint: 'bg-room-cap', ink: 'text-room-cap-ink' },
-  users: { Icon: Users, tint: 'bg-room-users', ink: 'text-room-users-ink' },
+  smile: { Icon: Smile, tint: 'bg-room-smile', ink: 'text-room-smile-ink' },
+  heart: { Icon: Heart, tint: 'bg-room-heart', ink: 'text-room-heart-ink' },
+  star: { Icon: Star, tint: 'bg-room-star', ink: 'text-room-star-ink' },
 } as const
 
 export type RoomIcon = keyof typeof ROOM_ICONS
@@ -59,7 +59,7 @@ const NOTES_MAX = 300
 */
 export function RoomAvatar({ icon, photo }: { icon: string; photo: string | null }) {
   const [failed, setFailed] = useState<string | null>(null)
-  const { Icon, tint, ink } = ROOM_ICONS[icon as RoomIcon] ?? ROOM_ICONS.users
+  const { Icon, tint, ink } = ROOM_ICONS[icon as RoomIcon] ?? ROOM_ICONS.smile
   if (photo && failed !== photo) {
     return (
       // eslint-disable-next-line @next/next/no-img-element -- private, see /api/room-photo
@@ -116,7 +116,7 @@ export function RoomDialog({
 }) {
   const ref = useRef<HTMLDialogElement>(null)
   const [state, action, pending] = useActionState<RoomState, FormData>(saveRoom, {})
-  const [icon, setIcon] = useState<RoomIcon>(room?.icon ?? 'users')
+  const [icon, setIcon] = useState<RoomIcon>(room?.icon ?? 'smile')
   const [transport, setTransport] = useState<string[]>(
     room?.transport?.length ? room.transport : ['bus'],
   )
@@ -187,6 +187,9 @@ export function RoomDialog({
       >
         {room ? <input type="hidden" name="id" value={room.id} /> : null}
         <input type="hidden" name="icon" value={icon} />
+        {/* No longer edited here. The ratio still backs the adult count on a
+            trip, so a save carries the room's stored value through untouched. */}
+        <input type="hidden" name="ratio" value={room?.ratioChildrenPerAdult ?? 8} />
         {removed && !picked ? <input type="hidden" name="removePhoto" value="1" /> : null}
         {transport.map((t) => (
           <input key={t} type="hidden" name="transport" value={t} />
@@ -323,13 +326,6 @@ export function RoomDialog({
             <FieldBox>
               <input name="size" type="number" min={1} required
                 defaultValue={room?.size ?? 16}
-                className="text-body-sm w-full border-0 bg-transparent font-bold outline-none" />
-            </FieldBox>
-          </Field>
-          <Field label="Children per adult">
-            <FieldBox>
-              <input name="ratio" type="number" min={1} required
-                defaultValue={room?.ratioChildrenPerAdult ?? 8}
                 className="text-body-sm w-full border-0 bg-transparent font-bold outline-none" />
             </FieldBox>
           </Field>

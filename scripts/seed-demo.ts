@@ -123,7 +123,7 @@ async function main() {
           id: preschoolId,
           centreId,
           name: 'Preschool room',
-          icon: 'backpack',
+          icon: 'smile',
           ageMin: 3,
           ageMax: 5,
           size: 16,

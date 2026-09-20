@@ -85,6 +85,13 @@
       "when": 1789077838620,
       "tag": "0011_lively_kitty_pryde",
       "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1789926858071,
+      "tag": "0012_icy_wilson_fisk",
+      "breakpoints": true
     }
   ]
 }

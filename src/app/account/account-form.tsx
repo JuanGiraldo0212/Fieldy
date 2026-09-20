@@ -18,11 +18,11 @@ import { CENTRE_TYPES, ROLES } from '@/lib/roles'
 /* Which rates a centre sees, and why. The design's own copy. */
 const TYPE_NOTE: Record<string, string> = {
   daycare_preschool:
-    'Venue school rates often do not apply, so we flag those and you can ask for a quote.',
+    'Venue school rates often do not apply, so ask for a quote before you budget.',
   elementary: 'School and district rates apply, and grade-based programs are shown as published.',
   middle: 'School and district rates apply, and grade-based programs are shown as published.',
   secondary: 'School and district rates apply, and grade-based programs are shown as published.',
-  other: 'We will show every rate we have and flag the ones written for schools.',
+  other: 'We will show every rate we have.',
 }
 
 export function AccountForm({
