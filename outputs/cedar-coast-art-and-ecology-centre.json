@@ -1,0 +1,110 @@
+{
+  "venue": {
+    "id": "cedar-coast-art-and-ecology-centre",
+    "name": "Cedar Coast Art and Ecology Centre",
+    "website": "https://thecedarcoast.ca/",
+    "description": "Cedar Coast was an off-grid centre on a 90 acre waterfront property on the southeast shoreline of Vargas Island, about 5 kilometres northwest of Tofino and reachable only by a 15 minute boat ride from the Cedar Coast Dock at 630 Campbell Street. It ran place-based ecology programs for K-12 and university groups alongside tent-cabin accommodation, catering and guided activities. Its home page now states that the centre is permanently closed, so it no longer takes school or daycare groups. The education and rates pages are still online and still describe programs and 2024 prices, but they have not been updated since the closure notice went up.",
+    "category": "nature_outdoors",
+    "address": "Cedar Coast Centre, Lot 1 Vargas Island, P.O. Box 1209, Tofino, B.C., V0R 2Z0",
+    "lat": null,
+    "lng": null,
+    "geo_source": "geocode_pending",
+    "hosts_school_groups": false,
+    "hosts_daycare_groups": false,
+    "youngest_age_welcomed_years": null,
+    "booking_email": "info@thecedarcoast.ca",
+    "booking_phone": "1-250-726-6790",
+    "booking_url": null,
+    "booking_method": null,
+    "has_washrooms": null,
+    "has_lunch_space": null,
+    "has_rain_backup": null,
+    "stroller_accessible": null,
+    "wheelchair_accessible": null,
+    "bus_parking": null,
+    "facility_notes": {
+      "bus_parking": "Please inform Cedar Coast staff ahead of time if your group will be needing to park a large 24 passenger bus so that we can plan parking arrangements accordingly."
+    },
+    "nearby_park": "Vargas Island Provincial Park borders the property to the west, and a trail runs from the centre to the beaches of Ahous Bay.",
+    "restrictions": [
+      "Cedar Coast is boat access only."
+    ],
+    "languages": null,
+    "general_admission_child_cad": null,
+    "general_admission_adult_cad": null,
+    "hours_notes": null,
+    "seasonal_notes": "Getting to the island depended on the marine forecast, and the site warned that access could become impossible in the off season between October 31 and April 1.",
+    "price_year_or_season": null,
+    "checked_on": "2026-09-20",
+    "checked_by": "scraper"
+  },
+  "programs": [],
+  "images": [
+    {
+      "id": "hero-vargas-island-site",
+      "url": "https://thecedarcoast.ca/wp-content/uploads/2024/08/JRA01646.jpg",
+      "role": "hero",
+      "alt": "A photograph of the Cedar Coast centre on the shoreline of Vargas Island.",
+      "alt_source": "generated",
+      "caption": null,
+      "found_on_url": "https://thecedarcoast.ca/",
+      "width": 1800,
+      "height": 1200,
+      "rights_note": null,
+      "usage": "unverified"
+    }
+  ],
+  "gaps": [
+    "the centre is permanently closed, so no price, age range, capacity, lead time, lunch space, washroom or rain backup answer on this record can be acted on",
+    "RETRIEVAL NOTE: thecedarcoast.ca serves its real WordPress site only to a browser user agent. A plain fetch with a default user agent returns a 596 byte stub page whose title and canonical link both point at cedarcoastfieldstation.org, with lang=\"id\" and a favicon on the off-domain host imgmahasuhu.io. A fetch-only re-run that does not send a browser user agent will appear to find an empty or hijacked site.",
+    "the home page carries the closure notice but the education, rates, facilities, activities and contact pages were never taken down and still read as though the centre is open",
+    "the published rates are headed 2024 Rates and are from before the closure, so no current price exists",
+    "the closure notice gives no date, so it is not stated when the centre closed",
+    "the closure notice does not say whether the organisation still exists in another form or who to contact about it",
+    "the site's own alt attributes are image file names or the photographer's name rather than descriptions, so none could be used verbatim",
+    "the hero alt was written without viewing the image, because no browser was available in this run. It rests on the image being the site's own chosen main photograph for a page about the centre, and should be checked by eye before publish",
+    "the gallery page's photographs are loaded by JavaScript and did not appear in the fetched markup, so only the main site image is recorded",
+    "no coordinates are published on the site and no geocoding service was available in this run, so the location is left for a later pass",
+    "the centre's own address is a lot number on a boat access only island, so it will not geocode to a point a group can drive to. The Cedar Coast Dock at 630 Campbell Street, Tofino was the meeting point"
+  ],
+  "conflicts": [
+    {
+      "field": "hosts_school_groups",
+      "values": [
+        "permanently closed",
+        "programs for grade school and university groups, $250 each, 2024 rates"
+      ],
+      "sources": [
+        "https://thecedarcoast.ca/",
+        "https://thecedarcoast.ca/educational-programming/",
+        "https://thecedarcoast.ca/costs-availability/"
+      ],
+      "note": "Their front page says the centre is permanently closed, but the school programs and rates pages are still up and still list programs and prices. We have gone with the closure notice, since it is the newest thing on the site. Do not plan a trip here without ringing first."
+    }
+  ],
+  "pages_opened": [
+    "https://thecedarcoast.ca/",
+    "https://thecedarcoast.ca/sitemap.xml",
+    "https://thecedarcoast.ca/sitemap-post-type-page.xml",
+    "https://thecedarcoast.ca/educational-programming/",
+    "https://thecedarcoast.ca/costs-availability/",
+    "https://thecedarcoast.ca/contact-us/",
+    "https://thecedarcoast.ca/location/",
+    "https://thecedarcoast.ca/getting-here/",
+    "https://thecedarcoast.ca/about/",
+    "https://thecedarcoast.ca/facilities/",
+    "https://thecedarcoast.ca/cedar-coast-activities/",
+    "https://thecedarcoast.ca/gallery/"
+  ],
+  "pages_useful": [
+    "https://thecedarcoast.ca/",
+    "https://thecedarcoast.ca/contact-us/",
+    "https://thecedarcoast.ca/location/",
+    "https://thecedarcoast.ca/getting-here/",
+    "https://thecedarcoast.ca/about/",
+    "https://thecedarcoast.ca/educational-programming/",
+    "https://thecedarcoast.ca/costs-availability/"
+  ],
+  "extracted_at": "2026-09-20T11:05:00-07:00",
+  "extractor_version": "v2.0"
+}

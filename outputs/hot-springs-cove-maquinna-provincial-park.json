@@ -1,0 +1,159 @@
+{
+  "venue": {
+    "id": "nismaakqin-park",
+    "name": "Nism̓aakqin Park",
+    "website": "https://bcparks.ca/nismaakqin-park/",
+    "description": "Nism̓aakqin Park is a provincial park in Clayoquot Sound on the west coast of Vancouver Island, northwest of Tofino. It was known as Maquinna Marine Park until it was renamed in 2025, and it is best known for the mux̣ʷšiƛa hot springs, where geothermal water cascades down a waterfall into six rocky pools that grow cooler towards the ocean and average 50°C. The park has no road access; it is reached by boat and float plane from Tofino, Ucluelet, Hot Springs Cove, Tahsis and Gold River, and a 2 km boardwalk trail with several sections of stairs leads from the dock to the pools. There is a day-use fee of $3, and the park is operated by Ahous Business Corporation.",
+    "category": "nature_outdoors",
+    "address": null,
+    "lat": 49.381959,
+    "lng": -126.327181,
+    "geo_source": "site_embed",
+    "hosts_school_groups": null,
+    "hosts_daycare_groups": null,
+    "youngest_age_welcomed_years": null,
+    "booking_email": null,
+    "booking_phone": null,
+    "booking_url": null,
+    "booking_method": null,
+    "has_washrooms": true,
+    "has_lunch_space": true,
+    "has_rain_backup": null,
+    "stroller_accessible": false,
+    "wheelchair_accessible": false,
+    "bus_parking": false,
+    "facility_notes": {
+      "washrooms": "This park has two composting toilets, one at the start of the boardwalk and another at the end near the hot springs. There is a picnic shelter and a large grassy area at the head of the dock with an information shelter and composting toilet.",
+      "lunch_space": "There is a picnic shelter and a large grassy area at the head of the dock with an information shelter and composting toilet. The change room and picnic shelter have hooks available for visitors to hang bags out of reach of wildlife.",
+      "stroller_accessible": "The boardwalk includes several sections of stairs that can be physically challenging for some visitors. Access to the pools is through a rock-strewn area with uneven footing.",
+      "wheelchair_accessible": "The boardwalk includes several sections of stairs that can be physically challenging for some visitors. Access to the pools is through a rock-strewn area with uneven footing.",
+      "bus_parking": "It is accessible by boat and float plane from Tofino, Ucluelet, Hot Springs Cove, Tahsis and Gold River. A dock is located on the west side of Openit Peninsula, beside the park entrance."
+    },
+    "nearby_park": null,
+    "restrictions": [
+      "Access is by boat and float plane only, from Tofino, Ucluelet, Hot Springs Cove, Tahsis and Gold River. There is no road to the park.",
+      "Dogs and other pets, camping, campfires, glass containers, soaps, and shampoos are not allowed in or near the hot spring.",
+      "Pets are not permitted at the hot springs beyond the start of the boardwalk.",
+      "Alcoholic beverages are not allowed in the park.",
+      "Glass containers are not permitted in and around the pools.",
+      "Camping and fires are prohibited in the mux̣ʷšiƛa hot springs area at the southern part of Openit Peninsula in the park.",
+      "In provincial parks, any person acting as a guide or offering guiding services, including vessel drop-offs, must hold a valid park-use permit.",
+      "There are no lifeguards on duty in BC Parks.",
+      "Docking is allowed for vessels 12 m and under. Larger vessels must anchor in the cove."
+    ],
+    "languages": null,
+    "general_admission_child_cad": 3,
+    "general_admission_adult_cad": 3,
+    "hours_notes": null,
+    "seasonal_notes": "During winter high tides, the hot spring pools fill with cold sea water. Rough water and floating wood debris may cause injury. Check tide tables and check with your tour operator, air carrier or water taxi before visiting.",
+    "price_year_or_season": null,
+    "checked_on": "2026-09-20",
+    "checked_by": "scraper"
+  },
+  "programs": [
+    {
+      "id": "self-guided-hot-springs-visit",
+      "name": "Self-guided visit to the mux̣ʷšiƛa hot springs",
+      "description": "The park is open to the public with a day-use fee of $3, which the site's hot springs brochure states is per person, per day. A 2 km boardwalk trail leads through old growth rainforest from the dock in Hot Springs Cove to six natural hot spring pools that average 50°C and cool towards the ocean. There is a change house, a picnic shelter, composting pit toilets and a viewing platform along the trail. No guided program, group rate, booking route, minimum age or capacity limit is published anywhere on the park page, and the park is reached only by boat or float plane from operators that hold a park-use permit.",
+      "what_children_do": "Step off a boat or a float plane at the dock, then walk 2 km of boardwalk through old growth rainforest, climbing several sections of stairs, with a viewing platform part way along that looks out over Hot Springs Cove. At the pools they pick their way across a rock-strewn area with uneven footing, down to six pools that step down from a waterfall, hottest at the top and cooled by ocean swells at the bottom. Then the same 2 km back to the dock.",
+      "our_note": "There is no road to this park. The only way in is a boat or a float plane, then 2 km of boardwalk with stairs in each direction, so for most daycare groups it is a day out that is out of reach without a chartered vessel and a long day. If you are planning it for an older group anyway, the water averages 50 degrees, the last stretch down to the pools is loose rock, and nobody is on duty to watch the water.",
+      "practical_summary": "Composting toilets at the dock, at the start of the boardwalk and at the pools, plus a change house and a picnic shelter, all of them outdoors. There is no road access, drinking water is not mentioned, and no group rate, minimum age or capacity limit is published, so anything past the $3 day-use fee needs a phone call.",
+      "comes_to_you": false,
+      "age_min_years": null,
+      "age_max_years": null,
+      "grade_min": null,
+      "grade_max": null,
+      "age_basis": null,
+      "duration_min": null,
+      "capacity_max": null,
+      "capacity_min": null,
+      "cost_per_child_cad": 3,
+      "cost_per_group_cad": null,
+      "cost_per_adult_cad": 3,
+      "free_adults_per_children": null,
+      "is_free": false,
+      "tax_included": null,
+      "extra_fees_note": "Getting there is a separate cost. The park is reached only by boat or float plane, and the companies listed as holding a park-use permit set their own fares. Boats staying overnight at the dock pay $2 per metre per night, taxes included, and that does not include the day-use fee.",
+      "school_rate_only": false,
+      "deposit_required": null,
+      "payment_timing": null,
+      "cancellation_note": null,
+      "months_offered": null,
+      "days_offered": null,
+      "time_slots": null,
+      "lead_time_days": null,
+      "chaperone_ratio": null,
+      "adults_free": null,
+      "indoor": false,
+      "outdoor": true,
+      "format": [
+        "self_guided"
+      ],
+      "sensory_friendly": null,
+      "low_noise": null,
+      "neurodiversity_friendly": null,
+      "mood_tags": [
+        "explore",
+        "active"
+      ],
+      "curriculum_tags": null,
+      "booking_email": null,
+      "booking_url": null,
+      "booking_method": null,
+      "source_url": "https://bcparks.ca/nismaakqin-park/",
+      "evidence": "There is a day-use fee of $3. Several companies in Tofino and Ahousaht offer tours and transportation to Hot Springs Cove",
+      "checked_on": "2026-09-20",
+      "image_ids": null
+    }
+  ],
+  "images": [],
+  "gaps": [
+    "RETRIEVAL NOTE: the facilities and fees part of this park page renders in JavaScript and does not appear in a plain fetch of the HTML. The composting toilets, picnic shelter, change house, hot spring description and the $3 day-use fee were read from the site's own page data at https://bcparks.ca/page-data/nismaakqin-park/page-data.json, which a browser loads to build the page. A fetch-only re-run will appear to find a park page with no facilities and no fee.",
+    "the park page carries no photographs at all, and its social card image is a generic BC Parks graphic rather than a photo of this park, so no hero image was recorded",
+    "no street address is published; BC Parks gives only a location description because the park has no road access",
+    "the map point recorded is the one BC Parks publishes for the whole park, which covers 2,613 hectares of marine and upland area. The dock and the hot springs sit southeast of it; the site's own hot springs brochure gives the springs as 49 degrees 20 minutes 59 seconds North, 126 degrees 15 minutes 34 seconds West",
+    "no guided program, school program, interpretive program or group visit of any kind is described on the park page",
+    "no group rate is published, and the site does not say whether young children pay the $3 day-use fee",
+    "the wording 'per person, per day' for the $3 fee comes from the site's Marine Hot Springs of Coastal BC brochure, which was updated in February 2016; the park page itself states the $3 day-use fee without a date",
+    "no youngest age or minimum age for visitors is stated",
+    "no capacity limit for a group is published. The visitor use management strategy for the hot springs talks about limiting group size and staggering arrivals but sets no number",
+    "no booking route or lead time is published. The park operator, Ahous Business Corporation, is listed at 1-250-725-2169 and info@mhssahousaht.ca, and the park page lists the companies holding a park-use permit to bring visitors in by water and air",
+    "no operating season, opening hours or closing time is published for the park",
+    "drinking water is not mentioned anywhere on the park page",
+    "no rain backup or indoor space is described; the change house and the picnic shelter are the only roofed structures mentioned",
+    "the advisories panel on the park page loads in JavaScript and did not render, so any closure or warning currently in force should be checked before travelling",
+    "the boardwalk and the pools are never described as stroller or wheelchair accessible. The flags are recorded as no on the strength of the stated stairs on the boardwalk and the rock-strewn, uneven access to the pools, not on an accessibility statement"
+  ],
+  "conflicts": [
+    {
+      "field": "venue.name",
+      "values": [
+        "Nism̓aakqin Park",
+        "Maquinna Marine Park"
+      ],
+      "sources": [
+        "https://bcparks.ca/nismaakqin-park/",
+        "https://nrs.objectstore.gov.bc.ca/kuwyyf/maquinna_marine_hot_springs_brochure_674bbb7a2f.pdf"
+      ],
+      "note": "This park goes by two names. BC Parks renamed it Nism̓aakqin Park in 2025, but its own brochures, the dock signs and most boat operators still say Maquinna Marine Park or Hot Springs Cove. It is all the same place, so do not worry if you are quoted one name and booked under the other."
+    }
+  ],
+  "pages_opened": [
+    "https://bcparks.ca/maquinna-marine-park/",
+    "https://bcparks.ca/explore/parkpgs/maquinna/",
+    "https://bcparks.ca/nismaakqin-park/",
+    "https://bcparks.ca/page-data/nismaakqin-park/page-data.json",
+    "https://bcparks.ca/reservations/camping-fees/",
+    "https://nrs.objectstore.gov.bc.ca/kuwyyf/maquinna_marine_hot_springs_brochure_674bbb7a2f.pdf",
+    "https://nrs.objectstore.gov.bc.ca/kuwyyf/maquinna_dock_overnight_fee_notice_cb1705b02e.pdf",
+    "https://nrs.objectstore.gov.bc.ca/kuwyyf/nismaakqin_park_mux_si_a_hot_springs_visitor_use_management_strategy_c284544c7e.pdf"
+  ],
+  "pages_useful": [
+    "https://bcparks.ca/nismaakqin-park/",
+    "https://bcparks.ca/page-data/nismaakqin-park/page-data.json",
+    "https://nrs.objectstore.gov.bc.ca/kuwyyf/maquinna_marine_hot_springs_brochure_674bbb7a2f.pdf",
+    "https://nrs.objectstore.gov.bc.ca/kuwyyf/maquinna_dock_overnight_fee_notice_cb1705b02e.pdf"
+  ],
+  "extracted_at": "2026-09-20T11:22:00-07:00",
+  "extractor_version": "v2.0"
+}

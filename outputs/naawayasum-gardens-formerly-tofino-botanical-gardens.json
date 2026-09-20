@@ -1,0 +1,186 @@
+{
+  "venue": {
+    "id": "naawayasum-gardens",
+    "name": "Naa'Waya'Sum Gardens",
+    "website": "https://www.clayoquotcampus.ca/naawayasum-gardens/",
+    "description": "Naa'Waya'Sum Coastal Indigenous Gardens, formerly the Tofino Botanical Gardens, is a 12 acre site of coastal temperate rainforest with trails, viewpoints and carvings on the Pacific Rim Highway in Tofino. It is part of the Clayoquot Campus, managed by the IISAAK OLAM Foundation and owned by the Clayoquot Indigenous Conservation Innovation Centre, and the grounds are being re-wilded from their former European style botanical garden layout. Entry is by a $10 day pass or an $80 annual membership, and Nuu-chah-nulth citizens and children aged 0 to 12 are free. A cafe and a carving studio and gallery share the same site.",
+    "category": "nature_outdoors",
+    "address": "1084 Pacific Rim Hwy, Tofino, BC V0R 2Z0",
+    "lat": 49.13316,
+    "lng": -125.8904,
+    "geo_source": "site_embed",
+    "hosts_school_groups": null,
+    "hosts_daycare_groups": null,
+    "youngest_age_welcomed_years": null,
+    "booking_email": "info@clayoquotcampus.ca",
+    "booking_phone": "(236) 233-2518",
+    "booking_url": null,
+    "booking_method": null,
+    "has_washrooms": null,
+    "has_lunch_space": null,
+    "has_rain_backup": null,
+    "stroller_accessible": null,
+    "wheelchair_accessible": null,
+    "bus_parking": null,
+    "facility_notes": {
+      "bus_parking": "The lodge parking lot can accommodate a maximum of 10 cars."
+    },
+    "nearby_park": null,
+    "restrictions": null,
+    "languages": null,
+    "general_admission_child_cad": 0,
+    "general_admission_adult_cad": 10,
+    "hours_notes": "The gardens page says open 7 days a week, 9:00am to 5:00pm. The carving gallery on the same site is listed separately as Thursday to Sunday 12 to 5pm, or by appointment during unscheduled hours.",
+    "seasonal_notes": "A notice carried on every page of the site says the gardens and cafe are closed for the season.",
+    "price_year_or_season": "Single day pass valid September 1, 2026 to May 1, 2027; annual adult membership valid April 1, 2026 to March 31, 2027",
+    "checked_on": "2026-09-20",
+    "checked_by": "scraper"
+  },
+  "programs": [
+    {
+      "id": "self-guided-garden-visit",
+      "name": "Self-guided garden visit",
+      "description": "Admission to the 12 acre gardens and trails is by a $10 single day pass or an $80 annual adult membership. Nuu-chah-nulth citizens and children aged 0 to 12 are free. The site says to buy tickets on arrival or to show proof of purchase at check in, and passes can also be bought through the online store. A map of the gardens and the surrounding campus can be downloaded from the gardens page. The site does not describe any guided tour, workshop, group rate or group booking route, and no minimum or maximum group size is published.",
+      "what_children_do": "Walk the trails through 12 acres of coastal temperate rainforest, stopping at viewpoints that look out over the inlet and at carvings set along the way. The site asks visitors to move slowly, listen to the cedar trees and notice the moss on the branches.",
+      "our_note": "Children 12 and under get in free, so most of what a group pays is the adults at $10 each. The site says nothing about washrooms, anywhere to eat a packed lunch, or a rate for a group, and a notice on the site says the gardens are closed for the season, so call before you set a date.",
+      "practical_summary": "The address, opening hours and admission are published, and the whole visit is outdoors on rainforest trails. Washrooms, indoor lunch space, rain backup, bus parking and any group rate are not stated anywhere, so it is worth a call first.",
+      "comes_to_you": false,
+      "age_min_years": null,
+      "age_max_years": null,
+      "grade_min": null,
+      "grade_max": null,
+      "age_basis": null,
+      "duration_min": null,
+      "capacity_max": null,
+      "capacity_min": null,
+      "cost_per_child_cad": 0,
+      "cost_per_group_cad": null,
+      "cost_per_adult_cad": 10,
+      "free_adults_per_children": null,
+      "is_free": null,
+      "tax_included": null,
+      "extra_fees_note": "Children aged 0 to 12 are free. Anyone 13 or older needs a $10 day pass. The site mentions discounted rates for seniors and youth on memberships but does not publish those prices.",
+      "school_rate_only": false,
+      "deposit_required": null,
+      "payment_timing": null,
+      "cancellation_note": null,
+      "months_offered": null,
+      "days_offered": [1, 2, 3, 4, 5, 6, 7],
+      "time_slots": null,
+      "lead_time_days": null,
+      "chaperone_ratio": null,
+      "adults_free": null,
+      "indoor": null,
+      "outdoor": true,
+      "format": [
+        "self_guided"
+      ],
+      "sensory_friendly": null,
+      "low_noise": null,
+      "neurodiversity_friendly": null,
+      "mood_tags": [
+        "explore"
+      ],
+      "curriculum_tags": null,
+      "booking_email": null,
+      "booking_url": "https://www.clayoquotcampus.ca/pass-purchase/",
+      "booking_method": "shop",
+      "source_url": "https://www.clayoquotcampus.ca/naawayasum-gardens/",
+      "evidence": "NUU-CHAH-NULTH CITIZENS & CHILDREN (0-12 YRS) ARE FREE.",
+      "checked_on": "2026-09-20",
+      "image_ids": null
+    }
+  ],
+  "images": [
+    {
+      "id": "hero-forest",
+      "url": "https://www.clayoquotcampus.ca/wp-content/uploads/2026/06/TofinoForest.png",
+      "role": "hero",
+      "alt": "Forest at the Clayoquot Campus in Tofino.",
+      "alt_source": "generated",
+      "caption": null,
+      "found_on_url": "https://www.clayoquotcampus.ca/",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    },
+    {
+      "id": "space-gardens-view",
+      "url": "https://www.clayoquotcampus.ca/wp-content/uploads/2023/01/botanicalgardens_spring-backup-version-1.jpg",
+      "role": "space",
+      "alt": "A view across the gardens at the Clayoquot Campus.",
+      "alt_source": "generated",
+      "caption": null,
+      "found_on_url": "https://www.clayoquotcampus.ca/clayoquot-campus/our-story/",
+      "width": null,
+      "height": null,
+      "rights_note": null,
+      "usage": "unverified"
+    }
+  ],
+  "gaps": [
+    "no group or school rate is published; the site lists only a $10 single day pass and an $80 annual adult membership",
+    "no group booking route and no lead time for a group visit is published; passes are bought on arrival or through the online store, and the contact form has a topic for the gardens",
+    "no minimum or maximum group size is stated",
+    "no youngest age is stated; children aged 0 to 12 are free, but nothing says whether under fives or a daycare group are expected",
+    "no age or grade range is published for any offering, so the record carries none",
+    "the site says visitors can learn about Nuu-chah-nulth art, culture and knowledge systems through tours, talks and scheduled programming, but nothing on the site describes, prices or dates any of them",
+    "washrooms are not mentioned anywhere on the site",
+    "no indoor lunch space or picnic area is described; there is a cafe on the same site with its own menu and hours",
+    "no rain backup or indoor shelter for a group is described",
+    "bus parking is not stated; the only parking figure on the site is a maximum of 10 cars in the lodge parking lot, given on the lodge group booking page",
+    "wheelchair and stroller access on the garden trails is not stated",
+    "the site mentions discounted membership rates for seniors and youth but does not publish those prices",
+    "no duration is published for a visit and the gardens set no time slots",
+    "the two phone numbers are an audit note: the footer carried on the gardens page, last modified 2026-09-01, gives General & Bookings (236) 233-2518 and the cafe as 236-312-6727, while the contact page, last modified 2026-07-17, reverses them and gives General & Bookings (236) 312-6727 and the cafe as (778) 244-4255. The value from the more recently modified page is recorded, and the disagreement is carried in conflicts",
+    "images on the site carry no descriptive alt text, and most file names are bare numbers. The gardens page itself holds only one image in its markup and that image has an empty alt attribute, so the hero was taken from the gardens tile on the home page, whose alt attribute is the file name TofinoForest. Neither recorded image was opened and looked at, because image files are not downloaded in this pipeline, so both alt lines rest on the file name and on where the photo sits on the page",
+    "the site publishes no photo credit; the footer carries a site-wide copyright line and the words Photography Credits as plain text with no link, so no image carries a credit"
+  ],
+  "conflicts": [
+    {
+      "field": "hours_notes",
+      "values": [
+        "OPEN 7 DAYS A WEEK | 9:00am-5:00pm",
+        "Gardens + Cafe Closed for the season"
+      ],
+      "sources": [
+        "https://www.clayoquotcampus.ca/naawayasum-gardens/",
+        "https://www.clayoquotcampus.ca/"
+      ],
+      "note": "Their site says two different things about opening hours. The gardens page says open seven days a week from 9am to 5pm, and a notice on every page says the gardens and cafe are closed for the season. Worth a phone call before you set a date."
+    },
+    {
+      "field": "booking_phone",
+      "values": [
+        "(236) 233-2518",
+        "(236) 312-6727"
+      ],
+      "sources": [
+        "https://www.clayoquotcampus.ca/naawayasum-gardens/",
+        "https://www.clayoquotcampus.ca/clayoquot-campus/contact-us/"
+      ],
+      "note": "Two of their pages give different numbers for bookings. One says 236-233-2518 and the other says 236-312-6727, which elsewhere is listed as the cafe. We use the first. If it does not get you anywhere, try the other."
+    }
+  ],
+  "pages_opened": [
+    "https://www.clayoquotcampus.ca/",
+    "https://www.clayoquotcampus.ca/naawayasum-gardens/",
+    "https://www.clayoquotcampus.ca/pass-purchase/",
+    "https://www.clayoquotcampus.ca/clayoquot-campus/our-story/",
+    "https://www.clayoquotcampus.ca/clayoquot-campus/contact-us/",
+    "https://www.clayoquotcampus.ca/carving-and-arts/",
+    "https://www.clayoquotcampus.ca/cafe/",
+    "https://www.clayoquotcampus.ca/lodge/group-bookings/"
+  ],
+  "pages_useful": [
+    "https://www.clayoquotcampus.ca/naawayasum-gardens/",
+    "https://www.clayoquotcampus.ca/",
+    "https://www.clayoquotcampus.ca/clayoquot-campus/our-story/",
+    "https://www.clayoquotcampus.ca/clayoquot-campus/contact-us/",
+    "https://www.clayoquotcampus.ca/carving-and-arts/",
+    "https://www.clayoquotcampus.ca/lodge/group-bookings/"
+  ],
+  "extracted_at": "2026-09-20T11:12:00-07:00",
+  "extractor_version": "v2.0"
+}
