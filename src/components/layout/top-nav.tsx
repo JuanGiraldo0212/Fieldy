@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { getViewer } from '@/lib/auth'
 import { navCounts } from '@/lib/trips/fetch'
-import { NavLinks } from './nav-links'
+import { MobileNav, NavLinks } from './nav-links'
 import { Logo } from '@/components/ui/logo'
 
 /*
@@ -44,10 +44,19 @@ export async function TopNav() {
 
         <div className="flex-1" />
 
-        {/* Five items no longer fit a 375px row once Inbox exists, and a
-            wrapped nav item reads as two. The row scrolls sideways instead,
-            bleeding to the page edge so the last item is not cut off. */}
-        <nav className="-mx-5 flex max-w-[calc(100%+40px)] items-center gap-1.5 overflow-x-auto px-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        {/* Five items no longer fit a 390px row once Inbox exists, and a
+            wrapped nav item reads as two, so on a phone the row collapses to
+            the design's hamburger and the items live in its panel. From 640px
+            up they are pills again. */}
+        <MobileNav
+          signedIn={Boolean(viewer?.centreId)}
+          isAdmin={viewer?.isAdmin ?? false}
+          tripCount={counts?.trips ?? 0}
+          unreadCount={counts?.unread ?? 0}
+          account={viewer ? { email: viewer.email, initials } : null}
+        />
+
+        <nav className="hidden items-center gap-1.5 sm:flex">
           <NavLinks
             signedIn={Boolean(viewer?.centreId)}
             isAdmin={viewer?.isAdmin ?? false}

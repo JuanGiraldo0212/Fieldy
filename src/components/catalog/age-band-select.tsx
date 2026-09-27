@@ -106,10 +106,11 @@ export function AgeBandSelect({
           className="w-full cursor-pointer text-left"
         >
           <FieldBox>
-            <span className="text-brand flex">
+            {/* A phone spends that 24px on the band's own name instead. */}
+            <span className="text-brand hidden sm:flex">
               <GraduationCap size={18} />
             </span>
-            <span className="text-body-sm min-w-0 flex-1 truncate font-semibold">
+            <span className="text-meta-sm sm:text-body-sm min-w-0 flex-1 truncate font-semibold">
               {bandSummary(value)}
             </span>
             <span className="text-text-faint flex">
@@ -123,8 +124,10 @@ export function AgeBandSelect({
             role="group"
             aria-label="Age or grade"
             /* Above the cards, and scrollable: fifteen rows is taller than a
-               phone once the field itself is on screen. */
-            className="border-border-strong bg-surface shadow-card absolute top-[calc(100%+6px)] right-0 left-0 z-30 max-h-[min(60vh,340px)] overflow-y-auto rounded-control border p-3"
+               phone once the field itself is on screen. It is as wide as the
+               field, except on a phone, where the field is a third of the row
+               and "Kindergarten" does not fit in it. */
+            className="border-border-strong bg-surface shadow-card absolute top-[calc(100%+6px)] right-0 left-0 z-30 max-h-[min(60vh,340px)] overflow-y-auto rounded-control border p-3 max-sm:right-auto max-sm:w-[250px]"
           >
             {AGE_BANDS.map((b, i) => (
               <CheckRow key={b[2]} checked={value.includes(i)} onChange={() => toggle(i)}>

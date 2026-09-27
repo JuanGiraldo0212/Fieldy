@@ -149,8 +149,16 @@ export function SearchControls({
 
   return (
     <form
+      /*
+        On a phone the panel has no chrome of its own: the design puts the
+        field, the chips and the list straight onto the page, and a card
+        border there only spends 32px of a 390px row on a box nobody needs
+        drawn. The order-* classes are the mobile arrangement — see the
+        budget block below.
+      */
       className={cx(
-        'bg-surface border-border shadow-card rounded-panel border p-4 sm:p-[18px]',
+        'flex flex-col sm:block',
+        'sm:bg-surface sm:border-border sm:shadow-card sm:rounded-panel sm:border sm:p-[18px]',
         pending && 'opacity-70',
       )}
       onSubmit={(e) => {
@@ -159,7 +167,7 @@ export function SearchControls({
       }}
     >
       {/* Search */}
-      <div className="mb-4 flex gap-2.5">
+      <div className="order-1 mb-4 flex gap-2.5">
         <div className="border-border-strong bg-surface flex h-control-lg flex-1 items-center gap-2.5 rounded-control border px-4">
           <span className="text-text-faint flex">
             <Search size={19} />
@@ -180,13 +188,17 @@ export function SearchControls({
         </button>
       </div>
       {dirty ? (
-        <p className="text-meta text-brand -mt-2 mb-3 font-semibold" role="status">
+        <p
+          className="text-meta text-brand order-2 -mt-2 mb-3 font-semibold"
+          role="status"
+        >
           Filters changed. Press Search to update the list.
         </p>
       ) : null}
 
-      {/* The always-visible row */}
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      {/* The always-visible row. Three across on a phone, which is the
+          design's own mobile row: age, how many, how they travel. */}
+      <div className="order-3 grid grid-cols-[1.25fr_0.85fr_1fr] gap-2 sm:grid-cols-3 sm:gap-3">
         <AgeBandSelect
           value={draft.age_bands}
           onChange={(age_bands) => set({ age_bands })}
@@ -201,7 +213,7 @@ export function SearchControls({
               value={children}
               onChange={(e) => setChildren(e.target.value)}
               aria-label="Number of children"
-              className="text-body-sm w-full border-0 bg-transparent font-bold outline-none"
+              className="text-meta-sm sm:text-body-sm w-full border-0 bg-transparent font-bold outline-none"
             />
             <span className="text-brand flex">
               <Users size={18} />
@@ -220,7 +232,7 @@ export function SearchControls({
                 set({ transport: e.target.value as SearchState['transport'] })
               }
               aria-label="How you travel"
-              className="text-body-sm h-select w-full cursor-pointer appearance-none border-0 bg-transparent font-semibold outline-none"
+              className="text-meta-sm sm:text-body-sm h-select w-full cursor-pointer appearance-none border-0 bg-transparent font-semibold outline-none"
             >
               <option value="walking">Walking</option>
               <option value="bus">Bus</option>
@@ -229,10 +241,26 @@ export function SearchControls({
           </FieldBox>
         </Field>
 
+      </div>
+
+      {/*
+        Budget and where she is leaving from. On a phone these are the two
+        the design leaves out of the standing row — a director changes them
+        once a term, not once a search — so they sit with the rest of the
+        filters behind More filters. `order-6` puts this block directly above
+        the drawer it belongs to; the form is a flex column below 640px, and
+        from 640px up it is an ordinary block again and the order is inert.
+      */}
+      <div
+        className={cx(
+          'order-6 sm:mt-3.5 sm:flex sm:items-start sm:gap-3',
+          filtersOpen ? 'border-border mt-4 grid gap-4 border-t pt-4' : 'hidden sm:flex',
+        )}
+      >
         {/* Quick amounts, and a box for anything else. The design's dropdown
             has "Or type a max" for the same reason: $10 and $15 cover most
             rooms, and the one on $7.50 should not have to round. */}
-        <Field label="Budget per child">
+        <Field label="Budget per child" className="sm:basis-[300px] sm:shrink-0">
           <FieldBox>
             <span className="text-brand flex">
               <CircleDollarSign size={18} />
@@ -246,7 +274,7 @@ export function SearchControls({
               value={budget}
               onChange={(e) => setBudget(e.target.value)}
               aria-label="Budget per child"
-              className="text-body-sm w-full border-0 bg-transparent font-bold outline-none"
+              className="text-meta-sm sm:text-body-sm w-full border-0 bg-transparent font-bold outline-none"
             />
           </FieldBox>
           <div className="mt-1.5 flex flex-wrap gap-1.5">
@@ -268,10 +296,8 @@ export function SearchControls({
             ))}
           </div>
         </Field>
-      </div>
 
-      <div className="mt-3.5">
-        <Field label="Leaving from">
+        <Field label="Leaving from" className="sm:flex-1">
           <div className="flex flex-col gap-2 sm:flex-row sm:gap-0">
             <div className="min-w-0 flex-1">
               <AddressField
@@ -324,11 +350,14 @@ export function SearchControls({
       </div>
 
       {/* Moods */}
-      <div className="border-border mt-4 border-t pt-4">
-        <div className="text-label text-text-muted mb-2.5 font-bold uppercase">
+      <div className="border-border order-4 mt-4 border-t pt-4">
+        <div className="font-display text-body-lg text-text mb-2.5 font-bold sm:text-label sm:text-text-muted sm:font-bold sm:uppercase">
           What are you in the mood for?
         </div>
-        <div className="flex flex-wrap gap-2.5">
+        {/* Six chips are three wrapped rows on a phone and the design shows
+            one. It scrolls sideways instead, bleeding to the page edge so the
+            cut chip reads as "there are more". */}
+        <div className="-mx-5 flex gap-2.5 overflow-x-auto px-5 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:px-0 [&::-webkit-scrollbar]:hidden">
           {Object.entries(MOOD_STYLE).map(([key, m]) => (
             <Chip
               key={key}
@@ -354,8 +383,8 @@ export function SearchControls({
       </div>
 
       {/* Categories */}
-      <div className="mt-4">
-        <div className="text-label text-text-muted mb-2.5 font-bold uppercase">
+      <div className="order-5 mt-4">
+        <div className="font-display text-body-lg text-text mb-2.5 font-bold sm:text-label sm:text-text-muted sm:font-bold sm:uppercase">
           Browse by type
         </div>
         <div className="flex flex-wrap items-center gap-2.5">
@@ -396,7 +425,7 @@ export function SearchControls({
         logged in docs/design-gaps.md.
       */}
       {filtersOpen ? (
-        <div className="border-border mt-4 grid grid-cols-1 gap-x-6 gap-y-4 border-t pt-4 sm:grid-cols-3">
+        <div className="border-border order-7 mt-4 grid grid-cols-1 gap-x-6 gap-y-4 border-t pt-4 sm:grid-cols-3">
           <div>
             <div className="text-label text-text-muted mb-1 font-bold uppercase">
               Environment

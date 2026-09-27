@@ -4,6 +4,7 @@ import {
   Bus,
   Car,
   Check,
+  ChevronRight,
   Clock,
   Footprints,
   TriangleAlert,
@@ -46,11 +47,11 @@ export function OutingCard({ result: r }: { result: SearchResult }) {
   return (
     <Link
       href={`/outing/${r.venueId}/${r.slug}`}
-      className="bg-surface border-border hover:border-brand hover:bg-surface-hover animate-rise-in flex w-full flex-wrap gap-5 rounded-card-lg border p-5 text-left no-underline"
+      className="bg-surface border-border hover:border-brand hover:bg-surface-hover animate-rise-in flex w-full flex-wrap items-start gap-3 rounded-card-lg border p-3.5 text-left no-underline sm:gap-5 sm:p-5"
     >
       {/* Thumbnail, falling back to an initials tile when the venue has no
           usable photo or the remote one fails to load. */}
-      <span className="bg-thumb relative block h-[104px] w-[104px] flex-none overflow-hidden rounded-thumb">
+      <span className="bg-thumb relative block h-[76px] w-[76px] flex-none overflow-hidden rounded-thumb sm:h-[104px] sm:w-[104px]">
         <VenueThumb
           src={r.heroUrl}
           alt={r.heroAlt ?? r.venueName}
@@ -60,14 +61,14 @@ export function OutingCard({ result: r }: { result: SearchResult }) {
       </span>
 
       {/* Body */}
-      <span className="block min-w-0 flex-1 basis-[230px]">
-        <span className="font-display text-display-sm text-text block leading-tight font-bold">
+      <span className="block min-w-0 flex-1 basis-[150px] sm:basis-[230px]">
+        <span className="font-display text-body-lg text-text block leading-tight font-bold sm:text-display-sm">
           {r.name}
         </span>
 
-        <span className="text-body-sm text-text-muted mt-1 flex flex-wrap items-center gap-2">
+        <span className="text-meta text-text-muted mt-1 flex flex-wrap items-center gap-x-2 gap-y-0.5 sm:text-body-sm">
           <span>{r.venueName}</span>
-          <span aria-hidden className="text-border-strong">
+          <span aria-hidden className="text-border-strong hidden sm:inline">
             ·
           </span>
           <span className="flex items-center gap-[7px]">
@@ -78,7 +79,7 @@ export function OutingCard({ result: r }: { result: SearchResult }) {
           </span>
         </span>
 
-        <span className="text-body-sm text-text-strong mt-3 flex flex-wrap items-center gap-x-4 gap-y-1.5">
+        <span className="text-body-sm text-text-strong mt-3 hidden flex-wrap items-center gap-x-4 gap-y-1.5 sm:flex">
           <span className="flex items-center gap-[7px]">
             <span className="text-brand flex">
               <Clock size={18} />
@@ -110,14 +111,22 @@ export function OutingCard({ result: r }: { result: SearchResult }) {
         {/* Two lines, then an ellipsis. The whole note is on the outing page;
             here it only has to say why this one is worth a look. */}
         {r.ourNote ? (
-          <span className="text-body-sm text-text-strong mt-3 line-clamp-2 italic">
+          <span className="text-body-sm text-text-strong mt-2 line-clamp-2 italic sm:mt-3">
             “{r.ourNote}”
           </span>
         ) : null}
       </span>
 
+      {/* The design's phone card ends in a chevron: the whole card is the
+          link, and the arrow is what says so on a touch screen. */}
+      <span aria-hidden className="text-text-faint mt-6 flex flex-none sm:hidden">
+        <ChevronRight size={20} />
+      </span>
+
       {/* Rail. Stacks under the body below the design's 620px breakpoint, and
-          sits in its own right-hand column above it. */}
+          sits in its own right-hand column above it. On a phone it is one
+          quiet line — the badge and the total — rather than the desktop
+          column, because the design gives the card four lines in all. */}
       <span className="border-border-soft flex basis-full flex-row items-center justify-between gap-3 sm:max-w-full sm:basis-[196px] sm:flex-col sm:items-end sm:justify-center sm:border-l sm:pl-5 sm:text-right">
         {green ? (
           <span className="bg-success-tint text-success text-meta-sm inline-flex items-center gap-[7px] rounded-pill px-3 py-[7px] font-bold whitespace-nowrap">
@@ -131,14 +140,16 @@ export function OutingCard({ result: r }: { result: SearchResult }) {
           </span>
         )}
 
-        <span className="block">
+        <span className="block text-right sm:text-inherit">
           <span className="flex items-baseline gap-[7px]">
-            <span className="font-display text-price font-bold">{r.bigTotal}</span>
+            <span className="font-display text-fact font-bold sm:text-price">
+              {r.bigTotal}
+            </span>
             <span className="text-meta text-text-muted whitespace-nowrap">
               {r.bigTotalCaption}
             </span>
           </span>
-          <span className="text-body-sm text-text-strong mt-1.5 block">
+          <span className="text-meta text-text-strong mt-0.5 block sm:text-body-sm sm:mt-1.5">
             {r.perChildLine}
           </span>
         </span>

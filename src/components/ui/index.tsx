@@ -66,7 +66,9 @@ export function Chip({
       aria-pressed={active}
       style={tint ? { background: tint, color: ink } : undefined}
       className={cx(
-        'text-body-sm relative flex items-center gap-2 whitespace-nowrap rounded-card px-3.5 py-3 font-semibold',
+        /* shrink-0 because the mood row scrolls sideways on a phone, and a
+           chip that shrinks to fit is a chip with its label cut in half. */
+        'text-body-sm relative flex shrink-0 items-center gap-2 whitespace-nowrap rounded-card px-3.5 py-3 font-semibold',
         tint ? 'border-0' : 'border-border-soft bg-surface border',
         !tint && active && 'bg-brand-tint-2',
         'hover:border-brand',
@@ -115,7 +117,9 @@ export function FieldBox({
 }) {
   const Tag = as
   return (
-    <Tag className="border-border-strong bg-surface text-body-sm text-text flex h-control items-center gap-2.5 rounded-control border px-3 font-semibold">
+    /* Tighter below 640px: three of these share a 390px row on a phone, and
+       at the desktop padding "3 to 5 years" has nowhere to sit. */
+    <Tag className="border-border-strong bg-surface text-meta-sm sm:text-body-sm text-text flex h-control items-center gap-1.5 rounded-control border px-2.5 font-semibold sm:gap-2.5 sm:px-3">
       {children}
     </Tag>
   )

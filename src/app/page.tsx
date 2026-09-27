@@ -102,11 +102,13 @@ export default async function CatalogPage({
 
   return (
     <main className="mx-auto max-w-page px-5 pb-16">
-      <header className="py-8">
-        <h1 className="font-display text-display-lg max-w-measure">
+      {/* The design gives a phone a shorter hero: the promise, one line of
+          what the page does, then the search field, all above the fold. */}
+      <header className="py-6 sm:py-8">
+        <h1 className="font-display text-display-md sm:text-display-lg max-w-measure">
           Find your next field trip. We&rsquo;ll help with the rest.
         </h1>
-        <p className="text-body-lg text-text-muted mt-2 max-w-[560px]">
+        <p className="text-body sm:text-body-lg text-text-muted mt-2 max-w-[560px]">
           Search, contact venues, and keep everything in one place.
         </p>
       </header>
