@@ -583,3 +583,61 @@ three things it needed that `components/ui` did not have:
 
 To draw properly before venues see it: the venue page, which will become
 the venue's own page when they join.
+
+---
+
+## The catalog on a phone
+
+### Deviation — three fields in the standing row, the other two behind More filters
+
+*`src/components/catalog/search-controls.tsx`, at 390px.*
+
+The mobile design's standing filter row is Ages / Children / Travel and
+nothing else: budget and "Leaving from" are not on it. Both are still in
+the app — below 640px they are the first two things inside the More filters
+drawer, above Environment. A director changes them once a term and the
+other three every search, so the drawer is where they belong on a screen
+that has one column.
+
+The block is rendered in the one place or the other — `useWideLayout`, a
+`matchMedia` subscription, decides which — rather than rendered once and
+moved with `order-*`. CSS order moves a block on screen and leaves it where
+it was for the Tab key and the screen reader, both of which read the DOM, so
+on a phone the drawer's own fields would have come before the mood chips
+they sit below. The server assumes wide and the block is `hidden` below
+640px, so a phone paints nothing in the wrong place before it hydrates.
+
+From 640px up the panel is what it always was — except that budget now
+shares its row with "Leaving from" rather than sitting fourth in the top
+row.
+
+Two smaller things in the same panel: below 640px the panel has no card
+chrome of its own (the design puts the controls straight onto the page),
+and the six mood chips scroll sideways in one row rather than wrapping into
+three.
+
+### Deviation — the phone's card drops the fact row, and keeps the money
+
+*`src/components/catalog/outing-card.tsx`, at 390px.*
+
+The design's mobile card is a thumbnail, a title, the venue and the travel
+line, a description and a chevron. Ours keeps all of that and adds one
+quiet line at the bottom with the feasibility badge and the total, because
+a card that does not say what an outing costs sends a director to the
+outing page to find out — and the price is the reason she is comparing at
+all. Duration, ages and capacity do go: they are three facts she cannot act
+on from the list, and they are the first thing on the outing page. They are
+still in the card from 640px up.
+
+### Deviation — the phone's top bar is a hamburger
+
+*`src/components/layout/nav-links.tsx` (`MobileNav`), `top-nav.tsx`.*
+
+Entry 99's scrolling pill row was five items and an avatar on a 390px bar.
+Below 640px they now live behind the design's hamburger, in a panel under
+the bar carrying the same items, the same two count pills, and the account
+row with the signed-in email. The pills are unchanged from 640px up.
+
+The panel is dismissed the way the age popover is — a `pointerdown` outside
+it, Escape, or a tap on one of its own rows. Escape alone would have been a
+key a phone does not have.
