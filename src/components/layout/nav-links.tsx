@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Menu, X } from 'lucide-react'
 import { cx } from '@/components/ui'
 
@@ -135,21 +135,36 @@ export function MobileNav({
 }) {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
+  const wrap = useRef<HTMLDivElement>(null)
+  const trigger = useRef<HTMLButtonElement>(null)
 
+  /* The same dismissal the age popover has. A phone has no Escape key, so
+     tapping the catalog is the gesture that has to close this; without it the
+     panel sits over the page until she finds the X again. */
   useEffect(() => {
     if (!open) return
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setOpen(false)
+    const onDown = (e: PointerEvent) => {
+      if (!wrap.current?.contains(e.target as Node)) setOpen(false)
     }
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return
+      setOpen(false)
+      trigger.current?.focus()
+    }
+    document.addEventListener('pointerdown', onDown)
     document.addEventListener('keydown', onKey)
-    return () => document.removeEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('pointerdown', onDown)
+      document.removeEventListener('keydown', onKey)
+    }
   }, [open])
 
   const items = navItems(props)
 
   return (
-    <div className="sm:hidden">
+    <div ref={wrap} className="sm:hidden">
       <button
+        ref={trigger}
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}

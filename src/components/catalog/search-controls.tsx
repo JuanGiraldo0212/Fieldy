@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { useState, useTransition } from 'react'
+import { useState, useSyncExternalStore, useTransition } from 'react'
 import {
   Accessibility,
   Binoculars,
@@ -92,6 +92,32 @@ const FORMATS: [string, string, LucideIcon][] = [
 
 const BUDGET_QUICK = [5, 10, 15, 20, 30]
 
+/*
+  Which arrangement the panel is in. Budget and "Leaving from" stand in the
+  top rows on a desktop and sit inside the More filters drawer on a phone, and
+  that is a change of order, not of styling: `order-*` moves a block on screen
+  and leaves it where it was for the Tab key and the screen reader, both of
+  which read the DOM. So the block is rendered in the one place or the other,
+  and this decides which.
+
+  The server assumes wide, and so does the first client render, so hydration
+  matches. A phone keeps the block display:none until she opens the drawer, so
+  the swap happens while there is nothing on screen to move.
+*/
+const PANEL_WIDE = '(min-width: 640px)'
+
+function useWideLayout() {
+  return useSyncExternalStore(
+    (onChange) => {
+      const mq = window.matchMedia(PANEL_WIDE)
+      mq.addEventListener('change', onChange)
+      return () => mq.removeEventListener('change', onChange)
+    },
+    () => window.matchMedia(PANEL_WIDE).matches,
+    () => true,
+  )
+}
+
 export function SearchControls({
   state,
   originLabel,
@@ -101,6 +127,7 @@ export function SearchControls({
 }) {
   const router = useRouter()
   const [pending, startTransition] = useTransition()
+  const wide = useWideLayout()
   const [filtersOpen, setFiltersOpen] = useState(false)
   const [draft, setDraft] = useState(state)
   /* The two number boxes hold what was typed, so either can be emptied on the
@@ -147,17 +174,132 @@ export function SearchControls({
   const extras =
     draft.environment.length + draft.accessibility.length + draft.formats.length
 
+  /*
+    Budget and where she is leaving from. On a phone these are the two the
+    design leaves out of the standing row — a director changes them once a
+    term, not once a search — so they sit with the rest of the filters behind
+    More filters. See useWideLayout: the panel renders this block in the one
+    place or the other, so that Tab and a screen reader find it where she can
+    see it.
+  */
+  const budgetRow = (
+    <div
+      className={
+        wide
+          ? /* Still sm:-guarded: `wide` is what the server assumes, so it is
+               also what a phone paints before it hydrates, and the block has
+               to be out of the way from the first byte. */
+            'hidden mt-3.5 sm:flex sm:items-start sm:gap-3'
+          : /* The divider and the stacking belong to the drawer this block
+               is the top of. Closed, it stays mounted, so what she typed
+               survives being hidden. */
+            filtersOpen
+            ? 'border-border mt-4 grid gap-4 border-t pt-4'
+            : 'hidden'
+      }
+    >
+      {/* Quick amounts, and a box for anything else. The design's dropdown
+          has "Or type a max" for the same reason: $10 and $15 cover most
+          rooms, and the one on $7.50 should not have to round. */}
+      <Field label="Budget per child" className="sm:basis-[300px] sm:shrink-0">
+        <FieldBox>
+          <span className="text-brand flex">
+            <CircleDollarSign size={18} />
+          </span>
+          <span className="text-text-faint">$</span>
+          <input
+            type="number"
+            min={0}
+            step="0.5"
+            inputMode="decimal"
+            value={budget}
+            onChange={(e) => setBudget(e.target.value)}
+            aria-label="Budget per child"
+            className="text-body-sm w-full border-0 bg-transparent font-bold outline-none"
+          />
+        </FieldBox>
+        <div className="mt-1.5 flex flex-wrap gap-1.5">
+          {BUDGET_QUICK.map((b) => (
+            <button
+              key={b}
+              type="button"
+              aria-pressed={next.budget_max === b}
+              onClick={() => setBudget(String(b))}
+              className={cx(
+                'text-meta-sm rounded-pill border px-2.5 py-1 font-semibold',
+                next.budget_max === b
+                  ? 'bg-brand-tint-2 border-brand text-brand'
+                  : 'border-border-soft bg-surface text-text-muted hover:border-brand',
+              )}
+            >
+              ${b}
+            </button>
+          ))}
+        </div>
+      </Field>
+
+      <Field label="Leaving from" className="sm:flex-1">
+        <div className="flex flex-col gap-2 sm:flex-row sm:gap-0">
+          <div className="min-w-0 flex-1">
+            <AddressField
+              key={addressKey}
+              name="from"
+              hideLabel
+              rounded="rounded-control sm:rounded-l-control sm:rounded-r-none"
+              defaultValue={draft.from}
+              placeholder={originLabel}
+              onPick={(s) => set({ from: s.label, from_lat: s.lat, from_lng: s.lng })}
+              /* Emptying the box goes back to the room's own home base
+                 rather than leaving the search measured from nowhere. */
+              onClear={() => set({ from: '', from_lat: null, from_lng: null })}
+            />
+          </div>
+          <div className="border-border-strong bg-surface flex h-control items-center gap-2.5 rounded-control border px-3 sm:rounded-l-none sm:border-l-0">
+            <span className="text-brand flex">
+              <Radar size={18} />
+            </span>
+            <select
+              value={draft.radius_km}
+              onChange={(e) => set({ radius_km: Number(e.target.value) })}
+              aria-label="How far you will travel"
+              className="text-body-sm h-select cursor-pointer appearance-none border-0 bg-transparent font-semibold outline-none"
+            >
+              {RADIUS_OPTIONS.map((r) => (
+                <option key={r} value={r}>
+                  {r === 0 ? 'Any distance' : `Within ${r} km`}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+        {draft.from ? (
+          <p className="text-meta text-text-faint mt-1.5">
+            Measuring from {draft.from}.{' '}
+            <button
+              type="button"
+              onClick={() => {
+                set({ from: '', from_lat: null, from_lng: null })
+                setAddressKey((k) => k + 1)
+              }}
+              className="text-brand font-semibold underline"
+            >
+              Use {originLabel} instead
+            </button>
+          </p>
+        ) : null}
+      </Field>
+    </div>
+  )
+
   return (
     <form
       /*
         On a phone the panel has no chrome of its own: the design puts the
         field, the chips and the list straight onto the page, and a card
         border there only spends 32px of a 390px row on a box nobody needs
-        drawn. The order-* classes are the mobile arrangement — see the
-        budget block below.
+        drawn.
       */
       className={cx(
-        'flex flex-col sm:block',
         'sm:bg-surface sm:border-border sm:shadow-card sm:rounded-panel sm:border sm:p-[18px]',
         pending && 'opacity-70',
       )}
@@ -167,7 +309,7 @@ export function SearchControls({
       }}
     >
       {/* Search */}
-      <div className="order-1 mb-4 flex gap-2.5">
+      <div className="mb-4 flex gap-2.5">
         <div className="border-border-strong bg-surface flex h-control-lg flex-1 items-center gap-2.5 rounded-control border px-4">
           <span className="text-text-faint flex">
             <Search size={19} />
@@ -189,7 +331,7 @@ export function SearchControls({
       </div>
       {dirty ? (
         <p
-          className="text-meta text-brand order-2 -mt-2 mb-3 font-semibold"
+          className="text-meta text-brand -mt-2 mb-3 font-semibold"
           role="status"
         >
           Filters changed. Press Search to update the list.
@@ -198,14 +340,14 @@ export function SearchControls({
 
       {/* The always-visible row. Three across on a phone, which is the
           design's own mobile row: age, how many, how they travel. */}
-      <div className="order-3 grid grid-cols-[1.25fr_0.85fr_1fr] gap-2 sm:grid-cols-3 sm:gap-3">
+      <div className="grid grid-cols-[1.25fr_0.85fr_1fr] gap-2 sm:grid-cols-3 sm:gap-3">
         <AgeBandSelect
           value={draft.age_bands}
           onChange={(age_bands) => set({ age_bands })}
         />
 
         <Field label="Children">
-          <FieldBox>
+          <FieldBox tight>
             <input
               type="number"
               min={1}
@@ -222,7 +364,7 @@ export function SearchControls({
         </Field>
 
         <Field label="Travel">
-          <FieldBox>
+          <FieldBox tight>
             <span className="text-brand flex">
               <Bus size={18} />
             </span>
@@ -240,117 +382,12 @@ export function SearchControls({
             </select>
           </FieldBox>
         </Field>
-
       </div>
 
-      {/*
-        Budget and where she is leaving from. On a phone these are the two
-        the design leaves out of the standing row — a director changes them
-        once a term, not once a search — so they sit with the rest of the
-        filters behind More filters. `order-6` puts this block directly above
-        the drawer it belongs to; the form is a flex column below 640px, and
-        from 640px up it is an ordinary block again and the order is inert.
-      */}
-      <div
-        className={cx(
-          'order-6 sm:mt-3.5 sm:flex sm:items-start sm:gap-3',
-          filtersOpen ? 'border-border mt-4 grid gap-4 border-t pt-4' : 'hidden sm:flex',
-        )}
-      >
-        {/* Quick amounts, and a box for anything else. The design's dropdown
-            has "Or type a max" for the same reason: $10 and $15 cover most
-            rooms, and the one on $7.50 should not have to round. */}
-        <Field label="Budget per child" className="sm:basis-[300px] sm:shrink-0">
-          <FieldBox>
-            <span className="text-brand flex">
-              <CircleDollarSign size={18} />
-            </span>
-            <span className="text-text-faint">$</span>
-            <input
-              type="number"
-              min={0}
-              step="0.5"
-              inputMode="decimal"
-              value={budget}
-              onChange={(e) => setBudget(e.target.value)}
-              aria-label="Budget per child"
-              className="text-meta-sm sm:text-body-sm w-full border-0 bg-transparent font-bold outline-none"
-            />
-          </FieldBox>
-          <div className="mt-1.5 flex flex-wrap gap-1.5">
-            {BUDGET_QUICK.map((b) => (
-              <button
-                key={b}
-                type="button"
-                aria-pressed={next.budget_max === b}
-                onClick={() => setBudget(String(b))}
-                className={cx(
-                  'text-meta-sm rounded-pill border px-2.5 py-1 font-semibold',
-                  next.budget_max === b
-                    ? 'bg-brand-tint-2 border-brand text-brand'
-                    : 'border-border-soft bg-surface text-text-muted hover:border-brand',
-                )}
-              >
-                ${b}
-              </button>
-            ))}
-          </div>
-        </Field>
-
-        <Field label="Leaving from" className="sm:flex-1">
-          <div className="flex flex-col gap-2 sm:flex-row sm:gap-0">
-            <div className="min-w-0 flex-1">
-              <AddressField
-                key={addressKey}
-                name="from"
-                hideLabel
-                rounded="rounded-control sm:rounded-l-control sm:rounded-r-none"
-                defaultValue={draft.from}
-                placeholder={originLabel}
-                onPick={(s) => set({ from: s.label, from_lat: s.lat, from_lng: s.lng })}
-                /* Emptying the box goes back to the room's own home base
-                   rather than leaving the search measured from nowhere. */
-                onClear={() => set({ from: '', from_lat: null, from_lng: null })}
-              />
-            </div>
-            <div className="border-border-strong bg-surface flex h-control items-center gap-2.5 rounded-control border px-3 sm:rounded-l-none sm:border-l-0">
-              <span className="text-brand flex">
-                <Radar size={18} />
-              </span>
-              <select
-                value={draft.radius_km}
-                onChange={(e) => set({ radius_km: Number(e.target.value) })}
-                aria-label="How far you will travel"
-                className="text-body-sm h-select cursor-pointer appearance-none border-0 bg-transparent font-semibold outline-none"
-              >
-                {RADIUS_OPTIONS.map((r) => (
-                  <option key={r} value={r}>
-                    {r === 0 ? 'Any distance' : `Within ${r} km`}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-          {draft.from ? (
-            <p className="text-meta text-text-faint mt-1.5">
-              Measuring from {draft.from}.{' '}
-              <button
-                type="button"
-                onClick={() => {
-                  set({ from: '', from_lat: null, from_lng: null })
-                  setAddressKey((k) => k + 1)
-                }}
-                className="text-brand font-semibold underline"
-              >
-                Use {originLabel} instead
-              </button>
-            </p>
-          ) : null}
-        </Field>
-      </div>
+      {wide ? budgetRow : null}
 
       {/* Moods */}
-      <div className="border-border order-4 mt-4 border-t pt-4">
+      <div className="border-border mt-4 border-t pt-4">
         <div className="font-display text-body-lg text-text mb-2.5 font-bold sm:text-label sm:text-text-muted sm:font-bold sm:uppercase">
           What are you in the mood for?
         </div>
@@ -383,7 +420,7 @@ export function SearchControls({
       </div>
 
       {/* Categories */}
-      <div className="order-5 mt-4">
+      <div className="mt-4">
         <div className="font-display text-body-lg text-text mb-2.5 font-bold sm:text-label sm:text-text-muted sm:font-bold sm:uppercase">
           Browse by type
         </div>
@@ -419,13 +456,15 @@ export function SearchControls({
         </div>
       </div>
 
+      {wide ? null : budgetRow}
+
       {/*
         The drawer. Its toggles land in the same draft as everything else and
         wait for Search; the design's separate Apply and Cancel are not built —
         logged in docs/design-gaps.md.
       */}
       {filtersOpen ? (
-        <div className="border-border order-7 mt-4 grid grid-cols-1 gap-x-6 gap-y-4 border-t pt-4 sm:grid-cols-3">
+        <div className="border-border mt-4 grid grid-cols-1 gap-x-6 gap-y-4 border-t pt-4 sm:grid-cols-3">
           <div>
             <div className="text-label text-text-muted mb-1 font-bold uppercase">
               Environment

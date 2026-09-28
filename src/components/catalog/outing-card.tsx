@@ -47,7 +47,7 @@ export function OutingCard({ result: r }: { result: SearchResult }) {
   return (
     <Link
       href={`/outing/${r.venueId}/${r.slug}`}
-      className="bg-surface border-border hover:border-brand hover:bg-surface-hover animate-rise-in flex w-full flex-wrap items-start gap-3 rounded-card-lg border p-3.5 text-left no-underline sm:gap-5 sm:p-5"
+      className="bg-surface border-border hover:border-brand hover:bg-surface-hover animate-rise-in flex w-full flex-wrap gap-3 rounded-card-lg border p-3.5 text-left no-underline max-sm:items-start sm:gap-5 sm:p-5"
     >
       {/* Thumbnail, falling back to an initials tile when the venue has no
           usable photo or the remote one fails to load. */}

@@ -599,12 +599,17 @@ drawer, above Environment. A director changes them once a term and the
 other three every search, so the drawer is where they belong on a screen
 that has one column.
 
-The form is a flex column below 640px and the blocks carry `order-*`
-classes, so the budget block sits against the drawer it belongs to without
-being rendered twice. From 640px up the form is an ordinary block again,
-the order is inert, and the panel is what it always was — except that
-budget now shares its row with "Leaving from" rather than sitting fourth in
-the top row.
+The block is rendered in the one place or the other — `useWideLayout`, a
+`matchMedia` subscription, decides which — rather than rendered once and
+moved with `order-*`. CSS order moves a block on screen and leaves it where
+it was for the Tab key and the screen reader, both of which read the DOM, so
+on a phone the drawer's own fields would have come before the mood chips
+they sit below. The server assumes wide and the block is `hidden` below
+640px, so a phone paints nothing in the wrong place before it hydrates.
+
+From 640px up the panel is what it always was — except that budget now
+shares its row with "Leaving from" rather than sitting fourth in the top
+row.
 
 Two smaller things in the same panel: below 640px the panel has no card
 chrome of its own (the design puts the controls straight onto the page),
@@ -632,3 +637,7 @@ Entry 99's scrolling pill row was five items and an avatar on a 390px bar.
 Below 640px they now live behind the design's hamburger, in a panel under
 the bar carrying the same items, the same two count pills, and the account
 row with the signed-in email. The pills are unchanged from 640px up.
+
+The panel is dismissed the way the age popover is — a `pointerdown` outside
+it, Escape, or a tap on one of its own rows. Escape alone would have been a
+key a phone does not have.

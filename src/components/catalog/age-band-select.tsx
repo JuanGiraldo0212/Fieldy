@@ -105,7 +105,7 @@ export function AgeBandSelect({
           aria-label={`Age or grade: ${bandSummary(value)}`}
           className="w-full cursor-pointer text-left"
         >
-          <FieldBox>
+          <FieldBox tight>
             {/* A phone spends that 24px on the band's own name instead. */}
             <span className="text-brand hidden sm:flex">
               <GraduationCap size={18} />

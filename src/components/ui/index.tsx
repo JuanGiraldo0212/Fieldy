@@ -111,15 +111,26 @@ export function Field({
 export function FieldBox({
   children,
   as = 'div',
+  tight,
 }: {
   children: ReactNode
   as?: 'div' | 'label'
+  /* Three of these share a 390px row in the catalog's standing filters, and
+     at the full padding "3 to 5 years" has nowhere to sit. Asked for, rather
+     than given to every field on every phone: everywhere else a field has the
+     row to itself and stays the size the design drew. */
+  tight?: boolean
 }) {
   const Tag = as
   return (
-    /* Tighter below 640px: three of these share a 390px row on a phone, and
-       at the desktop padding "3 to 5 years" has nowhere to sit. */
-    <Tag className="border-border-strong bg-surface text-meta-sm sm:text-body-sm text-text flex h-control items-center gap-1.5 rounded-control border px-2.5 font-semibold sm:gap-2.5 sm:px-3">
+    <Tag
+      className={cx(
+        'border-border-strong bg-surface text-text flex h-control items-center rounded-control border font-semibold',
+        tight
+          ? 'text-meta-sm gap-1.5 px-2.5 sm:text-body-sm sm:gap-2.5 sm:px-3'
+          : 'text-body-sm gap-2.5 px-3',
+      )}
+    >
       {children}
     </Tag>
   )
