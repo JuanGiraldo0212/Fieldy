@@ -2,6 +2,7 @@
 
 import 'leaflet/dist/leaflet.css'
 import type * as Leaflet from 'leaflet'
+import { useRouter } from 'next/navigation'
 import { useEffect, useRef } from 'react'
 
 /*
@@ -34,10 +35,20 @@ export type MapPin = {
   lng: number
   name: string
   caption: string
+  /* Where the pin's popup goes when tapped. A pin with no href — the single
+     pin on an outing page, which already IS that page — stays plain text. */
+  href?: string
+  /* The name of the program the tap opens. It is the link's own words, so the
+     popup says where it goes rather than leaving the reader to guess. */
+  linkLabel?: string
+  /* Said under the link when the pin stands for more than one program, so the
+     popup is honest that it opens one of several. */
+  moreLabel?: string
 }
 
 const HOME_COLOR = '#16202B' // --color-map-pin-home
 const VENUE_COLOR = '#1668D6' // --color-map-pin-venue
+const LINK_COLOR = '#1668D6' // --color-brand
 
 function pinIcon(L: typeof Leaflet, color: string, glyph: string) {
   return L.divIcon({
@@ -55,6 +66,70 @@ function pinIcon(L: typeof Leaflet, color: string, glyph: string) {
   })
 }
 
+/*
+  The popup is built as DOM rather than an HTML string for two reasons: venue
+  names come from the catalog and have no business being parsed as markup, and
+  a pin that leads somewhere should navigate the way the rest of the app does —
+  through the router, with no full page load and no lost scroll position.
+
+  A real <a href> underneath keeps the ordinary browser affordances: the status
+  bar shows the destination, and cmd/ctrl/middle-click still opens a new tab,
+  which is why those clicks fall through untouched.
+*/
+function popupContent(
+  p: MapPin,
+  router: { push: (href: string) => void },
+): HTMLElement {
+  /* The whole popup is the target, not just the name: on a phone it reads as
+     a card, and a card that only responds on one line of text is a card that
+     feels broken. The link line underneath is what SAYS so — a popup that is
+     silently clickable is a popup nobody clicks. */
+  const wrap = document.createElement(p.href ? 'a' : 'div')
+
+  const name = document.createElement('b')
+  name.textContent = p.name
+  wrap.append(name)
+
+  if (p.caption) {
+    wrap.append(document.createElement('br'))
+    const caption = document.createElement('span')
+    caption.textContent = p.caption
+    wrap.append(caption)
+  }
+
+  if (p.href) {
+    const cue = document.createElement('div')
+    cue.textContent = `${p.linkLabel ?? 'See this outing'} →`
+    cue.style.marginTop = '6px'
+    cue.style.color = LINK_COLOR
+    cue.style.fontWeight = '700'
+    cue.style.textDecoration = 'underline'
+    wrap.append(cue)
+  }
+
+  if (p.href && p.moreLabel) {
+    const more = document.createElement('div')
+    more.textContent = p.moreLabel
+    more.style.marginTop = '2px'
+    more.style.opacity = '0.75'
+    wrap.append(more)
+  }
+
+  if (p.href && wrap instanceof HTMLAnchorElement) {
+    wrap.href = p.href
+    wrap.style.display = 'block'
+    wrap.style.color = 'inherit'
+    wrap.style.textDecoration = 'none'
+    wrap.addEventListener('click', (e) => {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return
+      e.preventDefault()
+      router.push(p.href as string)
+    })
+  }
+
+  return wrap
+}
+
 export function CatalogMap({
   home,
   homeLabel,
@@ -66,6 +141,7 @@ export function CatalogMap({
 }) {
   const ref = useRef<HTMLDivElement>(null)
   const mapRef = useRef<Leaflet.Map | null>(null)
+  const router = useRouter()
 
   useEffect(() => {
     if (!ref.current || mapRef.current) return
@@ -100,7 +176,7 @@ export function CatalogMap({
       for (const p of pins) {
         L.marker([p.lat, p.lng], { icon: pinIcon(L, VENUE_COLOR, '★') })
           .addTo(map)
-          .bindPopup(`<b>${p.name}</b>${p.caption ? `<br>${p.caption}` : ''}`)
+          .bindPopup(popupContent(p, router))
         points.push([p.lat, p.lng])
       }
 
@@ -128,7 +204,7 @@ export function CatalogMap({
       mapRef.current?.remove()
       mapRef.current = null
     }
-  }, [home, homeLabel, pins])
+  }, [home, homeLabel, pins, router])
 
   return (
     <div
