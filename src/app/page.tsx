@@ -67,20 +67,39 @@ export default async function CatalogPage({
     would otherwise stack invisibly on one point. Programs that come to you
     have no pin, and neither do the four venues still missing coordinates.
   */
-  const seen = new Set<string>()
-  const pins: MapPin[] = []
+  const pinAt = new Map<string, MapPin>()
+  const extraAt = new Map<string, number>()
+  const firstProgram = new Map<string, string>()
   for (const r of results) {
     if (r.comesToYou || r.venueLat == null || r.venueLng == null) continue
     const key = `${r.venueLat},${r.venueLng}`
-    if (seen.has(key)) continue
-    seen.add(key)
-    pins.push({
+    /* The first result at a coordinate is the pin: the list is already in the
+       chosen sort order, so the one the pin opens is the one the reader would
+       have reached first anyway. The rest are counted, not dropped silently. */
+    if (pinAt.has(key)) {
+      extraAt.set(key, (extraAt.get(key) ?? 0) + 1)
+      continue
+    }
+    firstProgram.set(key, r.name)
+    pinAt.set(key, {
       lat: r.venueLat,
       lng: r.venueLng,
       name: r.venueName,
       caption: r.travelLine,
+      href: `/outing/${r.venueId}/${r.slug}`,
     })
   }
+  const pins: MapPin[] = [...pinAt].map(([key, pin]) => {
+    const extra = extraAt.get(key) ?? 0
+    return {
+      ...pin,
+      linkLabel: firstProgram.get(key),
+      moreLabel:
+        extra === 0
+          ? undefined
+          : `${extra} more outing${extra === 1 ? '' : 's'} at this venue`,
+    }
+  })
 
   const mapHref = () => {
     const p = toSearchParams(state)
